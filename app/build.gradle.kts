@@ -59,7 +59,7 @@ dependencies {
 
     // Hilt
     implementation(libs.hilt.android)
-    implementation(libs.hilt.android.compiler)
+    kapt(libs.hilt.android.compiler)
 
     // ViewModel, LiveData
     implementation(libs.androidx.lifecycle.livedata.ktx)
