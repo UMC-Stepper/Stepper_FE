@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="Purple_Black">#1F1B3C</color>
+    <color name="Purple_700">#988CFF</color>
+    <color name="Purple_Gray">#525068</color>
+    <color name="Purple_Gray_300">#57518E</color>
+    <color name="Purple_300">#DEDAFF</color>
+    <color name="Purple_Black_BG_1">#28274F</color>
+    <color name="Yellow_300">#E1E29F</color>
+    <color name="Yellow_500">#F2F482</color>
+    <color name="White">#FFFFFFFF</color>
+    <color name="Black_700">#FF000000</color>
+    <color name="Black_500">#353535</color>
 </resources>
