@@ -98,4 +98,6 @@ dependencies {
     // Coroutines
     implementation(libs.kotlinx.coroutines)
 
+    // MPAndroidChart
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }
