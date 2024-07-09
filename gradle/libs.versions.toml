@@ -42,7 +42,7 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 hilt-android = {module= "com.google.dagger:hilt-android", version.ref = "hiltAndroid"}
 hilt-android-compiler = {module= "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid"}
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
-okhttp = { module = "com.squareup.okhttp3:okhttp-bom", version.ref = "okhttp" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "gson" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastoreCore" }
