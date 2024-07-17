@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/todayFragment"
+        android:icon="@drawable/nav_today_selector"
+        android:title="Today"/>
+    <item
+        android:id="@+id/badgeFragment"
+        android:icon="@drawable/nav_badge_selector"
+        android:title="My Badge"/>
+    <item
+        android:id="@+id/stepperFragment"
+        android:icon="@drawable/nav_stepper_selector"
+        android:title="Stepper"/>
+    <item
+        android:id="@+id/communityFragment"
+        android:icon="@drawable/nav_community_selector"
+        android:title="Community"/>
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/nav_settings_selector"
+        android:title="Settings"/>
+
+</menu>
