@@ -9,6 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="settings 프래그먼트" />
+        android:text="settings 프래그먼트"
+        android:textColor="@color/White"/>
 
 </FrameLayout>
