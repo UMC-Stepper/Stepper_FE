@@ -36,6 +36,14 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <!-- sub_title_bold_16 -->
+    <style name="sub_title_bold_16">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:textColor">@color/Black_500</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
     <!-- body_regular_12-->
     <style name="body_regular_12">
         <item name="android:fontFamily">@font/pretendard_regular</item>
@@ -44,7 +52,7 @@
     </style>
 
     <!-- body_regular_14-->
-    <style name="body_regular">
+    <style name="body_regular_14">
         <item name="android:fontFamily">@font/pretendard_regular</item>
         <item name="android:textColor">@color/Black_500</item>
         <item name="android:textSize">14sp</item>
