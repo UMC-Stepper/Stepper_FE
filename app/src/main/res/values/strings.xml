@@ -1,5 +1,23 @@
 <resources>
     <string name="app_name">UMC_Stepper</string>
+    <string name="signup_title">딱 맞는 재활 운동을 위해<br> 회원가입을 진행해요.</br></string>
+    <string name="signup_sub_title">개인정보는 적합한 재활을 위한 정보 저장에\n사용됩니다.</string>
+    <string name="signup_nickname">닉네임</string>
+    <string name="signup_email">이메일</string>
+    <string name="signup_pwd">비밀번호</string>
+    <string name="signup_pwd_check">비밀번호 확인</string>
+    <string name="signup_nickname_hint">닉네임을 입력하세요.</string>
+    <string name="signup_email_hint">이메일 주소를 입력하세요.</string>
+    <string name="signup_cert_number">인증번호 입력</string>
+    <string name="signup_cert_error_msg">인증번호가 불일치합니다. 다시 확인해 주세요!</string>
+    <string name="signup_pwd_hint">비밀번호를 입력하세요.</string>
+    <string name="signup_pwd_check_hint">비밀번호를 다시 입력하세요</string>
+    <string name="signup_pwd_error_check_msg">비밀번호가 일치하지 않습니다</string>
+    <string name="signup_terms">[필수] 이용약관 및 개인정보 수집 동의</string>
+    <string name="sign_up_cert_btn">인증번호 받기</string>
+    <string name="sign_up_complete_btn">입력 완료</string>
+    <string name="sign_up_go_terms"><u>내용보기</u></string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="show_detail_alarm"><u>내용보기</u></string>
