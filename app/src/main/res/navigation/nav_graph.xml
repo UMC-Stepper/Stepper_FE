@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/badgeFragment">
+
+    <fragment
+        android:id="@+id/badgeFragment"
+        android:name="com.example.umc_stepper.ui.badge.BadgeFragment"
+        android:label="fragment_badge"
+        tools:layout="@layout/fragment_badge" />
+    <fragment
+        android:id="@+id/communityFragment"
+        android:name="com.example.umc_stepper.ui.community.CommunityFragment"
+        android:label="fragment_community"
+        tools:layout="@layout/fragment_community" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.umc_stepper.ui.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/stepperFragment"
+        android:name="com.example.umc_stepper.ui.stepper.StepperFragment"
+        android:label="fragment_stepper"
+        tools:layout="@layout/fragment_stepper" />
+    <fragment
+        android:id="@+id/todayFragment"
+        android:name="com.example.umc_stepper.ui.today.TodayFragment"
+        android:label="fragment_today"
+        tools:layout="@layout/fragment_today" />
+</navigation>
