@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/shape_rounded_square_purple700_18dp"
     android:layout_width="258dp"
-    android:layout_height="wrap_content">
+    android:layout_height="416dp">
 
     <TextView
         android:id="@+id/dialog_app_permission_title_tv"
@@ -45,7 +45,7 @@
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/dialog_app_permission_divider_dv"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="12dp"/>
 
     <ImageView
