@@ -135,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="21dp"
                 android:text="@string/signup_cert_error_msg"
-                android:textColor="@color/Red300"
+                android:textColor="@color/Red_300"
                 app:layout_constraintStart_toStartOf="@+id/signup_cert_number_et"
                 app:layout_constraintTop_toBottomOf="@+id/signup_cert_number_et" />
 
@@ -205,7 +205,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="21dp"
                 android:text="@string/signup_pwd_error_check_msg"
-                android:textColor="@color/Red300"
+                android:textColor="@color/Red_300"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/signup_pwd_check_et"
                 app:layout_constraintTop_toBottomOf="@+id/signup_pwd_check_et" />
