@@ -10,12 +10,12 @@
         android:id="@+id/fragment_register_2_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="90dp"
         android:text="더 정확한 정보를 위해서\n더 알려주세요!"
         android:textColor="@color/White"
         android:textSize="25dp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,7 +33,7 @@
         android:id="@+id/fragment_register_2_profile_card_cv"
         android:layout_width="98dp"
         android:layout_height="98dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="36dp"
         android:backgroundTint="@color/Purple_Black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
             android:id="@+id/fragment_register_2_profile_frame_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/shape_image_input_circle"/>
+            android:src="@drawable/shape_image_input_circle" />
 
         <ImageView
             android:id="@+id/fragment_register_2_profile_img_iv"
@@ -53,88 +53,106 @@
             android:src="@drawable/ic_profile_image" />
     </androidx.cardview.widget.CardView>
 
-    <ImageButton
-        android:id="@+id/fragment_register_2_checked_toggle_ib"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/selector_checked_toggle"
-        app:layout_constraintTop_toBottomOf="@id/fragment_register_2_profile_card_cv"
-        app:layout_constraintStart_toStartOf="@id/fragment_register_2_sub_title_tv"
-        />
+
 
     <TextView
-        android:id="@+id/fragment_register_2_agreement_tv"
+        android:id="@+id/fragment_register_2_height_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:textSize="11dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="36dp"
+        android:text="신장 cm"
         android:textColor="@color/White"
-        android:text="카메라 및 알람 기능 접근 동의"
-        app:layout_constraintStart_toEndOf="@id/fragment_register_2_checked_toggle_ib"
-        app:layout_constraintTop_toTopOf="@id/fragment_register_2_checked_toggle_ib"
-        app:layout_constraintBottom_toBottomOf="@id/fragment_register_2_checked_toggle_ib"
-        />
-    <TextView
-        android:id="@+id/fragment_register_2_alarm_agreement_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="11dp"
-        android:textColor="@color/Purple_400"
-        android:autoLink="all"
-        android:text="@string/show_detail_alarm"
-        android:layout_marginStart="6dp"
-        app:layout_constraintStart_toEndOf="@id/fragment_register_2_agreement_tv"
-        app:layout_constraintTop_toTopOf="@id/fragment_register_2_agreement_tv"
-        app:layout_constraintBottom_toBottomOf="@id/fragment_register_2_agreement_tv"
-
-        />
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/fragment_register_2_profile_card_cv"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <EditText
         android:id="@+id/fragment_register_2_height_et"
-        android:background="@drawable/shape_rounded_square_register_field_20dp_stroke_1"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:hint="신장(cm)"
-        android:paddingStart="24dp"
-        android:textSize="12dp"
-        android:textColorHint="@color/Gray_Purple"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_register_2_checked_toggle_ib"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginTop="20dp"/>
+        android:background="@drawable/shape_rounded_square_register_field_20dp_stroke_1"
+        android:paddingStart="24dp"
+        android:textColorHint="@color/Gray_Purple"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_register_2_height_tv" />
 
-
+    <TextView
+        android:id="@+id/fragment_register_2_weight_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:text="몸무게 kg"
+        android:textColor="@color/White"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/fragment_register_2_height_et"
+        app:layout_constraintStart_toStartOf="parent"/>
     <EditText
         android:id="@+id/fragment_register_2_weight_et"
-        android:background="@drawable/shape_rounded_square_register_field_20dp_stroke_1"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:hint="몸무게(kg)"
-        android:textSize="12dp"
-        android:textColorHint="@color/Gray_Purple"
+        android:background="@drawable/shape_rounded_square_register_field_20dp_stroke_1"
         android:paddingStart="24dp"
-        app:layout_constraintStart_toStartOf="@+id/fragment_register_2_height_et"
+        android:textColorHint="@color/Gray_Purple"
         app:layout_constraintEnd_toEndOf="@+id/fragment_register_2_height_et"
-        app:layout_constraintTop_toBottomOf="@id/fragment_register_2_height_et"
-        android:layout_marginTop="4dp"/>
-    
+        app:layout_constraintStart_toStartOf="@+id/fragment_register_2_height_et"
+        app:layout_constraintTop_toBottomOf="@id/fragment_register_2_weight_tv" />
+
     <ImageButton
         android:id="@+id/fragment_register_2_success_input_bt"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/selector_checked_input"
         android:layout_marginBottom="80dp"
+        android:background="@drawable/selector_checked_input"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
+    <ImageButton
+        android:id="@+id/fragment_register_2_checked_toggle_ib"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/selector_checked_toggle"
+        app:layout_constraintStart_toStartOf="@id/fragment_register_2_weight_et"
+        app:layout_constraintTop_toBottomOf="@id/fragment_register_2_weight_et" />
+
+    <TextView
+        android:id="@+id/fragment_register_2_agreement_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="카메라 및 알람 기능 접근 동의"
+        android:textColor="@color/White"
+        android:textSize="11dp"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_register_2_checked_toggle_ib"
+        app:layout_constraintStart_toEndOf="@id/fragment_register_2_checked_toggle_ib"
+        app:layout_constraintTop_toTopOf="@id/fragment_register_2_checked_toggle_ib" />
+
+    <TextView
+        android:id="@+id/fragment_register_2_alarm_agreement_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:autoLink="all"
+        android:text="@string/show_detail_alarm"
+        android:textColor="@color/Purple_400"
+        android:textSize="11dp"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_register_2_agreement_tv"
+        app:layout_constraintStart_toEndOf="@id/fragment_register_2_agreement_tv"
+        app:layout_constraintTop_toTopOf="@id/fragment_register_2_agreement_tv"
+
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
