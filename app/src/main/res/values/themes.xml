@@ -2,8 +2,23 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.UMC_Stepper" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->  <!-- 툴바 기본 색상 -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:colorBackground">@color/Purple_Black_BG_1</item>
+
+        <!-- Status Bar -->
+<!--        <item name="android:statusBarColor">@color/White</item>-->
+<!--        <item name="android:windowLightStatusBar">true</item> 상태 바 아이콘 (t: 검 / f: 흰) -->
+
     </style>
 
     <style name="Theme.UMC_Stepper" parent="Base.Theme.UMC_Stepper" />
+
+    <!-- Splash  -->
+<!--    <style name="AppTheme.Splash" parent="Theme.UMC_Stepper">-->
+<!--        <item name="windowSplashScreenBackground">@color/</item>-->
+<!--        <item name="windowSplashScreenAnimatedIcon">@drawable/</item>-->
+<!--        <item name="postSplashScreenTheme">@style/Theme.UMC_Stepper</item>-->
+<!--    </style>-->
 </resources>

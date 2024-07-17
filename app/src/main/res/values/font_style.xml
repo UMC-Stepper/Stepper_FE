@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- title_bold_24 -->
+    <style name="title_bold_24">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:textColor">@color/Black_500</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <!-- title_regular_24 -->
+    <style name="title_regular_24">
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+        <item name="android:textColor">@color/Black_500</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <!-- head_bold_18 -->
+    <style name="head_bold_18">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:textColor">@color/Black_500</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!-- sub_title_semi_bold_16 -->
+    <style name="sub_title_semi_bold_16">
+        <item name="android:fontFamily">@font/pretendard_semi_bold</item>
+        <item name="android:textColor">@color/Black_500</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- sub_title_medium_16 -->
+    <style name="sub_title_medium_16">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:textColor">@color/Black_500</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- body_regular_12-->
+    <style name="body_regular_12">
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+        <item name="android:textColor">@color/Black_500</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!-- body_regular_14-->
+    <style name="body_regular">
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+        <item name="android:textColor">@color/Black_500</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- body_medium_12 -->
+    <style name="body_medium_12">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:textColor">@color/Black_500</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!-- body_medium_14 -->
+    <style name="body_medium_14">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:textColor">@color/Black_500</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- body_semi_bold_12 -->
+    <style name="body_semi_bold_12">
+        <item name="android:fontFamily">@font/pretendard_semi_bold</item>
+        <item name="android:textColor">@color/Black_500</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!-- body_semi_bold_14 -->
+    <style name="body_semi_bold_14">
+        <item name="android:fontFamily">@font/pretendard_semi_bold</item>
+        <item name="android:textColor">@color/Black_500</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+</resources>
