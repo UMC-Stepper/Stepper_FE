@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/shape_rounded_square_purple700_18dp"
+    android:layout_width="258dp"
+    android:layout_height="416dp">
+
+    <TextView
+        android:id="@+id/dialog_app_permission_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="앱 접근 권한 안내"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/dialog_app_permission_description_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="본 앱에서는 차별화된 서비스를 제공하기 위해\n 다음과 같은 권한을 허용해주시기 바랍니다."
+        android:textSize="11dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_app_permission_title_tv" />
+    
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/dialog_app_permission_divider_dv"
+        app:layout_constraintTop_toBottomOf="@id/dialog_app_permission_description_tv"
+        android:layout_marginTop="12dp"
+        android:background="@color/Text_Line_Gray"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+
+
+    <TextView
+        android:id="@+id/dialog_app_select_permission_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="선택적 접근 권한"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/dialog_app_permission_divider_dv"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="12dp"/>
+
+    <ImageView
+        android:id="@+id/dialog_app_permission_camera_permission_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_camera_permission"
+        app:layout_constraintBottom_toBottomOf="@+id/dialog_app_permission_camera_description_tv"
+        app:layout_constraintStart_toStartOf="@id/dialog_app_select_permission_tv"
+        app:layout_constraintTop_toBottomOf="@id/dialog_app_select_permission_tv" />
+
+    <TextView
+        android:id="@+id/dialog_app_permission_camera_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="카메라"
+        android:textStyle="bold"
+        android:textSize="12dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/dialog_app_select_permission_tv"
+        app:layout_constraintStart_toEndOf="@id/dialog_app_permission_camera_permission_iv"
+        android:layout_marginStart="12dp"/>
+
+    <TextView
+        android:id="@+id/dialog_app_permission_camera_description_tv"
+        android:text="운동 후 통증 부위를 촬영하기 위한 권한"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="11dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintStart_toStartOf="@id/dialog_app_permission_camera_tv"
+        app:layout_constraintTop_toBottomOf="@id/dialog_app_permission_camera_tv"/>
+
+    <ImageView
+        android:id="@+id/dialog_app_permission_picture_permission_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:src="@drawable/ic_picture_permission"
+        app:layout_constraintBottom_toBottomOf="@+id/dialog_app_permission_picture_description_tv"
+        app:layout_constraintStart_toStartOf="@id/dialog_app_permission_camera_permission_iv"
+        app:layout_constraintTop_toBottomOf="@id/dialog_app_permission_camera_permission_iv" />
+    <TextView
+        android:id="@+id/dialog_app_permission_picture_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사진 라이브러리"
+        app:layout_constraintStart_toEndOf="@id/dialog_app_permission_picture_permission_iv"
+        app:layout_constraintTop_toBottomOf="@id/dialog_app_permission_camera_description_tv"
+        android:layout_marginTop="14dp"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        android:layout_marginStart="12dp"/>
+
+    <TextView
+        android:id="@+id/dialog_app_permission_picture_description_tv"
+        android:text="운동 후 통증 부위를 기록하기 위한 권한"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="11dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintStart_toStartOf="@id/dialog_app_permission_picture_tv"
+        app:layout_constraintTop_toBottomOf="@id/dialog_app_permission_picture_tv"/>
+
+
+    <ImageView
+        android:id="@+id/dialog_app_permission_notification_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:src="@drawable/ic_notification_permission"
+        app:layout_constraintBottom_toBottomOf="@+id/dialog_app_permission_notification_description_tv"
+        app:layout_constraintStart_toStartOf="@id/dialog_app_permission_picture_permission_iv"
+        app:layout_constraintTop_toBottomOf="@id/dialog_app_permission_picture_permission_iv" />
+
+    <TextView
+        android:id="@+id/dialog_app_permission_notification_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="알림"
+        app:layout_constraintStart_toEndOf="@id/dialog_app_permission_notification_iv"
+        app:layout_constraintTop_toBottomOf="@id/dialog_app_permission_picture_description_tv"
+        android:layout_marginTop="14dp"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        android:layout_marginStart="12dp"/>
+    <TextView
+        android:id="@+id/dialog_app_permission_notification_description_tv"
+        android:text="운동 후 통증 부위를 기록하기 위한 권한"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="11dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintStart_toStartOf="@id/dialog_app_permission_notification_tv"
+        app:layout_constraintTop_toBottomOf="@id/dialog_app_permission_notification_tv"/>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/dialog_app_permission_divider2_dv"
+        app:layout_constraintTop_toBottomOf="@id/dialog_app_permission_notification_description_tv"
+        android:layout_marginTop="12dp"
+        android:background="@color/Text_Line_Gray"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+
+
+    <TextView
+        android:id="@+id/dialog_app_select_permission_change_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="접근권한 변경 방법"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/dialog_app_permission_divider2_dv"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="12dp"/>
+
+    <ImageView
+        android:id="@+id/dialog_app_permission_setting_permission_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_setting_permission"
+        app:layout_constraintStart_toStartOf="@id/dialog_app_permission_notification_iv"
+        app:layout_constraintTop_toBottomOf="@id/dialog_app_select_permission_change_tv" />
+
+    <TextView
+        android:id="@+id/dialog_app_permission_setting_to_stepper_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="설정 > STEPPER"
+        app:layout_constraintTop_toTopOf="@id/dialog_app_permission_setting_permission_iv"
+        app:layout_constraintBottom_toBottomOf="@id/dialog_app_permission_setting_permission_iv"
+        app:layout_constraintStart_toEndOf="@+id/dialog_app_permission_setting_permission_iv"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        android:layout_marginStart="12dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/shape_rounded_half_square_18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="확인"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:textColor="@color/White"
+        app:layout_constraintTop_toBottomOf="@id/dialog_app_permission_setting_to_stepper_tv"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@id/dialog_app_permission_setting_to_stepper_tv"
+        app:layout_constraintEnd_toEndOf="@id/dialog_app_permission_setting_to_stepper_tv"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

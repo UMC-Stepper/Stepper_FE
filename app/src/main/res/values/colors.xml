@@ -13,7 +13,8 @@
     <color name="White">#FFFFFFFF</color>
     <color name="Black_700">#000000</color>
     <color name="Black_500">#171717</color>
-    <color name="Red_300">#FF6A5F</color>
+    <color name="Red300">#FF6A5F</color>
     <color name="Gray_Purple">#525068</color>
     <color name="Text_Gray">#A3A3A3</color>
+    <color name="Text_Line_Gray">#C8C8C8</color>
 </resources>
