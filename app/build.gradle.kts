@@ -110,5 +110,5 @@ dependencies {
     implementation ("androidx.camera:camera-view:${camerax_version}")
     implementation ("androidx.camera:camera-mlkit-vision:${camerax_version}")
     implementation ("androidx.camera:camera-extensions:${camerax_version}")
-
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
 }
