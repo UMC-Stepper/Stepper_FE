@@ -206,7 +206,6 @@
                 android:id="@+id/fragment_my_exercise_progressbar_pb_cl"
                 android:layout_width="match_parent"
                 android:layout_height="257dp"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_select_tag_7_tv">
@@ -228,7 +227,7 @@
                 android:text="'허벅지 근육 파열'"
                 android:textColor="@color/Yellow_300"
                 app:layout_constraintStart_toStartOf="@id/fragment_my_exercise_select_tag_7_tv"
-                app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_select_tag_7_tv" />
+                app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_progressbar_pb_cl" />
 
             <TextView
                 android:layout_width="wrap_content"
