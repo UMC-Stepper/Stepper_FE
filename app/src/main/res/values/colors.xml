@@ -8,14 +8,18 @@
     <color name="Purple_300">#DEDAFF</color>
     <color name="Purple_400">#988CFF</color>
     <color name="Purple_Black_BG_1">#28274F</color>
+    <color name="Purple_Black_BG_2">#1F1B3C</color>
     <color name="Yellow_300">#E1E29F</color>
     <color name="Yellow_500">#F2F482</color>
+    <color name="Yellow_700">#E1E29F</color>
     <color name="White">#FFFFFFFF</color>
     <color name="filed_white">#66EEF4FF</color>
     <color name="Black_700">#000000</color>
     <color name="Black_500">#171717</color>
-    <color name="Red300">#FF6A5F</color>
+    <color name="Red_300">#FF6A5F</color>
     <color name="Gray_Purple">#525068</color>
     <color name="Text_Gray">#A3A3A3</color>
     <color name="Text_Line_Gray">#C8C8C8</color>
+    <color name="Text_exercise_finish">#353535</color>
+    <color name="Select_Youtube_card">#2C265B</color>
 </resources>

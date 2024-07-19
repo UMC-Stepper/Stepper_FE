@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="ResultTimeData"
+            type="com.example.umc_stepper.domain.model.Time" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/fragment_today_exercise_success_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="115dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="오늘 이만큼 운동했어요!"
+            android:textColor="@color/White"
+            android:textSize="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fragment_today_exercise_success_hour_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="65dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="@{ResultTimeData.hour}"
+            android:textColor="@color/Purple_300"
+            android:textSize="60dp"
+            app:layout_constraintStart_toStartOf="@id/fragment_today_exercise_success_title_tv"
+            app:layout_constraintTop_toBottomOf="@id/fragment_today_exercise_success_title_tv" />
+
+        <TextView
+            android:id="@+id/fragment_today_exercise_success_divider_1_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:text=":"
+            android:textColor="@color/Purple_300"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="@id/fragment_today_exercise_success_hour_tv"
+            app:layout_constraintStart_toEndOf="@id/fragment_today_exercise_success_hour_tv"
+            app:layout_constraintTop_toTopOf="@id/fragment_today_exercise_success_hour_tv" />
+
+        <TextView
+            android:id="@+id/fragment_today_exercise_success_minute_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:text="@{ResultTimeData.minute}"
+            android:textColor="@color/Purple_300"
+            android:textSize="60dp"
+            app:layout_constraintBottom_toBottomOf="@id/fragment_today_exercise_success_divider_1_tv"
+            app:layout_constraintStart_toEndOf="@id/fragment_today_exercise_success_divider_1_tv"
+            app:layout_constraintTop_toTopOf="@id/fragment_today_exercise_success_divider_1_tv" />
+
+        <TextView
+            android:id="@+id/fragment_today_exercise_success_divider_2_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:text=":"
+            android:textColor="@color/Purple_300"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="@id/fragment_today_exercise_success_minute_tv"
+            app:layout_constraintStart_toEndOf="@id/fragment_today_exercise_success_minute_tv"
+            app:layout_constraintTop_toTopOf="@id/fragment_today_exercise_success_minute_tv" />
+
+        <TextView
+            android:id="@+id/fragment_today_exercise_success_second_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:text="@{ResultTimeData.second}"
+            android:textColor="@color/Purple_300"
+            android:textSize="60dp"
+            app:layout_constraintBottom_toBottomOf="@id/fragment_today_exercise_success_divider_2_tv"
+            app:layout_constraintStart_toEndOf="@id/fragment_today_exercise_success_divider_2_tv"
+            app:layout_constraintTop_toTopOf="@id/fragment_today_exercise_success_divider_2_tv" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="35dp"
+            android:background="@drawable/shape_rounded_square_yellow700_40dp"
+            android:fontFamily="@font/pretendard_semi_bold"
+            android:text="운동 평가 하기"
+            android:textColor="#1F1B3C"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

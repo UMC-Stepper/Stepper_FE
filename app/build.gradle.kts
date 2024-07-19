@@ -99,7 +99,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines)
 
     // MaterialCalendarView
-    //implementation("com.github.prolificinteractive:material-calendarview:2.0.1")
+    implementation("com.github.prolificinteractive:material-calendarview:2.0.1")
 
     // CameraX
     val camerax_version = "1.4.0-beta02"
@@ -110,5 +110,5 @@ dependencies {
     implementation ("androidx.camera:camera-view:${camerax_version}")
     implementation ("androidx.camera:camera-mlkit-vision:${camerax_version}")
     implementation ("androidx.camera:camera-extensions:${camerax_version}")
-
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
 }
