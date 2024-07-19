@@ -16,6 +16,7 @@
         android:id="@+id/fragment_login_cover2_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="125dp"
         android:src="@drawable/ic_login_cover2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
-        android:layout_marginTop="154dp"
+        android:layout_marginTop="142dp"
         android:layout_marginEnd="98dp"
         android:src="@drawable/ic_login_stepbystep"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,61 +47,62 @@
 
     <EditText
         android:id="@+id/fragment_login_email_et"
-        android:hint="    e-mail"
+        android:layout_width="312dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/shape_rounded_square_login_field_50dp"
+        android:hint="    이메일 주소"
         android:textColorHint="@color/White"
-        android:background="@drawable/shape_rounded_square_login_field_26dp"
-        android:layout_width="336dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginTop="179dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_login_stepper_iv"/>
+        app:layout_constraintTop_toBottomOf="@id/fragment_login_stepper_iv" />
 
     <EditText
         android:id="@+id/fragment_login_password_et"
-        android:hint="    password"
-        android:textColorHint="@color/White"
-        android:background="@drawable/shape_rounded_square_login_field_26dp"
-        android:layout_width="336dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginEnd="27dp"
+        android:layout_width="312dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/shape_rounded_square_login_field_50dp"
+        android:hint="    비밀번호"
+        android:textColorHint="@color/White"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_login_email_et"/>
+        app:layout_constraintTop_toBottomOf="@id/fragment_login_email_et" />
 
     <Button
         android:id="@+id/fragment_login_btn"
-        android:layout_width="336dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginEnd="27dp"
+        android:layout_width="311dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/shape_rounded_square_purple400_26dp"
+        android:background="@drawable/shape_rounded_square_50dp_stroke_1"
         android:text = "로그인"
-        android:textSize="15sp"
-        android:fontFamily="@font/pretendard_bold"
+        android:textSize="14sp"
+        android:fontFamily="@font/pretendard_semi_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragment_login_password_et"/>
 
-    <TextView
-        android:id="@+id/fragment_login_register_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="180dp"
-        android:layout_marginEnd="170dp"
-        android:layout_marginTop="34dp"
-        android:text = "회원가입"
-        android:textSize="11sp"
-        android:textColor="@color/White"
-        android:fontFamily="@font/pretendard_regular"
+    <Button
+        android:id="@+id/fragment_register_btn"
+        android:layout_width="311dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/shape_rounded_square_purple700_50dp"
+        android:text = "회원가입 하기"
+        android:textSize="16sp"
+        android:fontFamily="@font/pretendard_semi_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragment_login_btn"/>
+
 
 
 
