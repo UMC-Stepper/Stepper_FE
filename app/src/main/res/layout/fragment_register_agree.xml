@@ -47,7 +47,7 @@
         android:layout_marginTop="37dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragment_register_agree_btn"
-        app:layout_constraintEnd_toStartOf="@id/fragment_register_agree_btn"/>
+        app:layout_constraintEnd_toStartOf="@id/fragment_register_agree2_tv"/>
 
     <TextView
         android:id="@+id/fragment_register_agree2_tv"
@@ -108,7 +108,7 @@
         android:layout_marginTop="37dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragment_register_agree1_sv"
-        app:layout_constraintEnd_toStartOf="@id/fragment_register_agree_btn"/>
+        app:layout_constraintEnd_toStartOf="@id/fragment_register_agree4_tv"/>
 
     <TextView
         android:id="@+id/fragment_register_agree4_tv"
