@@ -8,6 +8,13 @@
         <item name="android:textSize">24sp</item>
     </style>
 
+    <!-- title_bold_24 -->
+    <style name="title_semi_bold_24">
+        <item name="android:fontFamily">@font/pretendard_semi_bold</item>
+        <item name="android:textColor">@color/Black_500</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
     <!-- title_regular_24 -->
     <style name="title_regular_24">
         <item name="android:fontFamily">@font/pretendard_regular</item>
