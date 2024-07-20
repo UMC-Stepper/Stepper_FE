@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/White">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/Purple_Black_BG_1">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:cardCornerRadius="18dp"
+            android:backgroundTint="@color/Purple_300"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/item_today_home_exercise_card_tv"
+                    style="@style/head_bold_18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="16dp"
+                    android:text="운동 부위"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/item_today_home_exercise_part_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:background="@drawable/shape_rounded_square_purpleblack_bg2_25dp"
+                    style="@style/body_medium_12"
+                    android:text="무릎, 다리"
+                    android:textColor="@color/White"
+                    app:layout_constraintBottom_toBottomOf="@+id/item_today_home_exercise_card_tv"
+                    app:layout_constraintStart_toEndOf="@+id/item_today_home_exercise_card_tv"
+                    app:layout_constraintTop_toTopOf="@+id/item_today_home_exercise_card_tv" />
+
+                <ImageView
+                    android:id="@+id/item_today_home_exercise_check_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginEnd="24dp"
+                    android:src="@drawable/ic_stepper_selected"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <TextView
+                    android:id="@+id/item_today_home_exercise_card_sub_tv"
+                    style="@style/body_semi_bold_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="19dp"
+                    android:text="총 3단계 운동"
+                    app:layout_constraintStart_toStartOf="@+id/item_today_home_exercise_card_tv"
+                    app:layout_constraintTop_toBottomOf="@+id/item_today_home_exercise_card_tv" />
+
+                <TextView
+                    android:id="@+id/item_today_home_exercise_card_step1_tv"
+                    style="@style/body_regular_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="1단계"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/item_today_home_exercise_card_sub_tv"
+                    app:layout_constraintTop_toBottomOf="@+id/item_today_home_exercise_card_sub_tv" />
+
+                <ImageView
+                    android:id="@+id/item_today_home_exercise_card_step1_iv"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="1dp"
+                    android:src="@drawable/ic_signup_pwd_check_ok"
+                    app:layout_constraintBottom_toBottomOf="@+id/item_today_home_exercise_card_step1_tv"
+                    app:layout_constraintStart_toEndOf="@+id/item_today_home_exercise_card_step1_tv"
+                    app:layout_constraintTop_toTopOf="@+id/item_today_home_exercise_card_step1_tv" />
+
+                <TextView
+                    android:id="@+id/item_today_home_exercise_card_step2_tv"
+                    style="@style/body_regular_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:text="2단계"
+                    app:layout_constraintBottom_toBottomOf="@+id/item_today_home_exercise_card_step1_iv"
+                    app:layout_constraintStart_toEndOf="@+id/item_today_home_exercise_card_step1_iv"
+                    app:layout_constraintTop_toTopOf="@+id/item_today_home_exercise_card_step1_iv" />
+
+                <ImageView
+                    android:id="@+id/item_today_home_exercise_card_step2_iv"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="1dp"
+                    android:src="@drawable/ic_signup_pwd_check_ok"
+                    app:layout_constraintBottom_toBottomOf="@+id/item_today_home_exercise_card_step2_tv"
+                    app:layout_constraintStart_toEndOf="@+id/item_today_home_exercise_card_step2_tv"
+                    app:layout_constraintTop_toTopOf="@+id/item_today_home_exercise_card_step2_tv" />
+
+                <TextView
+                    android:id="@+id/item_today_home_exercise_card_step3_tv"
+                    style="@style/body_regular_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:text="3단계"
+                    app:layout_constraintBottom_toBottomOf="@+id/item_today_home_exercise_card_step2_iv"
+                    app:layout_constraintStart_toEndOf="@+id/item_today_home_exercise_card_step2_iv"
+                    app:layout_constraintTop_toTopOf="@+id/item_today_home_exercise_card_step2_iv" />
+
+                <ImageView
+                    android:id="@+id/item_today_home_exercise_card_step3_iv"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_signup_pwd_check_ok"
+                    app:layout_constraintBottom_toBottomOf="@+id/item_today_home_exercise_card_step3_tv"
+                    app:layout_constraintStart_toEndOf="@+id/item_today_home_exercise_card_step3_tv"
+                    app:layout_constraintTop_toTopOf="@+id/item_today_home_exercise_card_step3_tv" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
