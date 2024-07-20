@@ -15,6 +15,13 @@
 
     <style name="Theme.UMC_Stepper" parent="Base.Theme.UMC_Stepper" />
 
+    <!-- timePicker Spinner -->
+    <style name="ThemeOverlay.NumberPicker" parent="Theme.UMC_Stepper">
+        <!-- NumberPicker divider color -->
+        <item name="colorControlNormal">@color/White</item>
+        <item name="android:textColorPrimary">@color/White</item>
+    </style>
+
     <!-- Splash  -->
 <!--    <style name="AppTheme.Splash" parent="Theme.UMC_Stepper">-->
 <!--        <item name="windowSplashScreenBackground">@color/</item>-->
