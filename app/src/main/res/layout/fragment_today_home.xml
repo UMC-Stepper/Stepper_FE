@@ -1,14 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.today.TodayHomeFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".ui.today.TodayHomeFragment">
 
-</FrameLayout>
+       <ImageView
+           android:id="@+id/fragment_today_home_calender_iv"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:src="@drawable/ic_today_toolbar_calender"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/fragment_today_home_calender_tv"
+            style="@style/title_bold_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="5월"
+            android:textColor="@color/White"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_today_home_calender_iv"
+            app:layout_constraintStart_toEndOf="@+id/fragment_today_home_calender_iv"
+            app:layout_constraintTop_toTopOf="@+id/fragment_today_home_calender_iv" />
+
+        <ImageView
+            android:id="@+id/fragment_today_home_go_today_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="11dp"
+            android:background="@drawable/ic_toolbar_today"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_today_home_go_stepper_iv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/fragment_today_home_go_stepper_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_toolbar_today"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_today_home_week_calendar_rv"
+            android:layout_width="0dp"
+            android:layout_height="68dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            tools:listitem="@layout/item_today_home_week_calendar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_calender_iv" />
+
+        <TextView
+            android:id="@+id/fragment_today_home_title_tv"
+            style="@style/head_bold_18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="오늘의 운동"
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="@+id/fragment_today_home_week_calendar_rv"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_week_calendar_rv" />
+
+        <ImageView
+            android:id="@+id/fragment_today_home_plus_exercise_card_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="27dp"
+            android:src="@drawable/ic_today_home_plus_exercise_card"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_today_home_week_calendar_rv"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_week_calendar_rv" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="12dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:listitem="@layout/item_today_home_exercise_card"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_title_tv"/>
+
+            <TextView
+                android:id="@+id/fragment_today_home_no_card_tv"
+                style="@style/sub_title_semi_bold_16"
+                android:layout_width="match_parent"
+                android:layout_height="330dp"
+                android:layout_marginStart="23dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginTop="12dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
+                android:text="설정하신 운동이 없습니다\n카드를 추가해주세요"
+                android:textColor="@color/White"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/fragment_today_home_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_today_home_my_exercise_constraint"
+            android:layout_width="0dp"
+            android:layout_height="105dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_today_home_guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_no_card_tv">
+
+            <TextView
+                android:id="@+id/fragment_today_home_my_exercise_tv"
+                style="@style/sub_title_semi_bold_16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="나만의 운동"
+                android:textColor="@color/White"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/fragment_today_home_my_exercise_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_today_home_my_exercise"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fragment_today_home_my_exercise_sub_tv"
+                style="@style/body_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="12dp"
+                android:text="필요시 유뷰트 영상\nURL 저장"
+                android:textColor="@color/White"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/fragment_today_home_my_exercise_tv"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_my_exercise_tv" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_today_home_evaluation_log_constraint"
+            android:layout_width="0dp"
+            android:layout_height="105dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="26dp"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/fragment_today_home_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_no_card_tv">
+
+            <TextView
+                android:id="@+id/fragment_today_home_evaluation_log_tv"
+                style="@style/sub_title_semi_bold_16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="평가 일지"
+                android:textColor="@color/White"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/fragment_today_home_evaluation_log_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_today_home_evaluation_log"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fragment_today_home_evaluation_log_sub_tv"
+                style="@style/body_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="12dp"
+                android:text="통증과 컨디션 평가\n일지 모아보기"
+                android:textColor="@color/White"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/fragment_today_home_evaluation_log_tv"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_evaluation_log_tv" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
