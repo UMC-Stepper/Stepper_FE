@@ -75,12 +75,6 @@
                 android:src="@drawable/ic_camera_change"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/activity_camera_capture_iv" />
-
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

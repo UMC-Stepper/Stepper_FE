@@ -3,6 +3,7 @@ package com.example.umc_stepper.ui.stepper
 import android.Manifest
 import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.provider.MediaStore
@@ -142,7 +143,14 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>(R.layout.activity_cam
                 // 캡쳐 성공 -> 사진을 저장
                 override fun onImageSaved(output: ImageCapture.OutputFileResults){
                     Toast.makeText(this@CameraActivity, "사진 촬영 성공.", Toast.LENGTH_SHORT).show()
-                    Log.d(TAG, "Photo capture succeeded: ${output.savedUri}")
+
+                    // 촬영한 사진을
+                    output.savedUri?.let { uri ->
+                        val intent = Intent(this@CameraActivity, CameraDetailActivity::class.java).apply {
+                            putExtra("photo_uri", uri.toString())
+                        }
+                        startActivity(intent)
+                    }
                 }
             }
         )
