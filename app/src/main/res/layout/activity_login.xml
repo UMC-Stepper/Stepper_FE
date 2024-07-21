@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/fragment_login_cover1_iv"
+        android:id="@+id/activity_login_cover1_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_login_cover1"
@@ -13,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/fragment_login_cover2_iv"
+        android:id="@+id/activity_login_cover2_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="125dp"
@@ -22,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/fragment_login_stepbystep_iv"
+        android:id="@+id/activity_login_stepbystep_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
@@ -34,7 +36,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/fragment_login_stepper_iv"
+        android:id="@+id/activity_login_stepper_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
@@ -43,39 +45,43 @@
         android:src="@drawable/ic_login_stepper"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_login_stepbystep_iv" />
+        app:layout_constraintTop_toBottomOf="@id/activity_login_stepbystep_iv" />
 
     <EditText
-        android:id="@+id/fragment_login_email_et"
-        android:layout_width="312dp"
+        android:id="@+id/activity_login_email_et"
+        android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="130dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/shape_rounded_square_login_field_50dp"
-        android:hint="    이메일 주소"
+        android:hint="이메일 주소"
+        android:paddingStart="24dp"
+        style="@style/body_medium_14"
         android:textColorHint="@color/White"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_login_stepper_iv" />
+        app:layout_constraintTop_toBottomOf="@id/activity_login_stepper_iv" />
 
     <EditText
-        android:id="@+id/fragment_login_password_et"
-        android:layout_width="312dp"
+        android:id="@+id/activity_login_password_et"
+        android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/shape_rounded_square_login_field_50dp"
-        android:hint="    비밀번호"
+        android:hint="비밀번호"
+        android:paddingStart="24dp"
+        style="@style/body_medium_14"
         android:textColorHint="@color/White"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_login_email_et" />
+        app:layout_constraintTop_toBottomOf="@id/activity_login_email_et" />
 
     <Button
-        android:id="@+id/fragment_login_btn"
-        android:layout_width="311dp"
+        android:id="@+id/activity_login_btn"
+        android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
@@ -86,11 +92,11 @@
         android:fontFamily="@font/pretendard_semi_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_login_password_et"/>
+        app:layout_constraintTop_toBottomOf="@id/activity_login_password_et"/>
 
     <Button
-        android:id="@+id/fragment_register_btn"
-        android:layout_width="311dp"
+        android:id="@+id/activity_register_btn"
+        android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
@@ -101,7 +107,7 @@
         android:fontFamily="@font/pretendard_semi_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_login_btn"/>
+        app:layout_constraintTop_toBottomOf="@id/activity_login_btn"/>
 
 
 
@@ -109,3 +115,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
