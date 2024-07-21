@@ -1,15 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.stepper.StepperFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="stepper 프래그먼트"
-        android:textColor="@color/White"/>
+        tools:context=".ui.stepper.StepperFragment">
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/stepper_month_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_rounded_purple_black_bg2_20dp"
+        android:gravity="center"
+        android:paddingTop="24dp"
+        android:paddingBottom="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="94dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/pretendard_semi_bold"
+        android:text="8월"
+        android:textColor="@color/White"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/stepper_calendar_gv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <GridView
+        android:id="@+id/stepper_calendar_gv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_rounded_purple_bg2_half_20dp"
+        android:layout_marginTop="168dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:numColumns="7"
+        android:verticalSpacing="1dp"
+        android:horizontalSpacing="1dp"
+        android:gravity="center"
+        android:stretchMode="columnWidth"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+    </GridView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout></layout>
