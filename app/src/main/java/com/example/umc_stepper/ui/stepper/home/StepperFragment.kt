@@ -1,10 +1,9 @@
-package com.example.umc_stepper.ui.stepper
+package com.example.umc_stepper.ui.stepper.home
 
+import android.view.WindowManager
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentStepperBinding
-import com.example.umc_stepper.ui.stepper.home.CalendarAdapter
-import com.example.umc_stepper.ui.stepper.home.DayData
 
 class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_stepper) {
     override fun setLayout() {
@@ -25,7 +24,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
 
         val adapter = CalendarAdapter(requireContext(),days)
         binding.stepperCalendarGv.adapter = adapter
+
+
     }
-
-
 }
