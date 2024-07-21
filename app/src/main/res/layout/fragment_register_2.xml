@@ -11,7 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="90dp"
-        android:text="더 정확한 정보를 위해서\n더 알려주세요!"
+        android:text="더 정확한 정보를 \n위해서 더 알려주세요!"
+        android:textAlignment="center"
         android:textColor="@color/White"
         android:textSize="25dp"
         android:textStyle="bold"
@@ -26,6 +27,7 @@
         android:layout_marginTop="8dp"
         android:text="지금 넘어가도 나중에 다시 입력할 수 있어요."
         android:textColor="@color/White"
+        app:layout_constraintEnd_toEndOf="@+id/fragment_register_2_title_tv"
         app:layout_constraintStart_toStartOf="@id/fragment_register_2_title_tv"
         app:layout_constraintTop_toBottomOf="@id/fragment_register_2_title_tv" />
 
@@ -54,7 +56,6 @@
     </androidx.cardview.widget.CardView>
 
 
-
     <TextView
         android:id="@+id/fragment_register_2_height_tv"
         android:layout_width="wrap_content"
@@ -64,17 +65,20 @@
         android:text="신장 cm"
         android:textColor="@color/White"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/fragment_register_2_profile_card_cv"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_register_2_profile_card_cv" />
 
     <EditText
         android:id="@+id/fragment_register_2_height_et"
+        style="@style/body_medium_14"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/shape_rounded_square_register_field_20dp_stroke_1"
+
+        android:background="@drawable/shape_rounded_square_purpleblack_bg1_50dp"
+        android:hint="키를 입력해주세요."
         android:paddingStart="24dp"
         android:textColorHint="@color/Gray_Purple"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,17 +93,21 @@
         android:layout_marginTop="12dp"
         android:text="몸무게 kg"
         android:textColor="@color/White"
+        android:textColorHint="@color/Purple_Gray"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/fragment_register_2_height_et"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_register_2_height_et" />
+
     <EditText
         android:id="@+id/fragment_register_2_weight_et"
+        style="@style/body_medium_14"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/shape_rounded_square_register_field_20dp_stroke_1"
+        android:background="@drawable/shape_rounded_square_purpleblack_bg1_50dp"
+        android:hint="몸무게를 입력해주세요."
         android:paddingStart="24dp"
         android:textColorHint="@color/Gray_Purple"
         app:layout_constraintEnd_toEndOf="@+id/fragment_register_2_height_et"
@@ -117,42 +125,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageButton
-        android:id="@+id/fragment_register_2_checked_toggle_ib"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/selector_checked_toggle"
-        app:layout_constraintStart_toStartOf="@id/fragment_register_2_weight_et"
-        app:layout_constraintTop_toBottomOf="@id/fragment_register_2_weight_et" />
-
-    <TextView
-        android:id="@+id/fragment_register_2_agreement_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="카메라 및 알람 기능 접근 동의"
-        android:textColor="@color/White"
-        android:textSize="11dp"
-        app:layout_constraintBottom_toBottomOf="@id/fragment_register_2_checked_toggle_ib"
-        app:layout_constraintStart_toEndOf="@id/fragment_register_2_checked_toggle_ib"
-        app:layout_constraintTop_toTopOf="@id/fragment_register_2_checked_toggle_ib" />
-
-    <TextView
-        android:id="@+id/fragment_register_2_alarm_agreement_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:autoLink="all"
-        android:text="@string/show_detail_alarm"
-        android:textColor="@color/Purple_400"
-        android:textSize="11dp"
-        app:layout_constraintBottom_toBottomOf="@id/fragment_register_2_agreement_tv"
-        app:layout_constraintStart_toEndOf="@id/fragment_register_2_agreement_tv"
-        app:layout_constraintTop_toTopOf="@id/fragment_register_2_agreement_tv"
-
-        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
