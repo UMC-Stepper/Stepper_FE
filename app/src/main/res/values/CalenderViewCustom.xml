@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 캘린더의 요일(Day)의 스타일 설정 -->
+<!--    <style name="CalenderViewCustom" parent="Theme.AppCompat">-->
+<!--        <item name="android:fontFamily">@font/pretendard_semi_bold</item>-->
+<!--        <item name="android:textSize">16sp</item>-->
+<!--    </style>-->
+
+    <!-- 캘린더의 날짜(Date)의 스타일 설정 -->
+    <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@drawable/selector_material_calendar_text_color</item>
+    </style>
+
+    <!-- 캘린더의 요일에 적용되는 스타일 -->
+    <style name="CalenderViewDayCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/Purple_700</item>
+    </style>
+
+    <!-- 연, 월을 표시하는 헤더에 적용되는 스타일 -->
+    <style name="CalendarWidgetHeader">
+        <item name="android:fontFamily">@font/pretendard_semi_bold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/White</item>
+    </style>
+
+</resources>

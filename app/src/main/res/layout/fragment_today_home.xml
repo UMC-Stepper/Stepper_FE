@@ -58,6 +58,7 @@
             android:layout_marginEnd="24dp"
             android:layout_marginTop="16dp"
             android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_today_home_week_calendar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,10 +79,10 @@
             android:id="@+id/fragment_today_home_plus_exercise_card_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="27dp"
             android:src="@drawable/ic_today_home_plus_exercise_card"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_today_home_title_tv"
             app:layout_constraintEnd_toEndOf="@+id/fragment_today_home_week_calendar_rv"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_week_calendar_rv" />
+            app:layout_constraintTop_toTopOf="@+id/fragment_today_home_title_tv" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
@@ -95,23 +96,22 @@
             tools:listitem="@layout/item_today_home_exercise_card"
             app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_title_tv"/>
 
-            <TextView
-                android:id="@+id/fragment_today_home_no_card_tv"
-                style="@style/sub_title_semi_bold_16"
-                android:layout_width="match_parent"
-                android:layout_height="330dp"
-                android:layout_marginStart="23dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginTop="12dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
-                android:text="설정하신 운동이 없습니다\n카드를 추가해주세요"
-                android:textColor="@color/White"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/fragment_today_home_no_card_tv"
+            style="@style/sub_title_semi_bold_16"
+            android:layout_width="match_parent"
+            android:layout_height="330dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="23dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
+            android:gravity="center"
+            android:text="설정하신 운동이 없습니다\n카드를 추가해주세요"
+            android:textColor="@color/White"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_title_tv" />
 
 
 
