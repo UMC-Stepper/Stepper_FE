@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/todayFragment"
+        android:id="@+id/todayHomeFragment"
         android:icon="@drawable/nav_today_selector"
         android:title="Today"/>
     <item
