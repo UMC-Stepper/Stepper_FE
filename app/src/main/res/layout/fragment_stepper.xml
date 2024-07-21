@@ -48,8 +48,146 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_stepper_home_calendar">
+        tools:listitem="@layout/item_stepper_home_calendar"/>
 
-    </GridView>
+        <TextView
+            android:id="@+id/stepper_explain1_tv"
+            style="@style/body_regular_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="*단계 별 운동을 모두 완료하면 STEPPER 상태로 표시됩니다."
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stepper_calendar_gv" />
+
+        <TextView
+            android:id="@+id/stepper_explain2_tv"
+            style="@style/body_regular_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:text="단계 별 운동 모두 완료 시"
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stepper_explain1_tv" />
+
+        <ImageView
+            android:id="@+id/stepper_icon_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="9dp"
+            android:src="@drawable/ic_stepper_home_calendar_icon"
+            app:layout_constraintStart_toEndOf="@id/stepper_explain2_tv"
+            app:layout_constraintTop_toBottomOf="@id/stepper_explain1_tv" />
+
+        <TextView
+            android:id="@+id/stepper_explain3_tv"
+            style="@style/body_regular_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="4dp"
+            android:text="단계 별 운동 미완료"
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stepper_explain2_tv" />
+
+        <ImageView
+            android:id="@+id/stepper_dot_iv"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="7dp"
+            android:src="@drawable/ic_stepper_calendar_dot"
+            app:layout_constraintStart_toEndOf="@id/stepper_explain3_tv"
+            app:layout_constraintTop_toBottomOf="@id/stepper_explain2_tv" />
+
+        <TextView
+            android:id="@+id/stepper_today_tv"
+            style="@style/head_bold_18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="42dp"
+            android:text="오늘의 운동 리스트"
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stepper_explain3_tv" />
+
+        <ImageView
+            android:id="@+id/stepper_modify_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="118dp"
+            android:src="@drawable/ic_stepper_modify_btn"
+            app:layout_constraintStart_toEndOf="@id/stepper_category_iv"
+            app:layout_constraintTop_toBottomOf="@id/stepper_calendar_gv" />
+
+        <ImageView
+            android:id="@+id/stepper_category_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="118dp"
+            android:src="@drawable/ic_stepper_category"
+            app:layout_constraintStart_toEndOf="@id/stepper_today_tv"
+            app:layout_constraintTop_toBottomOf="@id/stepper_calendar_gv" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/stepper_exercise_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stepper_today_tv" />
+
+        <TextView
+            android:id="@+id/stepper_additional_tv"
+            style="@style/head_bold_18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="40dp"
+            android:text="추가 운동 기록"
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stepper_exercise_rv" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/stepper_additional_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:visibility="visible"
+            tools:itemCount="2"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stepper_additional_tv" />
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/ic_stepper_additional_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stepper_additional_rv" />
+
+
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout></layout>
