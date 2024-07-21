@@ -7,12 +7,16 @@
     <uses-feature android:name="android.hardware.camera.any" />
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" /> <!-- 저장소 접근 권한 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" /> <!-- 저장소 접근 권한 -->
+
     <!-- 안드로이드 13 (Tiramisu -> T) 미만 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 안드로이드 13 (Tiramisu -> T) 이상 -->
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" /> <!-- 안드로이드 14 (Upside Down Cake -> U) 이상 -->
     <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
+
 
     <application
         android:name=".utils.GlobalApplication"
@@ -34,16 +38,21 @@
             android:name=".ui.login.LoginActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">
+        </activity>
+        <activity
+            android:name=".ui.stepper.CameraActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
