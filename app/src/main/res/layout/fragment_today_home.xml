@@ -58,6 +58,7 @@
             android:layout_marginEnd="24dp"
             android:layout_marginTop="16dp"
             android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_today_home_week_calendar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
