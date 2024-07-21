@@ -31,23 +31,25 @@
     <GridView
         android:id="@+id/stepper_calendar_gv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="320dp"
         android:background="@drawable/shape_rounded_purple_bg2_half_20dp"
         android:layout_marginTop="168dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:numColumns="7"
+        android:numRows="6"
         android:verticalSpacing="1dp"
         android:horizontalSpacing="1dp"
         android:gravity="center"
         android:stretchMode="columnWidth"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="20dp"
         android:paddingBottom="16dp"
         android:paddingTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_stepper_home_calendar">
 
     </GridView>
 

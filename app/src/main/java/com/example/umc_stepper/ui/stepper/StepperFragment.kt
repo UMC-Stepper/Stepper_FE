@@ -23,7 +23,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
             DayData("30", false, false), DayData("31", false, false), DayData("1", false, false)
         )
 
-        val adapter = CalendarAdapter(this, days)
+        val adapter = CalendarAdapter(requireContext(),days)
         binding.stepperCalendarGv.adapter = adapter
     }
 

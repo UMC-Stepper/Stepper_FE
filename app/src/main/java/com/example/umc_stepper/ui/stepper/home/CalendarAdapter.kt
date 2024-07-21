@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.stepper.home
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,9 +8,8 @@ import android.widget.BaseAdapter
 import androidx.core.content.ContextCompat
 import com.example.umc_stepper.R
 import com.example.umc_stepper.databinding.ItemStepperHomeCalendarBinding
-import com.example.umc_stepper.ui.stepper.StepperFragment
 
-class CalendarAdapter(private val context: StepperFragment, private val days: List<DayData>) : BaseAdapter() {
+class CalendarAdapter(private val context: Context, private val days: List<DayData>) : BaseAdapter() {
 
     override fun getCount(): Int {
         return days.size
