@@ -40,11 +40,8 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"></activity>
             android:windowSoftInputMode="adjustPan">
-
         </activity>
-
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">
