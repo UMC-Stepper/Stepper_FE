@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/stepperFragment"
-        android:name="com.example.umc_stepper.ui.stepper.StepperFragment"
+        android:name="com.example.umc_stepper.ui.stepper.home.StepperFragment"
         android:label="fragment_stepper"
         tools:layout="@layout/fragment_stepper" />
     <fragment

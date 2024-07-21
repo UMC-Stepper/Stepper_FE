@@ -288,7 +288,7 @@
             android:hint="운동 시 챙겨야 할 준비물 리스트를 알려주세요."
             android:paddingStart="24dp"
             android:textColorHint="@color/Purple_Gray"
-            app:layout_constraintEnd_toEndOf="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragment_exercise_settings_exercise_materials_title_tv" />
 
