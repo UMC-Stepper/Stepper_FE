@@ -37,7 +37,6 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:numColumns="7"
-        android:numRows="6"
         android:verticalSpacing="1dp"
         android:horizontalSpacing="1dp"
         android:gravity="center"
