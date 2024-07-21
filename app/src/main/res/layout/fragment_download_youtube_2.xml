@@ -125,7 +125,6 @@
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textColorHint="추가 운동으로 추가하기"
         style="@style/sub_title_semi_bold_16"
         android:textColor="@color/White"
         app:layout_constraintBottom_toBottomOf="parent"

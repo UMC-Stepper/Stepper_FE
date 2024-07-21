@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="56dp"
                 android:layout_marginEnd="56dp"
-                android:src="@drawable/ic_camera_permission"
+                android:src="@drawable/camera_btn_layer_list"
                 app:layout_constraintBottom_toBottomOf="@+id/activity_camera_cancel_iv"
                 app:layout_constraintEnd_toStartOf="@+id/activity_camera_change_iv"
                 app:layout_constraintStart_toEndOf="@+id/activity_camera_cancel_iv"
@@ -70,17 +70,11 @@
                 android:id="@+id/activity_camera_change_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="56dp"
                 android:layout_marginEnd="38dp"
                 android:src="@drawable/ic_camera_change"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_camera_capture_iv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/activity_camera_capture_iv" />
-
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>
