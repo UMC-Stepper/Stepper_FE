@@ -21,16 +21,18 @@
 
     <Button
         android:id="@+id/fragment_register_agree_btn"
-        android:layout_width="312dp"
-        android:layout_height="46dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="24dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
         android:background="@drawable/shape_rounded_square_purple700_50dp"
-        android:fontFamily="@font/pretendard_semi_bold"
+        style="@style/sub_title_semi_bold_16"
+        android:textColor="@color/White"
         android:text="전체 동의하기"
         android:textAlignment="textStart"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragment_register_agree_tv" />
@@ -39,21 +41,141 @@
         android:id="@+id/fragment_register_agree2_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/ic_register_check"
+        android:background="@drawable/selector_checked_off"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="37dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_register_agree_btn"/>
+        app:layout_constraintTop_toBottomOf="@id/fragment_register_agree_btn"
+        app:layout_constraintEnd_toStartOf="@id/fragment_register_agree2_tv"/>
 
     <TextView
+        android:id="@+id/fragment_register_agree2_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="이용약관 동의"
+        style="@style/body_semi_bold_14"
         android:textColor="@color/White"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="34dp"
+        app:layout_constraintStart_toStartOf="@id/fragment_register_agree2_btn"
+        app:layout_constraintTop_toBottomOf="@id/fragment_register_agree_btn"/>
+
+    <TextView
+        android:id="@+id/fragment_register_agree3_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(필수)"
+        style="@style/body_semi_bold_14"
+        android:textColor="@color/Red_300"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="34dp"
+        app:layout_constraintStart_toEndOf="@id/fragment_register_agree2_tv"
+        app:layout_constraintTop_toBottomOf="@id/fragment_register_agree_btn"/>
+
+    <ScrollView
+        android:id="@+id/fragment_register_agree1_sv"
+        android:layout_width="match_parent"
+        android:layout_height="196dp"
+        android:background="@drawable/shape_rounded_square_purple300_stoke_1"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_register_agree2_tv">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="196dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:paddingRight="16dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="@string/register_agree1"
+            android:textColor="@color/White"
+            android:textSize="11sp" />
+    </ScrollView>
+
+
+    <ImageButton
+        android:id="@+id/fragment_register_agree4_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_checked_off"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="37dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_register_agree_btn"/>
+        app:layout_constraintTop_toBottomOf="@id/fragment_register_agree1_sv"
+        app:layout_constraintEnd_toStartOf="@id/fragment_register_agree4_tv"/>
+
+    <TextView
+        android:id="@+id/fragment_register_agree4_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="개인정보 수집 동의"
+        style="@style/body_semi_bold_14"
+        android:textColor="@color/White"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="34dp"
+        app:layout_constraintStart_toStartOf="@id/fragment_register_agree2_btn"
+        app:layout_constraintTop_toBottomOf="@id/fragment_register_agree1_sv"/>
+
+    <TextView
+        android:id="@+id/fragment_register_agree5_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(필수)"
+        style="@style/body_semi_bold_14"
+        android:textColor="@color/Red_300"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="34dp"
+        app:layout_constraintStart_toEndOf="@id/fragment_register_agree4_tv"
+        app:layout_constraintTop_toBottomOf="@id/fragment_register_agree1_sv"/>
+
+    <ScrollView
+        android:id="@+id/fragment_register_agree2_sv"
+        android:layout_width="match_parent"
+        android:layout_height="196dp"
+        android:background="@drawable/shape_rounded_square_purple300_stoke_1"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_register_agree4_tv">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="196dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:paddingRight="16dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="@string/register_agree2"
+            android:textColor="@color/White"
+            android:textSize="11sp" />
+    </ScrollView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/selector_confirm_off"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:text="확인하기"
+        android:textColor="@color/Gray_Purple"
+        style="@style/sub_title_semi_bold_16"
+        android:enabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_register_agree2_sv"/>
+
+
 
 
 
