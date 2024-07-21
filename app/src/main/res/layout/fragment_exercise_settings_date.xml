@@ -51,32 +51,33 @@
 
         <TextView
             android:id="@+id/fragment_exercise_settings_date_title_tv"
+            style="@style/title_bold_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
             android:text="마지막 단계\n운동 일정과 준비물 설정"
             android:textColor="@color/White"
-            style="@style/title_bold_24"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_exercise_settings_date_back_iv"/>
+            app:layout_constraintTop_toBottomOf="@+id/fragment_exercise_settings_date_back_iv" />
+
         <TextView
             android:id="@+id/fragment_exercise_settings_time_tv"
+            style="@style/head_bold_18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:text="운동 시간 설정"
             android:textColor="@color/White"
-            style="@style/head_bold_18"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_exercise_settings_date_title_tv"
-            app:layout_constraintStart_toStartOf="@+id/fragment_exercise_settings_date_title_tv"/>
+            app:layout_constraintStart_toStartOf="@+id/fragment_exercise_settings_date_title_tv"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_exercise_settings_date_title_tv" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/fragment_exercise_settings_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5"/>
+            app:layout_constraintGuide_percent="0.5" />
 
         <TextView
             android:id="@+id/fragment_exercise_settings_hour_tv"
@@ -123,14 +124,189 @@
             android:id="@+id/fragment_exercise_settings_time_spinner"
             android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_marginTop="31dp"
             android:layout_marginStart="50dp"
+            android:layout_marginTop="31dp"
             android:layout_marginEnd="50dp"
             android:theme="@style/ThemeOverlay.NumberPicker"
             android:timePickerMode="spinner"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_exercise_settings_hour_tv"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_exercise_settings_hour_tv" />
+
+        <TextView
+            android:id="@+id/fragment_exercise_settings_plan_title"
+            style="@style/head_bold_18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:text="운동 일정 설정"
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="@id/fragment_exercise_settings_date_title_tv"
+            app:layout_constraintTop_toBottomOf="@id/fragment_exercise_settings_time_spinner" />
+
+        <TextView
+            android:id="@+id/fragment_exercise_settings_plan_sub_title"
+            style="@style/body_regular_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="일주일에 몇 번 운동할지 운동 주기를 설정해주세요."
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="@id/fragment_exercise_settings_plan_title"
+            app:layout_constraintTop_toBottomOf="@id/fragment_exercise_settings_plan_title" />
+
+        <TextView
+            android:id="@+id/fragment_exercise_settings_plan_description"
+            style="@style/body_medium_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="매주 %d %d"
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="@id/fragment_exercise_settings_plan_sub_title"
+            app:layout_constraintTop_toBottomOf="@id/fragment_exercise_settings_plan_sub_title" />
+
+        <TextView
+            android:id="@+id/fragment_exercise_settings_sunday_bt"
+            style="@style/body_regular_14"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
+            android:gravity="center"
+            android:text="일"
+            android:textColor="@color/White"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_exercise_settings_monday_bt"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_exercise_settings_plan_description" />
+
+        <TextView
+            android:id="@+id/fragment_exercise_settings_monday_bt"
+            style="@style/body_regular_14"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
+            android:gravity="center"
+            android:text="월"
+            android:textColor="@color/White"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_exercise_settings_tuesday_bt"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/fragment_exercise_settings_sunday_bt"
+            app:layout_constraintTop_toTopOf="@+id/fragment_exercise_settings_sunday_bt" />
+
+        <TextView
+            android:id="@+id/fragment_exercise_settings_tuesday_bt"
+            style="@style/body_regular_14"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
+            android:gravity="center"
+            android:text="화"
+            android:textColor="@color/White"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_exercise_settings_wednesday_bt"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/fragment_exercise_settings_monday_bt"
+            app:layout_constraintTop_toTopOf="@+id/fragment_exercise_settings_sunday_bt" />
+
+        <TextView
+            android:id="@+id/fragment_exercise_settings_wednesday_bt"
+            style="@style/body_regular_14"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
+            android:gravity="center"
+            android:text="수"
+            android:textColor="@color/White"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_exercise_settings_thursday_bt"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/fragment_exercise_settings_tuesday_bt"
+            app:layout_constraintTop_toTopOf="@+id/fragment_exercise_settings_tuesday_bt" />
+
+        <TextView
+            android:id="@+id/fragment_exercise_settings_thursday_bt"
+            style="@style/body_regular_14"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
+            android:gravity="center"
+            android:text="목"
+            android:textColor="@color/White"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_exercise_settings_friday_bt"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/fragment_exercise_settings_wednesday_bt"
+            app:layout_constraintTop_toTopOf="@+id/fragment_exercise_settings_wednesday_bt" />
+
+        <TextView
+            android:id="@+id/fragment_exercise_settings_friday_bt"
+            style="@style/body_regular_14"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
+            android:gravity="center"
+            android:text="금"
+            android:textColor="@color/White"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_exercise_settings_saturday_bt"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/fragment_exercise_settings_thursday_bt"
+            app:layout_constraintTop_toTopOf="@+id/fragment_exercise_settings_thursday_bt" />
+
+        <TextView
+            android:id="@+id/fragment_exercise_settings_saturday_bt"
+            style="@style/body_regular_14"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
+            android:gravity="center"
+            android:text="토"
+            android:textColor="@color/White"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/fragment_exercise_settings_friday_bt"
+            app:layout_constraintTop_toTopOf="@+id/fragment_exercise_settings_friday_bt" />
+
+        <TextView
+            android:id="@+id/fragment_exercise_settings_exercise_materials_title_tv"
+            style="@style/head_bold_18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:text="운동 준비물"
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="@id/fragment_exercise_settings_plan_title"
+            app:layout_constraintTop_toBottomOf="@id/fragment_exercise_settings_sunday_bt" />
+
+        <EditText
+            android:id="@+id/fragment_exercise_settings_exercise_materials_et"
+            style="@style/body_regular_12"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/shape_rounded_square_purpleblack_bg2_18dp"
+            android:hint="운동 시 챙겨야 할 준비물 리스트를 알려주세요."
+            android:paddingStart="24dp"
+            android:textColorHint="@color/Purple_Gray"
+            app:layout_constraintEnd_toEndOf="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_exercise_settings_exercise_materials_title_tv" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragment_exercise_settings_exercise_success_bt"
+            style="@style/sub_title_semi_bold_16"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/shape_rounded_square_purple700_60dp"
+            android:text="입력완료"
+            android:textColor="@color/White"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_exercise_settings_exercise_materials_et" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -26,8 +26,9 @@
         android:label="fragment_stepper"
         tools:layout="@layout/fragment_stepper" />
     <fragment
-        android:id="@+id/todayFragment"
-        android:name="com.example.umc_stepper.ui.today.TodayFragment"
-        android:label="fragment_today"
-        tools:layout="@layout/fragment_today" />
+        android:id="@+id/todayHomeFragment"
+        android:name="com.example.umc_stepper.ui.today.TodayHomeFragment"
+        android:label="TodayHomeFragment"
+        tools:layout="@layout/fragment_today_home"/>
+
 </navigation>

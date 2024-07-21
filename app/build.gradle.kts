@@ -100,6 +100,7 @@ dependencies {
 
     // MaterialCalendarView
     implementation("com.github.prolificinteractive:material-calendarview:2.0.1")
+    implementation ("com.jakewharton.threetenabp:threetenabp:1.3.1")
 
     // CameraX
     val camerax_version = "1.4.0-beta02"

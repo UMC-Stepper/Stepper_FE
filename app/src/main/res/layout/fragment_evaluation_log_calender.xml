@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.today.EvaluationLogFragment">
+
+        <ImageView
+            android:id="@+id/fragment_evaluation_log_calender_back_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fragment_evaluation_log_calender_title_tv"
+            style="@style/sub_title_bold_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="평가 일지"
+            android:textColor="@color/White"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_evaluation_log_calender_back_iv"
+            app:layout_constraintStart_toEndOf="@+id/fragment_evaluation_log_calender_back_iv"
+            app:layout_constraintTop_toTopOf="@+id/fragment_evaluation_log_calender_back_iv" />
+
+        <ImageView
+            android:id="@+id/fragment_evaluation_log_calender_go_today_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="11dp"
+            android:background="@drawable/ic_toolbar_today"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_evaluation_log_calender_go_stepper_iv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/fragment_evaluation_log_calender_go_stepper_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/ic_toolbar_today"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_evaluation_log_calender_rv"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_evaluation_log_calender_back_iv"
+            tools:listitem="@layout/item_evaluation_log_calender_category" />
+
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/fragment_evaluation_log_calender_calendarview"
+            android:layout_width="0dp"
+            android:layout_height="490dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="13dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:padding="24dp"
+            app:mcv_selectionColor="@color/Yellow_300"
+            android:background="@drawable/shape_rounded_square_purple400_20dp"
+            android:backgroundTint="@color/Purple_Black_BG_2"
+            app:mcv_firstDayOfWeek="monday"
+            app:mcv_leftArrow="@drawable/ic_calender_arrow_start"
+            app:mcv_rightArrow="@drawable/ic_calender_arrow_end"
+            app:mcv_selectionMode="single"
+            app:mcv_showOtherDates="all"
+            app:mcv_tileSize="40dp"
+            app:mcv_weekDayTextAppearance="@style/CalenderViewDayCustomText"
+            app:mcv_dateTextAppearance="@style/CalenderViewDateCustomText"
+            app:layout_constraintBottom_toTopOf="@+id/fragment_evaluation_log_calender_log_day_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_evaluation_log_calender_rv"/>
+
+        <ImageView
+            android:id="@+id/fragment_evaluation_log_calender_log_day_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="19dp"
+            android:src="@drawable/ic_calender_log_day"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/fragment_evaluation_log_calender_log_day_tv"
+            style="@style/body_regular_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="운동 평가 기록 작성"
+            android:textColor="@color/White"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_evaluation_log_calender_log_day_iv"
+            app:layout_constraintStart_toEndOf="@+id/fragment_evaluation_log_calender_log_day_iv"
+            app:layout_constraintTop_toTopOf="@+id/fragment_evaluation_log_calender_log_day_iv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

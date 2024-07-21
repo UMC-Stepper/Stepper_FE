@@ -31,7 +31,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.mainBottomNavigationBar.setupWithNavController(navController)
 
         // 최소 실행시 프래그먼트 설정
-        binding.mainBottomNavigationBar.selectedItemId = R.id.todayFragment
-        navController.navigate(R.id.todayFragment)
+        binding.mainBottomNavigationBar.selectedItemId = R.id.todayHomeFragment
+        navController.navigate(R.id.todayHomeFragment)
     }
 }
