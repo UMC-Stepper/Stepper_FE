@@ -204,153 +204,176 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/fragment_my_exercise_progressbar_pb_cl"
                 android:layout_width="match_parent"
-                android:layout_height="257dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_select_tag_7_tv">
 
+                <TextView
+                    android:id="@+id/fragment_my_exercise_select_ok_tag_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:text="'허벅지 근육 파열'"
+                    android:textColor="@color/Yellow_300"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="에 대한 검색 결과입니다."
+                    android:textColor="@color/White"
+                    app:layout_constraintStart_toEndOf="@id/fragment_my_exercise_select_ok_tag_tv"
+                    app:layout_constraintTop_toTopOf="@id/fragment_my_exercise_select_ok_tag_tv" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/fragment_my_exercise_search_result_card_1_cl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/shape_rounded_square_purpleblack_bg2_25dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_select_ok_tag_tv">
+
+                    <ImageView
+                        android:id="@+id/fragment_my_exercise_thumbnail_1_iv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="180dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/fragment_my_exercise_player_title_1_tv"
+                        style="@style/sub_title_bold_16"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="[중환자분들을 위한 재활 운동] 근손실 예방을 위한 스트레칭 | 누운 자세에서 운동하기(초급3)"
+                        android:textColor="@color/White"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_thumbnail_1_iv" />
+
+                    <ImageView
+                        android:id="@+id/fragment_my_exercise_profile_1_iv"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:src="@drawable/shape_image_input_circle"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/fragment_my_exercise_player_title_1_tv"
+                        app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_player_title_1_tv" />
+
+                    <TextView
+                        android:id="@+id/fragment_my_exercise_channel_name_1_tv"
+                        style="@style/body_medium_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="손제용의 사생활"
+                        android:textColor="@color/White"
+                        app:layout_constraintBottom_toBottomOf="@id/fragment_my_exercise_profile_1_iv"
+                        app:layout_constraintStart_toEndOf="@id/fragment_my_exercise_profile_1_iv"
+                        app:layout_constraintTop_toTopOf="@id/fragment_my_exercise_profile_1_iv" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/fragment_my_exercise_search_result_card_2_cl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/shape_rounded_square_purpleblack_bg2_25dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_search_result_card_1_cl">
+
+                    <ImageView
+                        android:id="@+id/fragment_my_exercise_thumbnail_2_iv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="180dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/fragment_my_exercise_player_title_2_tv"
+                        style="@style/sub_title_bold_16"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="[중환자분들을 위한 재활 운동] 근손실 예방을 위한 스트레칭 | 누운 자세에서 운동하기(초급3)"
+                        android:textColor="@color/White"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_thumbnail_2_iv" />
+
+                    <ImageView
+                        android:id="@+id/fragment_my_exercise_profile_2_iv"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:src="@drawable/shape_image_input_circle"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/fragment_my_exercise_player_title_2_tv"
+                        app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_player_title_2_tv" />
+
+                    <TextView
+                        android:id="@+id/fragment_my_exercise_channel_name_2_tv"
+                        style="@style/body_medium_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="손제용의 사생활"
+                        android:textColor="@color/White"
+                        app:layout_constraintBottom_toBottomOf="@id/fragment_my_exercise_profile_2_iv"
+                        app:layout_constraintStart_toEndOf="@id/fragment_my_exercise_profile_2_iv"
+                        app:layout_constraintTop_toTopOf="@id/fragment_my_exercise_profile_2_iv" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <ProgressBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/fragment_my_exercise_3_progressbar_pb"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="25"
+                    android:progressBackgroundTint="@color/Purple_Black_BG_1"
+                    android:progressDrawable="@drawable/circular_progress_bar2"
+                    android:progressTint="@color/Purple_700"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/sub_title_semi_bold_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:text="분석중입니다.\n잠시만 기다려주세요."
+                    android:textColor="@color/White"
+                    app:layout_constraintEnd_toEndOf="@id/fragment_my_exercise_3_progressbar_pb"
+                    app:layout_constraintStart_toStartOf="@id/fragment_my_exercise_3_progressbar_pb"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_3_progressbar_pb" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/fragment_my_exercise_select_ok_tag_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="'허벅지 근육 파열'"
-                android:textColor="@color/Yellow_300"
-                app:layout_constraintStart_toStartOf="@id/fragment_my_exercise_select_tag_7_tv"
-                app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_progressbar_pb_cl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="에 대한 검색 결과입니다."
-                android:textColor="@color/White"
-                app:layout_constraintStart_toEndOf="@id/fragment_my_exercise_select_ok_tag_tv"
-                app:layout_constraintTop_toTopOf="@id/fragment_my_exercise_select_ok_tag_tv" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/fragment_my_exercise_search_result_card_1_cl"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/shape_rounded_square_purpleblack_bg2_25dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_select_ok_tag_tv">
-
-                <ImageView
-                    android:id="@+id/fragment_my_exercise_thumbnail_1_iv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="180dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/fragment_my_exercise_player_title_1_tv"
-                    style="@style/sub_title_bold_16"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="[중환자분들을 위한 재활 운동] 근손실 예방을 위한 스트레칭 | 누운 자세에서 운동하기(초급3)"
-                    android:textColor="@color/White"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_thumbnail_1_iv" />
-
-                <ImageView
-                    android:id="@+id/fragment_my_exercise_profile_1_iv"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:src="@drawable/shape_image_input_circle"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/fragment_my_exercise_player_title_1_tv"
-                    app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_player_title_1_tv" />
-
-                <TextView
-                    android:id="@+id/fragment_my_exercise_channel_name_1_tv"
-                    style="@style/body_medium_12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="손제용의 사생활"
-                    android:textColor="@color/White"
-                    app:layout_constraintBottom_toBottomOf="@id/fragment_my_exercise_profile_1_iv"
-                    app:layout_constraintStart_toEndOf="@id/fragment_my_exercise_profile_1_iv"
-                    app:layout_constraintTop_toTopOf="@id/fragment_my_exercise_profile_1_iv" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/fragment_my_exercise_search_result_card_2_cl"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/shape_rounded_square_purpleblack_bg2_25dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_search_result_card_1_cl">
-
-                <ImageView
-                    android:id="@+id/fragment_my_exercise_thumbnail_2_iv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="180dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/fragment_my_exercise_player_title_2_tv"
-                    style="@style/sub_title_bold_16"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="[중환자분들을 위한 재활 운동] 근손실 예방을 위한 스트레칭 | 누운 자세에서 운동하기(초급3)"
-                    android:textColor="@color/White"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_thumbnail_2_iv" />
-
-                <ImageView
-                    android:id="@+id/fragment_my_exercise_profile_2_iv"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:src="@drawable/shape_image_input_circle"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/fragment_my_exercise_player_title_2_tv"
-                    app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_player_title_2_tv" />
-
-                <TextView
-                    android:id="@+id/fragment_my_exercise_channel_name_2_tv"
-                    style="@style/body_medium_12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="손제용의 사생활"
-                    android:textColor="@color/White"
-                    app:layout_constraintBottom_toBottomOf="@id/fragment_my_exercise_profile_2_iv"
-                    app:layout_constraintStart_toEndOf="@id/fragment_my_exercise_profile_2_iv"
-                    app:layout_constraintTop_toTopOf="@id/fragment_my_exercise_profile_2_iv" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/fragment_my_exercise_download_direct_link_tv"
@@ -361,8 +384,8 @@
                 android:text="링크로 직접 불러오기"
                 android:textColor="@color/White"
                 android:textSize="20dp"
-                app:layout_constraintStart_toStartOf="@id/fragment_my_exercise_search_result_card_2_cl"
-                app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_search_result_card_2_cl" />
+                app:layout_constraintStart_toStartOf="@id/fragment_my_exercise_select_tag_7_tv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_progressbar_pb_cl" />
 
             <TextView
                 android:id="@+id/fragment_my_exercise_download_direct_link_description_tv"
@@ -388,8 +411,8 @@
                 android:paddingStart="24dp"
                 android:textColor="@color/Purple_Gray"
                 android:textColorHint="@color/Purple_Gray"
-                app:layout_constraintEnd_toEndOf="@id/fragment_my_exercise_search_result_card_2_cl"
-                app:layout_constraintStart_toStartOf="@id/fragment_my_exercise_search_result_card_2_cl"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_download_direct_link_description_tv" />
 
             <EditText
@@ -402,8 +425,8 @@
                 android:height="44dp"
                 android:background="@drawable/selector_checked_input"
 
-                app:layout_constraintEnd_toEndOf="@id/fragment_my_exercise_search_result_card_2_cl"
-                app:layout_constraintStart_toStartOf="@id/fragment_my_exercise_search_result_card_2_cl"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_upload_youtube_link_et" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
