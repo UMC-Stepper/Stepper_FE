@@ -6,8 +6,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="95dp"
-        android:background="@drawable/shape_rounded_square_purple700_18dp"
-        android:backgroundTint="@color/Purple_Black_BG_1">
+        android:layout_marginBottom="12dp"
+        app:cardCornerRadius="18dp"
+        android:backgroundTint="@color/Purple_Black_BG_2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
