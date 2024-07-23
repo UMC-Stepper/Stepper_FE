@@ -106,6 +106,7 @@
             android:layout_marginEnd="25dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
+            android:backgroundTint="@color/Purple_Black_BG_2"
             android:gravity="center"
             android:text="설정하신 운동이 없습니다\n카드를 추가해주세요"
             android:textColor="@color/White"
@@ -130,6 +131,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="15dp"
             android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
+            android:backgroundTint="@color/Purple_Black_BG_2"
             app:layout_constraintEnd_toStartOf="@+id/fragment_today_home_guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_no_card_tv">
@@ -180,6 +182,7 @@
             android:layout_marginEnd="26dp"
             android:layout_marginStart="15dp"
             android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
+            android:backgroundTint="@color/Purple_Black_BG_2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/fragment_today_home_guideline"
             app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_no_card_tv">
