@@ -11,10 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginStart="18dp"
+        android:text="5"
         android:textAlignment="center"
-        android:text=""
         android:textColor="@color/White"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,10 +22,9 @@
         android:id="@+id/stepper_home_calendar_dot_iv"
         android:layout_width="14dp"
         android:layout_height="14dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginStart="12dp"
         android:src="@drawable/ic_stepper_calendar_dot"
-        android:visibility="gone"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/stepper_home_calendar_day_tv" />
 
@@ -33,12 +32,11 @@
         android:id="@+id/stepper_home_calendar_icon_iv"
         android:layout_width="16dp"
         android:layout_height="16dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="12dp"
-        android:textAlignment="center"
         android:src="@drawable/ic_stepper_home_calendar_icon"
-        android:visibility="gone"
+        android:textAlignment="center"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/stepper_home_calendar_day_tv"/>
+        app:layout_constraintTop_toBottomOf="@id/stepper_home_calendar_day_tv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
