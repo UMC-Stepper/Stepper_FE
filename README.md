@@ -28,6 +28,6 @@
 
 |Home|Today|Stepper|community|
 |---|---|---|---|
-|![image](이미지)|![image](이미지)||![image](이미지)|![image](이미지)|
+|![image](이미지)|![image](이미지)|![image](이미지)|![image](이미지)|
 |설명|설명|설명|설명|
 
