@@ -41,8 +41,6 @@
         android:horizontalSpacing="1dp"
         android:gravity="center"
         android:stretchMode="columnWidth"
-        android:paddingLeft="0dp"
-        android:paddingRight="20dp"
         android:paddingBottom="16dp"
         android:paddingTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
