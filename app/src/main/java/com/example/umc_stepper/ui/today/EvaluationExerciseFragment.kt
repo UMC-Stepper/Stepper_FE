@@ -88,7 +88,7 @@ class EvaluationExerciseFragment :
                 selectTextDescription = 4
                 stateAllToggle()
             }
-            fragmentEvaluationExercisePictureExerciseIb.setOnClickListener {
+            fragmentEvaluationExercisePictureExerciseIv.setOnClickListener {
                 openGallery()
             }
             fragmentEvaluationExerciseSuccessBt.setOnClickListener{
