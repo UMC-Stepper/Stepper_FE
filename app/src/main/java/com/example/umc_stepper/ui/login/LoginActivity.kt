@@ -60,6 +60,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         }
     }
 
+    //권한 확인
     private fun areAllPermissionsGranted(): Boolean {
         val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             arrayOf(
@@ -131,6 +132,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         }
     }
 
+    //다이얼 로그 표시
     private fun showDialog() {
         agreeDialog = AgreeDialog(this@LoginActivity)
 
@@ -140,12 +142,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         }
     }
 
+    //다이얼로그 확인 버튼
     override fun onClickConfirmButton(ok: Boolean) {
         if (ok) {
             askAllPermissions()
         }
     }
 
+    //권한 요청 생성
     private fun askAllPermissions() {
         val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             arrayOf(
@@ -163,6 +167,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         requestMultiplePermissionsLauncher.launch(permissions)
     }
 
+    //android 13 버전 이상
     private fun handlePermissionsResult(permissions: Map<String, Boolean>) {
         if (permissions[Manifest.permission.POST_NOTIFICATIONS] == true) {
             Snackbar.make(binding.root, "알림 권한을 허용하였습니다.", Snackbar.LENGTH_SHORT).show()
@@ -178,6 +183,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         }
     }
 
+    //android 13 버전 이하
     private fun handleLegacyPermissionsResult(permissions: Map<String, Boolean>) {
         if (permissions[Manifest.permission.CAMERA] == true) {
             Snackbar.make(binding.root, "카메라 권한을 허용하였습니다.", Snackbar.LENGTH_SHORT).show()
