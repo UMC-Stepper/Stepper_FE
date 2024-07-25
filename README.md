@@ -28,6 +28,6 @@
 
 |Home|Today|Stepper|community|
 |---|---|---|---|
-|![image](https://user-images.githubusercontent.com/66003567/216816017-bfd18669-9f70-45c2-8561-bae648690602.png)|![image](https://user-images.githubusercontent.com/66003567/216815971-d8ed6ea8-1f92-45f8-9611-1cbe2b5e8db0.png)|![image](https://user-images.githubusercontent.com/66003567/216815991-88e0f4d6-3e5d-4c19-9eb9-97047b40c0d0.png)|![image](https://user-images.githubusercontent.com/66003567/216816002-4eca6510-4436-44f5-b949-347e75129ada.png)|
+|![image](이미지)|![image](이미지)||![image](이미지)|![image](이미지)|
 |설명|설명|설명|설명|
 
