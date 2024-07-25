@@ -5,11 +5,11 @@ data class UserDto(
     val email: String = "",
     val email_agree: String = "",
     val exercise_alarm: String = "",
-    val height: String = "",
+    var height: String = "",
     val nick_name: String = "",
     val password: String = "",
     val per_agree: String = "",
-    val profile_image: String= "",
+    var profile_image: String= "",
     val use_agree: String = "",
-    val weight: String= ""
+    var weight: String= ""
 )
