@@ -185,17 +185,18 @@
         android:layout_marginStart="12dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:background="@drawable/shape_rounded_half_square_18dp"
-        android:layout_width="match_parent"
+        android:id="@+id/dialog_app_permission_btn"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="확인"
-        android:textStyle="bold"
-        android:textSize="16dp"
-        android:textColor="@color/White"
-        app:layout_constraintTop_toBottomOf="@id/dialog_app_permission_setting_to_stepper_tv"
         android:layout_marginTop="12dp"
-        app:layout_constraintStart_toStartOf="@id/dialog_app_permission_setting_to_stepper_tv"
-        app:layout_constraintEnd_toEndOf="@id/dialog_app_permission_setting_to_stepper_tv"/>
+        android:background="@drawable/shape_rounded_half_square_18dp"
+        android:text="확인"
+        android:textColor="@color/White"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_app_permission_setting_to_stepper_tv" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
