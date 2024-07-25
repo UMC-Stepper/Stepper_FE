@@ -13,15 +13,11 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseActivity
 import com.example.umc_stepper.databinding.ActivitySignUpBinding
@@ -29,9 +25,9 @@ import com.example.umc_stepper.domain.model.UserDto
 import com.google.gson.Gson
 
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sign_up) {
-    private var isCheckedCertificationNumber = false
-    private var isAgreementChecked = false
-
+    private var isCheckedCertificationNumber = true // 인증 번호
+    private var isAgreementChecked = false // 약관 동의
+    private lateinit var startForResult: ActivityResultLauncher<Intent>
 
     override fun setLayout() {
         setEditText()
@@ -93,9 +89,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
                 checkPwd()
             }
 
-            override fun afterTextChanged(s: Editable?) {
-
-            }
+            override fun afterTextChanged(s: Editable?) {}
         })
 
     }
@@ -142,34 +136,61 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
     private fun confirmUserDto() { //모아서 두번째 페이지로
         with(binding) {
             signupCompleteBtn.setOnClickListener {
+                val nickname = signupNicknameEt.text.toString()
+                val email = signupEmailEt.text.toString()
+                val password = signupPwdEt.text.toString()
+                val passwordCheck = signupPwdCheckEt.text.toString()
+
                 if (isCheckedCertificationNumber
-                    && signupNicknameEt.text.toString().isNotEmpty()
-                    && signupEmailEt.text.toString().isNotEmpty()
-                    && (signupPwdEt.text.toString() == signupPwdCheckEt.text.toString())
+                    && nickname.isNotEmpty()
+                    && email.isNotEmpty()
+                    && password == passwordCheck
                     && isAgreementChecked
                 ) {
                     val intent = Intent(this@SignUpActivity, SignUp2Activity::class.java)
                     val gson = Gson()
-                    val userDto = gson.toJson(UserDto())
+                    val userDto = gson.toJson(
+                        UserDto(
+                            nick_name = nickname,
+                            email = email,
+                            password = password,
+                            community_alarm = "true",
+                            email_agree = "true",
+                            per_agree = "true",
+                            use_agree = "true"
+                        )
+                    )
                     intent.putExtra("user", userDto)
                     startActivity(intent)
                 } else {
-                    Toast.makeText(this@SignUpActivity, "입력 필드를 다시 확인해 주세요", Toast.LENGTH_SHORT)
-                        .show()
+                    if (!isCheckedCertificationNumber) {
+                        makeToastMessage("인증 번호 확인 미완료")
+                    } else if (nickname.isEmpty()) {
+                        makeToastMessage("닉네임 확인 미완료")
+                    } else if (email.isEmpty()) {
+                        makeToastMessage("이메일 확인 미완료")
+                    } else if (passwordCheck.isEmpty()) {
+                        makeToastMessage("비밀번호 확인 미완료")
+                    } else if (!isAgreementChecked) {
+                        makeToastMessage("동의 미완료")
+                    }
                 }
             }
         }
     }
 
-
+    private fun makeToastMessage(message: String) {
+        Toast.makeText(this@SignUpActivity, message, Toast.LENGTH_SHORT)
+            .show()
+    }
 
     private fun nextAgreePage() {
-        val startForResult = registerForActivityResult(
+        startForResult = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
-                val result = result.data?.getBooleanExtra("agree_success",false)!!
-                if(result){
+                val result = result.data?.getBooleanExtra("agree_success", false)!!
+                if (result) {
                     binding.signupTermsCheckIv.setBackgroundResource(R.drawable.selector_checked_on)
                     isAgreementChecked = true
                 }
@@ -180,6 +201,4 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
             startForResult.launch(intent)
         }
     }
-
-
 }
