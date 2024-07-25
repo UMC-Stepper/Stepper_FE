@@ -16,15 +16,15 @@
 
             <TextView
                 android:id="@+id/signup_title_tv"
-                android:text="@string/signup_title"
+                style="@style/title_bold_24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/White"
-                style="@style/title_bold_24"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="56dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                android:text="@string/signup_title"
+                android:textColor="@color/White"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/signup_sub_title_tv"
@@ -39,56 +39,56 @@
 
             <TextView
                 android:id="@+id/signup_nickname_tv"
+                style="@style/body_semi_bold_14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="@string/signup_nickname"
-                style="@style/body_semi_bold_14"
                 android:textColor="@color/White"
                 app:layout_constraintStart_toStartOf="@+id/signup_sub_title_tv"
                 app:layout_constraintTop_toBottomOf="@+id/signup_sub_title_tv" />
 
             <EditText
                 android:id="@+id/signup_nickname_et"
+                style="@style/body_medium_14"
                 android:layout_width="0dp"
                 android:layout_height="44dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
-                android:inputType="text"
-                style="@style/body_medium_14"
-                android:textColor="@color/White"
                 android:background="@drawable/radius_corners_50dp"
                 android:hint="@string/signup_nickname_hint"
+                android:inputType="text"
+                android:paddingStart="24dp"
+                android:textColor="@color/White"
                 android:textColorHint="@color/Purple_Gray"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:paddingStart="24dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/signup_nickname_tv" />
 
             <TextView
                 android:id="@+id/signup_email_tv"
+                style="@style/body_semi_bold_14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:text="@string/signup_email"
-                style="@style/body_semi_bold_14"
                 android:textColor="@color/White"
                 app:layout_constraintStart_toStartOf="@+id/signup_nickname_et"
                 app:layout_constraintTop_toBottomOf="@+id/signup_nickname_et" />
 
             <EditText
                 android:id="@+id/signup_email_et"
+                style="@style/body_medium_14"
                 android:layout_width="0dp"
                 android:layout_height="44dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
-                android:paddingStart="24dp"
                 android:background="@drawable/radius_corners_50dp"
-                android:inputType="textWebEmailAddress"
                 android:hint="@string/signup_email_hint"
-                style="@style/body_medium_14"
+                android:inputType="textWebEmailAddress"
+                android:paddingStart="24dp"
                 android:textColor="@color/White"
                 android:textColorHint="@color/Purple_Gray"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -101,12 +101,12 @@
                 android:layout_width="0dp"
                 android:layout_height="44dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginEnd="17dp"
                 android:layout_marginTop="12dp"
-                android:paddingStart="24dp"
-                android:inputType="number"
+                android:layout_marginEnd="17dp"
                 android:background="@drawable/radius_corners_50dp"
                 android:hint="@string/signup_cert_number"
+                android:inputType="number"
+                android:paddingStart="24dp"
                 android:textColor="@color/White"
                 android:textColorHint="@color/Purple_Gray"
                 app:layout_constraintEnd_toStartOf="@+id/signup_receive_cert_num_btn"
@@ -121,9 +121,9 @@
                 android:layout_marginEnd="23dp"
                 android:background="@drawable/radius_corners_50dp"
                 android:backgroundTint="@color/Purple_700"
+                android:gravity="center"
                 android:text="@string/sign_up_cert_btn"
                 android:textColor="@color/White"
-                android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="@+id/signup_cert_number_et"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/signup_cert_number_et" />
@@ -133,9 +133,10 @@
                 style="@style/body_regular_12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="21dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/signup_cert_error_msg"
                 android:textColor="@color/Red_300"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/signup_cert_number_et"
                 app:layout_constraintTop_toBottomOf="@+id/signup_cert_number_et" />
 
@@ -144,7 +145,7 @@
                 style="@style/body_semi_bold_14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="40dp"
                 android:text="@string/signup_pwd"
                 android:textColor="@color/White"
                 app:layout_constraintStart_toStartOf="@+id/signup_cert_number_et"
@@ -156,8 +157,8 @@
                 android:layout_width="0dp"
                 android:layout_height="44dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
                 android:background="@drawable/radius_corners_50dp"
                 android:hint="@string/signup_pwd_hint"
                 android:inputType="textPassword"
@@ -185,8 +186,8 @@
                 android:layout_width="0dp"
                 android:layout_height="44dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
                 android:background="@drawable/radius_corners_50dp"
                 android:hint="@string/signup_pwd_check_hint"
                 android:inputType="textPassword"
@@ -203,33 +204,36 @@
                 style="@style/body_regular_12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="21dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/signup_pwd_error_check_msg"
                 android:textColor="@color/Red_300"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/signup_pwd_check_et"
                 app:layout_constraintTop_toBottomOf="@+id/signup_pwd_check_et" />
+
             <ImageView
                 android:id="@+id/signup_terms_check_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="30dp"
                 android:src="@drawable/ic_signup_terms_un_checked"
                 app:layout_constraintStart_toStartOf="@+id/signup_pwd_error_tv"
-                app:layout_constraintTop_toBottomOf="@+id/signup_pwd_error_tv"/>
+                app:layout_constraintTop_toBottomOf="@+id/signup_pwd_error_tv" />
+
             <TextView
                 android:id="@+id/signup_terms_check_tv"
+                style="@style/body_regular_12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:text="@string/signup_terms"
-                style="@style/body_regular_12"
                 android:textColor="@color/White"
-                app:layout_constraintTop_toTopOf="@+id/signup_terms_check_iv"
                 app:layout_constraintBottom_toBottomOf="@+id/signup_terms_check_iv"
-                app:layout_constraintStart_toEndOf="@+id/signup_terms_check_iv"/>
+                app:layout_constraintStart_toEndOf="@+id/signup_terms_check_iv"
+                app:layout_constraintTop_toTopOf="@+id/signup_terms_check_iv" />
 
             <TextView
+                android:id="@+id/signup_agree_tv"
                 style="@style/body_regular_12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -237,8 +241,8 @@
                 android:text="@string/sign_up_go_terms"
                 android:textColor="@color/Purple_700"
 
-                app:layout_constraintStart_toEndOf="@+id/signup_terms_check_tv"
                 app:layout_constraintBottom_toBottomOf="@+id/signup_terms_check_tv"
+                app:layout_constraintStart_toEndOf="@+id/signup_terms_check_tv"
                 app:layout_constraintTop_toTopOf="@+id/signup_terms_check_tv" />
 
 
@@ -249,8 +253,8 @@
                 android:layout_height="46dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="52dp"
-                android:layout_marginBottom="60dp"
                 android:layout_marginEnd="24dp"
+                android:layout_marginBottom="60dp"
                 android:background="@drawable/radius_corners_61dp_stroke_1"
                 android:text="@string/sign_up_complete_btn"
                 android:textColor="@color/Purple_700"
