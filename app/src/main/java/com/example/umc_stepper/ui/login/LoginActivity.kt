@@ -42,10 +42,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun goSignUp() {
-        binding.activityLoginStepperIv.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
-        }
+        val intent = Intent(this, SignUpActivity::class.java)
+        startActivity(intent)
+
     }
 
     private fun barTransparent() {
@@ -82,5 +81,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             }
         }
     }
+
 }
 
