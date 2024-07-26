@@ -34,7 +34,11 @@
         android:id="@+id/todayHomeFragment"
         android:name="com.example.umc_stepper.ui.today.TodayHomeFragment"
         android:label="TodayHomeFragment"
-        tools:layout="@layout/fragment_today_home"/>
+        tools:layout="@layout/fragment_today_home">
+        <action
+            android:id="@+id/action_todayHomeFragment_to_fragmentMyExercise3"
+            app:destination="@id/fragmentMyExercise3" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentEvaluationExercise"
         android:name="com.example.umc_stepper.ui.today.EvaluationExerciseFragment"
