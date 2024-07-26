@@ -43,6 +43,8 @@
         android:stretchMode="columnWidth"
         android:paddingBottom="16dp"
         android:paddingTop="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
