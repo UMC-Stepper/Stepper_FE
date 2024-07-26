@@ -32,11 +32,6 @@
         <activity
             android:name=".test.Test"
             android:exported="true" >
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
         </activity>
         <activity
             android:name=".ui.stepper.CameraDetailActivity"
@@ -54,13 +49,19 @@
             android:exported="true"
             android:windowSoftInputMode="adjustPan">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
         <activity
             android:name=".ui.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
             android:name=".ui.signup.RegisterAgreeFragment"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
             android:name=".ui.stepper.CameraActivity"
             android:exported="false" />
