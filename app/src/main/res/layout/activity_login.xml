@@ -70,6 +70,7 @@
 
         <EditText
             android:id="@+id/activity_login_password_et"
+            android:inputType="textPassword"
             style="@style/body_medium_14"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
