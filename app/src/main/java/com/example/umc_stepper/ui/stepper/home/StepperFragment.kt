@@ -25,6 +25,8 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
         val adapter = CalendarAdapter(requireContext(),days)
         binding.stepperCalendarGv.adapter = adapter
 
+        binding.
+
 
     }
 }
