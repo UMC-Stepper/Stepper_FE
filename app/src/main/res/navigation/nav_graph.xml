@@ -53,12 +53,22 @@
         android:id="@+id/additionalExerciseHomeFragment"
         android:name="com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseHomeFragment"
         android:label="AdditionalExerciseHomeFragment"
-        tools:layout="@layout/fragment_additional_exercise_home"/>
+        tools:layout="@layout/fragment_additional_exercise_home">
+        <action
+            android:id="@+id/action_additionalExerciseHomeFragment_to_fragmentAddExerciseDownload"
+            app:destination="@id/fragmentAddExerciseDownload" />
+    </fragment>
 
     <fragment
         android:id="@+id/fragmentMyExercise3"
         android:name="com.example.umc_stepper.ui.today.MyExercise3Fragment"
         android:label="MyExercise3"
         tools:layout="@layout/fragment_my_exercise_3"/>
+
+    <fragment
+        android:id="@+id/fragmentAddExerciseDownload"
+        android:name="com.example.umc_stepper.ui.stepper.additional.AddExerciseDownloadFragment"
+        android:label="AddExerciseDownload"
+        tools:layout="@layout/fragment_add_exercise_download"/>
 
 </navigation>

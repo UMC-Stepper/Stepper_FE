@@ -1,6 +1,7 @@
 package com.example.umc_stepper.ui.stepper.additional
 
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentAdditionalExerciseHomeBinding
@@ -11,6 +12,7 @@ class AdditionalExerciseHomeFragment :
         binding.addtionalExerciseHomeScrapBtn.setOnClickListener {
             binding.addtionalExerciseHomeScrapBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
             binding.addtionalExerciseHomeScrapBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_14dp)
+            goAddExerciseDownload()
         }
 
         binding.addtionalExerciseHomeYoutubeBtn.setOnClickListener {
@@ -25,5 +27,8 @@ class AdditionalExerciseHomeFragment :
 
         }
 
+    }
+    private fun goAddExerciseDownload(){
+        findNavController().navigate(R.id.action_additionalExerciseHomeFragment_to_fragmentAddExerciseDownload)
     }
 }
