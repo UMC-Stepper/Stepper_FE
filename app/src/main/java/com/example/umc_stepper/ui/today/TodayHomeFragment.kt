@@ -12,8 +12,12 @@ import com.example.umc_stepper.databinding.FragmentTodayHomeBinding
 
 class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragment_today_home) {
     override fun setLayout() {
-        binding.fragmentTodayHomeEvaluationLogConstraint.setOnClickListener {
-            findNavController().navigate(R.id.action_todayHomeFragment_to_fragmentEvaluationExercise)
-        }
+
+        //        binding.fragmentTodayHomeEvaluationLogConstraint.setOnClickListener {
+//            findNavController().navigate(R.id.action_todayHomeFragment_to_fragmentEvaluationExercise)
+//        } => 평가일지 => 운동 평가
+//        binding.fragmentTodayHomeEvaluationLogConstraint.setOnClickListener {
+//            findNavController().navigate(R.id.action_todayHomeFragment_to_fragmentMyExercise3)
+//        }
     }
 }
