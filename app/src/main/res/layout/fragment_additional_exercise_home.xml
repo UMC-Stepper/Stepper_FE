@@ -160,39 +160,37 @@
         android:id="@+id/additional_exercise_home_hour_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
         android:layout_marginTop="12dp"
         style="@style/body_regular_12"
         android:text="시간"
         android:textColor="@color/White"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/additional_exercise_home_timer1_tv"
+        app:layout_constraintEnd_toEndOf="@id/additional_exercise_home_timer1_tv"
         app:layout_constraintTop_toBottomOf="@id/additional_exercise_home_timer1_tv" />
 
     <TextView
         android:id="@+id/additional_exercise_home_minuate_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="115dp"
         android:layout_marginTop="12dp"
         style="@style/body_regular_12"
         android:text="분"
         android:textColor="@color/White"
-        app:layout_constraintStart_toEndOf="@id/additional_exercise_home_hour_tv"
+        app:layout_constraintStart_toStartOf="@id/additional_exercise_home_timer2_tv"
+        app:layout_constraintEnd_toEndOf="@id/additional_exercise_home_timer2_tv"
         app:layout_constraintTop_toBottomOf="@id/additional_exercise_home_timer2_tv" />
 
     <TextView
         android:id="@+id/additional_exercise_home_second_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="115dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="50dp"
         style="@style/body_regular_12"
         android:text="초"
         android:textColor="@color/White"
-        app:layout_constraintStart_toEndOf="@id/additional_exercise_home_minuate_tv"
+        app:layout_constraintStart_toStartOf="@id/additional_exercise_home_timer3_tv"
         app:layout_constraintTop_toBottomOf="@id/additional_exercise_home_timer2_tv"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="@id/additional_exercise_home_timer3_tv"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -43,7 +43,7 @@ class CalendarAdapter(private val context: Context, private val days: List<DayDa
             binding.stepperHomeCalendarDayTv.setTextColor(ContextCompat.getColor(context, R.color.Purple_700)) // 요일색 설정
         }else if (position in 7..9){   // 7월의 날짜 3개(+글씨체 글자색 수정)
             binding.stepperHomeCalendarDayTv.setTextColor(ContextCompat.getColor(context, R.color.Gray_Purple))
-        }else if (position in 10..40){   // 7월의 날짜 3개(+글씨체 글자색 수정)
+        }else if (position in 10..40){   // 8월 날짜(+글씨체 글자색 수정)
             binding.stepperHomeCalendarDayTv.setTextColor(ContextCompat.getColor(context, R.color.White))
         } else{ // 9월의 날짜 1개(+글씨체 글자색 수정)
             binding.stepperHomeCalendarDayTv.setTextColor(ContextCompat.getColor(context, R.color.Gray_Purple))
