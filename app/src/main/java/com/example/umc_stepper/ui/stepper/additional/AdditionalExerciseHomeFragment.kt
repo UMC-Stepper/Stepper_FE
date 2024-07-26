@@ -5,7 +5,7 @@ import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentAdditionalExerciseHomeBinding
 
-class AdditionalExerciseHomeFragment(layoutRes: Int) :
+class AdditionalExerciseHomeFragment :
     BaseFragment<FragmentAdditionalExerciseHomeBinding>(R.layout.fragment_additional_exercise_home) {
     override fun setLayout() {
         binding.addtionalExerciseHomeScrapBtn.setOnClickListener {
