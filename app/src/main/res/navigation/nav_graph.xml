@@ -23,7 +23,7 @@
     <fragment
         android:id="@+id/stepperFragment"
         android:name="com.example.umc_stepper.ui.stepper.home.StepperFragment"
-        android:label="fragment_stepper"
+        android:label="StepperFragment"
         tools:layout="@layout/fragment_stepper" >
         <action
             android:id="@+id/action_stepperFragment_to_additionalExerciseHomeFragment"
