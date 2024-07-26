@@ -91,6 +91,7 @@
             android:background="@drawable/shape_rounded_square_50dp_stroke_1"
             android:fontFamily="@font/pretendard_semi_bold"
             android:text="로그인"
+            android:textColor="@color/Purple_700"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
