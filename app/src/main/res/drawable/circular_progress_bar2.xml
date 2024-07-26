@@ -5,24 +5,22 @@
             android:innerRadiusRatio="3.02"
             android:thicknessRatio="5.90"
             android:shape="ring"
-            android:useLevel="false"
-            android:type="sweep">
+            android:useLevel="false">
             <solid android:color="#9E9E9E" />
         </shape>
     </item>
 
     <item android:id="@android:id/progress">
         <rotate
-            android:fromDegrees="270"
-            android:toDegrees="270">
+            android:fromDegrees="0"
+            android:toDegrees="360">
             <shape
                 android:innerRadiusRatio="3.02"
                 android:thicknessRatio="5.90"
                 android:shape="ring"
-                android:angle="0"
-                android:type="sweep">
+                android:useLevel="true">
+                <solid android:color="@color/Purple_700" />
             </shape>
         </rotate>
     </item>
-
 </layer-list>

@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout  xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.today.TodayHomeFragment">
 
-       <ImageView
-           android:id="@+id/fragment_today_home_calender_iv"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="16dp"
-           android:layout_marginStart="24dp"
-           android:src="@drawable/ic_today_toolbar_calender"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toTopOf="parent"/>
+        <ImageView
+            android:id="@+id/fragment_today_home_calender_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_today_toolbar_calender"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/fragment_today_home_calender_tv"
@@ -44,8 +48,8 @@
             android:id="@+id/fragment_today_home_go_stepper_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
             android:background="@drawable/ic_toolbar_today"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -55,14 +59,14 @@
             android:layout_width="0dp"
             android:layout_height="68dp"
             android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_today_home_week_calendar"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_calender_iv" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_calender_iv"
+            tools:listitem="@layout/item_today_home_week_calendar" />
 
         <TextView
             android:id="@+id/fragment_today_home_title_tv"
@@ -88,13 +92,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:listitem="@layout/item_today_home_exercise_card"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_title_tv"/>
+            app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_title_tv"
+            tools:listitem="@layout/item_today_home_exercise_card" />
 
         <TextView
             android:id="@+id/fragment_today_home_no_card_tv"
@@ -103,8 +107,8 @@
             android:layout_height="330dp"
             android:layout_gravity="center"
             android:layout_marginStart="23dp"
-            android:layout_marginEnd="25dp"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="25dp"
             android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
             android:backgroundTint="@color/Purple_Black_BG_2"
             android:gravity="center"
@@ -115,20 +119,19 @@
             app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_title_tv" />
 
 
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/fragment_today_home_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5"/>
+            app:layout_constraintGuide_percent="0.5" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fragment_today_home_my_exercise_constraint"
             android:layout_width="0dp"
             android:layout_height="105dp"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="15dp"
             android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
             android:backgroundTint="@color/Purple_Black_BG_2"
@@ -178,9 +181,9 @@
             android:id="@+id/fragment_today_home_evaluation_log_constraint"
             android:layout_width="0dp"
             android:layout_height="105dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="26dp"
-            android:layout_marginStart="15dp"
             android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
             android:backgroundTint="@color/Purple_Black_BG_2"
             app:layout_constraintEnd_toEndOf="parent"
