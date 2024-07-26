@@ -70,7 +70,8 @@ class MyExercise3Fragment :
             }
 
             fragmentMyExerciseCompleteInputBt.setOnClickListener{
-                //서버로 값 전송
+                val youtubeUrl = fragmentMyExerciseUploadYoutubeLinkEt.text.toString()
+                //url 담아서 다음 화면 전송
             }
         }
     }
