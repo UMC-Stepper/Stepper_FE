@@ -1,9 +1,12 @@
 package com.example.umc_stepper.ui.stepper.home
 
 import android.view.WindowManager
+import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentStepperBinding
+import com.example.umc_stepper.ui.MainActivity
+import com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseHomeFragment
 
 class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_stepper) {
     override fun setLayout() {
@@ -25,8 +28,13 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
         val adapter = CalendarAdapter(requireContext(),days)
         binding.stepperCalendarGv.adapter = adapter
 
-        binding.
+        binding.stepperAdditionalBtn.setOnClickListener {
+            goAdditionalExerciseHome()
+        }
 
 
+    }
+    private fun goAdditionalExerciseHome(){
+        findNavController().navigate(R.id.action_stepperFragment_to_additionalExerciseHomeFragment)
     }
 }

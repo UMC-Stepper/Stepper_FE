@@ -24,7 +24,11 @@
         android:id="@+id/stepperFragment"
         android:name="com.example.umc_stepper.ui.stepper.home.StepperFragment"
         android:label="fragment_stepper"
-        tools:layout="@layout/fragment_stepper" />
+        tools:layout="@layout/fragment_stepper" >
+        <action
+            android:id="@+id/action_stepperFragment_to_additionalExerciseHomeFragment"
+            app:destination="@id/additionalExerciseHomeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/evaluationLogFragment"
         android:name="com.example.umc_stepper.ui.today.EvaluationLogFragment"
@@ -35,6 +39,12 @@
         android:name="com.example.umc_stepper.ui.today.TodayHomeFragment"
         android:label="TodayHomeFragment"
         tools:layout="@layout/fragment_today_home"/>
+
+    <fragment
+        android:id="@+id/additionalExerciseHomeFragment"
+        android:name="com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseHomeFragment"
+        android:label="AdditionalExerciseHomeFragment"
+        tools:layout="@layout/fragment_additional_exercise_home"/>
 
 
 </navigation>

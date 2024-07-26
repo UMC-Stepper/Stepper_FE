@@ -10,16 +10,18 @@ class AdditionalExerciseHomeFragment(layoutRes: Int) :
     override fun setLayout() {
         binding.addtionalExerciseHomeScrapBtn.setOnClickListener {
             binding.addtionalExerciseHomeScrapBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
-            binding.addtionalExerciseHomeScrapBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.Purple_700))
+            binding.addtionalExerciseHomeScrapBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_14dp)
         }
 
         binding.addtionalExerciseHomeYoutubeBtn.setOnClickListener {
             binding.addtionalExerciseHomeYoutubeBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
+            binding.addtionalExerciseHomeYoutubeBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_14dp)
 
         }
 
         binding.addtionalExerciseHomeTimeBtn.setOnClickListener {
             binding.addtionalExerciseHomeTimeBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
+            binding.addtionalExerciseHomeTimeBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_14dp)
 
         }
 
