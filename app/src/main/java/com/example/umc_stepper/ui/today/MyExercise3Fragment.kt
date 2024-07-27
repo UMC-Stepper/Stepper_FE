@@ -3,32 +3,75 @@ package com.example.umc_stepper.ui.today
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
-import android.graphics.Color
-import android.os.Handler
-import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentMyExercise3Binding
+import com.example.umc_stepper.domain.model.request.AiVideoDto
+import com.example.umc_stepper.domain.model.response.AiVideoInfo
+import com.example.umc_stepper.domain.model.response.YouTubeVideo
+import com.example.umc_stepper.ui.TodayViewModel
 import com.example.umc_stepper.utils.GlobalApplication
-import java.lang.Thread.sleep
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class MyExercise3Fragment :
     BaseFragment<FragmentMyExercise3Binding>(R.layout.fragment_my_exercise_3) {
 
+    private val todayViewModel: TodayViewModel by activityViewModels()
     lateinit var tagList: List<TextView>
     var selectItem = -1
+
     override fun setLayout() {
         initSetting()
     }
 
     private fun initSetting() {
+        remoteLifeCycle()
         setList()
         setOnClickBtn()
+    }
+
+    private fun remoteLifeCycle() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    todayViewModel.provideAiVideo.collectLatest { response -> // AI 서버
+                        val (firstUrl, secondUrl) = formatUrl(response)
+                        if (firstUrl.isNotEmpty() || secondUrl.isNotEmpty()) {
+                            todayViewModel.getYoutubeVideoInfoSequentially(firstUrl, secondUrl)
+                            Log.d(
+                                "MyExercise3Fragment",
+                                "Fetching YouTube info for URLs: $firstUrl, $secondUrl"
+                            )
+                        } else {
+                            // URL이 없는 경우에 대한 처리
+                            Log.e("MyExercise3Fragment", "No valid URLs provided by AI")
+                            // 사용자에게 알림을 표시하거나 다른 적절한 처리를 수행
+                        }
+                    }
+                }
+            }
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                todayViewModel.successYoutubeLink.collectLatest { response ->
+                    if(response.ylist.size >= 2){
+                        updateUI(response.ylist)
+                    }
+                }
+            }
+        }
     }
 
     private fun setList() {
@@ -47,36 +90,23 @@ class MyExercise3Fragment :
 
     private fun setOnClickBtn() {
         with(binding) {
-            fragmentMyExerciseSelectTag1Tv.setOnClickListener {
-                selectListen(0)
-            }
-            fragmentMyExerciseSelectTag2Tv.setOnClickListener {
-                selectListen(1)
-            }
-            fragmentMyExerciseSelectTag3Tv.setOnClickListener {
-                selectListen(2)
-            }
-            fragmentMyExerciseSelectTag4Tv.setOnClickListener {
-                selectListen(3)
-            }
-            fragmentMyExerciseSelectTag5Tv.setOnClickListener {
-                selectListen(4)
-            }
-            fragmentMyExerciseSelectTag6Tv.setOnClickListener {
-                selectListen(5)
-            }
-            fragmentMyExerciseSelectTag7Tv.setOnClickListener {
-                selectListen(6)
-            }
+            fragmentMyExerciseSelectTag1Tv.setOnClickListener { selectListen(0) }
+            fragmentMyExerciseSelectTag2Tv.setOnClickListener { selectListen(1) }
+            fragmentMyExerciseSelectTag3Tv.setOnClickListener { selectListen(2) }
+            fragmentMyExerciseSelectTag4Tv.setOnClickListener { selectListen(3) }
+            fragmentMyExerciseSelectTag5Tv.setOnClickListener { selectListen(4) }
+            fragmentMyExerciseSelectTag6Tv.setOnClickListener { selectListen(5) }
+            fragmentMyExerciseSelectTag7Tv.setOnClickListener { selectListen(6) }
 
-            fragmentMyExerciseCompleteInputBt.setOnClickListener{
+            fragmentMyExerciseCompleteInputBt.setOnClickListener {
                 val youtubeUrl = fragmentMyExerciseUploadYoutubeLinkEt.text.toString()
-                //url 담아서 다음 화면 전송
+                // url 담아서 다음 화면 전송
             }
         }
     }
 
     private fun selectListen(select: Int) {
+
         for (i in 0..6) {
             if (i == select) {
                 tagList[i].setBackgroundResource(setColor(requireContext(), true).first)
@@ -102,64 +132,103 @@ class MyExercise3Fragment :
         return Pair(backGroundColor, textColor)
     }
 
-
     private fun callAIVideo(select: Int) {
         with(binding) {
-            fragmentMyExerciseProgressbarPbCl.visibility = View.VISIBLE
-
-            fragmentMyExerciseSearchResultCard1Cl.visibility = View.GONE
-            fragmentMyExerciseSearchResultCard2Cl.visibility = View.GONE
-            fragmentMyExerciseSelectOkTagTv.text = tagList[select].text.toString()
-
+            fragmentMyExerciseProgressbarPbCl.visibility = View.VISIBLE // 콘스트레인트
+            fragmentMyExerciseSearchResultCard1Cl.visibility = View.GONE // 1번 영상 창 숨김
+            fragmentMyExerciseSearchResultCard2Cl.visibility = View.GONE // 2번 영상 창 숨김
+            fragmentMyExerciseSelectOkTagTv.text = tagList[select].text.toString() // 타이틀 세팅
             fragmentMyExerciseSelectOkTagTv.visibility = View.VISIBLE
             fragmentMyExerciseSelectOkDescriptionTagTv.visibility = View.VISIBLE
-
-            fragmentMyExercise3ProgressbarPb.visibility = View.VISIBLE
-            fragmentMyExercise3ProgressbarTextTv.visibility = View.VISIBLE
-
-            // 25%로 고정된 프로그레스 바 설정
-            fragmentMyExercise3ProgressbarPb.progress = 25
-
-            // 회전 애니메이션 설정
-            val rotateAnimation =
-                ObjectAnimator.ofFloat(fragmentMyExercise3ProgressbarPb, "rotation", 0f, 360f)
-            rotateAnimation.duration = 2000 // 2초 동안 한 바퀴 회전
-            rotateAnimation.repeatCount = ValueAnimator.INFINITE
-            rotateAnimation.interpolator = LinearInterpolator()
-            rotateAnimation.start()
-
-            val handler = Handler(Looper.getMainLooper())
-            handler.postDelayed({
-                // 2초 후 애니메이션 정지 및 프로그레스 바 숨기기
-                rotateAnimation.cancel()
-                fragmentMyExercise3ProgressbarPb.visibility = View.GONE
-                fragmentMyExercise3ProgressbarTextTv.visibility = View.GONE
-
-                downloadSetting(select)
-            }, 2000) // 2000ms = 2초
+            downloadSetting(select)
         }
     }
 
+    private fun formatUrl(aiVideoInfo: AiVideoInfo): Pair<String, String> {
+        val url1 = aiVideoInfo.video_urls.getOrNull(0)?.let { extractYouTubeVideoId(it) } ?: ""
+        val url2 = aiVideoInfo.video_urls.getOrNull(1)?.let { extractYouTubeVideoId(it) } ?: ""
+        return Pair(url1, url2)
+    }
+
+    private fun extractYouTubeVideoId(url: String): String? {
+        val regex =
+            "(?:https?://)?(?:www\\.)?(?:youtube\\.com/(?:[^/\\n\\s]+/\\S+/|(?:v|e(?:mbed)?)|\\S*?[?&]v=)|youtu\\.be/)([a-zA-Z0-9_-]{11})".toRegex()
+        val matchResult = regex.find(url)
+        return matchResult?.groups?.get(1)?.value
+    }
+
     private fun downloadSetting(select: Int) {
-        with(binding) {
-            fragmentMyExerciseSearchResultCard1Cl.visibility = View.VISIBLE
-            fragmentMyExerciseSearchResultCard2Cl.visibility = View.VISIBLE
+        lifecycleScope.launch {
+            with(binding) {
+                fragmentMyExercise3ProgressbarPb.visibility = View.VISIBLE
+                fragmentMyExercise3ProgressbarTextTv.visibility = View.VISIBLE
 
-            fragmentMyExercisePlayerTitle1Tv.text =
-                "[중환자분들을 위한 재활 운동] 근손실 예방을 위한 스트레칭 | 누운 자세에서 운동하기(초급3)"
-            fragmentMyExercisePlayerTitle2Tv.text =
-                "[중환자분들을 위한 재활 운동] 근손실 예방을 위한 스트레칭 | 누운 자세에서 운동하기(초급3)"
+                // 25%로 고정된 프로그레스 바 설정
+                fragmentMyExercise3ProgressbarPb.progress = 25
 
-            fragmentMyExerciseChannelName1Tv.text = "손재웅의 사생활"
-            fragmentMyExerciseChannelName2Tv.text = "손재웅의 사생활"
+                // 회전 애니메이션 설정
+                val rotateAnimation =
+                    ObjectAnimator.ofFloat(fragmentMyExercise3ProgressbarPb, "rotation", 0f, 360f)
+                rotateAnimation.duration = 2000 // 2초 동안 한 바퀴 회전
+                rotateAnimation.repeatCount = ValueAnimator.INFINITE
+                rotateAnimation.interpolator = LinearInterpolator()
+                rotateAnimation.start()
 
-            //GlobalApplication.loadProfileImage(fragmentMyExerciseProfile1Iv,"url")
-            //GlobalApplication.loadProfileImage(fragmentMyExerciseProfile1Iv,"url")
-
-            //GlobalApplication.loadCropRoundedSquareImage(fragmentMyExerciseThumbnail1Iv,"url")
-            //GlobalApplication.loadCropRoundedSquareImage(fragmentMyExerciseThumbnail2Iv,"url")
-
+                val select1 = fragmentMyExerciseSelectTagTv.text.toString()
+                val select2 = tagList[select].text.toString()
+                todayViewModel.postAiVideoInfo(AiVideoDto(select1, select2))
+            }
         }
-        //서버에서 불러온 것
+    }
+
+    private fun updateUI(setList: List<YouTubeVideo>) {
+        Log.d("MyExercise3Fragment", "updateUI called with setList size: ${setList.size}")
+
+        if (setList.size >= 2) {
+            val response1 = setList.first()
+            val response2 = setList.last()
+
+            with(binding) {
+                hideProgressBar()
+                Log.d("MyExercise3Fragment", "프로그레스 바 숨김")
+                fragmentMyExerciseSearchResultCard1Cl.visibility = View.VISIBLE
+                fragmentMyExerciseSearchResultCard2Cl.visibility = View.VISIBLE
+                fragmentMyExercisePlayerTitle1Tv.text = response1.items[0].snippet.title
+                fragmentMyExerciseChannelName1Tv.text = response1.items[0].snippet.channelTitle
+                GlobalApplication.loadProfileImage(
+                    fragmentMyExerciseProfile1Iv,
+                    response1.items[0].snippet.thumbnails.medium.url
+                )
+                GlobalApplication.loadCropRoundedSquareImage(
+                    requireContext(),
+                    fragmentMyExerciseThumbnail1Iv,
+                    response1.items[0].snippet.thumbnails.medium.url,
+                    25
+                )
+
+                fragmentMyExercisePlayerTitle2Tv.text = response2.items[0].snippet.title
+                fragmentMyExerciseChannelName2Tv.text = response2.items[0].snippet.channelTitle
+                GlobalApplication.loadProfileImage(
+                    fragmentMyExerciseProfile2Iv,
+                    response2.items[0].snippet.thumbnails.medium.url
+                )
+                GlobalApplication.loadCropRoundedSquareImage(
+                    requireContext(),
+                    fragmentMyExerciseThumbnail2Iv,
+                    response2.items[0].snippet.thumbnails.medium.url,
+                    25
+                )
+            }
+        } else {
+            Log.e("MyExercise3Fragment", "setList size is less than 2")
+        }
+    }
+
+    private fun hideProgressBar() {
+        with(binding) {
+            fragmentMyExercise3ProgressbarPb.visibility = View.GONE
+            fragmentMyExercise3ProgressbarTextTv.visibility = View.GONE
+            todayViewModel.clearList()
+        }
     }
 }
