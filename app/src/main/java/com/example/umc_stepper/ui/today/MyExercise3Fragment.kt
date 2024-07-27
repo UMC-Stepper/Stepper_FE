@@ -3,6 +3,8 @@ package com.example.umc_stepper.ui.today
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.view.animation.LinearInterpolator
@@ -31,6 +33,8 @@ class MyExercise3Fragment :
     private val todayViewModel: TodayViewModel by activityViewModels()
     lateinit var tagList: List<TextView>
     var selectItem = -1
+    var url1 : String = ""
+    var url2 : String = ""
 
     override fun setLayout() {
         initSetting()
@@ -50,6 +54,8 @@ class MyExercise3Fragment :
                         val (firstUrl, secondUrl) = formatUrl(response)
                         if (firstUrl.isNotEmpty() || secondUrl.isNotEmpty()) {
                             todayViewModel.getYoutubeVideoInfoSequentially(firstUrl, secondUrl)
+                            url1 = response.video_urls.last()
+                            url2 = response.video_urls.first()
                             Log.d(
                                 "MyExercise3Fragment",
                                 "Fetching YouTube info for URLs: $firstUrl, $secondUrl"
@@ -97,11 +103,23 @@ class MyExercise3Fragment :
             fragmentMyExerciseSelectTag5Tv.setOnClickListener { selectListen(4) }
             fragmentMyExerciseSelectTag6Tv.setOnClickListener { selectListen(5) }
             fragmentMyExerciseSelectTag7Tv.setOnClickListener { selectListen(6) }
-
+            fragmentMyExerciseSearchResultCard1Cl.setOnClickListener {
+                ableUrlCheck(url1)
+            }
+            fragmentMyExerciseSearchResultCard2Cl.setOnClickListener {
+                ableUrlCheck(url2)
+            }
             fragmentMyExerciseCompleteInputBt.setOnClickListener {
                 val youtubeUrl = fragmentMyExerciseUploadYoutubeLinkEt.text.toString()
                 // url 담아서 다음 화면 전송
             }
+        }
+    }
+    private fun ableUrlCheck(url : String){
+        if(url.isNotEmpty()){
+            Log.d("링크","$url1 $url2")
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
         }
     }
 
@@ -191,10 +209,16 @@ class MyExercise3Fragment :
             with(binding) {
                 hideProgressBar()
                 Log.d("MyExercise3Fragment", "프로그레스 바 숨김")
+
                 fragmentMyExerciseSearchResultCard1Cl.visibility = View.VISIBLE
                 fragmentMyExerciseSearchResultCard2Cl.visibility = View.VISIBLE
+
                 fragmentMyExercisePlayerTitle1Tv.text = response1.items[0].snippet.title
                 fragmentMyExerciseChannelName1Tv.text = response1.items[0].snippet.channelTitle
+
+                fragmentMyExercisePlayerTitle2Tv.text = response2.items[0].snippet.title
+                fragmentMyExerciseChannelName2Tv.text = response2.items[0].snippet.channelTitle
+
                 GlobalApplication.loadProfileImage(
                     fragmentMyExerciseProfile1Iv,
                     response1.items[0].snippet.thumbnails.medium.url
@@ -206,8 +230,6 @@ class MyExercise3Fragment :
                     25
                 )
 
-                fragmentMyExercisePlayerTitle2Tv.text = response2.items[0].snippet.title
-                fragmentMyExerciseChannelName2Tv.text = response2.items[0].snippet.channelTitle
                 GlobalApplication.loadProfileImage(
                     fragmentMyExerciseProfile2Iv,
                     response2.items[0].snippet.thumbnails.medium.url
