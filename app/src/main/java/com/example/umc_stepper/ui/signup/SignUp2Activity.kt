@@ -14,7 +14,7 @@ import androidx.core.content.ContextCompat
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseActivity
 import com.example.umc_stepper.databinding.FragmentRegister2Binding
-import com.example.umc_stepper.domain.model.UserDto
+import com.example.umc_stepper.domain.model.request.UserDto
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.utils.GlobalApplication
 import com.google.gson.Gson
