@@ -102,6 +102,10 @@ dependencies {
     implementation("com.github.prolificinteractive:material-calendarview:2.0.1")
     implementation ("com.jakewharton.threetenabp:threetenabp:1.3.1")
 
+    // dataStore
+    implementation ("androidx.datastore:datastore-preferences:1.0.0")
+    implementation ("androidx.datastore:datastore-core:1.0.0")
+
     // CameraX
     val camerax_version = "1.4.0-beta02"
     implementation ("androidx.camera:camera-core:${camerax_version}")
