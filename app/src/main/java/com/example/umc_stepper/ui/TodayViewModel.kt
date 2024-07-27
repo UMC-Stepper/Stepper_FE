@@ -3,6 +3,7 @@ package com.example.umc_stepper.ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.umc_stepper.BuildConfig
 import com.example.umc_stepper.domain.model.request.AiVideoDto
 import com.example.umc_stepper.domain.model.response.AiVideoInfo
 import com.example.umc_stepper.domain.model.response.Ylist
@@ -33,7 +34,8 @@ class TodayViewModel @Inject constructor(
     private val _successYoutubeLink = MutableStateFlow(Ylist())
     val successYoutubeLink: StateFlow<Ylist> = _successYoutubeLink
 
-    val apiKey = "AIzaSyCxDkjFpZNT8VLNaGV44DFjwSeY3uh1pf4"
+
+    val youtubeKey = BuildConfig.YOUTUBE_KEY
 
     fun postAiVideoInfo(aiVideoDto: AiVideoDto) {
         viewModelScope.launch {
@@ -64,16 +66,16 @@ class TodayViewModel @Inject constructor(
     }
 
 
-
     fun clearList(){
         val updatedList = _successYoutubeLink.value.ylist.toMutableList()
         updatedList.clear()
         _successYoutubeLink.value = _successYoutubeLink.value.copy(ylist = updatedList)
     }
+
     fun getYoutubeVideoInfoSequentially(firstUrl: String, secondUrl: String) {
         viewModelScope.launch {
-            getYoutubeVideoInfo("snippet", firstUrl, apiKey)
-            getYoutubeVideoInfo("snippet", secondUrl, apiKey)
+            getYoutubeVideoInfo("snippet", firstUrl, youtubeKey)
+            getYoutubeVideoInfo("snippet", secondUrl, youtubeKey)
         }
     }
 }
