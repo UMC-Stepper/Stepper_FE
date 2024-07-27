@@ -52,11 +52,17 @@
     <fragment
         android:id="@+id/additionalExerciseHomeFragment"
         android:name="com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseHomeFragment"
-        android:label="AdditionalExerciseHomeFragment"
+        android:label="AdditionalExerciseHome"
         tools:layout="@layout/fragment_additional_exercise_home">
         <action
             android:id="@+id/action_additionalExerciseHomeFragment_to_fragmentAddExerciseDownload"
             app:destination="@id/fragmentAddExerciseDownload" />
+        <action
+            android:id="@+id/action_additionalExerciseHomeFragment_to_fragmentAdditionalExerciseYoutube1"
+            app:destination="@id/fragmentAdditionalExerciseYoutube1" />
+        <action
+            android:id="@+id/action_additionalExerciseHomeFragment_to_fragmentAdditionalExerciseMiddle"
+            app:destination="@id/fragmentAdditionalExerciseMiddle" />
     </fragment>
 
     <fragment
@@ -70,5 +76,17 @@
         android:name="com.example.umc_stepper.ui.stepper.additional.AddExerciseDownloadFragment"
         android:label="AddExerciseDownload"
         tools:layout="@layout/fragment_add_exercise_download"/>
+
+    <fragment
+        android:id="@+id/fragmentAdditionalExerciseYoutube1"
+        android:name="com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseYoutube1Fragment"
+        android:label="AdditionalExerciseYoutube1"
+        tools:layout="@layout/fragment_additional_exercise_youtube1"/>
+
+    <fragment
+        android:id="@+id/fragmentAdditionalExerciseMiddle"
+        android:name="com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseMiddleFragment"
+        android:label="AdditionalExerciseMiddle"
+        tools:layout="@layout/fragment_additional_exercise_middle"/>
 
 </navigation>
