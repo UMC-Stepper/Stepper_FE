@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentEvaluationExercise"
-        android:name="com.example.umc_stepper.ui.today.EvaluationExerciseFragment"
+        android:name="com.example.umc_stepper.ui.stepper.EvaluationExerciseFragment"
         android:label="EvaluationExercise"
         tools:layout="@layout/fragment_evaluation_exercise"/>
 
