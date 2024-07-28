@@ -5,7 +5,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
-import com.example.umc_stepper.databinding.FragmentEvaluationExerciseBinding
 import com.example.umc_stepper.databinding.FragmentEvaluationExerciseTodayBinding
 
 class EvaluationExerciseTodayFragment :
