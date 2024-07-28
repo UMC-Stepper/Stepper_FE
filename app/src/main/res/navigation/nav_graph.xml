@@ -107,6 +107,9 @@
         <action
             android:id="@+id/action_fragmentExerciseComplete_to_stepperFragment"
             app:destination="@id/stepperFragment" />
+        <action
+            android:id="@+id/action_fragmentExerciseComplete_to_todayHomeFragment"
+            app:destination="@id/todayHomeFragment" />
     </fragment>
 
 </navigation>

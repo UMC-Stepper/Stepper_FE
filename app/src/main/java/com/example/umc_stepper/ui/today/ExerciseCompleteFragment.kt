@@ -1,4 +1,4 @@
-package com.example.umc_stepper.ui.stepper
+package com.example.umc_stepper.ui.today
 
 import android.os.Bundle
 import androidx.navigation.fragment.findNavController
@@ -9,10 +9,10 @@ import com.example.umc_stepper.databinding.FragmentExerciseCompleteBinding
 class ExerciseCompleteFragment :BaseFragment<FragmentExerciseCompleteBinding>(R.layout.fragment_exercise_complete) {
     override fun setLayout() {
         binding.exerciseCompleteBtn.setOnClickListener {
-            goStepperHome()
+            goTodayHome()
         }
     }
-    private fun goStepperHome(){
-        findNavController().navigate(R.id.action_fragmentExerciseComplete_to_stepperFragment)
+    private fun goTodayHome(){
+        findNavController().navigate(R.id.action_fragmentExerciseComplete_to_todayHomeFragment)
     }
 }
