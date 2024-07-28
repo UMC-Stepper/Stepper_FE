@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.stepper.additional
 
+import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.WindowManager
@@ -45,6 +46,10 @@ class AdditionalExerciseYoutube1Fragment:BaseFragment<FragmentAdditionalExercise
     }
 
     private fun goAdditionalExerciseYoutube2(){
+        val urlText = binding.fragmentYoutubeUrlLoadInputUrlEt.text.toString()
+        val bundle = Bundle().apply {
+            putString("urlText", urlText)
+        }
         findNavController().navigate(R.id.action_fragmentAdditionalExerciseYoutube1_to_fragmentAdditionalExerciseYoutube2)
     }
 }
