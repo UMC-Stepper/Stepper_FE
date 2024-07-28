@@ -1,19 +1,14 @@
-package com.example.umc_stepper.ui.today
+package com.example.umc_stepper.ui.stepper
 
-import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentEvaluationExerciseBinding
-import com.example.umc_stepper.utils.GlobalApplication
+import com.example.umc_stepper.databinding.FragmentEvaluationExerciseTodayBinding
 import java.lang.NumberFormatException
 
 class EvaluationExerciseFragment :
@@ -27,7 +22,7 @@ class EvaluationExerciseFragment :
     lateinit var stateTitleList: List<String>
     lateinit var descriptionList: List<String>
     var selectTextDescription = 0
-//    private lateinit var galleryForResult: ActivityResultLauncher<Intent>
+    //    private lateinit var galleryForResult: ActivityResultLauncher<Intent>
     var profileImage = ""
     var score = 0
 
