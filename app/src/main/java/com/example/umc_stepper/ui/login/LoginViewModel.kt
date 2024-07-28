@@ -1,7 +1,7 @@
 package com.example.umc_stepper.ui.login
 
 import androidx.lifecycle.ViewModel
-import com.example.umc_stepper.domain.model.User
+import com.example.umc_stepper.domain.model.response.User
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject

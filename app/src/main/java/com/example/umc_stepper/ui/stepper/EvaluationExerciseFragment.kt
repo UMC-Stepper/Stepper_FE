@@ -1,19 +1,14 @@
-package com.example.umc_stepper.ui.today
+package com.example.umc_stepper.ui.stepper
 
-import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentEvaluationExerciseBinding
-import com.example.umc_stepper.utils.GlobalApplication
+import com.example.umc_stepper.databinding.FragmentEvaluationExerciseTodayBinding
 import java.lang.NumberFormatException
 
 class EvaluationExerciseFragment :
@@ -27,7 +22,7 @@ class EvaluationExerciseFragment :
     lateinit var stateTitleList: List<String>
     lateinit var descriptionList: List<String>
     var selectTextDescription = 0
-    private lateinit var galleryForResult: ActivityResultLauncher<Intent>
+    //    private lateinit var galleryForResult: ActivityResultLauncher<Intent>
     var profileImage = ""
     var score = 0
 
@@ -36,7 +31,7 @@ class EvaluationExerciseFragment :
     }
 
     private fun initSetting() {
-        initActivityResultLauncher()
+//        initActivityResultLauncher()
         setList()
         setScoreText()
         setOnClickBtn()
@@ -89,7 +84,8 @@ class EvaluationExerciseFragment :
                 stateAllToggle()
             }
             fragmentEvaluationExercisePictureExerciseIv.setOnClickListener {
-                openGallery()
+//                openGallery()
+                //카메라 찍고 다시 돌아오는 로직 필요
             }
             fragmentEvaluationExerciseSuccessBt.setOnClickListener{
                 val memo = fragmentEvaluationExerciseMemoEt.text.toString() //메모
@@ -188,30 +184,30 @@ class EvaluationExerciseFragment :
         }
     }
 
-    private fun initActivityResultLauncher() {
-        galleryForResult = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result: ActivityResult ->
-            if (result.resultCode == AppCompatActivity.RESULT_OK) {
-                val selectImageUrl = result.data?.data
-                selectImageUrl?.let {
-                    GlobalApplication.loadCropRoundedSquareImage(
-                        requireContext(),
-                        binding.fragmentEvaluationExercisePictureExerciseIv,
-                        it.toString(),
-                        18
-                    )
-                    binding.fragmentEvaluationExercisePictureExerciseIb.visibility = View.GONE
-                    profileImage = it.toString()
-                }
-            }
-        }
-    }
+//    private fun initActivityResultLauncher() {
+//        galleryForResult = registerForActivityResult(
+//            ActivityResultContracts.StartActivityForResult()
+//        ) { result: ActivityResult ->
+//            if (result.resultCode == AppCompatActivity.RESULT_OK) {
+//                val selectImageUrl = result.data?.data
+//                selectImageUrl?.let {
+//                    GlobalApplication.loadCropRoundedSquareImage(
+//                        requireContext(),
+//                        binding.fragmentEvaluationExercisePictureExerciseIv,
+//                        it.toString(),
+//                        18
+//                    )
+//                    binding.fragmentEvaluationExercisePictureExerciseIb.visibility = View.GONE
+//                    profileImage = it.toString()
+//                }
+//            }
+//        }
+//    }
 
-    private fun openGallery() {
-        val galleryIntent = Intent()
-            .setType("image/*")
-            .setAction(Intent.ACTION_GET_CONTENT)
-        galleryForResult.launch(Intent.createChooser(galleryIntent, "Select Picture"))
-    }
+//    private fun openGallery() {
+//        val galleryIntent = Intent()
+//            .setType("image/*")
+//            .setAction(Intent.ACTION_GET_CONTENT)
+//        galleryForResult.launch(Intent.createChooser(galleryIntent, "Select Picture"))
+//    }
 }
