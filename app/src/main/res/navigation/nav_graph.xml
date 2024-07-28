@@ -81,7 +81,17 @@
         android:id="@+id/fragmentAdditionalExerciseYoutube1"
         android:name="com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseYoutube1Fragment"
         android:label="AdditionalExerciseYoutube1"
-        tools:layout="@layout/fragment_additional_exercise_youtube1"/>
+        tools:layout="@layout/fragment_additional_exercise_youtube1">
+        <action
+            android:id="@+id/action_fragmentAdditionalExerciseYoutube1_to_fragmentAdditionalExerciseYoutube2"
+            app:destination="@id/fragmentAdditionalExerciseYoutube2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentAdditionalExerciseYoutube2"
+        android:name="com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseYoutube2Fragment"
+        android:label="AdditionalExerciseYoutube2"
+        tools:layout="@layout/fragment_additional_exercise_youtube2"/>
 
     <fragment
         android:id="@+id/fragmentAdditionalExerciseMiddle"
