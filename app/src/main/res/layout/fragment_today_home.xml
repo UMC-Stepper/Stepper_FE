@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ui.today.TodayHomeFragment">
+        tools:context=".ui.today.home.TodayHomeFragment">
 
         <ImageView
             android:id="@+id/fragment_today_home_calender_iv"
@@ -23,7 +23,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/fragment_today_home_calender_tv"
+            android:id="@+id/fragment_today_home_calender_month_tv"
             style="@style/title_bold_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
