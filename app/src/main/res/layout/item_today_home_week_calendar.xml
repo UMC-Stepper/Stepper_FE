@@ -2,7 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="weekCalendarItem"
+            type="com.example.umc_stepper.domain.model.local.WeekCalendar" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_today_home_week_calendar_constraint"
         android:layout_width="wrap_content"
         android:layout_height="68dp"
         android:layout_marginEnd="3dp"
@@ -19,7 +26,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="12"
+            android:text="@{weekCalendarItem.date}"
             android:textColor="@color/White"
             style="@style/body_medium_14"
             android:textSize="15sp"/>
@@ -31,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:text="SUN"
+            android:text="@{weekCalendarItem.day}"
             android:textColor="@color/White"
             android:textSize="11sp"
             app:layout_constraintEnd_toEndOf="parent"
