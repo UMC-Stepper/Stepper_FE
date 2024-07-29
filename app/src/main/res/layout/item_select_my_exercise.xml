@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/item_select_my_exercise_background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
-    android:background="@drawable/shape_rounded_square_18dp_exercise_yuotube_card_on"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@drawable/shape_rounded_square_18dp_exercise_yuotube_card_on">
 
     <ImageView
         android:id="@+id/item_select_my_exercise_checked_bt"
@@ -49,4 +53,4 @@
         app:layout_constraintStart_toStartOf="@id/item_select_my_exercise_title_tv"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout></layout>
