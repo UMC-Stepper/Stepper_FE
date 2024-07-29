@@ -33,10 +33,10 @@
         android:id="@+id/evaluationLogFragment"
         android:name="com.example.umc_stepper.ui.today.EvaluationLogFragment"
         android:label="EvaluationLogFragment"
-        tools:layout="@layout/item_evaluation_log_calender_category"/>
+        tools:layout="@layout/fragment_evaluation_log_calender"/>
     <fragment
         android:id="@+id/todayHomeFragment"
-        android:name="com.example.umc_stepper.ui.today.TodayHomeFragment"
+        android:name="com.example.umc_stepper.ui.today.home.TodayHomeFragment"
         android:label="TodayHomeFragment"
         tools:layout="@layout/fragment_today_home">
         <action
@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_todayHomeFragment_to_fragmentAddExercise"
             app:destination="@id/fragmentAddExercise" />
+        <action
+            android:id="@+id/action_todayHomeFragment_to_evaluationLogFragment"
+            app:destination="@id/evaluationLogFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentEvaluationExercise"

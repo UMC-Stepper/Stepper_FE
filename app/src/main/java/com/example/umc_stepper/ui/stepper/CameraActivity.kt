@@ -75,8 +75,14 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>(R.layout.activity_cam
             startCamera()
         }
 
+        // 사진 찍기 버튼
         binding.activityCameraCaptureIv.setOnClickListener {
             takePhoto(this)
+        }
+
+        // 취소 버튼
+        binding.activityCameraCancelIv.setOnClickListener {
+
         }
     }
 
