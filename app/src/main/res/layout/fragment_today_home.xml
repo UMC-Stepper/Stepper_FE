@@ -184,10 +184,12 @@
             android:layout_width="0dp"
             android:layout_height="105dp"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
             android:layout_marginEnd="26dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
             android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
             android:backgroundTint="@color/Purple_Black_BG_2"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/fragment_today_home_guideline"
             app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_no_card_tv">
