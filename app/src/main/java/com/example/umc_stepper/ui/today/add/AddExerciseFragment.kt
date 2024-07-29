@@ -1,4 +1,4 @@
-package com.example.umc_stepper.ui.today
+package com.example.umc_stepper.ui.today.add
 
 import android.content.Context
 import android.view.View
