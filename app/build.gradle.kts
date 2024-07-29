@@ -98,6 +98,9 @@ dependencies {
     // Coroutines
     implementation(libs.kotlinx.coroutines)
 
+    // WorkManger
+    implementation ("androidx.work:work-runtime-ktx:2.7.1")
+
     // MaterialCalendarView
     implementation("com.github.prolificinteractive:material-calendarview:2.0.1")
     implementation ("com.jakewharton.threetenabp:threetenabp:1.3.1")
