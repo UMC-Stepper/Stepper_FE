@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/fragment_youtube_url_load_sub_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="95dp"
+            android:text="Youtube 링크로 불러오기"
+            style="@style/title_bold_24"
+            android:textColor="@color/White"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_youtube_url_load_sub_constraint"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/shape_rounded_square_purple400_20dp"
+            android:backgroundTint="@color/Purple_Black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_youtube_url_load_sub_title_tv">
+
+            <TextView
+                android:id="@+id/fragment_youtube_url_load_sub_title2_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:text="Youtube 영상 URL을 복사해서 아래의\n창에 입력해주세요."
+                style="@style/sub_title_semi_bold_16"
+                android:textColor="@color/White"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+            <TextView
+                android:id="@+id/fragment_youtube_url_load_sub_title3_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="*유튜브 URL 주소만 입력해주세요"
+                style="@style/body_regular_14"
+                android:textColor="@color/White"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_youtube_url_load_sub_title2_tv"
+                app:layout_constraintStart_toStartOf="@+id/fragment_youtube_url_load_sub_title2_tv"/>
+
+            <EditText
+                android:id="@+id/fragment_youtube_url_load_input_url_et"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/shape_rounded_square_purpleblack_bg1_50dp"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_youtube_url_load_sub_title3_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                android:hint="URL 주소를 붙여넣으세요."
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:textColorHint="@color/Purple_Gray"
+                style="@style/body_medium_14"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragment_youtube_url_load_complete_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="입력완료"
+            style="@style/sub_title_semi_bold_16"
+            android:textColor="@color/Purple_700"
+            android:background="@drawable/radius_corners_61dp_stroke_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_youtube_url_load_sub_constraint"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
