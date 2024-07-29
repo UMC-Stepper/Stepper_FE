@@ -1,4 +1,4 @@
-package com.example.umc_stepper.domain.model
+package com.example.umc_stepper.domain.model.response
 
 import java.time.LocalDateTime
 

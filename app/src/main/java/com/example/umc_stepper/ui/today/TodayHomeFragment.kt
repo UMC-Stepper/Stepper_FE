@@ -16,8 +16,10 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
         //        binding.fragmentTodayHomeEvaluationLogConstraint.setOnClickListener {
 //            findNavController().navigate(R.id.action_todayHomeFragment_to_fragmentEvaluationExercise)
 //        } => 평가일지 => 운동 평가
+//        binding.fragmentTodayHomeEvaluationLogConstraint.setOnClickListener {
+//            findNavController().navigate(R.id.action_todayHomeFragment_to_fragmentMyExercise3)
         binding.fragmentTodayHomeEvaluationLogConstraint.setOnClickListener {
-            findNavController().navigate(R.id.action_todayHomeFragment_to_fragmentMyExercise3)
+            findNavController().navigate(R.id.action_todayHomeFragment_to_fragmentAddExercise)
         }
     }
 }

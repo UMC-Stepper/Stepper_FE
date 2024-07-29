@@ -1,9 +1,7 @@
 package com.example.umc_stepper.ui.signup
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
@@ -16,12 +14,11 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseActivity
 import com.example.umc_stepper.databinding.ActivitySignUpBinding
-import com.example.umc_stepper.domain.model.UserDto
+import com.example.umc_stepper.domain.model.request.UserDto
 import com.google.gson.Gson
 
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sign_up) {
