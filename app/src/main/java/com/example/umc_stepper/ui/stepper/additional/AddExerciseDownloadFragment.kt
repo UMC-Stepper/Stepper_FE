@@ -55,7 +55,7 @@ class AddExerciseDownloadFragment : BaseFragment<FragmentAddExerciseDownloadBind
     }
 
     override fun onExerciseClick(exercise: ExerciseDto) {
-        binding.fragmentAddExerciseDownloadBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.Purple_Black_BG_2))
+        binding.fragmentAddExerciseDownloadBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
         binding.fragmentAddExerciseDownloadBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
         binding.fragmentAddExerciseDownloadBtn.isEnabled=true
     }
