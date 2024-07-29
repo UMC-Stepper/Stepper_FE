@@ -1,42 +1,52 @@
 package com.example.umc_stepper.ui.stepper.additional
 
+import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentAddExerciseDownloadBinding
 import com.example.umc_stepper.domain.model.request.ExerciseDto
 
-class AddExerciseDownloadFragment : BaseFragment<FragmentAddExerciseDownloadBinding>(R.layout.fragment_add_exercise_download),CategoryAdapter.OnCategoryClickListener,
-    ExerciseAdapter.OnExerciseClickListener {
+class AddExerciseDownloadFragment : BaseFragment<FragmentAddExerciseDownloadBinding>(R.layout.fragment_add_exercise_download), CategoryAdapter.OnCategoryClickListener, ExerciseAdapter.OnExerciseClickListener {
+
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var exerciseAdapter: ExerciseAdapter
     private val exerciseList = mutableListOf<ExerciseDto>()
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        // ExerciseAdapter 초기화
+        exerciseAdapter = ExerciseAdapter(this)
+        categoryAdapter = CategoryAdapter(this)
+
+        super.onViewCreated(view, savedInstanceState)
+    }
+
     override fun setLayout() {
         val categories = listOf("머리", "어깨, 팔", "가슴", "복부", "골반", "무릎, 다리", "등", "허리", "발")
-        val categoryAdapter = CategoryAdapter(this)
+
         categoryAdapter.submitList(categories)
         binding.fragmentAddExerciseDownloadTagRv.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = categoryAdapter
         }
 
-        val exerciseAdapter = ExerciseAdapter(this)
         binding.fragmentAddExerciseDownloadCardListRv.apply {
-           layoutManager = LinearLayoutManager(requireContext())
-           adapter = exerciseAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = exerciseAdapter
         }
 
+        // 기본 운동 목록 로드
         loadExercises("어깨, 팔")
     }
 
     override fun onCategoryClick(category: String) {
-       loadExercises(category)
+        loadExercises(category)
     }
 
     private fun loadExercises(category: String) {
         exerciseList.clear()
-        // Dummy data
+        exerciseList.add(ExerciseDto("전쟁재활운동", "서울아산병원", "url_to_image"))
         exerciseList.add(ExerciseDto("전쟁재활운동", "서울아산병원", "url_to_image"))
         exerciseList.add(ExerciseDto("전쟁재활운동", "서울아산병원", "url_to_image"))
         exerciseList.add(ExerciseDto("전쟁재활운동", "서울아산병원", "url_to_image"))
@@ -44,6 +54,6 @@ class AddExerciseDownloadFragment : BaseFragment<FragmentAddExerciseDownloadBind
     }
 
     override fun onExerciseClick(exercise: ExerciseDto) {
-
+        // Exercise 클릭 이벤트 처리
     }
 }

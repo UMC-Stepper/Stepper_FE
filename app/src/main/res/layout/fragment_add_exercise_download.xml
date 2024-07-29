@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:background="@drawable/shape_rounded_square_purpleblack_bg1_purple700_stroke_50dp_1dp"
-            android:text="1단계 운동 설정하기"
+            android:text="추가 운동으로 선택하기"
             android:layout_marginTop="28dp"
             android:layout_marginBottom="28dp"
             app:layout_constraintBottom_toBottomOf="parent"
