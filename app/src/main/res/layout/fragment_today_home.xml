@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ui.today.TodayHomeFragment">
+        tools:context=".ui.today.home.TodayHomeFragment">
 
         <ImageView
             android:id="@+id/fragment_today_home_calender_iv"
@@ -23,7 +23,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/fragment_today_home_calender_tv"
+            android:id="@+id/fragment_today_home_calender_month_tv"
             style="@style/title_bold_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
             app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_week_calendar_rv" />
 
         <ImageView
-            android:id="@+id/fragment_today_home_plus_exercise_card_iv"
+            android:id="@+id/fragment_today_home_plus_exercise_add_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_today_home_plus_exercise_card"
@@ -184,10 +184,12 @@
             android:layout_width="0dp"
             android:layout_height="105dp"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
             android:layout_marginEnd="26dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
             android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
             android:backgroundTint="@color/Purple_Black_BG_2"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/fragment_today_home_guideline"
             app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_no_card_tv">

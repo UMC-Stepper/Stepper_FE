@@ -48,4 +48,14 @@
         <item>12월</item>
     </string-array>
 
+    <string-array name="calendar_day_eng">
+        <item>SUN</item>
+        <item>MON</item>
+        <item>TUE</item>
+        <item>WED</item>
+        <item>THU</item>
+        <item>FRI</item>
+        <item>SAT</item>
+    </string-array>
+
 </resources>

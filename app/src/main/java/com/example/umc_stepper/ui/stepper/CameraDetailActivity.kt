@@ -25,4 +25,17 @@ class CameraDetailActivity : BaseActivity<ActivityCameraDetailBinding>(R.layout.
         }
     }
 
+    private fun setButton() {
+
+        // 다시 찍기 버튼
+        binding.activityCameraDetailRetakeIv.setOnClickListener {
+            startNextActivity(CameraActivity::class.java)
+        }
+
+        // 사진 사용 버튼
+        binding.activityCameraDetailUsePhotoIv.setOnClickListener {
+
+        }
+    }
+
 }
