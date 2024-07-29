@@ -72,6 +72,8 @@
             android:text="00"
             android:textColor="@color/Purple_300"
             android:textSize="60dp"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_additional_middle_colon_hour_tv"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragment_additional_middle_sub_title_tv" />
 
@@ -85,6 +87,8 @@
             android:textColor="@color/White"
             android:textSize="25dp"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_additional_middle_hour_tv"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_additional_middle_min_tv"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/fragment_additional_middle_hour_tv"
             app:layout_constraintTop_toTopOf="@+id/fragment_additional_middle_hour_tv" />
 
@@ -98,6 +102,8 @@
             android:textColor="@color/Purple_300"
             android:textSize="60dp"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_additional_middle_colon_hour_tv"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_additional_middle_colon_min_tv"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/fragment_additional_middle_colon_hour_tv"
             app:layout_constraintTop_toTopOf="@+id/fragment_additional_middle_colon_hour_tv" />
 
@@ -111,6 +117,8 @@
             android:textColor="@color/White"
             android:textSize="25dp"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_additional_middle_min_tv"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_additional_middle_sec_tv"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/fragment_additional_middle_min_tv"
             app:layout_constraintTop_toTopOf="@+id/fragment_additional_middle_min_tv" />
 
@@ -126,6 +134,7 @@
             android:textSize="60dp"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_additional_middle_colon_min_tv"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/fragment_additional_middle_colon_min_tv"
             app:layout_constraintTop_toTopOf="@+id/fragment_additional_middle_colon_min_tv" />
 
