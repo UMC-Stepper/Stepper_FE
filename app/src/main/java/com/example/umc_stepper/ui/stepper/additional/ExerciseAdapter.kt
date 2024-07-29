@@ -22,6 +22,7 @@ class ExerciseAdapter(
     override fun bind(binding: ItemSelectMyExerciseBinding, item: ExerciseDto) {
         binding.itemSelectMyExerciseTitleTv.text = item.name
         binding.itemSelectMyExerciseCheckedBt.setImageResource(R.drawable.selector_checked_off_gray_purple) // 실제 체크 상태 로직으로 대체해야 합니다.
+        binding.itemSelectMyExerciseThumbnailIv.setBackgroundResource(R.drawable.ic_dummy_thumnail)
         binding.root.setOnClickListener {
             listener.onExerciseClick(item)
             binding.itemSelectMyExerciseCheckedBt.setImageResource(R.drawable.selector_checked_on_white)

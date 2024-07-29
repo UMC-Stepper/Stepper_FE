@@ -11,7 +11,7 @@
         android:id="@+id/tag_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/selector_tag"
+        android:background="@drawable/shape_rounded_stroke_square_yellow700_40dp_1dp"
         android:gravity="center"
         android:text="머리"
         android:textColor="@color/Yellow_700"

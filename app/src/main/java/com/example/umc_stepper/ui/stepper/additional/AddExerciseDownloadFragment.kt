@@ -2,6 +2,7 @@ package com.example.umc_stepper.ui.stepper.additional
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
@@ -17,7 +18,7 @@ class AddExerciseDownloadFragment : BaseFragment<FragmentAddExerciseDownloadBind
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // ExerciseAdapter 초기화
         exerciseAdapter = ExerciseAdapter(this)
-        categoryAdapter = CategoryAdapter(this)
+        categoryAdapter = CategoryAdapter(requireContext(),this)
 
         super.onViewCreated(view, savedInstanceState)
     }
@@ -41,7 +42,7 @@ class AddExerciseDownloadFragment : BaseFragment<FragmentAddExerciseDownloadBind
     }
 
     override fun onCategoryClick(category: String) {
-        loadExercises(category)
+        //loadExercises(category)
     }
 
     private fun loadExercises(category: String) {
@@ -54,6 +55,8 @@ class AddExerciseDownloadFragment : BaseFragment<FragmentAddExerciseDownloadBind
     }
 
     override fun onExerciseClick(exercise: ExerciseDto) {
-        // Exercise 클릭 이벤트 처리
+        binding.fragmentAddExerciseDownloadBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.Purple_Black_BG_2))
+        binding.fragmentAddExerciseDownloadBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
+        binding.fragmentAddExerciseDownloadBtn.isEnabled=true
     }
 }
