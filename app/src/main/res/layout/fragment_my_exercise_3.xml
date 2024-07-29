@@ -244,16 +244,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="16dp"
+                        android:visibility="gone"
                         android:layout_marginEnd="24dp"
                         android:background="@drawable/shape_rounded_square_purpleblack_bg2_25dp"
-                        android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_select_ok_tag_tv">
 
                         <ImageView
                             android:id="@+id/fragment_my_exercise_thumbnail_1_iv"
-                            android:layout_width="wrap_content"
+                            android:layout_width="360dp"
                             android:layout_height="180dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -312,7 +312,7 @@
 
                         <ImageView
                             android:id="@+id/fragment_my_exercise_thumbnail_2_iv"
-                            android:layout_width="wrap_content"
+                            android:layout_width="360dp"
                             android:layout_height="180dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -366,7 +366,7 @@
                         android:max="100"
                         android:progress="25"
                         android:progressDrawable="@drawable/circular_progress_bar2"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

@@ -1,4 +1,4 @@
-package com.example.umc_stepper.domain.model
+package com.example.umc_stepper.domain.model.request
 
 data class UserDto(
     val community_alarm: String = "",

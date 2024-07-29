@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="180dp"
             android:fontFamily="@font/pretendard_bold"
-            android:text="오늘 이만큼 운동했어요!"
+            android:text="오늘 이만큼 추가 운동했어요!"
             android:textColor="@color/White"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -127,6 +127,7 @@
             app:layout_constraintEnd_toEndOf="@id/fragment_today_exercise_success_second_tv"
             app:layout_constraintTop_toBottomOf="@id/fragment_today_exercise_success_second_tv"/>
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragment_today_exercise_success_ok_btn"
             style="@style/sub_title_semi_bold_16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
