@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_stepperFragment_to_additionalExerciseHomeFragment"
             app:destination="@id/additionalExerciseHomeFragment" />
+        <action
+            android:id="@+id/action_stepperFragment_to_fragmentEvaluationExerciseToday"
+            app:destination="@id/fragmentEvaluationExerciseToday" />
     </fragment>
     <fragment
         android:id="@+id/evaluationLogFragment"
@@ -122,6 +125,13 @@
         <action
             android:id="@+id/action_fragmentExerciseComplete_to_todayHomeFragment"
             app:destination="@id/todayHomeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentEvaluationExerciseToday"
+        android:name="com.example.umc_stepper.ui.today.EvaluationExerciseTodayFragment"
+        android:label="EvaluationExerciseToday"
+        tools:layout="@layout/fragment_evaluation_exercise_today">
     </fragment>
 
 </navigation>

@@ -5,7 +5,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="809dp">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/fragment_exercise_settings_date_title_tv"
