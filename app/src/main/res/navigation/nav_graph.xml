@@ -36,7 +36,7 @@
         tools:layout="@layout/fragment_evaluation_log_calender"/>
     <fragment
         android:id="@+id/todayHomeFragment"
-        android:name="com.example.umc_stepper.ui.today.TodayHomeFragment"
+        android:name="com.example.umc_stepper.ui.today.home.TodayHomeFragment"
         android:label="TodayHomeFragment"
         tools:layout="@layout/fragment_today_home">
         <action
