@@ -2,16 +2,14 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
+    xmlns:tool="http://schemas.android.com/tools">
 <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.today.add.AddExerciseSelectScrapFragment">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/fragment_add_exercise_download_title_tv"
@@ -19,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="82dp"
             android:text="스크랩에서 운동 선택하기"
             android:textColor="@color/White"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +44,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="@+id/fragment_add_exercise_download_subtitle_tv"
             app:layout_constraintTop_toBottomOf="@+id/fragment_add_exercise_download_subtitle_tv"
-            tools:listitem="@layout/item_tag" />
+            tool:listitem="@layout/item_tag" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment_add_exercise_download_card_list_rv"
@@ -57,14 +56,15 @@
             app:layout_constraintEnd_toEndOf="@id/fragment_add_exercise_download_title_tv"
             app:layout_constraintStart_toStartOf="@id/fragment_add_exercise_download_tag_rv"
             app:layout_constraintTop_toBottomOf="@id/fragment_add_exercise_download_tag_rv"
-            tools:listitem="@layout/item_select_my_exercise" />
+            tool:listitem="@layout/item_select_my_exercise" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/fragment_add_exercise_add_download_step1_complete_btn"
+            android:id="@+id/fragment_add_exercise_download_btn"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:background="@drawable/shape_rounded_square_purpleblack_bg1_purple700_stroke_50dp_1dp"
-            android:text="1단계 운동 설정하기"
+            android:text="추가 운동으로 선택하기"
+            android:enabled="false"
             android:layout_marginTop="28dp"
             android:layout_marginBottom="28dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -74,6 +74,9 @@
             app:layout_constraintTop_toBottomOf="@id/fragment_add_exercise_download_card_list_rv"
             app:layout_constraintStart_toStartOf="@id/fragment_add_exercise_download_card_list_rv"
             app:layout_constraintEnd_toEndOf="@id/fragment_add_exercise_download_card_list_rv"/>
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView></layout>

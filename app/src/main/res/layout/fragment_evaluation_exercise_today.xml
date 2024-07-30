@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
     </data>
 
-    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="44dp"
@@ -31,6 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
+                    android:layout_marginTop="81dp"
                     android:text="오늘의 운동 컨디션 점수는?"
                     android:textColor="@color/White"
                     android:textSize="18dp"
@@ -45,13 +46,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:background="@drawable/shape_rounded_square_pruplebg_1_40dp"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:paddingStart="16dp"
                     android:paddingTop="2dp"
                     android:paddingEnd="16dp"
                     android:paddingBottom="2dp"
                     android:singleLine="true"
-                    android:inputType="text"
                     android:text="0"
                     android:textColor="@color/White"
                     app:layout_constraintBottom_toBottomOf="@id/fragment_evaluation_exercise_half_bg_tv"
@@ -335,6 +336,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/shape_rounded_square_yellow300_12dp"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_blur_20_tv">
@@ -430,11 +432,10 @@
             <ImageView
                 android:id="@+id/fragment_evaluation_exercise_picture_exercise_iv"
                 android:layout_width="match_parent"
-                android:layout_height="312dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
-                android:background="@drawable/shape_rounded_square_gray_purple_18dp_stroke_1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_picture_exercise_description_tv" />
