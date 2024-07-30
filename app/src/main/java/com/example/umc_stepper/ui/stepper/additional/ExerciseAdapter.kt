@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.stepper.additional
 
+import androidx.recyclerview.widget.DiffUtil
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseAdapter
 import com.example.umc_stepper.base.BaseDiffCallback
@@ -9,8 +10,10 @@ import com.example.umc_stepper.domain.model.request.ExerciseDto
 class ExerciseAdapter(
     private val listener: OnExerciseClickListener
 ) : BaseAdapter<ExerciseDto, ItemSelectMyExerciseBinding>(
-    ExerciseDiffCallback()
-) {
+    BaseDiffCallback(
+        itemsTheSame = { oldItem, newItem -> oldItem == newItem },
+        contentsTheSame = { oldItem, newItem -> oldItem == newItem }
+    )) {
 
     interface OnExerciseClickListener {
         fun onExerciseClick(exercise: ExerciseDto)
@@ -30,8 +33,4 @@ class ExerciseAdapter(
         }
     }
 
-    class ExerciseDiffCallback : BaseDiffCallback<ExerciseDto>(
-        areItemsTheSame = { oldItem, newItem -> oldItem == newItem },
-        areContentsTheSame = { oldItem, newItem -> oldItem == newItem }
-    )
 }
