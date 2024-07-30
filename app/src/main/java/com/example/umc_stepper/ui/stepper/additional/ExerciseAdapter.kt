@@ -9,7 +9,10 @@ import com.example.umc_stepper.domain.model.request.ExerciseDto
 class ExerciseAdapter(
     private val listener: OnExerciseClickListener
 ) : BaseAdapter<ExerciseDto, ItemSelectMyExerciseBinding>(
-    ExerciseDiffCallback()
+    BaseDiffCallback(
+        itemsTheSame = { oldItem, newItem -> oldItem == newItem },
+        contentsTheSame = { oldItem, newItem -> oldItem == newItem }
+    )
 ) {
 
     interface OnExerciseClickListener {
@@ -29,9 +32,4 @@ class ExerciseAdapter(
             binding.itemSelectMyExerciseBackground.setBackgroundResource(R.drawable.shape_rounded_square_purple700_18dp)
         }
     }
-
-    class ExerciseDiffCallback : BaseDiffCallback<ExerciseDto>(
-        areItemsTheSame = { oldItem, newItem -> oldItem == newItem },
-        areContentsTheSame = { oldItem, newItem -> oldItem == newItem }
-    )
 }
