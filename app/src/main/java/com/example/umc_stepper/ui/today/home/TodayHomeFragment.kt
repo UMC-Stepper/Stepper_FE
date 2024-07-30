@@ -32,7 +32,7 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
     private fun setMonth() {
         val monthFormat = DateTimeFormatter.ofPattern("M월").withLocale(Locale.forLanguageTag("ko"))
         val localDateMonth = LocalDateTime.now().format(monthFormat)
-        //binding.fragmentTodayHomeCalenderMonthTv.text = localDateMonth
+        binding.fragmentTodayHomeCalenderMonthTv.text = localDateMonth
     }
 
     private fun setAdapter() {
