@@ -3,9 +3,11 @@ package com.example.umc_stepper.utils.calender
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.Drawable
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.text.style.TextAppearanceSpan
+import androidx.core.content.ContextCompat
 import com.example.umc_stepper.R
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
@@ -24,7 +26,7 @@ class TodayDecorator(context: Context) : DayViewDecorator {
     }
 }
 
-class EventDecorator()
+class EventDecorator(private val context: Context)
     : DayViewDecorator {
 
     private val datesWithEvent = mutableSetOf<CalendarDay>()
@@ -39,7 +41,9 @@ class EventDecorator()
     }
 
     override fun decorate(view: DayViewFacade) {
-        view.addSpan(DotSpan(10F, Color.parseColor("#d3d3d3")))
+        //view.addSpan(DotSpan(10F, Color.parseColor("#d3d3d3")))
+        val drawable: Drawable = ContextCompat.getDrawable(context, R.drawable.circle_purple_700_40dp)!!
+        view?.setBackgroundDrawable(drawable)
     }
 }
 

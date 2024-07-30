@@ -33,7 +33,12 @@
         android:id="@+id/evaluationLogFragment"
         android:name="com.example.umc_stepper.ui.today.EvaluationLogFragment"
         android:label="EvaluationLogFragment"
-        tools:layout="@layout/fragment_evaluation_log_calender"/>
+        tools:layout="@layout/fragment_evaluation_log_calender">
+
+        <action
+            android:id="@+id/action_evaluationLogFragment_to_evaluationExerciseTodayFragment"
+            app:destination="@id/evaluationExerciseTodayFragment" />
+    </fragment>
     <fragment
         android:id="@+id/todayHomeFragment"
         android:name="com.example.umc_stepper.ui.today.home.TodayHomeFragment"
@@ -81,7 +86,14 @@
         android:id="@+id/fragmentAddExerciseDownload"
         android:name="com.example.umc_stepper.ui.stepper.additional.AddExerciseDownloadFragment"
         android:label="AddExerciseDownload"
-        tools:layout="@layout/fragment_add_exercise_download"/>
+        tools:layout="@layout/fragment_add_exercise_select_scrap">
+        <action
+            android:id="@+id/action_fragmentAddExerciseDownload_to_fragmentAddExercise"
+            app:destination="@id/fragmentAddExercise" />
+        <action
+            android:id="@+id/action_fragmentAddExerciseDownload_to_fragmentAddExercise2"
+            app:destination="@id/fragmentAddExercise" />
+    </fragment>
 
     <fragment
         android:id="@+id/fragmentAdditionalExerciseYoutube1"
@@ -97,8 +109,17 @@
   
   <fragment
         android:id="@+id/fragmentAddExercise"
-        android:name="com.example.umc_stepper.ui.today.AddExerciseFragment"
+        android:name="com.example.umc_stepper.ui.today.add.AddExerciseFragment"
         android:label="AddExercise"
-        tools:layout="@layout/fragment_add_exercise"/>
+        tools:layout="@layout/fragment_add_exercise">
+      <action
+          android:id="@+id/action_fragmentAddExercise_to_fragmentAddExerciseDownload"
+          app:destination="@id/fragmentAddExerciseDownload" />
+  </fragment>
+    <fragment
+        android:id="@+id/evaluationExerciseTodayFragment"
+        android:name="com.example.umc_stepper.ui.today.EvaluationExerciseTodayFragment"
+        android:label="EvaluationExerciseTodayFragment"
+        tools:layout="@layout/fragment_evaluation_exercise" />
 
 </navigation>
