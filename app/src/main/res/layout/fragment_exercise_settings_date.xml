@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="94dp"
             android:text="마지막 단계\n운동 일정과 준비물 설정"
             android:textColor="@color/White"
             app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="매주 %d %d"
+            android:text="매주 "
             android:textColor="@color/White"
             app:layout_constraintStart_toStartOf="@id/fragment_exercise_settings_plan_sub_title"
             app:layout_constraintTop_toBottomOf="@id/fragment_exercise_settings_plan_sub_title" />
@@ -246,6 +246,7 @@
             android:hint="운동 시 챙겨야 할 준비물 리스트를 알려주세요."
             android:paddingStart="24dp"
             android:textColorHint="@color/Purple_Gray"
+            android:textColor="@color/White"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragment_exercise_settings_exercise_materials_title_tv" />

@@ -9,15 +9,15 @@
 
         <TextView
             android:id="@+id/fragment_exercise_card_last_title_tv"
+            style="@style/title_bold_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="94dp"
             android:text="마지막 단계\n운동 일정과 준비물 설정"
-            style="@style/title_bold_24"
             android:textColor="@color/White"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <TextView
             android:id="@+id/fragment_exercise_card_last_sub_title_tv"
             android:layout_width="wrap_content"
