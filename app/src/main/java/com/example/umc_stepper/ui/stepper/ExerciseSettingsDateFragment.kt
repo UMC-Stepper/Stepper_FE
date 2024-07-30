@@ -2,6 +2,7 @@ package com.example.umc_stepper.ui.stepper
 
 import android.os.Bundle
 import android.view.View
+import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.TimePicker
 import androidx.core.content.ContextCompat
@@ -18,6 +19,9 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
     override fun setLayout() {
         val timePicker: TimePicker = binding.fragmentExerciseSettingsTimeSpinner
         timePicker.setIs24HourView(false)
+        val amPmSpinnerId = resources.getIdentifier("amPm", "id", "android")
+        val amPmSpinner: NumberPicker = timePicker.findViewById(amPmSpinnerId)
+        amPmSpinner.displayedValues = arrayOf("AM", "PM")
 
         timePicker.setOnTimeChangedListener { _, hour, minute ->
             // 시간 변환
