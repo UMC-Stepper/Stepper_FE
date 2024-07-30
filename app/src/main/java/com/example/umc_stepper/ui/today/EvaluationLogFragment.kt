@@ -53,7 +53,7 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
                 CalendarDay.today().day
             }
 
-            val action = EvaluationLogFragmentDirections.actionEvaluationLogFragmentToFragmentEvaluationExercise()
+            val action = EvaluationLogFragmentDirections.actionEvaluationLogFragmentToEvaluationExerciseTodayFragment()
             findNavController().navigateSafe(action.actionId)
         }
     }
