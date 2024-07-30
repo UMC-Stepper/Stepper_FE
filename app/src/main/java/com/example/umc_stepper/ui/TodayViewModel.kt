@@ -3,13 +3,13 @@ package com.example.umc_stepper.ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.umc_stepper.BuildConfig
 import com.example.umc_stepper.domain.model.request.AiVideoDto
 import com.example.umc_stepper.domain.model.response.AiVideoInfo
 import com.example.umc_stepper.domain.model.response.Ylist
 import com.example.umc_stepper.domain.model.response.YouTubeVideo
 import com.example.umc_stepper.domain.repository.FastApiRepository
 import com.example.umc_stepper.domain.repository.YoutubeApiRepository
+import com.pierfrancescosoffritti.androidyoutubeplayer.BuildConfig
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -35,7 +35,7 @@ class TodayViewModel @Inject constructor(
     val successYoutubeLink: StateFlow<Ylist> = _successYoutubeLink
 
 
-    val youtubeKey = BuildConfig.YOUTUBE_KEY
+    //val youtubeKey = BuildConfig.YOUTUBE_KEY
 
     fun postAiVideoInfo(aiVideoDto: AiVideoDto) {
         viewModelScope.launch {
@@ -74,8 +74,8 @@ class TodayViewModel @Inject constructor(
 
     fun getYoutubeVideoInfoSequentially(firstUrl: String, secondUrl: String) {
         viewModelScope.launch {
-            getYoutubeVideoInfo("snippet", firstUrl, youtubeKey)
-            getYoutubeVideoInfo("snippet", secondUrl, youtubeKey)
+            //getYoutubeVideoInfo("snippet", firstUrl, youtubeKey)
+            //getYoutubeVideoInfo("snippet", secondUrl, youtubeKey)
         }
     }
 }

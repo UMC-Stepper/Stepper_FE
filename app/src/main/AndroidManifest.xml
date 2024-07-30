@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 알림 권한 -->
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/><!--알람 권한-->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- 카메라 권한 -->
     <uses-feature android:name="android.hardware.camera.any" />
 

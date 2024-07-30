@@ -32,9 +32,23 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
             goAdditionalExerciseHome()
         }
 
+        //테스트를 위한 임시함수 적용(8월을 누르면 평가화면으로)
+        binding.stepperMonthTitleTv.setOnClickListener {
+            goExerciseSettingsDate()
+        }
 
     }
     private fun goAdditionalExerciseHome(){
         findNavController().navigate(R.id.action_stepperFragment_to_additionalExerciseHomeFragment)
+    }
+
+    //테스트를 위한 임시함수 적용
+    private fun goEvaluationExerciseToday(){
+        findNavController().navigate(R.id.action_stepperFragment_to_fragmentEvaluationExerciseToday)
+    }
+
+    //테스트를 위한 임시함수 적용
+    private fun goExerciseSettingsDate(){
+        findNavController().navigate(R.id.action_stepperFragment_to_fragmentExerciseSettingsDate)
     }
 }

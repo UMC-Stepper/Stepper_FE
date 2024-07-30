@@ -3,53 +3,54 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/item_select_my_exercise_background"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/shape_rounded_square_18dp_exercise_yuotube_card_on">
+
+    <ImageView
+        android:id="@+id/item_select_my_exercise_checked_bt"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/selector_checked_off_gray_purple"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/item_select_my_exercise_thumbnail_iv"
+        android:layout_width="143dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="12dp"
-        android:background="@drawable/shape_rounded_square_18dp_exercise_yuotube_card_on">
+        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/item_select_my_exercise_checked_bt"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/item_select_my_exercise_title_tv"
+        android:textColor="@color/White"
+        app:layout_constraintStart_toEndOf="@id/item_select_my_exercise_thumbnail_iv"
+        app:layout_constraintTop_toTopOf="@id/item_select_my_exercise_thumbnail_iv"
+        android:fontFamily="@font/pretendard_semi_bold"
+        android:layout_marginStart="12dp"
+        android:text="진정재활운동"
+        android:layout_marginTop="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
-        <ImageView
-            android:id="@+id/item_select_my_exercise_checked_bt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/selector_checked_off_gray_purple"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pretendard_regular"
+        android:text="손재용의 사생활"
+        android:layout_marginBottom="4dp"
+        android:textColor="@color/White"
+        app:layout_constraintBottom_toBottomOf="@id/item_select_my_exercise_thumbnail_iv"
+        app:layout_constraintStart_toStartOf="@id/item_select_my_exercise_title_tv"/>
 
-        <ImageView
-            android:id="@+id/item_select_my_exercise_thumbnail_iv"
-            android:layout_width="143dp"
-            android:layout_height="81dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="12dp"
-            android:layout_marginTop="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/item_select_my_exercise_checked_bt"
-            app:layout_constraintTop_toTopOf="parent" />
-        <TextView
-            android:id="@+id/item_select_my_exercise_title_tv"
-            android:textColor="@color/White"
-            app:layout_constraintStart_toEndOf="@id/item_select_my_exercise_thumbnail_iv"
-            app:layout_constraintTop_toTopOf="@id/item_select_my_exercise_thumbnail_iv"
-            android:fontFamily="@font/pretendard_semi_bold"
-            android:layout_marginStart="12dp"
-            android:text="진정재활운동"
-            android:layout_marginTop="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_regular"
-            android:text="손재용의 사생활"
-            android:layout_marginBottom="4dp"
-            android:textColor="@color/White"
-            app:layout_constraintBottom_toBottomOf="@id/item_select_my_exercise_thumbnail_iv"
-            app:layout_constraintStart_toStartOf="@id/item_select_my_exercise_title_tv"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout></layout>
