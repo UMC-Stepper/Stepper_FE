@@ -15,6 +15,7 @@ class CameraDetailActivity : BaseActivity<ActivityCameraDetailBinding>(R.layout.
 
     override fun setLayout() {
         setImageView()
+        setButton()
     }
 
     private fun setImageView() {
