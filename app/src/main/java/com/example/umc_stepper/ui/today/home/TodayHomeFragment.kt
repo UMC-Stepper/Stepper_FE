@@ -61,7 +61,8 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
 
         // 운동 추가
         binding.fragmentTodayHomePlusExerciseAddIv.setOnClickListener {
-            findNavController().navigate(R.id.action_todayHomeFragment_to_fragmentAddExercise)
+            val action = TodayHomeFragmentDirections.actionTodayHomeFragmentToFragmentMyExercise3()
+            findNavController().navigateSafe(action.actionId)
         }
 
         // 나만의 운동
