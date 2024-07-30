@@ -7,7 +7,7 @@ import com.example.umc_stepper.databinding.FragmentAddExerciseSelectScrapBinding
 class AddExerciseSelectScrapFragment: BaseFragment<FragmentAddExerciseSelectScrapBinding>(R.layout.fragment_add_exercise_select_scrap) {
 
     override fun setLayout() {
-
+        setButton()
     }
 
     private fun setButton() {
