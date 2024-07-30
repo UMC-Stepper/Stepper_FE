@@ -1,30 +1,33 @@
 package com.example.umc_stepper.ui.stepper
 
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
+import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.TimePicker
-import android.widget.Toast
-import androidx.camera.core.impl.utils.ContextUtil.getApplicationContext
+import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentExerciseSettingsDateBinding
-import java.util.Calendar
 
-class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBinding>(R.layout.fragment_exercise_settings_date){
-    private lateinit var timePicker: TimePicker
-    private lateinit var setAlarmButton: Button
-    private lateinit var alarmTextView: TextView
-    private lateinit var alarmMaterialEditText: EditText
-    private lateinit var dayButtons: List<TextView>
+class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBinding>(R.layout.fragment_exercise_settings_date) {
+
+    private lateinit var dayTextViews: List<TextView>
+    private val selectedDays = mutableSetOf<TextView>()
 
     override fun setLayout() {
-        val dayButtons = listOf(
+        val timePicker: TimePicker = binding.fragmentExerciseSettingsTimeSpinner
+        timePicker.setIs24HourView(false)
+
+        timePicker.setOnTimeChangedListener { _, hour, minute ->
+            // 시간 변환
+            val hourIn12Format = if (hour % 12 == 0) 12 else hour % 12
+
+            binding.fragmentExerciseSettingsHourTv.text = String.format("%02d", hourIn12Format)
+            binding.fragmentExerciseSettingsMinTv.text = String.format("%02d", minute)
+        }
+
+        dayTextViews = listOf(
             binding.fragmentExerciseSettingsSundayBt,
             binding.fragmentExerciseSettingsMondayBt,
             binding.fragmentExerciseSettingsTuesdayBt,
@@ -34,55 +37,38 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
             binding.fragmentExerciseSettingsSaturdayBt
         )
 
-        dayButtons.forEach { button ->
-            button.setOnClickListener {
-                button.isSelected = !button.isSelected
+        dayTextViews.forEach { textView ->
+            textView.setOnClickListener {
+                toggleDaySelection(textView)
+                updateSelectedDaysText()
             }
         }
 
         binding.fragmentExerciseSettingsExerciseSuccessBt.setOnClickListener {
-            setAlarmsForSelectedDays(dayButtons)
-        }
-    }
-    private fun setAlarmsForSelectedDays(dayButtons: List<View>) {
-        val selectedDays = dayButtons.mapIndexedNotNull { index, textView ->
-            if (textView.isSelected) index + 1 else null
-        }
-
-        if (selectedDays.isEmpty()) {
-            Toast.makeText(requireContext(), "하나 이상의 요일을 선택해주세요.",Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, binding.fragmentExerciseSettingsTimeSpinner.hour)
-        calendar.set(Calendar.MINUTE, binding.fragmentExerciseSettingsTimeSpinner.minute)
-        calendar.set(Calendar.SECOND, 0)
-
-        selectedDays.forEach { dayOfWeek ->
-            setRepeatingAlarm(calendar, dayOfWeek)
+            goExerciseCardLast()
         }
     }
 
-    private fun setRepeatingAlarm(calendar: Calendar, dayOfWeek: Int) {
-        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(requireContext(), AlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(requireContext(), dayOfWeek, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-
-        calendar.set(Calendar.DAY_OF_WEEK, dayOfWeek)
-
-        // If the alarm time has already passed for today, set it for the next week.
-        if (calendar.before(Calendar.getInstance())) {
-            calendar.add(Calendar.WEEK_OF_YEAR, 1)
+    private fun toggleDaySelection(textView: TextView) {
+        if (selectedDays.contains(textView)) {
+            // 선택풀기
+            textView.setBackgroundResource(R.drawable.shape_rounded_square_purple_bg2_21dp)
+            textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
+            selectedDays.remove(textView)
+        } else {
+            // 선택하기
+            textView.setBackgroundResource(R.drawable.shape_rounded_square_yellow300_21dp)
+            textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.Black_500))
+            selectedDays.add(textView)
         }
-
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY * 7,
-            pendingIntent
-        )
-
     }
 
+    private fun updateSelectedDaysText() {
+        val selectedDaysText = selectedDays.joinToString(" ") { it.text }
+        binding.fragmentExerciseSettingsPlanDescription.text = "매주 $selectedDaysText"
+    }
+
+    private fun goExerciseCardLast(){
+        //fragment_card_last로 넘어가는 네비구현(코틀린코드 작업전이라 보류)
+    }
 }

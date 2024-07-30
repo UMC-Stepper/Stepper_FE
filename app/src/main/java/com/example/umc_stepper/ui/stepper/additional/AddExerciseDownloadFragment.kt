@@ -6,10 +6,10 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
-import com.example.umc_stepper.databinding.FragmentAddExerciseDownloadBinding
+import com.example.umc_stepper.databinding.FragmentAddExerciseSelectScrapBinding
 import com.example.umc_stepper.domain.model.request.ExerciseDto
 
-class AddExerciseDownloadFragment : BaseFragment<FragmentAddExerciseDownloadBinding>(R.layout.fragment_add_exercise_download), CategoryAdapter.OnCategoryClickListener, ExerciseAdapter.OnExerciseClickListener {
+class AddExerciseDownloadFragment : BaseFragment<FragmentAddExerciseSelectScrapBinding>(R.layout.fragment_add_exercise_select_scrap), CategoryAdapter.OnCategoryClickListener, ExerciseAdapter.OnExerciseClickListener {
 
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var exerciseAdapter: ExerciseAdapter

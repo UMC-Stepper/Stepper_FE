@@ -17,10 +17,10 @@ class AddExerciseSelectScrapFragment: BaseFragment<FragmentAddExerciseSelectScra
 
     private fun setButton() {
         // 운동 카드 추가 화면으로 되돌아가기
-        binding.fragmentAddExerciseAddDownloadStep1CompleteBtn.setOnClickListener {
-            val action = AddExerciseDownloadFragmentDirections.actionFragmentAddExerciseDownloadToFragmentAddExercise()
-            findNavController().navigateSafe(action.actionId)
-        }
+        //binding.fragmentAddExerciseAddDownloadStep1CompleteBtn.setOnClickListener {
+            //val action = AddExerciseDownloadFragmentDirections.actionFragmentAddExerciseDownloadToFragmentAddExercise()
+            //findNavController().navigateSafe(action.actionId)
+        //}
     }
 
 }
