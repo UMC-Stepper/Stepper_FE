@@ -20,7 +20,6 @@ import com.example.umc_stepper.databinding.FragmentMyExercise3Binding
 import com.example.umc_stepper.domain.model.request.AiVideoDto
 import com.example.umc_stepper.domain.model.response.AiVideoInfo
 import com.example.umc_stepper.domain.model.response.YouTubeVideo
-import com.example.umc_stepper.ui.TodayViewModel
 import com.example.umc_stepper.utils.GlobalApplication
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest

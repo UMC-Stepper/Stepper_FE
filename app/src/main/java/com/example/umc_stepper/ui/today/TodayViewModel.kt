@@ -1,4 +1,4 @@
-package com.example.umc_stepper.ui
+package com.example.umc_stepper.ui.today
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -13,7 +13,6 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.BuildConfig
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

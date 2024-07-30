@@ -15,8 +15,8 @@ import java.util.Locale
 class TodayHomeCalendarAdapter(private val onItemClick: (WeekCalendar) -> Unit) :
     BaseAdapter<WeekCalendar, ItemTodayHomeWeekCalendarBinding>(
         BaseDiffCallback(
-            areItemsTheSame = { oldItem, newItem -> oldItem.date == newItem.date },
-            areContentsTheSame = { oldItem, newItem -> oldItem == newItem }
+            itemsTheSame = { oldItem, newItem -> oldItem.date == newItem.date },
+            contentsTheSame = { oldItem, newItem -> oldItem == newItem }
         )
     ) {
     override val layoutId: Int get() = R.layout.item_today_home_week_calendar
