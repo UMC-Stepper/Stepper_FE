@@ -10,4 +10,10 @@ class AddExerciseSelectScrapFragment: BaseFragment<FragmentAddExerciseSelectScra
 
     }
 
+    private fun setButton() {
+        binding.fragmentAddExerciseAddDownloadStep1CompleteBtn.setOnClickListener {
+
+        }
+    }
+
 }
