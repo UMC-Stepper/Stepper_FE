@@ -15,7 +15,7 @@ import java.util.Locale
 class TodayHomeCalendarAdapter(private val onItemClick: (WeekCalendar) -> Unit) :
     BaseAdapter<WeekCalendar, ItemTodayHomeWeekCalendarBinding>(
         BaseDiffCallback(
-            itemsTheSame = { oldItem, newItem -> oldItem.date == newItem.date },
+            itemsTheSame = { oldItem, newItem -> oldItem == newItem },
             contentsTheSame = { oldItem, newItem -> oldItem == newItem }
         )
     ) {
@@ -26,22 +26,23 @@ class TodayHomeCalendarAdapter(private val onItemClick: (WeekCalendar) -> Unit) 
 
         val today = LocalDate.now().format(DateTimeFormatter.ofPattern("dd").withLocale(Locale.forLanguageTag("ko")))
         val tintColor = when {
-            item.date == today && !item.isSelected -> ContextCompat.getColor(binding.root.context, R.color.Purple_700)
+            item.date == today && item.firstConnect.equals("first") -> ContextCompat.getColor(binding.root.context, R.color.Purple_700)
+            item.date == today && item.firstConnect.equals("second") -> ContextCompat.getColor(binding.root.context, R.color.Purple_700)
             item.isSelected -> ContextCompat.getColor(binding.root.context, R.color.Purple_700)
-            !(item.isSelected) -> ContextCompat.getColor(binding.root.context, R.color.Purple_Black_BG_2)
             else -> ContextCompat.getColor(binding.root.context, R.color.Purple_Black_BG_2)
         }
         binding.itemTodayHomeWeekCalendarConstraint.backgroundTintList = ColorStateList.valueOf(tintColor)
 
         // 클릭 시 색상 변경
         binding.root.setOnClickListener {
-
             val updatedList = currentList.map { listItem ->
-                listItem.copy(isSelected = listItem.date == item.date)
+                when (listItem.date) {
+                    today -> listItem.copy(firstConnect = "second")
+                    item.date -> listItem.copy(isSelected = true)
+                    else -> listItem.copy(isSelected = false)
+                }
             }
-
-            Log.d("TodayHomeCalendarAdapter", "updatedList: $updatedList")
-            //submitList(updatedList)
+            submitList(updatedList)
             onItemClick(item)
         }
     }
