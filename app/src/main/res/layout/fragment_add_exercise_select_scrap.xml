@@ -13,55 +13,12 @@
         android:layout_height="match_parent"
         tools:context=".ui.today.add.AddExerciseSelectScrapFragment">
 
-        <ImageView
-        android:id="@+id/fragment_additional_select_scrap_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:src="@drawable/ic_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/fragment_additional_select_scrap_go_today_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="11dp"
-            android:background="@drawable/ic_toolbar_today"
-            app:layout_constraintEnd_toStartOf="@+id/fragment_additional_select_scrap_go_stepper_iv"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/fragment_additional_select_scrap_go_stepper_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/ic_toolbar_stepper"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/fragment_additional_select_scrap_title_tv"
-            style="@style/sub_title_semi_bold_16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="9dp"
-            android:text="운동 카드를 작성해봐요!"
-            android:textColor="@color/White"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_additional_select_scrap_iv"
-            app:layout_constraintStart_toEndOf="@+id/fragment_additional_select_scrap_iv"
-            app:layout_constraintTop_toTopOf="@+id/fragment_additional_select_scrap_iv" />
-
         <TextView
             android:id="@+id/fragment_add_exercise_download_title_tv"
             style="@style/title_bold_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="82dp"
             android:text="스크랩에서 운동 선택하기"
             android:textColor="@color/White"
             app:layout_constraintStart_toStartOf="parent"
