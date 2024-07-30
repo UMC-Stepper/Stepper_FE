@@ -32,7 +32,7 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
     private fun setMonth() {
         val monthFormat = DateTimeFormatter.ofPattern("M월").withLocale(Locale.forLanguageTag("ko"))
         val localDateMonth = LocalDateTime.now().format(monthFormat)
-        binding.fragmentTodayHomeCalenderMonthTv.text = localDateMonth
+        //binding.fragmentTodayHomeCalenderMonthTv.text = localDateMonth
     }
 
     private fun setAdapter() {
@@ -61,7 +61,8 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
 
         // 운동 추가
         binding.fragmentTodayHomePlusExerciseAddIv.setOnClickListener {
-            findNavController().navigate(R.id.action_todayHomeFragment_to_fragmentAddExercise)
+            val action = TodayHomeFragmentDirections.actionTodayHomeFragmentToFragmentAddExercise()
+            findNavController().navigateSafe(action.actionId)
         }
 
         // 나만의 운동

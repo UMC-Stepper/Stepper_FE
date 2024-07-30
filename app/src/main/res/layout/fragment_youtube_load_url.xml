@@ -7,59 +7,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/fragment_youtube_url_back_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/ic_back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/fragment_youtube_url_load_title_tv"
-            style="@style/sub_title_bold_16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:text="운동 카드를 작성해봐요!"
-            android:textColor="@color/White"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_youtube_url_back_iv"
-            app:layout_constraintStart_toEndOf="@+id/fragment_youtube_url_back_iv"
-            app:layout_constraintTop_toTopOf="@+id/fragment_youtube_url_back_iv" />
-
-        <ImageView
-            android:id="@+id/fragment_youtube_load_url_go_today_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="11dp"
-            android:background="@drawable/ic_toolbar_today"
-            app:layout_constraintEnd_toStartOf="@+id/fragment_youtube_load_url_go_stepper_iv"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/fragment_youtube_load_url_go_stepper_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/ic_toolbar_today"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/fragment_youtube_url_load_sub_title_tv"
+            style="@style/title_bold_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="29dp"
+            android:layout_marginTop="13dp"
             android:text="Youtube 링크로 불러오기"
-            style="@style/title_bold_24"
             android:textColor="@color/White"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_youtube_url_back_iv"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fragment_youtube_url_load_sub_constraint"
