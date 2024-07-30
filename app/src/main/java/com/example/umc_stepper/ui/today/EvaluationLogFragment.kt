@@ -103,7 +103,7 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
         var boldDecorator = BoldDecorator(CalendarDay.today().month)
         val todayDecorator = TodayDecorator(requireContext())
         var selectedMonthDecorator = SelectedMonthDecorator(CalendarDay.today().month)
-        val eventDecorator = EventDecorator()
+        val eventDecorator = EventDecorator(requireContext())
 
         materialCalendarView.addDecorators(
             sundayDecorator,
@@ -121,7 +121,7 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
             val newYear = date.year
             val newMonth = date.month
             val newDateList = generateDateList(newYear, newMonth)
-            val newEventDecorator = EventDecorator()
+            val newEventDecorator = EventDecorator(requireContext())
             Log.d("로그", "${newDateList}")
             // Decorators 추가
             selectedMonthDecorator = SelectedMonthDecorator(date.month)
