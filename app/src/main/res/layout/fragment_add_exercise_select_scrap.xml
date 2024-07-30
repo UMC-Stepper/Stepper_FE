@@ -103,6 +103,7 @@
             tools:listitem="@layout/item_select_my_exercise" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragment_add_exercise_add_download_step1_complete_btn"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:background="@drawable/shape_rounded_square_purpleblack_bg1_purple700_stroke_50dp_1dp"
