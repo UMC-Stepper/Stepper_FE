@@ -1,4 +1,13 @@
 package com.example.umc_stepper.ui.today.add
 
-class AddExerciseSelectScrapFragment {
+import com.example.umc_stepper.R
+import com.example.umc_stepper.base.BaseFragment
+import com.example.umc_stepper.databinding.FragmentAddExerciseSelectScrapBinding
+
+class AddExerciseSelectScrapFragment: BaseFragment<FragmentAddExerciseSelectScrapBinding>(R.layout.fragment_add_exercise_select_scrap) {
+
+    override fun setLayout() {
+
+    }
+
 }
