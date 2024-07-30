@@ -50,7 +50,7 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
             calendarList.apply {
                 val currentDate = preSunday.plusDays(i.toLong()).format(dateFormat)
                 val currentDay = weekDay[i]
-                calendarList.add(WeekCalendar(currentDate, currentDay, false))
+                calendarList.add(WeekCalendar(currentDate, currentDay, "first",false))
             }
         }
         binding.fragmentTodayHomeWeekCalendarRv.adapter = todayHomeCalendarAdapter
