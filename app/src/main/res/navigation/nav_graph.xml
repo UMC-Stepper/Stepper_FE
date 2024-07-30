@@ -23,16 +23,25 @@
     <fragment
         android:id="@+id/stepperFragment"
         android:name="com.example.umc_stepper.ui.stepper.home.StepperFragment"
-        android:label="fragment_stepper"
-        tools:layout="@layout/fragment_stepper" />
+        android:label="StepperFragment"
+        tools:layout="@layout/fragment_stepper" >
+        <action
+            android:id="@+id/action_stepperFragment_to_additionalExerciseHomeFragment"
+            app:destination="@id/additionalExerciseHomeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/evaluationLogFragment"
         android:name="com.example.umc_stepper.ui.today.EvaluationLogFragment"
         android:label="EvaluationLogFragment"
-        tools:layout="@layout/item_evaluation_log_calender_category"/>
+        tools:layout="@layout/fragment_evaluation_log_calender">
+
+        <action
+            android:id="@+id/action_evaluationLogFragment_to_evaluationExerciseTodayFragment"
+            app:destination="@id/evaluationExerciseTodayFragment" />
+    </fragment>
     <fragment
         android:id="@+id/todayHomeFragment"
-        android:name="com.example.umc_stepper.ui.today.TodayHomeFragment"
+        android:name="com.example.umc_stepper.ui.today.home.TodayHomeFragment"
         android:label="TodayHomeFragment"
         tools:layout="@layout/fragment_today_home">
         <action
@@ -41,6 +50,9 @@
         <action
             android:id="@+id/action_todayHomeFragment_to_fragmentAddExercise"
             app:destination="@id/fragmentAddExercise" />
+        <action
+            android:id="@+id/action_todayHomeFragment_to_evaluationLogFragment"
+            app:destination="@id/evaluationLogFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentEvaluationExercise"
@@ -49,15 +61,65 @@
         tools:layout="@layout/fragment_evaluation_exercise"/>
 
     <fragment
+        android:id="@+id/additionalExerciseHomeFragment"
+        android:name="com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseHomeFragment"
+        android:label="AdditionalExerciseHome"
+        tools:layout="@layout/fragment_additional_exercise_home">
+        <action
+            android:id="@+id/action_additionalExerciseHomeFragment_to_fragmentAddExerciseDownload"
+            app:destination="@id/fragmentAddExerciseDownload" />
+        <action
+            android:id="@+id/action_additionalExerciseHomeFragment_to_fragmentAdditionalExerciseYoutube1"
+            app:destination="@id/fragmentAdditionalExerciseYoutube1" />
+        <action
+            android:id="@+id/action_additionalExerciseHomeFragment_to_fragmentAdditionalExerciseMiddle"
+            app:destination="@id/fragmentAdditionalExerciseMiddle" />
+    </fragment>
+
+    <fragment
         android:id="@+id/fragmentMyExercise3"
         android:name="com.example.umc_stepper.ui.today.MyExercise3Fragment"
         android:label="MyExercise3"
         tools:layout="@layout/fragment_my_exercise_3"/>
 
     <fragment
+        android:id="@+id/fragmentAddExerciseDownload"
+        android:name="com.example.umc_stepper.ui.stepper.additional.AddExerciseDownloadFragment"
+        android:label="AddExerciseDownload"
+        tools:layout="@layout/fragment_add_exercise_select_scrap">
+        <action
+            android:id="@+id/action_fragmentAddExerciseDownload_to_fragmentAddExercise"
+            app:destination="@id/fragmentAddExercise" />
+        <action
+            android:id="@+id/action_fragmentAddExerciseDownload_to_fragmentAddExercise2"
+            app:destination="@id/fragmentAddExercise" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentAdditionalExerciseYoutube1"
+        android:name="com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseYoutube1Fragment"
+        android:label="AdditionalExerciseYoutube1"
+        tools:layout="@layout/fragment_additional_exercise_youtube1"/>
+
+    <fragment
+        android:id="@+id/fragmentAdditionalExerciseMiddle"
+        android:name="com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseMiddleFragment"
+        android:label="AdditionalExerciseMiddle"
+        tools:layout="@layout/fragment_additional_exercise_middle"/>
+  
+  <fragment
         android:id="@+id/fragmentAddExercise"
-        android:name="com.example.umc_stepper.ui.today.AddExerciseFragment"
+        android:name="com.example.umc_stepper.ui.today.add.AddExerciseFragment"
         android:label="AddExercise"
-        tools:layout="@layout/fragment_add_exercise"/>
+        tools:layout="@layout/fragment_add_exercise">
+      <action
+          android:id="@+id/action_fragmentAddExercise_to_fragmentAddExerciseDownload"
+          app:destination="@id/fragmentAddExerciseDownload" />
+  </fragment>
+    <fragment
+        android:id="@+id/evaluationExerciseTodayFragment"
+        android:name="com.example.umc_stepper.ui.today.EvaluationExerciseTodayFragment"
+        android:label="EvaluationExerciseTodayFragment"
+        tools:layout="@layout/fragment_evaluation_exercise" />
 
 </navigation>

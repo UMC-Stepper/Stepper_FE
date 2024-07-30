@@ -1,11 +1,14 @@
 package com.example.umc_stepper.ui.stepper.home
 
 import android.view.WindowManager
+import androidx.navigation.fragment.findNavController
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentStepperBinding
+import com.example.umc_stepper.ui.MainActivity
+import com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseHomeFragment
 import com.example.umc_stepper.ui.stepper.ExerciseViewAdapter
 import com.example.umc_stepper.ui.stepper.LevelItem
 import com.example.umc_stepper.ui.stepper.LevelListItem
@@ -74,10 +77,17 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
 
         recyclerAdapter = ExerciseViewAdapter()
         binding.stepperExerciseRv.adapter = recyclerAdapter
+        binding.stepperAdditionalBtn.setOnClickListener {
+            goAdditionalExerciseHome()
+        }
 
         stepperViewModel.levelItems.observe(viewLifecycleOwner) { levelItems ->
             recyclerAdapter.submitList(levelItems)
         }
+
+    }
+    private fun goAdditionalExerciseHome(){
+        findNavController().navigate(R.id.action_stepperFragment_to_additionalExerciseHomeFragment)
     }
 
 

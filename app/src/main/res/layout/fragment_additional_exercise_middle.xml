@@ -8,48 +8,6 @@
         android:layout_height="match_parent"
         tools:context=".ui.stepper.additional.AdditionalExerciseMiddleFragment">
 
-        <ImageView
-            android:id="@+id/fragment_additional_middle_back_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/ic_back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/fragment_additional_middle_go_today_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="11dp"
-            android:background="@drawable/ic_toolbar_today"
-            app:layout_constraintEnd_toStartOf="@+id/fragment_additional_middle_go_stepper_iv"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/fragment_additional_middle_go_stepper_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/ic_toolbar_today"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/fragment_additional_middle_title_tv"
-            style="@style/sub_title_semi_bold_16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="9dp"
-            android:text="추가 운동하기"
-            android:textColor="@color/White"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_additional_middle_back_iv"
-            app:layout_constraintStart_toEndOf="@+id/fragment_additional_middle_back_iv"
-            app:layout_constraintTop_toTopOf="@+id/fragment_additional_middle_back_iv" />
-
         <TextView
             android:id="@+id/fragment_additional_middle_sub_title_tv"
             style="@style/head_bold_18"
@@ -60,7 +18,7 @@
             android:text="추가 운동 시간 측정"
             android:textColor="@color/White"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_additional_middle_title_tv" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/fragment_additional_middle_hour_tv"
@@ -72,6 +30,8 @@
             android:text="00"
             android:textColor="@color/Purple_300"
             android:textSize="60dp"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_additional_middle_colon_hour_tv"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragment_additional_middle_sub_title_tv" />
 
@@ -85,6 +45,8 @@
             android:textColor="@color/White"
             android:textSize="25dp"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_additional_middle_hour_tv"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_additional_middle_min_tv"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/fragment_additional_middle_hour_tv"
             app:layout_constraintTop_toTopOf="@+id/fragment_additional_middle_hour_tv" />
 
@@ -98,6 +60,8 @@
             android:textColor="@color/Purple_300"
             android:textSize="60dp"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_additional_middle_colon_hour_tv"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_additional_middle_colon_min_tv"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/fragment_additional_middle_colon_hour_tv"
             app:layout_constraintTop_toTopOf="@+id/fragment_additional_middle_colon_hour_tv" />
 
@@ -111,6 +75,8 @@
             android:textColor="@color/White"
             android:textSize="25dp"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_additional_middle_min_tv"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_additional_middle_sec_tv"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/fragment_additional_middle_min_tv"
             app:layout_constraintTop_toTopOf="@+id/fragment_additional_middle_min_tv" />
 
@@ -126,6 +92,7 @@
             android:textSize="60dp"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_additional_middle_colon_min_tv"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/fragment_additional_middle_colon_min_tv"
             app:layout_constraintTop_toTopOf="@+id/fragment_additional_middle_colon_min_tv" />
 
@@ -171,6 +138,7 @@
             android:layout_width="85dp"
             android:layout_height="36dp"
             android:layout_marginStart="93dp"
+            android:layout_marginEnd="14dp"
             android:layout_marginTop="28dp"
             android:background="@drawable/shape_rounded_stroke_square_purple700_41dp_stroke_1dp"
             android:text="초기화"
@@ -184,6 +152,7 @@
             style="@style/body_semi_bold_14"
             android:layout_width="85dp"
             android:layout_height="36dp"
+            android:layout_marginStart="14dp"
             android:layout_marginEnd="93dp"
             android:background="@drawable/shape_rounded_square_purple700_40dp"
             android:text="시작"

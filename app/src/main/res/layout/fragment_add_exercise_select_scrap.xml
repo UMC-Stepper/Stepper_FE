@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tool="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.today.add.AddExerciseSelectScrapFragment">
 
         <TextView
             android:id="@+id/fragment_add_exercise_download_title_tv"
@@ -41,7 +45,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="@+id/fragment_add_exercise_download_subtitle_tv"
             app:layout_constraintTop_toBottomOf="@+id/fragment_add_exercise_download_subtitle_tv"
-            tool:listitem="@layout/item_tag" />
+            tools:listitem="@layout/item_tag" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment_add_exercise_download_card_list_rv"
@@ -53,9 +57,10 @@
             app:layout_constraintEnd_toEndOf="@id/fragment_add_exercise_download_title_tv"
             app:layout_constraintStart_toStartOf="@id/fragment_add_exercise_download_tag_rv"
             app:layout_constraintTop_toBottomOf="@id/fragment_add_exercise_download_tag_rv"
-            tool:listitem="@layout/item_select_my_exercise" />
+            tools:listitem="@layout/item_select_my_exercise" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragment_add_exercise_add_download_step1_complete_btn"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:background="@drawable/shape_rounded_square_purpleblack_bg1_purple700_stroke_50dp_1dp"
@@ -70,8 +75,5 @@
             app:layout_constraintStart_toStartOf="@id/fragment_add_exercise_download_card_list_rv"
             app:layout_constraintEnd_toEndOf="@id/fragment_add_exercise_download_card_list_rv"/>
 
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+</androidx.core.widget.NestedScrollView></layout>

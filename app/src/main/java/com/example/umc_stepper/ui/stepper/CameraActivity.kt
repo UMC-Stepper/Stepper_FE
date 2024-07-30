@@ -75,8 +75,14 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>(R.layout.activity_cam
             startCamera()
         }
 
+        // 사진 찍기 버튼
         binding.activityCameraCaptureIv.setOnClickListener {
             takePhoto(this)
+        }
+
+        // 취소 버튼
+        binding.activityCameraCancelIv.setOnClickListener {
+
         }
     }
 
@@ -137,12 +143,12 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>(R.layout.activity_cam
             object : ImageCapture.OnImageSavedCallback {
                 override fun onError(exc: ImageCaptureException) {
                     Log.d(TAG, "Photo capture exc: $exc")
-                    Toast.makeText(this@CameraActivity, "사진 촬영에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "사진 촬영에 실패하였습니다.")
                 }
 
                 // 캡쳐 성공 -> 사진을 저장
                 override fun onImageSaved(output: ImageCapture.OutputFileResults){
-                    Toast.makeText(this@CameraActivity, "사진 촬영 성공.", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "사진 촬영에 성공하였습니다.")
 
                     // 촬영한 사진을
                     output.savedUri?.let { uri ->
