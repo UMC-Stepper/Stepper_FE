@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="94dp"
+            android:layout_marginTop="16dp"
             android:text="마지막 단계\n운동 일정과 준비물 설정"
             android:textColor="@color/White"
             app:layout_constraintStart_toStartOf="parent"
