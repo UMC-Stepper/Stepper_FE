@@ -13,7 +13,8 @@ class ExerciseAdapter(
     BaseDiffCallback(
         itemsTheSame = { oldItem, newItem -> oldItem == newItem },
         contentsTheSame = { oldItem, newItem -> oldItem == newItem }
-    )) {
+    )
+) {
 
     interface OnExerciseClickListener {
         fun onExerciseClick(exercise: ExerciseDto)
