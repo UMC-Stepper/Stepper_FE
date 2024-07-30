@@ -27,6 +27,7 @@ class TodayHomeCalendarAdapter(private val onItemClick: (WeekCalendar) -> Unit) 
         val today = LocalDate.now().format(DateTimeFormatter.ofPattern("dd").withLocale(Locale.forLanguageTag("ko")))
         val tintColor = when {
             item.date == today && item.firstConnect.equals("first") -> ContextCompat.getColor(binding.root.context, R.color.Purple_700)
+            item.date == today && item.firstConnect.equals("second") -> ContextCompat.getColor(binding.root.context, R.color.Purple_700)
             item.isSelected -> ContextCompat.getColor(binding.root.context, R.color.Purple_700)
             else -> ContextCompat.getColor(binding.root.context, R.color.Purple_Black_BG_2)
         }
@@ -42,7 +43,6 @@ class TodayHomeCalendarAdapter(private val onItemClick: (WeekCalendar) -> Unit) 
                 }
             }
             submitList(updatedList)
-            Log.d("로그", "updatedList   $updatedList")
             onItemClick(item)
         }
     }
