@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.today
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentEvaluationLogCalenderBinding
+import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.utils.calender.BoldDecorator
 import com.example.umc_stepper.utils.calender.EventDecorator
 import com.example.umc_stepper.utils.calender.SaturdayDecorator
@@ -27,9 +29,22 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
 
     private lateinit var materialCalendarView: MaterialCalendarView
 
+    private lateinit var mainActivity : MainActivity
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
+
     override fun setLayout() {
+        updateMainToolbar()
         setCalendarView()
         setClickDate()
+    }
+
+    private fun updateMainToolbar() {
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
+        mainActivity.updateToolbarTitle("평가 일지")
     }
 
     private fun setClickDate() {
