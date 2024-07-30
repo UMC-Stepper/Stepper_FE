@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentEvaluationLogCalenderBinding
@@ -15,6 +16,7 @@ import com.example.umc_stepper.utils.calender.SaturdayDecorator
 import com.example.umc_stepper.utils.calender.SelectedMonthDecorator
 import com.example.umc_stepper.utils.calender.SundayDecorator
 import com.example.umc_stepper.utils.calender.TodayDecorator
+import com.example.umc_stepper.utils.extensions.navigateSafe
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import java.text.SimpleDateFormat
@@ -33,17 +35,17 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
     private fun setClickDate() {
 
         materialCalendarView.setOnDateChangedListener { widget, date, selected ->
-            val selectedYear = if (materialCalendarView.selectedDate != null) {
-                materialCalendarView.selectedDate?.year ?: 0
-            } else {
-                CalendarDay.today().year
-            }
-
-            val selectedMonth = if (materialCalendarView.selectedDate != null) {
-                materialCalendarView.selectedDate?.month ?: 0
-            } else {
-                CalendarDay.today().month
-            }
+//            val selectedYear = if (materialCalendarView.selectedDate != null) {
+//                materialCalendarView.selectedDate?.year ?: 0
+//            } else {
+//                CalendarDay.today().year
+//            }
+//
+//            val selectedMonth = if (materialCalendarView.selectedDate != null) {
+//                materialCalendarView.selectedDate?.month ?: 0
+//            } else {
+//                CalendarDay.today().month
+//            }
 
             val selectedDay = if (materialCalendarView.selectedDate != null) {
                 materialCalendarView.selectedDate?.day ?: 0
@@ -51,11 +53,8 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
                 CalendarDay.today().day
             }
 
-//            val todoFragment = TodoFragment(selectedYear, selectedMonth, selectedDay)
-//            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-//            transaction.replace(R.id.fragment_container, todoFragment)
-//            transaction.addToBackStack(null)
-//            transaction.commit()
+            val action = EvaluationLogFragmentDirections.actionEvaluationLogFragmentToFragmentEvaluationExercise()
+            findNavController().navigateSafe(action.actionId)
         }
     }
 
