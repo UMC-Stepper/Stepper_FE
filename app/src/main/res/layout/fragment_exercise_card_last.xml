@@ -38,6 +38,7 @@
             android:layout_marginEnd="24dp"
             android:layout_marginTop="12dp"
             android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_exercise_card_schedule"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
