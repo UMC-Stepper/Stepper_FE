@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.stepper.additional
 
+import androidx.recyclerview.widget.DiffUtil
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseAdapter
 import com.example.umc_stepper.base.BaseDiffCallback
@@ -32,4 +33,5 @@ class ExerciseAdapter(
             binding.itemSelectMyExerciseBackground.setBackgroundResource(R.drawable.shape_rounded_square_purple700_18dp)
         }
     }
+
 }
