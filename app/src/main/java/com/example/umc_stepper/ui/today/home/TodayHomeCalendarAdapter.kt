@@ -27,7 +27,6 @@ class TodayHomeCalendarAdapter(private val onItemClick: (WeekCalendar) -> Unit) 
         val today = LocalDate.now().format(DateTimeFormatter.ofPattern("dd").withLocale(Locale.forLanguageTag("ko")))
         val tintColor = when {
             item.date == today && item.firstConnect.equals("first") -> ContextCompat.getColor(binding.root.context, R.color.Purple_700)
-            item.date == today && item.firstConnect.equals("second") -> ContextCompat.getColor(binding.root.context, R.color.Purple_700)
             item.isSelected -> ContextCompat.getColor(binding.root.context, R.color.Purple_700)
             else -> ContextCompat.getColor(binding.root.context, R.color.Purple_Black_BG_2)
         }
@@ -37,9 +36,15 @@ class TodayHomeCalendarAdapter(private val onItemClick: (WeekCalendar) -> Unit) 
         binding.root.setOnClickListener {
             val updatedList = currentList.map { listItem ->
                 when (listItem.date) {
-                    today -> listItem.copy(firstConnect = "second")
-                    item.date -> listItem.copy(isSelected = true)
-                    else -> listItem.copy(isSelected = false)
+                    today -> {
+                        // 초기 접속이고, 현재 클릭된 날짜가 오늘 날짜인 경우 isSelected는 true가 되고, 그렇지 않으면 false
+                        if (listItem.firstConnect == "first") {
+                            listItem.copy(firstConnect = "second", isSelected = listItem.date == item.date)
+                        } else {
+                            listItem.copy(isSelected = listItem.date == item.date)
+                        }
+                    }
+                    else -> listItem.copy(isSelected = listItem.date == item.date)
                 }
             }
             submitList(updatedList)
