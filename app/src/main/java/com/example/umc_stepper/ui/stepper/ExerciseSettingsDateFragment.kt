@@ -74,5 +74,6 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
 
     private fun goExerciseCardLast(){
         //fragment_card_last로 넘어가는 네비구현(코틀린코드 작업전이라 보류)
+        findNavController().navigate(R.id.action_fragmentExerciseSettingsDate_to_exerciseCardLastFragment)
     }
 }

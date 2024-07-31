@@ -5,7 +5,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:cotext="ui.today.add.ExerciseCardLastFragment">
 
         <TextView
             android:id="@+id/fragment_exercise_card_last_title_tv"
@@ -13,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="94dp"
+            android:layout_marginTop="60dp"
             android:text="마지막 단계\n운동 일정과 준비물 설정"
             android:textColor="@color/White"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,11 +33,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment_exercise_card_last_schedule_rv"
             android:layout_width="0dp"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:layout_marginTop="12dp"
             android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_exercise_card_schedule"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -94,11 +94,9 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
         findNavController().navigate(R.id.action_stepperFragment_to_additionalExerciseHomeFragment)
     }
 
-
-
     //테스트를 위한 임시함수 적용
     private fun goEvaluationExerciseToday(){
-        findNavController().navigate(R.id.action_stepperFragment_to_fragmentEvaluationExerciseToday)
+        findNavController().navigate(R.id.action_stepperFragment_to_fragmentEvaluationExercise)
     }
 
     //테스트를 위한 임시함수 적용
