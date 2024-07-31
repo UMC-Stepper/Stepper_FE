@@ -29,11 +29,11 @@
             android:id="@+id/action_stepperFragment_to_additionalExerciseHomeFragment"
             app:destination="@id/additionalExerciseHomeFragment" />
         <action
-            android:id="@+id/action_stepperFragment_to_fragmentEvaluationExerciseToday"
-            app:destination="@id/fragmentEvaluationExerciseToday" />
-        <action
             android:id="@+id/action_stepperFragment_to_fragmentExerciseSettingsDate"
             app:destination="@id/fragmentExerciseSettingsDate" />
+        <action
+            android:id="@+id/action_stepperFragment_to_fragmentEvaluationExercise"
+            app:destination="@id/fragmentEvaluationExercise" />
     </fragment>
     <fragment
         android:id="@+id/evaluationLogFragment"
@@ -156,17 +156,13 @@
     </fragment>
 
     <fragment
-        android:id="@+id/fragmentEvaluationExerciseToday"
-        android:name="com.example.umc_stepper.ui.today.EvaluationExerciseTodayFragment"
-        android:label="EvaluationExerciseToday"
-        tools:layout="@layout/fragment_evaluation_exercise_today">
-    </fragment>
-
-    <fragment
         android:id="@+id/fragmentExerciseSettingsDate"
         android:name="com.example.umc_stepper.ui.stepper.ExerciseSettingsDateFragment"
         android:label="ExerciseSettingsDate"
         tools:layout="@layout/fragment_exercise_settings_date">
+        <action
+            android:id="@+id/action_fragmentExerciseSettingsDate_to_exerciseCardLastFragment"
+            app:destination="@id/exerciseCardLastFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentMyExercise2"
@@ -177,5 +173,10 @@
             android:id="@+id/action_fragmentMyExercise2_to_fragmentMyExercise3"
             app:destination="@id/fragmentMyExercise3" />
     </fragment>
+    <fragment
+        android:id="@+id/exerciseCardLastFragment"
+        android:name="com.example.umc_stepper.ui.today.add.ExerciseCardLastFragment"
+        android:label="ExerciseCardLastFragment"
+        tools:layout="@layout/fragment_exercise_card_last" />
 
 </navigation>

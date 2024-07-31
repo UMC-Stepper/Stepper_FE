@@ -74,6 +74,7 @@
 
         </activity>
 
+        <receiver android:name=".ui.stepper.AlarmReceiver"/>
     </application>
 
 </manifest>
