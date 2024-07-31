@@ -51,38 +51,15 @@
                 app:layout_constraintTop_toTopOf="@+id/item_exercise_card_schedule_time_tv" />
 
             <TextView
-                android:id="@+id/item_exercise_card_category_tv"
-                style="@style/body_medium_12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="어깨 운동"
-                android:textColor="@color/White"
-                app:layout_constraintStart_toStartOf="@+id/item_exercise_card_schedule_time_tv"
-                app:layout_constraintTop_toBottomOf="@+id/item_exercise_card_schedule_time_tv" />
-
-            <TextView
-                android:id="@+id/item_exercise_card_pipe_tv"
-                style="@style/body_medium_12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:text="|"
-                android:textColor="@color/White"
-                app:layout_constraintBottom_toBottomOf="@+id/item_exercise_card_category_tv"
-                app:layout_constraintStart_toEndOf="@+id/item_exercise_card_category_tv"
-                app:layout_constraintTop_toTopOf="@+id/item_exercise_card_category_tv" />
-            <TextView
                 android:id="@+id/item_exercise_card_materials_tv"
                 style="@style/body_medium_12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
+                android:layout_marginTop="2dp"
                 android:text="준비물: 운동밴드"
                 android:textColor="@color/White"
-                app:layout_constraintBottom_toBottomOf="@+id/item_exercise_card_pipe_tv"
-                app:layout_constraintStart_toEndOf="@+id/item_exercise_card_pipe_tv"
-                app:layout_constraintTop_toTopOf="@+id/item_exercise_card_pipe_tv" />
+                app:layout_constraintStart_toStartOf="@+id/item_exercise_card_schedule_time_tv"
+                app:layout_constraintTop_toBottomOf="@+id/item_exercise_card_schedule_time_tv" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/item_exercise_card_switch"
