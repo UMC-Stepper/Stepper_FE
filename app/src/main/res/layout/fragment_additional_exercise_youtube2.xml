@@ -104,6 +104,7 @@
             app:layout_constraintTop_toBottomOf="@id/fragment_download_youtube_2_main_card_channel_name_tv" />
 
         <TextView
+            android:id="@+id/fragment_download_youtube_2_profile_name_tv"
             style="@style/body_medium_14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -10,7 +10,8 @@ import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentAdditionalExerciseYoutube1Binding
 
-class AdditionalExerciseYoutube1Fragment:BaseFragment<FragmentAdditionalExerciseYoutube1Binding>(R.layout.fragment_additional_exercise_youtube1) {
+class AdditionalExerciseYoutube1Fragment : BaseFragment<FragmentAdditionalExerciseYoutube1Binding>(R.layout.fragment_additional_exercise_youtube1) {
+
     override fun setLayout() {
         enabledComplete()
         setupTextWatcher()
@@ -20,9 +21,9 @@ class AdditionalExerciseYoutube1Fragment:BaseFragment<FragmentAdditionalExercise
     }
 
     private fun enabledComplete() {
-        if (binding.fragmentYoutubeUrlLoadInputUrlEt.text.isNullOrEmpty()){
+        if (binding.fragmentYoutubeUrlLoadInputUrlEt.text.isNullOrEmpty()) {
             binding.fragmentYoutubeUrlLoadCompleteBtn.isEnabled = false
-        }else {
+        } else {
             binding.fragmentYoutubeUrlLoadCompleteBtn.isEnabled = true
             binding.fragmentYoutubeUrlLoadCompleteBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
             binding.fragmentYoutubeUrlLoadCompleteBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
@@ -45,11 +46,11 @@ class AdditionalExerciseYoutube1Fragment:BaseFragment<FragmentAdditionalExercise
         })
     }
 
-    private fun goAdditionalExerciseYoutube2(){
+    private fun goAdditionalExerciseYoutube2() {
         val urlText = binding.fragmentYoutubeUrlLoadInputUrlEt.text.toString()
         val bundle = Bundle().apply {
             putString("urlText", urlText)
         }
-        findNavController().navigate(R.id.action_fragmentAdditionalExerciseYoutube1_to_fragmentAdditionalExerciseYoutube2)
+        findNavController().navigate(R.id.action_fragmentAdditionalExerciseYoutube1_to_fragmentAdditionalExerciseYoutube2, bundle)
     }
 }
