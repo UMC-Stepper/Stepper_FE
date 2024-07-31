@@ -1,79 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginBottom="44dp">
+<layout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <data>
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="44dp">
 
-
-        <TextView
-            android:id="@+id/fragment_my_exercise_2_title_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:text="운동 부위"
-            android:textColor="@color/White"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/fragment_my_exercise_2_description_tv"
-            style="@style/body_regular_14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="영상을 추가하실 카테고리를 골라 주세요"
-            android:textColor="@color/White"
-            app:layout_constraintStart_toStartOf="@id/fragment_my_exercise_2_title_tv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_2_title_tv" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment_my_exercise_2_tag_rv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintStart_toStartOf="@id/fragment_my_exercise_2_description_tv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_2_description_tv"
-            tools:listitem="@layout/item_tag" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment_my_exercise_2_youtube_card_rv"
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="24dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_2_tag_rv"
-            tools:listitem="@layout/item_collocate_my_exercise" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            style="@style/sub_title_semi_bold_16"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/shape_rounded_square_purple700_50dp"
-            android:text="Youtube에서 불러오기"
-            android:textColor="@color/White"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/fragment_my_exercise_2_youtube_card_rv"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_my_exercise_2_youtube_card_rv" />
+            android:layout_height="match_parent">
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/fragment_my_exercise_2_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="운동 부위"
+                android:textColor="@color/White"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.core.widget.NestedScrollView>
+            <TextView
+                android:id="@+id/fragment_my_exercise_2_description_tv"
+                style="@style/body_regular_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="영상을 추가하실 카테고리를 골라 주세요"
+                android:textColor="@color/White"
+                app:layout_constraintStart_toStartOf="@id/fragment_my_exercise_2_title_tv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_2_title_tv" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragment_my_exercise_2_tag_rv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="@id/fragment_my_exercise_2_description_tv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_2_description_tv"
+                tools:listitem="@layout/item_tag" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragment_my_exercise_2_youtube_card_rv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="24dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_my_exercise_2_tag_rv"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_collocate_my_exercise" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/sub_title_semi_bold_16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/shape_rounded_square_purple700_50dp"
+                android:text="Youtube에서 불러오기"
+                android:textColor="@color/White"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/fragment_my_exercise_2_youtube_card_rv"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_my_exercise_2_youtube_card_rv" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>
