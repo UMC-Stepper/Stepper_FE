@@ -119,6 +119,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/fragment_download_youtube_2_btn"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:background="@drawable/shape_rounded_square_purple700_50dp"

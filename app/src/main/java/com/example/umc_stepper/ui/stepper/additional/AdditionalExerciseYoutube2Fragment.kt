@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.stepper.additional
 
+import android.os.Bundle
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.umc_stepper.R
@@ -16,6 +17,10 @@ class AdditionalExerciseYoutube2Fragment : BaseFragment<FragmentAdditionalExerci
             binding.fragmentDownloadYoutube2MainCardInputLinkEt.setText(urlText)
             initializeYouTubePlayer(urlText)
             fetchYouTubeVideoDetails(urlText)
+        }
+
+        binding.fragmentDownloadYoutube2Btn.setOnClickListener {
+            goLastExercise()
         }
     }
 
@@ -56,5 +61,13 @@ class AdditionalExerciseYoutube2Fragment : BaseFragment<FragmentAdditionalExerci
         //일단 불러왔다고 가정하고 임시데이터에요!
 
         callback("윗몸일으키기 제대로 하는 방법", "비타밍제이", "https://yt3.ggpht.com/l0AxbcHO4TRBQFka9rUZpiM19BQxueUZ_UE4wHW8qwaLZtZ_3J4fIXmay5HurJH03LJ7cGirxFY=s88-c-k-c0x00ffffff-no-rj")
+    }
+
+    private fun goLastExercise() {
+        val urlText = binding.fragmentDownloadYoutube2MainCardInputLinkEt.text.toString()
+        val bundle = Bundle().apply {
+            putString("urlText", urlText)
+        }
+        findNavController().navigate(R.id.action_fragmentAdditionalExerciseYoutube2_to_fragmentLastExercise, bundle)
     }
 }

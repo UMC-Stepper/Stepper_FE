@@ -119,13 +119,33 @@
         android:id="@+id/fragmentAdditionalExerciseYoutube2"
         android:name="com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseYoutube2Fragment"
         android:label="AdditionalExerciseYoutube2"
-        tools:layout="@layout/fragment_additional_exercise_youtube2"/>
+        tools:layout="@layout/fragment_additional_exercise_youtube2">
+        <action
+            android:id="@+id/action_fragmentAdditionalExerciseYoutube2_to_fragmentLastExercise"
+            app:destination="@id/fragmentLastExercise" />
+    </fragment>
 
     <fragment
         android:id="@+id/fragmentAdditionalExerciseMiddle"
         android:name="com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseMiddleFragment"
         android:label="AdditionalExerciseMiddle"
         tools:layout="@layout/fragment_additional_exercise_middle"/>
+
+    <fragment
+        android:id="@+id/fragmentAdditionalExerciseSuccess"
+        android:name="com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseSuccessFragment"
+        android:label="AAdditionalExerciseSuccess"
+        tools:layout="@layout/fragment_today_exercise_success"/>
+
+    <fragment
+        android:id="@+id/fragmentLastExercise"
+        android:name="com.example.umc_stepper.ui.stepper.additional.LastExerciseFragment"
+        android:label="AdditionalLastExercise"
+        tools:layout="@layout/fragment_last_exercise">
+        <action
+            android:id="@+id/action_fragmentLastExercise_to_fragmentAdditionalExerciseSuccess"
+            app:destination="@id/fragmentAdditionalExerciseSuccess" />
+    </fragment>
   
   <fragment
         android:id="@+id/fragmentAddExercise"
