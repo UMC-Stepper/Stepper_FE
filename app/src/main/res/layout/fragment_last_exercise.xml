@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools">
@@ -229,9 +230,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="80dp"
                 android:layout_marginEnd="24dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/radius_corners_61dp_stroke_1"
                 android:text="운동 완료"
                 android:textColor="@color/Purple_700"
@@ -247,5 +247,6 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_begin="206dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout></androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

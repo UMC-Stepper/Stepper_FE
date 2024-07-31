@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Button
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.umc_stepper.R
@@ -44,6 +45,8 @@ class LastExerciseFragment : BaseFragment<FragmentLastExerciseBinding>(R.layout.
 
         binding.fragmentAdditionalMiddleExerciseCompleteBtn.setOnClickListener {
             goAdditionalExerciseSuccess()
+            binding.fragmentAdditionalMiddleExerciseCompleteBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
+            binding.fragmentAdditionalMiddleExerciseCompleteBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
         }
     }
 
@@ -130,7 +133,6 @@ class LastExerciseFragment : BaseFragment<FragmentLastExerciseBinding>(R.layout.
 
 
     private fun goAdditionalExerciseSuccess() {
-
         findNavController().navigate(R.id.action_fragmentLastExercise_to_fragmentAdditionalExerciseSuccess)
     }
 }
