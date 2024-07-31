@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:text="Youtube 영상 URL을 복사해서 아래의\n창에 입력해주세요."
+            android:text="링크가 불러온 Youtube 영상이\n맞는지 확인해 주세요."
             android:textColor="@color/White"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/fragment_download_youtube_2_main_card_cl" />
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="*유튜브 URL주소만 입력해주세요"
+            android:text="*유튜브 영상 확인 단계"
             android:textColor="@color/White"
             app:layout_constraintStart_toStartOf="@id/fragment_download_youtube_2_main_card_title_tv"
             app:layout_constraintTop_toBottomOf="@id/fragment_download_youtube_2_main_card_title_tv" />
