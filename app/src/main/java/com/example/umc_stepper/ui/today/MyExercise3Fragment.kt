@@ -14,6 +14,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentMyExercise3Binding
@@ -21,6 +22,7 @@ import com.example.umc_stepper.domain.model.request.AiVideoDto
 import com.example.umc_stepper.domain.model.response.AiVideoInfo
 import com.example.umc_stepper.domain.model.response.YouTubeVideo
 import com.example.umc_stepper.utils.GlobalApplication
+import com.example.umc_stepper.utils.extensions.navigateSafe
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -36,6 +38,10 @@ class MyExercise3Fragment :
     var url2 : String = ""
 
     override fun setLayout() {
+        binding.fragmentMyExerciseSelectTagTv.setOnClickListener{
+            val action = MyExercise3FragmentDirections.actionFragmentMyExercise3ToFragmentMyExercise2()
+            findNavController().navigateSafe(action.actionId)
+        }
         initSetting()
     }
 
