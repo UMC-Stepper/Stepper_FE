@@ -6,7 +6,6 @@ import com.example.umc_stepper.base.BaseDiffCallback
 import com.example.umc_stepper.databinding.ItemCollocateMyExerciseBinding
 import com.example.umc_stepper.domain.model.Exercise2Data
 import com.example.umc_stepper.utils.listener.ItemClickListener
-import dagger.hilt.android.AndroidEntryPoint
 
 class MyExercise2Adapter(
     val listener: ItemClickListener
