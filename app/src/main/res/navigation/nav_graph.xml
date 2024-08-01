@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_stepperFragment_to_fragmentEvaluationExercise"
             app:destination="@id/fragmentEvaluationExercise" />
+        <action
+            android:id="@+id/action_stepperFragment_to_fragmentAddExercise"
+            app:destination="@id/fragmentAddExercise" />
     </fragment>
 
     <!-- 투데이 평가일지-->

@@ -1,6 +1,7 @@
 package com.example.umc_stepper.ui.stepper.additional
 
 import android.os.Bundle
+import android.util.Log
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.umc_stepper.R
@@ -8,6 +9,8 @@ import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentAdditionalExerciseYoutube2Binding
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import java.net.URL
+import java.net.URLDecoder
 
 class AdditionalExerciseYoutube2Fragment : BaseFragment<FragmentAdditionalExerciseYoutube2Binding>(R.layout.fragment_additional_exercise_youtube2) {
 
@@ -35,11 +38,21 @@ class AdditionalExerciseYoutube2Fragment : BaseFragment<FragmentAdditionalExerci
         })
     }
 
-    private fun extractVideoId(url: String): String {
-        // URL에서 비디오 ID 추출
-        val regex = Regex("v=([a-zA-Z0-9_-]+)")
-        val match = regex.find(url)
-        return match?.groupValues?.get(1) ?: ""
+    fun extractVideoId(url: String): String {
+        val patterns = listOf(
+            "(?<=watch\\?v=|/videos/|embed\\/|youtu.be\\/|\\/v\\/|\\/e\\/|watch\\?v%3D|watch\\?feature=player_embedded&v=|%2Fvideos%2F|embed%\u200C\u200B2F|youtu.be%2F|%2Fv%2F)[^#\\&\\?\\n]*",
+            "(?<=shorts/)([a-zA-Z0-9_-]+)"
+        )
+
+        for (pattern in patterns) {
+            val regex = Regex(pattern)
+            val matchResult = regex.find(url)
+            if (matchResult != null) {
+                return matchResult.value
+            }
+        }
+
+        return ""
     }
 
     private fun fetchYouTubeVideoDetails(url: String) {

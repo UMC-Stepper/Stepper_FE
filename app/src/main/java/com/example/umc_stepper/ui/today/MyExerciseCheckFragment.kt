@@ -42,10 +42,20 @@ class MyExerciseCheckFragment:
     }
 
     private fun extractVideoId(url: String): String {
-        // URL에서 비디오 ID 추출
-        val regex = Regex("v=([a-zA-Z0-9_-]+)")
-        val match = regex.find(url)
-        return match?.groupValues?.get(1) ?: ""
+        val patterns = listOf(
+            "(?<=watch\\?v=|/videos/|embed\\/|youtu.be\\/|\\/v\\/|\\/e\\/|watch\\?v%3D|watch\\?feature=player_embedded&v=|%2Fvideos%2F|embed%\u200C\u200B2F|youtu.be%2F|%2Fv%2F)[^#\\&\\?\\n]*",
+            "(?<=shorts/)([a-zA-Z0-9_-]+)"
+        )
+
+        for (pattern in patterns) {
+            val regex = Regex(pattern)
+            val matchResult = regex.find(url)
+            if (matchResult != null) {
+                return matchResult.value
+            }
+        }
+
+        return ""
     }
 
     private fun fetchYouTubeVideoDetails(url: String) {
