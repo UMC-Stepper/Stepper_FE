@@ -4,6 +4,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Button
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
@@ -38,6 +39,8 @@ class AdditionalExerciseMiddleFragment : BaseFragment<FragmentAdditionalExercise
     }
 
     private fun goAdditionalExerciseSuccess(){
+        binding.fragmentAdditionalMiddleExerciseCompleteBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
+        binding.fragmentAdditionalMiddleExerciseCompleteBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
         findNavController().navigate(R.id.action_fragmentAdditionalExerciseMiddle_to_fragmentAdditionalExerciseSuccess)
     }
 
