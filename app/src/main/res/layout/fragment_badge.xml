@@ -8,6 +8,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.badge.BadgeFragment">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
     <TextView
         android:id="@+id/fragment_badge_title_tv"
         style="@style/title_bold_24"
