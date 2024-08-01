@@ -136,7 +136,7 @@
             android:layout_marginBottom="32dp"
             android:background="@drawable/shape_rounded_square_purple700_60dp"
             android:fontFamily="@font/pretendard_semi_bold"
-            android:text="운동 평가 하기"
+            android:text="추가 운동 완료"
             android:textColor="@color/White"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
