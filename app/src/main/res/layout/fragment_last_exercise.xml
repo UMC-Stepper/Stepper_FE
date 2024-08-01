@@ -17,7 +17,6 @@
         android:background="@color/Purple_Black">
 
         <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-            android:layout_marginTop="47dp"
             android:id="@+id/fragment_last_exercise_youtube_view_yv"
             android:layout_width="match_parent"
             android:layout_height="219dp"
