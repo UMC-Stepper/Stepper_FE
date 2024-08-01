@@ -5,21 +5,28 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/badgeFragment">
 
+    <!-- 뱃지 프래그먼트 -->
     <fragment
         android:id="@+id/badgeFragment"
         android:name="com.example.umc_stepper.ui.badge.BadgeFragment"
         android:label="fragment_badge"
         tools:layout="@layout/fragment_badge" />
+
+    <!-- 커뮤니티 프래그먼트 -->
     <fragment
         android:id="@+id/communityFragment"
         android:name="com.example.umc_stepper.ui.community.CommunityFragment"
         android:label="fragment_community"
         tools:layout="@layout/fragment_community" />
+
+    <!-- 설정 프래그먼트 -->
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.umc_stepper.ui.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+
+    <!-- 스패터 홈 -->
     <fragment
         android:id="@+id/stepperFragment"
         android:name="com.example.umc_stepper.ui.stepper.home.StepperFragment"
@@ -32,6 +39,8 @@
             android:id="@+id/action_stepperFragment_to_fragmentEvaluationExercise"
             app:destination="@id/fragmentEvaluationExercise" />
     </fragment>
+
+    <!-- 투데이 평가일지-->
     <fragment
         android:id="@+id/evaluationLogFragment"
         android:name="com.example.umc_stepper.ui.today.EvaluationLogFragment"
@@ -42,6 +51,8 @@
             android:id="@+id/action_evaluationLogFragment_to_evaluationExerciseTodayFragment"
             app:destination="@id/evaluationExerciseTodayFragment" />
     </fragment>
+
+    <!-- 투데이 홈 -->
     <fragment
         android:id="@+id/todayHomeFragment"
         android:name="com.example.umc_stepper.ui.today.home.TodayHomeFragment"
@@ -57,6 +68,8 @@
             android:id="@+id/action_todayHomeFragment_to_fragmentMyExercise2"
             app:destination="@id/fragmentMyExercise2" />
     </fragment>
+
+    <!-- 스태퍼 평가일지 -->
     <fragment
         android:id="@+id/fragmentEvaluationExercise"
         android:name="com.example.umc_stepper.ui.stepper.EvaluationExerciseFragment"
@@ -67,6 +80,7 @@
             app:destination="@id/fragmentExerciseComplete" />
     </fragment>
 
+    <!-- 스태퍼 추가운동 홈 -->
     <fragment
         android:id="@+id/additionalExerciseHomeFragment"
         android:name="com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseHomeFragment"
@@ -83,6 +97,7 @@
             app:destination="@id/fragmentAdditionalExerciseMiddle" />
     </fragment>
 
+    <!-- 투데이 나만의 운동 (AI) -->
     <fragment
         android:id="@+id/fragmentMyExercise3"
         android:name="com.example.umc_stepper.ui.today.MyExercise3Fragment"
@@ -93,6 +108,7 @@
             app:destination="@id/myExerciseCheckFragment" />
     </fragment>
 
+    <!-- 스태퍼 추가운동 스크랩 -->
     <fragment
         android:id="@+id/fragmentAddExerciseDownload"
         android:name="com.example.umc_stepper.ui.stepper.additional.AddExerciseDownloadFragment"
@@ -103,6 +119,7 @@
             app:destination="@id/fragmentLastExercise" />
     </fragment>
 
+    <!-- 스태퍼 추가운동 유튜브 링크 불러오기 첫 화면 -->
     <fragment
         android:id="@+id/fragmentAdditionalExerciseYoutube1"
         android:name="com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseYoutube1Fragment"
@@ -113,6 +130,7 @@
             app:destination="@id/fragmentAdditionalExerciseYoutube2" />
     </fragment>
 
+    <!-- 스태퍼 추가운동 유튜브 링크 불러오기 첫 화면 -> 링크 확인 (두번쨰) -->
     <fragment
         android:id="@+id/fragmentAdditionalExerciseYoutube2"
         android:name="com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseYoutube2Fragment"
@@ -123,6 +141,7 @@
             app:destination="@id/fragmentLastExercise" />
     </fragment>
 
+    <!-- 스태퍼 추가운동 타이머 (시간만 재기) -->
     <fragment
         android:id="@+id/fragmentAdditionalExerciseMiddle"
         android:name="com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseMiddleFragment"
@@ -133,6 +152,7 @@
             app:destination="@id/fragmentAdditionalExerciseSuccess" />
     </fragment>
 
+    <!-- 스태퍼 추가운동 완료 -->
     <fragment
         android:id="@+id/fragmentAdditionalExerciseSuccess"
         android:name="com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseSuccessFragment"
@@ -143,6 +163,7 @@
             app:destination="@id/stepperFragment" />
     </fragment>
 
+    <!-- 스태퍼 추가운동 하기(영상 + 타이머) -->
     <fragment
         android:id="@+id/fragmentLastExercise"
         android:name="com.example.umc_stepper.ui.stepper.additional.LastExerciseFragment"
@@ -152,7 +173,8 @@
             android:id="@+id/action_fragmentLastExercise_to_fragmentAdditionalExerciseSuccess"
             app:destination="@id/fragmentAdditionalExerciseSuccess" />
     </fragment>
-  
+
+    <!-- 투데이 운동카드 추가 1 -->
   <fragment
         android:id="@+id/fragmentAddExercise"
         android:name="com.example.umc_stepper.ui.today.add.AddExerciseFragment"
@@ -165,6 +187,8 @@
           android:id="@+id/action_fragmentAddExercise_to_addExerciseSelectScrapFragment2"
           app:destination="@id/addExerciseSelectScrapFragment" />
   </fragment>
+
+    <!-- 투데이 평가 일지 (확인 , 수정불가)  -->
     <fragment
         android:id="@+id/evaluationExerciseTodayFragment"
         android:name="com.example.umc_stepper.ui.today.EvaluationExerciseTodayFragment"
@@ -175,6 +199,7 @@
             app:destination="@id/todayHomeFragment" />
     </fragment>
 
+    <!-- 스태퍼 운동 완료 -->
     <fragment
         android:id="@+id/fragmentExerciseComplete"
         android:name="com.example.umc_stepper.ui.stepper.ExerciseCompleteFragment"
@@ -185,6 +210,7 @@
             app:destination="@id/stepperFragment" />
     </fragment>
 
+    <!-- 투데이 운동 일정 설정 (요일, 준비물 등) -->
     <fragment
         android:id="@+id/fragmentExerciseSettingsDate"
         android:name="com.example.umc_stepper.ui.stepper.ExerciseSettingsDateFragment"
@@ -194,6 +220,8 @@
             android:id="@+id/action_fragmentExerciseSettingsDate_to_exerciseCardLastFragment"
             app:destination="@id/exerciseCardLastFragment" />
     </fragment>
+
+    <!-- 투데이 나만의 운동 스크랩 불러오기 -->
     <fragment
         android:id="@+id/fragmentMyExercise2"
         android:name="com.example.umc_stepper.ui.today.MyExercise2Fragment"
@@ -203,6 +231,8 @@
             android:id="@+id/action_fragmentMyExercise2_to_fragmentMyExercise3"
             app:destination="@id/fragmentMyExercise3" />
     </fragment>
+
+    <!-- 투데이 알람 설정 -->
     <fragment
         android:id="@+id/exerciseCardLastFragment"
         android:name="com.example.umc_stepper.ui.today.add.ExerciseCardLastFragment"
@@ -212,6 +242,8 @@
             android:id="@+id/action_exerciseCardLastFragment_to_exerciseCompleteFragment"
             app:destination="@id/exerciseCompleteFragment" />
     </fragment>
+
+    <!-- 투데이 운동 카드 추가 스크랩 -->
     <fragment
         android:id="@+id/addExerciseSelectScrapFragment"
         android:name="com.example.umc_stepper.ui.today.add.AddExerciseSelectScrapFragment"
@@ -221,6 +253,8 @@
             android:id="@+id/action_addExerciseSelectScrapFragment_to_fragmentAddExercise2"
             app:destination="@id/fragmentAddExercise" />
     </fragment>
+
+    <!-- 투데이 운동 완료-->
     <fragment
         android:id="@+id/exerciseCompleteFragment"
         android:name="com.example.umc_stepper.ui.today.ExerciseCompleteFragment"
@@ -230,19 +264,22 @@
             android:id="@+id/action_exerciseCompleteFragment_to_todayHomeFragment"
             app:destination="@id/todayHomeFragment" />
     </fragment>
+
+    <!-- 사용 X -->
     <fragment
         android:id="@+id/todayAddExerciseSuccessFragment"
         android:name="com.example.umc_stepper.ui.stepper.TodayAddExerciseSuccessFragment"
         android:label="TodayAddExerciseSuccessFragment"
         tools:layout="@layout/fragment_today_exercise_success"/>
 
-    <!-- 스태퍼 화면임 -->
+    <!-- 사용 X -->
     <fragment
         android:id="@+id/todayExerciseSuccessFragment"
         android:name="com.example.umc_stepper.ui.stepper.TodayExerciseSuccessFragment"
         android:label="TodayExerciseSuccessFragment"
         tools:layout="@layout/fragment_today_exercise_success"/>
 
+    <!-- 투데이 유튜브 링크 확인 화면 -->
     <fragment
         android:id="@+id/myExerciseCheckFragment"
         android:name="com.example.umc_stepper.ui.today.MyExerciseCheckFragment"
