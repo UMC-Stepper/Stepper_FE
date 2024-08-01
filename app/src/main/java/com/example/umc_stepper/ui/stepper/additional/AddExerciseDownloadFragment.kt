@@ -3,6 +3,7 @@ package com.example.umc_stepper.ui.stepper.additional
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
@@ -37,8 +38,16 @@ class AddExerciseDownloadFragment : BaseFragment<FragmentAddExerciseSelectScrapB
             adapter = exerciseAdapter
         }
 
+        binding.fragmentAddExerciseDownloadBtn.setOnClickListener {
+            goLastExercise()
+        }
+
         // 기본 운동 목록 로드
         loadExercises("어깨, 팔")
+    }
+
+    private fun goLastExercise(){
+        findNavController().navigate(R.id.action_fragmentAddExerciseDownload_to_fragmentLastExercise)
     }
 
     override fun onCategoryClick(category: String) {

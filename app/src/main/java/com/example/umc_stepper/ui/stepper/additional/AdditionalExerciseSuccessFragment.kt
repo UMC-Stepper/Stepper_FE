@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.stepper.additional
 
+import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentTodayExerciseSuccessBinding
@@ -21,7 +22,7 @@ class AdditionalExerciseSuccessFragment : BaseFragment<FragmentTodayExerciseSucc
 
     private fun setOnClickBtn(){
         binding.fragmentTodayExerciseSuccessOkBtn.setOnClickListener{
-            //다음화면
+            findNavController().navigate(R.id.action_fragmentAdditionalExerciseSuccess_to_stepperFragment)
         }
     }
 }
