@@ -90,6 +90,12 @@
         <action
             android:id="@+id/action_fragmentMyExercise3_to_fragmentMyExercise2"
             app:destination="@id/fragmentMyExercise2" />
+        <action
+            android:id="@+id/action_fragmentMyExercise3_self"
+            app:destination="@id/fragmentMyExercise3" />
+        <action
+            android:id="@+id/action_fragmentMyExercise3_to_myExerciseCheckFragment"
+            app:destination="@id/myExerciseCheckFragment" />
     </fragment>
 
     <fragment
@@ -220,5 +226,12 @@
         android:name="com.example.umc_stepper.ui.stepper.TodayExerciseSuccessFragment"
         android:label="TodayExerciseSuccessFragment"
         tools:layout="@layout/fragment_today_exercise_success"/>
+
+    <fragment
+        android:id="@+id/myExerciseCheckFragment"
+        android:name="com.example.umc_stepper.ui.today.MyExerciseCheckFragment"
+        android:label="MyExerciseCheckFragment"
+        tools:layout="@layout/fragment_exercise_check">
+    </fragment>
 
 </navigation>

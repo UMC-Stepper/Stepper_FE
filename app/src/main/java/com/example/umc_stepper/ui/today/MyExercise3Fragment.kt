@@ -298,6 +298,6 @@ class MyExercise3Fragment :
         val bundle = Bundle().apply {
             putString("urlText", urlText)
         }
-        findNavController().navigate(R.id.action_fragmentAdditionalExerciseYoutube2_to_fragmentLastExercise, bundle)
+        findNavController().navigate(R.id.action_fragmentMyExercise3_to_myExerciseCheckFragment, bundle)
     }
 }
