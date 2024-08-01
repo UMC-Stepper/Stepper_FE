@@ -23,6 +23,7 @@
             <TextView
                 android:id="@+id/stepper_today_tv"
                 style="@style/head_bold_18"
+                android:layout_marginTop="2dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
