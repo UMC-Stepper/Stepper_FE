@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.stepper
 
+import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -28,6 +29,11 @@ class EvaluationExerciseFragment :
 
     override fun setLayout() {
         initSetting()
+        //카메라액티비티로 이동
+        binding.fragmentEvaluationExercisePictureExerciseIv.setOnClickListener {
+            val intent = Intent(activity, CameraActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun initSetting() {

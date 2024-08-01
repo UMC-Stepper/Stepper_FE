@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools">
@@ -81,183 +82,171 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/fragment_last_exercise_time_cl"
+            <TextView
+                android:id="@+id/fragment_additional_middle_hour_tv"
+                style="@style/body_regular_14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="65dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="38dp"
+                android:layout_marginTop="20dp"
+                android:text="00"
+                android:textColor="@color/Purple_300"
+                android:textSize="60dp"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_additional_middle_colon_hour_tv"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fragment_last_exercise_success_title_tv">
-
-                <TextView
-                    android:id="@+id/fragment_last_exercise_success_hour_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/pretendard_regular"
-                    android:text="@{ResultTimeData.hour}"
-                    android:textColor="@color/Purple_300"
-                    android:textSize="60dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/fragment_last_exercise_success_divider_1_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:text=":"
-                    android:textColor="@color/Purple_300"
-                    android:textSize="25dp"
-                    app:layout_constraintBottom_toBottomOf="@id/fragment_last_exercise_success_hour_tv"
-                    app:layout_constraintStart_toEndOf="@id/fragment_last_exercise_success_hour_tv"
-                    app:layout_constraintTop_toTopOf="@id/fragment_last_exercise_success_hour_tv" />
-
-                <TextView
-                    android:id="@+id/fragment_last_exercise_success_minute_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:text="@{ResultTimeData.minute}"
-                    android:textColor="@color/Purple_300"
-                    android:textSize="60dp"
-                    app:layout_constraintBottom_toBottomOf="@id/fragment_last_exercise_success_divider_1_tv"
-                    app:layout_constraintStart_toEndOf="@id/fragment_last_exercise_success_divider_1_tv"
-                    app:layout_constraintTop_toTopOf="@id/fragment_last_exercise_success_divider_1_tv" />
-
-                <TextView
-                    android:id="@+id/fragment_last_exercise_success_divider_2_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:text=":"
-                    android:textColor="@color/Purple_300"
-                    android:textSize="25dp"
-                    app:layout_constraintBottom_toBottomOf="@id/fragment_last_exercise_success_minute_tv"
-                    app:layout_constraintStart_toEndOf="@id/fragment_last_exercise_success_minute_tv"
-                    app:layout_constraintTop_toTopOf="@id/fragment_last_exercise_success_minute_tv" />
-
-                <TextView
-                    android:id="@+id/fragment_last_exercise_success_second_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:text="@{ResultTimeData.second}"
-                    android:textColor="@color/Purple_300"
-                    android:textSize="60dp"
-                    app:layout_constraintBottom_toBottomOf="@id/fragment_last_exercise_success_divider_2_tv"
-                    app:layout_constraintStart_toEndOf="@id/fragment_last_exercise_success_divider_2_tv"
-                    app:layout_constraintTop_toTopOf="@id/fragment_last_exercise_success_divider_2_tv" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintTop_toBottomOf="@+id/fragment_last_exercise_success_title_tv" />
 
             <TextView
-                android:id="@+id/fragment_last_exercise_hour_tv"
+                android:id="@+id/fragment_additional_middle_colon_hour_tv"
+                style="@style/body_semi_bold_12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:text=":"
+                android:textColor="@color/White"
+                android:textSize="25dp"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_additional_middle_hour_tv"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_additional_middle_min_tv"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/fragment_additional_middle_hour_tv"
+                app:layout_constraintTop_toTopOf="@+id/fragment_additional_middle_hour_tv" />
+
+            <TextView
+                android:id="@+id/fragment_additional_middle_min_tv"
+                style="@style/body_regular_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:text="00"
+                android:textColor="@color/Purple_300"
+                android:textSize="60dp"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_additional_middle_colon_hour_tv"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_additional_middle_colon_min_tv"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/fragment_additional_middle_colon_hour_tv"
+                app:layout_constraintTop_toTopOf="@+id/fragment_additional_middle_colon_hour_tv" />
+
+            <TextView
+                android:id="@+id/fragment_additional_middle_colon_min_tv"
+                style="@style/body_semi_bold_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:text=":"
+                android:textColor="@color/White"
+                android:textSize="25dp"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_additional_middle_min_tv"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_additional_middle_sec_tv"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/fragment_additional_middle_min_tv"
+                app:layout_constraintTop_toTopOf="@+id/fragment_additional_middle_min_tv" />
+
+            <TextView
+                android:id="@+id/fragment_additional_middle_sec_tv"
+                style="@style/body_regular_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="29dp"
+                android:text="00"
+                android:textColor="@color/Purple_300"
+                android:textSize="60dp"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_additional_middle_colon_min_tv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/fragment_additional_middle_colon_min_tv"
+                app:layout_constraintTop_toTopOf="@+id/fragment_additional_middle_colon_min_tv" />
+
+            <TextView
+                android:id="@+id/fragment_additional_middle_hour_sub_tv"
                 style="@style/body_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="65dp"
+                android:layout_marginTop="16dp"
                 android:text="시간"
                 android:textColor="@color/White"
-                app:layout_constraintStart_toStartOf="@id/fragment_last_exercise_time_cl"
-                app:layout_constraintEnd_toStartOf="@id/fragment_last_exercise_time_cl"
-                app:layout_constraintTop_toBottomOf="@id/fragment_last_exercise_time_cl"
-                android:layout_marginTop="16dp"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_additional_middle_hour_tv" />
 
             <TextView
-                android:id="@+id/fragment_last_exercise_minute_tv"
+                android:id="@+id/fragment_additional_middle_min_sub_tv"
+                style="@style/body_regular_12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/body_regular_12"
+                android:layout_marginTop="16dp"
                 android:text="분"
                 android:textColor="@color/White"
-                app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintEnd_toEndOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@id/fragment_last_exercise_time_cl"
-                android:layout_marginTop="16dp"
-                />
+                app:layout_constraintEnd_toEndOf="@+id/fragment_additional_middle_min_tv"
+                app:layout_constraintStart_toStartOf="@+id/fragment_additional_middle_min_tv"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_additional_middle_min_tv" />
+
             <TextView
-                android:id="@+id/fragment_last_exercise_second_tv"
+                android:id="@+id/fragment_additional_middle_sec_sub_tv"
+                style="@style/body_regular_12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/body_regular_12"
+                android:layout_marginTop="16dp"
                 android:text="초"
                 android:textColor="@color/White"
-                app:layout_constraintStart_toEndOf="@id/fragment_last_exercise_time_cl"
-                app:layout_constraintEnd_toEndOf="@id/fragment_last_exercise_time_cl"
-                app:layout_constraintTop_toBottomOf="@id/fragment_last_exercise_time_cl"
-                app:layout_goneMarginTop="16dp"
-                android:layout_marginTop="16dp"
-                />
-            <CheckedTextView
-                android:id="@+id/fragment_last_exercise_reset_bt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/fragment_additional_middle_sec_tv"
+                app:layout_constraintStart_toStartOf="@+id/fragment_additional_middle_sec_tv"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_additional_middle_sec_tv" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/fragment_additional_middle_reset_btn"
+                style="@style/body_semi_bold_14"
+                android:layout_width="85dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="93dp"
+                android:layout_marginEnd="14dp"
                 android:layout_marginTop="28dp"
-                android:background="@drawable/selector_time"
-                android:fontFamily="@font/pretendard_semi_bold"
-                android:gravity="center"
-                android:paddingStart="24dp"
-                app:layout_goneMarginTop="28dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="24dp"
-                android:paddingBottom="8dp"
+                android:background="@drawable/shape_rounded_stroke_square_purple700_41dp_stroke_1dp"
                 android:text="초기화"
-                android:textColor="@color/Purple_400"
-                app:layout_constraintEnd_toEndOf="@id/guideline_left"
-                android:layout_marginEnd="8dp"
-                android:autoSizeMaxTextSize="28dp"
-                app:layout_constraintTop_toBottomOf="@id/fragment_last_exercise_hour_tv"
-                />
+                android:textColor="@color/Purple_700"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_additional_middle_center_guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_additional_middle_hour_sub_tv" />
 
-            <CheckedTextView
-                android:id="@+id/fragment_last_exercise_start_bt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_rounded_square_purple700_60dp"
-                android:checked="true"
-                android:fontFamily="@font/pretendard_semi_bold"
-                android:gravity="center"
-                android:paddingStart="24dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="24dp"
-                android:paddingBottom="8dp"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/fragment_additional_middle_start_btn"
+                style="@style/body_semi_bold_14"
+                android:layout_width="85dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="93dp"
+                android:background="@drawable/shape_rounded_square_purple700_40dp"
                 android:text="시작"
-                android:layout_marginStart="8dp"
                 android:textColor="@color/White"
-                app:layout_constraintStart_toStartOf="@id/guideline_right"
-                app:layout_constraintTop_toTopOf="@id/fragment_last_exercise_reset_bt"
-                app:layout_constraintBottom_toBottomOf="@id/fragment_last_exercise_reset_bt"
-                />
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_additional_middle_reset_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/fragment_additional_middle_center_guideline"
+                app:layout_constraintTop_toTopOf="@+id/fragment_additional_middle_reset_btn" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/fragment_additional_middle_exercise_complete_btn"
+                style="@style/sub_title_semi_bold_16"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/radius_corners_61dp_stroke_1"
+                android:text="운동 완료"
+                android:textColor="@color/Purple_700"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_additional_middle_reset_btn" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_left"
+                android:id="@+id/fragment_additional_middle_center_guideline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5" />
+                app:layout_constraintGuide_begin="206dp" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="45dp"
-            android:background="@drawable/shape_rounded_square_purpleblack_bg1_purple700_stroke_50dp_1dp"
-            style="@style/sub_title_semi_bold_16"
-            android:text="운동 완료"
-            android:textColor="@color/Purple_700"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
