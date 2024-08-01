@@ -63,7 +63,7 @@
 
         </activity>
         <activity
-            android:name=".ui.signup.RegisterAgreeFragment"
+            android:name=".ui.signup.RegisterAgreeActivity"
             android:exported="true">
 
         </activity>

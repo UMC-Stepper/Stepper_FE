@@ -5,10 +5,10 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseActivity
-import com.example.umc_stepper.databinding.FragmentRegisterAgreeBinding
+import com.example.umc_stepper.databinding.ActivityRegisterAgreeBinding
 
-class RegisterAgreeFragment :
-    BaseActivity<FragmentRegisterAgreeBinding>(R.layout.fragment_register_agree) {
+class RegisterAgreeActivity :
+    BaseActivity<ActivityRegisterAgreeBinding>(R.layout.activity_register_agree) {
     private var isCheckedTermsOfUse = false
     private var isCheckedPrivacyPermission = false
     private var isConfirmBtnState = false
@@ -68,7 +68,7 @@ class RegisterAgreeFragment :
 
     //체크된 값들을 가지고 돌아감
     private fun resultIntent() {
-        val intent = Intent(this@RegisterAgreeFragment, SignUpActivity::class.java).apply {
+        val intent = Intent(this, SignUpActivity::class.java).apply {
             putExtra("agree_success", true)
         }
         setResult(RESULT_OK, intent)

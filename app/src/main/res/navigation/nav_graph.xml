@@ -198,5 +198,27 @@
         android:name="com.example.umc_stepper.ui.today.add.ExerciseCardLastFragment"
         android:label="ExerciseCardLastFragment"
         tools:layout="@layout/fragment_exercise_card_last" />
+    <fragment
+        android:id="@+id/addExerciseSelectScrapFragment"
+        android:name="com.example.umc_stepper.ui.today.add.AddExerciseSelectScrapFragment"
+        android:label="AddExerciseSelectScrapFragment"
+        tools:layout="@layout/fragment_add_exercise_select_scrap"/>
+    <fragment
+        android:id="@+id/exerciseCompleteFragment"
+        android:name="com.example.umc_stepper.ui.today.ExerciseCompleteFragment"
+        android:label="ExerciseCompleteFragment"
+        tools:layout="@layout/fragment_exercise_complete"/>
+    <fragment
+        android:id="@+id/todayAddExerciseSuccessFragment"
+        android:name="com.example.umc_stepper.ui.stepper.TodayAddExerciseSuccessFragment"
+        android:label="TodayAddExerciseSuccessFragment"
+        tools:layout="@layout/fragment_today_exercise_success"/>
+
+    <!-- 스태퍼 화면임 -->
+    <fragment
+        android:id="@+id/todayExerciseSuccessFragment"
+        android:name="com.example.umc_stepper.ui.stepper.TodayExerciseSuccessFragment"
+        android:label="TodayExerciseSuccessFragment"
+        tools:layout="@layout/fragment_today_exercise_success"/>
 
 </navigation>
