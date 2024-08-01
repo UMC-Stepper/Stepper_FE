@@ -211,10 +211,20 @@ class MyExercise3Fragment :
     }
 
     private fun extractYouTubeVideoId(url: String): String? {
-        val regex =
-            "(?:https?://)?(?:www\\.)?(?:youtube\\.com/(?:[^/\\n\\s]+/\\S+/|(?:v|e(?:mbed)?)|\\S*?[?&]v=)|youtu\\.be/)([a-zA-Z0-9_-]{11})".toRegex()
-        val matchResult = regex.find(url)
-        return matchResult?.groups?.get(1)?.value
+        val patterns = listOf(
+            "(?<=watch\\?v=|/videos/|embed\\/|youtu.be\\/|\\/v\\/|\\/e\\/|watch\\?v%3D|watch\\?feature=player_embedded&v=|%2Fvideos%2F|embed%\u200C\u200B2F|youtu.be%2F|%2Fv%2F)[^#\\&\\?\\n]*",
+            "(?<=shorts/)([a-zA-Z0-9_-]+)"
+        )
+
+        for (pattern in patterns) {
+            val regex = Regex(pattern)
+            val matchResult = regex.find(url)
+            if (matchResult != null) {
+                return matchResult.value
+            }
+        }
+
+        return ""
     }
 
     private fun downloadSetting(select: Int) {

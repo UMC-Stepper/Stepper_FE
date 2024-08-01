@@ -1,6 +1,9 @@
 package com.example.umc_stepper.ui.stepper.home
 
+import android.os.Bundle
+import android.view.View.OnClickListener
 import android.view.WindowManager
+import android.widget.AdapterView.OnItemClickListener
 import androidx.navigation.fragment.findNavController
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
@@ -13,9 +16,10 @@ import com.example.umc_stepper.ui.stepper.ExerciseViewAdapter
 import com.example.umc_stepper.ui.stepper.LevelItem
 import com.example.umc_stepper.ui.stepper.LevelListItem
 import com.example.umc_stepper.ui.stepper.StepperViewModel
+import com.example.umc_stepper.utils.listener.ItemClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
-class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_stepper) {
+class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_stepper), ItemClickListener {
     private lateinit var recyclerAdapter: ExerciseViewAdapter
     private lateinit var stepperViewModel : StepperViewModel
     lateinit var days : List<DayData>
@@ -64,8 +68,6 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
             DayData("31", false, false),
             DayData("1", false, false)
         )
-
-
         init()
     }
 
@@ -75,7 +77,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
         val adapter = CalendarAdapter(requireContext(), days)
         binding.stepperCalendarGv.adapter = adapter
 
-        recyclerAdapter = ExerciseViewAdapter()
+        recyclerAdapter = ExerciseViewAdapter(this)
         binding.stepperExerciseRv.adapter = recyclerAdapter
         binding.stepperAdditionalBtn.setOnClickListener {
             goAdditionalExerciseHome()
@@ -88,6 +90,17 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
     }
     private fun goAdditionalExerciseHome(){
         findNavController().navigate(R.id.action_stepperFragment_to_additionalExerciseHomeFragment)
+    }
+
+    override fun onClick(item: Any) {
+        val bd = Bundle()
+        if(item is LevelItem){
+            bd.putString("pick",item.pick)
+        }
+        findNavController().navigateSafe(
+            R.id.action_stepperFragment_to_fragmentAddExercise,
+            bd
+        )
     }
 
 }
