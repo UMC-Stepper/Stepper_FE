@@ -1,6 +1,7 @@
 package com.example.umc_stepper.ui.today.add
 
 import android.content.Context
+import androidx.navigation.fragment.findNavController
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
@@ -18,7 +19,15 @@ class ExerciseCardLastFragment:BaseFragment<FragmentExerciseCardLastBinding>(R.l
     private lateinit var exerciseAlarmAdapter: ExerciseAlarmAdapter
 
     override fun setLayout() {
+        setButton()
         setAdapter()
+    }
+
+    private fun setButton() {
+        binding.fragmentExerciseCardLastCompleteBtn.setOnClickListener {
+            val action = ExerciseCardLastFragmentDirections.actionExerciseCardLastFragmentToExerciseCompleteFragment()
+            findNavController().navigateSafe(action.actionId)
+        }
     }
 
     private fun setAdapter() {

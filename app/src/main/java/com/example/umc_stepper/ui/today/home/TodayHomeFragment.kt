@@ -59,23 +59,23 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
 
     private fun setNavigationAction() {
 
-//        // 운동 추가
-//        binding.fragmentTodayHomePlusExerciseAddIv.setOnClickListener {
-//            val action = TodayHomeFragmentDirections.actionTodayHomeFragmentToFragmentAddExercise()
-//            findNavController().navigateSafe(action.actionId)
-//        }
-//
-//        // 나만의 운동
-//        binding.fragmentTodayHomeMyExerciseConstraint.setOnClickListener {
-//            val action = TodayHomeFragmentDirections.actionTodayHomeFragmentToFragmentMyExercise3()
-//            findNavController().navigateSafe(action.actionId)
-//        }
-//
-//        // 평가 일지
-//        binding.fragmentTodayHomeEvaluationLogConstraint.setOnClickListener {
-//            val action = TodayHomeFragmentDirections.actionTodayHomeFragmentToEvaluationLogFragment()
-//            findNavController().navigateSafe(action.actionId)
-//        }
+        // 운동 카드 추가
+        binding.fragmentTodayHomePlusExerciseAddIv.setOnClickListener {
+            val action = TodayHomeFragmentDirections.actionTodayHomeFragmentToFragmentAddExercise()
+            findNavController().navigateSafe(action.actionId)
+        }
+
+        // 나만의 운동
+        binding.fragmentTodayHomeMyExerciseConstraint.setOnClickListener {
+            val action = TodayHomeFragmentDirections.actionTodayHomeFragmentToFragmentMyExercise2()
+            findNavController().navigateSafe(action.actionId)
+        }
+
+        // 평가 일지
+        binding.fragmentTodayHomeEvaluationLogConstraint.setOnClickListener {
+            val action = TodayHomeFragmentDirections.actionTodayHomeFragmentToEvaluationLogFragment()
+            findNavController().navigateSafe(action.actionId)
+        }
 
     }
 }
