@@ -5,8 +5,11 @@ import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseAdapter
 import com.example.umc_stepper.base.BaseDiffCallback
 import com.example.umc_stepper.databinding.ItemStepperTodayExerciseRecyclerBinding
+import com.example.umc_stepper.utils.listener.ItemClickListener
 
-class ExerciseViewAdapter : BaseAdapter<LevelListItem, ItemStepperTodayExerciseRecyclerBinding>(
+class ExerciseViewAdapter(
+    private val listener: ItemClickListener
+) : BaseAdapter<LevelListItem, ItemStepperTodayExerciseRecyclerBinding>(
     BaseDiffCallback(
         itemsTheSame = { oldItem, newItem -> oldItem.levelList == newItem.levelList },
         contentsTheSame = { oldItem, newItem -> oldItem == newItem }
@@ -17,13 +20,19 @@ class ExerciseViewAdapter : BaseAdapter<LevelListItem, ItemStepperTodayExerciseR
 
     override fun bind(binding: ItemStepperTodayExerciseRecyclerBinding, item: LevelListItem) {
         binding.levelItem = item
+        binding.pick = listener
     }
 }
 
 data class LevelListItem(
-    val levelList : List<LevelItem> = emptyList()
+    val levelList: List<LevelItem> = emptyList()
 )
+
 data class LevelItem(
-    val imgView: String="",
-    val level: String=""
+    val imgView: String = "",
+    val level: String = "",
+    val pick: String = ""
+)
+data class Pick(
+    val pick : String = "무릎, 허리"
 )
