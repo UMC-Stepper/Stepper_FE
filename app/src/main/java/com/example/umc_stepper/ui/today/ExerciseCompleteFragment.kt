@@ -13,6 +13,6 @@ class ExerciseCompleteFragment :BaseFragment<FragmentExerciseCompleteBinding>(R.
         }
     }
     private fun goTodayHome(){
-        findNavController().navigate(R.id.action_fragmentExerciseComplete_to_todayHomeFragment)
+        //findNavController().navigate(R.id.action_fragmentExerciseComplete_to_todayHomeFragment)
     }
 }
