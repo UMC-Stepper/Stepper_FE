@@ -15,7 +15,7 @@ import java.util.Locale
 class TodayHomeCalendarAdapter(private val onItemClick: (WeekCalendar) -> Unit) :
     BaseAdapter<WeekCalendar, ItemTodayHomeWeekCalendarBinding>(
         BaseDiffCallback(
-            itemsTheSame = { oldItem, newItem -> oldItem == newItem },
+            itemsTheSame = { oldItem, newItem -> oldItem.date == newItem.date },
             contentsTheSame = { oldItem, newItem -> oldItem == newItem }
         )
     ) {
