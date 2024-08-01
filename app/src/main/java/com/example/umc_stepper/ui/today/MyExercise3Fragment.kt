@@ -41,10 +41,7 @@ class MyExercise3Fragment :
     var url2 : String = ""
 
     override fun setLayout() {
-        binding.fragmentMyExerciseSelectTagTv.setOnClickListener{
-            val action = MyExercise3FragmentDirections.actionFragmentMyExercise3ToFragmentMyExercise2()
-            findNavController().navigateSafe(action.actionId)
-        }
+
         initSetting()
         binding.fragmentMyExerciseCompleteInputBt.setOnClickListener {
             goExerciseCheck()
