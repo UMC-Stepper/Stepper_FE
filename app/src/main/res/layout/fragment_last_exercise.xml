@@ -5,7 +5,6 @@
     xmlns:tool="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="ResultTimeData"
             type="com.example.umc_stepper.domain.model.Time" />
@@ -244,7 +243,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="206dp" />
+                app:layout_constraintGuide_end="205dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
