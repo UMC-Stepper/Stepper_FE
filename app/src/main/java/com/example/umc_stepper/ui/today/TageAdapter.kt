@@ -3,11 +3,12 @@ package com.example.umc_stepper.ui.today
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseAdapter
 import com.example.umc_stepper.base.BaseDiffCallback
+import com.example.umc_stepper.databinding.ItemTag2Binding
 import com.example.umc_stepper.databinding.ItemTagBinding
 import com.example.umc_stepper.domain.model.ExerciseTagData
 
 class TageAdapter(
-) : BaseAdapter<ExerciseTagData, ItemTagBinding>(
+) : BaseAdapter<ExerciseTagData, ItemTag2Binding>(
     BaseDiffCallback(
         itemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
         contentsTheSame = { oldItem, newItem -> oldItem == newItem }
@@ -32,9 +33,9 @@ class TageAdapter(
     }
 
     override val layoutId: Int
-        get() = R.layout.item_tag
+        get() = R.layout.item_tag2
 
-    override fun bind(binding: ItemTagBinding, item: ExerciseTagData) {
+    override fun bind(binding: ItemTag2Binding, item: ExerciseTagData) {
         binding.tagData = item
         binding.func = this
     }

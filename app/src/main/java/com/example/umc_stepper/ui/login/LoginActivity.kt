@@ -25,8 +25,8 @@ import kotlinx.coroutines.launch
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login),
     ConfirmDialogInterface {
-    lateinit var loginViewModel: LoginViewModel
-    lateinit var agreeDialog: AgreeDialog
+    private lateinit var loginViewModel: LoginViewModel
+    private lateinit var agreeDialog: AgreeDialog
     private lateinit var requestMultiplePermissionsLauncher: ActivityResultLauncher<Array<String>>
 
     override fun setLayout() {
