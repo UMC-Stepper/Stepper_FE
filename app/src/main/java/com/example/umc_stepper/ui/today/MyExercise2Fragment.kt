@@ -22,6 +22,7 @@ class MyExercise2Fragment :
 
     override fun setLayout() {
         initSetting()
+        setButton()
     }
 
     private fun initSetting() {
@@ -35,6 +36,14 @@ class MyExercise2Fragment :
 
         binding.fragmentMyExercise2TagRv.adapter = tagAdapter
         binding.fragmentMyExercise2YoutubeCardRv.adapter = itemAdapter
+    }
+
+    private fun setButton() {
+        // 유튜브에서 불러오기 버튼 클릭
+        binding.fragmentMyExercise2YoutubeBtn.setOnClickListener {
+            val action = MyExercise2FragmentDirections.actionFragmentMyExercise2ToFragmentMyExercise3()
+            findNavController().navigateSafe(action.actionId)
+        }
     }
 
     override fun onClick(item: Any) {

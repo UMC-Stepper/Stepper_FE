@@ -67,6 +67,7 @@
                 tools:listitem="@layout/item_collocate_my_exercise" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/fragment_my_exercise_2_youtube_btn"
                 style="@style/sub_title_semi_bold_16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -35,17 +35,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="28dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginTop="12dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_exercise_card_schedule"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_exercise_card_last_sub_title_tv"/>
+            app:layout_constraintTop_toBottomOf="@+id/fragment_exercise_card_last_sub_title_tv"
+            tools:listitem="@layout/item_exercise_card_schedule" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/fragment_exercise_card_last_complete_iv"
+            android:id="@+id/fragment_exercise_card_last_complete_btn"
             style="@style/sub_title_semi_bold_16"
             android:layout_width="0dp"
             android:layout_height="50dp"

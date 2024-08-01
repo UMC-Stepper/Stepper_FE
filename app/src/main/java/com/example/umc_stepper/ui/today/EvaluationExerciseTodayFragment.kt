@@ -3,6 +3,7 @@ package com.example.umc_stepper.ui.today
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentEvaluationExerciseTodayBinding
@@ -124,7 +125,8 @@ class EvaluationExerciseTodayFragment :
     private fun setOnClickBtn() {
         with(binding) {
             fragmentEvaluationExerciseSuccessBt.setOnClickListener{
-//                findNavController().navigate() 뒤로가기
+                val action = EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToTodayHomeFragment()
+                findNavController().navigateSafe(action.actionId)
             }
         }
     }
