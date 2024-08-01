@@ -194,7 +194,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
             }
         }
         binding.signupAgreeTv.setOnClickListener {
-            val intent = Intent(this@SignUpActivity, RegisterAgreeFragment::class.java)
+            val intent = Intent(this@SignUpActivity, RegisterAgreeActivity::class.java)
             startForResult.launch(intent)
         }
     }
