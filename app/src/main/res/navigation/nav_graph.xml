@@ -198,8 +198,8 @@
         android:label="EvaluationExerciseTodayFragment"
         tools:layout="@layout/fragment_evaluation_exercise" >
         <action
-            android:id="@+id/action_evaluationExerciseTodayFragment_to_todayHomeFragment"
-            app:destination="@id/todayHomeFragment" />
+            android:id="@+id/action_evaluationExerciseTodayFragment_to_evaluationLogFragment"
+            app:destination="@id/evaluationLogFragment" />
     </fragment>
 
     <!-- 스태퍼 운동 완료 -->

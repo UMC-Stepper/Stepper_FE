@@ -125,7 +125,7 @@ class EvaluationExerciseTodayFragment :
     private fun setOnClickBtn() {
         with(binding) {
             fragmentEvaluationExerciseSuccessBt.setOnClickListener{
-                val action = EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToTodayHomeFragment()
+                val action = EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToEvaluationLogFragment()
                 findNavController().navigateSafe(action.actionId)
             }
         }
