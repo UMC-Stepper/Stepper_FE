@@ -16,21 +16,51 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/item_cl"
+            android:layout_marginTop="42dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/Purple_300">
+            <TextView
+                android:id="@+id/stepper_today_tv"
+                style="@style/head_bold_18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="오늘의 운동 리스트"
+                android:textColor="@color/White"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/stepper_modify_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_stepper_modify_btn"
+                app:layout_constraintBottom_toBottomOf="@+id/stepper_category_iv"
+                app:layout_constraintStart_toEndOf="@id/stepper_category_iv"
+                app:layout_constraintTop_toTopOf="@+id/stepper_category_iv" />
+
+            <ImageView
+                android:id="@+id/stepper_category_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                android:src="@drawable/ic_stepper_category"
+                app:layout_constraintBottom_toBottomOf="@+id/stepper_today_tv"
+                app:layout_constraintStart_toEndOf="@id/stepper_today_tv"
+                app:layout_constraintTop_toTopOf="@+id/stepper_today_tv" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_1"
                 android:layout_width="149dp"
                 android:layout_height="123dp"
-                android:layout_marginBottom="18dp"
-
+                android:layout_marginTop="16dp"
                 android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
                 android:backgroundTint="@color/Purple_300"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/stepper_today_tv">
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -73,7 +103,7 @@
                 android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
                 android:backgroundTint="@color/Purple_300"
                 app:layout_constraintStart_toEndOf="@id/cl_1"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="@id/cl_1">
 
                 <ImageView
                     android:id="@+id/imageView2"
@@ -116,7 +146,7 @@
                 android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
                 android:backgroundTint="@color/Purple_300"
                 app:layout_constraintStart_toEndOf="@id/cl_2"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="@id/cl_2">
 
                 <ImageView
                     android:id="@+id/imageView3"
