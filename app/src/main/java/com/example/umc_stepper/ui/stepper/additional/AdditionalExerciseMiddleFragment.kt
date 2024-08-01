@@ -4,6 +4,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Button
+import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentAdditionalExerciseMiddleBinding
@@ -31,6 +32,13 @@ class AdditionalExerciseMiddleFragment : BaseFragment<FragmentAdditionalExercise
         initButton()
         setTimer()
         resetTimer()
+        binding.fragmentAdditionalMiddleExerciseCompleteBtn.setOnClickListener {
+            goAdditionalExerciseSuccess()
+        }
+    }
+
+    private fun goAdditionalExerciseSuccess(){
+        findNavController().navigate(R.id.action_fragmentAdditionalExerciseMiddle_to_fragmentAdditionalExerciseSuccess)
     }
 
     private fun initButton() {
