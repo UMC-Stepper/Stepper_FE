@@ -24,6 +24,7 @@ import com.example.umc_stepper.databinding.FragmentMyExercise3Binding
 import com.example.umc_stepper.domain.model.request.AiVideoDto
 import com.example.umc_stepper.domain.model.response.AiVideoInfo
 import com.example.umc_stepper.domain.model.response.YouTubeVideo
+import com.example.umc_stepper.ui.today.home.TodayHomeFragmentDirections
 import com.example.umc_stepper.utils.GlobalApplication
 import com.example.umc_stepper.utils.extensions.navigateSafe
 import dagger.hilt.android.AndroidEntryPoint
@@ -149,10 +150,13 @@ class MyExercise3Fragment :
             }
             fragmentMyExerciseCompleteInputBt.setOnClickListener {
                 val youtubeUrl = fragmentMyExerciseUploadYoutubeLinkEt.text.toString()
+                val action = MyExercise3FragmentDirections.actionFragmentMyExercise3ToMyExerciseCheckFragment()
+                findNavController().navigateSafe(action.actionId)
                 // url 담아서 다음 화면 전송
             }
         }
     }
+
     private fun ableUrlCheck(url : String){
         if(url.isNotEmpty()){
             Log.d("링크","$url1 $url2")

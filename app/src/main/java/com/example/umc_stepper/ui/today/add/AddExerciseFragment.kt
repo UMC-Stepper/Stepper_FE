@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentAddExerciseBinding
@@ -32,6 +33,34 @@ class AddExerciseFragment :
     private fun initSetting() {
         setList()
         setMenuList()
+        setOnClick()
+    }
+
+    private fun setOnClick() {
+
+        // 운동 부위 추가 1
+        binding.fragmentAddExerciseNoneAddStep1Constraint.setOnClickListener {
+            val action = AddExerciseFragmentDirections.actionFragmentAddExerciseToAddExerciseSelectScrapFragment2()
+            findNavController().navigateSafe(action.actionId)
+        }
+
+        // 운동 부위 추가 2
+        binding.fragmentAddExerciseNoneAddStep2Constraint.setOnClickListener {
+            val action = AddExerciseFragmentDirections.actionFragmentAddExerciseToAddExerciseSelectScrapFragment2()
+            findNavController().navigateSafe(action.actionId)
+        }
+
+        // 운동 부위 추가 3
+        binding.fragmentAddExerciseNoneAddStep3Constraint.setOnClickListener {
+            val action = AddExerciseFragmentDirections.actionFragmentAddExerciseToAddExerciseSelectScrapFragment2()
+            findNavController().navigateSafe(action.actionId)
+        }
+
+        // 다음으로 버튼 클릭
+        binding.fragmentAddExerciseNextBtn.setOnClickListener {
+            val action = AddExerciseFragmentDirections.actionFragmentAddExerciseToFragmentExerciseSettingsDate()
+            findNavController().navigateSafe(action.actionId)
+        }
     }
 
     private fun setList() {
@@ -102,9 +131,6 @@ class AddExerciseFragment :
                 tagList[i].setBackgroundResource(setColor(requireContext(), false).first)
                 tagList[i].setTextColor(setColor(requireContext(), false).second)
             }
-        }
-        binding.fragmentAddExerciseNextBtn.setOnClickListener {
-//            findNavController().navigate() 이동
         }
     }
 

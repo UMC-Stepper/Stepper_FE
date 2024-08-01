@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.today
 
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
@@ -10,7 +11,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 
 class MyExerciseCheckFragment:
     BaseFragment<FragmentExerciseCheckBinding>(R.layout.fragment_exercise_check) {
-    override fun setLayout() {
+
+        override fun setLayout() {
         val urlText = arguments?.getString("urlText")
         if (!urlText.isNullOrEmpty()) {
             binding.fragmentDownloadYoutube2MainCardInputLinkEt.setText(urlText)
@@ -18,7 +20,16 @@ class MyExerciseCheckFragment:
             fetchYouTubeVideoDetails(urlText)
         }
 
+        setButton()
     }
+
+    private fun setButton() {
+        binding.fragmentDownloadYoutube2Btn.setOnClickListener {
+            val action = MyExerciseCheckFragmentDirections.actionMyExerciseCheckFragmentToFragmentMyExercise2()
+            findNavController().navigateSafe(action.actionId)
+        }
+    }
+
     private fun initializeYouTubePlayer(url: String) {
         lifecycle.addObserver(binding.fragmentDownloadYoutube2MainCardPreviewYv)
 
