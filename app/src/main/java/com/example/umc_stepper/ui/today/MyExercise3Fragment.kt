@@ -5,6 +5,9 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.animation.LinearInterpolator
@@ -43,12 +46,43 @@ class MyExercise3Fragment :
             findNavController().navigateSafe(action.actionId)
         }
         initSetting()
+        binding.fragmentMyExerciseCompleteInputBt.setOnClickListener {
+            goExerciseCheck()
+        }
     }
 
     private fun initSetting() {
         remoteLifeCycle()
         setList()
         setOnClickBtn()
+        enabledComplete()
+        setupTextWatcher()
+    }
+
+    private fun enabledComplete() {
+        if (binding.fragmentMyExerciseUploadYoutubeLinkEt.text.isNullOrEmpty()) {
+            binding.fragmentMyExerciseCompleteInputBt.isEnabled = false
+        } else {
+            binding.fragmentMyExerciseCompleteInputBt.isEnabled = true
+            binding.fragmentMyExerciseCompleteInputBt.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
+            binding.fragmentMyExerciseCompleteInputBt.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
+        }
+    }
+
+    private fun setupTextWatcher() {
+        binding.fragmentMyExerciseUploadYoutubeLinkEt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Do nothing
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Do nothing
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                enabledComplete()
+            }
+        })
     }
 
     private fun remoteLifeCycle() {
@@ -257,5 +291,13 @@ class MyExercise3Fragment :
             fragmentMyExercise3ProgressbarTextTv.visibility = View.GONE
             todayViewModel.clearList()
         }
+    }
+
+    private fun goExerciseCheck() {
+        val urlText = binding.fragmentMyExerciseUploadYoutubeLinkEt.text.toString()
+        val bundle = Bundle().apply {
+            putString("urlText", urlText)
+        }
+        findNavController().navigate(R.id.action_fragmentAdditionalExerciseYoutube2_to_fragmentLastExercise, bundle)
     }
 }
