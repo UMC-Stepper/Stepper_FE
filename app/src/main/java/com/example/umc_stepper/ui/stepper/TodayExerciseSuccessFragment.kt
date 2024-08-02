@@ -31,6 +31,7 @@ class TodayExerciseSuccessFragment :
     }
 
     private fun setOnClickBtn(){
+        binding.fragmentTodayExerciseSuccessOkBtn.text = "운동 평가하기"
         binding.fragmentTodayExerciseSuccessOkBtn.setOnClickListener{
             //다음화면
         }

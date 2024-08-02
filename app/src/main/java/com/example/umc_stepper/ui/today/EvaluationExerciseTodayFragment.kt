@@ -33,6 +33,7 @@ class EvaluationExerciseTodayFragment :
 
     private fun setTitle(){
         mainActivity.updateToolbarLeftPlusImg("07.09","무릎, 다리") //타이틀 세팅
+        mainActivity.setBg()
     }
 
     override fun setLayout() {

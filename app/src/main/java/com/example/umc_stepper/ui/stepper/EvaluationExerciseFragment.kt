@@ -35,6 +35,7 @@ class EvaluationExerciseFragment :
         mainActivity = context as MainActivity
     }
     private fun setTitle(){
+        mainActivity.setBg()
         mainActivity.updateToolbarLeftPlusImg("07.09","무릎, 다리") //타이틀 세팅
     }
     override fun setLayout() {
