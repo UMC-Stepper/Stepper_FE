@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.stepper.additional
 
+import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -9,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentAdditionalExerciseMiddleBinding
+import com.example.umc_stepper.ui.MainActivity
 
 class AdditionalExerciseMiddleFragment : BaseFragment<FragmentAdditionalExerciseMiddleBinding>(R.layout.fragment_additional_exercise_middle) {
 
@@ -17,6 +19,8 @@ class AdditionalExerciseMiddleFragment : BaseFragment<FragmentAdditionalExercise
 
     private lateinit var startBtn: Button
     private lateinit var resetBtn: Button
+
+    private lateinit var mainActivity : MainActivity
 
     private val handler = Handler(Looper.getMainLooper())
     private val timerRunnable = object : Runnable {
@@ -29,13 +33,24 @@ class AdditionalExerciseMiddleFragment : BaseFragment<FragmentAdditionalExercise
         }
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
+
     override fun setLayout() {
+        updateMainToolbar()
         initButton()
         setTimer()
         resetTimer()
         binding.fragmentAdditionalMiddleExerciseCompleteBtn.setOnClickListener {
             goAdditionalExerciseSuccess()
         }
+    }
+
+    private fun updateMainToolbar() {
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
+        mainActivity.updateToolbarTitle("추가 운동하기")
     }
 
     private fun goAdditionalExerciseSuccess(){
