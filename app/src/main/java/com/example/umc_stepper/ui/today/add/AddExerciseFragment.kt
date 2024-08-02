@@ -1,6 +1,7 @@
 package com.example.umc_stepper.ui.today.add
 
 import android.content.Context
+import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -11,7 +12,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentAddExerciseBinding
+import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.utils.GlobalApplication
+import kotlin.properties.Delegates
 
 class AddExerciseFragment :
     BaseFragment<FragmentAddExerciseBinding>(R.layout.fragment_add_exercise) {
@@ -23,18 +26,34 @@ class AddExerciseFragment :
     private lateinit var titleList: List<TextView>
     private lateinit var editBtnList: List<Button>
     private lateinit var channelList: List<TextView>
+    private val youtubeCardList : ArrayList<YoutubeCard> = arrayListOf(
+        YoutubeCard("","진정재활운동","서울아산병원 이비인후과"),
+        YoutubeCard("","진정재활운동","서울아산병원 이비인후과"),
+        YoutubeCard("","진정재활운동","서울아산병원 이비인후과")
+    )
 
+    private var menuCount by Delegates.notNull<Int>()
+    private lateinit var mainActivity : MainActivity
 
-    var menuCount = 0
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
+    private fun setTitle(){
+        mainActivity.updateToolbarTitle("운동 카드를 작성해봐요!")
+    }
+
     override fun setLayout() {
         initSetting()
     }
 
     private fun initSetting() {
+        setTitle()
         setList()
         setMenuList()
         setOnClick()
     }
+
 
     private fun setOnClick() {
 
@@ -149,29 +168,74 @@ class AddExerciseFragment :
 
 
     private fun setMenuList() {
+        menuCount = youtubeCardList.size
         for (i in 0..menuCount) {
             addItemList[i].visibility = View.VISIBLE
             nonAddItemList[i].visibility = View.GONE
-//            setMenu() 메뉴 세팅
+            setMenu(youtubeCardList[i],i)
         }
     }
 
-    private fun setMenu(thumbnail: ImageView, title: TextView, channel: TextView, editBtn: Button) {
-        GlobalApplication.loadCropRoundedSquareImage(
-            this@AddExerciseFragment.requireContext(),
-            thumbnail,
-            "",
-            18
+    private fun setMenu(youtubeCard: YoutubeCard , count : Int) {
+
+        when(count) {
+            1 -> {
+                GlobalApplication.loadCropRoundedSquareImage(
+                    this@AddExerciseFragment.requireContext(),
+                    binding.fragmentAddExerciseThumbnail1Iv,
+                    "",
+                    18
+                )
+                binding.fragmentAddExerciseTitle1Tv.text = youtubeCard.title
+                binding.fragmentAddExerciseChannel1Tv.text = youtubeCard.description
+                binding.fragmentAddExerciseEdit1Iv.setOnClickListener {
+                    goEditPage(1)
+                }
+            }
+            2 -> {
+                GlobalApplication.loadCropRoundedSquareImage(
+                    this@AddExerciseFragment.requireContext(),
+                    binding.fragmentAddExerciseThumbnail2Iv,
+                    "",
+                    18
+                )
+                binding.fragmentAddExerciseTitle2Tv.text = youtubeCard.title
+                binding.fragmentAddExerciseChannel2Tv.text = youtubeCard.description
+                binding.fragmentAddExerciseEdit2Iv.setOnClickListener {
+                    goEditPage(2)
+                }
+            }
+            3 -> {
+                GlobalApplication.loadCropRoundedSquareImage(
+                    this@AddExerciseFragment.requireContext(),
+                    binding.fragmentAddExerciseThumbnail3Iv,
+                    "",
+                    18
+                )
+                binding.fragmentAddExerciseTitle3Tv.text = youtubeCard.title
+                binding.fragmentAddExerciseChannel3Tv.text = youtubeCard.description
+                binding.fragmentAddExerciseEdit3Iv.setOnClickListener {
+                    goEditPage(3)
+                }
+            }
+        }
+    }
+
+    private fun goEditPage(number : Int) {
+        val bundle = Bundle().apply {
+            putInt("count", number)
+        }
+        val action = AddExerciseFragmentDirections.actionFragmentAddExerciseToFragmentExerciseSettingsDate()
+        findNavController().navigateSafe(action.actionId,
+            bundle
         )
-        title.text = ""
-        channel.text = ""
-        editBtn.setOnClickListener {
-            goEditPage()
-        }
     }
 
-    private fun goEditPage() {
-//        findNavController().navigate() 수정 페이지 이동
-    }
 
 }
+
+data class YoutubeCard(
+    val thumbnail: String,
+    val title: String,
+    val description : String,
+)
