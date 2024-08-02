@@ -1,198 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:ignore="ExtraText">
 
-    <TextView
-        android:id="@+id/additional_exercise_home_tv"
-        style="@style/head_bold_18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="91dp"
-        android:text="운동 영상 불러오기"
-        android:textColor="@color/White"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/addtional_exercise_home_scrap_btn"
-        style="@style/body_medium_14"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/shape_rounded_stroke_square_purple700_14dp_stroke_1dp"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:text="운동 스크랩에서 운동 영상 불러오기"
-        android:textColor="@color/Purple_700"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/additional_exercise_home_tv" />
+        android:layout_height="match_parent"
+        tools:context=".ui.stepper.additional.AdditionalExerciseHomeFragment"
+        tools:ignore="ExtraText">
 
-    <Button
-        android:id="@+id/addtional_exercise_home_youtube_btn"
-        style="@style/body_medium_14"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/shape_rounded_stroke_square_purple700_14dp_stroke_1dp"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:text="Youtube 링크로 영상 불러오기"
-        android:textColor="@color/Purple_700"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addtional_exercise_home_scrap_btn" />
+        <TextView
+            android:id="@+id/additional_exercise_home_tv"
+            style="@style/head_bold_18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:text="운동 영상 불러오기"
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/addtional_exercise_home_time_btn"
-        style="@style/body_medium_14"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/shape_rounded_stroke_square_purple700_14dp_stroke_1dp"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:text="시간만 재기"
-        android:textColor="@color/Purple_700"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addtional_exercise_home_youtube_btn" />
+        <Button
+            android:id="@+id/addtional_exercise_home_scrap_btn"
+            style="@style/body_medium_14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/shape_rounded_stroke_square_purple700_14dp_stroke_1dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="운동 스크랩에서 운동 영상 불러오기"
+            android:textColor="@color/Purple_700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/additional_exercise_home_tv" />
 
-    <TextView
-        android:id="@+id/additional_exercise_home_today_tv"
-        style="@style/head_bold_18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp"
-        android:text="오늘 이만큼 운동했어요!"
-        android:textColor="@color/White"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addtional_exercise_home_time_btn" />
+        <Button
+            android:id="@+id/addtional_exercise_home_youtube_btn"
+            style="@style/body_medium_14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/shape_rounded_stroke_square_purple700_14dp_stroke_1dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="Youtube 링크로 영상 불러오기"
+            android:textColor="@color/Purple_700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/addtional_exercise_home_scrap_btn" />
 
-    <TextView
-        android:id="@+id/additional_exercise_home_timer1_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="14dp"
-        android:fontFamily="@font/pretendard_regular"
-        android:text="00"
-        android:textColor="@color/White"
-        android:textSize="60sp"
-        app:layout_constraintEnd_toStartOf="@id/additional_exercise_home_dot1_tv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/additional_exercise_home_today_tv" />
+        <Button
+            android:id="@+id/addtional_exercise_home_time_btn"
+            style="@style/body_medium_14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/shape_rounded_stroke_square_purple700_14dp_stroke_1dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="시간만 재기"
+            android:textColor="@color/Purple_700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/addtional_exercise_home_youtube_btn" />
 
-    <TextView
-        android:id="@+id/additional_exercise_home_dot1_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="14dp"
-        android:fontFamily="@font/pretendard_semi_bold"
-        android:text=":"
-        android:textColor="@color/White"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toStartOf="@id/additional_exercise_home_timer2_tv"
-        app:layout_constraintStart_toEndOf="@+id/additional_exercise_home_timer1_tv"
-        app:layout_constraintTop_toBottomOf="@id/additional_exercise_home_today_tv" />
+        <TextView
+            android:id="@+id/additional_exercise_home_today_tv"
+            style="@style/head_bold_18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="56dp"
+            android:text="오늘 이만큼 운동했어요!"
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/addtional_exercise_home_time_btn" />
 
-    <TextView
-        android:id="@+id/additional_exercise_home_timer2_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="14dp"
-        android:fontFamily="@font/pretendard_regular"
-        android:text="00"
-        android:textColor="@color/White"
-        android:textSize="60sp"
-        app:layout_constraintEnd_toStartOf="@id/additional_exercise_home_dot2_tv"
-        app:layout_constraintStart_toEndOf="@id/additional_exercise_home_dot1_tv"
-        app:layout_constraintTop_toBottomOf="@id/additional_exercise_home_today_tv" />
+        <TextView
+            android:id="@+id/fragment_additional_exercise_hour_tv"
+            style="@style/body_regular_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginTop="20dp"
+            android:text="00"
+            android:textColor="@color/Purple_300"
+            android:textSize="60dp"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_additional_exercise_colon_hour_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/additional_exercise_home_today_tv" />
 
-    <TextView
-        android:id="@+id/additional_exercise_home_dot2_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="15dp"
-        android:fontFamily="@font/pretendard_semi_bold"
-        android:text=":"
-        android:textColor="@color/White"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toStartOf="@id/additional_exercise_home_timer3_tv"
-        app:layout_constraintStart_toEndOf="@+id/additional_exercise_home_timer2_tv"
-        app:layout_constraintTop_toBottomOf="@id/additional_exercise_home_today_tv" />
+        <TextView
+            android:id="@+id/fragment_additional_exercise_colon_hour_tv"
+            style="@style/body_semi_bold_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textColor="@color/White"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_additional_exercise_hour_tv"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_additional_exercise_home_guideline_33"
+            app:layout_constraintStart_toStartOf="@+id/fragment_additional_exercise_home_guideline_33"
+            app:layout_constraintTop_toTopOf="@+id/fragment_additional_exercise_hour_tv" />
 
-    <TextView
-        android:id="@+id/additional_exercise_home_timer3_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="48dp"
-        android:fontFamily="@font/pretendard_regular"
-        android:text="00"
-        android:textColor="@color/White"
-        android:textSize="60sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/additional_exercise_home_dot2_tv"
-        app:layout_constraintTop_toBottomOf="@id/additional_exercise_home_today_tv" />
+        <TextView
+            android:id="@+id/fragment_additional_exercise_min_tv"
+            style="@style/body_regular_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00"
+            android:textColor="@color/Purple_300"
+            android:textSize="60dp"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_additional_exercise_colon_hour_tv"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_additional_exercise_home_guideline"
+            app:layout_constraintStart_toStartOf="@+id/fragment_additional_exercise_home_guideline"
+            app:layout_constraintTop_toTopOf="@+id/fragment_additional_exercise_colon_hour_tv" />
 
-    <TextView
-        android:id="@+id/additional_exercise_home_hour_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        style="@style/body_regular_12"
-        android:text="시간"
-        android:textColor="@color/White"
-        app:layout_constraintStart_toStartOf="@id/additional_exercise_home_timer1_tv"
-        app:layout_constraintEnd_toEndOf="@id/additional_exercise_home_timer1_tv"
-        app:layout_constraintTop_toBottomOf="@id/additional_exercise_home_timer1_tv" />
+        <TextView
+            android:id="@+id/fragment_additional_exercise_colon_min_tv"
+            style="@style/body_semi_bold_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textColor="@color/White"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_additional_exercise_min_tv"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_additional_exercise_home_guideline_66"
+            app:layout_constraintStart_toStartOf="@+id/fragment_additional_exercise_home_guideline_66"
+            app:layout_constraintTop_toTopOf="@+id/fragment_additional_exercise_min_tv" />
 
-    <TextView
-        android:id="@+id/additional_exercise_home_minuate_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        style="@style/body_regular_12"
-        android:text="분"
-        android:textColor="@color/White"
-        app:layout_constraintStart_toStartOf="@id/additional_exercise_home_timer2_tv"
-        app:layout_constraintEnd_toEndOf="@id/additional_exercise_home_timer2_tv"
-        app:layout_constraintTop_toBottomOf="@id/additional_exercise_home_timer2_tv" />
+        <TextView
+            android:id="@+id/fragment_additional_exercise_sec_tv"
+            style="@style/body_regular_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:text="00"
+            android:textColor="@color/Purple_300"
+            android:textSize="60dp"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_additional_exercise_colon_min_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fragment_additional_exercise_colon_min_tv"
+            app:layout_constraintTop_toTopOf="@+id/fragment_additional_exercise_colon_min_tv" />
 
-    <TextView
-        android:id="@+id/additional_exercise_home_second_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        style="@style/body_regular_12"
-        android:text="초"
-        android:textColor="@color/White"
-        app:layout_constraintStart_toStartOf="@id/additional_exercise_home_timer3_tv"
-        app:layout_constraintTop_toBottomOf="@id/additional_exercise_home_timer2_tv"
-        app:layout_constraintEnd_toEndOf="@id/additional_exercise_home_timer3_tv"/>
+        <TextView
+            android:id="@+id/fragment_additional_exercise_hour_sub_tv"
+            style="@style/body_regular_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="시간"
+            android:textColor="@color/White"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_additional_exercise_hour_tv"
+            app:layout_constraintStart_toStartOf="@+id/fragment_additional_exercise_hour_tv"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_additional_exercise_hour_tv" />
+
+        <TextView
+            android:id="@+id/fragment_additional_exercise_min_sub_tv"
+            style="@style/body_regular_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="분"
+            android:textColor="@color/White"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_additional_exercise_min_tv"
+            app:layout_constraintStart_toStartOf="@+id/fragment_additional_exercise_min_tv"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_additional_exercise_min_tv" />
+
+        <TextView
+            android:id="@+id/fragment_additional_exercise_sec_sub_tv"
+            style="@style/body_regular_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="초"
+            android:textColor="@color/White"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_additional_exercise_sec_tv"
+            app:layout_constraintStart_toStartOf="@+id/fragment_additional_exercise_sec_tv"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_additional_exercise_sec_tv" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/fragment_additional_exercise_home_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/fragment_additional_exercise_home_guideline_33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.33" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/fragment_additional_exercise_home_guideline_66"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.66" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout></layout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
