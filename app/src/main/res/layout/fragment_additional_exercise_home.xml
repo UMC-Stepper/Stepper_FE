@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="91dp"
+        android:layout_marginTop="12dp"
         android:text="운동 영상 불러오기"
         android:textColor="@color/White"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,14 +87,14 @@
         android:id="@+id/additional_exercise_home_timer1_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="34dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="14dp"
         android:fontFamily="@font/pretendard_regular"
         android:text="00"
         android:textColor="@color/White"
         android:textSize="60sp"
-        app:layout_constraintEnd_toStartOf="@id/additional_exercise_home_dot1_tv"
+        app:layout_constraintEnd_toStartOf="@id/fragment_additional__guideline_33"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/additional_exercise_home_today_tv" />
 
@@ -103,71 +103,71 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
-        android:layout_marginTop="45dp"
         android:layout_marginEnd="14dp"
+        android:layout_marginTop="45dp"
         android:fontFamily="@font/pretendard_semi_bold"
         android:text=":"
         android:textColor="@color/White"
         android:textSize="25sp"
         app:layout_constraintEnd_toStartOf="@id/additional_exercise_home_timer2_tv"
         app:layout_constraintStart_toEndOf="@+id/additional_exercise_home_timer1_tv"
-        app:layout_constraintTop_toBottomOf="@id/additional_exercise_home_today_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/additional_exercise_home_today_tv" />
 
     <TextView
         android:id="@+id/additional_exercise_home_timer2_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="14dp"
         android:fontFamily="@font/pretendard_regular"
         android:text="00"
         android:textColor="@color/White"
         android:textSize="60sp"
-        app:layout_constraintEnd_toStartOf="@id/additional_exercise_home_dot2_tv"
-        app:layout_constraintStart_toEndOf="@id/additional_exercise_home_dot1_tv"
-        app:layout_constraintTop_toBottomOf="@id/additional_exercise_home_today_tv" />
+        app:layout_constraintBottom_toBottomOf="@+id/additional_exercise_home_dot1_tv"
+        app:layout_constraintStart_toStartOf="@id/fragment_additional__guideline_33"
+        app:layout_constraintEnd_toEndOf="@id/fragment_additional__guideline_66"
+        app:layout_constraintTop_toTopOf="@+id/additional_exercise_home_dot1_tv" />
 
     <TextView
         android:id="@+id/additional_exercise_home_dot2_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
-        android:layout_marginTop="45dp"
         android:layout_marginEnd="15dp"
         android:fontFamily="@font/pretendard_semi_bold"
         android:text=":"
         android:textColor="@color/White"
         android:textSize="25sp"
+
         app:layout_constraintEnd_toStartOf="@id/additional_exercise_home_timer3_tv"
         app:layout_constraintStart_toEndOf="@+id/additional_exercise_home_timer2_tv"
-        app:layout_constraintTop_toBottomOf="@id/additional_exercise_home_today_tv" />
+        app:layout_constraintTop_toTopOf="@+id/additional_exercise_home_dot1_tv" />
 
     <TextView
         android:id="@+id/additional_exercise_home_timer3_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginEnd="34dp"
         android:fontFamily="@font/pretendard_regular"
         android:text="00"
         android:textColor="@color/White"
         android:textSize="60sp"
+        app:layout_constraintBottom_toBottomOf="@+id/additional_exercise_home_dot2_tv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/additional_exercise_home_dot2_tv"
-        app:layout_constraintTop_toBottomOf="@id/additional_exercise_home_today_tv" />
+        app:layout_constraintStart_toStartOf="@id/fragment_additional__guideline_66"
+        app:layout_constraintTop_toTopOf="@+id/additional_exercise_home_dot2_tv" />
 
     <TextView
         android:id="@+id/additional_exercise_home_hour_tv"
+        style="@style/body_regular_12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        style="@style/body_regular_12"
         android:text="시간"
         android:textColor="@color/White"
-        app:layout_constraintStart_toStartOf="@id/additional_exercise_home_timer1_tv"
-        app:layout_constraintEnd_toEndOf="@id/additional_exercise_home_timer1_tv"
+        app:layout_constraintEnd_toEndOf="@+id/additional_exercise_home_timer1_tv"
+        app:layout_constraintStart_toStartOf="@+id/additional_exercise_home_timer1_tv"
         app:layout_constraintTop_toBottomOf="@id/additional_exercise_home_timer1_tv" />
 
     <TextView
@@ -184,15 +184,28 @@
 
     <TextView
         android:id="@+id/additional_exercise_home_second_tv"
+        style="@style/body_regular_12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        style="@style/body_regular_12"
         android:text="초"
         android:textColor="@color/White"
+        app:layout_constraintEnd_toEndOf="@id/additional_exercise_home_timer3_tv"
         app:layout_constraintStart_toStartOf="@id/additional_exercise_home_timer3_tv"
-        app:layout_constraintTop_toBottomOf="@id/additional_exercise_home_timer2_tv"
-        app:layout_constraintEnd_toEndOf="@id/additional_exercise_home_timer3_tv"/>
+        app:layout_constraintTop_toBottomOf="@+id/additional_exercise_home_timer3_tv" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fragment_additional__guideline_33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.33" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fragment_additional__guideline_66"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.66" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout></layout>
