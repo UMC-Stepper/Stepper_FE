@@ -43,16 +43,16 @@ class LastExerciseFragment : BaseFragment<FragmentLastExerciseBinding>(R.layout.
             fetchYouTubeVideoDetails(urlText)
         }
 
-        binding.fragmentAdditionalMiddleExerciseCompleteBtn.setOnClickListener {
+        binding.fragmentLastExerciseExerciseCompleteBtn.setOnClickListener {
             goAdditionalExerciseSuccess()
-            binding.fragmentAdditionalMiddleExerciseCompleteBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
-            binding.fragmentAdditionalMiddleExerciseCompleteBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
+            binding.fragmentLastExerciseExerciseCompleteBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
+            binding.fragmentLastExerciseExerciseCompleteBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
         }
     }
 
     private fun initButton() {
-        startBtn = binding.fragmentAdditionalMiddleStartBtn
-        resetBtn = binding.fragmentAdditionalMiddleResetBtn
+        startBtn = binding.fragmentLastExerciseStartBtn
+        resetBtn = binding.fragmentLastExerciseStartBtn
     }
 
     private fun setTimer() {
@@ -77,9 +77,9 @@ class LastExerciseFragment : BaseFragment<FragmentLastExerciseBinding>(R.layout.
 
         Log.d("updateTimerUI", "시: $hours 분: $minutes 초: $seconds")
 
-        binding.fragmentAdditionalMiddleHourTv.text = String.format("%02d", hours)
-        binding.fragmentAdditionalMiddleMinTv.text = String.format("%02d", minutes)
-        binding.fragmentAdditionalMiddleSecTv.text = String.format("%02d", seconds)
+        binding.fragmentLastExerciseHourTv.text = String.format("%02d", hours)
+        binding.fragmentLastExerciseMinTv.text = String.format("%02d", minutes)
+        binding.fragmentLastExerciseSecTv.text = String.format("%02d", seconds)
     }
 
     private fun resetTimer() {
