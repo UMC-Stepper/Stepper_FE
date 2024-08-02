@@ -67,6 +67,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.mainToolbarBackIv.setImageResource(imgSrc)
     }
 
+    fun updateToolbarLeftPlusImg(text : String , tag : String){
+        binding.mainToolbarSelectTagTv.visibility = View.GONE
+        binding.mainToolbarTitleTv.text = text
+        binding.mainToolbarSelectTagTv.text = tag
+    }
+
+    fun visibleTag(){
+        binding.mainToolbarTitleTv.visibility = View.VISIBLE
+    }
+
 
     // 툴바 중간 이미지 변경 함수
     fun updateToolbarMiddleImg(imgSrc: Int) {

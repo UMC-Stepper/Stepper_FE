@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.today
 
+import android.content.Context
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
@@ -7,6 +8,7 @@ import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentMyExercise2Binding
 import com.example.umc_stepper.domain.model.Exercise2Data
 import com.example.umc_stepper.domain.model.ExerciseTagData
+import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.utils.extensions.navigateSafe
 import com.example.umc_stepper.utils.listener.ItemClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,9 +20,19 @@ class MyExercise2Fragment :
     private val todayViewModel: TodayViewModel by activityViewModels()
     private lateinit var tagAdapter: TageAdapter
     private lateinit var itemAdapter: MyExercise2Adapter
+    private lateinit var mainActivity : MainActivity
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
+
+    private fun setTitle(){
+        mainActivity.updateToolbarTitle("나만의 운동 영상 저장하기") //타이틀 세팅
+    }
 
     override fun setLayout() {
+        setTitle()
         initSetting()
         setButton()
     }

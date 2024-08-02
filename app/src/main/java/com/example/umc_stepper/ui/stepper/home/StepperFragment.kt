@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.stepper.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View.OnClickListener
 import android.view.WindowManager
@@ -23,7 +24,17 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
     private lateinit var recyclerAdapter: ExerciseViewAdapter
     private lateinit var stepperViewModel : StepperViewModel
     lateinit var days : List<DayData>
+    private lateinit var mainActivity : MainActivity
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
+    private fun setTitle(){
+        mainActivity.updateToolbarTitle("STEPPER") //타이틀 세팅
+    }
     override fun setLayout() {
+        setTitle()
         days = listOf(
             DayData("월", false, false),
             DayData("화", false, false),

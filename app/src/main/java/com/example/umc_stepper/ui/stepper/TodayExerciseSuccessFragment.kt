@@ -1,11 +1,19 @@
 package com.example.umc_stepper.ui.stepper
 
+import android.content.Context
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentTodayExerciseSuccessBinding
+import com.example.umc_stepper.ui.MainActivity
 
 class TodayExerciseSuccessFragment :
     BaseFragment<FragmentTodayExerciseSuccessBinding>(R.layout.fragment_today_exercise_success) {
+    private lateinit var mainActivity : MainActivity
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
     override fun setLayout() {
         setTitle()
         setOnClickBtn()
@@ -19,6 +27,7 @@ class TodayExerciseSuccessFragment :
             fragmentTodayExerciseSuccessMinuteTv
             fragmentTodayExerciseSuccessSecondTv
         }
+        mainActivity.updateToolbarTitle("운동 완료")
     }
 
     private fun setOnClickBtn(){
