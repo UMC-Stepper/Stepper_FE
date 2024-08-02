@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.stepper
 
+import android.content.Context
 import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,6 +11,7 @@ import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentEvaluationExerciseBinding
 import com.example.umc_stepper.databinding.FragmentEvaluationExerciseTodayBinding
+import com.example.umc_stepper.ui.MainActivity
 import java.lang.NumberFormatException
 
 class EvaluationExerciseFragment :
@@ -26,7 +28,16 @@ class EvaluationExerciseFragment :
     //    private lateinit var galleryForResult: ActivityResultLauncher<Intent>
     var profileImage = ""
     var score = 0
+    private lateinit var mainActivity : MainActivity
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
+    private fun setTitle(){
+        mainActivity.setBg()
+        mainActivity.updateToolbarLeftPlusImg("07.09","무릎, 다리") //타이틀 세팅
+    }
     override fun setLayout() {
         initSetting()
         //카메라액티비티로 이동
@@ -38,6 +49,7 @@ class EvaluationExerciseFragment :
 
     private fun initSetting() {
 //        initActivityResultLauncher()
+        setTitle()
         setList()
         setScoreText()
         setOnClickBtn()
@@ -98,6 +110,8 @@ class EvaluationExerciseFragment :
                 val state = selectTextDescription //상태값 0 1 2 3 4
                 val imageUrl = profileImage //이미지
                 val point = score //점수
+                mainActivity.visibleTag()
+
                 //위의 값들 서버로 전달
             }
         }

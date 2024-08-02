@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
@@ -31,7 +32,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private fun setViewModel(){
         todayViewModel = ViewModelProvider(this)[TodayViewModel::class.java]
     }
-
     private fun setNavigation() {
 
         binding.mainBottomNavigationBar.itemIconTintList = null
@@ -67,6 +67,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.mainToolbarBackIv.setImageResource(imgSrc)
     }
 
+    fun updateToolbarLeftPlusImg(text : String , tag : String){
+        binding.mainToolbarSelectTagTv.visibility = View.GONE
+        binding.mainToolbarTitleTv.text = text
+        binding.mainToolbarSelectTagTv.text = tag
+    }
+
+    fun visibleTag(){
+        binding.mainToolbarTitleTv.visibility = View.VISIBLE
+    }
+
 
     // 툴바 중간 이미지 변경 함수
     fun updateToolbarMiddleImg(imgSrc: Int) {
@@ -76,6 +86,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     // 툴바 가장 오른쪽 이미지 변경 함수
     fun updateToolbarRightImg(imgSrc: Int) {
         binding.mainToolbarGoStepper.setImageResource(imgSrc)
+    }
+
+    fun setBg(){
+        binding.mainToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.Purple_Black_BG_1))
     }
 
 

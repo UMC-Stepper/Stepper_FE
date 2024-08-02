@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.today
 
+import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -7,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentEvaluationExerciseTodayBinding
+import com.example.umc_stepper.ui.MainActivity
 
 class EvaluationExerciseTodayFragment :
     BaseFragment<FragmentEvaluationExerciseTodayBinding>(R.layout.fragment_evaluation_exercise_today) {
@@ -22,11 +24,24 @@ class EvaluationExerciseTodayFragment :
     var profileImage = ""
     var score = 0
 
+    private lateinit var mainActivity : MainActivity
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
+
+    private fun setTitle(){
+        mainActivity.updateToolbarLeftPlusImg("07.09","무릎, 다리") //타이틀 세팅
+        mainActivity.setBg()
+    }
+
     override fun setLayout() {
         initSetting()
     }
 
     private fun initSetting() {
+        setTitle()
         setList()
         initScreen()
         setOnClickBtn()
@@ -125,6 +140,7 @@ class EvaluationExerciseTodayFragment :
     private fun setOnClickBtn() {
         with(binding) {
             fragmentEvaluationExerciseSuccessBt.setOnClickListener{
+                mainActivity.visibleTag()
                 val action = EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToEvaluationLogFragment()
                 findNavController().navigateSafe(action.actionId)
             }

@@ -24,6 +24,7 @@ import com.example.umc_stepper.databinding.FragmentMyExercise3Binding
 import com.example.umc_stepper.domain.model.request.AiVideoDto
 import com.example.umc_stepper.domain.model.response.AiVideoInfo
 import com.example.umc_stepper.domain.model.response.YouTubeVideo
+import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.today.home.TodayHomeFragmentDirections
 import com.example.umc_stepper.utils.GlobalApplication
 import com.example.umc_stepper.utils.extensions.navigateSafe
@@ -41,8 +42,19 @@ class MyExercise3Fragment :
     var url1 : String = ""
     var url2 : String = ""
 
-    override fun setLayout() {
+    private lateinit var mainActivity : MainActivity
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
+
+    private fun setTitle(){
+        mainActivity.updateToolbarTitle("나만의 운동 영상 저장하기") //타이틀 세팅
+    }
+
+    override fun setLayout() {
+        setTitle()
         initSetting()
         binding.fragmentMyExerciseCompleteInputBt.setOnClickListener {
             goExerciseCheck()
