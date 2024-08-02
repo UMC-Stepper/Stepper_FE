@@ -33,6 +33,20 @@
                     style="@style/sub_title_bold_16"
                     android:textColor="@color/White" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/main_toolbar_select_tag_tv"
+                android:background="@drawable/selector_tag"
+                android:text="무릎, 다리"
+                android:textColor="@color/Yellow_500"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="4dp"
+                android:visibility="gone"
+                android:paddingBottom="4dp"
+                android:layout_marginStart="16dp"/>
+
                 <ImageView
                     android:id="@+id/main_toolbar_go_stepper"
                     android:layout_width="wrap_content"
