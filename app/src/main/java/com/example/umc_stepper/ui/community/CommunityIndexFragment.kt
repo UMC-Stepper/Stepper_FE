@@ -11,9 +11,17 @@ class CommunityIndexFragment :BaseFragment<FragmentCommunityIndexBinding>(R.layo
         binding.commnunityIndexPostBtn.setOnClickListener {
             goCommunityIndexPost()
         }
+
+        binding.commnunityIndexCommentBtn.setOnClickListener {
+            goCommunityIndexComment()
+        }
     }
 
     private fun goCommunityIndexPost(){
         findNavController().navigate(R.id.action_communityIndexFragment_to_communityIndexPostFragment)
+    }
+
+    private fun goCommunityIndexComment(){
+        findNavController().navigate(R.id.action_communityIndexFragment_to_communityIndexCommentFragment)
     }
 }

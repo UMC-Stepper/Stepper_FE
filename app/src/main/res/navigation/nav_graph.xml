@@ -318,6 +318,9 @@
         <action
             android:id="@+id/action_communityIndexFragment_to_communityIndexPostFragment"
             app:destination="@id/communityIndexPostFragment" />
+        <action
+            android:id="@+id/action_communityIndexFragment_to_communityIndexCommentFragment"
+            app:destination="@id/communityIndexCommentFragment" />
     </fragment>
 
     <!-- 커뮤니티 목록 확인 - 작성 글 모음 -->
@@ -325,6 +328,13 @@
         android:id="@+id/communityIndexPostFragment"
         android:name="com.example.umc_stepper.ui.community.CommunityIndexPostFragment"
         android:label="CommunityIndexPostFragment"
+        tools:layout="@layout/fragment_community_index_post"/>
+
+    <!-- 커뮤니티 목록 확인 - 작성 댓글 모음 -->
+    <fragment
+        android:id="@+id/communityIndexCommentFragment"
+        android:name="com.example.umc_stepper.ui.community.CommunityIndexCommentFragment"
+        android:label="CommunityIndexCommentFragment"
         tools:layout="@layout/fragment_community_index_post"/>
 
 </navigation>
