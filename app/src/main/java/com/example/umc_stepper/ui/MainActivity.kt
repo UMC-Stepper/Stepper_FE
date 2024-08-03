@@ -47,12 +47,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         // 평가 일지 (달력) 프래그먼트 -> 메인 툴바 제거
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.todayHomeFragment || destination.id == R.id.exerciseCardLastFragment
-                || destination.id == R.id.exerciseCompleteFragment) {
-                binding.mainToolbar.visibility = View.GONE
-                binding.mainToolbar.setOnClickListener(null)
-            } else {
-                binding.mainToolbar.visibility = View.VISIBLE
+            val shouldHideToolbar = destination.id in setOf(
+                R.id.todayHomeFragment,
+                R.id.exerciseCardLastFragment,
+                R.id.exerciseCompleteFragment,
+                R.layout.fragment_community_home
+            )
+            binding.mainToolbar.apply {
+                visibility = if (shouldHideToolbar) View.GONE else View.VISIBLE
+                if (shouldHideToolbar) setOnClickListener(null)
             }
         }
     }
