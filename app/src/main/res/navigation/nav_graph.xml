@@ -52,6 +52,11 @@
         <action
             android:id="@+id/action_stepperFragment_to_fragmentLastExercise"
             app:destination="@id/fragmentLastExercise" />
+
+        <!-- 임시로 커뮤니티 목록화면 이동-->
+        <action
+            android:id="@+id/action_stepperFragment_to_communityIndexFragment"
+            app:destination="@id/communityIndexFragment" />
     </fragment>
 
     <!-- 투데이 평가일지-->
@@ -320,5 +325,43 @@
         android:name="com.example.umc_stepper.ui.community.weekly.CommunityWeeklyShowPostFragment"
         android:label="CommunityWeeklyShowPostFragment"
         tools:layout="@layout/fragment_community_weekly_show_post"/>
+
+    <!-- 커뮤니티 목록 확인 화면 -->
+    <fragment
+        android:id="@+id/communityIndexFragment"
+        android:name="com.example.umc_stepper.ui.community.CommunityIndexFragment"
+        android:label="CommunityIndexFragment"
+        tools:layout="@layout/fragment_community_index">
+        <action
+            android:id="@+id/action_communityIndexFragment_to_communityIndexPostFragment"
+            app:destination="@id/communityIndexPostFragment" />
+        <action
+            android:id="@+id/action_communityIndexFragment_to_communityIndexCommentFragment"
+            app:destination="@id/communityIndexCommentFragment" />
+        <action
+            android:id="@+id/action_communityIndexFragment_to_communityIndexScrapFragment"
+            app:destination="@id/communityIndexScrapFragment" />
+    </fragment>
+
+    <!-- 커뮤니티 목록 확인 - 작성 글 모음 -->
+    <fragment
+        android:id="@+id/communityIndexPostFragment"
+        android:name="com.example.umc_stepper.ui.community.CommunityIndexPostFragment"
+        android:label="CommunityIndexPostFragment"
+        tools:layout="@layout/fragment_community_index_post"/>
+
+    <!-- 커뮤니티 목록 확인 - 작성 댓글 모음 -->
+    <fragment
+        android:id="@+id/communityIndexCommentFragment"
+        android:name="com.example.umc_stepper.ui.community.CommunityIndexCommentFragment"
+        android:label="CommunityIndexCommentFragment"
+        tools:layout="@layout/fragment_community_index_post"/>
+
+    <!-- 커뮤니티 목록 확인 - 스크랩 모음 -->
+    <fragment
+        android:id="@+id/communityIndexScrapFragment"
+        android:name="com.example.umc_stepper.ui.community.CommunityIndexScrapFragment"
+        android:label="CommunityIndexScrapFragment"
+        tools:layout="@layout/fragment_community_index_post"/>
 
 </navigation>

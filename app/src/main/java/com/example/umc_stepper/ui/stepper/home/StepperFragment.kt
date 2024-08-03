@@ -80,6 +80,10 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
             DayData("1", false, false)
         )
         init()
+        //임시함수적용: 추후 아래의 goCommunityIndex()함수와 함께 꼭 삭제
+        binding.stepperMonthTitleTv.setOnClickListener {
+            goCommunityIndex()
+        }
     }
 
     private fun init() {
@@ -114,4 +118,8 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
         )
     }
 
+    //임시함수(꼭 추후삭제) 작성글목록확인으로 이동
+    private fun goCommunityIndex(){
+        findNavController().navigate(R.id.action_stepperFragment_to_communityIndexFragment)
+    }
 }
