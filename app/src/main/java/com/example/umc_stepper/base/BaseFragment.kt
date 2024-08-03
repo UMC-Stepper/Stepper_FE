@@ -45,15 +45,10 @@ abstract class BaseFragment<VB: ViewBinding>(@LayoutRes private val layoutRes: I
         // 현재 목적지와 이동할 목적지 비교 (목적지 중복 이동 방지)
         val action = currentDestination?.getAction(resId) ?: graph.getAction(resId)
         if (action != null && currentDestination?.id != action.destinationId) {
-            val action = currentDestination?.getAction(resId) ?: graph.getAction(resId)
-            if (action != null && currentDestination?.id != action.destinationId) {
-
-                val newNavOptions = navOptions?.let { NavOptions.Builder() } ?: NavOptions.Builder()
-                newNavOptions.setPopUpTo(action.destinationId, true)
-                navigate(resId, args, newNavOptions.build(), navExtras)
-            }
+            val newNavOptions = navOptions?.let { NavOptions.Builder() } ?: NavOptions.Builder()
+            newNavOptions.setPopUpTo(action.destinationId, true)    // 현재 프래그먼트 ~ 목적지 프래그먼트 사이의 백스택 제거
+            navigate(resId, args, newNavOptions.build(), navExtras)
         }
-
     }
 
     abstract fun setLayout()
