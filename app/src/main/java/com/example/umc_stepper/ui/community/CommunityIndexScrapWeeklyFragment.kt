@@ -8,7 +8,7 @@ import com.example.umc_stepper.databinding.FragmentCommunityIndexPostWeeklyBindi
 
 class CommunityIndexScrapWeeklyFragment :BaseFragment<FragmentCommunityIndexPostWeeklyBinding>(R.layout.fragment_community_index_post_weekly) {
     override fun setLayout() {
-        this.binding.communityIndexPostWeeklyTv.text="스크랩한 글이 없습니다."
+        binding.communityIndexPostWeeklyTv.text="스크랩한 글이 없습니다."
     }
 
 }

@@ -41,8 +41,8 @@ class CommunityIndexScrapFragment : Fragment() {
 
         val pagerAdapter = PagerFragmentStateAdapter(requireActivity())
         // 2개의 fragment add
-        pagerAdapter.addFragment(CommunityIndexCommentPartFragment())
-        pagerAdapter.addFragment(CommunityIndexCommentWeeklyFragment())
+        pagerAdapter.addFragment(CommunityIndexScrapPartFragment())
+        pagerAdapter.addFragment(CommunityIndexScrapWeeklyFragment())
 
         // adapter 연결
         viewPager.adapter = pagerAdapter
