@@ -28,4 +28,9 @@
 <!--        <item name="windowSplashScreenAnimatedIcon">@drawable/</item>-->
 <!--        <item name="postSplashScreenTheme">@style/Theme.UMC_Stepper</item>-->
 <!--    </style>-->
+
+    <style name="FabShapeAppearance">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">48dp</item> <!-- 원하는 모서리 반경을 설정합니다 -->
+    </style>
 </resources>
