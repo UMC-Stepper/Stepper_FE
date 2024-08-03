@@ -43,7 +43,6 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
     }
 
     private fun updateMainToolbar() {
-        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
         mainActivity.updateToolbarTitle("평가 일지")
     }
 

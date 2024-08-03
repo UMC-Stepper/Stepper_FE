@@ -35,12 +35,16 @@
         <action
             android:id="@+id/action_stepperFragment_to_additionalExerciseHomeFragment"
             app:destination="@id/additionalExerciseHomeFragment" />
-        <action
-            android:id="@+id/action_stepperFragment_to_fragmentEvaluationExercise"
-            app:destination="@id/fragmentEvaluationExercise" />
+
+        <!-- 오늘의 운동 리스트 수정하기 버튼 클릭 -->
         <action
             android:id="@+id/action_stepperFragment_to_fragmentAddExercise"
             app:destination="@id/fragmentAddExercise" />
+
+        <!-- 오늘의 운동 리스트 운동하기 클릭 -->
+        <action
+            android:id="@+id/action_stepperFragment_to_fragmentLastExercise"
+            app:destination="@id/fragmentLastExercise" />
     </fragment>
 
     <!-- 투데이 평가일지-->
@@ -164,6 +168,11 @@
         <action
             android:id="@+id/action_fragmentAdditionalExerciseSuccess_to_stepperFragment"
             app:destination="@id/stepperFragment" />
+
+        <!-- 운동 평가하기 클릭 -->
+        <action
+            android:id="@+id/action_fragmentAdditionalExerciseSuccess_to_fragmentEvaluationExercise"
+            app:destination="@id/fragmentEvaluationExercise" />
     </fragment>
 
     <!-- 스태퍼 추가운동 하기(영상 + 타이머) -->
@@ -172,6 +181,8 @@
         android:name="com.example.umc_stepper.ui.stepper.additional.LastExerciseFragment"
         android:label="AdditionalLastExercise"
         tools:layout="@layout/fragment_last_exercise">
+
+        <!-- 운동 완료/평가 화면으로 이동 -->
         <action
             android:id="@+id/action_fragmentLastExercise_to_fragmentAdditionalExerciseSuccess"
             app:destination="@id/fragmentAdditionalExerciseSuccess" />
