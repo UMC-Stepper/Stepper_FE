@@ -21,7 +21,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/community_index_post_menu_background"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="41dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="25dp"
         android:layout_marginTop="16dp"
@@ -35,7 +35,7 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/community_index_post_menu_tl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="33dp"
         android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
         android:backgroundTint="@color/Purple_Black_BG_2"
         app:tabBackground="@drawable/selector_community_index_tab"
