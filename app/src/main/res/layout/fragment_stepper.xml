@@ -22,13 +22,12 @@
         android:paddingTop="24dp"
         android:paddingBottom="16dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="94dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/pretendard_semi_bold"
         android:text="8월"
         android:textColor="@color/White"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@id/stepper_calendar_gv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +37,6 @@
         android:layout_width="match_parent"
         android:layout_height="320dp"
         android:background="@drawable/shape_rounded_purple_bg2_half_20dp"
-        android:layout_marginTop="168dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:numColumns="7"
@@ -52,7 +50,7 @@
         android:paddingEnd="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/stepper_month_title_tv"
         tools:listitem="@layout/item_stepper_home_calendar"/>
 
         <TextView
@@ -62,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:text="*단계 별 운동을 모두 완료하면 STEPPER 상태로 표시됩니다."
+            android:text="*오늘의 운동을 모두 완료하면 STEPPER 상태로 표시됩니다."
             android:textColor="@color/White"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/stepper_calendar_gv" />
@@ -74,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:text="단계 별 운동 모두 완료 시"
+            android:text="오늘의 운동 모두 완료 시"
             android:textColor="@color/White"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/stepper_explain1_tv" />
@@ -96,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="4dp"
-            android:text="단계 별 운동 미완료"
+            android:text="오늘의 운동 미완료"
             android:textColor="@color/White"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/stepper_explain2_tv" />
