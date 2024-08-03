@@ -33,6 +33,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="show_detail_alarm"><u>내용보기</u></string>
 
+    <!-- 커뮤니티 -->
+    <string name="Weekly_Mission">Weekly Mission</string>
+
     <string-array name="custom_months">
         <item>1월</item>
         <item>2월</item>

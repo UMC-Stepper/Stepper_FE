@@ -17,7 +17,14 @@
         android:id="@+id/communityHomeFragment"
         android:name="com.example.umc_stepper.ui.community.CommunityHomeFragment"
         android:label="fragment_community"
-        tools:layout="@layout/fragment_community_home" />
+        tools:layout="@layout/fragment_community_home" >
+        <action
+            android:id="@+id/action_communityHomeFragment_to_communityWeeklyHomeFragment"
+            app:destination="@id/communityWeeklyHomeFragment" />
+        <action
+            android:id="@+id/action_communityHomeFragment_to_communityWeeklyShowPostFragment"
+            app:destination="@id/communityWeeklyShowPostFragment" />
+    </fragment>
 
     <!-- 설정 프래그먼트 -->
     <fragment
@@ -308,6 +315,16 @@
             android:id="@+id/action_myExerciseCheckFragment_to_fragmentMyExercise2"
             app:destination="@id/fragmentMyExercise2" />
     </fragment>
+    <fragment
+        android:id="@+id/communityWeeklyHomeFragment"
+        android:name="com.example.umc_stepper.ui.community.weekly.CommunityWeeklyHomeFragment"
+        android:label="CommunityWeeklyHomeFragment"
+        tools:layout="@layout/fragment_community_weekly_home"/>
+    <fragment
+        android:id="@+id/communityWeeklyShowPostFragment"
+        android:name="com.example.umc_stepper.ui.community.weekly.CommunityWeeklyShowPostFragment"
+        android:label="CommunityWeeklyShowPostFragment"
+        tools:layout="@layout/fragment_community_weekly_show_post"/>
 
     <!-- 커뮤니티 목록 확인 화면 -->
     <fragment

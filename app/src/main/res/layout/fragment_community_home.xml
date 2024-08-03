@@ -95,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="50dp"
-                    android:text="Weekly Mission"
+                    android:text="@string/Weekly_Mission"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_logo_iv" />
 
