@@ -3,360 +3,356 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.community.CommunityHomeFragment">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/fragment_community_home_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/Purple_300"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/fragment_community_home_toolbar_back_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:src="@drawable/ic_toolbar_community_home" />
-
-            <TextView
-                android:id="@+id/fragment_community_home_toolbar_title_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:text="COMMUNITY"
-                style="@style/sub_title_bold_16" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/fragment_community_home_toolbar_select_tag_tv"
-                android:background="@drawable/selector_tag"
-                android:text="무릎, 다리"
-                android:textColor="@color/Yellow_500"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:paddingTop="4dp"
-                android:visibility="gone"
-                android:paddingBottom="4dp"
-                android:layout_marginStart="16dp"/>
-
-            <ImageView
-                android:id="@+id/fragment_community_home_toolbar_go_menu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:layout_gravity="end"
-                android:src="@drawable/ic_toolbar_community_menu"/>
-
-            <ImageView
-                android:id="@+id/fragment_community_home_toolbar_go_search"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
-                android:layout_gravity="end"
-                android:src="@drawable/ic_toolbar_community_search"/>
-
-        </com.google.android.material.appbar.MaterialToolbar>
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/fragment_community_home_top_constraint"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@drawable/shape_rounded_half_square_18dp"
-            android:backgroundTint="@color/Purple_300"
-            app:layout_constraintBottom_toTopOf="@+id/fragment_community_home_guideline_50"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_toolbar">
+            android:layout_height="match_parent"
+            tools:context=".ui.community.CommunityHomeFragment">
 
-            <ImageView
-                android:id="@+id/fragment_community_home_logo_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:src="@drawable/ic_community_logo"
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/fragment_community_home_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/Purple_300"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/fragment_community_home_toolbar_back_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:src="@drawable/ic_toolbar_community_home" />
+
+                <TextView
+                    android:id="@+id/fragment_community_home_toolbar_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="COMMUNITY"
+                    style="@style/sub_title_bold_16" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fragment_community_home_toolbar_select_tag_tv"
+                    android:background="@drawable/selector_tag"
+                    android:text="무릎, 다리"
+                    android:textColor="@color/Yellow_500"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="4dp"
+                    android:visibility="gone"
+                    android:paddingBottom="4dp"
+                    android:layout_marginStart="16dp"/>
+
+                <ImageView
+                    android:id="@+id/fragment_community_home_toolbar_go_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    android:layout_gravity="end"
+                    android:src="@drawable/ic_toolbar_community_menu"/>
+
+                <ImageView
+                    android:id="@+id/fragment_community_home_toolbar_go_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:layout_gravity="end"
+                    android:src="@drawable/ic_toolbar_community_search"/>
+            </com.google.android.material.appbar.MaterialToolbar>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_community_home_top_constraint"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/shape_rounded_half_square_18dp"
+                android:backgroundTint="@color/Purple_300"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_toolbar">
+
+                <ImageView
+                    android:id="@+id/fragment_community_home_logo_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:src="@drawable/ic_community_logo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/fragment_community_home_title_tv"
+                    style="@style/head_bold_18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="50dp"
+                    android:text="Weekly Mission"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_logo_iv" />
+
+                <TextView
+                    android:id="@+id/fragment_community_home_sub_title_tv"
+                    style="@style/body_regular_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="32dp"
+                    android:text="이번주에 비가 온다고 하네요.\n이럴 때 집에서 하는 나만의 운동을\n추천해 주세요"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/fragment_community_home_title_tv"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_title_tv" />
+
+                <ImageView
+                    android:id="@+id/fragment_community_home_go_weekly_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_go_community"
+                    android:layout_marginStart="34dp"
+                    android:layout_marginEnd="34dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_sub_title_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/fragment_community_home_sub_title_tv"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_community_home_sub_title_tv" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/fragment_community_home_title_tv"
+                android:id="@+id/fragment_community_home_part_title_tv"
                 style="@style/head_bold_18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="50dp"
-                android:text="Weekly Mission"
+                android:layout_marginTop="24dp"
+                android:text="Stepper’s Talking"
+                android:textColor="@color/White"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_logo_iv" />
+                app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_top_constraint" />
+
+            <ImageView
+                android:id="@+id/fragment_community_home_head_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_community_head"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="26dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_part_title_tv" />
 
             <TextView
-                android:id="@+id/fragment_community_home_sub_title_tv"
+                android:id="@+id/fragment_community_home_head_tv"
                 style="@style/body_regular_14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="32dp"
-                android:text="이번주에 비가 온다고 하네요.\n이럴 때 집에서 하는 나만의 운동을 추천해\n 주세요"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/fragment_community_home_title_tv"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_title_tv" />
+                android:layout_marginTop="8dp"
+                android:text="머리, 얼굴"
+                android:textColor="@color/White"
+                app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_head_iv"
+                app:layout_constraintStart_toStartOf="@+id/fragment_community_home_head_iv"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_head_iv" />
 
             <ImageView
-                android:id="@+id/fragment_community_home_go_weekly_iv"
+                android:id="@+id/fragment_community_home_chest_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_go_community"
-                android:layout_marginStart="34dp"
-                android:layout_marginEnd="34dp"
-                app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_sub_title_tv"
+                android:layout_marginStart="14dp"
+                android:src="@drawable/ic_community_chest"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_head_iv"
+                app:layout_constraintStart_toEndOf="@+id/fragment_community_home_head_iv"
+                app:layout_constraintTop_toTopOf="@+id/fragment_community_home_head_iv" />
+
+            <TextView
+                android:id="@+id/fragment_community_home_chest_tv"
+                style="@style/body_regular_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="가슴"
+                android:textColor="@color/White"
+                app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_chest_iv"
+                app:layout_constraintStart_toStartOf="@+id/fragment_community_home_chest_iv"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_chest_iv" />
+
+            <ImageView
+                android:id="@+id/fragment_community_home_stomach_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:src="@drawable/ic_community_stomach"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_chest_iv"
+                app:layout_constraintStart_toEndOf="@+id/fragment_community_home_chest_iv"
+                app:layout_constraintTop_toTopOf="@+id/fragment_community_home_chest_iv" />
+
+            <TextView
+                android:id="@+id/fragment_community_home_stomach_tv"
+                style="@style/body_regular_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="복부"
+                android:textColor="@color/White"
+                app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_stomach_iv"
+                app:layout_constraintStart_toStartOf="@+id/fragment_community_home_stomach_iv"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_stomach_iv" />
+
+            <ImageView
+                android:id="@+id/fragment_community_home_pelvis_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:src="@drawable/ic_community_pelvis"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_stomach_iv"
+                app:layout_constraintStart_toEndOf="@+id/fragment_community_home_stomach_iv"
+                app:layout_constraintTop_toTopOf="@+id/fragment_community_home_stomach_iv" />
+
+            <TextView
+                android:id="@+id/fragment_community_home_pelvis_tv"
+                style="@style/body_regular_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="골반"
+                android:textColor="@color/White"
+                app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_pelvis_iv"
+                app:layout_constraintStart_toStartOf="@+id/fragment_community_home_pelvis_iv"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_pelvis_iv" />
+
+            <ImageView
+                android:id="@+id/fragment_community_home_arm_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/ic_community_arm"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_pelvis_iv"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/fragment_community_home_sub_title_tv"
-                app:layout_constraintTop_toTopOf="@+id/fragment_community_home_sub_title_tv" />
+                app:layout_constraintStart_toEndOf="@+id/fragment_community_home_pelvis_iv"
+                app:layout_constraintTop_toTopOf="@+id/fragment_community_home_pelvis_iv" />
+
+            <TextView
+                android:id="@+id/fragment_community_home_arm_tv"
+                style="@style/body_regular_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="팔 어깨"
+                android:textColor="@color/White"
+                app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_arm_iv"
+                app:layout_constraintStart_toStartOf="@+id/fragment_community_home_arm_iv"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_arm_iv" />
+
+            <ImageView
+                android:id="@+id/fragment_community_home_leg_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_community_leg"
+                app:layout_constraintStart_toStartOf="@+id/fragment_community_home_head_tv"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_head_tv" />
+
+            <TextView
+                android:id="@+id/fragment_community_home_leg_tv"
+                style="@style/body_regular_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="무릎, 다리"
+                android:textColor="@color/White"
+                app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_leg_iv"
+                app:layout_constraintStart_toStartOf="@+id/fragment_community_home_leg_iv"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_leg_iv" />
+
+            <ImageView
+                android:id="@+id/fragment_community_home_back_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:src="@drawable/ic_community_back"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_leg_iv"
+                app:layout_constraintStart_toEndOf="@+id/fragment_community_home_leg_iv"
+                app:layout_constraintTop_toTopOf="@+id/fragment_community_home_leg_iv" />
+
+            <TextView
+                android:id="@+id/fragment_community_home_back_tv"
+                style="@style/body_regular_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="등"
+                android:textColor="@color/White"
+                app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_back_iv"
+                app:layout_constraintStart_toStartOf="@+id/fragment_community_home_back_iv"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_back_iv" />
+
+            <ImageView
+                android:id="@+id/fragment_community_home_waist_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:src="@drawable/ic_community_waist"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_back_iv"
+                app:layout_constraintStart_toEndOf="@+id/fragment_community_home_back_iv"
+                app:layout_constraintTop_toTopOf="@+id/fragment_community_home_back_iv" />
+
+            <TextView
+                android:id="@+id/fragment_community_home_waist_tv"
+                style="@style/body_regular_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="허리"
+                android:textColor="@color/White"
+                app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_waist_iv"
+                app:layout_constraintStart_toStartOf="@+id/fragment_community_home_waist_iv"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_waist_iv" />
+
+            <ImageView
+                android:id="@+id/fragment_community_home_foot_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="88dp"
+                android:src="@drawable/ic_community_foot"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_waist_iv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/fragment_community_home_waist_iv"
+                app:layout_constraintTop_toTopOf="@+id/fragment_community_home_waist_iv" />
+
+            <TextView
+                android:id="@+id/fragment_community_home_foot_tv"
+                style="@style/body_regular_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="발"
+                android:textColor="@color/White"
+                app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_foot_iv"
+                app:layout_constraintStart_toStartOf="@+id/fragment_community_home_foot_iv"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_foot_iv" />
+
+            <ImageView
+                android:id="@+id/fragment_community_home_banner_ad_iv"
+                android:layout_width="0dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginBottom="35dp"
+                android:src="@drawable/ic_community_logo"
+                android:background="@color/Purple_300"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_leg_tv" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/fragment_community_home_part_title_tv"
-            style="@style/head_bold_18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:text="Stepper’s Talking"
-            android:textColor="@color/White"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_top_constraint" />
-
-        <ImageView
-            android:id="@+id/fragment_community_home_head_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_community_head"
-            android:layout_marginTop="12dp"
-            android:layout_marginStart="26dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_part_title_tv" />
-
-        <TextView
-            android:id="@+id/fragment_community_home_head_tv"
-            style="@style/body_regular_14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="머리, 얼굴"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_head_iv"
-            app:layout_constraintStart_toStartOf="@+id/fragment_community_home_head_iv"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_head_iv" />
-
-        <ImageView
-            android:id="@+id/fragment_community_home_chest_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:src="@drawable/ic_community_chest"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_head_iv"
-            app:layout_constraintStart_toEndOf="@+id/fragment_community_home_head_iv"
-            app:layout_constraintTop_toTopOf="@+id/fragment_community_home_head_iv" />
-
-        <TextView
-            android:id="@+id/fragment_community_home_chest_tv"
-            style="@style/body_regular_14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="가슴"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_chest_iv"
-            app:layout_constraintStart_toStartOf="@+id/fragment_community_home_chest_iv"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_chest_iv" />
-
-        <ImageView
-            android:id="@+id/fragment_community_home_stomach_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:src="@drawable/ic_community_stomach"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_chest_iv"
-            app:layout_constraintStart_toEndOf="@+id/fragment_community_home_chest_iv"
-            app:layout_constraintTop_toTopOf="@+id/fragment_community_home_chest_iv" />
-
-        <TextView
-            android:id="@+id/fragment_community_home_stomach_tv"
-            style="@style/body_regular_14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="복부"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_stomach_iv"
-            app:layout_constraintStart_toStartOf="@+id/fragment_community_home_stomach_iv"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_stomach_iv" />
-
-        <ImageView
-            android:id="@+id/fragment_community_home_pelvis_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:src="@drawable/ic_community_pelvis"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_stomach_iv"
-            app:layout_constraintStart_toEndOf="@+id/fragment_community_home_stomach_iv"
-            app:layout_constraintTop_toTopOf="@+id/fragment_community_home_stomach_iv" />
-
-        <TextView
-            android:id="@+id/fragment_community_home_pelvis_tv"
-            style="@style/body_regular_14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="골반"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_pelvis_iv"
-            app:layout_constraintStart_toStartOf="@+id/fragment_community_home_pelvis_iv"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_pelvis_iv" />
-
-        <ImageView
-            android:id="@+id/fragment_community_home_arm_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginEnd="24dp"
-            android:src="@drawable/ic_community_arm"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_pelvis_iv"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/fragment_community_home_pelvis_iv"
-            app:layout_constraintTop_toTopOf="@+id/fragment_community_home_pelvis_iv" />
-
-        <TextView
-            android:id="@+id/fragment_community_home_arm_tv"
-            style="@style/body_regular_14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="팔 어깨"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_arm_iv"
-            app:layout_constraintStart_toStartOf="@+id/fragment_community_home_arm_iv"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_arm_iv" />
-
-        <ImageView
-            android:id="@+id/fragment_community_home_leg_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_community_leg"
-            app:layout_constraintStart_toStartOf="@+id/fragment_community_home_head_tv"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_head_tv" />
-
-        <TextView
-            android:id="@+id/fragment_community_home_leg_tv"
-            style="@style/body_regular_14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="무릎, 다리"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_leg_iv"
-            app:layout_constraintStart_toStartOf="@+id/fragment_community_home_leg_iv"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_leg_iv" />
-
-        <ImageView
-            android:id="@+id/fragment_community_home_back_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:src="@drawable/ic_community_back"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_leg_iv"
-            app:layout_constraintStart_toEndOf="@+id/fragment_community_home_leg_iv"
-            app:layout_constraintTop_toTopOf="@+id/fragment_community_home_leg_iv" />
-
-        <TextView
-            android:id="@+id/fragment_community_home_back_tv"
-            style="@style/body_regular_14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="등"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_back_iv"
-            app:layout_constraintStart_toStartOf="@+id/fragment_community_home_back_iv"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_back_iv" />
-
-        <ImageView
-            android:id="@+id/fragment_community_home_waist_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:src="@drawable/ic_community_waist"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_back_iv"
-            app:layout_constraintStart_toEndOf="@+id/fragment_community_home_back_iv"
-            app:layout_constraintTop_toTopOf="@+id/fragment_community_home_back_iv" />
-
-        <TextView
-            android:id="@+id/fragment_community_home_waist_tv"
-            style="@style/body_regular_14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="허리"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_waist_iv"
-            app:layout_constraintStart_toStartOf="@+id/fragment_community_home_waist_iv"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_waist_iv" />
-
-        <ImageView
-            android:id="@+id/fragment_community_home_foot_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginEnd="88dp"
-            android:src="@drawable/ic_community_foot"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_waist_iv"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/fragment_community_home_waist_iv"
-            app:layout_constraintTop_toTopOf="@+id/fragment_community_home_waist_iv" />
-
-        <TextView
-            android:id="@+id/fragment_community_home_foot_tv"
-            style="@style/body_regular_14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="발"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_foot_iv"
-            app:layout_constraintStart_toStartOf="@+id/fragment_community_home_foot_iv"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_foot_iv" />
-
-        <ImageView
-            android:id="@+id/fragment_community_home_banner_ad_iv"
-            android:layout_width="0dp"
-            android:layout_height="75dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginTop="35dp"
-            android:layout_marginBottom="35dp"
-            android:src="@drawable/ic_community_logo"
-            android:background="@color/Purple_300"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_leg_tv" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/fragment_community_home_guideline_50"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </androidx.core.widget.NestedScrollView>
 </layout>
