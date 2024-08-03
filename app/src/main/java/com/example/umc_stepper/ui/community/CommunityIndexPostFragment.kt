@@ -50,8 +50,12 @@ class CommunityIndexPostFragment : Fragment() {
         })
 
         // tablayout 붙이기
-        TabLayoutMediator(tabLayout, viewPager){ tab, position ->
-            tab.text = "Tab ${position+1}"
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = when (position) {
+                0 -> "부위별 커뮤니티 글"
+                1 -> "Weekly Mission"
+                else -> "Tab ${position + 1}"
+            }
         }.attach()
     }
 
