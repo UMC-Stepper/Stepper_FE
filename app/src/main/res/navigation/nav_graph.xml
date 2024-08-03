@@ -14,10 +14,10 @@
 
     <!-- 커뮤니티 프래그먼트 -->
     <fragment
-        android:id="@+id/communityFragment"
-        android:name="com.example.umc_stepper.ui.community.CommunityFragment"
+        android:id="@+id/communityHomeFragment"
+        android:name="com.example.umc_stepper.ui.community.CommunityHomeFragment"
         android:label="fragment_community"
-        tools:layout="@layout/fragment_community" />
+        tools:layout="@layout/fragment_community_home" />
 
     <!-- 설정 프래그먼트 -->
     <fragment
