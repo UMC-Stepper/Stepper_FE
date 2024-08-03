@@ -17,7 +17,11 @@
         android:id="@+id/communityHomeFragment"
         android:name="com.example.umc_stepper.ui.community.CommunityHomeFragment"
         android:label="fragment_community"
-        tools:layout="@layout/fragment_community_home" />
+        tools:layout="@layout/fragment_community_home" >
+        <action
+            android:id="@+id/action_communityHomeFragment_to_communityWeeklyHomeFragment"
+            app:destination="@id/communityWeeklyHomeFragment" />
+    </fragment>
 
     <!-- 설정 프래그먼트 -->
     <fragment
@@ -303,5 +307,10 @@
             android:id="@+id/action_myExerciseCheckFragment_to_fragmentMyExercise2"
             app:destination="@id/fragmentMyExercise2" />
     </fragment>
+    <fragment
+        android:id="@+id/communityWeeklyHomeFragment"
+        android:name="com.example.umc_stepper.ui.community.weekly.CommunityWeeklyHomeFragment"
+        android:label="CommunityWeeklyHomeFragment"
+        tools:layout="@layout/fragment_community_weekly_home"/>
 
 </navigation>
