@@ -29,8 +29,15 @@
 <!--        <item name="postSplashScreenTheme">@style/Theme.UMC_Stepper</item>-->
 <!--    </style>-->
 
+    <!-- fab -->
     <style name="FabShapeAppearance">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">48dp</item> <!-- 원하는 모서리 반경을 설정합니다 -->
     </style>
+
+    <!--  ImageView Style  -->
+    <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>
