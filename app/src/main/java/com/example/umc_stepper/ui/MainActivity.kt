@@ -51,7 +51,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 R.id.todayHomeFragment,
                 R.id.exerciseCardLastFragment,
                 R.id.exerciseCompleteFragment,
-                R.layout.fragment_community_home
+                R.id.communityHomeFragment
             )
             binding.mainToolbar.apply {
                 visibility = if (shouldHideToolbar) View.GONE else View.VISIBLE
