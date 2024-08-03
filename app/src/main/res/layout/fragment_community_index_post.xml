@@ -18,13 +18,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/community_index_post_menu_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginTop="16dp"
+        android:padding="4dp"
+        android:background="@drawable/shape_rounded_square_purple700_40dp"
+        android:backgroundTint="@color/Purple_Black_BG_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/community_index_post_title_tv">
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/community_index_post_menu_tl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="25dp"
         android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
         android:backgroundTint="@color/Purple_Black_BG_2"
         app:tabBackground="@drawable/selector_community_index_tab"
@@ -34,15 +45,17 @@
         app:tabIndicatorHeight="0dp"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/community_index_post_title_tv" />
+        app:layout_constraintEnd_toEndOf="@id/community_index_post_menu_background"
+        app:layout_constraintStart_toStartOf="@id/community_index_post_menu_background"
+        app:layout_constraintTop_toTopOf="@id/community_index_post_menu_background"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/community_index_post_vp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/community_index_post_menu_tl"/>
+        app:layout_constraintTop_toBottomOf="@id/community_index_post_menu_background"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
