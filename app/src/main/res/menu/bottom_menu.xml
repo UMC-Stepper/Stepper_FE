@@ -14,7 +14,7 @@
         android:icon="@drawable/nav_stepper_selector"
         android:title="Stepper"/>
     <item
-        android:id="@+id/communityFragment"
+        android:id="@+id/communityHomeFragment"
         android:icon="@drawable/nav_community_selector"
         android:title="Community"/>
     <item

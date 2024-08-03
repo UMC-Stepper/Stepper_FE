@@ -14,7 +14,7 @@
 
     <!-- 커뮤니티 프래그먼트 -->
     <fragment
-        android:id="@+id/communityFragment"
+        android:id="@+id/communityHomeFragment"
         android:name="com.example.umc_stepper.ui.community.CommunityHomeFragment"
         android:label="fragment_community"
         tools:layout="@layout/fragment_community_home" />
