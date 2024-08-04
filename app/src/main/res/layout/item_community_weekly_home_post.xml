@@ -110,8 +110,8 @@
 
         <ImageView
             android:id="@+id/item_weekly_home_desc_iv"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="20dp"
