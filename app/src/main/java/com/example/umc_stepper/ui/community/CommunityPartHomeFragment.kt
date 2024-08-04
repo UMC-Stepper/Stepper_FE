@@ -12,6 +12,7 @@ import com.example.umc_stepper.R
 import com.example.umc_stepper.ui.MainActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlin.text.Typography.nbsp
 
 class CommunityPartHomeFragment : Fragment() {
 
@@ -62,10 +63,10 @@ class CommunityPartHomeFragment : Fragment() {
         // tablayout 붙이기
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = when (position) {
-                0 -> "무물보"
-                1 -> "건강정보"
-                2 -> "자유 Talk"
-                3 -> "동기부여 Talk"
+                0 -> " 무물보 "
+                1 -> " 건강정보 "
+                2 -> "자유  Talk"
+                3 -> " 동기부여  Talk "
                 else -> "Tab ${position + 1}"
             }
         }.attach()
