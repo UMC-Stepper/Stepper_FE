@@ -336,32 +336,33 @@
             android:id="@+id/action_communityIndexFragment_to_communityIndexPostFragment"
             app:destination="@id/communityIndexPostFragment" />
         <action
-            android:id="@+id/action_communityIndexFragment_to_communityIndexCommentFragment"
-            app:destination="@id/communityIndexCommentFragment" />
+            android:id="@+id/action_communityIndexFragment_to_communityMyCommentsFragment"
+            app:destination="@id/communityMyCommentsFragment" />
         <action
-            android:id="@+id/action_communityIndexFragment_to_communityIndexScrapFragment"
-            app:destination="@id/communityIndexScrapFragment" />
+            android:id="@+id/action_communityIndexFragment_to_communityMyScrapFragment"
+            app:destination="@id/communityMyScrapFragment" />
     </fragment>
 
-    <!-- 커뮤니티 목록 확인 - 작성 글 모음 -->
+    <!-- 커뮤니티 목록 확인 - 작성한 글 모음 -->
     <fragment
         android:id="@+id/communityIndexPostFragment"
         android:name="com.example.umc_stepper.ui.community.CommunityIndexPostFragment"
         android:label="CommunityIndexPostFragment"
         tools:layout="@layout/fragment_community_index_post"/>
 
-    <!-- 커뮤니티 목록 확인 - 작성 댓글 모음 -->
+    <!-- 커뮤니티 목록 확인 - 작성한 댓글 모음 -->
     <fragment
-        android:id="@+id/communityIndexCommentFragment"
-        android:name="com.example.umc_stepper.ui.community.CommunityIndexCommentFragment"
-        android:label="CommunityIndexCommentFragment"
-        tools:layout="@layout/fragment_community_index_post"/>
+        android:id="@+id/communityMyCommentsFragment"
+        android:name="com.example.umc_stepper.ui.community.savedcontents.CommunityMyCommentsFragment"
+        android:label="CommunityMyCommentsFragment"
+        tools:layout="@layout/fragment_community_my_comments"/>
 
     <!-- 커뮤니티 목록 확인 - 스크랩 모음 -->
     <fragment
-        android:id="@+id/communityIndexScrapFragment"
-        android:name="com.example.umc_stepper.ui.community.CommunityIndexScrapFragment"
-        android:label="CommunityIndexScrapFragment"
-        tools:layout="@layout/fragment_community_index_post"/>
+        android:id="@+id/communityMyScrapFragment"
+        android:name="com.example.umc_stepper.ui.community.savedcontents.CommunityMyScrapFragment"
+        android:label="CommunityMyScrapFragment"
+        tools:layout="@layout/fragment_community_my_scrap"/>
+
 
 </navigation>

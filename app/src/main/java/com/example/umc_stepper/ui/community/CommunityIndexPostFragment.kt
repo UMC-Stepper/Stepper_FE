@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.community
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.umc_stepper.R
+import com.example.umc_stepper.ui.MainActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -15,6 +17,12 @@ class CommunityIndexPostFragment : Fragment() {
 
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
+    private lateinit var mainActivity: MainActivity
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,10 +33,10 @@ class CommunityIndexPostFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view:View = inflater.inflate(R.layout.fragment_community_index_post, container, false)
         viewPager = view.findViewById(R.id.community_index_post_vp)
         tabLayout = view.findViewById(R.id.community_index_post_menu_tl)
+        updateToolbar()
         return view
     }
 
@@ -57,6 +65,12 @@ class CommunityIndexPostFragment : Fragment() {
                 else -> "Tab ${position + 1}"
             }
         }.attach()
+    }
+    private fun updateToolbar() {
+        mainActivity.updateToolbarTitle("목록")
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_toolbar_community_home)
+        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_community_search)
+        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_community_menu)
     }
 
 }
