@@ -31,7 +31,7 @@
         android:id="@+id/settingsFragment"
         android:name="com.example.umc_stepper.ui.settings.SettingsHomeFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings_home" />
 
     <!-- 스패터 홈 -->
     <fragment
