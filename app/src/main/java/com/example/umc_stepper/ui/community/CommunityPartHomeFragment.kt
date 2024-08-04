@@ -12,7 +12,6 @@ import com.example.umc_stepper.R
 import com.example.umc_stepper.ui.MainActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlin.text.Typography.nbsp
 
 class CommunityPartHomeFragment : Fragment() {
 
