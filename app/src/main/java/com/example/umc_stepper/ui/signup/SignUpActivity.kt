@@ -102,12 +102,17 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
                 setBounds(0, 0, intrinsicWidth, intrinsicHeight)
             }
 
-        if (pwd == pwdCheck) {
+        if (pwdCheck.isEmpty()) {
             binding.signupPwdErrorTv.visibility = View.GONE
-            binding.signupPwdCheckEt.setCompoundDrawables(null, null, drawableOk, null)
+            binding.signupPwdCheckEt.setCompoundDrawables(null, null, null, null)
         } else {
-            binding.signupPwdErrorTv.visibility = View.VISIBLE
-            binding.signupPwdCheckEt.setCompoundDrawables(null, null, drawableError, null)
+            if (pwd == pwdCheck) {
+                binding.signupPwdErrorTv.visibility = View.GONE
+                binding.signupPwdCheckEt.setCompoundDrawables(null, null, drawableOk, null)
+            } else {
+                binding.signupPwdErrorTv.visibility = View.VISIBLE
+                binding.signupPwdCheckEt.setCompoundDrawables(null, null, drawableError, null)
+            }
         }
     }
 
