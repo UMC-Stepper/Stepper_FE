@@ -5,22 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
+import com.example.umc_stepper.base.BaseFragment
+import com.example.umc_stepper.databinding.FragmentSettingsHomeBinding
 
-class SettingsHomeFragment : Fragment() {
+class SettingsHomeFragment : BaseFragment<FragmentSettingsHomeBinding>(R.layout.fragment_settings_home) {
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun setLayout() {
+        setOnClick()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings_home, container, false)
+    // 화면 테스트 용
+    private fun setOnClick() {
+        binding.fragmentSettingHomeTv.setOnClickListener {
+            val action = SettingsHomeFragmentDirections.actionSettingsFragmentToSettingsShowProfileFragment()
+            findNavController().navigate(action.actionId)
+        }
     }
 
 }
