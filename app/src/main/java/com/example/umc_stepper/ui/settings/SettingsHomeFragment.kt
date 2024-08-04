@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.umc_stepper.R
 
-class SettingsFragment : Fragment() {
+class SettingsHomeFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
