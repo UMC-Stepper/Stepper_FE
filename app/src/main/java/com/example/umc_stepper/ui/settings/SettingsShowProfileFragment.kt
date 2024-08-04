@@ -18,7 +18,7 @@ class SettingsShowProfileFragment : BaseFragment<FragmentSettingsShowProfileBind
 
     private fun setButton() {
         binding.fragmentSettingsShowEditBtn.setOnClickListener {
-            val action = SettingsHomeFragmentDirections.actionSettingsFragmentToSettingsShowProfileFragment()
+            val action = SettingsShowProfileFragmentDirections.actionSettingsShowProfileFragmentToSettingsEditProfileFragment()
             findNavController().navigate(action.actionId)
         }
     }
