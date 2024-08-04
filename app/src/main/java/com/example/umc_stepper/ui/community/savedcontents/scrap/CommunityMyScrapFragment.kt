@@ -1,12 +1,12 @@
-package com.example.umc_stepper.ui.community.savedcontents
+package com.example.umc_stepper.ui.community.savedcontents.scrap
 
 import android.content.Context
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
-import com.example.umc_stepper.databinding.FragmentCommunityMyCommentsBinding
+import com.example.umc_stepper.databinding.FragmentCommunityMyScrapBinding
 import com.example.umc_stepper.ui.MainActivity
 
-class CommunityMyCommentsFragment : BaseFragment<FragmentCommunityMyCommentsBinding>(R.layout.fragment_community_my_comments) {
+class CommunityMyScrapFragment : BaseFragment<FragmentCommunityMyScrapBinding>(R.layout.fragment_community_my_scrap) {
 
     private lateinit var mainActivity: MainActivity
 

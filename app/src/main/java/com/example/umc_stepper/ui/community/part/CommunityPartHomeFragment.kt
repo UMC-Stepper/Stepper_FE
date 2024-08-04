@@ -1,4 +1,4 @@
-package com.example.umc_stepper.ui.community
+package com.example.umc_stepper.ui.community.part
 
 import android.content.Context
 import android.os.Bundle
@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.umc_stepper.R
 import com.example.umc_stepper.ui.MainActivity
+import com.example.umc_stepper.ui.community.savedcontents.post.PagerFragmentStateAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 

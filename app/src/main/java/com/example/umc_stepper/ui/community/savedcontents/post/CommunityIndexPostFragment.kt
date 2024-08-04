@@ -1,4 +1,4 @@
-package com.example.umc_stepper.ui.community
+package com.example.umc_stepper.ui.community.savedcontents.post
 
 import android.content.Context
 import android.os.Bundle
