@@ -8,10 +8,10 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/community_index_post_part_tv"
+        android:id="@+id/community_part_home_tab_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="198dp"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/pretendard_semi_bold"
         android:text="작성한 글이 없습니다."
         android:textColor="@color/White"

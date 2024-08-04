@@ -187,7 +187,7 @@
             app:tabTextAppearance="@style/body_semi_bold_12"
             app:tabTextColor="@color/White"
             app:tabIndicatorHeight="0dp"
-            app:tabGravity="fill"
+            app:tabGravity="start"
             app:tabMode="fixed"
             app:layout_constraintEnd_toEndOf="@id/community_part_home_background"
             app:layout_constraintStart_toStartOf="@id/community_part_home_background"
