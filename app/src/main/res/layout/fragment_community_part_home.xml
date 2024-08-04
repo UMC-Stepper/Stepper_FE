@@ -182,16 +182,16 @@
             android:layout_height="33dp"
             android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
             android:backgroundTint="@color/Purple_Black_BG_2"
+            app:layout_constraintEnd_toEndOf="@id/community_part_home_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/community_part_home_background"
             app:tabBackground="@drawable/selector_community_index_tab"
+            app:tabGravity="fill"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="fixed"
             app:tabSelectedTextColor="@color/Black_500"
             app:tabTextAppearance="@style/body_semi_bold_12"
-            app:tabTextColor="@color/White"
-            app:tabIndicatorHeight="0dp"
-            app:tabGravity="start"
-            app:tabMode="fixed"
-            app:layout_constraintEnd_toEndOf="@id/community_part_home_background"
-            app:layout_constraintStart_toStartOf="@id/community_part_home_background"
-            app:layout_constraintTop_toTopOf="@id/community_part_home_background"/>
+            app:tabTextColor="@color/White" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
