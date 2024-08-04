@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/community_part_home_title_tv"
+        style="@style/head_bold_18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="복부 Community"
+        android:textColor="@color/White"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/community_part_home_warning_cl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/shape_rounded_square_purple400_20dp"
+        android:backgroundTint="@color/Purple_300"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/community_part_home_title_tv">
+
+        <TextView
+            android:id="@+id/community_part_home_warning_title_tv"
+            style="@style/sub_title_semi_bold_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:text="여름철 재활운동 주의사항"
+            android:textColor="@color/Black_500"
+            app:layout_constraintEnd_toEndOf="@id/community_part_home_warning_cl"
+            app:layout_constraintStart_toStartOf="@id/community_part_home_warning_cl"
+            app:layout_constraintTop_toTopOf="@id/community_part_home_warning_cl" />
+
+        <ImageView
+            android:id="@+id/community_part_home_warning1_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_community_part_home_warning1"
+            app:layout_constraintEnd_toStartOf="@+id/community_part_home_warning2_iv"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/community_part_home_warning_title_tv" />
+
+        <TextView
+            android:id="@+id/community_part_home_warning1_tv"
+            style="@style/body_regular_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="운동 강도를 10-20%\n낮추고 자주 휴식해 주세요"
+            app:layout_constraintEnd_toEndOf="@id/community_part_home_warning1_iv"
+            app:layout_constraintStart_toStartOf="@id/community_part_home_warning1_iv"
+            app:layout_constraintTop_toBottomOf="@id/community_part_home_warning1_iv" />
+
+        <ImageView
+            android:id="@+id/community_part_home_warning2_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_community_part_home_warning2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/community_part_home_warning1_iv"
+            app:layout_constraintTop_toBottomOf="@id/community_part_home_warning_title_tv" />
+
+        <TextView
+            android:id="@+id/community_part_home_warning2_tv"
+            style="@style/body_regular_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="야외 운동 시 해가 진\n오후에 운동을 해주세요"
+            app:layout_constraintEnd_toEndOf="@id/community_part_home_warning2_iv"
+            app:layout_constraintStart_toStartOf="@id/community_part_home_warning2_iv"
+            app:layout_constraintTop_toBottomOf="@id/community_part_home_warning2_iv" />
+
+        <ImageView
+            android:id="@+id/community_part_home_warning3_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_community_part_home_warning3"
+            app:layout_constraintEnd_toStartOf="@+id/community_part_home_warning4_iv"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/community_part_home_warning1_tv" />
+
+        <TextView
+            android:id="@+id/community_part_home_warning3_tv"
+            style="@style/body_regular_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="갈증이 심하지 않더라도\n꾸준히 수분을 챙겨주세요"
+            app:layout_constraintEnd_toEndOf="@id/community_part_home_warning3_iv"
+            app:layout_constraintStart_toStartOf="@id/community_part_home_warning3_iv"
+            app:layout_constraintTop_toBottomOf="@id/community_part_home_warning3_iv" />
+
+        <ImageView
+            android:id="@+id/community_part_home_warning4_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/ic_community_part_home_warning4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/community_part_home_warning3_iv"
+            app:layout_constraintTop_toBottomOf="@id/community_part_home_warning2_tv" />
+
+        <TextView
+            android:id="@+id/community_part_home_warning4_tv"
+            style="@style/body_regular_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="통풍 잘되는 기능성\n운동복을 착용해 주세요"
+            app:layout_constraintEnd_toEndOf="@id/community_part_home_warning4_iv"
+            app:layout_constraintStart_toStartOf="@id/community_part_home_warning4_iv"
+            app:layout_constraintTop_toBottomOf="@id/community_part_home_warning4_iv" />
+
+        <ImageView
+            android:id="@+id/community_part_home_warning5_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_community_part_home_warning5"
+            app:layout_constraintEnd_toEndOf="@id/community_part_home_warning3_iv"
+            app:layout_constraintStart_toStartOf="@id/community_part_home_warning3_iv"
+            app:layout_constraintTop_toBottomOf="@+id/community_part_home_warning3_tv"/>
+
+        <TextView
+            android:id="@+id/community_part_home_warning5_tv"
+            style="@style/body_regular_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:text="1주일 정도 몸이 적응할\n여유를 주세요"
+            app:layout_constraintBottom_toBottomOf="@id/community_part_home_warning_cl"
+            app:layout_constraintEnd_toEndOf="@id/community_part_home_warning5_iv"
+            app:layout_constraintStart_toStartOf="@id/community_part_home_warning5_iv"
+            app:layout_constraintTop_toBottomOf="@id/community_part_home_warning5_iv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
