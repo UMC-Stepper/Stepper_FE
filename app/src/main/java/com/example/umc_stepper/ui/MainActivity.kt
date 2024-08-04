@@ -1,17 +1,14 @@
 package com.example.umc_stepper.ui
 
-import android.os.Bundle
+import android.content.Context
+import android.view.MotionEvent
 import android.view.View
-import androidx.activity.enableEdgeToEdge
-import androidx.annotation.IdRes
-import androidx.appcompat.app.AppCompatActivity
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.umc_stepper.R
@@ -29,6 +26,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private lateinit var navController: NavController
 
     override fun setLayout() {
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         setViewModel()
         setNavigation()
     }
@@ -77,6 +75,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 if (shouldHideToolbar) setOnClickListener(null)
             }
         }
+    }
+
+    // 외부 터치시 키보드 숨기기, 포커스 제거
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        val imm: InputMethodManager = ContextCompat.getSystemService(this, InputMethodManager::class.java) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+
+        if (currentFocus is EditText) {
+            currentFocus!!.clearFocus()
+        }
+
+        return super.dispatchTouchEvent(ev)
     }
 
     // 툴바 타이틀 변경 함수
