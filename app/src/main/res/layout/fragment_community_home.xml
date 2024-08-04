@@ -230,10 +230,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
-                android:layout_marginEnd="24dp"
                 android:src="@drawable/ic_community_arm"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_pelvis_iv"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/fragment_community_home_pelvis_iv"
                 app:layout_constraintTop_toTopOf="@+id/fragment_community_home_pelvis_iv" />
 
@@ -319,10 +317,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
-                android:layout_marginEnd="88dp"
                 android:src="@drawable/ic_community_foot"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_waist_iv"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/fragment_community_home_waist_iv"
                 app:layout_constraintTop_toTopOf="@+id/fragment_community_home_waist_iv" />
 
