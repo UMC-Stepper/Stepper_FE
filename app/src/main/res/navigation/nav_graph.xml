@@ -333,7 +333,7 @@
     <!-- 커뮤니티 목록 확인 화면 -->
     <fragment
         android:id="@+id/communityIndexFragment"
-        android:name="com.example.umc_stepper.ui.community.CommunityIndexFragment"
+        android:name="com.example.umc_stepper.ui.community.savedcontents.post.CommunityIndexFragment"
         android:label="CommunityIndexFragment"
         tools:layout="@layout/fragment_community_index">
         <action
@@ -350,28 +350,28 @@
     <!-- 커뮤니티 목록 확인 - 작성한 글 모음 -->
     <fragment
         android:id="@+id/communityIndexPostFragment"
-        android:name="com.example.umc_stepper.ui.community.CommunityIndexPostFragment"
+        android:name="com.example.umc_stepper.ui.community.savedcontents.post.CommunityIndexPostFragment"
         android:label="CommunityIndexPostFragment"
         tools:layout="@layout/fragment_community_index_post"/>
 
     <!-- 커뮤니티 목록 확인 - 작성한 댓글 모음 -->
     <fragment
         android:id="@+id/communityMyCommentsFragment"
-        android:name="com.example.umc_stepper.ui.community.savedcontents.CommunityMyCommentsFragment"
+        android:name="com.example.umc_stepper.ui.community.savedcontents.comments.CommunityMyCommentsFragment"
         android:label="CommunityMyCommentsFragment"
         tools:layout="@layout/fragment_community_my_comments"/>
 
     <!-- 커뮤니티 목록 확인 - 스크랩 모음 -->
     <fragment
         android:id="@+id/communityMyScrapFragment"
-        android:name="com.example.umc_stepper.ui.community.savedcontents.CommunityMyScrapFragment"
+        android:name="com.example.umc_stepper.ui.community.savedcontents.scrap.CommunityMyScrapFragment"
         android:label="CommunityMyScrapFragment"
         tools:layout="@layout/fragment_community_my_scrap"/>
 
     <!-- 커뮤니티 부위별 게시판 홈 -->
     <fragment
         android:id="@+id/communityPartHomeFragment"
-        android:name="com.example.umc_stepper.ui.community.CommunityPartHomeFragment"
+        android:name="com.example.umc_stepper.ui.community.part.CommunityPartHomeFragment"
         android:label="CommunityPartHomeFragment"
         tools:layout="@layout/fragment_community_part_home"/>
 

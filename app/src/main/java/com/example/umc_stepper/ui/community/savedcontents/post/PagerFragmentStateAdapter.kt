@@ -1,4 +1,4 @@
-package com.example.umc_stepper.ui.community
+package com.example.umc_stepper.ui.community.savedcontents.post
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

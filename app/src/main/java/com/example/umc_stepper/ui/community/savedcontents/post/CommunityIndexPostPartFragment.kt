@@ -1,4 +1,4 @@
-package com.example.umc_stepper.ui.community
+package com.example.umc_stepper.ui.community.savedcontents.post
 
 import android.view.WindowManager
 import com.example.umc_stepper.R

@@ -1,6 +1,5 @@
-package com.example.umc_stepper.ui.community
+package com.example.umc_stepper.ui.community.part
 
-import android.view.WindowManager
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentCommunityPartHomeTabBinding

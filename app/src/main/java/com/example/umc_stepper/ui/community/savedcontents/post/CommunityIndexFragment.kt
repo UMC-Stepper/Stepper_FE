@@ -1,7 +1,6 @@
-package com.example.umc_stepper.ui.community
+package com.example.umc_stepper.ui.community.savedcontents.post
 
 import android.content.Context
-import android.view.WindowManager
 import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
