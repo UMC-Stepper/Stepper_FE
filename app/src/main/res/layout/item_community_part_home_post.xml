@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/Purple_Black_BG_2"
+        android:background="@drawable/shape_rounded_square_register_field_20dp_stroke_1">
+
+        <TextView
+            android:id="@+id/item_weekly_home_title"
+            style="@style/head_bold_18"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="이 운동을 자주 해주면 자세가 달라져요"
+            android:textColor="@color/White"
+            android:textSize="14sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toStartOf="@+id/item_weekly_home_guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_weekly_home_desc"
+            style="@style/body_regular_12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="평소에는 잘 안하다가 요즘에 새롭게 빠진 운동을 추천해 주세요! 일상에서 쉽게 접근할 수 있고, 초보자도 즐길 수 있는 운동이라면 더욱 좋겠습니다!"
+            android:textColor="@color/White"
+            android:textSize="14sp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:layout_constraintStart_toStartOf="@+id/item_weekly_home_title"
+            app:layout_constraintEnd_toEndOf="@id/item_weekly_home_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/item_weekly_home_title" />
+
+        <ImageView
+            android:id="@+id/item_weekly_home_thumbs_up_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="12dp"
+            android:src="@drawable/ic_thumbs_up"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/item_weekly_home_desc"
+            app:layout_constraintTop_toBottomOf="@+id/item_weekly_home_desc" />
+        <TextView
+            android:id="@+id/item_weekly_home_thumbs_up_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="7"
+            style="@style/body_regular_12"
+            android:textColor="@color/Yellow_300"
+            app:layout_constraintStart_toEndOf="@+id/item_weekly_home_thumbs_up_iv"
+            app:layout_constraintTop_toTopOf="@+id/item_weekly_home_thumbs_up_iv"
+            app:layout_constraintBottom_toBottomOf="@+id/item_weekly_home_thumbs_up_iv"/>
+
+        <ImageView
+            android:id="@+id/item_weekly_home_scraps_up_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_scraps_up"
+            app:layout_constraintBottom_toBottomOf="@+id/item_weekly_home_thumbs_up_tv"
+            app:layout_constraintStart_toEndOf="@+id/item_weekly_home_thumbs_up_tv"
+            app:layout_constraintTop_toTopOf="@+id/item_weekly_home_thumbs_up_tv" />
+        <TextView
+            android:id="@+id/item_weekly_home_scraps_up_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="2"
+            style="@style/body_regular_12"
+            android:textColor="@color/Yellow_300"
+            app:layout_constraintStart_toEndOf="@+id/item_weekly_home_scraps_up_iv"
+            app:layout_constraintTop_toTopOf="@+id/item_weekly_home_scraps_up_iv"
+            app:layout_constraintBottom_toBottomOf="@+id/item_weekly_home_scraps_up_iv"/>
+
+        <ImageView
+            android:id="@+id/item_weekly_home_reply_up_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_reply_up"
+            app:layout_constraintBottom_toBottomOf="@+id/item_weekly_home_scraps_up_tv"
+            app:layout_constraintStart_toEndOf="@+id/item_weekly_home_scraps_up_tv"
+            app:layout_constraintTop_toTopOf="@+id/item_weekly_home_scraps_up_tv" />
+        <TextView
+            android:id="@+id/item_weekly_home_reply_up_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="1"
+            style="@style/body_regular_12"
+            android:textColor="@color/Yellow_300"
+            app:layout_constraintStart_toEndOf="@+id/item_weekly_home_reply_up_iv"
+            app:layout_constraintTop_toTopOf="@+id/item_weekly_home_reply_up_iv"
+            app:layout_constraintBottom_toBottomOf="@+id/item_weekly_home_reply_up_iv"/>
+
+        <ImageView
+            android:id="@+id/item_weekly_home_desc_iv"
+            android:layout_width="67dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/shape_rounded_square_yellow300_12dp"
+            android:backgroundTint="@color/White"
+            android:src="@drawable/ic_community_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/item_weekly_home_desc"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/item_weekly_home_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.7"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

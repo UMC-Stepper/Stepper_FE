@@ -57,6 +57,10 @@
         <action
             android:id="@+id/action_stepperFragment_to_communityIndexFragment"
             app:destination="@id/communityIndexFragment" />
+        <!-- 임시로 커뮤니티 부위별 게시판 홈 이동-->
+        <action
+            android:id="@+id/action_stepperFragment_to_communityPartHomeFragment"
+            app:destination="@id/communityPartHomeFragment" />
     </fragment>
 
     <!-- 투데이 평가일지-->
@@ -363,6 +367,13 @@
         android:name="com.example.umc_stepper.ui.community.savedcontents.CommunityMyScrapFragment"
         android:label="CommunityMyScrapFragment"
         tools:layout="@layout/fragment_community_my_scrap"/>
+
+    <!-- 커뮤니티 부위별 게시판 홈 -->
+    <fragment
+        android:id="@+id/communityPartHomeFragment"
+        android:name="com.example.umc_stepper.ui.community.CommunityPartHomeFragment"
+        android:label="CommunityPartHomeFragment"
+        tools:layout="@layout/fragment_community_part_home"/>
 
 
 </navigation>
