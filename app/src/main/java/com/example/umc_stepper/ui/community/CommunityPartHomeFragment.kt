@@ -65,7 +65,7 @@ class CommunityPartHomeFragment : Fragment() {
                 0 -> " 무물보 "
                 1 -> " 건강정보 "
                 2 -> "자유  Talk"
-                3 -> " 동기부여  Talk "
+                3 -> "동기부여  Talk"
                 else -> "Tab ${position + 1}"
             }
         }.attach()
