@@ -29,9 +29,13 @@
     <!-- 설정 프래그먼트 -->
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.umc_stepper.ui.settings.SettingsFragment"
+        android:name="com.example.umc_stepper.ui.settings.SettingsHomeFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings_home" >
+        <action
+            android:id="@+id/action_settingsFragment_to_settingsShowProfileFragment"
+            app:destination="@id/settingsShowProfileFragment" />
+    </fragment>
 
     <!-- 스패터 홈 -->
     <fragment
@@ -374,6 +378,20 @@
         android:name="com.example.umc_stepper.ui.community.part.CommunityPartHomeFragment"
         android:label="CommunityPartHomeFragment"
         tools:layout="@layout/fragment_community_part_home"/>
+    <fragment
+        android:id="@+id/settingsEditProfileFragment"
+        android:name="com.example.umc_stepper.ui.settings.SettingsEditProfileFragment"
+        android:label="fragment_settings_edit_profile"
+        tools:layout="@layout/fragment_settings_edit_profile" />
+    <fragment
+        android:id="@+id/settingsShowProfileFragment"
+        android:name="com.example.umc_stepper.ui.settings.SettingsShowProfileFragment"
+        android:label="fragment_settings_show_profile"
+        tools:layout="@layout/fragment_settings_show_profile" >
+        <action
+            android:id="@+id/action_settingsShowProfileFragment_to_settingsEditProfileFragment"
+            app:destination="@id/settingsEditProfileFragment" />
+    </fragment>
 
 
 </navigation>
