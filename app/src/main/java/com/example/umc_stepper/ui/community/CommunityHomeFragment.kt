@@ -24,6 +24,11 @@ class CommunityHomeFragment : BaseFragment<FragmentCommunityHomeBinding>(R.layou
             val action = CommunityHomeFragmentDirections.actionCommunityHomeFragmentToCommunityWeeklyHomeFragment()
             findNavController().navigate(action.actionId)
         }
+
+        binding.fragmentCommunityHomePartTitleTv.setOnClickListener {
+            val action = CommunityHomeFragmentDirections.actionCommunityHomeFragmentToWeeklyEditFragment()
+            findNavController().navigate(action.actionId)
+        }
     }
 
 }
