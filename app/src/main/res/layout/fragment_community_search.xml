@@ -5,24 +5,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <EditText
-        android:id="@+id/fragment_community_search_edit_et"
-        style="@style/body_medium_14"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/shape_rounded_square_purple700_40dp"
-        android:drawableEnd="@drawable/ic_community_search"
-        android:hint="검색어 입력"
-        android:paddingStart="16dp"
-        android:paddingEnd="18dp"
         android:layout_marginEnd="12dp"
-        android:textColor="@color/Purple_Black_BG_1"
-        android:textColorHint="@color/Purple_Black_BG_1"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/ic_community_search"
         app:layout_constraintEnd_toStartOf="@+id/fragment_community_search_cancel_tv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragment_community_search_edit_et"
+            style="@style/body_medium_14"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/shape_rounded_square_purple700_40dp"
+            android:hint="검색어 입력"
+            android:paddingStart="16dp"
+            android:paddingEnd="18dp"
+            android:textColor="@color/Purple_Black_BG_1"
+            android:textColorHint="@color/Purple_Black_BG_1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <TextView
         android:id="@+id/fragment_community_search_cancel_tv"
@@ -32,16 +40,16 @@
         android:text="취소"
         android:layout_marginEnd="24dp"
         android:textColor="@color/White"
-        app:layout_constraintBottom_toBottomOf="@id/fragment_community_search_edit_et"
+        app:layout_constraintBottom_toBottomOf="@id/text_input_layout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/fragment_community_search_edit_et" />
+        app:layout_constraintTop_toTopOf="@id/text_input_layout" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragment_community_search_constraint_cl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="26dp"
-        app:layout_constraintTop_toBottomOf="@id/fragment_community_search_edit_et"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="24dp"
@@ -74,6 +82,7 @@
             android:layout_marginTop="12dp"
             android:textColor="@color/Purple_Gray"/>
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_community_search_item_rv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             tools:listitem="@layout/item_community_search"
@@ -84,18 +93,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+        <ProgressBar
+            android:id="@+id/fragment_community_search_progress_pb"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
-
-
-
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

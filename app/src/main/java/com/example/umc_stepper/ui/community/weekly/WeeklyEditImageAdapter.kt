@@ -13,14 +13,15 @@ import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentWeeklyEditBinding
 import com.example.umc_stepper.databinding.ItemImageBinding
 import com.example.umc_stepper.databinding.ItemUploadPictureBinding
+import com.example.umc_stepper.ui.community.CommunityRemoveInterface
 import com.example.umc_stepper.utils.GlobalApplication
 
 class WeeklyEditImageAdapter(
-    private var items: MutableList<UploadImageCard>
+    private val removeInterface: CommunityRemoveInterface
 ) : BaseAdapter<UploadImageCard, ItemUploadPictureBinding>(
     BaseDiffCallback(
         itemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
-        contentsTheSame = { oldItem, newItem -> oldItem.id == newItem.id }
+        contentsTheSame = { oldItem, newItem -> oldItem == newItem }
     )
 ){
     override val layoutId: Int
@@ -30,15 +31,15 @@ class WeeklyEditImageAdapter(
         GlobalApplication.loadCropRoundedSquareImage(binding.root.context,binding.itemUploadPictureIv,item.imgUrl,18
         )
         binding.itemUploadPictureCancelIb.setOnClickListener {
-            removeItem(item.id)  // 해당 아이템 삭제
+            removeInterface.onRemove(item.id)
         }
     }
 
-    private fun removeItem(pos: Int) {
-        if (pos >= 0 && pos < items.size) {
-            items.removeAt(pos)
-            notifyItemRemoved(pos)
-        }
+    fun removeItem(pos: Int) {
+        val currentList = currentList.toMutableList()
+            val index = currentList.findLast{it.id == pos}
+            currentList.remove(index)
+            submitList(currentList)
     }
 
 
