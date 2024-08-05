@@ -9,19 +9,17 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
-import com.example.umc_stepper.databinding.FragmentWeeklyEditBinding
 import com.example.umc_stepper.databinding.FragmentWeeklySegmentEditBinding
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import java.util.Collections
 
 class WeeklySegmentEditFragment : BaseFragment<FragmentWeeklySegmentEditBinding>(R.layout.fragment_weekly_segment_edit) {
 
     private lateinit var galleryForResult: ActivityResultLauncher<Intent>
     private lateinit var uploadImgAdapter: WeeklyEditImageAdapter
-    val imgList: MutableList<UploadImageCard> = mutableListOf(
-    )
+    private val imgList: MutableList<UploadImageCard> = mutableListOf()
     private var selectedTab = ""
+
     override fun setLayout() {
         initTabLayout()
         initRecyclerView()
@@ -49,7 +47,6 @@ class WeeklySegmentEditFragment : BaseFragment<FragmentWeeklySegmentEditBinding>
         galleryForResult.launch(Intent.createChooser(galleryIntent, "Select Pictures"))
     }
 
-
     //갤러리 런처 초기화
     private fun initActivityResultLauncher() {
         galleryForResult = registerForActivityResult(
@@ -72,26 +69,25 @@ class WeeklySegmentEditFragment : BaseFragment<FragmentWeeklySegmentEditBinding>
 
     private fun initTabLayout(){
         with(binding.fragmentWeeklySegmentItemTb) {
-            newTab().text = "QnA"
-            newTab().text = "건강정보"
-            newTab().text = "자유토크"
-            newTab().text = "동기부여"
+            addTab(newTab().setText("QnA"))
+            addTab(newTab().setText("건강정보"))
+            addTab(newTab().setText("자유토크"))
+            addTab(newTab().setText("동기부여"))
+
             addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
-                override fun onTabSelected(p0: TabLayout.Tab) {
-                    selectedTab = p0.text.toString()
+                override fun onTabSelected(tab: TabLayout.Tab) {
+                    selectedTab = tab.text.toString()
                 }
 
-                override fun onTabUnselected(p0: TabLayout.Tab) {
-                    TODO("Not yet implemented")
+                override fun onTabUnselected(tab: TabLayout.Tab) {
+                    // 필요 시 구현
                 }
 
-                override fun onTabReselected(p0: TabLayout.Tab) {
-                    TODO("Not yet implemented")
+                override fun onTabReselected(tab: TabLayout.Tab) {
+                    // 필요 시 구현
                 }
-
             })
         }
-
     }
 
     private fun initRecyclerView() {
@@ -124,5 +120,4 @@ class WeeklySegmentEditFragment : BaseFragment<FragmentWeeklySegmentEditBinding>
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(binding.fragmentWeeklyImageUploadRv)
     }
-
 }
