@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.settings.SettingsShowProfileFragment">
+
+        <ImageView
+            android:id="@+id/fragment_settings_edit_back_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/fragment_settings_edit_title_tv"
+            style="@style/sub_title_semi_bold_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="계정 관리"
+            android:textColor="@color/White"
+            android:layout_marginTop="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/fragment_settings_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_settings_edit_title_tv">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/fragment_settings_edit_profile_iv"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@color/White"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_settings_edit_title_tv"
+                app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/fragment_settings_edit_profile_camera_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_edit_profile_select_img"
+                android:layout_gravity="bottom|end"/>
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/fragment_settings_edit_nickname_title_tv"
+            style="@style/body_semi_bold_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="150dp"
+            android:text="닉네임"
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_settings_edit_back_iv" />
+
+        <TextView
+            android:id="@+id/fragment_settings_edit_nickname_error_tv"
+            style="@style/body_regular_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="*변경 불가능"
+            android:textColor="@color/Red_300"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_settings_edit_nickname_title_tv"
+            app:layout_constraintStart_toEndOf="@+id/fragment_settings_edit_nickname_title_tv"
+            app:layout_constraintTop_toTopOf="@+id/fragment_settings_edit_nickname_title_tv" />
+
+        <TextView
+            android:id="@+id/fragment_settings_edit_nickname_tv"
+            style="@style/body_medium_14"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:paddingStart="24dp"
+            android:background="@drawable/radius_corners_50dp"
+            android:backgroundTint="@color/Purple_Black_BG_2"
+            android:text="Yen"
+            android:gravity="center|start"
+            android:textColor="@color/White"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_settings_edit_nickname_title_tv" />
+
+        <TextView
+            android:id="@+id/fragment_settings_edit_email_title_tv"
+            style="@style/body_semi_bold_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="이메일"
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="@+id/fragment_settings_edit_nickname_tv"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_settings_edit_nickname_tv" />
+
+        <TextView
+            android:id="@+id/fragment_settings_edit_email_error_tv"
+            style="@style/body_regular_12"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="*올바른 이메일 형식인지 확인해주세요."
+            android:textColor="@color/Red_300"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_settings_edit_email_title_tv"
+            app:layout_constraintStart_toEndOf="@+id/fragment_settings_edit_email_title_tv"
+            app:layout_constraintTop_toTopOf="@+id/fragment_settings_edit_email_title_tv" />
+
+
+        <EditText
+            android:id="@+id/fragment_settings_edit_email_et"
+            style="@style/body_semi_bold_14"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/radius_corners_50dp"
+            android:backgroundTint="@color/Purple_Black_BG_2"
+            android:paddingStart="24dp"
+            android:hint="@string/signup_email_hint"
+            android:inputType="textWebEmailAddress"
+            android:textColor="@color/White"
+            android:textColorHint="@color/Purple_Gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_settings_edit_email_title_tv" />
+
+
+        <TextView
+            android:id="@+id/fragment_settings_edit_phone_number_title_tv"
+            style="@style/body_medium_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="휴대폰 번호(선택)"
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="@+id/fragment_settings_edit_email_et"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_settings_edit_email_et" />
+
+        <EditText
+            android:id="@+id/fragment_settings_edit_phone_number_et"
+            style="@style/body_medium_14"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/radius_corners_50dp"
+            android:backgroundTint="@color/Purple_Black_BG_2"
+            android:gravity="center|start"
+            android:paddingStart="24dp"
+            android:hint="전화번호를 입력해 주세요."
+            android:inputType="phone"
+            android:maxLength="13"
+            android:textColorHint="@color/Purple_Gray"
+            android:textColor="@color/White"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_settings_edit_phone_number_title_tv" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragment_settings_edit_complete_btn"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="88dp"
+            android:layout_marginBottom="47dp"
+            android:text="변경 완료"
+            style="@style/sub_title_semi_bold_16"
+            android:textColor="@color/Purple_700"
+            android:background="@drawable/radius_corners_61dp_stroke_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_settings_edit_phone_number_et" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

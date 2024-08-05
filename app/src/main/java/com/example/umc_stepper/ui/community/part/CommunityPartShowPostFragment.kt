@@ -1,12 +1,17 @@
-package com.example.umc_stepper.ui.community.savedcontents
+package com.example.umc_stepper.ui.community.part
 
 import android.content.Context
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
-import com.example.umc_stepper.databinding.FragmentCommunityMyScrapBinding
+import com.example.umc_stepper.databinding.FragmentCommunityPartShowPostBinding
 import com.example.umc_stepper.ui.MainActivity
 
-class CommunityMyScrapFragment : BaseFragment<FragmentCommunityMyScrapBinding>(R.layout.fragment_community_my_scrap) {
+class CommunityPartShowPostFragment : BaseFragment<FragmentCommunityPartShowPostBinding>(R.layout.fragment_community_part_show_post) {
 
     private lateinit var mainActivity: MainActivity
 
@@ -16,11 +21,11 @@ class CommunityMyScrapFragment : BaseFragment<FragmentCommunityMyScrapBinding>(R
     }
 
     override fun setLayout() {
-        updateToolbar()
+        updateMainToolbar()
     }
 
-    private fun updateToolbar() {
-        mainActivity.updateToolbarTitle("목록")
+    private fun updateMainToolbar() {
+        mainActivity.updateToolbarTitle("Community")
         mainActivity.updateToolbarLeftImg(R.drawable.ic_toolbar_community_home)
         mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_community_search)
         mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_community_menu)

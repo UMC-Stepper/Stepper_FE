@@ -85,7 +85,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginEnd="32dp"
                 android:padding="8dp"
-                style="floatin"
+                style="@style/Widget.Design.FloatingActionButton"
                 android:backgroundTint="@color/Purple_700"
                 app:srcCompat="@drawable/ic_post"
                 app:layout_constraintBottom_toBottomOf="parent"

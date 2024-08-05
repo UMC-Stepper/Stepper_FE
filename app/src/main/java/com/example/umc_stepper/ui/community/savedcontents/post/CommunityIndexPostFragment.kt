@@ -1,4 +1,4 @@
-package com.example.umc_stepper.ui.community
+package com.example.umc_stepper.ui.community.savedcontents.post
 
 import android.content.Context
 import android.os.Bundle
@@ -13,7 +13,7 @@ import com.example.umc_stepper.ui.MainActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class CommunityPartHomeFragment : Fragment() {
+class CommunityIndexPostFragment : Fragment() {
 
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
@@ -33,9 +33,9 @@ class CommunityPartHomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.fragment_community_part_home, container, false)
-        viewPager = view.findViewById(R.id.community_part_home_vp)
-        tabLayout = view.findViewById(R.id.community_part_home_tl)
+        val view:View = inflater.inflate(R.layout.fragment_community_index_post, container, false)
+        viewPager = view.findViewById(R.id.community_index_post_vp)
+        tabLayout = view.findViewById(R.id.community_index_post_menu_tl)
         updateToolbar()
         return view
     }
@@ -44,11 +44,9 @@ class CommunityPartHomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         val pagerAdapter = PagerFragmentStateAdapter(requireActivity())
-        // 4개의 fragment add
-        pagerAdapter.addFragment(CommunityPartHomeAskFragment())
-        pagerAdapter.addFragment(CommunityPartHomeHealthFragment())
-        pagerAdapter.addFragment(CommunityPartHomeFreeFragment())
-        pagerAdapter.addFragment(CommunityPartHomeMotivationFragment())
+        // 2개의 fragment add
+        pagerAdapter.addFragment(CommunityIndexPostPartFragment())
+        pagerAdapter.addFragment(CommunityIndexPostWeeklyFragment())
 
         // adapter 연결
         viewPager.adapter = pagerAdapter
@@ -62,16 +60,14 @@ class CommunityPartHomeFragment : Fragment() {
         // tablayout 붙이기
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = when (position) {
-                0 -> " 무물보 "
-                1 -> " 건강정보 "
-                2 -> "자유  Talk"
-                3 -> "동기부여  Talk"
+                0 -> "부위별 커뮤니티 글"
+                1 -> "Weekly Mission"
                 else -> "Tab ${position + 1}"
             }
         }.attach()
     }
     private fun updateToolbar() {
-        mainActivity.updateToolbarTitle("Community")
+        mainActivity.updateToolbarTitle("목록")
         mainActivity.updateToolbarLeftImg(R.drawable.ic_toolbar_community_home)
         mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_community_search)
         mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_community_menu)

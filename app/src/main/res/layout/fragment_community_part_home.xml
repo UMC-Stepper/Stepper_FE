@@ -160,6 +160,7 @@
             app:layout_constraintEnd_toEndOf="@id/community_part_home_warning5_iv"
             app:layout_constraintStart_toStartOf="@id/community_part_home_warning5_iv"
             app:layout_constraintTop_toBottomOf="@id/community_part_home_warning5_iv" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -183,15 +184,16 @@
             android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
             android:backgroundTint="@color/Purple_Black_BG_2"
             app:tabBackground="@drawable/selector_community_index_tab"
+            app:tabGravity="fill"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="fixed"
             app:tabSelectedTextColor="@color/Black_500"
             app:tabTextAppearance="@style/body_semi_bold_12"
             app:tabTextColor="@color/White"
-            app:tabIndicatorHeight="0dp"
-            app:tabGravity="start"
-            app:tabMode="fixed"
             app:layout_constraintEnd_toEndOf="@id/community_part_home_background"
             app:layout_constraintStart_toStartOf="@id/community_part_home_background"
             app:layout_constraintTop_toTopOf="@id/community_part_home_background"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.viewpager2.widget.ViewPager2
@@ -199,5 +201,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/community_part_home_background"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
