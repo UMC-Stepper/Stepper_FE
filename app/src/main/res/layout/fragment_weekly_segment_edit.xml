@@ -1,173 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/fragment_weekly_title_tv"
-        style="@style/head_bold_18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="15dp"
-        android:text="STEPPER 커뮤니티"
-        android:textAlignment="center"
-        android:textColor="@color/White"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <TextView
-        android:id="@+id/fragment_weekly_sub_title_tv"
-        style="@style/body_medium_14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="카테고리를 선택해주세요"
-        android:textColor="@color/White"
-        app:layout_constraintStart_toStartOf="@id/fragment_weekly_title_tv"
-        app:layout_constraintTop_toBottomOf="@id/fragment_weekly_title_tv" />
+    </data>
 
-    <com.google.android.material.tabs.TabLayout
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:id="@+id/fragment_weekly_segment_item_tb"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_weekly_sub_title_tv"
-        app:tabRippleColor="@null"
-        android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
-        app:tabMode="fixed"
-        app:tabBackground="@drawable/shape_rounded_square_purple700_18dp"
-        app:tabGravity="center"
-        app:tabSelectedTextColor="@color/Black_500"
-        app:tabTextColor="@color/White" />
-
-    <EditText
-        android:id="@+id/fragment_weekly_subtitle_et"
-        style="@style/body_semi_bold_14"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/shape_rounded_stroke_square_purple700_14dp_stroke_1dp"
-        android:textColor="@color/White"
-        app:layout_constraintTop_toBottomOf="@id/fragment_weekly_segment_item_tb" />
-
-    <EditText
-        android:id="@+id/fragment_weekly_description_tv"
-        style="@style/body_regular_14"
-        android:layout_width="0dp"
-        android:layout_height="270dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/shape_rounded_stroke_square_purple700_14dp_stroke_1dp"
-        android:textColor="@color/White"
-        app:layout_constraintEnd_toEndOf="@id/fragment_weekly_subtitle_et"
-        app:layout_constraintStart_toStartOf="@id/fragment_weekly_subtitle_et"
-        app:layout_constraintTop_toBottomOf="@id/fragment_weekly_subtitle_et" />
-
-    <TextView
-        android:id="@+id/fragment_weekly_upload_image_title_tv"
-        style="@style/head_bold_18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="갤러리에서 사진 업로드하기"
-        android:textColor="@color/White"
-        app:layout_constraintStart_toStartOf="@id/fragment_weekly_description_tv"
-        app:layout_constraintTop_toBottomOf="@id/fragment_weekly_description_tv" />
-
-    <ImageView
-        android:id="@+id/fragment_weekly_add_picture_iv"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="12dp"
-        android:src="@drawable/ic_add_picture"
-        app:layout_constraintBottom_toBottomOf="@id/fragment_weekly_upload_image_title_tv"
-        app:layout_constraintStart_toEndOf="@id/fragment_weekly_upload_image_title_tv"
-        app:layout_constraintTop_toTopOf="@id/fragment_weekly_upload_image_title_tv" />
-
-    <TextView
-        android:id="@+id/fragment_weekly_des_1_tv"
-        style="@style/body_regular_14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="* 최대 9장까지 업로드 가능"
-        android:textColor="@color/White"
-        app:layout_constraintStart_toStartOf="@id/fragment_weekly_upload_image_title_tv"
-        app:layout_constraintTop_toBottomOf="@id/fragment_weekly_upload_image_title_tv" />
-
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager2"
-        android:layout_width="match_parent"
-        android:layout_height="96dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/shape_rounded_square_white_18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_weekly_image_upload_rv" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragment_weekly_image_upload_rv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/fragment_weekly_des_1_tv"
-        app:layout_constraintTop_toBottomOf="@id/fragment_weekly_des_1_tv"
-        tools:listitem="@layout/item_upload_picture" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+        android:fillViewport="true">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/fragment_weekly_success_edit_bt"
-        style="@style/body_semi_bold_14"
-        android:layout_width="0dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/shape_rounded_square_purple700_50dp"
-        android:text="작성완료"
-        android:textColor="@color/White"
-        app:layout_constraintEnd_toStartOf="@id/guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewPager2" />
+        <TextView
+            android:id="@+id/fragment_weekly_title_tv"
+            style="@style/head_bold_18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="15dp"
+            android:text="STEPPER 커뮤니티"
+            android:textAlignment="center"
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/fragment_weekly_segment_edit_cancel_bt"
-        style="@style/body_semi_bold_14"
-        android:layout_width="0dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="28dp"
-        android:background="@drawable/shape_rounded_square_purpleblack_bg1_purple700_stroke_50dp_1dp"
-        android:text="취소하기"
-        android:textColor="@color/Purple_700"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/viewPager2" />
+        <TextView
+            android:id="@+id/fragment_weekly_sub_title_tv"
+            style="@style/body_medium_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="카테고리를 선택해주세요"
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="@id/fragment_weekly_title_tv"
+            app:layout_constraintTop_toBottomOf="@id/fragment_weekly_title_tv" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/fragment_weekly_segment_item_tb"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            app:tabIndicator="@null"
+            android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_weekly_sub_title_tv"
+            app:tabBackground="@drawable/tab_background_selector"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            style="@style/body_semi_bold_12"
+            app:tabRippleColor="@null"
+            app:tabSelectedTextColor="@color/Black_500"
+            app:tabTextColor="@color/White" />
+
+        <EditText
+            android:id="@+id/fragment_weekly_subtitle_et"
+            style="@style/body_semi_bold_14"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/shape_rounded_stroke_square_purple700_14dp_stroke_1dp"
+            android:textColor="@color/White"
+            app:layout_constraintTop_toBottomOf="@id/fragment_weekly_segment_item_tb" />
+
+        <EditText
+            android:id="@+id/fragment_weekly_description_tv"
+            style="@style/body_regular_14"
+            android:layout_width="0dp"
+            android:layout_height="270dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_rounded_stroke_square_purple700_14dp_stroke_1dp"
+            android:textColor="@color/White"
+            app:layout_constraintEnd_toEndOf="@id/fragment_weekly_subtitle_et"
+            app:layout_constraintStart_toStartOf="@id/fragment_weekly_subtitle_et"
+            app:layout_constraintTop_toBottomOf="@id/fragment_weekly_subtitle_et" />
+
+        <TextView
+            android:id="@+id/fragment_weekly_upload_image_title_tv"
+            style="@style/head_bold_18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="갤러리에서 사진 업로드하기"
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="@id/fragment_weekly_description_tv"
+            app:layout_constraintTop_toBottomOf="@id/fragment_weekly_description_tv" />
+
+        <ImageView
+            android:id="@+id/fragment_weekly_add_picture_iv"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="12dp"
+            android:src="@drawable/ic_add_picture"
+            app:layout_constraintBottom_toBottomOf="@id/fragment_weekly_upload_image_title_tv"
+            app:layout_constraintStart_toEndOf="@id/fragment_weekly_upload_image_title_tv"
+            app:layout_constraintTop_toTopOf="@id/fragment_weekly_upload_image_title_tv" />
+
+        <TextView
+            android:id="@+id/fragment_weekly_des_1_tv"
+            style="@style/body_regular_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="* 최대 9장까지 업로드 가능"
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="@id/fragment_weekly_upload_image_title_tv"
+            app:layout_constraintTop_toBottomOf="@id/fragment_weekly_upload_image_title_tv" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/shape_rounded_square_white_18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_weekly_image_upload_rv" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_weekly_image_upload_rv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/fragment_weekly_des_1_tv"
+            app:layout_constraintTop_toBottomOf="@id/fragment_weekly_des_1_tv"
+            tools:listitem="@layout/item_upload_picture" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragment_weekly_success_edit_bt"
+            style="@style/body_semi_bold_14"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="28dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/shape_rounded_square_purple700_50dp"
+            android:text="작성완료"
+            android:textColor="@color/White"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewPager2" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragment_weekly_segment_edit_cancel_bt"
+            style="@style/body_semi_bold_14"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/shape_rounded_square_purpleblack_bg1_purple700_stroke_50dp_1dp"
+            android:text="취소하기"
+            android:textColor="@color/Purple_700"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_weekly_success_edit_bt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/fragment_weekly_success_edit_bt" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>
