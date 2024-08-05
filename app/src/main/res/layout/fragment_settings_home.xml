@@ -79,6 +79,7 @@
             app:layout_constraintTop_toBottomOf="@id/settings_name_tv" />
 
         <ImageButton
+            android:id="@+id/settings_menu1_ib"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="121dp"
@@ -121,11 +122,108 @@
             app:layout_constraintStart_toEndOf="@id/settings_menu2_1_iv"
             app:layout_constraintTop_toBottomOf="@id/settings_menu2_tv" />
 
+        <TextView
+            android:id="@+id/settings_menu2_toggle_tv"
+            style="@style/body_regular_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="30dp"
+            android:text="off"
+            android:textColor="@color/Purple_Gray"
+            app:layout_constraintEnd_toStartOf="@id/settings_menu2_switch"
+            app:layout_constraintTop_toBottomOf="@id/settings_menu2_tv" />
 
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/settings_menu2_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="24dp"
+            android:checked="false"
+            android:background="@null"
+            app:trackTint="@drawable/selector_switch_settings_track_color"
+            app:thumbTint="@color/Purple_700"
+            android:thumb="@drawable/selector_switch_settings_thumb"
+            app:track="@drawable/selector_switch_exercise_card_track"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/settings_menu2_tv"/>
 
+        <TextView
+            android:id="@+id/settings_menu3_tv"
+            style="@style/head_bold_18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="56dp"
+            android:text="기타"
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/settings_menu2_1_iv" />
 
+        <ImageView
+            android:id="@+id/settings_menu3_1_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_setting_icon2"
+            android:layout_marginTop="17dp"
+            android:layout_marginStart="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/settings_menu3_tv"/>
 
+        <TextView
+            android:id="@+id/settings_menu3_1_tv"
+            style="@style/body_medium_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="28dp"
+            android:text="로그아웃"
+            android:textColor="@color/White"
+            app:layout_constraintStart_toEndOf="@id/settings_menu3_1_iv"
+            app:layout_constraintTop_toBottomOf="@id/settings_menu3_tv" />
 
+        <ImageButton
+            android:id="@+id/settings_menu3_logout_ib"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/ic_setting_right_arrow2_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/settings_menu3_tv" />
+
+        <ImageView
+            android:id="@+id/settings_menu3_2_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_setting_icon3"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/settings_menu3_1_iv"/>
+
+        <TextView
+            android:id="@+id/settings_menu3_2_tv"
+            style="@style/body_medium_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="27dp"
+            android:text="탈퇴하기"
+            android:textColor="@color/White"
+            app:layout_constraintStart_toEndOf="@id/settings_menu3_1_iv"
+            app:layout_constraintTop_toBottomOf="@id/settings_menu3_1_iv" />
+
+        <ImageButton
+            android:id="@+id/settings_menu3_delete_account_ib"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/ic_setting_right_arrow_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/settings_menu3_1_iv" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

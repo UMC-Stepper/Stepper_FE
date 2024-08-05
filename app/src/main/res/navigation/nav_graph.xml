@@ -34,17 +34,6 @@
 
     </fragment>
 
-    <!-- 설정 프래그먼트 -->
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.example.umc_stepper.ui.settings.SettingsHomeFragment"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings_home" >
-        <action
-            android:id="@+id/action_settingsFragment_to_settingsShowProfileFragment"
-            app:destination="@id/settingsShowProfileFragment" />
-    </fragment>
-
     <!-- 스패터 홈 -->
     <fragment
         android:id="@+id/stepperFragment"
@@ -390,11 +379,33 @@
         android:name="com.example.umc_stepper.ui.community.part.CommunityPartHomeFragment"
         android:label="CommunityPartHomeFragment"
         tools:layout="@layout/fragment_community_part_home"/>
+
+    <fragment
+        android:id="@+id/weeklySegmentEditFragment"
+        android:name="com.example.umc_stepper.ui.community.weekly.WeeklySegmentEditFragment"
+        android:label="fragment_weekly_segment_edit"
+        tools:layout="@layout/fragment_weekly_segment_edit"
+        />
+
+    <!-- 설정 홈 -->
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.umc_stepper.ui.settings.SettingsHomeFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings_home" >
+        <action
+            android:id="@+id/action_settingsFragment_to_settingsShowProfileFragment"
+            app:destination="@id/settingsShowProfileFragment" />
+    </fragment>
+
+    <!-- 설정-프로필edit -->
     <fragment
         android:id="@+id/settingsEditProfileFragment"
         android:name="com.example.umc_stepper.ui.settings.SettingsEditProfileFragment"
         android:label="fragment_settings_edit_profile"
         tools:layout="@layout/fragment_settings_edit_profile" />
+
+    <!-- 설정-프로필show -->
     <fragment
         android:id="@+id/settingsShowProfileFragment"
         android:name="com.example.umc_stepper.ui.settings.SettingsShowProfileFragment"
@@ -405,11 +416,5 @@
             app:destination="@id/settingsEditProfileFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/weeklySegmentEditFragment"
-        android:name="com.example.umc_stepper.ui.community.weekly.WeeklySegmentEditFragment"
-        android:label="fragment_weekly_segment_edit"
-        tools:layout="@layout/fragment_weekly_segment_edit"
-        />
 
 </navigation>
