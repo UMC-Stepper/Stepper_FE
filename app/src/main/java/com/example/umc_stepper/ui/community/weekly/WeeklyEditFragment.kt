@@ -29,6 +29,12 @@ class WeeklyEditFragment : BaseFragment<FragmentWeeklyEditBinding>(R.layout.frag
         binding.fragmentWeeklyAddPictureIv.setOnClickListener {
             openGallery()
         }
+        binding.fragmentWeeklyEditSuccessBt.setOnClickListener {
+            //저장
+        }
+        binding.fragmentWeeklyEditCancelBt.setOnClickListener {
+            //취소
+        }
     }
 
     //갤러리 열기
@@ -51,7 +57,6 @@ class WeeklyEditFragment : BaseFragment<FragmentWeeklyEditBinding>(R.layout.frag
                     for (i in 0 until clipData.itemCount) {
                         val imageUri = clipData.getItemAt(i).uri
                         imageUri?.let {
-                            // Add each image URI to a list and update the RecyclerView
                             imgList.add(i, UploadImageCard(it.toString(), i))
                         }
                     }

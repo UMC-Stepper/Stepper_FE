@@ -125,7 +125,7 @@
             app:layout_constraintGuide_percent="0.5" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/appCompatButton"
+            android:id="@+id/fragment_weekly_edit_success_bt"
             style="@style/body_semi_bold_14"
             android:layout_width="0dp"
             android:layout_height="44dp"
@@ -142,6 +142,7 @@
             app:layout_constraintTop_toBottomOf="@id/fragment_weekly_image_upload_rv" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragment_weekly_edit_cancel_bt"
             style="@style/body_semi_bold_14"
             android:layout_width="0dp"
             android:layout_height="44dp"
@@ -150,10 +151,10 @@
             android:background="@drawable/shape_rounded_square_purpleblack_bg1_purple700_stroke_50dp_1dp"
             android:text="취소하기"
             android:textColor="@color/Purple_700"
-            app:layout_constraintBottom_toBottomOf="@+id/appCompatButton"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_weekly_edit_success_bt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline"
-            app:layout_constraintTop_toTopOf="@+id/appCompatButton" />
+            app:layout_constraintTop_toTopOf="@+id/fragment_weekly_edit_success_bt" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
