@@ -71,6 +71,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 R.id.communityHomeFragment,
                 R.id.settingsShowProfileFragment,
                 R.id.settingsEditProfileFragment,
+                R.id.settingsFragment
             )
             binding.mainToolbar.apply {
                 visibility = if (shouldHideToolbar) View.GONE else View.VISIBLE
