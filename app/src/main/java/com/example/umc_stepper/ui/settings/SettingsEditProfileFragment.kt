@@ -57,10 +57,12 @@ class SettingsEditProfileFragment : BaseFragment<FragmentSettingsEditProfileBind
         })
     }
 
+    // 이메일 유효성 체크 함수
     private fun isValidEmail(email: String): Boolean {
         return email.contains("@") && (email.endsWith(".com") || email.endsWith(".net"))
     }
 
+    // 전화 번호 입력시 자동 하이픈(-) 추가 및 버튼 활성화 함수 텍스트 입력에 따라 계혹 호출
     private fun editPhoneNumber() {
         binding.fragmentSettingsEditPhoneNumberEt.addTextChangedListener(PhoneNumberFormattingTextWatcher())
         binding.fragmentSettingsEditPhoneNumberEt.addTextChangedListener(object : TextWatcher {
@@ -72,15 +74,18 @@ class SettingsEditProfileFragment : BaseFragment<FragmentSettingsEditProfileBind
         })
     }
 
+    // 버튼 활성화
     private fun activateButton() {
         val email = binding.fragmentSettingsEditEmailEt.text.toString()
         val phoneNumber = binding.fragmentSettingsEditPhoneNumberEt.text.toString()
-        if (isValidEmail(email) || phoneNumber.length == 13) {
+
+        if ((isValidEmail(email) || phoneNumber.length == 13) || (isValidEmail(email) && phoneNumber.length == 13) || (phoneNumber.length == 13)) {
             binding.fragmentSettingsEditCompleteBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
             binding.fragmentSettingsEditCompleteBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
         } else {
             binding.fragmentSettingsEditCompleteBtn.setBackgroundResource(R.drawable.radius_corners_61dp_stroke_1)
-            binding.fragmentSettingsEditCompleteBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.Purple_700))
+            binding.fragmentSettingsEditCompleteBtn.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.Purple_Black_BG_2)
+            binding.fragmentSettingsEditCompleteBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.Purple_Gray_300))
         }
     }
 
