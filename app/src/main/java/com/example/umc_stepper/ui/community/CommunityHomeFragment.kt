@@ -26,7 +26,7 @@ class CommunityHomeFragment : BaseFragment<FragmentCommunityHomeBinding>(R.layou
         }
 
         binding.fragmentCommunityHomePartTitleTv.setOnClickListener {
-            val action = CommunityHomeFragmentDirections.actionCommunityHomeFragmentToWeeklyEditFragment()
+            val action = CommunityHomeFragmentDirections.actionCommunityHomeFragmentToWeeklySegmentEditFragment()
             findNavController().navigate(action.actionId)
         }
     }
