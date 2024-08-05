@@ -13,15 +13,18 @@ import com.example.umc_stepper.databinding.FragmentSettingsHomeBinding
 class SettingsHomeFragment : BaseFragment<FragmentSettingsHomeBinding>(R.layout.fragment_settings_home) {
 
     override fun setLayout() {
-        setOnClick()
+        binding.settingsMenu1Ib.setOnClickListener {
+            goSettingsShowProfile()
+        }
+    }
+    //프로필show로 이동
+    private fun goSettingsShowProfile(){
+        findNavController().navigate(R.id.action_settingsFragment_to_settingsShowProfileFragment)
     }
 
-    // 화면 테스트 용
-    private fun setOnClick() {
-        binding.fragmentSettingHomeTv.setOnClickListener {
-            val action = SettingsHomeFragmentDirections.actionSettingsFragmentToSettingsShowProfileFragment()
-            findNavController().navigate(action.actionId)
-        }
+    //추후 탈퇴하기 버튼 연결
+    private fun goSettings(){
+        //findNavController().navigate(R.id.action_additionalExerciseHomeFragment_to_fragmentAddExerciseDownload)
     }
 
 }
