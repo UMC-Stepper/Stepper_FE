@@ -63,7 +63,7 @@ class CommunityPartHomeFragment : Fragment() {
         // tablayout 붙이기
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = when (position) {
-                0 -> " Q&A"
+                0 -> " QnA"
                 1 -> " 건강정보 "
                 2 -> "자유토크"
                 3 -> "동기부여"
