@@ -14,6 +14,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseActivity
 import com.example.umc_stepper.databinding.ActivityMainBinding
+import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.example.umc_stepper.ui.today.TodayViewModel
 import com.example.umc_stepper.utils.extensions.navigateToTopLevelDestination
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,8 +22,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-
     private lateinit var todayViewModel: TodayViewModel
+    private lateinit var stepperViewModel: StepperViewModel
     private lateinit var navController: NavController
 
     override fun setLayout() {
@@ -33,6 +34,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private fun setViewModel(){
         todayViewModel = ViewModelProvider(this)[TodayViewModel::class.java]
+        stepperViewModel = ViewModelProvider(this)[StepperViewModel::class.java]
     }
     private fun setNavigation() {
 
