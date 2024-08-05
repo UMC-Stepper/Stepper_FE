@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_marginStart="50dp"
-    android:layout_marginEnd="50dp"
+    android:layout_width="260dp"
     android:layout_height="wrap_content"
     android:background="@drawable/shape_rounded_square_white_18dp">
 
@@ -20,7 +18,7 @@
 
     <com.google.android.material.internal.BaselineLayout
         android:id="@+id/baseLine"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,8 +32,8 @@
         android:layout_height="50dp"
         android:background="@drawable/shape_rounded_square_gray_purple_bottom_left_18dp"
         android:text="앨범 선택"
-        app:layout_constraintEnd_toStartOf="@id/dialog_community_button2_bt"
         android:textColor="@color/White"
+        app:layout_constraintEnd_toStartOf="@id/line"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/baseLine" />
 
@@ -48,17 +46,16 @@
         android:text="취소하기"
         android:textColor="@color/White"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/dialog_community_button1_bt"
+        app:layout_constraintStart_toEndOf="@id/line"
         app:layout_constraintTop_toBottomOf="@id/baseLine" />
 
     <com.google.android.material.internal.BaselineLayout
+        android:id="@+id/line"
         android:layout_width="1dp"
         android:layout_height="0dp"
-        android:foregroundTint="@color/Black_500"
         android:background="@color/Black_500"
-        app:layout_constraintStart_toEndOf="@id/dialog_community_button1_bt"
-        app:layout_constraintEnd_toStartOf="@id/dialog_community_button2_bt"
-        app:layout_constraintTop_toBottomOf="@id/baseLine"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:orientation="vertical"/>
+        app:layout_constraintEnd_toStartOf="@id/dialog_community_button2_bt"
+        app:layout_constraintStart_toEndOf="@id/dialog_community_button1_bt"
+        app:layout_constraintTop_toBottomOf="@id/baseLine" />
 </androidx.constraintlayout.widget.ConstraintLayout>
