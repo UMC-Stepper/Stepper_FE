@@ -60,6 +60,8 @@ object NetworkModule {
             .build()
     }
 
+
+    //fast api
     @ApiRetrofit
     @Singleton
     @Provides
@@ -74,7 +76,7 @@ object NetworkModule {
             .build()
     }
 
-
+    //youtube
     @YoutubeRetrofit
     @Singleton
     @Provides
