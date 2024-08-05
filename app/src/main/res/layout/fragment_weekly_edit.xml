@@ -108,7 +108,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="24dp"
             android:id="@+id/fragment_weekly_image_upload_rv"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:orientation="horizontal"
