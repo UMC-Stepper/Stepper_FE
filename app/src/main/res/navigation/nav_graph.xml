@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_communityHomeFragment_to_weeklyEditFragment"
             app:destination="@id/weeklyEditFragment" />
+        <action
+            android:id="@+id/action_communityHomeFragment_to_weeklySegmentEditFragment"
+            app:destination="@id/weeklySegmentEditFragment" />
 
 
     </fragment>
@@ -36,7 +39,6 @@
         android:id="@+id/settingsFragment"
         android:name="com.example.umc_stepper.ui.settings.SettingsHomeFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
         tools:layout="@layout/fragment_settings_home" >
         <action
             android:id="@+id/action_settingsFragment_to_settingsShowProfileFragment"
@@ -403,5 +405,11 @@
             app:destination="@id/settingsEditProfileFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/weeklySegmentEditFragment"
+        android:name="com.example.umc_stepper.ui.community.weekly.WeeklySegmentEditFragment"
+        android:label="fragment_weekly_segment_edit"
+        tools:layout="@layout/fragment_weekly_segment_edit"
+        />
 
 </navigation>
