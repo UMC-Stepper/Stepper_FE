@@ -24,6 +24,14 @@
         <action
             android:id="@+id/action_communityHomeFragment_to_communityWeeklyShowPostFragment"
             app:destination="@id/communityWeeklyShowPostFragment" />
+        <action
+            android:id="@+id/action_communityHomeFragment_to_weeklyEditFragment"
+            app:destination="@id/weeklyEditFragment" />
+        <action
+            android:id="@+id/action_communityHomeFragment_to_weeklySegmentEditFragment"
+            app:destination="@id/weeklySegmentEditFragment" />
+
+
     </fragment>
 
     <!-- 설정 프래그먼트 -->
@@ -371,6 +379,10 @@
         android:name="com.example.umc_stepper.ui.community.savedcontents.scrap.CommunityMyScrapFragment"
         android:label="CommunityMyScrapFragment"
         tools:layout="@layout/fragment_community_my_scrap"/>
+    <fragment
+        android:id="@+id/weeklyEditFragment"
+        android:name="com.example.umc_stepper.ui.community.weekly.WeeklyEditFragment"
+        android:label="WeeklyEditFragment" />
 
     <!-- 커뮤니티 부위별 게시판 홈 -->
     <fragment
@@ -393,5 +405,11 @@
             app:destination="@id/settingsEditProfileFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/weeklySegmentEditFragment"
+        android:name="com.example.umc_stepper.ui.community.weekly.WeeklySegmentEditFragment"
+        android:label="fragment_weekly_segment_edit"
+        tools:layout="@layout/fragment_weekly_segment_edit"
+        />
 
 </navigation>
