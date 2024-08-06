@@ -6,15 +6,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.umc_stepper.R
 import com.example.umc_stepper.ui.MainActivity
+import com.example.umc_stepper.ui.community.CommunityDialog
+import com.example.umc_stepper.ui.community.CommunityDialogInterface
 import com.example.umc_stepper.ui.community.savedcontents.post.PagerFragmentStateAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class CommunityPartHomeFragment : Fragment() {
+class CommunityPartHomeFragment : Fragment(){
 
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
