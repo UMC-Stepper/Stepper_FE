@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.settings
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,9 +10,14 @@ import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentSettingsHomeBinding
+import com.example.umc_stepper.ui.community.CommunityDialog
+import com.example.umc_stepper.ui.community.CommunityDialogInterface
+import com.example.umc_stepper.ui.login.LoginActivity
 
-class SettingsHomeFragment : BaseFragment<FragmentSettingsHomeBinding>(R.layout.fragment_settings_home) {
+class SettingsHomeFragment : BaseFragment<FragmentSettingsHomeBinding>(R.layout.fragment_settings_home),
+    CommunityDialogInterface {
 
+    private lateinit var communityDialog: CommunityDialog
     override fun setLayout() {
         binding.settingsMenu1Ib.setOnClickListener {
             goSettingsShowProfile()
@@ -23,6 +29,10 @@ class SettingsHomeFragment : BaseFragment<FragmentSettingsHomeBinding>(R.layout.
         // 스위치 리스너
         binding.settingsMenu2Switch.setOnCheckedChangeListener { _, isChecked ->
             updateToggleText(isChecked)
+        }
+
+        binding.settingsMenu3LogoutIb.setOnClickListener {
+            showDialog("로그아웃\n정말 하실 건가요?","로그아웃","취소")
         }
     }
 
@@ -38,4 +48,22 @@ class SettingsHomeFragment : BaseFragment<FragmentSettingsHomeBinding>(R.layout.
     private fun goSettings() {
         // findNavController().navigate(R.id.action_additionalExerciseHomeFragment_to_fragmentAddExerciseDownload)
     }
+
+    private fun showDialog(title:String, btn1: String, btn2:String){
+        activity?.let{
+            communityDialog= CommunityDialog(title,btn1,btn2,this)
+            communityDialog.isCancelable=false
+            communityDialog.show(it.supportFragmentManager,"communityDialog")
+        }?: run{
+
+        }
+    }
+
+    override fun OnClickBtn1(btn1: String) {
+        val intent = Intent(requireContext(),LoginActivity::class.java)
+        startActivity(intent)
+        // 회원탈퇴기능(서버에전송)
+    }
+
+
 }
