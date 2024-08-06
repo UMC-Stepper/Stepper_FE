@@ -1,15 +1,16 @@
 package com.example.umc_stepper.domain.model.request
 
 data class UserDto(
-    val community_alarm: String = "",
-    val email: String = "",
-    val email_agree: String = "",
-    val exercise_alarm: String = "",
-    var height: String = "",
-    val nick_name: String = "",
-    val password: String = "",
-    val per_agree: String = "",
-    var profile_image: String= "",
-    val use_agree: String = "",
-    var weight: String= ""
+    var name: String = "",
+    var nickName: String = "",
+    var email: String = "",
+    var password: String = "",
+    var profileImage: String = "",
+    var height: Int = 0,
+    var weight: Int = 0,
+    var communityAlarm: Boolean = true,
+    var exerciseAlarm: Boolean = true,
+    var emailAgree: Boolean = true,
+    var useAgree: Boolean = true,
+    var perAgree: Boolean = true
 )
