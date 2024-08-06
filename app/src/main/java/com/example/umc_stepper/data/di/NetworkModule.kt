@@ -26,6 +26,10 @@ object NetworkModule {
     @Retention(AnnotationRetention.BINARY)
     annotation class YoutubeRetrofit
 
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class MainRetrofit
+
     @Singleton
     @Provides
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
@@ -88,6 +92,20 @@ object NetworkModule {
             .addConverterFactory(gsonConverterFactory)
             .client(okHttpClient)
             .baseUrl("https://www.googleapis.com/youtube/v3/")
+            .build()
+    }
+
+    @MainRetrofit
+    @Singleton
+    @Provides
+    fun provideMainRetrofit(
+        okHttpClient: OkHttpClient,
+        gsonConverterFactory: GsonConverterFactory
+    ): Retrofit {
+        return Retrofit.Builder()
+            .addConverterFactory(gsonConverterFactory)
+            .client(okHttpClient)
+            .baseUrl("http://stepper-dev-env.eba-4gp3sbph.ap-northeast-2.elasticbeanstalk.com/")
             .build()
     }
 }
