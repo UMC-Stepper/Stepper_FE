@@ -403,7 +403,11 @@
         android:id="@+id/settingsEditProfileFragment"
         android:name="com.example.umc_stepper.ui.settings.SettingsEditProfileFragment"
         android:label="fragment_settings_edit_profile"
-        tools:layout="@layout/fragment_settings_edit_profile" />
+        tools:layout="@layout/fragment_settings_edit_profile" >
+        <action
+            android:id="@+id/action_settingsEditProfileFragment_to_settingsShowProfileFragment"
+            app:destination="@id/settingsShowProfileFragment" />
+    </fragment>
 
     <!-- 설정-프로필show -->
     <fragment

@@ -168,7 +168,7 @@ class AddExerciseFragment :
 
 
     private fun setMenuList() {
-        menuCount = youtubeCardList.size
+        menuCount = youtubeCardList.size-1
         for (i in 0..menuCount) {
             addItemList[i].visibility = View.VISIBLE
             nonAddItemList[i].visibility = View.GONE
