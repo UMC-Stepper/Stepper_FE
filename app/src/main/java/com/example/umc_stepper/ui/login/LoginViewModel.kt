@@ -1,27 +1,36 @@
 package com.example.umc_stepper.ui.login
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.umc_stepper.domain.model.response.User
+import androidx.lifecycle.viewModelScope
+import com.example.umc_stepper.base.BaseResponse
+import com.example.umc_stepper.domain.model.request.UserDto
+import com.example.umc_stepper.domain.model.response.UserResponse
+import com.example.umc_stepper.domain.repository.MainApiRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class LoginViewModel @Inject constructor(
+    private val mainApiRepository: MainApiRepository
+) : ViewModel() {
 
-) : ViewModel(){
+    private val _userData = MutableStateFlow<BaseResponse<UserResponse>>(BaseResponse())
+    var userData: StateFlow<BaseResponse<UserResponse>> = _userData
 
-    private val _userData = MutableStateFlow(User())
-    var userData : StateFlow<User> = _userData
-
-    init {
-        updateUser(User())
-    } // 더미 데이터
-
-    init {
-        // 초기화 필요 시 여기에 코드 추가
+    fun postSignUpInfo(userDto: UserDto) {
+        viewModelScope.launch {
+            try {
+                mainApiRepository.postSignUpInfo(userDto).collect {
+                    _userData.value = it
+                }
+            } catch (e: Exception) {
+                Log.e("SignUp", "Error")
+            }
+        }
     }
 
-    fun updateUser(newUser: User) {
-        _userData.value = newUser
-    }  // 유저 데이터 추가
 }
