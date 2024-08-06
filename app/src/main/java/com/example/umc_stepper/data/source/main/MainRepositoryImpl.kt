@@ -22,12 +22,12 @@ class MainRepositoryImpl @Inject constructor(
     = dataSource.postLogOutInfo()
 
     override suspend fun postSignUpInfo(userDto: UserDto): Flow<BaseResponse<UserResponse>>
-    = postSignUpInfo(userDto)
+    = dataSource.postSignUpInfo(userDto)
 
     override suspend fun getUserInfo(): Flow<BaseResponse<UserResponse>>
-    = getUserInfo()
+    = dataSource.getUserInfo()
 
     override suspend fun deleteExit(): Flow<BaseResponse<Any>>
-    = deleteExit()
+    = dataSource.deleteExit()
 
 }

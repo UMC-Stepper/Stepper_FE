@@ -14,6 +14,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseActivity
 import com.example.umc_stepper.databinding.ActivityMainBinding
+import com.example.umc_stepper.ui.login.LoginViewModel
 import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.example.umc_stepper.ui.today.TodayViewModel
 import com.example.umc_stepper.utils.extensions.navigateToTopLevelDestination

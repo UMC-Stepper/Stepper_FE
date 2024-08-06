@@ -8,9 +8,9 @@ data class UserDto(
     var profileImage: String = "",
     var height: Int = 0,
     var weight: Int = 0,
-    var communityAlarm: Boolean = true,
-    var exerciseAlarm: Boolean = true,
-    var emailAgree: Boolean = true,
-    var useAgree: Boolean = true,
-    var perAgree: Boolean = true
+    var communityAlarm: Boolean = false,
+    var exerciseAlarm: Boolean = false,
+    var emailAgree: Boolean = false,
+    var useAgree: Boolean = false,
+    var perAgree: Boolean = false
 )

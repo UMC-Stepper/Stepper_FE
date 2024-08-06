@@ -20,9 +20,11 @@ import com.example.umc_stepper.databinding.ActivityLoginBinding
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.signup.SignUpActivity
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login),
     ConfirmDialogInterface {
     private lateinit var loginViewModel: LoginViewModel
@@ -123,7 +125,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
                     loginViewModel.userData.collectLatest { response ->
-                        loginViewModel.updateUser(response) //유저 업데이트
+//                        loginViewModel.updateUser(response) //유저 업데이트
                         goHome()
                         finish()
                     }
