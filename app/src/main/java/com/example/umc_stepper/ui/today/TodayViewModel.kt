@@ -4,11 +4,15 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.umc_stepper.BuildConfig
+import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.model.request.AiVideoDto
 import com.example.umc_stepper.domain.model.response.AiVideoInfo
+import com.example.umc_stepper.domain.model.response.CheckExerciseResponseDTO
+import com.example.umc_stepper.domain.model.response.ToDayExerciseResponseDto
 import com.example.umc_stepper.domain.model.response.Ylist
 import com.example.umc_stepper.domain.model.response.YouTubeVideo
 import com.example.umc_stepper.domain.repository.FastApiRepository
+import com.example.umc_stepper.domain.repository.TodayApiRepository
 import com.example.umc_stepper.domain.repository.YoutubeApiRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,6 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TodayViewModel @Inject constructor(
+    private val todayApiRepository: TodayApiRepository,
     private val youtubeApiRepository: YoutubeApiRepository,
     private val fastApiRepository: FastApiRepository
 ) : ViewModel() {
@@ -32,6 +37,36 @@ class TodayViewModel @Inject constructor(
 
     private val _successYoutubeLink = MutableStateFlow(Ylist())
     val successYoutubeLink: StateFlow<Ylist> = _successYoutubeLink
+
+    private val _toDayExerciseResponseDto = MutableStateFlow<BaseResponse<ToDayExerciseResponseDto>>(BaseResponse())
+    val toDayExerciseResponseDto: StateFlow<BaseResponse<ToDayExerciseResponseDto>> = _toDayExerciseResponseDto
+
+    private val _checkExerciseResponseDTO = MutableStateFlow<BaseResponse<CheckExerciseResponseDTO>>(BaseResponse())
+    val checkExerciseResponseDTO: StateFlow<BaseResponse<CheckExerciseResponseDTO>> = _checkExerciseResponseDTO
+
+    fun getTodayExerciseState(date: String) {
+        viewModelScope.launch {
+            try {
+                todayApiRepository.getTodayExerciseState(date).collect {
+                    _toDayExerciseResponseDto.value = it
+                }
+            } catch (e: Exception) {
+                Log.e("getTodayExerciseState is Error", e.message.toString())
+            }
+        }
+    }
+
+    fun getMyExercise(bodyPart: String) {
+        viewModelScope.launch {
+            try {
+                todayApiRepository.getMyExercise(bodyPart).collect {
+                    _checkExerciseResponseDTO.value = it
+                }
+            } catch (e:Exception) {
+                Log.e("getMyExercise is Error", e.message.toString())
+            }
+        }
+    }
 
 
     val youtubeKey = BuildConfig.YOUTUBE_KEY
