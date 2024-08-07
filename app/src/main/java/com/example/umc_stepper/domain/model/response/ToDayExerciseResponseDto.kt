@@ -5,7 +5,7 @@ import com.example.umc_stepper.utils.enum.bodyPartType
 // 오늘의 운동 진행상태 조회
 data class ToDayExerciseResponseDto(
     val id: Int = 0,
-    val bodyPart: bodyPartType? = null,
+    val bodyPart: String? = null,
     val stepList: ExerciseStepResponseDto? = null
 )
 
