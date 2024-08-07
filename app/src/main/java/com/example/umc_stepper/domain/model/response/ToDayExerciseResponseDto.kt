@@ -6,7 +6,7 @@ import com.example.umc_stepper.utils.enum.bodyPartType
 data class ToDayExerciseResponseDto(
     val id: Int = 0,
     val bodyPart: String? = null,
-    val stepList: ExerciseStepResponseDto? = null
+    val stepList: List<ExerciseStepResponseDto>? = null
 )
 
 data class ExerciseStepResponseDto(
