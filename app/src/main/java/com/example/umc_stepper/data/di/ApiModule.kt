@@ -2,6 +2,7 @@ package com.example.umc_stepper.data.di
 
 import com.example.umc_stepper.data.remote.FastApi
 import com.example.umc_stepper.data.remote.MainApi
+import com.example.umc_stepper.data.remote.TodayApi
 import com.example.umc_stepper.data.remote.YoutubeApi
 import dagger.Module
 import dagger.Provides
@@ -31,4 +32,10 @@ object ApiModule {
     fun getMainServer(
         @NetworkModule.MainRetrofit retrofit: Retrofit
     ): MainApi = retrofit.create(MainApi::class.java)
+
+    @Provides
+    @Singleton
+    fun getTodayApi(
+        @NetworkModule.MainRetrofit retrofit: Retrofit
+    ) : TodayApi = retrofit.create(TodayApi::class.java)
 }
