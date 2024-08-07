@@ -41,7 +41,9 @@ class TodayViewModel @Inject constructor(
     private val _toDayExerciseResponseDto = MutableStateFlow<BaseResponse<ToDayExerciseResponseDto>>(BaseResponse())
     val toDayExerciseResponseDto: StateFlow<BaseResponse<ToDayExerciseResponseDto>> = _toDayExerciseResponseDto
 
-    private val _checkExerciseResponseDTO = MutableStateFlow<BaseResponse<CheckExerciseResponseDTO>>(BaseResponse())
+    private val _checkExerciseResponseDTO = MutableStateFlow<BaseResponse<CheckExerciseResponseDTO>>(
+        BaseResponse()
+    )
     val checkExerciseResponseDTO: StateFlow<BaseResponse<CheckExerciseResponseDTO>> = _checkExerciseResponseDTO
 
     fun getTodayExerciseState(date: String) {
@@ -49,6 +51,7 @@ class TodayViewModel @Inject constructor(
             try {
                 todayApiRepository.getTodayExerciseState(date).collect {
                     _toDayExerciseResponseDto.value = it
+                    Log.d("TodayViewModel", "_toDayExerciseResponseDto : $it")
                 }
             } catch (e: Exception) {
                 Log.e("getTodayExerciseState is Error", e.message.toString())
@@ -61,6 +64,7 @@ class TodayViewModel @Inject constructor(
             try {
                 todayApiRepository.getMyExercise(bodyPart).collect {
                     _checkExerciseResponseDTO.value = it
+                    Log.d("TodayViewModel", "_checkExerciseResponseDTO : $it")
                 }
             } catch (e:Exception) {
                 Log.e("getMyExercise is Error", e.message.toString())
