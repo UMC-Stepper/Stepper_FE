@@ -1,6 +1,6 @@
 package com.example.umc_stepper.token
 
-import com.example.umc_stepper.token.TokenManager
+import android.util.Log
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
@@ -22,6 +22,7 @@ class AccessTokenInterceptor @Inject constructor(
         val requestBuilder = chain.request().newBuilder()
         if (token != null) {
             requestBuilder.addHeader(HEADER_AUTHORIZATION, "$TOKEN_TYPE $token")
+            Log.d("토큰ㄴ","$TOKEN_TYPE $token")
         }
         val request = requestBuilder.build()
         return chain.proceed(request)
