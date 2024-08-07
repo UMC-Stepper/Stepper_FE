@@ -19,6 +19,7 @@ class TokenManager @Inject constructor(
 ) {
     companion object {
         private val ACCESS_TOKEN_KEY = stringPreferencesKey("access_token")
+        private val YOUTUBE_TOKEN_KEY = stringPreferencesKey("youtube_token")
         private val COOKIE = stringPreferencesKey("cookie")
         private val EXERCISE_ID = stringPreferencesKey("exercise_id")
     }
@@ -31,6 +32,12 @@ class TokenManager @Inject constructor(
         }
     }
 
+    fun saveYoutubeToken(token: String) = runBlocking {
+        dataStore.edit { prefs ->
+            prefs[YOUTUBE_TOKEN_KEY] = token
+        }
+    }
+
     fun saveExerciseId(eid : String) = runBlocking{
         dataStore.edit { prefs ->
             prefs[EXERCISE_ID] =  eid
@@ -40,6 +47,12 @@ class TokenManager @Inject constructor(
     fun getExerciseId() : Flow<String?>{
         return dataStore.data.map { prefs ->
             prefs[EXERCISE_ID]
+        }
+    }
+
+    fun getYoutubeToken() : Flow<String?>{
+        return dataStore.data.map { prefs ->
+            prefs[YOUTUBE_TOKEN_KEY]
         }
     }
 
