@@ -22,7 +22,7 @@ interface TodayApi {
     // 나만의 운동
 
     // 나만의 운동 조회 -> 스크랩 화면
-    @GET("/api/myxercise/check")
+    @GET("/api/myexercise/check")
     suspend fun getMyExercise(
         @Query("bodyPart") bodyPart: String
     ) : BaseResponse<CheckExerciseResponseDTO>
