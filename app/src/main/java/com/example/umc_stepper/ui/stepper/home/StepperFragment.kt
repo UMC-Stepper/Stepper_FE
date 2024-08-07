@@ -20,7 +20,7 @@ import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.example.umc_stepper.utils.listener.ItemClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
-class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_stepper), ItemClickListener {
+class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_stepper), ItemClickListener{
     private lateinit var recyclerAdapter: ExerciseViewAdapter
     private lateinit var stepperViewModel : StepperViewModel
     lateinit var days : List<DayData>

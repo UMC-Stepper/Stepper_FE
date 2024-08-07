@@ -22,7 +22,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StepperViewModel @Inject constructor(
-    private val mainApiRepository: MainApiRepository
+    private val mainApiRepository: MainApiRepository,
+    private val youtubeApiRepository: YoutubeApiRepository
 ) : ViewModel() {
     private val _levelItems = MutableLiveData<List<LevelListItem>>()
     val levelItems: LiveData<List<LevelListItem>> = _levelItems
