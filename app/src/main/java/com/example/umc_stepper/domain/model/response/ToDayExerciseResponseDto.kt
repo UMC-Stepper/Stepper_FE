@@ -1,7 +1,5 @@
 package com.example.umc_stepper.domain.model.response
 
-import com.example.umc_stepper.utils.enum.bodyPartType
-
 // 오늘의 운동 진행상태 조회
 data class ToDayExerciseResponseDto(
     val id: Int = 0,
