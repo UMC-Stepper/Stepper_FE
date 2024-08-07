@@ -20,6 +20,7 @@ class TokenManager @Inject constructor(
     companion object {
         private val ACCESS_TOKEN_KEY = stringPreferencesKey("access_token")
         private val COOKIE = stringPreferencesKey("cookie")
+        private val EXERCISE_ID = stringPreferencesKey("exercise_id")
     }
 
     private val dataStore: DataStore<Preferences> = context.datastore
@@ -27,6 +28,18 @@ class TokenManager @Inject constructor(
     fun saveToken(token: String) = runBlocking {
         dataStore.edit { prefs ->
             prefs[ACCESS_TOKEN_KEY] = token
+        }
+    }
+
+    fun saveExerciseId(eid : String) = runBlocking{
+        dataStore.edit { prefs ->
+            prefs[EXERCISE_ID] =  eid
+        }
+    }
+
+    fun getExerciseId() : Flow<String?>{
+        return dataStore.data.map { prefs ->
+            prefs[EXERCISE_ID]
         }
     }
 

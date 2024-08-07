@@ -5,8 +5,11 @@ import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.data.remote.MainApi
 import com.example.umc_stepper.domain.model.request.AiVideoDto
 import com.example.umc_stepper.domain.model.request.LogInDto
+import com.example.umc_stepper.domain.model.request.RateDiaryDto
 import com.example.umc_stepper.domain.model.request.UserDto
 import com.example.umc_stepper.domain.model.response.AiVideoInfo
+import com.example.umc_stepper.domain.model.response.RateDiaryResponse
+import com.example.umc_stepper.domain.model.response.RateDiaryResult
 import com.example.umc_stepper.domain.model.response.UserResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -49,6 +52,20 @@ class MainApiDataSource @Inject constructor(
         emit(result)
     }.catch {
         Log.e("Get User Failure", it.message.toString())
+    }
+
+    fun postRateDiaryEdit(rateDiaryDto: RateDiaryDto) : Flow<BaseResponse<RateDiaryResult>> = flow{
+        val result = mainApi.postRateDiaryEdit(rateDiaryDto)
+        emit(result)
+    }.catch {
+        Log.e("Post RateDiary Edit Failure", it.message.toString())
+    }
+
+    fun getRateDiaryConfirm() : Flow<BaseResponse<List<RateDiaryResponse>>> = flow {
+        val result = mainApi.getRateDiaryConfirm()
+        emit(result)
+    }.catch {
+        Log.e("Get RateDiary Confirm Failure", it.message.toString())
     }
 }
 
