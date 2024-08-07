@@ -9,7 +9,7 @@ import com.example.umc_stepper.domain.model.local.ExerciseState
 
 class TodayHomeExerciseCardAdapter: BaseAdapter<ExerciseState, ItemTodayHomeExerciseCardBinding> (
     diffCallback = BaseDiffCallback(
-        itemsTheSame = { oldItem, newItem -> oldItem == newItem },
+        itemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
         contentsTheSame = { oldItem, newItem -> oldItem == newItem }
     )
 ) {

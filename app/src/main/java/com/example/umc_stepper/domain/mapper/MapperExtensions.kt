@@ -12,6 +12,7 @@ fun BaseListResponse<ToDayExerciseResponseDto>.toExerciseStates(): List<Exercise
         } ?: emptyList()
 
         ExerciseState(
+            id = dto.id,
             bodyPart = dto.bodyPart,
             steps = steps,
             isSuccess = this.isSuccess,
