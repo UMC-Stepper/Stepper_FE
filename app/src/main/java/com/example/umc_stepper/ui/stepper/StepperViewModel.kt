@@ -96,12 +96,13 @@ class StepperViewModel @Inject constructor(
     fun getYoutubeVideoInfo(part: String, id: String, key: String) {
         viewModelScope.launch {
             try {
+                Log.d("뷰모델", "Fetching YouTube video details for ID: $id with key: $key")
                 youtubeApiRepository.getYoutubeDetail(part, id, key).collect { video ->
-                    _successYoutubeLink.value=video
-
+                    Log.d(TAG, "YouTube video details fetched: $video")
+                    _successYoutubeLink.value = video
                 }
             } catch (e: Exception) {
-                Log.e("Get YoutubeVideo is Error", e.message.toString())
+                Log.e("뷰모델", "Get YouTubeVideo is Error", e)
             }
         }
     }

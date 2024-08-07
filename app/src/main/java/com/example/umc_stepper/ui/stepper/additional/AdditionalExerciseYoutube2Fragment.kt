@@ -18,19 +18,20 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.net.URL
-import java.net.URLDecoder
+
 @AndroidEntryPoint
 class AdditionalExerciseYoutube2Fragment : BaseFragment<FragmentAdditionalExerciseYoutube2Binding>(R.layout.fragment_additional_exercise_youtube2) {
 
-    val stepperViewModel:StepperViewModel by activityViewModels()
-    val youtubeKey = BuildConfig.YOUTUBE_KEY
+    private val stepperViewModel: StepperViewModel by activityViewModels()
+    private val youtubeKey = BuildConfig.YOUTUBE_KEY
+
     override fun setLayout() {
         val urlText = arguments?.getString("urlText")
         if (!urlText.isNullOrEmpty()) {
             binding.fragmentDownloadYoutube2MainCardInputLinkEt.setText(urlText)
             initializeYouTubePlayer(urlText)
             fetchYouTubeVideoDetails(urlText)
+            dataSetting()
         }
 
         binding.fragmentDownloadYoutube2Btn.setOnClickListener {
@@ -71,33 +72,42 @@ class AdditionalExerciseYoutube2Fragment : BaseFragment<FragmentAdditionalExerci
         val videoId = extractVideoId(url)
         // videoId를 사용하여 비디오 세부 정보를 가져오는 선호하는 방법 사용 (예: Retrofit, OkHttp 등)
         // 데이터를 가져오기 위한 플레이스홀더 함수
-        fetchVideoDetailsFromApi("snippet",videoId,youtubeKey)
+        fetchVideoDetailsFromApi("snippet", videoId, youtubeKey)
     }
 
-    //유튜브api에서 세부정보 불러오는 함수..
+    // 유튜브 API에서 세부 정보를 불러오는 함수
     private fun fetchVideoDetailsFromApi(part: String, id: String, key: String) {
-        stepperViewModel.getYoutubeVideoInfo(part,id,key)
-
-
+        stepperViewModel.getYoutubeVideoInfo(part, id, key)
+        // ViewModel이 데이터를 적절히 설정하는지 확인
     }
 
-    private fun dataSetting(){
+    private fun dataSetting() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                try{
-                    stepperViewModel.provideYoutubeLink.collect{
-                        binding.fragmentDownloadYoutube2MainCardChannelNameTv.text = it.items[0].snippet.title
-                        binding.fragmentDownloadYoutube2ProfileNameTv.text = it.items[0].snippet.channelTitle
-                        // 이미지 로딩 라이브러리를 사용하여 ImageView에 이미지 로드 (예: Glide, Picasso)
-                        Glide.with(requireContext())
-                            .load(it.items[0].snippet.thumbnails.default)
-                            .into(binding.fragmentDownloadYoutube2MainCardChannelProfileIv)
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                try {
+                    stepperViewModel.provideYoutubeLink.collect { response ->
+                        Log.d("dataSetting", "Response received: $response")
+                        if (response != null && response.items.isNotEmpty()) {
+                            val videoItem = response.items[0].snippet
+                            Log.d("dataSetting", "Video title: ${videoItem.title}")
+                            Log.d("dataSetting", "Channel title: ${videoItem.channelTitle}")
+                            Log.d("dataSetting", "Thumbnail URL: ${videoItem.thumbnails.default.url}")
+
+                            binding.fragmentDownloadYoutube2MainCardChannelNameTv.text = videoItem.title
+                            binding.fragmentDownloadYoutube2ProfileNameTv.text = videoItem.channelTitle
+
+                            Glide.with(requireContext())
+                                .load(videoItem.thumbnails.default.url)
+                                .into(binding.fragmentDownloadYoutube2MainCardChannelProfileIv)
+                        } else {
+                            Log.e("dataSetting", "비디오 아이템이 없음")
+                        }
                     }
-                }catch(e: Exception) {
+                } catch (e: Exception) {
+                    Log.e("dataSetting", "Error collecting video details", e)
                 }
             }
         }
-
     }
 
     private fun goLastExercise() {
@@ -107,5 +117,4 @@ class AdditionalExerciseYoutube2Fragment : BaseFragment<FragmentAdditionalExerci
         }
         findNavController().navigate(R.id.action_fragmentAdditionalExerciseYoutube2_to_fragmentLastExercise, bundle)
     }
-
 }
