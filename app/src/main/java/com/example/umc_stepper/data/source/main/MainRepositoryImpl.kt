@@ -3,8 +3,11 @@ package com.example.umc_stepper.data.source.main
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.model.request.AiVideoDto
 import com.example.umc_stepper.domain.model.request.LogInDto
+import com.example.umc_stepper.domain.model.request.RateDiaryDto
 import com.example.umc_stepper.domain.model.request.UserDto
 import com.example.umc_stepper.domain.model.response.AiVideoInfo
+import com.example.umc_stepper.domain.model.response.RateDiaryResponse
+import com.example.umc_stepper.domain.model.response.RateDiaryResult
 import com.example.umc_stepper.domain.model.response.UserResponse
 import com.example.umc_stepper.domain.repository.FastApiRepository
 import com.example.umc_stepper.domain.repository.MainApiRepository
@@ -29,5 +32,10 @@ class MainRepositoryImpl @Inject constructor(
 
     override suspend fun deleteExit(): Flow<BaseResponse<Any>>
     = dataSource.deleteExit()
+
+    override suspend fun postRateDiaryEdit(rateDiaryDto: RateDiaryDto) : Flow<BaseResponse<RateDiaryResult>>
+    = dataSource.postRateDiaryEdit(rateDiaryDto)
+    override suspend fun getRateDiaryConfirm() : Flow<BaseResponse<List<RateDiaryResponse>>>
+    = dataSource.getRateDiaryConfirm()
 
 }
