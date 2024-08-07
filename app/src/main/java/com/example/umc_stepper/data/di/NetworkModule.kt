@@ -1,6 +1,6 @@
 package com.example.umc_stepper.data.di
 
-import com.example.avocado_android.utils.token.AccessTokenInterceptor
+import com.example.umc_stepper.token.AccessTokenInterceptor
 import com.example.umc_stepper.token.TokenManager
 import dagger.Module
 import dagger.Provides

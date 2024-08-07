@@ -1,4 +1,4 @@
-package com.example.avocado_android.utils.token
+package com.example.umc_stepper.token
 
 import com.example.umc_stepper.token.TokenManager
 import kotlinx.coroutines.flow.firstOrNull
