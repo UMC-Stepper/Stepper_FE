@@ -36,6 +36,6 @@ object ApiModule {
     @Provides
     @Singleton
     fun getTodayApi(
-        @NetworkModule.ApiRetrofit retrofit: Retrofit
+        @NetworkModule.MainRetrofit retrofit: Retrofit
     ) : TodayApi = retrofit.create(TodayApi::class.java)
 }
