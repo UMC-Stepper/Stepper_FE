@@ -1,6 +1,7 @@
 package com.example.umc_stepper.data.source.today
 
 import android.util.Log
+import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.data.remote.TodayApi
 import com.example.umc_stepper.domain.model.response.CheckExerciseResponseDTO
@@ -14,7 +15,7 @@ import javax.inject.Inject
 class TodayApiDataSource @Inject constructor(
     private val todayApi: TodayApi
 ){
-    fun getTodayExerciseState(date: String): Flow<BaseResponse<ToDayExerciseResponseDto>> = flow {
+    fun getTodayExerciseState(date: String): Flow<BaseListResponse<ToDayExerciseResponseDto>> = flow {
         val result = todayApi.getTodayExerciseState(date)
         emit(result)
     }.catch {

@@ -1,5 +1,6 @@
 package com.example.umc_stepper.data.remote
 
+import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.model.response.CheckExerciseResponseDTO
 import com.example.umc_stepper.domain.model.response.ToDayExerciseResponseDto
@@ -16,7 +17,7 @@ interface TodayApi {
     @GET("/api/exercise-card/today")
     suspend fun getTodayExerciseState(
         @Query("date") date: String
-    ) : BaseResponse<ToDayExerciseResponseDto>
+    ) : BaseListResponse<ToDayExerciseResponseDto>
 
 
     // 나만의 운동
