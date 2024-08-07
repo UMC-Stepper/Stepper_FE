@@ -2,6 +2,7 @@ package com.example.umc_stepper.data.di
 
 import com.example.umc_stepper.token.AccessTokenInterceptor
 import com.example.umc_stepper.token.TokenManager
+import com.example.umc_stepper.token.YoutubeTokenInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,6 +12,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
@@ -44,6 +46,12 @@ object NetworkModule {
         return AccessTokenInterceptor(tokenManager)
     }
 
+    @Singleton
+    @Provides
+    fun provideYoutubeTokenInterceptor(tokenManager: TokenManager): YoutubeTokenInterceptor {
+        return YoutubeTokenInterceptor(tokenManager)
+    }
+
 
     @Provides
     @Singleton
@@ -51,6 +59,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
+    @Named("defaultOkHttpClient")
     fun provideOkHttpClient(
         httpLoggingInterceptor: HttpLoggingInterceptor,
         accessTokenInterceptor: AccessTokenInterceptor,
@@ -64,13 +73,45 @@ object NetworkModule {
             .build()
     }
 
+    @Singleton
+    @Provides
+    @Named("defaultFastApiClient")
+    fun provideFastApiClient(
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        accessTokenInterceptor: AccessTokenInterceptor,
+    ): OkHttpClient {
+        return OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor(accessTokenInterceptor)
+            .build()
+    }
+
+    @Singleton
+    @Provides
+    @Named("defaultYoutubeClient")
+    fun provideOkHttpYoutubeClient(
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        youtubeTokenInterceptor: YoutubeTokenInterceptor,
+    ): OkHttpClient {
+        return OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor(youtubeTokenInterceptor)
+            .build()
+    }
+
 
     //fast api
     @ApiRetrofit
     @Singleton
     @Provides
     fun provideRetrofit(
-        okHttpClient: OkHttpClient,
+        @Named("defaultYoutubeClient") okHttpClient: OkHttpClient,
         gsonConverterFactory: GsonConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
@@ -85,7 +126,7 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideYoutubeRetrofit(
-        okHttpClient: OkHttpClient,
+        @Named("defaultYoutubeClient") okHttpClient: OkHttpClient,
         gsonConverterFactory: GsonConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
@@ -99,7 +140,7 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideMainRetrofit(
-        okHttpClient: OkHttpClient,
+        @Named("defaultFastApiClient") okHttpClient: OkHttpClient,
         gsonConverterFactory: GsonConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
