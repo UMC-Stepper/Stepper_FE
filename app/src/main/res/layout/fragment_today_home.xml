@@ -89,6 +89,7 @@
             app:layout_constraintTop_toTopOf="@+id/fragment_today_home_title_tv" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_today_home_exercise_card_rv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
