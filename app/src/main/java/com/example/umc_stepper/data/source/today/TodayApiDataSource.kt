@@ -5,6 +5,7 @@ import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.data.remote.TodayApi
 import com.example.umc_stepper.domain.model.response.CheckExerciseResponseDTO
+import com.example.umc_stepper.domain.model.response.ExerciseCardWeekResponseDto
 import com.example.umc_stepper.domain.model.response.ToDayExerciseResponseDto
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -18,7 +19,6 @@ class TodayApiDataSource @Inject constructor(
 ){
     fun getTodayExerciseState(date: String): Flow<BaseListResponse<ToDayExerciseResponseDto>> = flow {
         val result = todayApi.getTodayExerciseState(date)
-        Log.d("TodayApiDataSource", "result : ${result.isSuccess}")
         emit(result)
     }.catch { e ->
         val errorBody = (e as? HttpException)?.response()?.errorBody()?.string()
@@ -30,11 +30,17 @@ class TodayApiDataSource @Inject constructor(
         ))
     }
 
-
     fun getMyExercise(bodyPart: String): Flow<BaseResponse<CheckExerciseResponseDTO>> = flow {
         val result = todayApi.getMyExercise(bodyPart)
         emit(result)
     }.catch {
-        Log.e("getMyExercise Failure", it.message.toString())
+        Log.e("GET MyExercise Failure", it.message.toString())
+    }
+
+    fun getExerciseCheckDate(bodyPart: String) : Flow<BaseListResponse<ExerciseCardWeekResponseDto>> = flow {
+        val result = todayApi.getExerciseCheckDate(bodyPart)
+        emit(result)
+    }.catch {
+        Log.e("GET MyExercise Failure", it.message.toString())
     }
 }

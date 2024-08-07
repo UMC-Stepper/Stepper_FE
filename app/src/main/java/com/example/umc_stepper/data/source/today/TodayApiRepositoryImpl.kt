@@ -3,6 +3,7 @@ package com.example.umc_stepper.data.source.today
 import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.model.response.CheckExerciseResponseDTO
+import com.example.umc_stepper.domain.model.response.ExerciseCardWeekResponseDto
 import com.example.umc_stepper.domain.model.response.ToDayExerciseResponseDto
 import com.example.umc_stepper.domain.repository.TodayApiRepository
 import kotlinx.coroutines.flow.Flow
@@ -17,4 +18,8 @@ class TodayApiRepositoryImpl @Inject constructor(
 
     override suspend fun getMyExercise(bodyPart: String): Flow<BaseResponse<CheckExerciseResponseDTO>> =
         dataSource.getMyExercise(bodyPart)
+
+    override suspend fun getExerciseCheckDate(bodyPart: String): Flow<BaseListResponse<ExerciseCardWeekResponseDto>> =
+        dataSource.getExerciseCheckDate(bodyPart)
+
 }
