@@ -3,6 +3,7 @@ package com.example.umc_stepper.data.remote
 import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.model.response.CheckExerciseResponseDTO
+import com.example.umc_stepper.domain.model.response.ExerciseCardWeekResponseDto
 import com.example.umc_stepper.domain.model.response.ToDayExerciseResponseDto
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -19,6 +20,11 @@ interface TodayApi {
         @Query("date") date: String
     ) : BaseListResponse<ToDayExerciseResponseDto>
 
+    // 운동 부위의 운동 카드 요일 조회
+    @GET("/api/exercise-card/check-date")
+    suspend fun getExerciseCheckDate(
+        @Query("bodyPart") bodyPart: String
+    ) : BaseListResponse<ExerciseCardWeekResponseDto>
 
     // 나만의 운동
 
@@ -27,4 +33,5 @@ interface TodayApi {
     suspend fun getMyExercise(
         @Query("bodyPart") bodyPart: String
     ) : BaseResponse<CheckExerciseResponseDTO>
+
 }

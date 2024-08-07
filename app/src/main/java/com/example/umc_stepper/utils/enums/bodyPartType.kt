@@ -1,4 +1,4 @@
-package com.example.umc_stepper.utils.enum
+package com.example.umc_stepper.utils.enums
 
 enum class bodyPartType {
     머리,
