@@ -61,14 +61,35 @@
                     app:layout_constraintEnd_toEndOf="parent" />
 
                 <TextView
-                    android:id="@+id/item_today_home_exercise_card_sub_tv"
+                    android:id="@+id/item_today_home_exercise_card_sub_tv1"
                     style="@style/body_semi_bold_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="19dp"
-                    android:text="총 3단계 운동"
+                    android:text="총"
                     app:layout_constraintStart_toStartOf="@+id/item_today_home_exercise_card_tv"
                     app:layout_constraintTop_toBottomOf="@+id/item_today_home_exercise_card_tv" />
+
+                <TextView
+                    android:id="@+id/item_today_home_exercise_card_total_step"
+                    style="@style/body_semi_bold_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:text="3"
+                    app:layout_constraintBottom_toBottomOf="@+id/item_today_home_exercise_card_sub_tv1"
+                    app:layout_constraintStart_toEndOf="@+id/item_today_home_exercise_card_sub_tv1"
+                    app:layout_constraintTop_toTopOf="@+id/item_today_home_exercise_card_sub_tv1" />
+
+                <TextView
+                    android:id="@+id/item_today_home_exercise_card_sub_tv2"
+                    style="@style/body_semi_bold_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="단계 운동"
+                    app:layout_constraintBottom_toBottomOf="@+id/item_today_home_exercise_card_total_step"
+                    app:layout_constraintStart_toEndOf="@+id/item_today_home_exercise_card_total_step"
+                    app:layout_constraintTop_toTopOf="@+id/item_today_home_exercise_card_total_step" />
 
                 <TextView
                     android:id="@+id/item_today_home_exercise_card_step1_tv"
@@ -79,8 +100,8 @@
                     android:layout_marginBottom="12dp"
                     android:text="1단계"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/item_today_home_exercise_card_sub_tv"
-                    app:layout_constraintTop_toBottomOf="@+id/item_today_home_exercise_card_sub_tv" />
+                    app:layout_constraintStart_toStartOf="@+id/item_today_home_exercise_card_sub_tv1"
+                    app:layout_constraintTop_toBottomOf="@+id/item_today_home_exercise_card_sub_tv1" />
 
                 <ImageView
                     android:id="@+id/item_today_home_exercise_card_step1_iv"
