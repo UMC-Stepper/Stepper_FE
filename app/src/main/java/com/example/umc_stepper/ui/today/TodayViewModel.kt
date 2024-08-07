@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.umc_stepper.BuildConfig
 import com.example.umc_stepper.base.BaseResponse
+import com.example.umc_stepper.domain.mapper.toExerciseStates
+import com.example.umc_stepper.domain.model.local.ExerciseState
 import com.example.umc_stepper.domain.model.request.AiVideoDto
 import com.example.umc_stepper.domain.model.response.AiVideoInfo
 import com.example.umc_stepper.domain.model.response.CheckExerciseResponseDTO
@@ -38,23 +40,26 @@ class TodayViewModel @Inject constructor(
     private val _successYoutubeLink = MutableStateFlow(Ylist())
     val successYoutubeLink: StateFlow<Ylist> = _successYoutubeLink
 
-    private val _toDayExerciseResponseDto = MutableStateFlow<BaseResponse<ToDayExerciseResponseDto>>(BaseResponse())
-    val toDayExerciseResponseDto: StateFlow<BaseResponse<ToDayExerciseResponseDto>> = _toDayExerciseResponseDto
-
     private val _checkExerciseResponseDTO = MutableStateFlow<BaseResponse<CheckExerciseResponseDTO>>(
         BaseResponse()
     )
     val checkExerciseResponseDTO: StateFlow<BaseResponse<CheckExerciseResponseDTO>> = _checkExerciseResponseDTO
 
+    private val _exerciseState = MutableStateFlow<List<ExerciseState>?>(null)
+    val exerciseState: StateFlow<List<ExerciseState>?> = _exerciseState
+
     fun getTodayExerciseState(date: String) {
         viewModelScope.launch {
             try {
-                todayApiRepository.getTodayExerciseState(date).collect {
-                    _toDayExerciseResponseDto.value = it
-                    Log.d("TodayViewModel", "_toDayExerciseResponseDto : $it")
+                todayApiRepository.getTodayExerciseState(date).collect { response ->
+                    if (response != null) {
+                        Log.d(" response.isSuccess", " response.isSuccess: ${response.isSuccess}")
+                        val exerciseStateList = response.toExerciseStates()
+                        _exerciseState.value = exerciseStateList
+                    }
                 }
             } catch (e: Exception) {
-                Log.e("getTodayExerciseState is Error", e.message.toString())
+                Log.e("TodayViewModel getTodayExerciseState Error", e.message.toString())
             }
         }
     }
