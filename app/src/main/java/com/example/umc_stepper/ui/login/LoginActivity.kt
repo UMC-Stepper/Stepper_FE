@@ -47,6 +47,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun setting() {
+        lifecycleScope.launch {
+            tokenManager.deleteAccessToken()
+        }
         setViewModel()
         barTransparent()
         onClicked()
