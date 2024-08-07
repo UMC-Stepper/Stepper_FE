@@ -20,7 +20,7 @@ import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.example.umc_stepper.utils.listener.ItemClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
-class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_stepper), ItemClickListener {
+class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_stepper), ItemClickListener{
     private lateinit var recyclerAdapter: ExerciseViewAdapter
     private lateinit var stepperViewModel : StepperViewModel
     lateinit var days : List<DayData>
@@ -79,7 +79,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
             DayData("31", false, false),
             DayData("1", false, false)
         )
-        init()
+        //init()
         //임시함수적용: 추후 아래의 goCommunityIndex()함수와 함께 꼭 삭제
         binding.stepperMonthTitleTv.setOnClickListener {
             goCommunityIndex()
@@ -88,6 +88,10 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
         //임시함수적용: 추후 아래의 goCommunityPartHome()함수와 함께 꼭 삭제
         binding.stepperExplain1Tv.setOnClickListener {
             goCommunityPartHome()
+        }
+        //추가운동홈으로 이동
+        binding.stepperAdditionalBtn.setOnClickListener {
+            goAdditionalExerciseHome()
         }
     }
 
@@ -99,9 +103,6 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
 
         recyclerAdapter = ExerciseViewAdapter(this)
         binding.stepperExerciseRv.adapter = recyclerAdapter
-        binding.stepperAdditionalBtn.setOnClickListener {
-            goAdditionalExerciseHome()
-        }
 
         stepperViewModel.levelItems.observe(viewLifecycleOwner) { levelItems ->
             recyclerAdapter.submitList(levelItems)

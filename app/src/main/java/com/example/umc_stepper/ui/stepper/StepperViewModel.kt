@@ -1,6 +1,5 @@
 package com.example.umc_stepper.ui.stepper
 
-import android.provider.Telephony.Mms.Rate
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,6 +11,8 @@ import com.example.umc_stepper.domain.model.response.RateDiaryResponse
 import com.example.umc_stepper.domain.model.response.RateDiaryResult
 import com.example.umc_stepper.domain.model.response.UserResponse
 import com.example.umc_stepper.domain.repository.MainApiRepository
+import com.example.umc_stepper.domain.model.response.YouTubeVideo
+import com.example.umc_stepper.domain.repository.YoutubeApiRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,10 +22,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StepperViewModel @Inject constructor(
-    private val mainApiRepository: MainApiRepository
+    private val mainApiRepository: MainApiRepository,
+    private val youtubeApiRepository: YoutubeApiRepository
 ) : ViewModel() {
     private val _levelItems = MutableLiveData<List<LevelListItem>>()
     val levelItems: LiveData<List<LevelListItem>> = _levelItems
+
+    private val _successYoutubeLink = MutableStateFlow(YouTubeVideo())
+    val provideYoutubeLink: StateFlow<YouTubeVideo> = _successYoutubeLink
 
     private val TAG = "StepperViewModel"
     //평가 일지 작성 요청 후 응답
@@ -86,5 +91,19 @@ class StepperViewModel @Inject constructor(
             )
         )
         _levelItems.value = items
+    }
+
+    fun getYoutubeVideoInfo(part: String, id: String, key: String) {
+        viewModelScope.launch {
+            try {
+                Log.d("뷰모델", "Fetching YouTube video details for ID: $id with key: $key")
+                youtubeApiRepository.getYoutubeDetail(part, id, key).collect { video ->
+                    Log.d(TAG, "YouTube video details fetched: $video")
+                    _successYoutubeLink.value = video
+                }
+            } catch (e: Exception) {
+                Log.e("뷰모델", "Get YouTubeVideo is Error", e)
+            }
+        }
     }
 }
