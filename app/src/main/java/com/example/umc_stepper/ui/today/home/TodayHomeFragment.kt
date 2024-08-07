@@ -52,7 +52,6 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
 
         viewLifecycleOwner.lifecycleScope.launch {
             todayViewModel.getTodayExerciseState(formattedDate)
-            //updateUIVisibility()
         }
     }
 
@@ -95,6 +94,7 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
 
         todayHomeExerciseCardAdapter = TodayHomeExerciseCardAdapter()
         binding.fragmentTodayHomeExerciseCardRv.adapter = todayHomeExerciseCardAdapter
+        binding.fragmentTodayHomeExerciseCardRv.itemAnimator = null
 
         // 어댑터 초기화 및 클릭 리스너 설정 (날짜 바뀌면서 운동카드 갱신)
         todayHomeCalendarAdapter = TodayHomeCalendarAdapter { formattedDate ->
