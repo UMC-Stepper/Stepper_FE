@@ -1,6 +1,7 @@
 package com.example.umc_stepper.ui
 
 import android.content.Context
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
@@ -8,28 +9,44 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseActivity
 import com.example.umc_stepper.databinding.ActivityMainBinding
+import com.example.umc_stepper.token.TokenManager
+import com.example.umc_stepper.ui.login.LoginViewModel
 import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.example.umc_stepper.ui.today.TodayViewModel
 import com.example.umc_stepper.utils.extensions.navigateToTopLevelDestination
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
+    @Inject
+    lateinit var tokenManager : TokenManager
     private lateinit var todayViewModel: TodayViewModel
     private lateinit var stepperViewModel: StepperViewModel
     private lateinit var navController: NavController
 
     override fun setLayout() {
+        confirmAccessToken()
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         setViewModel()
         setNavigation()
+    }
+
+    private fun confirmAccessToken(){
+        lifecycleScope.launch {
+            val token = tokenManager.getAccessToken().first() // Flow에서 첫 번째 값을 가져옴
+            Log.d("토큰", token ?: "토큰이 없습니다.")
+        }
     }
 
     private fun setViewModel(){

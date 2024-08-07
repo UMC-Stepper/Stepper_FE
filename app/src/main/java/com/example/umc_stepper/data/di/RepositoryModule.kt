@@ -3,9 +3,12 @@ package com.example.umc_stepper.data.di
 
 import com.example.umc_stepper.data.source.fastapi.FastApiDataSource
 import com.example.umc_stepper.data.source.fastapi.FastApiRepositoryImpl
+import com.example.umc_stepper.data.source.main.MainApiDataSource
+import com.example.umc_stepper.data.source.main.MainRepositoryImpl
 import com.example.umc_stepper.data.source.youtube.YoutubeDataSource
 import com.example.umc_stepper.data.source.youtube.YoutubeRepositoryImpl
 import com.example.umc_stepper.domain.repository.FastApiRepository
+import com.example.umc_stepper.domain.repository.MainApiRepository
 import com.example.umc_stepper.domain.repository.YoutubeApiRepository
 import dagger.Module
 import dagger.Provides
@@ -27,6 +30,11 @@ object RepositoryModule {
     @Provides
     fun provideYoutubeApiRepository(youtubeApiDataSource: YoutubeDataSource): YoutubeApiRepository =
         YoutubeRepositoryImpl(youtubeApiDataSource)
+
+    @Singleton
+    @Provides
+    fun provideMainApiRepository(mainApiDataSource: MainApiDataSource) : MainApiRepository =
+        MainRepositoryImpl(mainApiDataSource)
 
 
 }

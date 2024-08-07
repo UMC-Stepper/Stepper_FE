@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import android.util.Log
 import android.view.WindowManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -16,20 +17,30 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseActivity
+import com.example.umc_stepper.data.di.DataStoreModule
 import com.example.umc_stepper.databinding.ActivityLoginBinding
+import com.example.umc_stepper.domain.model.request.LogInDto
+import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.signup.SignUpActivity
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+import kotlin.math.log
 
+@AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login),
-    ConfirmDialogInterface {
+    ConfirmDialogInterface{
+    @Inject
+    lateinit var tokenManager: TokenManager
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var agreeDialog: AgreeDialog
     private lateinit var requestMultiplePermissionsLauncher: ActivityResultLauncher<Array<String>>
 
     override fun setLayout() {
+        requestForUserData()
         initPermissionLaunchers()
         checkPermissionsAndProceed()
         setting()
@@ -39,7 +50,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         setViewModel()
         barTransparent()
         onClicked()
-        goHome()
     }
 
     private fun initPermissionLaunchers() {
@@ -86,10 +96,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun goHome() {
-        binding.activityLoginStepperIv.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        this@LoginActivity.finish()
     }
 
     private fun goSignUp() {
@@ -110,6 +119,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                 val email = activityLoginEmailEt.text.toString()
                 val password = activityLoginPasswordEt.text.toString()
                 //전송 api 호출 loginViewModel.getUser(email,password)
+                loginViewModel.postUserLogInInfo(
+                    LogInDto(
+                        email = email,
+                        password = password
+                    )
+                )
             }
 
             activityRegisterBtn.setOnClickListener {
@@ -119,13 +134,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun requestForUserData() { //응답
-        with(binding) {
-            lifecycleScope.launch {
-                repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    loginViewModel.userData.collectLatest { response ->
-                        loginViewModel.updateUser(response) //유저 업데이트
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                loginViewModel.loginData.collectLatest { response ->
+                    if (response.isSuccess) {
+                        tokenManager.saveToken(response.result!!)
                         goHome()
-                        finish()
+                        Log.e("okhttp", "이동")
                     }
                 }
             }

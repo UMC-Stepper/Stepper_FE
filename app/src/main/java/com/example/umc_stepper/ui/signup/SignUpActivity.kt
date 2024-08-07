@@ -20,7 +20,9 @@ import com.example.umc_stepper.base.BaseActivity
 import com.example.umc_stepper.databinding.ActivitySignUpBinding
 import com.example.umc_stepper.domain.model.request.UserDto
 import com.google.gson.Gson
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sign_up) {
     private var isCheckedCertificationNumber = true // 인증 번호
     private var isAgreementChecked = false // 약관 동의
@@ -153,13 +155,14 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
                     val gson = Gson()
                     val userDto = gson.toJson(
                         UserDto(
-                            nick_name = nickname,
+                            nickName = nickname,
                             email = email,
                             password = password,
-                            community_alarm = "true",
-                            email_agree = "true",
-                            per_agree = "true",
-                            use_agree = "true"
+                            communityAlarm = true,
+                            exerciseAlarm = true,
+                            emailAgree = true,
+                            useAgree = true,
+                            perAgree = true
                         )
                     )
                     intent.putExtra("user", userDto)

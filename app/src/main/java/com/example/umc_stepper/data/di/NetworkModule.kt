@@ -1,6 +1,6 @@
 package com.example.umc_stepper.data.di
 
-import com.example.avocado_android.utils.token.AccessTokenInterceptor
+import com.example.umc_stepper.token.AccessTokenInterceptor
 import com.example.umc_stepper.token.TokenManager
 import dagger.Module
 import dagger.Provides
@@ -25,6 +25,10 @@ object NetworkModule {
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
     annotation class YoutubeRetrofit
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class MainRetrofit
 
     @Singleton
     @Provides
@@ -88,6 +92,20 @@ object NetworkModule {
             .addConverterFactory(gsonConverterFactory)
             .client(okHttpClient)
             .baseUrl("https://www.googleapis.com/youtube/v3/")
+            .build()
+    }
+
+    @MainRetrofit
+    @Singleton
+    @Provides
+    fun provideMainRetrofit(
+        okHttpClient: OkHttpClient,
+        gsonConverterFactory: GsonConverterFactory
+    ): Retrofit {
+        return Retrofit.Builder()
+            .addConverterFactory(gsonConverterFactory)
+            .client(okHttpClient)
+            .baseUrl("http://stepper-dev-env.eba-4gp3sbph.ap-northeast-2.elasticbeanstalk.com/")
             .build()
     }
 }
