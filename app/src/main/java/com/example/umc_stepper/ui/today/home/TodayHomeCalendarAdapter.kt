@@ -12,7 +12,7 @@ import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
 import java.util.Locale
 
-class TodayHomeCalendarAdapter(private val onItemClick: (WeekCalendar) -> Unit) :
+class TodayHomeCalendarAdapter(private val onItemClick: (String) -> Unit) :
     BaseAdapter<WeekCalendar, ItemTodayHomeWeekCalendarBinding>(
         BaseDiffCallback(
             itemsTheSame = { oldItem, newItem -> oldItem.date == newItem.date },
@@ -48,7 +48,17 @@ class TodayHomeCalendarAdapter(private val onItemClick: (WeekCalendar) -> Unit) 
                 }
             }
             submitList(updatedList)
-            onItemClick(item)
+
+            // 현재 날짜 기준으로 연, 월 가져옴
+            val currentDate = LocalDate.now()
+            val year = currentDate.year
+            val month = currentDate.monthValue
+
+            val day = item.date.toInt() // 클릭한 날짜 파싱
+            val selectedDate = LocalDate.of(year, month, day)
+
+            val formattedDate = selectedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+            onItemClick(formattedDate)
         }
     }
 
