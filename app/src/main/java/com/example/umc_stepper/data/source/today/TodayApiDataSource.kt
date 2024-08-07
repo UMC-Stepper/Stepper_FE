@@ -9,6 +9,7 @@ import com.example.umc_stepper.domain.model.response.ToDayExerciseResponseDto
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
 
 import javax.inject.Inject
 
@@ -17,10 +18,18 @@ class TodayApiDataSource @Inject constructor(
 ){
     fun getTodayExerciseState(date: String): Flow<BaseListResponse<ToDayExerciseResponseDto>> = flow {
         val result = todayApi.getTodayExerciseState(date)
+        Log.d("TodayApiDataSource", "result : ${result.isSuccess}")
         emit(result)
-    }.catch {
-        Log.e("getTodayExerciseState Failure", it.message.toString())
+    }.catch { e ->
+        val errorBody = (e as? HttpException)?.response()?.errorBody()?.string()
+        Log.e("getTodayExerciseState FailureHttpException", "HTTP ${(e as? HttpException)?.code()} Error: $errorBody")
+        emit(BaseListResponse<ToDayExerciseResponseDto>(
+            isSuccess = false,
+            code = (e as? HttpException)?.code().toString(),
+            message = errorBody ?: e.message ?: "Unknown error"
+        ))
     }
+
 
     fun getMyExercise(bodyPart: String): Flow<BaseResponse<CheckExerciseResponseDTO>> = flow {
         val result = todayApi.getMyExercise(bodyPart)
