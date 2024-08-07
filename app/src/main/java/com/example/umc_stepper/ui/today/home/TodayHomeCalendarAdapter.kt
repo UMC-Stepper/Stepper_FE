@@ -49,13 +49,9 @@ class TodayHomeCalendarAdapter(private val onItemClick: (String) -> Unit) :
             }
             submitList(updatedList)
 
-            // 현재 날짜 기준으로 연, 월 가져옴
             val currentDate = LocalDate.now()
-            val year = currentDate.year
-            val month = currentDate.monthValue
-
             val day = item.date.toInt() // 클릭한 날짜 파싱
-            val selectedDate = LocalDate.of(year, month, day)
+            val selectedDate = LocalDate.of(currentDate.year, currentDate.monthValue, day)
 
             val formattedDate = selectedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
             onItemClick(formattedDate)
