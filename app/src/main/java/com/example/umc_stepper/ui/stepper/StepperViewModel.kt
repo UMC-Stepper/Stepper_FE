@@ -13,6 +13,7 @@ import com.example.umc_stepper.domain.model.response.UserResponse
 import com.example.umc_stepper.domain.repository.MainApiRepository
 import com.example.umc_stepper.domain.model.response.YouTubeVideo
 import com.example.umc_stepper.domain.repository.YoutubeApiRepository
+import com.example.umc_stepper.utils.enums.LoadState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -53,11 +54,17 @@ class StepperViewModel @Inject constructor(
 
     fun getDiaryConfirm(){
         viewModelScope.launch {
+            _diaryList.value = BaseResponse(LoadState.LOADING)
             try{
                 mainApiRepository.getRateDiaryConfirm().collect{
-                    _diaryList.value = it
+                    if (it.isSuccess && !it.result.isNullOrEmpty()) {
+                        _diaryList.value = it.copy(loadState = LoadState.SUCCESS)
+                    } else {
+                        _diaryList.value = BaseResponse(LoadState.EMPTY)
+                    }
                 }
             }catch (e : Exception){
+                _diaryList.value = BaseResponse(LoadState.ERROR)
                 Log.e(TAG, "getDiaryConfirm Error")
             }
         }

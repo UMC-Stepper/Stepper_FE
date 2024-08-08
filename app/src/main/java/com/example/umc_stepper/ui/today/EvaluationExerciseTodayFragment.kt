@@ -1,18 +1,29 @@
 package com.example.umc_stepper.ui.today
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentEvaluationExerciseTodayBinding
 import com.example.umc_stepper.ui.MainActivity
-
+import com.example.umc_stepper.ui.stepper.StepperViewModel
+import com.example.umc_stepper.utils.GlobalApplication
+import com.example.umc_stepper.utils.enums.LoadState
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+//앞 화면에서 받은 리스트로 조작해야 함
 class EvaluationExerciseTodayFragment :
     BaseFragment<FragmentEvaluationExerciseTodayBinding>(R.layout.fragment_evaluation_exercise_today) {
 
+        val stepperViewModel : StepperViewModel by activityViewModels()
     lateinit var imgList: List<ImageView>
     lateinit var tvList: List<TextView>
     lateinit var triangleList: List<ImageView>
@@ -44,20 +55,64 @@ class EvaluationExerciseTodayFragment :
         setTitle()
         setList()
         initScreen()
+        setObserver()
         setOnClickBtn()
     }
 
-    private fun initScreen(){
-        with(binding){
-            fragmentEvaluationExerciseHalfBgTv.text = fragmentEvaluationExerciseScoreTv.text.toString()
-            when(selectTextDescription){
-                0 -> setDescription(0)
-                1 -> setDescription(1)
-                2 -> setDescription(2)
-                3 -> setDescription(3)
-                4 -> setDescription(4)
+    private fun setObserver(){
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                stepperViewModel.diaryList.collectLatest {
+                    when(it.loadState){
+                        LoadState.LOADING -> {
+                            binding.loadingProgressPb.visibility = View.VISIBLE
+                            binding.loadingMessageTv.visibility = View.VISIBLE
+                            binding.allConstraintCl.visibility = View.GONE
+                            binding.allConstraint2Cl.visibility = View.VISIBLE
+                        }
+
+                        LoadState.SUCCESS -> {
+                            binding.loadingProgressPb.visibility = View.GONE
+                            binding.loadingMessageTv.visibility = View.GONE
+                            binding.allConstraint2Cl.visibility = View.GONE
+                            if (!it.result.isNullOrEmpty()) {
+                                binding.fragmentEvaluationExerciseTodayEmptyTv.visibility = View.GONE
+                                binding.allConstraintCl.visibility = View.VISIBLE
+                                binding.fragmentEvaluationExerciseScoreTv.text = it.result[0].conditionRate.toString()
+                                binding.fragmentEvaluationExercisePointTv.text = it.result[0].conditionRate.toString()
+                                setDescription(it.result[0].painRate)
+                                binding.fragmentEvaluationExerciseProgressbarPb.progress = it.result[0].conditionRate
+                                binding.fragmentEvaluationExerciseMemoEt.text = it.result[0].painMemo
+                                GlobalApplication.loadCropImage(binding.fragmentEvaluationExercisePictureExerciseIv, it.result[0].painImage)
+                            } else {
+                                binding.fragmentEvaluationExerciseTodayEmptyTv.visibility = View.VISIBLE
+                                binding.allConstraintCl.visibility = View.GONE
+                            }
+                        }
+
+                        LoadState.EMPTY -> {
+                            binding.loadingProgressPb.visibility = View.GONE
+                            binding.loadingMessageTv.visibility = View.GONE
+                            binding.allConstraintCl.visibility = View.GONE
+                            binding.allConstraint2Cl.visibility = View.VISIBLE
+                        }
+
+                        LoadState.ERROR -> {
+                            Log.e("에러", "로딩 에러")
+                            binding.loadingProgressPb.visibility = View.GONE
+                            binding.loadingMessageTv.visibility = View.GONE
+                            binding.allConstraintCl.visibility = View.GONE
+                            binding.allConstraint2Cl.visibility = View.VISIBLE
+                        }
+                    }
+                }
             }
         }
+    }
+
+    //앞에서 보내준 리스트로 파싱 지정날짜 운동카드 넘겨줘야함
+    private fun initScreen(){
+        stepperViewModel.getDiaryConfirm()
     }
 
     private fun setDescription(select : Int){
@@ -65,7 +120,6 @@ class EvaluationExerciseTodayFragment :
         triangleList[select].visibility = View.VISIBLE
         binding.fragmentEvaluationExerciseStateTv.text = stateTitleList[select]
         binding.fragmentEvaluationExerciseDescriptionTv.text = descriptionList[select]
-//        binding.fragmentEvaluationExerciseMemoEt.text = 값을 받은 메모
     }
 
     private fun setList() {
@@ -112,10 +166,10 @@ class EvaluationExerciseTodayFragment :
 
             stateTitleList = listOf(
                 "완전 괜찮아요",
+                "조금 덜 아팠어요",
                 "큰 차이가 없어요",
                 "조금 더 불편해요",
-                "완전 아파요",
-                "조금 덜 아팠어요"
+                "많이 아파요",
             )
 
             descriptionList = listOf(
