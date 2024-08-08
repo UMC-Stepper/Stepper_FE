@@ -51,7 +51,9 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
         val formattedDate = selectedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
 
         viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
             todayViewModel.getTodayExerciseState(formattedDate)
+             }
         }
     }
 
