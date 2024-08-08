@@ -47,4 +47,31 @@ fun NavController.navigateToTopLevelDestination(
         e.printStackTrace()
         false
     }
+
+}
+
+fun NavController.navTop(
+    @IdRes destinationId: Int
+): Boolean {
+    val builder = NavOptions.Builder()
+        .setLaunchSingleTop(true)   // 동일 목적지 중복 생성 방지
+        .setRestoreState(true)      // 프래그먼트 상태 유지
+
+    // 현재 목적지와 이동할 목적지 비교
+    if (currentDestination?.id != destinationId) {
+        // 최상위 목적지로 이동 시 백스택 관리
+        builder.setPopUpTo(
+            graph.findStartDestination().id,
+            inclusive = false,
+            saveState = true    // 백스택 저장
+        )
+    }
+
+    return try {
+        navigate(destinationId, null, builder.build())
+        true
+    } catch (e: IllegalArgumentException) {
+        e.printStackTrace()
+        false
+    }
 }
