@@ -6,12 +6,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.umc_stepper.base.BaseResponse
+import com.example.umc_stepper.domain.model.Time
 import com.example.umc_stepper.domain.model.request.RateDiaryDto
 import com.example.umc_stepper.domain.model.response.RateDiaryResponse
 import com.example.umc_stepper.domain.model.response.RateDiaryResult
+import com.example.umc_stepper.domain.model.response.TimeResponse
 import com.example.umc_stepper.domain.model.response.UserResponse
 import com.example.umc_stepper.domain.repository.MainApiRepository
 import com.example.umc_stepper.domain.model.response.YouTubeVideo
+import com.example.umc_stepper.domain.repository.StepperApiRepository
 import com.example.umc_stepper.domain.repository.YoutubeApiRepository
 import com.example.umc_stepper.utils.enums.LoadState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,13 +27,17 @@ import javax.inject.Inject
 @HiltViewModel
 class StepperViewModel @Inject constructor(
     private val mainApiRepository: MainApiRepository,
-    private val youtubeApiRepository: YoutubeApiRepository
+    private val youtubeApiRepository: YoutubeApiRepository,
+    private val stepperApiRepository: StepperApiRepository
 ) : ViewModel() {
     private val _levelItems = MutableLiveData<List<LevelListItem>>()
     val levelItems: LiveData<List<LevelListItem>> = _levelItems
 
     private val _successYoutubeLink = MutableStateFlow(YouTubeVideo())
     val provideYoutubeLink: StateFlow<YouTubeVideo> = _successYoutubeLink
+
+    private val _addTimeState = MutableStateFlow<BaseResponse<TimeResponse>>(BaseResponse())
+    val addTimeState : StateFlow<BaseResponse<TimeResponse>> = _addTimeState
 
     private val TAG = "StepperViewModel"
     //평가 일지 작성 요청 후 응답
@@ -110,6 +117,18 @@ class StepperViewModel @Inject constructor(
                 }
             } catch (e: Exception) {
                 Log.e("뷰모델", "Get YouTubeVideo is Error", e)
+            }
+        }
+    }
+
+    fun saveMoreExerciseTime(time : Time){
+        viewModelScope.launch {
+            try {
+                stepperApiRepository.postMoreExercise(time).collect{
+                    _addTimeState.value = it
+                }
+            }catch(e : Exception){
+                Log.e(TAG, e.message.toString())
             }
         }
     }
