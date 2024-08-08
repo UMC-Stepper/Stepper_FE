@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Button
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
@@ -17,8 +18,9 @@ class AdditionalExerciseMiddleFragment : BaseFragment<FragmentAdditionalExercise
     private var isRunning = false
     private var time = 0L // 밀리초 단위
 
-    private lateinit var startBtn: Button
-    private lateinit var resetBtn: Button
+    private lateinit var startBtn: AppCompatButton
+    private lateinit var resetBtn: AppCompatButton
+    private lateinit var completeBtn : AppCompatButton
 
     private val handler = Handler(Looper.getMainLooper())
     private val timerRunnable = object : Runnable {
@@ -40,13 +42,18 @@ class AdditionalExerciseMiddleFragment : BaseFragment<FragmentAdditionalExercise
 
 
     override fun setLayout() {
+        initSettings()
+
+        completeBtn.setOnClickListener {
+            goAdditionalExerciseSuccess()
+        }
+    }
+
+    private fun initSettings() {
         updateMainToolbar()
         initButton()
         setTimer()
         resetTimer()
-        binding.fragmentAdditionalMiddleExerciseCompleteBtn.setOnClickListener {
-            goAdditionalExerciseSuccess()
-        }
     }
 
     private fun updateMainToolbar() {
@@ -54,25 +61,24 @@ class AdditionalExerciseMiddleFragment : BaseFragment<FragmentAdditionalExercise
     }
 
     private fun goAdditionalExerciseSuccess(){
-        binding.fragmentAdditionalMiddleExerciseCompleteBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
-        binding.fragmentAdditionalMiddleExerciseCompleteBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
         findNavController().navigate(R.id.action_fragmentAdditionalExerciseMiddle_to_fragmentAdditionalExerciseSuccess)
     }
 
     private fun initButton() {
         startBtn = binding.fragmentAdditionalMiddleStartBtn
         resetBtn = binding.fragmentAdditionalMiddleResetBtn
+        completeBtn = binding.fragmentAdditionalMiddleExerciseCompleteBtn
     }
 
     private fun setButtonUI(text: String) {
         when(text) {
             "시작", "중지" -> {
-                binding.fragmentAdditionalMiddleExerciseCompleteBtn.setBackgroundResource(R.drawable.radius_corners_61dp_stroke_1)
-                binding.fragmentAdditionalMiddleExerciseCompleteBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.Purple_700))
+                completeBtn.setBackgroundResource(R.drawable.radius_corners_61dp_stroke_1)
+                completeBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.Purple_700))
             }
             "계속" -> {
-                binding.fragmentAdditionalMiddleExerciseCompleteBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
-                binding.fragmentAdditionalMiddleExerciseCompleteBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
+                completeBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
+                completeBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
             }
         }
     }

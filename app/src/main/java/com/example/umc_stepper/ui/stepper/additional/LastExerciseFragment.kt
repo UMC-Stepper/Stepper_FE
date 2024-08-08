@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Button
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -19,8 +20,9 @@ class LastExerciseFragment : BaseFragment<FragmentLastExerciseBinding>(R.layout.
     private var isRunning = false
     private var time = 0L // 밀리초 단위
 
-    private lateinit var startBtn: Button
-    private lateinit var resetBtn: Button
+    private lateinit var startBtn: AppCompatButton
+    private lateinit var resetBtn: AppCompatButton
+    private lateinit var completeBtn : AppCompatButton
 
     private val handler = Handler(Looper.getMainLooper())
     private val timerRunnable = object : Runnable {
@@ -34,36 +36,42 @@ class LastExerciseFragment : BaseFragment<FragmentLastExerciseBinding>(R.layout.
     }
 
     override fun setLayout() {
-        initButton()
-        setTimer()
-        resetTimer()
+        initSettings()
+
         val urlText = arguments?.getString("urlText")
         if (!urlText.isNullOrEmpty()) {
             initializeYouTubePlayer(urlText)
             fetchYouTubeVideoDetails(urlText)
         }
 
-        binding.fragmentLastExerciseExerciseCompleteBtn.setOnClickListener {
+        completeBtn.setOnClickListener {
             goAdditionalExerciseSuccess()
         }
+    }
+
+    private fun initSettings() {
+        initButton()
+        setTimer()
+        resetTimer()
     }
 
     private fun setButtonUI(text: String) {
         when(text) {
             "시작", "중지" -> {
-                binding.fragmentLastExerciseExerciseCompleteBtn.setBackgroundResource(R.drawable.radius_corners_61dp_stroke_1)
-                binding.fragmentLastExerciseExerciseCompleteBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.Purple_700))
+                completeBtn.setBackgroundResource(R.drawable.radius_corners_61dp_stroke_1)
+                completeBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.Purple_700))
             }
             "계속" -> {
-                binding.fragmentLastExerciseExerciseCompleteBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
-                binding.fragmentLastExerciseExerciseCompleteBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
+                completeBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
+                completeBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
             }
         }
     }
 
     private fun initButton() {
         startBtn = binding.fragmentLastExerciseStartBtn
-        resetBtn = binding.fragmentLastExerciseStartBtn
+        resetBtn = binding.fragmentLastExerciseResetBtn
+        completeBtn = binding.fragmentLastExerciseExerciseCompleteBtn
     }
 
     private fun setTimer() {
