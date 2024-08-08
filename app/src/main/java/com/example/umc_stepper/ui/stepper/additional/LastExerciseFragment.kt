@@ -45,8 +45,19 @@ class LastExerciseFragment : BaseFragment<FragmentLastExerciseBinding>(R.layout.
 
         binding.fragmentLastExerciseExerciseCompleteBtn.setOnClickListener {
             goAdditionalExerciseSuccess()
-            binding.fragmentLastExerciseExerciseCompleteBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
-            binding.fragmentLastExerciseExerciseCompleteBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
+        }
+    }
+
+    private fun setButtonUI(text: String) {
+        when(text) {
+            "시작", "중지" -> {
+                binding.fragmentLastExerciseExerciseCompleteBtn.setBackgroundResource(R.drawable.radius_corners_61dp_stroke_1)
+                binding.fragmentLastExerciseExerciseCompleteBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.Purple_700))
+            }
+            "계속" -> {
+                binding.fragmentLastExerciseExerciseCompleteBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
+                binding.fragmentLastExerciseExerciseCompleteBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
+            }
         }
     }
 
@@ -60,10 +71,12 @@ class LastExerciseFragment : BaseFragment<FragmentLastExerciseBinding>(R.layout.
             if (!isRunning) {
                 isRunning = true
                 startBtn.text = "중지"
+                setButtonUI(startBtn.text.toString())
                 handler.post(timerRunnable) // 타이머 시작
             } else {
                 isRunning = false
                 startBtn.text = "계속"
+                setButtonUI(startBtn.text.toString())
                 handler.removeCallbacks(timerRunnable) // 타이머 중지
             }
         }
@@ -87,6 +100,7 @@ class LastExerciseFragment : BaseFragment<FragmentLastExerciseBinding>(R.layout.
             isRunning = false
             time = 0
             startBtn.text = "시작"
+            setButtonUI(startBtn.text.toString())
             updateTimerUI(time)
             handler.removeCallbacks(timerRunnable) // 타이머 중지
         }

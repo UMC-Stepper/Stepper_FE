@@ -64,15 +64,31 @@ class AdditionalExerciseMiddleFragment : BaseFragment<FragmentAdditionalExercise
         resetBtn = binding.fragmentAdditionalMiddleResetBtn
     }
 
+    private fun setButtonUI(text: String) {
+        when(text) {
+            "시작", "중지" -> {
+                binding.fragmentAdditionalMiddleExerciseCompleteBtn.setBackgroundResource(R.drawable.radius_corners_61dp_stroke_1)
+                binding.fragmentAdditionalMiddleExerciseCompleteBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.Purple_700))
+            }
+            "계속" -> {
+                binding.fragmentAdditionalMiddleExerciseCompleteBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
+                binding.fragmentAdditionalMiddleExerciseCompleteBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
+            }
+        }
+    }
+
     private fun setTimer() {
         startBtn.setOnClickListener {
             if (!isRunning) {
                 isRunning = true
                 startBtn.text = "중지"
+                setButtonUI(startBtn.text.toString())
                 handler.post(timerRunnable) // 타이머 시작
+
             } else {
                 isRunning = false
                 startBtn.text = "계속"
+                setButtonUI(startBtn.text.toString())
                 handler.removeCallbacks(timerRunnable) // 타이머 중지
             }
         }
@@ -96,6 +112,7 @@ class AdditionalExerciseMiddleFragment : BaseFragment<FragmentAdditionalExercise
             isRunning = false
             time = 0
             startBtn.text = "시작"
+            setButtonUI(startBtn.text.toString())
             updateTimerUI(time)
             handler.removeCallbacks(timerRunnable) // 타이머 중지
         }
