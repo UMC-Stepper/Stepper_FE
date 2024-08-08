@@ -2,10 +2,8 @@ package com.example.umc_stepper.data.remote
 
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.model.request.LogInDto
-import com.example.umc_stepper.domain.model.request.MoreExerciseRequestDto
 import com.example.umc_stepper.domain.model.request.RateDiaryDto
 import com.example.umc_stepper.domain.model.request.UserDto
-import com.example.umc_stepper.domain.model.response.MoreExerciseResponseDto
 import com.example.umc_stepper.domain.model.response.RateDiaryResponse
 import com.example.umc_stepper.domain.model.response.RateDiaryResult
 import com.example.umc_stepper.domain.model.response.UserResponse
