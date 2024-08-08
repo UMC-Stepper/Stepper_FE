@@ -7,16 +7,32 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentEvaluationExerciseBinding
 import com.example.umc_stepper.databinding.FragmentEvaluationExerciseTodayBinding
+import com.example.umc_stepper.domain.model.request.RateDiaryDto
+import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.last
+import kotlinx.coroutines.launch
 import java.lang.NumberFormatException
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class EvaluationExerciseFragment :
     BaseFragment<FragmentEvaluationExerciseBinding>(R.layout.fragment_evaluation_exercise) {
-
+    @Inject
+    lateinit var tokenManager: TokenManager
+    val stepperViewModel: StepperViewModel by activityViewModels()
     lateinit var imgList: List<ImageView>
     lateinit var tvList: List<TextView>
     lateinit var triangleList: List<ImageView>
@@ -25,34 +41,46 @@ class EvaluationExerciseFragment :
     lateinit var stateTitleList: List<String>
     lateinit var descriptionList: List<String>
     var selectTextDescription = 0
-    //    private lateinit var galleryForResult: ActivityResultLauncher<Intent>
+
     var profileImage = ""
     var score = 0
-    private lateinit var mainActivity : MainActivity
+    private lateinit var mainActivity: MainActivity
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mainActivity = context as MainActivity
     }
-    private fun setTitle(){
+
+    private fun setTitle() {
         mainActivity.setBg()
-        mainActivity.updateToolbarLeftPlusImg("07.09","무릎, 다리") //타이틀 세팅
+        mainActivity.updateToolbarLeftPlusImg("07.09", "무릎, 다리") //타이틀 세팅
     }
+
     override fun setLayout() {
         initSetting()
-        //카메라액티비티로 이동
-        binding.fragmentEvaluationExercisePictureExerciseIv.setOnClickListener {
-            val intent = Intent(activity, CameraActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     private fun initSetting() {
 //        initActivityResultLauncher()
+        observeLifeCycle()
         setTitle()
         setList()
         setScoreText()
         setOnClickBtn()
+    }
+
+    private fun observeLifeCycle() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                stepperViewModel.diaryItems.collectLatest {
+                    if (it.isSuccess) {
+                        val action =
+                            R.id.action_fragmentEvaluationExercise_to_fragmentExerciseComplete
+                        findNavController().navigateSafe(action)
+                    }
+                }
+            }
+        }
     }
 
     private fun setScoreText() {
@@ -101,21 +129,36 @@ class EvaluationExerciseFragment :
                 selectTextDescription = 4
                 stateAllToggle()
             }
-            fragmentEvaluationExercisePictureExerciseIv.setOnClickListener {
-//                openGallery()
-                //카메라 찍고 다시 돌아오는 로직 필요
+            //카메라액티비티로 이동
+            binding.fragmentEvaluationExercisePictureExerciseIv.setOnClickListener {
+                val intent = Intent(activity, CameraActivity::class.java)
+                startActivity(intent)
             }
-            fragmentEvaluationExerciseSuccessBt.setOnClickListener{
+
+            //운동아이디필요
+            fragmentEvaluationExerciseSuccessBt.setOnClickListener {
                 val memo = fragmentEvaluationExerciseMemoEt.text.toString() //메모
                 val state = selectTextDescription //상태값 0 1 2 3 4
                 val imageUrl = profileImage //이미지
                 val point = score //점수
                 mainActivity.visibleTag()
-
+                lifecycleScope.launch {
+                    val exerciseId = tokenManager.getExerciseId().first() ?: ""
+                    stepperViewModel.postDiaryEdit(
+                        RateDiaryDto(
+                            conditionRate = point.toString(),
+                            painImage = imageUrl,
+                            painMemo = memo,
+                            painRate = state.toString(),
+                            exerciseCardId = exerciseId //운동아이디
+                        )
+                    )
+                }
                 //위의 값들 서버로 전달
             }
         }
     }
+
 
     private fun setList() {
         with(binding) {

@@ -14,448 +14,505 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/Purple_Black_BG_1">
+            android:layout_height="wrap_content">
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/fragment_evaluation_exercise_half_bg_cl"
+                android:id="@+id/all_constraint_2_cl"
                 android:layout_width="match_parent"
-                android:layout_height="363dp"
-                android:background="@drawable/shape_rounded_purple_black_half_square_60dp"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+                <ProgressBar
+                    android:id="@+id/loading_progress_pb"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
                 <TextView
-                    android:id="@+id/fragment_evaluation_exercise_half_bg_tv"
+                    android:id="@+id/loading_message_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/head_bold_18"
+                    android:textColor="@color/White"
+                    android:layout_marginTop="12dp"
+                    android:text="평가일지를 불러오는 중 입니다."
+                    app:layout_constraintStart_toStartOf="@id/loading_progress_pb"
+                    app:layout_constraintEnd_toEndOf="@id/loading_progress_pb"
+                    app:layout_constraintTop_toBottomOf="@id/loading_progress_pb"/>
+                <TextView
+                    android:id="@+id/fragment_evaluation_exercise_today_empty_tv"
+                    style="@style/title_bold_24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="이 날은 작성된 평가일지가 없어요"
+                    android:textColor="@color/White"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/all_constraint_cl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/Purple_Black_BG_1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/fragment_evaluation_exercise_half_bg_cl"
+                    android:layout_width="match_parent"
+                    android:layout_height="363dp"
+                    android:background="@drawable/shape_rounded_purple_black_half_square_60dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/fragment_evaluation_exercise_half_bg_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:text="오늘의 운동 컨디션 점수는?"
+                        android:textColor="@color/White"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/fragment_evaluation_exercise_point_tv"
+                        style="@style/body_medium_14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:background="@drawable/shape_rounded_square_pruplebg_1_40dp"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:paddingStart="16dp"
+                        android:paddingTop="2dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="2dp"
+                        android:singleLine="true"
+                        android:text="0"
+                        android:textColor="@color/White"
+                        app:layout_constraintBottom_toBottomOf="@id/fragment_evaluation_exercise_half_bg_tv"
+                        app:layout_constraintStart_toEndOf="@id/fragment_evaluation_exercise_half_bg_tv"
+                        app:layout_constraintTop_toTopOf="@id/fragment_evaluation_exercise_half_bg_tv" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="점"
+                        android:textColor="@color/White"
+                        android:textSize="12dp"
+                        app:layout_constraintBottom_toBottomOf="@id/fragment_evaluation_exercise_point_tv"
+                        app:layout_constraintStart_toEndOf="@+id/fragment_evaluation_exercise_point_tv"
+                        app:layout_constraintTop_toTopOf="@id/fragment_evaluation_exercise_point_tv" />
+
+                    <ProgressBar
+                        android:id="@+id/fragment_evaluation_exercise_progressbar_pb"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_width="168dp"
+                        android:layout_height="168dp"
+                        android:layout_gravity="center"
+                        android:indeterminate="false"
+                        android:max="100"
+                        android:progressBackgroundTint="@color/Purple_Black_BG_1"
+                        android:progressDrawable="@drawable/circular_progress_bar"
+                        android:progressTint="@color/Purple_700"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/fragment_evaluation_exercise_score_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0점"
+                        android:textColor="@color/White"
+                        android:textSize="34dp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/fragment_evaluation_exercise_progressbar_pb"
+                        app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_progressbar_pb"
+                        app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_progressbar_pb"
+                        app:layout_constraintTop_toTopOf="@id/fragment_evaluation_exercise_progressbar_pb" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/fragment_evaluation_exercise_today_sick_tv"
+                    style="@style/head_bold_18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:text="오늘의 운동 컨디션 점수는?"
+                    android:layout_marginTop="32dp"
+                    android:text="오늘의 통증"
                     android:textColor="@color/White"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_half_bg_cl" />
 
                 <TextView
-                    android:id="@+id/fragment_evaluation_exercise_point_tv"
-                    style="@style/body_medium_14"
+                    android:id="@+id/fragment_evaluation_exercise_today_sick_description_tv"
+                    style="@style/body_medium_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:background="@drawable/shape_rounded_square_pruplebg_1_40dp"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:paddingStart="16dp"
-                    android:paddingTop="2dp"
-                    android:paddingEnd="16dp"
-                    android:paddingBottom="2dp"
-                    android:singleLine="true"
-                    android:text="0"
+                    android:layout_marginTop="8dp"
+                    android:text="오늘의 운동 통증을 평가해주세요."
                     android:textColor="@color/White"
-                    app:layout_constraintBottom_toBottomOf="@id/fragment_evaluation_exercise_half_bg_tv"
-                    app:layout_constraintStart_toEndOf="@id/fragment_evaluation_exercise_half_bg_tv"
-                    app:layout_constraintTop_toTopOf="@id/fragment_evaluation_exercise_half_bg_tv" />
+                    app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_today_sick_tv"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_today_sick_tv" />
 
-                <TextView
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/fragment_evaluation_exercise_dv"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="40dp"
+                    app:dividerColor="@color/Purple_Black_BG_2"
+                    app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_today_sick_tv"
+                    app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_today_sick_tv"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_today_sick_description_tv" />
+
+                <ImageView
+                    android:id="@+id/fragment_evaluation_exercise_blur_20_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="점"
+                    android:src="@drawable/ic_img_20"
+                    app:layout_constraintBottom_toBottomOf="@id/fragment_evaluation_exercise_dv"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_vertical_start"
+                    app:layout_constraintStart_toStartOf="@id/guideline_vertical_start"
+                    app:layout_constraintTop_toTopOf="@id/fragment_evaluation_exercise_dv" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_vertical_center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_vertical_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@android:dimen/app_icon_size"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_vertical_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@android:dimen/app_icon_size" />
+
+
+                <ImageView
+                    android:id="@+id/fragment_evaluation_exercise_blur_60_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_img_60"
+                    app:layout_constraintBottom_toBottomOf="@id/fragment_evaluation_exercise_dv"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_vertical_center"
+                    app:layout_constraintStart_toStartOf="@id/guideline_vertical_center"
+                    app:layout_constraintTop_toTopOf="@id/fragment_evaluation_exercise_dv" />
+
+                <ImageView
+                    android:id="@+id/fragment_evaluation_exercise_blur_100_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_img_100"
+                    app:layout_constraintBottom_toBottomOf="@id/fragment_evaluation_exercise_dv"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_vertical_end"
+                    app:layout_constraintStart_toStartOf="@id/guideline_vertical_end"
+                    app:layout_constraintTop_toTopOf="@id/fragment_evaluation_exercise_dv" />
+
+                <ImageView
+                    android:id="@+id/fragment_evaluation_exercise_blur_40_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_img_40"
+                    app:layout_constraintBottom_toBottomOf="@id/fragment_evaluation_exercise_dv"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_vertical_center"
+                    app:layout_constraintStart_toStartOf="@id/guideline_vertical_start"
+                    app:layout_constraintTop_toTopOf="@id/fragment_evaluation_exercise_dv" />
+
+
+                <ImageView
+                    android:id="@+id/fragment_evaluation_exercise_blur_80_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_img_80"
+                    app:layout_constraintBottom_toBottomOf="@id/fragment_evaluation_exercise_dv"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_vertical_end"
+                    app:layout_constraintStart_toStartOf="@id/guideline_vertical_center"
+                    app:layout_constraintTop_toTopOf="@id/fragment_evaluation_exercise_dv" />
+
+                <TextView
+                    android:id="@+id/fragment_evaluation_exercise_blur_20_tv"
+                    style="@style/body_medium_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:text="   완전  \n괜찮아요"
                     android:textColor="@color/White"
-                    android:textSize="12dp"
-                    app:layout_constraintBottom_toBottomOf="@id/fragment_evaluation_exercise_point_tv"
-                    app:layout_constraintStart_toEndOf="@+id/fragment_evaluation_exercise_point_tv"
-                    app:layout_constraintTop_toTopOf="@id/fragment_evaluation_exercise_point_tv" />
-
-                <ProgressBar
-                    android:id="@+id/fragment_evaluation_exercise_progressbar_pb"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                    android:layout_width="168dp"
-                    android:layout_height="168dp"
-                    android:layout_gravity="center"
-                    android:indeterminate="false"
-                    android:max="100"
-                    android:progressBackgroundTint="@color/Purple_Black_BG_1"
-                    android:progressDrawable="@drawable/circular_progress_bar"
-                    android:progressTint="@color/Purple_700"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_blur_20_iv"
+                    app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_blur_20_iv"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_evaluation_exercise_blur_20_iv" />
 
                 <TextView
-                    android:id="@+id/fragment_evaluation_exercise_score_tv"
+                    android:id="@+id/fragment_evaluation_exercise_blur_40_tv"
+                    style="@style/body_medium_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0점"
+                    android:layout_marginTop="9dp"
+                    android:text=" 조금 덜\n아팠어요"
                     android:textColor="@color/White"
-                    android:textSize="34dp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/fragment_evaluation_exercise_progressbar_pb"
-                    app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_progressbar_pb"
-                    app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_progressbar_pb"
-                    app:layout_constraintTop_toTopOf="@id/fragment_evaluation_exercise_progressbar_pb" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/fragment_evaluation_exercise_today_sick_tv"
-                style="@style/head_bold_18"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="32dp"
-                android:text="오늘의 통증"
-                android:textColor="@color/White"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_half_bg_cl" />
-
-            <TextView
-                android:id="@+id/fragment_evaluation_exercise_today_sick_description_tv"
-                style="@style/body_medium_12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="오늘의 운동 통증을 평가해주세요."
-                android:textColor="@color/White"
-                app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_today_sick_tv"
-                app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_today_sick_tv" />
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/fragment_evaluation_exercise_dv"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="40dp"
-                app:dividerColor="@color/Purple_Black_BG_2"
-                app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_today_sick_tv"
-                app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_today_sick_tv"
-                app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_today_sick_description_tv" />
-
-            <ImageView
-                android:id="@+id/fragment_evaluation_exercise_blur_20_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_img_20"
-                app:layout_constraintBottom_toBottomOf="@id/fragment_evaluation_exercise_dv"
-                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_start"
-                app:layout_constraintStart_toStartOf="@id/guideline_vertical_start"
-                app:layout_constraintTop_toTopOf="@id/fragment_evaluation_exercise_dv" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_vertical_center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_vertical_start"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="@android:dimen/app_icon_size"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_vertical_end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_end="@android:dimen/app_icon_size" />
-
-
-            <ImageView
-                android:id="@+id/fragment_evaluation_exercise_blur_60_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_img_60"
-                app:layout_constraintBottom_toBottomOf="@id/fragment_evaluation_exercise_dv"
-                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_center"
-                app:layout_constraintStart_toStartOf="@id/guideline_vertical_center"
-                app:layout_constraintTop_toTopOf="@id/fragment_evaluation_exercise_dv" />
-
-            <ImageView
-                android:id="@+id/fragment_evaluation_exercise_blur_100_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_img_100"
-                app:layout_constraintBottom_toBottomOf="@id/fragment_evaluation_exercise_dv"
-                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_end"
-                app:layout_constraintStart_toStartOf="@id/guideline_vertical_end"
-                app:layout_constraintTop_toTopOf="@id/fragment_evaluation_exercise_dv" />
-
-            <ImageView
-                android:id="@+id/fragment_evaluation_exercise_blur_40_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_img_40"
-                app:layout_constraintBottom_toBottomOf="@id/fragment_evaluation_exercise_dv"
-                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_center"
-                app:layout_constraintStart_toStartOf="@id/guideline_vertical_start"
-                app:layout_constraintTop_toTopOf="@id/fragment_evaluation_exercise_dv" />
-
-
-            <ImageView
-                android:id="@+id/fragment_evaluation_exercise_blur_80_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_img_80"
-                app:layout_constraintBottom_toBottomOf="@id/fragment_evaluation_exercise_dv"
-                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_end"
-                app:layout_constraintStart_toStartOf="@id/guideline_vertical_center"
-                app:layout_constraintTop_toTopOf="@id/fragment_evaluation_exercise_dv" />
-
-            <TextView
-                android:id="@+id/fragment_evaluation_exercise_blur_20_tv"
-                style="@style/body_medium_12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="9dp"
-                android:text="   완전  \n괜찮아요"
-                android:textColor="@color/White"
-                app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_blur_20_iv"
-                app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_blur_20_iv"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_evaluation_exercise_blur_20_iv" />
-
-            <TextView
-                android:id="@+id/fragment_evaluation_exercise_blur_40_tv"
-                style="@style/body_medium_12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="9dp"
-                android:text=" 조금 덜\n아팠어요"
-                android:textColor="@color/White"
-                app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_blur_40_iv"
-                app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_blur_40_iv"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_evaluation_exercise_blur_40_iv" />
-
-            <TextView
-                android:id="@+id/fragment_evaluation_exercise_blur_60_tv"
-                style="@style/body_medium_12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="9dp"
-                android:text="큰 차이가\n   없어요"
-                android:textColor="@color/White"
-                app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_blur_60_iv"
-                app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_blur_60_iv"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_evaluation_exercise_blur_60_iv" />
-
-            <TextView
-                android:id="@+id/fragment_evaluation_exercise_blur_80_tv"
-                style="@style/body_medium_12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="9dp"
-                android:text=" 조금 더\n불편해요"
-                android:textColor="@color/White"
-                app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_blur_80_iv"
-                app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_blur_80_iv"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_evaluation_exercise_blur_80_iv" />
-
-            <TextView
-                android:id="@+id/fragment_evaluation_exercise_blur_100_tv"
-                style="@style/body_medium_12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="9dp"
-                android:text="  많이  \n아파요"
-                android:textColor="@color/White"
-                app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_blur_100_iv"
-                app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_blur_100_iv"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_evaluation_exercise_blur_100_iv" />
-
-            <ImageView
-                android:id="@+id/fragment_evaluation_exercise_triangle_20_iv"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:visibility="gone"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/shape_yellow300_triangle"
-                app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_blur_20_tv"
-                app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_blur_20_tv"
-                app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_blur_20_tv" />
-
-
-            <ImageView
-                android:id="@+id/fragment_evaluation_exercise_triangle_40_iv"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/shape_yellow300_triangle"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_blur_40_tv"
-                app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_blur_40_tv"
-                app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_blur_40_tv" />
-
-            <ImageView
-                android:id="@+id/fragment_evaluation_exercise_triangle_60_iv"
-
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/shape_yellow300_triangle"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_blur_60_tv"
-                app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_blur_60_tv"
-                app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_blur_60_tv" />
-
-            <ImageView
-                android:id="@+id/fragment_evaluation_exercise_triangle_80_iv"
-
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/shape_yellow300_triangle"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_blur_80_tv"
-                app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_blur_80_tv"
-                app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_blur_80_tv" />
-
-            <ImageView
-                android:id="@+id/fragment_evaluation_exercise_triangle_100_iv"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/shape_yellow300_triangle"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_blur_100_tv"
-                app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_blur_100_tv"
-                app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_blur_100_tv" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/fragment_evaluation_exercise_description_cl"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/shape_rounded_square_yellow300_12dp"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_blur_20_tv">
+                    app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_blur_40_iv"
+                    app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_blur_40_iv"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_evaluation_exercise_blur_40_iv" />
 
                 <TextView
-                    android:id="@+id/fragment_evaluation_exercise_state_tv"
-                    style="@style/sub_title_semi_bold_16"
+                    android:id="@+id/fragment_evaluation_exercise_blur_60_tv"
+                    style="@style/body_medium_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="20dp"
-                    android:text="조금 덜 아팠어요"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_marginTop="9dp"
+                    android:text="큰 차이가\n   없어요"
+                    android:textColor="@color/White"
+                    app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_blur_60_iv"
+                    app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_blur_60_iv"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_evaluation_exercise_blur_60_iv" />
 
                 <TextView
-                    android:id="@+id/fragment_evaluation_exercise_description_tv"
+                    android:id="@+id/fragment_evaluation_exercise_blur_80_tv"
+                    style="@style/body_medium_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:text=" 조금 더\n불편해요"
+                    android:textColor="@color/White"
+                    app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_blur_80_iv"
+                    app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_blur_80_iv"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_evaluation_exercise_blur_80_iv" />
+
+                <TextView
+                    android:id="@+id/fragment_evaluation_exercise_blur_100_tv"
+                    style="@style/body_medium_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:text="  많이  \n아파요"
+                    android:textColor="@color/White"
+                    app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_blur_100_iv"
+                    app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_blur_100_iv"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_evaluation_exercise_blur_100_iv" />
+
+                <ImageView
+                    android:id="@+id/fragment_evaluation_exercise_triangle_20_iv"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/shape_yellow300_triangle"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_blur_20_tv"
+                    app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_blur_20_tv"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_blur_20_tv" />
+
+
+                <ImageView
+                    android:id="@+id/fragment_evaluation_exercise_triangle_40_iv"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/shape_yellow300_triangle"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_blur_40_tv"
+                    app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_blur_40_tv"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_blur_40_tv" />
+
+                <ImageView
+                    android:id="@+id/fragment_evaluation_exercise_triangle_60_iv"
+
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/shape_yellow300_triangle"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_blur_60_tv"
+                    app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_blur_60_tv"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_blur_60_tv" />
+
+                <ImageView
+                    android:id="@+id/fragment_evaluation_exercise_triangle_80_iv"
+
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/shape_yellow300_triangle"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_blur_80_tv"
+                    app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_blur_80_tv"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_blur_80_tv" />
+
+                <ImageView
+                    android:id="@+id/fragment_evaluation_exercise_triangle_100_iv"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/shape_yellow300_triangle"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_blur_100_tv"
+                    app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_blur_100_tv"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_blur_100_tv" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/fragment_evaluation_exercise_description_cl"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginBottom="20dp"
-                    android:text="오늘 운동 고생 많으셨어요! 점점 나아지는 모습 보기 좋아요! 차트에 컨디션 기록할게요."
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/shape_rounded_square_yellow300_12dp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_state_tv" />
+                    app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_blur_20_tv">
 
+                    <TextView
+                        android:id="@+id/fragment_evaluation_exercise_state_tv"
+                        style="@style/sub_title_semi_bold_16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="20dp"
+                        android:text="조금 덜 아팠어요"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/fragment_evaluation_exercise_description_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="32dp"
+                        android:layout_marginBottom="20dp"
+                        android:text="오늘 운동 고생 많으셨어요! 점점 나아지는 모습 보기 좋아요! 차트에 컨디션 기록할게요."
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_state_tv" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/fragment_evaluation_exercise_memo_sick_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="44dp"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="통증 메모"
+                    android:textColor="@color/White"
+                    android:textSize="18dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_description_cl" />
+
+                <TextView
+                    android:id="@+id/fragment_evaluation_exercise_memo_et"
+                    style="@style/body_medium_14"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/shape_rounded_square_gray_purple_18dp_stroke_1"
+                    android:gravity="start|top"
+                    android:hint="운동 후 어느 부위가 어떻게 아흔지 메모해주세요!"
+                    android:paddingStart="16dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/White"
+                    android:textColorHint="@color/Gray_Purple"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_memo_sick_tv" />
+
+
+                <TextView
+                    android:id="@+id/fragment_evaluation_exercise_picture_exercise_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="44dp"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:text="통증 사진 남기기"
+                    android:textColor="@color/White"
+                    android:textSize="18dp"
+                    app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_memo_et"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_memo_et" />
+
+                <TextView
+                    android:id="@+id/fragment_evaluation_exercise_picture_exercise_description_tv"
+                    style="@style/body_medium_12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="운동 후 통증이 느껴지는 부위를 시간별로 기록해 두시면 병원 방문 시 더 구체적으로 증상을 전달할 수 있습니다."
+                    android:textColor="@color/White"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_evaluation_exercise_picture_exercise_tv" />
+
+
+                <ImageView
+                    android:id="@+id/fragment_evaluation_exercise_picture_exercise_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_picture_exercise_description_tv" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/fragment_evaluation_exercise_success_bt"
+                    style="@style/sub_title_semi_bold_16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="44dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/shape_rounded_stroke_square_purple700_41dp_stroke_1dp"
+                    android:text="완료하기"
+                    android:textColor="@color/Purple_700"
+                    app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_picture_exercise_iv"
+                    app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_picture_exercise_iv"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_picture_exercise_iv" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/fragment_evaluation_exercise_memo_sick_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="44dp"
-                android:fontFamily="@font/pretendard_bold"
-                android:text="통증 메모"
-                android:textColor="@color/White"
-                android:textSize="18dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_description_cl" />
-
-            <TextView
-                android:id="@+id/fragment_evaluation_exercise_memo_et"
-                style="@style/body_medium_14"
-                android:textColor="@color/White"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/shape_rounded_square_gray_purple_18dp_stroke_1"
-                android:gravity="start|top"
-                android:hint="운동 후 어느 부위가 어떻게 아흔지 메모해주세요!"
-                android:paddingStart="16dp"
-                android:paddingTop="10dp"
-                android:textColorHint="@color/Gray_Purple"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_memo_sick_tv" />
-
-
-            <TextView
-                android:id="@+id/fragment_evaluation_exercise_picture_exercise_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="44dp"
-                android:fontFamily="@font/pretendard_bold"
-                android:text="통증 사진 남기기"
-                android:textColor="@color/White"
-                android:textSize="18dp"
-                app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_memo_et"
-                app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_memo_et" />
-
-            <TextView
-                android:id="@+id/fragment_evaluation_exercise_picture_exercise_description_tv"
-                style="@style/body_medium_12"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="24dp"
-                android:text="운동 후 통증이 느껴지는 부위를 시간별로 기록해 두시면 병원 방문 시 더 구체적으로 증상을 전달할 수 있습니다."
-                android:textColor="@color/White"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_evaluation_exercise_picture_exercise_tv" />
-
-
-            <ImageView
-                android:id="@+id/fragment_evaluation_exercise_picture_exercise_iv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_picture_exercise_description_tv" />
-
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/fragment_evaluation_exercise_success_bt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="44dp"
-                android:layout_marginEnd="24dp"
-                android:text="완료하기"
-                style="@style/sub_title_semi_bold_16"
-                android:textColor="@color/Purple_700"
-                android:background="@drawable/shape_rounded_stroke_square_purple700_41dp_stroke_1dp"
-                app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_picture_exercise_iv"
-                app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_picture_exercise_iv"
-                app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_picture_exercise_iv" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.core.widget.NestedScrollView>
 
 </layout>
