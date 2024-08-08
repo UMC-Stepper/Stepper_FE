@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlin.properties.Delegates
-
+//앞에서 시간 넘어와야 함
 @AndroidEntryPoint
 class AdditionalExerciseSuccessFragment :
     BaseFragment<FragmentTodayExerciseSuccessBinding>(R.layout.fragment_today_exercise_success) {
