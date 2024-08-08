@@ -66,7 +66,6 @@ class TodayViewModel @Inject constructor(
             try {
                 todayApiRepository.getTodayExerciseState(date).collect { response ->
                     if (response != null) {
-                        Log.d(" response.isSuccess", " response.isSuccess: ${response.isSuccess}")
                         val exerciseStateList = response.toExerciseStates()
                         _exerciseState.value = exerciseStateList
                     }
@@ -97,7 +96,6 @@ class TodayViewModel @Inject constructor(
             try {
                 todayApiRepository.getExerciseMonthCheck(month).collect {
                     _exerciseCardStatusResponseDto.value = it
-                    Log.d("exerciseCardStatusResponseDto", "it : $it")
                 }
             } catch (e:Exception) {
                 Log.e("getExerciseMonthCheck is Error", e.message.toString())
