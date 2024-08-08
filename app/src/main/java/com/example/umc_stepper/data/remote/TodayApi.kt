@@ -39,6 +39,6 @@ interface TodayApi {
     @GET("/api/myexercise/check")
     suspend fun getMyExercise(
         @Query("bodyPart") bodyPart: String
-    ) : BaseResponse<CheckExerciseResponseDTO>
+    ) : BaseListResponse<CheckExerciseResponseDTO>
 
 }

@@ -31,7 +31,7 @@ class TodayApiDataSource @Inject constructor(
         ))
     }
 
-    fun getMyExercise(bodyPart: String): Flow<BaseResponse<CheckExerciseResponseDTO>> = flow {
+    fun getMyExercise(bodyPart: String): Flow<BaseListResponse<CheckExerciseResponseDTO>> = flow {
         val result = todayApi.getMyExercise(bodyPart)
         emit(result)
     }.catch {

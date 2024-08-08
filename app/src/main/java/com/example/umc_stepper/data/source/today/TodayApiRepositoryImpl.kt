@@ -17,7 +17,7 @@ class TodayApiRepositoryImpl @Inject constructor(
     override suspend fun getTodayExerciseState(date: String): Flow<BaseListResponse<ToDayExerciseResponseDto>> =
         dataSource.getTodayExerciseState(date)
 
-    override suspend fun getMyExercise(bodyPart: String): Flow<BaseResponse<CheckExerciseResponseDTO>> =
+    override suspend fun getMyExercise(bodyPart: String): Flow<BaseListResponse<CheckExerciseResponseDTO>> =
         dataSource.getMyExercise(bodyPart)
 
     override suspend fun getExerciseMonthCheck(month: Int): Flow<BaseListResponse<ExerciseCardStatusResponseDto>> =
