@@ -67,5 +67,6 @@ class MainApiDataSource @Inject constructor(
     }.catch {
         Log.e("Get RateDiary Confirm Failure", it.message.toString())
     }
+
 }
 

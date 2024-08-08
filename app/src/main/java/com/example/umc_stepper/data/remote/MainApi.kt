@@ -43,5 +43,5 @@ interface MainApi {
     @GET("/api/RateDiary/check")
     suspend fun getRateDiaryConfirm(
     ):BaseResponse<List<RateDiaryResponse>>
-
+    
 }

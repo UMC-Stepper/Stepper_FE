@@ -5,12 +5,15 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Button
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentLastExerciseBinding
+import com.example.umc_stepper.domain.model.Time
+import com.google.gson.Gson
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 
@@ -19,8 +22,9 @@ class LastExerciseFragment : BaseFragment<FragmentLastExerciseBinding>(R.layout.
     private var isRunning = false
     private var time = 0L // 밀리초 단위
 
-    private lateinit var startBtn: Button
-    private lateinit var resetBtn: Button
+    private lateinit var startBtn: AppCompatButton
+    private lateinit var resetBtn: AppCompatButton
+    private lateinit var completeBtn : AppCompatButton
 
     private val handler = Handler(Looper.getMainLooper())
     private val timerRunnable = object : Runnable {
@@ -33,26 +37,55 @@ class LastExerciseFragment : BaseFragment<FragmentLastExerciseBinding>(R.layout.
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+
+        isRunning = false
+        time = 0
+        startBtn.text = "시작"
+        setButtonUI(startBtn.text.toString())
+        updateTimerUI(time)
+        handler.removeCallbacks(timerRunnable)
+    }
+
+
     override fun setLayout() {
-        initButton()
-        setTimer()
-        resetTimer()
+        initSettings()
+
         val urlText = arguments?.getString("urlText")
         if (!urlText.isNullOrEmpty()) {
             initializeYouTubePlayer(urlText)
             fetchYouTubeVideoDetails(urlText)
         }
 
-        binding.fragmentLastExerciseExerciseCompleteBtn.setOnClickListener {
+        completeBtn.setOnClickListener {
             goAdditionalExerciseSuccess()
-            binding.fragmentLastExerciseExerciseCompleteBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
-            binding.fragmentLastExerciseExerciseCompleteBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
+        }
+    }
+
+    private fun initSettings() {
+        initButton()
+        setTimer()
+        resetTimer()
+    }
+
+    private fun setButtonUI(text: String) {
+        when(text) {
+            "시작", "중지" -> {
+                completeBtn.setBackgroundResource(R.drawable.radius_corners_61dp_stroke_1)
+                completeBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.Purple_700))
+            }
+            "계속" -> {
+                completeBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
+                completeBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
+            }
         }
     }
 
     private fun initButton() {
         startBtn = binding.fragmentLastExerciseStartBtn
-        resetBtn = binding.fragmentLastExerciseStartBtn
+        resetBtn = binding.fragmentLastExerciseResetBtn
+        completeBtn = binding.fragmentLastExerciseExerciseCompleteBtn
     }
 
     private fun setTimer() {
@@ -60,10 +93,12 @@ class LastExerciseFragment : BaseFragment<FragmentLastExerciseBinding>(R.layout.
             if (!isRunning) {
                 isRunning = true
                 startBtn.text = "중지"
+                setButtonUI(startBtn.text.toString())
                 handler.post(timerRunnable) // 타이머 시작
             } else {
                 isRunning = false
                 startBtn.text = "계속"
+                setButtonUI(startBtn.text.toString())
                 handler.removeCallbacks(timerRunnable) // 타이머 중지
             }
         }
@@ -87,6 +122,7 @@ class LastExerciseFragment : BaseFragment<FragmentLastExerciseBinding>(R.layout.
             isRunning = false
             time = 0
             startBtn.text = "시작"
+            setButtonUI(startBtn.text.toString())
             updateTimerUI(time)
             handler.removeCallbacks(timerRunnable) // 타이머 중지
         }
@@ -141,8 +177,22 @@ class LastExerciseFragment : BaseFragment<FragmentLastExerciseBinding>(R.layout.
         callback("윗몸일으키기 제대로 하는 방법", "비타밍제이", "https://yt3.ggpht.com/l0AxbcHO4TRBQFka9rUZpiM19BQxueUZ_UE4wHW8qwaLZtZ_3J4fIXmay5HurJH03LJ7cGirxFY=s88-c-k-c0x00ffffff-no-rj")
     }
 
-
     private fun goAdditionalExerciseSuccess() {
-        findNavController().navigate(R.id.action_fragmentLastExercise_to_fragmentAdditionalExerciseSuccess)
+        handler.removeCallbacks(timerRunnable)  // 타이머 중지
+
+        val hour = binding.fragmentLastExerciseHourTv.text.toString()
+        val min = binding.fragmentLastExerciseMinTv.text.toString()
+        val sec = binding.fragmentLastExerciseSecTv.text.toString()
+
+        val time = Time(hour, min, sec)
+        val gson = Gson()
+
+        val timeJson = gson.toJson(time)
+        val args = Bundle().apply {
+            putString("time", timeJson)
+        }
+
+        val action = LastExerciseFragmentDirections.actionFragmentLastExerciseToFragmentAdditionalExerciseSuccess()
+        findNavController().navigate(action.actionId, args)
     }
 }
