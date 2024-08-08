@@ -43,10 +43,5 @@ interface MainApi {
     @GET("/api/RateDiary/check")
     suspend fun getRateDiaryConfirm(
     ):BaseResponse<List<RateDiaryResponse>>
-
-    // 추가 운동 기록 API
-    @GET("api/more-exercise/add")
-    suspend fun postMoreExercise(
-        @Body moreExerciseRequestDto: MoreExerciseRequestDto
-    ) : BaseResponse<MoreExerciseResponseDto>
+    
 }
