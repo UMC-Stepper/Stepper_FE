@@ -11,6 +11,7 @@ import com.example.umc_stepper.domain.model.local.ExerciseState
 import com.example.umc_stepper.domain.model.request.AiVideoDto
 import com.example.umc_stepper.domain.model.response.AiVideoInfo
 import com.example.umc_stepper.domain.model.response.CheckExerciseResponseDTO
+import com.example.umc_stepper.domain.model.response.ExerciseCardStatusResponseDto
 import com.example.umc_stepper.domain.model.response.ExerciseCardWeekResponseDto
 import com.example.umc_stepper.domain.model.response.ToDayExerciseResponseDto
 import com.example.umc_stepper.domain.model.response.Ylist
@@ -51,9 +52,13 @@ class TodayViewModel @Inject constructor(
     private val _exerciseCardWeekResponseDto = MutableStateFlow<BaseListResponse<ExerciseCardWeekResponseDto>>(BaseListResponse())
     val exerciseCardWeekResponseDto : StateFlow<BaseListResponse<ExerciseCardWeekResponseDto>> = _exerciseCardWeekResponseDto
 
+    // 월별 운동 카드 상태 조회
+    private val _exerciseCardStatusResponseDto = MutableStateFlow<BaseListResponse<ExerciseCardStatusResponseDto>>(BaseListResponse())
+    val exerciseCardStatusResponseDto : StateFlow<BaseListResponse<ExerciseCardStatusResponseDto>> = _exerciseCardStatusResponseDto
+
     // 나만의 운동 조회
-    private val _checkExerciseResponseDTO = MutableStateFlow<BaseResponse<CheckExerciseResponseDTO>>(BaseResponse())
-    val checkExerciseResponseDTO: StateFlow<BaseResponse<CheckExerciseResponseDTO>> = _checkExerciseResponseDTO
+    private val _checkExerciseResponseDTO = MutableStateFlow<BaseListResponse<CheckExerciseResponseDTO>>(BaseListResponse())
+    val checkExerciseResponseDTO: StateFlow<BaseListResponse<CheckExerciseResponseDTO>> = _checkExerciseResponseDTO
 
     // 오늘의 운동 진행 상태 조회
     fun getTodayExerciseState(date: String) {
@@ -83,6 +88,20 @@ class TodayViewModel @Inject constructor(
                 Log.e("getExerciseCheckDate is Error", e.message.toString())
             }
 
+        }
+    }
+
+    // 월별 운동 카드 상태 조회
+    fun getExerciseMonthCheck(month: Int) {
+        viewModelScope.launch {
+            try {
+                todayApiRepository.getExerciseMonthCheck(month).collect {
+                    _exerciseCardStatusResponseDto.value = it
+                    Log.d("exerciseCardStatusResponseDto", "it : $it")
+                }
+            } catch (e:Exception) {
+                Log.e("getExerciseMonthCheck is Error", e.message.toString())
+            }
         }
     }
 
