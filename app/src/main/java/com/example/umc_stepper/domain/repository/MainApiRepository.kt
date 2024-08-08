@@ -19,4 +19,6 @@ interface MainApiRepository {
     suspend fun deleteExit() : Flow<BaseResponse<Any>>
     suspend fun postRateDiaryEdit(rateDiaryDto: RateDiaryDto) : Flow<BaseResponse<RateDiaryResult>>
     suspend fun getRateDiaryConfirm() : Flow<BaseResponse<List<RateDiaryResponse>>>
+
+
 }
