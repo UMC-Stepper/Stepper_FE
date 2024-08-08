@@ -1,6 +1,7 @@
 package com.example.umc_stepper.ui.stepper.additional
 
 import android.content.Context
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -11,7 +12,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentAdditionalExerciseMiddleBinding
+import com.example.umc_stepper.domain.model.Time
 import com.example.umc_stepper.ui.MainActivity
+import com.google.gson.Gson
 
 class AdditionalExerciseMiddleFragment : BaseFragment<FragmentAdditionalExerciseMiddleBinding>(R.layout.fragment_additional_exercise_middle) {
 
@@ -40,6 +43,17 @@ class AdditionalExerciseMiddleFragment : BaseFragment<FragmentAdditionalExercise
         mainActivity = context as MainActivity
     }
 
+    override fun onStop() {
+        super.onStop()
+
+        isRunning = false
+        time = 0
+        startBtn.text = "시작"
+        setButtonUI(startBtn.text.toString())
+        updateTimerUI(time)
+        handler.removeCallbacks(timerRunnable)
+    }
+
 
     override fun setLayout() {
         initSettings()
@@ -61,7 +75,22 @@ class AdditionalExerciseMiddleFragment : BaseFragment<FragmentAdditionalExercise
     }
 
     private fun goAdditionalExerciseSuccess(){
-        findNavController().navigate(R.id.action_fragmentAdditionalExerciseMiddle_to_fragmentAdditionalExerciseSuccess)
+        handler.removeCallbacks(timerRunnable)  // 타이머 중지
+
+        val hour = binding.fragmentAdditionalMiddleHourTv.text.toString()
+        val min = binding.fragmentAdditionalMiddleMinTv.text.toString()
+        val sec = binding.fragmentAdditionalMiddleSecTv.text.toString()
+
+        val time = Time(hour, min, sec)
+        val gson = Gson()
+
+        val timeJson = gson.toJson(time)
+        val args = Bundle().apply {
+            putString("time", timeJson)
+        }
+
+        val action = AdditionalExerciseMiddleFragmentDirections.actionFragmentAdditionalExerciseMiddleToFragmentAdditionalExerciseSuccess()
+        findNavController().navigate(action.actionId, args)
     }
 
     private fun initButton() {

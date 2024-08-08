@@ -12,6 +12,8 @@ import com.bumptech.glide.Glide
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentLastExerciseBinding
+import com.example.umc_stepper.domain.model.Time
+import com.google.gson.Gson
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 
@@ -34,6 +36,18 @@ class LastExerciseFragment : BaseFragment<FragmentLastExerciseBinding>(R.layout.
             }
         }
     }
+
+    override fun onStop() {
+        super.onStop()
+
+        isRunning = false
+        time = 0
+        startBtn.text = "시작"
+        setButtonUI(startBtn.text.toString())
+        updateTimerUI(time)
+        handler.removeCallbacks(timerRunnable)
+    }
+
 
     override fun setLayout() {
         initSettings()
@@ -163,8 +177,22 @@ class LastExerciseFragment : BaseFragment<FragmentLastExerciseBinding>(R.layout.
         callback("윗몸일으키기 제대로 하는 방법", "비타밍제이", "https://yt3.ggpht.com/l0AxbcHO4TRBQFka9rUZpiM19BQxueUZ_UE4wHW8qwaLZtZ_3J4fIXmay5HurJH03LJ7cGirxFY=s88-c-k-c0x00ffffff-no-rj")
     }
 
-
     private fun goAdditionalExerciseSuccess() {
-        findNavController().navigate(R.id.action_fragmentLastExercise_to_fragmentAdditionalExerciseSuccess)
+        handler.removeCallbacks(timerRunnable)  // 타이머 중지
+
+        val hour = binding.fragmentLastExerciseHourTv.text.toString()
+        val min = binding.fragmentLastExerciseMinTv.text.toString()
+        val sec = binding.fragmentLastExerciseSecTv.text.toString()
+
+        val time = Time(hour, min, sec)
+        val gson = Gson()
+
+        val timeJson = gson.toJson(time)
+        val args = Bundle().apply {
+            putString("time", timeJson)
+        }
+
+        val action = LastExerciseFragmentDirections.actionFragmentLastExerciseToFragmentAdditionalExerciseSuccess()
+        findNavController().navigate(action.actionId, args)
     }
 }
