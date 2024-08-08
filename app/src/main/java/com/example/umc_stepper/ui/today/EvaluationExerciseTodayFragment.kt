@@ -22,23 +22,23 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+
 //앞 화면에서 받은 리스트로 조작해야 함
 class EvaluationExerciseTodayFragment :
     BaseFragment<FragmentEvaluationExerciseTodayBinding>(R.layout.fragment_evaluation_exercise_today) {
+    private val stepperViewModel: StepperViewModel by activityViewModels()
+    private lateinit var imgList: List<ImageView>
+    private lateinit var tvList: List<TextView>
+    private lateinit var triangleList: List<ImageView>
+    private lateinit var blurList: List<Int>
+    private lateinit var notBlurList: List<Int>
+    private lateinit var stateTitleList: List<String>
+    private lateinit var descriptionList: List<String>
+    private var selectTextDescription = 0
+    private var profileImage = ""
+    private var score = 0
 
-        val stepperViewModel : StepperViewModel by activityViewModels()
-    lateinit var imgList: List<ImageView>
-    lateinit var tvList: List<TextView>
-    lateinit var triangleList: List<ImageView>
-    lateinit var blurList: List<Int>
-    lateinit var notBlurList: List<Int>
-    lateinit var stateTitleList: List<String>
-    lateinit var descriptionList: List<String>
-    var selectTextDescription = 0
-    var profileImage = ""
-    var score = 0
-
-    private lateinit var mainActivity : MainActivity
+    private lateinit var mainActivity: MainActivity
 
 
     override fun onAttach(context: Context) {
@@ -46,8 +46,8 @@ class EvaluationExerciseTodayFragment :
         mainActivity = context as MainActivity
     }
 
-    private fun setTitle(){
-        mainActivity.updateToolbarLeftPlusImg("07.09","무릎, 다리") //타이틀 세팅
+    private fun setTitle() {
+        mainActivity.updateToolbarLeftPlusImg("07.09", "무릎, 다리") //타이틀 세팅
         mainActivity.setBg()
     }
 
@@ -82,11 +82,11 @@ class EvaluationExerciseTodayFragment :
         setOnClickBtn()
     }
 
-    private fun setObserver(){
+    private fun setObserver() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 stepperViewModel.diaryList.collectLatest {
-                    when(it.loadState){
+                    when (it.loadState) {
                         LoadState.LOADING -> {
                             binding.loadingProgressPb.visibility = View.VISIBLE
                             binding.loadingMessageTv.visibility = View.VISIBLE
@@ -99,16 +99,25 @@ class EvaluationExerciseTodayFragment :
                             binding.loadingMessageTv.visibility = View.GONE
                             binding.allConstraint2Cl.visibility = View.GONE
                             if (!it.result.isNullOrEmpty()) {
-                                binding.fragmentEvaluationExerciseTodayEmptyTv.visibility = View.GONE
+                                binding.fragmentEvaluationExerciseTodayEmptyTv.visibility =
+                                    View.GONE
                                 binding.allConstraintCl.visibility = View.VISIBLE
-                                binding.fragmentEvaluationExerciseScoreTv.text = it.result[0].conditionRate.toString()
-                                binding.fragmentEvaluationExercisePointTv.text = it.result[0].conditionRate.toString()
+                                binding.fragmentEvaluationExerciseScoreTv.text =
+                                    it.result[0].conditionRate.toString()
+                                binding.fragmentEvaluationExercisePointTv.text =
+                                    it.result[0].conditionRate.toString()
                                 setDescription(it.result[0].painRate)
-                                binding.fragmentEvaluationExerciseProgressbarPb.progress = it.result[0].conditionRate
-                                binding.fragmentEvaluationExerciseMemoEt.text = it.result[0].painMemo
-                                GlobalApplication.loadCropImage(binding.fragmentEvaluationExercisePictureExerciseIv, it.result[0].painImage)
+                                binding.fragmentEvaluationExerciseProgressbarPb.progress =
+                                    it.result[0].conditionRate
+                                binding.fragmentEvaluationExerciseMemoEt.text =
+                                    it.result[0].painMemo
+                                GlobalApplication.loadCropImage(
+                                    binding.fragmentEvaluationExercisePictureExerciseIv,
+                                    it.result[0].painImage
+                                )
                             } else {
-                                binding.fragmentEvaluationExerciseTodayEmptyTv.visibility = View.VISIBLE
+                                binding.fragmentEvaluationExerciseTodayEmptyTv.visibility =
+                                    View.VISIBLE
                                 binding.allConstraintCl.visibility = View.GONE
                             }
                         }
@@ -134,11 +143,11 @@ class EvaluationExerciseTodayFragment :
     }
 
     //앞에서 보내준 리스트로 파싱 지정날짜 운동카드 넘겨줘야함
-    private fun initScreen(){
+    private fun initScreen() {
         stepperViewModel.getDiaryConfirm()
     }
 
-    private fun setDescription(select : Int){
+    private fun setDescription(select: Int) {
         imgList[select].setBackgroundResource(blurList[select])
         triangleList[select].visibility = View.VISIBLE
         binding.fragmentEvaluationExerciseStateTv.text = stateTitleList[select]
@@ -214,11 +223,13 @@ class EvaluationExerciseTodayFragment :
             )
         }
     }
+
     private fun setOnClickBtn() {
         with(binding) {
-            fragmentEvaluationExerciseSuccessBt.setOnClickListener{
+            fragmentEvaluationExerciseSuccessBt.setOnClickListener {
                 mainActivity.visibleTag()
-                val action = EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToEvaluationLogFragment()
+                val action =
+                    EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToEvaluationLogFragment()
                 findNavController().navigateSafe(action.actionId)
             }
         }

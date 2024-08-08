@@ -38,4 +38,10 @@ object ApiModule {
     fun getTodayApi(
         @NetworkModule.MainRetrofit retrofit: Retrofit
     ) : TodayApi = retrofit.create(TodayApi::class.java)
+
+    @Provides
+    @Singleton
+    fun getStepperApi(
+        @NetworkModule.MainRetrofit retrofit: Retrofit
+    ) : TodayApi = retrofit.create(TodayApi::class.java)
 }
