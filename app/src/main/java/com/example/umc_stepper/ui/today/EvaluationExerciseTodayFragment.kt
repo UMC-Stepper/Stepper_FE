@@ -13,10 +13,13 @@ import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentEvaluationExerciseTodayBinding
+import com.example.umc_stepper.domain.model.response.RateDiaryResponse
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.example.umc_stepper.utils.GlobalApplication
 import com.example.umc_stepper.utils.enums.LoadState
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 //앞 화면에서 받은 리스트로 조작해야 함
@@ -37,6 +40,7 @@ class EvaluationExerciseTodayFragment :
 
     private lateinit var mainActivity : MainActivity
 
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mainActivity = context as MainActivity
@@ -49,6 +53,25 @@ class EvaluationExerciseTodayFragment :
 
     override fun setLayout() {
         initSetting()
+
+        // 받는 부분
+        val args = arguments
+        val selectedDate = args?.getString("selectedDate")
+        val diaryListValue = args?.getString("diaryListValue")
+
+        Log.d("EvaluationExerciseTodayFragment11111", "selectedDate: $selectedDate")
+        Log.d("EvaluationExerciseTodayFragment22222", "diaryListValue: $diaryListValue")
+
+        if (diaryListValue != null) {
+            val gson = Gson()
+            val type = object : TypeToken<List<RateDiaryResponse>>() {}.type
+            val diaryList: List<RateDiaryResponse> = gson.fromJson(diaryListValue, type)
+
+            // 받은 데이터 사용
+            Log.d("EvaluationExerciseTodayFragment3333", "diaryList: $diaryList")
+        }
+        // 받는 부분
+
     }
 
     private fun initSetting() {

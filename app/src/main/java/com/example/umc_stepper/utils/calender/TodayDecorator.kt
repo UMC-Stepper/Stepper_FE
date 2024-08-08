@@ -13,7 +13,10 @@ import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.prolificinteractive.materialcalendarview.spans.DotSpan
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 class TodayDecorator(context: Context) : DayViewDecorator {
     private var date = CalendarDay.today()
@@ -26,13 +29,28 @@ class TodayDecorator(context: Context) : DayViewDecorator {
     }
 }
 
-class EventDecorator(private val context: Context)
+class EventDecorator(private val context: Context, private val eventDateList: MutableList<String>)
     : DayViewDecorator {
 
     private val datesWithEvent = mutableSetOf<CalendarDay>()
 
     init {
-
+        // 날짜 파싱
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        eventDateList.forEach { dateString ->
+            try {
+                val date = dateFormat.parse(dateString)
+                if (date != null) {
+                    val calendar = Calendar.getInstance().apply {
+                        time = date
+                    }
+                    val calendarDay = CalendarDay.from(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH))
+                    datesWithEvent.add(calendarDay)
+                }
+            } catch (e: ParseException) {
+                e.printStackTrace()
+            }
+        }
     }
 
     override fun shouldDecorate(day: CalendarDay): Boolean {
