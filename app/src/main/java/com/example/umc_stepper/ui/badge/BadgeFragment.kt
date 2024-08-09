@@ -25,6 +25,8 @@ class BadgeFragment : BaseFragment<FragmentBadgeBinding>(R.layout.fragment_badge
         getBadge()
     }
 
+    // 뷰모델의 함수 호출 -> 뷰모델 -> 리포지토리의 함수 호출 : 서버에서 api 받아오는 과정 전부 실행됨
+    // -> _getBadge 에 서버에서 받아온 값 저장됨
     private fun getBadge() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -33,6 +35,8 @@ class BadgeFragment : BaseFragment<FragmentBadgeBinding>(R.layout.fragment_badge
             }
     }
 
+    // _getBadge 에 서버에서 받아온 값 꺼내서 파싱하여 사용 (읽기전용으로 값 가져옴)
+    // ainViewModel.getBadge.collect { response -> 이 부분임
     private fun setBadge(){
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
