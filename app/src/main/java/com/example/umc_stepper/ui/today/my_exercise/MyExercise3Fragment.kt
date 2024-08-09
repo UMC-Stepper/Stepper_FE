@@ -1,4 +1,4 @@
-package com.example.umc_stepper.ui.today
+package com.example.umc_stepper.ui.today.my_exercise
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
@@ -25,9 +25,8 @@ import com.example.umc_stepper.domain.model.request.AiVideoDto
 import com.example.umc_stepper.domain.model.response.AiVideoInfo
 import com.example.umc_stepper.domain.model.response.YouTubeVideo
 import com.example.umc_stepper.ui.MainActivity
-import com.example.umc_stepper.ui.today.home.TodayHomeFragmentDirections
+import com.example.umc_stepper.ui.today.TodayViewModel
 import com.example.umc_stepper.utils.GlobalApplication
-import com.example.umc_stepper.utils.extensions.navigateSafe
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

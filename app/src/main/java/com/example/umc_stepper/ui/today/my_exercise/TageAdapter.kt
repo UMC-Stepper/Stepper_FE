@@ -1,10 +1,9 @@
-package com.example.umc_stepper.ui.today
+package com.example.umc_stepper.ui.today.my_exercise
 
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseAdapter
 import com.example.umc_stepper.base.BaseDiffCallback
 import com.example.umc_stepper.databinding.ItemTag2Binding
-import com.example.umc_stepper.databinding.ItemTagBinding
 import com.example.umc_stepper.domain.model.ExerciseTagData
 
 class TageAdapter(
