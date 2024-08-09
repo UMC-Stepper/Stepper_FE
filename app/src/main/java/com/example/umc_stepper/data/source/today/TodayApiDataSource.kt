@@ -9,6 +9,7 @@ import com.example.umc_stepper.domain.model.response.exercise_card_controller.Ex
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardStatusResponseDto
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardWeekResponseDto
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ToDayExerciseResponseDto
+import com.example.umc_stepper.domain.model.response.my_exercise_controller.AddExerciseResponse
 import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -65,6 +66,14 @@ class TodayApiDataSource @Inject constructor(
         emit(result)
     }.catch {
         Log.e("GET ExerciseMonthCheck Failure", it.message.toString())
+    }
+
+    // 나만의 운동 추가 API
+    fun postAddMyExercise(addExerciseRequestDto: ExerciseCardRequestDto) : Flow<BaseResponse<AddExerciseResponse>> = flow {
+        val result = todayApi.postAddMyExercise(addExerciseRequestDto)
+        emit(result)
+    }.catch {
+        Log.e("Post AddMyExercise Failure", it.message.toString())
     }
 
     // 나만의 운동 조회 API -> 스크랩 화면

@@ -16,6 +16,7 @@ import com.example.umc_stepper.domain.model.response.exercise_card_controller.Ex
 import com.example.umc_stepper.domain.model.response.Ylist
 import com.example.umc_stepper.domain.model.response.YouTubeVideo
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardResponse
+import com.example.umc_stepper.domain.model.response.my_exercise_controller.AddExerciseResponse
 import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
 import com.example.umc_stepper.domain.repository.FastApiRepository
 import com.example.umc_stepper.domain.repository.TodayApiRepository
@@ -64,6 +65,10 @@ class TodayViewModel @Inject constructor(
     // 월별 운동 카드 상태 조회
     private val _exerciseCardStatusResponseDto = MutableStateFlow<BaseListResponse<ExerciseCardStatusResponseDto>>(BaseListResponse())
     val exerciseCardStatusResponseDto : StateFlow<BaseListResponse<ExerciseCardStatusResponseDto>> = _exerciseCardStatusResponseDto
+
+    // 나만의 운동 추가
+    private val _addExerciseResponse = MutableStateFlow<BaseResponse<AddExerciseResponse>>(BaseResponse())
+    val addExerciseResponse: StateFlow<BaseResponse<AddExerciseResponse>> = _addExerciseResponse
 
     // 나만의 운동 조회
     private val _checkExerciseResponseDTO = MutableStateFlow<BaseListResponse<CheckExerciseResponse>>(BaseListResponse())
@@ -134,6 +139,19 @@ class TodayViewModel @Inject constructor(
                 }
             } catch (e:Exception) {
                 Log.e("getExerciseMonthCheck is Error", e.message.toString())
+            }
+        }
+    }
+
+    // 나만의 운동 추가 addExerciseResponse
+    fun postAddMyExercise(addExerciseRequestDto: ExerciseCardRequestDto) {
+        viewModelScope.launch {
+            try{
+                todayApiRepository.postAddMyExercise(addExerciseRequestDto).collect {
+                    _addExerciseResponse.value = it
+                }
+            }  catch (e:Exception) {
+                Log.e("postAddMyExercise is Error", e.message.toString())
             }
         }
     }

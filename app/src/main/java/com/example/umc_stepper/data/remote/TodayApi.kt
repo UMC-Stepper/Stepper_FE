@@ -7,6 +7,7 @@ import com.example.umc_stepper.domain.model.response.exercise_card_controller.Ex
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardStatusResponseDto
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardWeekResponseDto
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ToDayExerciseResponseDto
+import com.example.umc_stepper.domain.model.response.my_exercise_controller.AddExerciseResponse
 import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -49,6 +50,12 @@ interface TodayApi {
     ) : BaseListResponse<ExerciseCardStatusResponseDto>
 
     // 나만의 운동
+
+    // 나만의 운동 추가 API
+    @POST("/api/myexercise/add")
+    suspend fun postAddMyExercise(
+        @Body addExerciseRequestDto: ExerciseCardRequestDto
+    ) : BaseResponse<AddExerciseResponse>
 
     // 나만의 운동 조회 API -> 스크랩 화면
     @GET("/api/myexercise/check")
