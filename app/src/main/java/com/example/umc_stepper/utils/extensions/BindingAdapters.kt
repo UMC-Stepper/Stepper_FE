@@ -12,18 +12,25 @@ object BindingAdapters {
     @JvmStatic
     @BindingAdapter("imageUrl")
     fun loadImage(view: ImageView, url: String?) {
-        if (url != null) {
-            Glide.with(view.context)
-                .load(url)
-                .apply(RequestOptions().centerCrop())
-                .into(view)
-        }
+        Glide.with(view.context)
+            .load(url)
+            .apply(RequestOptions().centerCrop())
+            .into(view)
+    }
+
+    @JvmStatic
+    @BindingAdapter("imageUrl2")
+    fun loadImage2(view: ImageView, url: String?) {
+        Glide.with(view.context)
+            .load(url)
+            .apply(RequestOptions().centerCrop())
+            .into(view)
     }
 
     @JvmStatic
     @BindingAdapter("app:stepStatus")
     fun setStepStatusImg(view: ImageView, stepStatus: Boolean) {
-        val imageRes = if(stepStatus) {
+        val imageRes = if (stepStatus) {
             R.drawable.ic_signup_pwd_check_ok
         } else {
             R.drawable.ic_signup_pwd_check_error
@@ -40,7 +47,7 @@ object BindingAdapters {
     @JvmStatic
     @BindingAdapter("app:setImg")
     fun setStepCompleteImg(view: ImageView, exerciseState: ExerciseState) {
-        val imageRes = when(exerciseState.steps.size) {
+        val imageRes = when (exerciseState.steps.size) {
             1 -> {
                 if (exerciseState.steps[0].stepStatus) {
                     R.drawable.ic_exercise_card_complete
@@ -48,6 +55,7 @@ object BindingAdapters {
                     R.drawable.ic_exercise_card_un_complete
                 }
             }
+
             2 -> {
                 if (exerciseState.steps[0].stepStatus && exerciseState.steps[1].stepStatus) {
                     R.drawable.ic_exercise_card_complete
@@ -55,6 +63,7 @@ object BindingAdapters {
                     R.drawable.ic_exercise_card_un_complete
                 }
             }
+
             3 -> {
                 if (exerciseState.steps[0].stepStatus && exerciseState.steps[1].stepStatus && exerciseState.steps[2].stepStatus) {
                     R.drawable.ic_exercise_card_complete
@@ -62,6 +71,7 @@ object BindingAdapters {
                     R.drawable.ic_exercise_card_un_complete
                 }
             }
+
             else -> {
                 R.drawable.ic_exercise_card_un_complete
             }
