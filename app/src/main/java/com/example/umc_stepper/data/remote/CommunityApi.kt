@@ -11,14 +11,16 @@ import com.example.umc_stepper.domain.model.response.post_controller.ApiResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostViewResponse
 import com.example.umc_stepper.domain.model.response.post_controller.LikeResponse
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponse
+import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentWriteResponse
 import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponse
+import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponseItem
 import com.example.umc_stepper.domain.model.response.post_controller.ScrapResponse
 import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyPostsResponse
+import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyPostsResponseItem
 import com.google.android.gms.common.internal.safeparcel.SafeParcelable.Param
 import retrofit2.http.Body
 import retrofit2.http.DELETE
-import retrofit2.http.GET
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -71,14 +73,12 @@ interface CommunityApi {
     //내가 작성한 글 조회
     @GET("/api/community/my_posts")
     suspend fun getCommunityMyPosts(
-
-    ):BaseResponse<CommunityMyPostsResponse>
+    ):BaseListResponse<CommunityMyPostsResponseItem>
 
     //내가 작성한 댓글 조회
     @GET("/api/community/my_comments")
     suspend fun getCommunityMyComments(
-
-    ):BaseResponse<CommunityMyCommentsResponse>
+    ):BaseListResponse<CommunityMyCommentsResponseItem>
 
     //댓글 작성
     @POST("/api/comment/write")
@@ -88,8 +88,8 @@ interface CommunityApi {
 
     //댓글 조회
     @GET("api/comment/{postId}/comment")
-    suspend fun  getComment(
+    suspend fun getComment(
         @Path("postId") postId : Int
-    ):BaseResponse<CommentResponse>
+    ):BaseListResponse<CommentResponseItem>
 
 }
