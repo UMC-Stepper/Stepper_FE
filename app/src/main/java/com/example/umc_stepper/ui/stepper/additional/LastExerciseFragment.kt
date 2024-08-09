@@ -239,6 +239,7 @@ class LastExerciseFragment : BaseFragment<FragmentLastExerciseBinding>(R.layout.
         val timeJson = gson.toJson(time)
         val args = Bundle().apply {
             putString("time", timeJson)
+            putInt("titleNumber",1)
         }
 
         val action = LastExerciseFragmentDirections.actionFragmentLastExerciseToFragmentAdditionalExerciseSuccess()
