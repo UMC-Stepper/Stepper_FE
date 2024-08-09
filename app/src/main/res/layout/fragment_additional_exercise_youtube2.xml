@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="영상제목"
+            android:text=""
             android:textColor="@color/White"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_download_youtube_2_main_card_preview_yv" />
@@ -104,7 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/White"
-            android:text="채널명"
+            android:text=""
             android:layout_marginStart="12dp"
             app:layout_constraintBottom_toBottomOf="@id/fragment_download_youtube_2_main_card_channel_profile_iv"
             app:layout_constraintStart_toEndOf="@id/fragment_download_youtube_2_main_card_channel_profile_iv"
