@@ -22,6 +22,7 @@ class TokenManager @Inject constructor(
         private val YOUTUBE_TOKEN_KEY = stringPreferencesKey("youtube_token")
         private val COOKIE = stringPreferencesKey("cookie")
         private val EXERCISE_ID = stringPreferencesKey("exercise_id")
+        private val EXERCISE_CARD_ID = stringPreferencesKey("exercise_card_id")
     }
 
     private val dataStore: DataStore<Preferences> = context.datastore
@@ -43,6 +44,18 @@ class TokenManager @Inject constructor(
             prefs[EXERCISE_ID] =  eid
         }
     }
+
+    fun saveExerciseCardId(eid : String) = runBlocking{
+        dataStore.edit { prefs ->
+            prefs[EXERCISE_CARD_ID] =  eid
+        }
+    }
+    suspend fun deleteExerciseCardId() {
+        dataStore.edit { prefs ->
+            prefs.remove(EXERCISE_CARD_ID)
+        }
+    }
+
 
     fun getExerciseId() : Flow<String?>{
         return dataStore.data.map { prefs ->
