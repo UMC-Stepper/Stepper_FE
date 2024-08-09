@@ -1,11 +1,13 @@
 package com.example.umc_stepper.data.source.main
 
 import android.util.Log
+import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.data.remote.MainApi
 import com.example.umc_stepper.domain.model.request.member_controller.LogInDto
 import com.example.umc_stepper.domain.model.request.rate_diary_controller.RateDiaryDto
 import com.example.umc_stepper.domain.model.request.member_controller.UserDto
+import com.example.umc_stepper.domain.model.response.BadgeResponseItem
 import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResponse
 import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResult
 import com.example.umc_stepper.domain.model.response.member_controller.UserResponse
@@ -64,6 +66,13 @@ class MainApiDataSource @Inject constructor(
         emit(result)
     }.catch {
         Log.e("Get RateDiary Confirm Failure", it.message.toString())
+    }
+
+    fun getBadge(): Flow<BaseListResponse<BadgeResponseItem>> = flow {
+        val result = mainApi.getBadge()
+        emit(result)
+    }.catch {
+        Log.e("Get Badge Failure", it.message.toString())
     }
 
 }
