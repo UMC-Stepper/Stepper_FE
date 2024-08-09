@@ -1,14 +1,11 @@
 package com.example.umc_stepper.data.remote
 
 import com.example.umc_stepper.base.BaseListResponse
-import com.example.umc_stepper.base.BaseResponse
-import com.example.umc_stepper.domain.model.response.CheckExerciseResponseDTO
-import com.example.umc_stepper.domain.model.response.ExerciseCardStatusResponseDto
-import com.example.umc_stepper.domain.model.response.ExerciseCardWeekResponseDto
-import com.example.umc_stepper.domain.model.response.ToDayExerciseResponseDto
+import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardStatusResponseDto
+import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardWeekResponseDto
+import com.example.umc_stepper.domain.model.response.exercise_card_controller.ToDayExerciseResponseDto
+import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
 import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface TodayApi {
@@ -39,6 +36,6 @@ interface TodayApi {
     @GET("/api/myexercise/check")
     suspend fun getMyExercise(
         @Query("bodyPart") bodyPart: String
-    ) : BaseListResponse<CheckExerciseResponseDTO>
+    ) : BaseListResponse<CheckExerciseResponse>
 
 }

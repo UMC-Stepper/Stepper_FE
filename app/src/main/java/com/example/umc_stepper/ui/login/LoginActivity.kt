@@ -3,9 +3,7 @@ package com.example.umc_stepper.ui.login
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
-import android.provider.Settings
 import android.util.Log
 import android.view.WindowManager
 import androidx.activity.result.ActivityResultLauncher
@@ -17,9 +15,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseActivity
-import com.example.umc_stepper.data.di.DataStoreModule
 import com.example.umc_stepper.databinding.ActivityLoginBinding
-import com.example.umc_stepper.domain.model.request.LogInDto
+import com.example.umc_stepper.domain.model.request.member_controller.LogInDto
 import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.signup.SignUpActivity
@@ -28,7 +25,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.math.log
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login),

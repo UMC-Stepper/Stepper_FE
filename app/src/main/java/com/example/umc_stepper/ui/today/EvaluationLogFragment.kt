@@ -11,10 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentEvaluationLogCalenderBinding
-import com.example.umc_stepper.domain.model.response.ExerciseCardStatusResponseDto
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.stepper.StepperViewModel
-import com.example.umc_stepper.ui.today.home.TodayHomeCalendarAdapter
 import com.example.umc_stepper.utils.calender.BoldDecorator
 import com.example.umc_stepper.utils.calender.EventDecorator
 import com.example.umc_stepper.utils.calender.SaturdayDecorator
@@ -22,11 +20,9 @@ import com.example.umc_stepper.utils.calender.SelectedMonthDecorator
 import com.example.umc_stepper.utils.calender.SundayDecorator
 import com.example.umc_stepper.utils.calender.TodayDecorator
 import com.example.umc_stepper.utils.enums.LoadState
-import com.example.umc_stepper.utils.listener.ItemClickListener
 import com.google.gson.Gson
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
 import java.text.SimpleDateFormat

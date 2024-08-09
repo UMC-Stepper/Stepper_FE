@@ -1,4 +1,4 @@
-package com.example.umc_stepper.domain.model.response
+package com.example.umc_stepper.domain.model.response.member_controller
 
 data class UserResponse(
     var id: Int = 0,

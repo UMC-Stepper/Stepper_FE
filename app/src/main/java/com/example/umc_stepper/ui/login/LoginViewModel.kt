@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.umc_stepper.base.BaseResponse
-import com.example.umc_stepper.domain.model.request.LogInDto
-import com.example.umc_stepper.domain.model.request.UserDto
-import com.example.umc_stepper.domain.model.response.UserResponse
+import com.example.umc_stepper.domain.model.request.member_controller.LogInDto
+import com.example.umc_stepper.domain.model.request.member_controller.UserDto
+import com.example.umc_stepper.domain.model.response.member_controller.UserResponse
 import com.example.umc_stepper.domain.repository.MainApiRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -1,4 +1,4 @@
-package com.example.umc_stepper.domain.model.response
+package com.example.umc_stepper.domain.model.response.more_exercise_controller
 
 data class TimeResponse(
     val id : Int = 0,

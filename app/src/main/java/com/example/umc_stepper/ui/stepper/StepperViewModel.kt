@@ -7,11 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.model.Time
-import com.example.umc_stepper.domain.model.request.RateDiaryDto
-import com.example.umc_stepper.domain.model.response.RateDiaryResponse
-import com.example.umc_stepper.domain.model.response.RateDiaryResult
-import com.example.umc_stepper.domain.model.response.TimeResponse
-import com.example.umc_stepper.domain.model.response.UserResponse
+import com.example.umc_stepper.domain.model.request.rate_diary_controller.RateDiaryDto
+import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResponse
+import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResult
+import com.example.umc_stepper.domain.model.response.more_exercise_controller.TimeResponse
 import com.example.umc_stepper.domain.repository.MainApiRepository
 import com.example.umc_stepper.domain.model.response.YouTubeVideo
 import com.example.umc_stepper.domain.repository.StepperApiRepository
@@ -21,7 +20,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import java.util.logging.Level
 import javax.inject.Inject
 
 @HiltViewModel

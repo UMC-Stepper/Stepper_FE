@@ -15,14 +15,12 @@ import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentEvaluationExerciseBinding
-import com.example.umc_stepper.databinding.FragmentEvaluationExerciseTodayBinding
-import com.example.umc_stepper.domain.model.request.RateDiaryDto
+import com.example.umc_stepper.domain.model.request.rate_diary_controller.RateDiaryDto
 import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.launch
 import java.lang.NumberFormatException
 import javax.inject.Inject
