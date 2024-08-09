@@ -18,8 +18,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseActivity
 import com.example.umc_stepper.databinding.FragmentRegister2Binding
-import com.example.umc_stepper.domain.model.request.UserDto
-import com.example.umc_stepper.ui.MainActivity
+import com.example.umc_stepper.domain.model.request.member_controller.UserDto
 import com.example.umc_stepper.ui.login.LoginActivity
 import com.example.umc_stepper.ui.login.LoginViewModel
 import com.example.umc_stepper.utils.GlobalApplication

@@ -2,12 +2,11 @@ package com.example.umc_stepper.data.source.today
 
 import android.util.Log
 import com.example.umc_stepper.base.BaseListResponse
-import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.data.remote.TodayApi
-import com.example.umc_stepper.domain.model.response.CheckExerciseResponseDTO
-import com.example.umc_stepper.domain.model.response.ExerciseCardStatusResponseDto
-import com.example.umc_stepper.domain.model.response.ExerciseCardWeekResponseDto
-import com.example.umc_stepper.domain.model.response.ToDayExerciseResponseDto
+import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardStatusResponseDto
+import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardWeekResponseDto
+import com.example.umc_stepper.domain.model.response.exercise_card_controller.ToDayExerciseResponseDto
+import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -31,7 +30,7 @@ class TodayApiDataSource @Inject constructor(
         ))
     }
 
-    fun getMyExercise(bodyPart: String): Flow<BaseListResponse<CheckExerciseResponseDTO>> = flow {
+    fun getMyExercise(bodyPart: String): Flow<BaseListResponse<CheckExerciseResponse>> = flow {
         val result = todayApi.getMyExercise(bodyPart)
         emit(result)
     }.catch {

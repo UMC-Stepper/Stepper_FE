@@ -5,7 +5,7 @@ import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.data.remote.StepperApi
 import com.example.umc_stepper.domain.model.Time
-import com.example.umc_stepper.domain.model.response.TimeResponse
+import com.example.umc_stepper.domain.model.response.more_exercise_controller.TimeResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow

@@ -1,4 +1,4 @@
-package com.example.umc_stepper.domain.model.response
+package com.example.umc_stepper.domain.model.response.rate_diary_controller
 
 data class RateDiaryResponse(
     val bodyPart: String = "",

@@ -1,15 +1,12 @@
 package com.example.umc_stepper.data.source.main
 
 import com.example.umc_stepper.base.BaseResponse
-import com.example.umc_stepper.domain.model.request.AiVideoDto
-import com.example.umc_stepper.domain.model.request.LogInDto
-import com.example.umc_stepper.domain.model.request.RateDiaryDto
-import com.example.umc_stepper.domain.model.request.UserDto
-import com.example.umc_stepper.domain.model.response.AiVideoInfo
-import com.example.umc_stepper.domain.model.response.RateDiaryResponse
-import com.example.umc_stepper.domain.model.response.RateDiaryResult
-import com.example.umc_stepper.domain.model.response.UserResponse
-import com.example.umc_stepper.domain.repository.FastApiRepository
+import com.example.umc_stepper.domain.model.request.member_controller.LogInDto
+import com.example.umc_stepper.domain.model.request.rate_diary_controller.RateDiaryDto
+import com.example.umc_stepper.domain.model.request.member_controller.UserDto
+import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResponse
+import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResult
+import com.example.umc_stepper.domain.model.response.member_controller.UserResponse
 import com.example.umc_stepper.domain.repository.MainApiRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

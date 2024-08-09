@@ -3,9 +3,8 @@ package com.example.umc_stepper.data.source.stepper
 import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.model.Time
-import com.example.umc_stepper.domain.model.response.TimeResponse
+import com.example.umc_stepper.domain.model.response.more_exercise_controller.TimeResponse
 import com.example.umc_stepper.domain.repository.StepperApiRepository
-import com.example.umc_stepper.domain.repository.TodayApiRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
