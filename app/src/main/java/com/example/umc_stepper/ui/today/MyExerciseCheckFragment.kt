@@ -15,12 +15,13 @@ import com.example.umc_stepper.databinding.FragmentMyExercise3Binding
 import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
+@AndroidEntryPoint
 class MyExerciseCheckFragment:
     BaseFragment<FragmentExerciseCheckBinding>(R.layout.fragment_exercise_check) {
 
-        private val todayViewModel: TodayViewModel by activityViewModels()
+        private val stepperViewModel: StepperViewModel by activityViewModels()
         private val youtubeKey = BuildConfig.YOUTUBE_KEY
 
         override fun setLayout() {
@@ -79,7 +80,7 @@ class MyExerciseCheckFragment:
 
     // 유튜브 API에서 세부 정보를 불러오는 함수
     private fun fetchVideoDetailsFromApi(part: String, id: String, key: String) {
-        todayViewModel.getYoutubeVideoInfo(part, id, key)
+        stepperViewModel.getYoutubeVideoInfo(part, id, key)
         // ViewModel이 데이터를 적절히 설정하는지 확인
     }
 
@@ -87,9 +88,9 @@ class MyExerciseCheckFragment:
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 try {
-                    todayViewModel.provideYoutubeLink.collect { response ->
+                    stepperViewModel.provideYoutubeLink.collect { response ->
                         Log.d("dataSetting", "Response received: $response")
-                        if (response != null && response.items.isNotEmpty()) {
+                        if (response.items.isNotEmpty()) {
                             val videoItem = response.items[0].snippet
                             Log.d("dataSetting", "Video title: ${videoItem.title}")
                             Log.d("dataSetting", "Channel title: ${videoItem.channelTitle}")
