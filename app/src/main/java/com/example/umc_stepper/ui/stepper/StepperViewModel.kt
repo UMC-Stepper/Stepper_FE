@@ -5,14 +5,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.model.Time
+import com.example.umc_stepper.domain.model.request.exercise_card_controller.ExerciseCardRequestDto
 import com.example.umc_stepper.domain.model.request.rate_diary_controller.RateDiaryDto
 import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResponse
 import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResult
 import com.example.umc_stepper.domain.model.response.more_exercise_controller.TimeResponse
 import com.example.umc_stepper.domain.repository.MainApiRepository
 import com.example.umc_stepper.domain.model.response.YouTubeVideo
+import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardResponse
 import com.example.umc_stepper.domain.repository.StepperApiRepository
 import com.example.umc_stepper.domain.repository.YoutubeApiRepository
 import com.example.umc_stepper.utils.enums.LoadState
@@ -38,12 +41,47 @@ class StepperViewModel @Inject constructor(
     val addTimeState : StateFlow<BaseResponse<TimeResponse>> = _addTimeState
 
     private val TAG = "StepperViewModel"
+
     //평가 일지 작성 요청 후 응답
     private val _diaryItems = MutableStateFlow<BaseResponse<RateDiaryResult>>(BaseResponse())
     val diaryItems : StateFlow<BaseResponse<RateDiaryResult>> = _diaryItems
 
     private val _diaryList = MutableStateFlow<BaseResponse<List<RateDiaryResponse>>>(BaseResponse())
     val diaryList : StateFlow<BaseResponse<List<RateDiaryResponse>>> = _diaryList
+
+    // 운동 카드 수정
+    private val _exerciseCardResponse = MutableStateFlow<BaseListResponse<ExerciseCardResponse>>(BaseListResponse())
+    val exerciseCardResponse : StateFlow<BaseListResponse<ExerciseCardResponse>> = _exerciseCardResponse
+
+    // 운동 카드 단계별 상태 수정
+    private val _exerciseCardStepResponse = MutableStateFlow<BaseResponse<Any>>(BaseResponse())
+    val exerciseCardStepResponse : StateFlow<BaseResponse<Any>> = _exerciseCardStepResponse
+
+    // 운동 카드 수정
+    fun putEditExerciseCard(exerciseId: Int, exerciseCardRequestDto: ExerciseCardRequestDto) {
+        viewModelScope.launch {
+            try {
+                stepperApiRepository.putEditExerciseCard(exerciseId, exerciseCardRequestDto).collect {
+                        _exerciseCardResponse.value = it
+                }
+            } catch (e : Exception){
+                Log.e(TAG,"putEditExerciseCard Error")
+            }
+        }
+    }
+
+    // 운동 카드 단계별 상태 수정
+    fun postEditExerciseStep(stepId: Int) {
+        viewModelScope.launch {
+            try {
+                stepperApiRepository.postEditExerciseStep(stepId).collect {
+                    _exerciseCardStepResponse.value = it
+                }
+            } catch (e : Exception){
+                Log.e(TAG,"postEditExerciseStep Error")
+            }
+        }
+    }
 
     fun postDiaryEdit(rateDiaryDto: RateDiaryDto){
         viewModelScope.launch {
