@@ -1,6 +1,5 @@
 package com.example.umc_stepper.ui
 
-import android.content.Context
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -52,7 +51,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             Log.d("토큰", token ?: "토큰이 없습니다.")
         }
     }
-    
+
     private fun setViewModel(){
         todayViewModel = ViewModelProvider(this)[TodayViewModel::class.java]
         stepperViewModel = ViewModelProvider(this)[StepperViewModel::class.java]
@@ -62,13 +61,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun setNavigation() {
-
         val mainBottomNavigationBar =  binding.mainBottomNavigationBar
         mainBottomNavigationBar.itemIconTintList = null
 
         val host = supportFragmentManager.findFragmentById(binding.mainNavHostFragment.id) as NavHostFragment ?: return
         navController = host.navController
-        mainBottomNavigationBar.apply { setupWithNavController(navController) }
+        mainBottomNavigationBar.apply { setupWithNavController(navController)
+        }
 
         // 최상위 프래그먼트 이동 설정 (투데이, 뱃지, 스태퍼, 커뮤니티, 설정)
         mainBottomNavigationBar.setOnItemSelectedListener { item ->
@@ -81,7 +80,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 else -> false
             }
         }
-
 
         // 최소 실행시 프래그먼트 설정
         mainBottomNavigationBar.selectedItemId = R.id.todayHomeFragment
@@ -113,7 +111,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         if (currentFocus is EditText) {
             currentFocus!!.clearFocus()
         }
-
         return super.dispatchTouchEvent(ev)
     }
 
@@ -137,7 +134,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.mainToolbarTitleTv.visibility = View.VISIBLE
     }
 
-
     // 툴바 중간 이미지 변경 함수
     fun updateToolbarMiddleImg(imgSrc: Int) {
         binding.mainToolbarGoToday.setImageResource(imgSrc)
@@ -151,6 +147,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     fun setBg(){
         binding.mainToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.Purple_Black_BG_1))
     }
-
 
 }
