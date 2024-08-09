@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.stepper.additional
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.activityViewModels
@@ -12,6 +13,7 @@ import com.example.umc_stepper.BuildConfig
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentAdditionalExerciseYoutube2Binding
+import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
@@ -22,10 +24,17 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class AdditionalExerciseYoutube2Fragment : BaseFragment<FragmentAdditionalExerciseYoutube2Binding>(R.layout.fragment_additional_exercise_youtube2) {
 
+    private lateinit var mainActivity: MainActivity
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
     private val stepperViewModel: StepperViewModel by activityViewModels()
     private val youtubeKey = BuildConfig.YOUTUBE_KEY
 
     override fun setLayout() {
+        updateToolbar()
         val urlText = arguments?.getString("urlText")
         if (!urlText.isNullOrEmpty()) {
             binding.fragmentDownloadYoutube2MainCardInputLinkEt.setText(urlText)
@@ -108,6 +117,13 @@ class AdditionalExerciseYoutube2Fragment : BaseFragment<FragmentAdditionalExerci
                 }
             }
         }
+    }
+
+    private fun updateToolbar() {
+        mainActivity.updateToolbarTitle("추가 운동하기")
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
+        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
+        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
     }
 
     private fun goLastExercise() {

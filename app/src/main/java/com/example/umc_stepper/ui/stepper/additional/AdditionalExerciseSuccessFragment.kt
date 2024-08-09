@@ -23,7 +23,7 @@ import com.google.gson.Gson
 class AdditionalExerciseSuccessFragment :
     BaseFragment<FragmentTodayExerciseSuccessBinding>(R.layout.fragment_today_exercise_success) {
     private val stepperViewModel: StepperViewModel by activityViewModels()
-    private val titleList : List<String> = listOf(
+    private val titleList: List<String> = listOf(
         "오늘 이만큼 운동 했어요!",
         "오늘 이만큼 추가 운동 했어요!"
     )
@@ -36,39 +36,40 @@ class AdditionalExerciseSuccessFragment :
         observeLifeCycle()
         setOnClickBtn()
 
-        // 받는 부분
-        val args = arguments
-        val timeJson = args?.getString("time")
-
-        if (timeJson != null) {
-            val gson = Gson()
-            val time : Time = gson.fromJson(timeJson, Time::class.java)
-
-            Log.d("AdditionalExerciseSuccessFragment", "time: $time")
-        }
 
     }
 
 
     // 오늘 이만큼 운동 했어요!
     private fun setTitle() {
-//        titleNumber = arguments?.getInt("titleNumber") ?: 0
-
         with(binding) {
-            fragmentTodayExerciseSuccessTitleTv.text = titleList[titleNumber]
-            fragmentTodayExerciseSuccessHourTv.text
-            fragmentTodayExerciseSuccessMinuteTv
-            fragmentTodayExerciseSuccessSecondTv
+            // 받는 부분
+            val args = arguments
+            val timeJson = args?.getString("time")
+
+            if (timeJson != null) {
+                val gson = Gson()
+                val time: Time = gson.fromJson(timeJson, Time::class.java)
+
+                Log.d("AdditionalExerciseSuccessFragment", "time: $time")
+
+                titleNumber = arguments?.getInt("titleNumber") ?: 0
+
+
+                fragmentTodayExerciseSuccessTitleTv.text = titleList[titleNumber]
+                resultTimeData = time
+            }
         }
     }
 
     private fun setOnClickBtn() {
         binding.fragmentTodayExerciseSuccessOkBtn.setOnClickListener {
             when (titleNumber) {
-                1 ->{
+                1 -> {
                     //운동
                     findNavController().navTop(R.id.action_fragmentAdditionalExerciseSuccess_to_fragmentEvaluationExercise)
                 }
+
                 2 -> {
                     stepperViewModel.saveMoreExerciseTime(
                         //추가운동
@@ -79,6 +80,7 @@ class AdditionalExerciseSuccessFragment :
                         )
                     )
                 }
+
                 else -> {
 
                 }
