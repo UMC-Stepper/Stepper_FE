@@ -16,6 +16,7 @@ import com.example.umc_stepper.domain.model.response.exercise_card_controller.Ex
 import com.example.umc_stepper.domain.model.response.Ylist
 import com.example.umc_stepper.domain.model.response.YouTubeVideo
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardResponse
+import com.example.umc_stepper.domain.model.response.exercise_card_controller.ToDayExerciseResponseDto
 import com.example.umc_stepper.domain.model.response.my_exercise_controller.AddExerciseResponse
 import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
 import com.example.umc_stepper.domain.repository.FastApiRepository
@@ -74,6 +75,9 @@ class TodayViewModel @Inject constructor(
     private val _checkExerciseResponseDTO = MutableStateFlow<BaseListResponse<CheckExerciseResponse>>(BaseListResponse())
     val checkExerciseResponseDTO: StateFlow<BaseListResponse<CheckExerciseResponse>> = _checkExerciseResponseDTO
 
+    private val _todayExerciseResponseDto = MutableStateFlow<BaseListResponse<ToDayExerciseResponseDto>>(BaseListResponse())
+    val todayExerciseResponseDto : StateFlow<BaseListResponse<ToDayExerciseResponseDto>> = _todayExerciseResponseDto
+
     // 운동 카드 추가
     fun postAddExerciseCard(exerciseCardRequestDto: ExerciseCardRequestDto) {
         viewModelScope.launch {
@@ -100,15 +104,25 @@ class TodayViewModel @Inject constructor(
         }
     }
 
+    fun getStepperExerciseState(date : String){
+        viewModelScope.launch {
+            try {
+                todayApiRepository.getTodayExerciseState(date).collect{
+                    _todayExerciseResponseDto.value = it
+                }
+            }catch (e : Exception){
+                Log.e("TodayViewModel",e.message.toString())
+            }
+        }
+    }
+
     // 오늘의 운동 진행 상태 조회
     fun getTodayExerciseState(date: String) {
         viewModelScope.launch {
             try {
                 todayApiRepository.getTodayExerciseState(date).collect { response ->
-                    if (response != null) {
-                        val exerciseStateList = response.toExerciseStates()
-                        _exerciseState.value = exerciseStateList
-                    }
+                    val exerciseStateList = response.toExerciseStates()
+                    _exerciseState.value = exerciseStateList
                 }
             } catch (e: Exception) {
                 Log.e("TodayViewModel getTodayExerciseState Error", e.message.toString())

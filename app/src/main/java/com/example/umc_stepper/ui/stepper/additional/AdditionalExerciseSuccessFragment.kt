@@ -28,7 +28,6 @@ class AdditionalExerciseSuccessFragment :
         "오늘 이만큼 추가 운동 했어요!"
     )
 
-
     //이거 필요
     private var titleNumber by Delegates.notNull<Int>()
     override fun setLayout() {

@@ -31,8 +31,6 @@ class StepperViewModel @Inject constructor(
     private val youtubeApiRepository: YoutubeApiRepository,
     private val stepperApiRepository: StepperApiRepository
 ) : ViewModel() {
-    private val _levelItems = MutableLiveData<List<LevelListItem>>()
-    val levelItems: LiveData<List<LevelListItem>> = _levelItems
 
     private val _successYoutubeLink = MutableStateFlow(YouTubeVideo())
     val provideYoutubeLink: StateFlow<YouTubeVideo> = _successYoutubeLink
@@ -112,36 +110,9 @@ class StepperViewModel @Inject constructor(
             }
         }
     }
-    init {
-        loadLevelItems()
-    }
 
-    private fun loadLevelItems() {
-        val items = listOf(
-            LevelListItem(
-                listOf(
-                    LevelItem("image1.jpg", "Level 1"),
-                    LevelItem("image2.jpg", "Level 2"),
-                    LevelItem("image3.jpg", "Level 3")
-                )
-            ),
-            LevelListItem(
-                listOf(
-                    LevelItem("image4.jpg", "Level 1"),
-                    LevelItem("image5.jpg", "Level 2"),
-                    LevelItem("image6.jpg", "Level 3")
-                )
-            ),
-            LevelListItem(
-                listOf(
-                    LevelItem("image4.jpg", "Level 1"),
-                    LevelItem("image5.jpg", "Level 2"),
-                    LevelItem("image6.jpg", "Level 3")
-                )
-            )
-        )
-        _levelItems.value = items
-    }
+
+
 
     fun getYoutubeVideoInfo(part: String, id: String, key: String) {
         viewModelScope.launch {
@@ -168,4 +139,5 @@ class StepperViewModel @Inject constructor(
             }
         }
     }
+
 }

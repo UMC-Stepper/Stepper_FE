@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
-        name="pickString"
-        type="com.example.umc_stepper.ui.stepper.Pick" />
+            name="stepList"
+            type="com.example.umc_stepper.domain.model.response.exercise_card_controller.ToDayExerciseResponseDto" />
 
         <variable
             name="pick"
             type="com.example.umc_stepper.utils.listener.ItemClickListener" />
+
         <variable
-            name="levelItem"
-            type="com.example.umc_stepper.ui.stepper.LevelListItem" />
+            name="pick2"
+            type="com.example.umc_stepper.utils.listener.AdapterNextClick" />
+
+
     </data>
 
     <HorizontalScrollView
@@ -22,52 +27,53 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/item_cl"
-            android:layout_marginTop="42dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="42dp"
             android:backgroundTint="@color/Purple_300">
+
             <TextView
                 android:id="@+id/stepper_today_tv"
                 style="@style/head_bold_18"
-                android:layout_marginTop="2dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
                 android:text="오늘의 운동 리스트"
                 android:textColor="@color/White"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:onClick="@{() -> pick.onClick(levelItem)}"
                 android:id="@+id/stepper_modify_iv"
+                style="@style/body_regular_12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:background="@drawable/shape_rounded_square_purple700_60dp"
+                android:onClick="@{() -> pick.onClick(stepList)}"
+                android:paddingStart="12dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="6dp"
                 android:text="수정하기"
                 android:textColor="@color/White"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                style="@style/body_regular_12"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
-                android:background="@drawable/shape_rounded_square_purple700_60dp"
                 app:layout_constraintBottom_toBottomOf="@+id/stepper_category_iv"
                 app:layout_constraintStart_toEndOf="@id/stepper_category_iv"
                 app:layout_constraintTop_toTopOf="@+id/stepper_category_iv" />
 
             <TextView
                 android:id="@+id/stepper_category_iv"
-                android:text='@{pickString.pick + " 무릎"}'
-                android:textColor="@color/Purple_700"
+                style="@style/body_regular_12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="11dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                style="@style/body_regular_12"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
                 android:background="@drawable/shape_rounded_square_purpleblack_bg1_purple700_stroke_50dp_1dp"
+                android:paddingStart="12dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="6dp"
+                android:text="@{stepList.bodyPart}"
+                android:textColor="@color/Purple_700"
                 app:layout_constraintBottom_toBottomOf="@+id/stepper_today_tv"
                 app:layout_constraintStart_toEndOf="@id/stepper_today_tv"
                 app:layout_constraintTop_toTopOf="@+id/stepper_today_tv" />
@@ -82,6 +88,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/stepper_today_tv">
+<!--                app:imageUrl2="@{stepList.stepList[0].myExercise.video_image}"-->
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -90,7 +97,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    app:imageUrl="@{levelItem.levelList[0].imgView}"
+                    app:imageUrl2="@{stepList.stepList.size() > 0 ? stepList.stepList.get(0).myExercise.video_image : ``}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -101,12 +108,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginBottom="10dp"
-                    android:text="@{levelItem.levelList[0].level}"
+                    android:text="1단계"
                     android:textColor="#000000"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <ImageButton
+                    android:onClick="@{() -> pick2.onClickNextPage(stepList.stepList.size() > 0 ? stepList.stepList.get(0).stepId : 0, stepList)}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="8dp"
@@ -133,7 +141,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    app:imageUrl ="@{levelItem.levelList[1].imgView}"
+                    app:imageUrl2="@{stepList.stepList.size() > 1 ? stepList.stepList.get(1).myExercise.video_image : ``}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -144,12 +152,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginBottom="10dp"
-                    android:text ="@{levelItem.levelList[1].level}"
-                    android:textColor="#000000"
+                    android:text="2단계"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <ImageButton
+                    android:onClick="@{() -> pick2.onClickNextPage(stepList.stepList.size() > 1 ? stepList.stepList.get(1).stepId : 1, stepList)}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="8dp"
@@ -176,23 +184,23 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    app:imageUrl="@{levelItem.levelList[2].imgView}"
+                    app:imageUrl2="@{stepList.stepList.size() > 2 ? stepList.stepList.get(2).myExercise.video_image : ``}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
                 <TextView
                     style="@style/body_semi_bold_14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="17dp"
                     android:layout_marginStart="12dp"
                     android:layout_marginBottom="10dp"
-                    android:text="@{levelItem.levelList[2].imgView}"
+                    android:text="3단계"
                     android:textColor="#000000"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <ImageButton
+                    android:onClick="@{() -> pick2.onClickNextPage(stepList.stepList.size() > 2 ? stepList.stepList.get(2).stepId : 2, stepList)}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="8dp"
