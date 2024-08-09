@@ -5,24 +5,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.umc_stepper.BuildConfig
 import com.example.umc_stepper.base.BaseListResponse
-import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.mapper.toExerciseStates
 import com.example.umc_stepper.domain.model.local.ExerciseState
 import com.example.umc_stepper.domain.model.request.AiVideoDto
 import com.example.umc_stepper.domain.model.response.AiVideoInfo
-import com.example.umc_stepper.domain.model.response.CheckExerciseResponseDTO
-import com.example.umc_stepper.domain.model.response.ExerciseCardStatusResponseDto
-import com.example.umc_stepper.domain.model.response.ExerciseCardWeekResponseDto
-import com.example.umc_stepper.domain.model.response.ToDayExerciseResponseDto
+import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardStatusResponseDto
+import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardWeekResponseDto
 import com.example.umc_stepper.domain.model.response.Ylist
 import com.example.umc_stepper.domain.model.response.YouTubeVideo
+import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
 import com.example.umc_stepper.domain.repository.FastApiRepository
 import com.example.umc_stepper.domain.repository.TodayApiRepository
 import com.example.umc_stepper.domain.repository.YoutubeApiRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -57,8 +54,8 @@ class TodayViewModel @Inject constructor(
     val exerciseCardStatusResponseDto : StateFlow<BaseListResponse<ExerciseCardStatusResponseDto>> = _exerciseCardStatusResponseDto
 
     // 나만의 운동 조회
-    private val _checkExerciseResponseDTO = MutableStateFlow<BaseListResponse<CheckExerciseResponseDTO>>(BaseListResponse())
-    val checkExerciseResponseDTO: StateFlow<BaseListResponse<CheckExerciseResponseDTO>> = _checkExerciseResponseDTO
+    private val _checkExerciseResponseDTO = MutableStateFlow<BaseListResponse<CheckExerciseResponse>>(BaseListResponse())
+    val checkExerciseResponseDTO: StateFlow<BaseListResponse<CheckExerciseResponse>> = _checkExerciseResponseDTO
 
     // 오늘의 운동 진행 상태 조회
     fun getTodayExerciseState(date: String) {

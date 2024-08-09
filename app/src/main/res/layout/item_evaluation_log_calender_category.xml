@@ -6,7 +6,7 @@
     <data>
         <variable
             name="exerciseCardStatusResponseDto"
-            type="com.example.umc_stepper.domain.model.response.ExerciseCardStatusResponseDto" />
+            type="com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardStatusResponseDto" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

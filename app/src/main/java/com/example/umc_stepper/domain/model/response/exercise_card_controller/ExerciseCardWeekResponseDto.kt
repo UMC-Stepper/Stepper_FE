@@ -1,4 +1,4 @@
-package com.example.umc_stepper.domain.model.response
+package com.example.umc_stepper.domain.model.response.exercise_card_controller
 
 import com.example.umc_stepper.utils.enums.DayOfWeek
 

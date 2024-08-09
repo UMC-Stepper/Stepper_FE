@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentEvaluationExerciseTodayBinding
-import com.example.umc_stepper.domain.model.response.RateDiaryResponse
+import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResponse
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.example.umc_stepper.utils.GlobalApplication

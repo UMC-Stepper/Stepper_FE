@@ -18,7 +18,7 @@ import androidx.core.content.ContextCompat
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseActivity
 import com.example.umc_stepper.databinding.ActivitySignUpBinding
-import com.example.umc_stepper.domain.model.request.UserDto
+import com.example.umc_stepper.domain.model.request.member_controller.UserDto
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -1,11 +1,10 @@
 package com.example.umc_stepper.data.source.today
 
 import com.example.umc_stepper.base.BaseListResponse
-import com.example.umc_stepper.base.BaseResponse
-import com.example.umc_stepper.domain.model.response.CheckExerciseResponseDTO
-import com.example.umc_stepper.domain.model.response.ExerciseCardStatusResponseDto
-import com.example.umc_stepper.domain.model.response.ExerciseCardWeekResponseDto
-import com.example.umc_stepper.domain.model.response.ToDayExerciseResponseDto
+import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardStatusResponseDto
+import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardWeekResponseDto
+import com.example.umc_stepper.domain.model.response.exercise_card_controller.ToDayExerciseResponseDto
+import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
 import com.example.umc_stepper.domain.repository.TodayApiRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -17,7 +16,7 @@ class TodayApiRepositoryImpl @Inject constructor(
     override suspend fun getTodayExerciseState(date: String): Flow<BaseListResponse<ToDayExerciseResponseDto>> =
         dataSource.getTodayExerciseState(date)
 
-    override suspend fun getMyExercise(bodyPart: String): Flow<BaseListResponse<CheckExerciseResponseDTO>> =
+    override suspend fun getMyExercise(bodyPart: String): Flow<BaseListResponse<CheckExerciseResponse>> =
         dataSource.getMyExercise(bodyPart)
 
     override suspend fun getExerciseMonthCheck(month: Int): Flow<BaseListResponse<ExerciseCardStatusResponseDto>> =
