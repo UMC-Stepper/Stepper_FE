@@ -1,4 +1,4 @@
-package com.example.umc_stepper.ui.today
+package com.example.umc_stepper.ui.today.evaluation_log
 
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseAdapter

@@ -1,4 +1,4 @@
-package com.example.umc_stepper.ui.today
+package com.example.umc_stepper.ui.today.evaluation_log
 
 import android.content.Context
 import android.os.Bundle
@@ -13,6 +13,7 @@ import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentEvaluationLogCalenderBinding
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.stepper.StepperViewModel
+import com.example.umc_stepper.ui.today.TodayViewModel
 import com.example.umc_stepper.utils.calender.BoldDecorator
 import com.example.umc_stepper.utils.calender.EventDecorator
 import com.example.umc_stepper.utils.calender.SaturdayDecorator
