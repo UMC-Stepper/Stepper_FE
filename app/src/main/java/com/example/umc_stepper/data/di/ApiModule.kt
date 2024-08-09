@@ -1,5 +1,6 @@
 package com.example.umc_stepper.data.di
 
+import com.example.umc_stepper.data.remote.CommunityApi
 import com.example.umc_stepper.data.remote.FastApi
 import com.example.umc_stepper.data.remote.MainApi
 import com.example.umc_stepper.data.remote.StepperApi
@@ -45,4 +46,10 @@ object ApiModule {
     fun getStepperApi(
         @NetworkModule.MainRetrofit retrofit: Retrofit
     ) : StepperApi = retrofit.create(StepperApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideCommunityApi(
+        @NetworkModule.MainRetrofit retrofit: Retrofit
+    ) : CommunityApi = retrofit.create(CommunityApi::class.java)
 }
