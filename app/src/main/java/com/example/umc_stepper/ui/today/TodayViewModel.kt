@@ -5,14 +5,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.umc_stepper.BuildConfig
 import com.example.umc_stepper.base.BaseListResponse
+import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.mapper.toExerciseStates
 import com.example.umc_stepper.domain.model.local.ExerciseState
 import com.example.umc_stepper.domain.model.request.AiVideoDto
+import com.example.umc_stepper.domain.model.request.exercise_card_controller.ExerciseCardRequestDto
 import com.example.umc_stepper.domain.model.response.AiVideoInfo
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardStatusResponseDto
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardWeekResponseDto
 import com.example.umc_stepper.domain.model.response.Ylist
 import com.example.umc_stepper.domain.model.response.YouTubeVideo
+import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardResponse
 import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
 import com.example.umc_stepper.domain.repository.FastApiRepository
 import com.example.umc_stepper.domain.repository.TodayApiRepository
@@ -29,6 +32,7 @@ class TodayViewModel @Inject constructor(
     private val youtubeApiRepository: YoutubeApiRepository,
     private val fastApiRepository: FastApiRepository
 ) : ViewModel() {
+
     private val _provideAiVideo = MutableStateFlow(AiVideoInfo())
     val provideAiVideo: StateFlow<AiVideoInfo> = _provideAiVideo
 
@@ -40,6 +44,14 @@ class TodayViewModel @Inject constructor(
 
     private val _successYoutubeLink = MutableStateFlow(Ylist())
     val successYoutubeLink: StateFlow<Ylist> = _successYoutubeLink
+
+    // 운동 카드 추가
+    private val _addExerciseCardResponse = MutableStateFlow<BaseResponse<ExerciseCardResponse>>(BaseResponse())
+    val addExerciseCardResponse : StateFlow<BaseResponse<ExerciseCardResponse>> = _addExerciseCardResponse
+
+    // 운동 카드 상세 조회
+    private val _inquiryExerciseCardResponse = MutableStateFlow<BaseResponse<ExerciseCardResponse>>(BaseResponse())
+    val inquiryExerciseCardResponse : StateFlow<BaseResponse<ExerciseCardResponse>> = _inquiryExerciseCardResponse
 
     // 오늘의 운동 진행 상태 조회
     private val _exerciseState = MutableStateFlow<List<ExerciseState>?>(null)
@@ -56,6 +68,32 @@ class TodayViewModel @Inject constructor(
     // 나만의 운동 조회
     private val _checkExerciseResponseDTO = MutableStateFlow<BaseListResponse<CheckExerciseResponse>>(BaseListResponse())
     val checkExerciseResponseDTO: StateFlow<BaseListResponse<CheckExerciseResponse>> = _checkExerciseResponseDTO
+
+    // 운동 카드 추가
+    fun postAddExerciseCard(exerciseCardRequestDto: ExerciseCardRequestDto) {
+        viewModelScope.launch {
+            try {
+                todayApiRepository.postAddExerciseCard(exerciseCardRequestDto).collect {
+                    _addExerciseCardResponse.value =it
+                }
+            } catch (e: Exception) {
+                Log.e("TodayViewModel AddExerciseCard Error", e.message.toString())
+            }
+        }
+    }
+
+    // 운동 카드 상세 조회
+    fun postInquiryExerciseCard(exerciseId: Int) {
+        viewModelScope.launch {
+            try {
+                todayApiRepository.postInquiryExerciseCard(exerciseId).collect {
+                    _inquiryExerciseCardResponse.value =it
+                }
+            } catch (e: Exception) {
+                Log.e("TodayViewModel InquiryExerciseCard Error", e.message.toString())
+            }
+        }
+    }
 
     // 오늘의 운동 진행 상태 조회
     fun getTodayExerciseState(date: String) {
