@@ -67,7 +67,7 @@
     <!-- 투데이 평가일지-->
     <fragment
         android:id="@+id/evaluationLogFragment"
-        android:name="com.example.umc_stepper.ui.today.EvaluationLogFragment"
+        android:name="com.example.umc_stepper.ui.today.evaluation_log.EvaluationLogFragment"
         android:label="EvaluationLogFragment"
         tools:layout="@layout/fragment_evaluation_log_calender">
 
@@ -91,6 +91,9 @@
         <action
             android:id="@+id/action_todayHomeFragment_to_fragmentMyExercise2"
             app:destination="@id/fragmentMyExercise2" />
+        <action
+            android:id="@+id/action_todayHomeFragment_to_addExerciseSelectScrapFragment"
+            app:destination="@id/addExerciseSelectScrapFragment" />
     </fragment>
 
     <!-- 스태퍼 평가일지 -->
@@ -124,7 +127,7 @@
     <!-- 투데이 나만의 운동 (AI) -->
     <fragment
         android:id="@+id/fragmentMyExercise3"
-        android:name="com.example.umc_stepper.ui.today.MyExercise3Fragment"
+        android:name="com.example.umc_stepper.ui.today.my_exercise.MyExercise3Fragment"
         android:label="MyExercise3"
         tools:layout="@layout/fragment_my_exercise_3">
         <action
@@ -222,7 +225,7 @@
     <!-- 투데이 평가 일지 (확인 , 수정불가)  -->
     <fragment
         android:id="@+id/evaluationExerciseTodayFragment"
-        android:name="com.example.umc_stepper.ui.today.EvaluationExerciseTodayFragment"
+        android:name="com.example.umc_stepper.ui.today.evaluation_log.EvaluationExerciseTodayFragment"
         android:label="EvaluationExerciseTodayFragment"
         tools:layout="@layout/fragment_evaluation_exercise" >
         <action
@@ -244,7 +247,7 @@
     <!-- 투데이 운동 일정 설정 (요일, 준비물 등) -->
     <fragment
         android:id="@+id/fragmentExerciseSettingsDate"
-        android:name="com.example.umc_stepper.ui.stepper.ExerciseSettingsDateFragment"
+        android:name="com.example.umc_stepper.ui.today.add.ExerciseSettingsDateFragment"
         android:label="ExerciseSettingsDate"
         tools:layout="@layout/fragment_exercise_settings_date">
         <action
@@ -255,7 +258,7 @@
     <!-- 투데이 나만의 운동 스크랩 불러오기 -->
     <fragment
         android:id="@+id/fragmentMyExercise2"
-        android:name="com.example.umc_stepper.ui.today.MyExercise2Fragment"
+        android:name="com.example.umc_stepper.ui.today.my_exercise.MyExercise2Fragment"
         android:label="MyExercise2"
         tools:layout="@layout/fragment_my_exercise_2">
         <action
@@ -313,7 +316,7 @@
     <!-- 투데이 유튜브 링크 확인 화면 -->
     <fragment
         android:id="@+id/myExerciseCheckFragment"
-        android:name="com.example.umc_stepper.ui.today.MyExerciseCheckFragment"
+        android:name="com.example.umc_stepper.ui.today.my_exercise.MyExerciseCheckFragment"
         android:label="MyExerciseCheckFragment"
         tools:layout="@layout/fragment_exercise_check">
         <action

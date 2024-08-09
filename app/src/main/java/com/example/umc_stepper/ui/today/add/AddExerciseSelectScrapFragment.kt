@@ -14,6 +14,7 @@ import com.example.umc_stepper.utils.extensions.navigateSafe
 class AddExerciseSelectScrapFragment: BaseFragment<FragmentAddExerciseSelectScrapBinding>(R.layout.fragment_add_exercise_select_scrap) {
 
     private lateinit var mainActivity : MainActivity
+    private lateinit var selectScrapBodyPartAdapter: SelectScrapBodyPartAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -21,8 +22,19 @@ class AddExerciseSelectScrapFragment: BaseFragment<FragmentAddExerciseSelectScra
     }
 
     override fun setLayout() {
+        initSettings()
+    }
+
+    private fun initSettings() {
         updateMainToolbar()
         setButton()
+        setAdapter()
+    }
+
+    private fun setAdapter() {
+        selectScrapBodyPartAdapter = SelectScrapBodyPartAdapter()
+        binding.fragmentAddExerciseDownloadTagRv.adapter = selectScrapBodyPartAdapter
+        selectScrapBodyPartAdapter.submitList(listOf("머리"))
     }
 
     private fun updateMainToolbar() {

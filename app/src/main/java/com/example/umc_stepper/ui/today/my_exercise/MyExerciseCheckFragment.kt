@@ -1,4 +1,4 @@
-package com.example.umc_stepper.ui.today
+package com.example.umc_stepper.ui.today.my_exercise
 
 import android.util.Log
 import androidx.fragment.app.activityViewModels
@@ -11,7 +11,6 @@ import com.example.umc_stepper.BuildConfig
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentExerciseCheckBinding
-import com.example.umc_stepper.databinding.FragmentMyExercise3Binding
 import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
