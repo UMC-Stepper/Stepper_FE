@@ -1,16 +1,28 @@
 package com.example.umc_stepper.ui.today
 
+import android.util.Log
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.umc_stepper.BuildConfig
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentExerciseCheckBinding
 import com.example.umc_stepper.databinding.FragmentMyExercise3Binding
+import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+@AndroidEntryPoint
 class MyExerciseCheckFragment:
     BaseFragment<FragmentExerciseCheckBinding>(R.layout.fragment_exercise_check) {
+
+        private val stepperViewModel: StepperViewModel by activityViewModels()
+        private val youtubeKey = BuildConfig.YOUTUBE_KEY
 
         override fun setLayout() {
         val urlText = arguments?.getString("urlText")
@@ -18,6 +30,7 @@ class MyExerciseCheckFragment:
             binding.fragmentDownloadYoutube2MainCardInputLinkEt.setText(urlText)
             initializeYouTubePlayer(urlText)
             fetchYouTubeVideoDetails(urlText)
+            dataSetting()
         }
 
         setButton()
@@ -62,20 +75,42 @@ class MyExerciseCheckFragment:
         val videoId = extractVideoId(url)
         // videoId를 사용하여 비디오 세부 정보를 가져오는 선호하는 방법 사용 (예: Retrofit, OkHttp 등)
         // 데이터를 가져오기 위한 플레이스홀더 함수
-        fetchVideoDetailsFromApi(videoId) { title, channelName, channelProfileUrl ->
-            binding.fragmentDownloadYoutube2MainCardChannelNameTv.text = title
-            binding.fragmentDownloadYoutube2ProfileNameTv.text = channelName
-            // 이미지 로딩 라이브러리를 사용하여 ImageView에 이미지 로드 (예: Glide, Picasso)
-            Glide.with(this)
-                .load(channelProfileUrl)
-                .into(binding.fragmentDownloadYoutube2MainCardChannelProfileIv)
+        fetchVideoDetailsFromApi("snippet", videoId, youtubeKey)
+    }
+
+    // 유튜브 API에서 세부 정보를 불러오는 함수
+    private fun fetchVideoDetailsFromApi(part: String, id: String, key: String) {
+        stepperViewModel.getYoutubeVideoInfo(part, id, key)
+        // ViewModel이 데이터를 적절히 설정하는지 확인
+    }
+
+    private fun dataSetting() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                try {
+                    stepperViewModel.provideYoutubeLink.collect { response ->
+                        Log.d("dataSetting", "Response received: $response")
+                        if (response.items.isNotEmpty()) {
+                            val videoItem = response.items[0].snippet
+                            Log.d("dataSetting", "Video title: ${videoItem.title}")
+                            Log.d("dataSetting", "Channel title: ${videoItem.channelTitle}")
+                            Log.d("dataSetting", "Thumbnail URL: ${videoItem.thumbnails.default.url}")
+
+                            binding.fragmentDownloadYoutube2MainCardChannelNameTv.text = videoItem.title
+                            binding.fragmentDownloadYoutube2ProfileNameTv.text = videoItem.channelTitle
+
+                            Glide.with(requireContext())
+                                .load(videoItem.thumbnails.default.url)
+                                .into(binding.fragmentDownloadYoutube2MainCardChannelProfileIv)
+                        } else {
+                            Log.e("dataSetting", "비디오 아이템이 없음")
+                        }
+                    }
+                } catch (e: Exception) {
+                    Log.e("dataSetting", "Error collecting video details", e)
+                }
+            }
         }
     }
 
-    //유튜브api에서 세부정보 불러오는 함수..
-    private fun fetchVideoDetailsFromApi(videoId: String, callback: (String, String, String) -> Unit) {
-        //일단 불러왔다고 가정하고 임시데이터에요!
-
-        callback("윗몸일으키기 제대로 하는 방법", "비타밍제이", "https://yt3.ggpht.com/l0AxbcHO4TRBQFka9rUZpiM19BQxueUZ_UE4wHW8qwaLZtZ_3J4fIXmay5HurJH03LJ7cGirxFY=s88-c-k-c0x00ffffff-no-rj")
-    }
 }
