@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.today.EvaluationLogFragment">
+        tools:context=".ui.today.evaluation_log.EvaluationLogFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment_evaluation_log_calender_rv"

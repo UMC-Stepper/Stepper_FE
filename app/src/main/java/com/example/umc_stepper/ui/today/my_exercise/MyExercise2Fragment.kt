@@ -1,4 +1,4 @@
-package com.example.umc_stepper.ui.today
+package com.example.umc_stepper.ui.today.my_exercise
 
 import android.content.Context
 import androidx.fragment.app.activityViewModels
@@ -9,7 +9,7 @@ import com.example.umc_stepper.databinding.FragmentMyExercise2Binding
 import com.example.umc_stepper.domain.model.Exercise2Data
 import com.example.umc_stepper.domain.model.ExerciseTagData
 import com.example.umc_stepper.ui.MainActivity
-import com.example.umc_stepper.utils.extensions.navigateSafe
+import com.example.umc_stepper.ui.today.TodayViewModel
 import com.example.umc_stepper.utils.listener.ItemClickListener
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -8,7 +8,7 @@
 
         <variable
             name="func"
-            type="com.example.umc_stepper.ui.today.TageAdapter" />
+            type="com.example.umc_stepper.ui.today.my_exercise.TageAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
