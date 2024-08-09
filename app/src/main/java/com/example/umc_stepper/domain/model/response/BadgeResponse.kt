@@ -9,7 +9,7 @@ data class BadgeResponseItem(
 )
 
 data class Badge(
-    val badgeName: String = "",
-    val explanation: String = "",
-    val id: Int = 0
+    val badgeName: String? = "",
+    val explanation: String? = "",
+    val id: Int? = 0
 )
