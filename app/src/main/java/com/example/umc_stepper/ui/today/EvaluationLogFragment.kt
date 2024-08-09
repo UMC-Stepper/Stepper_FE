@@ -93,7 +93,10 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
         materialCalendarView.setOnDateChangedListener { widget, date, selected ->
             val selectedMonth = date.month
             val selectedDay = date.day
+            val selectedYear = date.year
             val formattedDate = String.format("%02d.%02d", selectedMonth, selectedDay)
+
+            val setFormattedDate = String.format("%04d-%02d-%02d",selectedYear, selectedMonth,selectedDay)
 
             viewLifecycleOwner.lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -102,7 +105,7 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
 
                     stepperViewModel.diaryList.collect { diaryResponse ->
                         if (diaryResponse.loadState == LoadState.SUCCESS && diaryResponse.result != null) {
-                            val diaryList = diaryResponse.result
+                            val diaryList = diaryResponse.result.filter { it.date == setFormattedDate }
                             Log.d("materialCalendarView", "diaryList : $diaryList")
 
                             val gson = Gson()
