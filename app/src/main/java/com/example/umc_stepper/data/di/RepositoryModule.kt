@@ -1,6 +1,8 @@
 
 package com.example.umc_stepper.data.di
 
+import com.example.umc_stepper.data.source.community.CommunityApiDataSource
+import com.example.umc_stepper.data.source.community.CommunityApiRepositoryImpl
 import com.example.umc_stepper.data.source.fastapi.FastApiDataSource
 import com.example.umc_stepper.data.source.fastapi.FastApiRepositoryImpl
 import com.example.umc_stepper.data.source.main.MainApiDataSource
@@ -11,6 +13,7 @@ import com.example.umc_stepper.data.source.today.TodayApiDataSource
 import com.example.umc_stepper.data.source.today.TodayApiRepositoryImpl
 import com.example.umc_stepper.data.source.youtube.YoutubeDataSource
 import com.example.umc_stepper.data.source.youtube.YoutubeRepositoryImpl
+import com.example.umc_stepper.domain.repository.CommunityApiRepository
 import com.example.umc_stepper.domain.repository.FastApiRepository
 import com.example.umc_stepper.domain.repository.MainApiRepository
 import com.example.umc_stepper.domain.repository.StepperApiRepository
@@ -25,7 +28,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
-
 
     @Singleton
     @Provides
@@ -51,5 +53,10 @@ object RepositoryModule {
     @Provides
     fun provideStepperApiRepository(stepperApiDataSource: StepperApiDataSource) : StepperApiRepository =
         StepperApiRepositoryImpl(stepperApiDataSource)
+
+    @Singleton
+    @Provides
+    fun provideCommunityApiRepository(communityDataSource: CommunityApiDataSource) : CommunityApiRepository =
+        CommunityApiRepositoryImpl(communityDataSource)
 
 }
