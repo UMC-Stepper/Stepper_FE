@@ -1,9 +1,11 @@
 package com.example.umc_stepper.data.source.main
 
+import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.model.request.member_controller.LogInDto
 import com.example.umc_stepper.domain.model.request.rate_diary_controller.RateDiaryDto
 import com.example.umc_stepper.domain.model.request.member_controller.UserDto
+import com.example.umc_stepper.domain.model.response.BadgeResponseItem
 import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResponse
 import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResult
 import com.example.umc_stepper.domain.model.response.member_controller.UserResponse
@@ -34,5 +36,8 @@ class MainRepositoryImpl @Inject constructor(
     = dataSource.postRateDiaryEdit(rateDiaryDto)
     override suspend fun getRateDiaryConfirm() : Flow<BaseResponse<List<RateDiaryResponse>>>
     = dataSource.getRateDiaryConfirm()
+
+    override suspend fun getBadge(): Flow<BaseListResponse<BadgeResponseItem>>
+    = dataSource.getBadge()
 
 }
