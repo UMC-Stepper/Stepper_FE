@@ -2,39 +2,57 @@ package com.example.umc_stepper.ui.stepper.home
 
 import android.content.Context
 import android.os.Bundle
-import android.view.View.OnClickListener
-import android.view.WindowManager
-import android.widget.AdapterView.OnItemClickListener
+import android.util.Log
+import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentStepperBinding
+import com.example.umc_stepper.domain.model.response.exercise_card_controller.ToDayExerciseResponseDto
+import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.MainActivity
-import com.example.umc_stepper.ui.stepper.additional.AdditionalExerciseHomeFragment
 import com.example.umc_stepper.ui.stepper.ExerciseViewAdapter
-import com.example.umc_stepper.ui.stepper.LevelItem
-import com.example.umc_stepper.ui.stepper.LevelListItem
 import com.example.umc_stepper.ui.stepper.StepperViewModel
+import com.example.umc_stepper.ui.today.TodayViewModel
+import com.example.umc_stepper.utils.listener.AdapterNextClick
 import com.example.umc_stepper.utils.listener.ItemClickListener
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import org.threeten.bp.LocalDate
+import org.threeten.bp.format.DateTimeFormatter
+import javax.inject.Inject
 
-class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_stepper), ItemClickListener{
+@AndroidEntryPoint
+class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_stepper),
+    ItemClickListener, AdapterNextClick {
     private lateinit var recyclerAdapter: ExerciseViewAdapter
-    private lateinit var stepperViewModel : StepperViewModel
-    lateinit var days : List<DayData>
-    private lateinit var mainActivity : MainActivity
+    private val stepperViewModel: StepperViewModel by activityViewModels()
+    lateinit var days: List<DayData>
+    private lateinit var mainActivity: MainActivity
+    val todayViewModel: TodayViewModel by activityViewModels()
 
+    @Inject
+    lateinit var tokenManager: TokenManager
+
+    val currentDate = LocalDate.now()
+    val selectedDate =
+        LocalDate.of(currentDate.year, currentDate.monthValue, currentDate.dayOfMonth)
+    val formattedDate = selectedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mainActivity = context as MainActivity
     }
-    private fun setTitle(){
+
+    private fun setTitle() {
         mainActivity.updateToolbarTitle("STEPPER") //타이틀 세팅
     }
+
     override fun setLayout() {
-        setTitle()
         days = listOf(
             DayData("월", false, false),
             DayData("화", false, false),
@@ -79,7 +97,9 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
             DayData("31", false, false),
             DayData("1", false, false)
         )
-        //init()
+
+        init()
+        setTitle()
         //임시함수적용: 추후 아래의 goCommunityIndex()함수와 함께 꼭 삭제
         binding.stepperMonthTitleTv.setOnClickListener {
             goCommunityIndex()
@@ -95,42 +115,79 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
         }
     }
 
-    private fun init() {
-        stepperViewModel = ViewModelProvider(this)[StepperViewModel::class.java]
-
-        val adapter = CalendarAdapter(requireContext(), days)
-        binding.stepperCalendarGv.adapter = adapter
-
-        recyclerAdapter = ExerciseViewAdapter(this)
-        binding.stepperExerciseRv.adapter = recyclerAdapter
-
-        stepperViewModel.levelItems.observe(viewLifecycleOwner) { levelItems ->
-            recyclerAdapter.submitList(levelItems)
-        }
-
-    }
-    private fun goAdditionalExerciseHome(){
+    private fun goAdditionalExerciseHome() {
         findNavController().navigate(R.id.action_stepperFragment_to_additionalExerciseHomeFragment)
     }
 
-    override fun onClick(item: Any) {
-        val bd = Bundle()
-        if(item is LevelItem){
-            bd.putString("pick",item.pick)
-        }
-        findNavController().navigateSafe(
-            R.id.action_stepperFragment_to_fragmentAddExercise,
-            bd
-        )
-    }
-
     //임시함수(꼭 추후삭제) 작성글목록확인으로 이동
-    private fun goCommunityIndex(){
+    private fun goCommunityIndex() {
         findNavController().navigate(R.id.action_stepperFragment_to_communityIndexFragment)
     }
 
     //임시함수(꼭 추후삭제) 커뮤니티 부위별 게시판홈으로 이동
-    private fun goCommunityPartHome(){
+    private fun goCommunityPartHome() {
         findNavController().navigate(R.id.action_stepperFragment_to_communityPartHomeFragment)
+    }
+
+
+    private fun firstConnect() {
+        todayViewModel.getStepperExerciseState(formattedDate)
+    }
+
+
+    private fun init() {
+        firstConnect()
+        val adapter = CalendarAdapter(requireContext(), days)
+        binding.stepperCalendarGv.adapter = adapter
+
+        recyclerAdapter = ExerciseViewAdapter(this, this)
+        binding.stepperExerciseRv.adapter = recyclerAdapter
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                todayViewModel.todayExerciseResponseDto.collectLatest {
+                    recyclerAdapter.submitList(it.result)
+                }
+            }
+        }
+
+    }
+
+    //운동 카드 수정
+    override fun onClick(item: Any) {
+        findNavController().navigateSafe(
+            R.id.action_stepperFragment_to_fragmentAddExercise,
+        )
+    }
+
+    //다음 페이지 이동
+    override fun onClickNextPage(id: Int,item: Any) {
+        //운동 카드 ID 넘겨줌 (후에 평가일지 작성에서 활용)
+        if (item is ToDayExerciseResponseDto) {
+            saveExerciseCardId(item.id.toString())
+            Log.d("아이디", item.id.toString())
+            //유튜부 정보 전송
+            //스텝 아이디 전송
+            val bd = Bundle()
+            val pickItem = item.stepList.first { it.stepId == id }
+            with(bd) {
+                putString("videoTitle", pickItem.myExercise?.video_title)
+                putString("videoImage", pickItem.myExercise?.video_image)
+                putString("url", pickItem.myExercise?.url)
+                putString("channelName", pickItem.myExercise?.channel_name)
+                putInt("stepId", id)
+            }
+            findNavController().navigateSafe(
+                R.id.action_stepperFragment_to_fragmentLastExercise,
+                args = bd
+            )
+        }
+    }
+
+    private fun saveExerciseCardId(id: String) {
+        lifecycleScope.launch {
+            tokenManager.deleteExerciseCardId()
+            tokenManager.saveExerciseCardId(id)
+        }
     }
 }
