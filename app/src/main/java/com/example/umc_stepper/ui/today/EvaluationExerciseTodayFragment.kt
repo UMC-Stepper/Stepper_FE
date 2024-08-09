@@ -1,6 +1,7 @@
 package com.example.umc_stepper.ui.today
 
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -20,9 +21,11 @@ import com.example.umc_stepper.utils.GlobalApplication
 import com.example.umc_stepper.utils.enums.LoadState
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 //앞 화면에서 받은 리스트로 조작해야 함
 class EvaluationExerciseTodayFragment :
     BaseFragment<FragmentEvaluationExerciseTodayBinding>(R.layout.fragment_evaluation_exercise_today) {
@@ -37,9 +40,11 @@ class EvaluationExerciseTodayFragment :
     private var selectTextDescription = 0
     private var profileImage = ""
     private var score = 0
-
+    private lateinit var args: Bundle
+    private lateinit var selectedDate: String
+    private lateinit var diaryListValue: String
     private lateinit var mainActivity: MainActivity
-
+    private lateinit var diaryList: List<RateDiaryResponse>
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -47,31 +52,29 @@ class EvaluationExerciseTodayFragment :
     }
 
     private fun setTitle() {
-        mainActivity.updateToolbarLeftPlusImg("07.09", "무릎, 다리") //타이틀 세팅
+        if (!diaryList.isEmpty()) {
+            mainActivity.updateToolbarLeftPlusImg(selectedDate, diaryList[0].bodyPart) //타이틀 세팅
+        }
         mainActivity.setBg()
     }
 
+    private fun takeDataClass() {
+        // 받는 부분
+        args = arguments ?: Bundle()
+        selectedDate = args.getString("selectedDate")!!
+        diaryListValue = args.getString("diaryListValue")!!
+        val gson = Gson()
+        val type = object : TypeToken<List<RateDiaryResponse>>() {}.type
+        diaryList = gson.fromJson(diaryListValue, type)
+
+        // 받은 데이터 사용
+        Log.d("EvaluationExerciseTodayFragment3333", "diaryList: $diaryList")
+        // 받는 부분
+    }
+
     override fun setLayout() {
+        takeDataClass()
         initSetting()
-
-        // 받는 부분
-        val args = arguments
-        val selectedDate = args?.getString("selectedDate")
-        val diaryListValue = args?.getString("diaryListValue")
-
-        Log.d("EvaluationExerciseTodayFragment11111", "selectedDate: $selectedDate")
-        Log.d("EvaluationExerciseTodayFragment22222", "diaryListValue: $diaryListValue")
-
-        if (diaryListValue != null) {
-            val gson = Gson()
-            val type = object : TypeToken<List<RateDiaryResponse>>() {}.type
-            val diaryList: List<RateDiaryResponse> = gson.fromJson(diaryListValue, type)
-
-            // 받은 데이터 사용
-            Log.d("EvaluationExerciseTodayFragment3333", "diaryList: $diaryList")
-        }
-        // 받는 부분
-
     }
 
     private fun initSetting() {
@@ -83,64 +86,27 @@ class EvaluationExerciseTodayFragment :
     }
 
     private fun setObserver() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                stepperViewModel.diaryList.collectLatest {
-                    when (it.loadState) {
-                        LoadState.LOADING -> {
-                            binding.loadingProgressPb.visibility = View.VISIBLE
-                            binding.loadingMessageTv.visibility = View.VISIBLE
-                            binding.allConstraintCl.visibility = View.GONE
-                            binding.allConstraint2Cl.visibility = View.VISIBLE
-                        }
-
-                        LoadState.SUCCESS -> {
-                            binding.loadingProgressPb.visibility = View.GONE
-                            binding.loadingMessageTv.visibility = View.GONE
-                            binding.allConstraint2Cl.visibility = View.GONE
-                            if (!it.result.isNullOrEmpty()) {
-                                binding.fragmentEvaluationExerciseTodayEmptyTv.visibility =
-                                    View.GONE
-                                binding.allConstraintCl.visibility = View.VISIBLE
-                                binding.fragmentEvaluationExerciseScoreTv.text =
-                                    it.result[0].conditionRate.toString()
-                                binding.fragmentEvaluationExercisePointTv.text =
-                                    it.result[0].conditionRate.toString()
-                                setDescription(it.result[0].painRate)
-                                binding.fragmentEvaluationExerciseProgressbarPb.progress =
-                                    it.result[0].conditionRate
-                                binding.fragmentEvaluationExerciseMemoEt.text =
-                                    it.result[0].painMemo
-                                GlobalApplication.loadCropImage(
-                                    binding.fragmentEvaluationExercisePictureExerciseIv,
-                                    it.result[0].painImage
-                                )
-                            } else {
-                                binding.fragmentEvaluationExerciseTodayEmptyTv.visibility =
-                                    View.VISIBLE
-                                binding.allConstraintCl.visibility = View.GONE
-                            }
-                        }
-
-                        LoadState.EMPTY -> {
-                            binding.loadingProgressPb.visibility = View.GONE
-                            binding.loadingMessageTv.visibility = View.GONE
-                            binding.allConstraintCl.visibility = View.GONE
-                            binding.allConstraint2Cl.visibility = View.VISIBLE
-                        }
-
-                        LoadState.ERROR -> {
-                            Log.e("에러", "로딩 에러")
-                            binding.loadingProgressPb.visibility = View.GONE
-                            binding.loadingMessageTv.visibility = View.GONE
-                            binding.allConstraintCl.visibility = View.GONE
-                            binding.allConstraint2Cl.visibility = View.VISIBLE
-                        }
-                    }
-                }
-            }
+        if(diaryList.isNotEmpty()) {
+            binding.fragmentEvaluationExerciseScoreTv.text =
+                diaryList[0].conditionRate.toString()
+            binding.fragmentEvaluationExercisePointTv.text =
+                diaryList[0].conditionRate.toString()
+            setDescription(diaryList[0].painRate)
+            binding.fragmentEvaluationExerciseProgressbarPb.progress =
+                diaryList[0].conditionRate
+            binding.fragmentEvaluationExerciseMemoEt.text =
+                diaryList[0].painMemo
+            GlobalApplication.loadCropImage(
+                binding.fragmentEvaluationExercisePictureExerciseIv,
+                diaryList[0].painImage
+            )
+        }
+        else{
+            binding.allConstraintCl.visibility = View.GONE
+            binding.allConstraint2Cl.visibility = View.VISIBLE
         }
     }
+
 
     //앞에서 보내준 리스트로 파싱 지정날짜 운동카드 넘겨줘야함
     private fun initScreen() {
