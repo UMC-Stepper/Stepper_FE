@@ -34,21 +34,27 @@ class AdditionalExerciseSuccessFragment :
         setTitle()
         observeLifeCycle()
         setOnClickBtn()
+
+
     }
+
 
     // 오늘 이만큼 운동 했어요!
     private fun setTitle() {
-//        titleNumber = arguments?.getInt("titleNumber") ?: 0
-        val args = arguments
-        val timeJson = args?.getString("time")
+        with(binding) {
+            // 받는 부분
+            val args = arguments
+            val timeJson = args?.getString("time")
 
-        if (timeJson != null) {
-            val gson = Gson()
-            val time: Time = gson.fromJson(timeJson, Time::class.java)
+            if (timeJson != null) {
+                val gson = Gson()
+                val time: Time = gson.fromJson(timeJson, Time::class.java)
 
-            Log.d("AdditionalExerciseSuccessFragment", "time: $time")
+                Log.d("AdditionalExerciseSuccessFragment", "time: $time")
 
-            with(binding) {
+                titleNumber = arguments?.getInt("titleNumber") ?: 0
+
+
                 fragmentTodayExerciseSuccessTitleTv.text = titleList[titleNumber]
                 resultTimeData = time
             }
@@ -73,6 +79,7 @@ class AdditionalExerciseSuccessFragment :
                         )
                     )
                 }
+
                 else -> {
 
                 }

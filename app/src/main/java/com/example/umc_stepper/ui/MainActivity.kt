@@ -16,9 +16,7 @@ import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseActivity
 import com.example.umc_stepper.databinding.ActivityMainBinding
 import com.example.umc_stepper.token.TokenManager
-import com.example.umc_stepper.ui.community.CommunityViewModel
 import com.example.umc_stepper.ui.login.LoginViewModel
-import com.example.umc_stepper.ui.login.MainViewModel
 import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.example.umc_stepper.ui.today.TodayViewModel
 import com.example.umc_stepper.utils.extensions.navigateToTopLevelDestination
@@ -35,9 +33,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private lateinit var todayViewModel: TodayViewModel
     private lateinit var stepperViewModel: StepperViewModel
     private lateinit var navController: NavController
-    private lateinit var mainViewModel: MainViewModel
+//    private lateinit var mainViewModel: MainViewModel
     private lateinit var loginViewModel : LoginViewModel
-    private lateinit var communityViewModel: CommunityViewModel
+//    private lateinit var communityViewModel: CommunityViewModel
     override fun setLayout() {
         confirmAccessToken()
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
@@ -55,8 +53,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private fun setViewModel(){
         todayViewModel = ViewModelProvider(this)[TodayViewModel::class.java]
         stepperViewModel = ViewModelProvider(this)[StepperViewModel::class.java]
-        mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        communityViewModel = ViewModelProvider(this)[CommunityViewModel::class.java]
+//        mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+//        communityViewModel = ViewModelProvider(this)[CommunityViewModel::class.java]
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
     }
 
