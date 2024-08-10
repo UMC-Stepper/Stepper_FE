@@ -23,19 +23,23 @@ import com.example.umc_stepper.utils.extensions.navigateToTopLevelDestination
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import org.threeten.bp.LocalDate
+import org.threeten.bp.format.DateTimeFormatter
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     @Inject
-    lateinit var tokenManager : TokenManager
+    lateinit var tokenManager: TokenManager
     private lateinit var todayViewModel: TodayViewModel
     private lateinit var stepperViewModel: StepperViewModel
     private lateinit var navController: NavController
-//    private lateinit var mainViewModel: MainViewModel
-    private lateinit var loginViewModel : LoginViewModel
-//    private lateinit var communityViewModel: CommunityViewModel
+
+    //    private lateinit var mainViewModel: MainViewModel
+    private lateinit var loginViewModel: LoginViewModel
+
+    //    private lateinit var communityViewModel: CommunityViewModel
     override fun setLayout() {
         confirmAccessToken()
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
@@ -43,14 +47,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         setNavigation()
     }
 
-    private fun confirmAccessToken(){
+    private fun confirmAccessToken() {
         lifecycleScope.launch {
             val token = tokenManager.getAccessToken().first() // Flow에서 첫 번째 값을 가져옴
             Log.d("토큰", token ?: "토큰이 없습니다.")
         }
     }
 
-    private fun setViewModel(){
+    private fun setViewModel() {
         todayViewModel = ViewModelProvider(this)[TodayViewModel::class.java]
         stepperViewModel = ViewModelProvider(this)[StepperViewModel::class.java]
 //        mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
@@ -59,22 +63,45 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun setNavigation() {
-        val mainBottomNavigationBar =  binding.mainBottomNavigationBar
+        val mainBottomNavigationBar = binding.mainBottomNavigationBar
         mainBottomNavigationBar.itemIconTintList = null
 
-        val host = supportFragmentManager.findFragmentById(binding.mainNavHostFragment.id) as NavHostFragment ?: return
+        val host =
+            supportFragmentManager.findFragmentById(binding.mainNavHostFragment.id) as NavHostFragment
+                ?: return
         navController = host.navController
-        mainBottomNavigationBar.apply { setupWithNavController(navController)
+        mainBottomNavigationBar.apply {
+            setupWithNavController(navController)
         }
 
         // 최상위 프래그먼트 이동 설정 (투데이, 뱃지, 스태퍼, 커뮤니티, 설정)
         mainBottomNavigationBar.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.todayHomeFragment -> navController.navigateToTopLevelDestination(R.id.todayHomeFragment, navController)
-                R.id.stepperFragment -> navController.navigateToTopLevelDestination(R.id.stepperFragment, navController)
-                R.id.badgeFragment -> navController.navigateToTopLevelDestination(R.id.badgeFragment, navController)
-                R.id.communityHomeFragment -> navController.navigateToTopLevelDestination(R.id.communityHomeFragment, navController)
-                R.id.settingsFragment -> navController.navigateToTopLevelDestination(R.id.settingsFragment, navController)
+                R.id.todayHomeFragment -> navController.navigateToTopLevelDestination(
+                    R.id.todayHomeFragment,
+                    navController
+                )
+
+                R.id.stepperFragment -> navController.navigateToTopLevelDestination(
+                    R.id.stepperFragment,
+                    navController
+                )
+
+                R.id.badgeFragment -> navController.navigateToTopLevelDestination(
+                    R.id.badgeFragment,
+                    navController
+                )
+
+                R.id.communityHomeFragment -> navController.navigateToTopLevelDestination(
+                    R.id.communityHomeFragment,
+                    navController
+                )
+
+                R.id.settingsFragment -> navController.navigateToTopLevelDestination(
+                    R.id.settingsFragment,
+                    navController
+                )
+
                 else -> false
             }
         }
@@ -103,7 +130,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     // 외부 터치시 키보드 숨기기, 포커스 제거
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        val imm: InputMethodManager = ContextCompat.getSystemService(this, InputMethodManager::class.java) as InputMethodManager
+        val imm: InputMethodManager = ContextCompat.getSystemService(
+            this,
+            InputMethodManager::class.java
+        ) as InputMethodManager
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
 
         if (currentFocus is EditText) {
@@ -111,6 +141,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         }
         return super.dispatchTouchEvent(ev)
     }
+
+
 
     // 툴바 타이틀 변경 함수
     fun updateToolbarTitle(title: String) {
@@ -122,13 +154,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.mainToolbarBackIv.setImageResource(imgSrc)
     }
 
-    fun updateToolbarLeftPlusImg(text : String , tag : String){
+    fun updateToolbarLeftPlusImg(text: String, tag: String) {
         binding.mainToolbarSelectTagTv.visibility = View.GONE
         binding.mainToolbarTitleTv.text = text
         binding.mainToolbarSelectTagTv.text = tag
     }
 
-    fun visibleTag(){
+    fun visibleTag() {
         binding.mainToolbarTitleTv.visibility = View.VISIBLE
     }
 
@@ -142,8 +174,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.mainToolbarGoStepper.setImageResource(imgSrc)
     }
 
-    fun setBg(){
-        binding.mainToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.Purple_Black_BG_1))
+    fun setBg() {
+        binding.mainToolbar.setBackgroundColor(
+            ContextCompat.getColor(
+                this,
+                R.color.Purple_Black_BG_1
+            )
+        )
     }
 
 }
