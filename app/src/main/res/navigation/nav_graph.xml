@@ -399,6 +399,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_settingsShowProfileFragment"
             app:destination="@id/settingsShowProfileFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_settingExitFragment"
+            app:destination="@id/settingExitFragment" />
     </fragment>
 
     <!-- 설정-프로필edit -->
@@ -422,6 +425,11 @@
             android:id="@+id/action_settingsShowProfileFragment_to_settingsEditProfileFragment"
             app:destination="@id/settingsEditProfileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingExitFragment"
+        android:name="com.example.umc_stepper.ui.settings.SettingExitFragment"
+        android:label="fragment_setting_exit"
+        tools:layout="@layout/fragment_setting_exit" />
 
 
 </navigation>

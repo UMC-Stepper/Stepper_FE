@@ -13,7 +13,9 @@ import com.example.umc_stepper.databinding.FragmentSettingsHomeBinding
 import com.example.umc_stepper.ui.community.CommunityDialog
 import com.example.umc_stepper.ui.community.CommunityDialogInterface
 import com.example.umc_stepper.ui.login.LoginActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SettingsHomeFragment : BaseFragment<FragmentSettingsHomeBinding>(R.layout.fragment_settings_home),
     CommunityDialogInterface {
 
@@ -33,6 +35,10 @@ class SettingsHomeFragment : BaseFragment<FragmentSettingsHomeBinding>(R.layout.
 
         binding.settingsMenu3LogoutIb.setOnClickListener {
             showDialog("로그아웃\n정말 하실 건가요?","로그아웃","취소")
+        }
+
+        binding.settingsMenu3DeleteAccountIb.setOnClickListener {
+            findNavController().navigateSafe(R.id.action_settingsFragment_to_settingExitFragment)
         }
     }
 
