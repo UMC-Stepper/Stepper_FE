@@ -13,6 +13,7 @@ import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentStepperBinding
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ToDayExerciseResponseDto
+import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
 import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.stepper.ExerciseViewAdapter
@@ -20,6 +21,7 @@ import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.example.umc_stepper.ui.today.TodayViewModel
 import com.example.umc_stepper.utils.listener.AdapterNextClick
 import com.example.umc_stepper.utils.listener.ItemClickListener
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -39,10 +41,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
     @Inject
     lateinit var tokenManager: TokenManager
 
-    val currentDate = LocalDate.now()
-    val selectedDate =
-        LocalDate.of(currentDate.year, currentDate.monthValue, currentDate.dayOfMonth)
-    val formattedDate = selectedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mainActivity = context as MainActivity
@@ -97,7 +96,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
             DayData("31", false, false),
             DayData("1", false, false)
         )
-
+        firstConnect()
         init()
         setTitle()
         //임시함수적용: 추후 아래의 goCommunityIndex()함수와 함께 꼭 삭제
@@ -130,19 +129,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
     }
 
 
-    private fun firstConnect() {
-        todayViewModel.getStepperExerciseState(formattedDate)
-    }
-
-
-    private fun init() {
-        firstConnect()
-        val adapter = CalendarAdapter(requireContext(), days)
-        binding.stepperCalendarGv.adapter = adapter
-
-        recyclerAdapter = ExerciseViewAdapter(this, this)
-        binding.stepperExerciseRv.adapter = recyclerAdapter
-
+    private fun observeLifecycle() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 todayViewModel.todayExerciseResponseDto.collectLatest {
@@ -150,32 +137,66 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
                 }
             }
         }
+    }
+    private fun firstConnect() {
+        val currentDate = LocalDate.now()
+        val selectedDate =
+            LocalDate.of(currentDate.year, currentDate.monthValue, currentDate.dayOfMonth)
+        val formattedDate = selectedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+        todayViewModel.getStepperExerciseState(formattedDate)
+    }
+    private fun init() {
+        val adapter = CalendarAdapter(requireContext(), days)
+        binding.stepperCalendarGv.adapter = adapter
+
+        recyclerAdapter = ExerciseViewAdapter(this, this)
+        binding.stepperExerciseRv.adapter = recyclerAdapter
+
+        observeLifecycle()
 
     }
 
     //운동 카드 수정
     override fun onClick(item: Any) {
+        val bd = Bundle()
+        if (item is ToDayExerciseResponseDto) {
+            val gson = Gson()
+            val json = gson.toJson(item)
+            //운동카드 리스트 전송
+            bd.putString("CardListJson", json)
+        }
         findNavController().navigateSafe(
             R.id.action_stepperFragment_to_fragmentAddExercise,
         )
     }
 
     //다음 페이지 이동
-    override fun onClickNextPage(id: Int,item: Any) {
+    override fun onClickNextPage(id: Int, item: Any) {
         //운동 카드 ID 넘겨줌 (후에 평가일지 작성에서 활용)
         if (item is ToDayExerciseResponseDto) {
             saveExerciseCardId(item.id.toString())
             Log.d("아이디", item.id.toString())
-            //유튜부 정보 전송
-            //스텝 아이디 전송
             val bd = Bundle()
             val pickItem = item.stepList.first { it.stepId == id }
-            with(bd) {
-                putString("videoTitle", pickItem.myExercise?.video_title)
-                putString("videoImage", pickItem.myExercise?.video_image)
-                putString("url", pickItem.myExercise?.url)
-                putString("channelName", pickItem.myExercise?.channel_name)
-                putInt("stepId", id)
+            with(pickItem) {
+                val checkExerciseResponse = CheckExerciseResponse(
+                    exerciseId = myExercise?.exerciseId ?: 0,
+                    video_image = myExercise?.video_image ?: "",
+                    video_title = myExercise?.video_title ?: "",
+                    url = myExercise?.url ?: "",
+                    channel_name = myExercise?.channel_name ?: ""
+                )
+                val gson = Gson()
+                val myExerciseJson = gson.toJson(checkExerciseResponse)
+                val stepList = gson.toJson(item.stepList)
+                //step Id 전송
+                bd.putInt("stepId", id)
+                //stepList 전송
+                bd.putString("stepList", stepList)
+                //유투부 정보 전송
+                bd.putString("myExercise", myExerciseJson)
+                //운동 타입 ( 0 : 오늘의 운동 , 1 : 추가 운동)
+                bd.putInt("exerciseType", 0)
             }
             findNavController().navigateSafe(
                 R.id.action_stepperFragment_to_fragmentLastExercise,
