@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.settings.SettingExitFragment">
+
+        <TextView
+            android:id="@+id/fragment_settings_exit_title"
+            style="@style/head_bold_18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:text="탈퇴하시기 전 떠나시는\n이유를 알려주세요."
+            android:textColor="@color/White"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/fragment_settings_exit_rg"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintStart_toStartOf="@id/fragment_settings_exit_title"
+            app:layout_constraintTop_toBottomOf="@id/fragment_settings_exit_title">
+
+            <RadioButton
+                style="@style/body_regular_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/radio_button_selector"
+                android:buttonTintMode="add"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="2dp"
+                android:text="사용을 잘 안하게 돼요."
+                android:textColor="@color/White" />
+
+            <RadioButton
+                style="@style/body_regular_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/radio_button_selector"
+                android:buttonTintMode="add"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="2dp"
+                android:text="사용이 어려운 것 같아요."
+                android:textColor="@color/White" />
+
+            <RadioButton
+                style="@style/body_regular_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/radio_button_selector"
+                android:buttonTintMode="add"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="2dp"
+                android:text="개인정보보호를 위해 삭제하고 싶어요."
+                android:textColor="@color/White" />
+
+            <RadioButton
+                style="@style/body_regular_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/radio_button_selector"
+                android:buttonTintMode="add"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="2dp"
+                android:text="다른 계정이 있어요."
+                android:textColor="@color/White" />
+
+            <RadioButton
+                style="@style/body_regular_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/radio_button_selector"
+                android:buttonTintMode="add"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="2dp"
+                android:text="원하는 기능이 없어요."
+                android:textColor="@color/White" />
+
+            <RadioButton
+                style="@style/body_regular_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/radio_button_selector"
+                android:buttonTintMode="add"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="2dp"
+                android:text="기타"
+                android:textColor="@color/White" />
+        </RadioGroup>
+
+        <EditText
+            style="@style/body_regular_14"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/radius_corners_50dp"
+            android:backgroundTint="@color/Purple_Black_BG_2"
+            android:hint="탈퇴하는 이유를 말씀해 주세요."
+            android:paddingStart="24dp"
+            android:textColorHint="@color/Purple_Gray"
+            app:layout_constraintTop_toBottomOf="@id/fragment_settings_exit_rg" />
+
+        <EditText
+            style="@style/sub_title_semi_bold_16"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/shape_rounded_square_purpleblack_bg1_purple700_stroke_50dp_1dp"
+            android:gravity="center"
+            android:text="탈퇴하기"
+            android:textColor="@color/Purple_700"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
