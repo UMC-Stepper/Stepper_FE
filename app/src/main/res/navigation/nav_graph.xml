@@ -193,6 +193,10 @@
         <action
             android:id="@+id/action_fragmentAdditionalExerciseSuccess_to_fragmentEvaluationExercise"
             app:destination="@id/fragmentEvaluationExercise" />
+        <!--추가운동 홈으로-->
+        <action
+            android:id="@+id/action_fragmentAdditionalExerciseSuccess_to_additionalExerciseHomeFragment"
+            app:destination="@id/additionalExerciseHomeFragment" />
     </fragment>
 
     <!-- 스태퍼 추가운동 하기(영상 + 타이머) -->

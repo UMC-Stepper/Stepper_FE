@@ -18,7 +18,6 @@ import kotlinx.coroutines.launch
 class AdditionalExerciseHomeFragment : BaseFragment<FragmentAdditionalExerciseHomeBinding>(R.layout.fragment_additional_exercise_home) {
 
     private lateinit var mainActivity : MainActivity
-    private val stepperViewModel: StepperViewModel by activityViewModels()
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mainActivity = context as MainActivity
@@ -49,10 +48,18 @@ class AdditionalExerciseHomeFragment : BaseFragment<FragmentAdditionalExerciseHo
     }
 
     private fun setTodayExerciseTime(){
-
-        binding.fragmentAdditionalExerciseHourTv.text=""
-        binding.fragmentAdditionalExerciseMinTv.text=""
-        binding.fragmentAdditionalExerciseSecTv.text=""
+        val hour = arguments?.getString("hour")
+        val minute = arguments?.getString("minute")
+        val seconds = arguments?.getString("seconds")
+        if(hour!=null){
+            binding.fragmentAdditionalExerciseHourTv.text = hour
+        }
+        if(minute!=null){
+            binding.fragmentAdditionalExerciseMinTv.text=minute
+        }
+        if(seconds!=null){
+            binding.fragmentAdditionalExerciseSecTv.text=seconds
+        }
 
     }
 
