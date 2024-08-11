@@ -60,7 +60,7 @@ interface TodayApi {
     // 나만의 운동 조회 API -> 스크랩 화면
     @GET("/api/myexercise/check")
     suspend fun getMyExercise(
-        @Query("bodyPart") bodyPart: String
+        @Query("request") bodyPart: String
     ) : BaseListResponse<CheckExerciseResponse>
 
 }
