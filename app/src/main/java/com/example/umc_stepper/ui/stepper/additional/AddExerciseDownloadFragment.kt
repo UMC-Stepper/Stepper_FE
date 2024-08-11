@@ -65,9 +65,6 @@ class AddExerciseDownloadFragment : BaseFragment<FragmentAddExerciseSelectScrapB
         binding.fragmentAddExerciseDownloadBtn.setOnClickListener {
             goLastExercise()
         }
-
-        // 기본 운동 목록 로드
-        loadExercises("어깨, 팔")
     }
 
     private fun goLastExercise(){
