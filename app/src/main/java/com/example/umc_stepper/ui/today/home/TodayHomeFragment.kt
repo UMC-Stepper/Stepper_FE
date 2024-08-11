@@ -116,7 +116,7 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
 
         var weekDay = resources.getStringArray(R.array.calendar_day_eng)
         val dateFormat = DateTimeFormatter.ofPattern("dd").withLocale(Locale.forLanguageTag("ko"))
-        var preSunday: LocalDateTime = LocalDateTime.now().with(TemporalAdjusters.previous(DayOfWeek.SUNDAY))
+        var preSunday: LocalDateTime = LocalDateTime.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY))
         Log.d("weekDay", "weekDay : $weekDay, preSunday: $preSunday")
 
         for (i in 0..6) {
