@@ -43,7 +43,7 @@
             app:layout_constraintTop_toTopOf="@id/item_select_my_exercise_thumbnail_iv"
             android:fontFamily="@font/pretendard_semi_bold"
             android:layout_marginStart="12dp"
-            android:text="진정재활운동"
+            android:text="@{checkExerciseResponse.video_title}"
             android:layout_marginTop="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_regular"
-            android:text="손재용의 사생활"
+            android:text="@{checkExerciseResponse.channel_name}"
             android:layout_marginBottom="4dp"
             android:textColor="@color/White"
             app:layout_constraintBottom_toBottomOf="@id/item_select_my_exercise_thumbnail_iv"
