@@ -64,12 +64,12 @@ class AdditionalExerciseSuccessFragment :
     private fun setOnClickBtn() {
         binding.fragmentTodayExerciseSuccessOkBtn.setOnClickListener {
             when (titleNumber) {
-                1 -> {
+                0 -> {
                     //운동
                     findNavController().navTop(R.id.action_fragmentAdditionalExerciseSuccess_to_fragmentEvaluationExercise)
                 }
 
-                2 -> {
+                1 -> {
                     stepperViewModel.saveMoreExerciseTime(
                         //추가운동
                         Time(
