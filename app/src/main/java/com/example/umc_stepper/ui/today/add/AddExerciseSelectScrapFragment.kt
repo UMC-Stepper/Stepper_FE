@@ -12,12 +12,7 @@ import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentAddExerciseSelectScrapBinding
 import com.example.umc_stepper.ui.MainActivity
-import com.example.umc_stepper.ui.stepper.additional.AddExerciseDownloadFragment
-import com.example.umc_stepper.ui.stepper.additional.AddExerciseDownloadFragmentDirections
 import com.example.umc_stepper.ui.today.TodayViewModel
-import com.example.umc_stepper.ui.today.home.TodayHomeFragmentDirections
-import com.example.umc_stepper.utils.extensions.navigateSafe
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class AddExerciseSelectScrapFragment: BaseFragment<FragmentAddExerciseSelectScrapBinding>(R.layout.fragment_add_exercise_select_scrap) {
