@@ -74,7 +74,6 @@
             android:id="@+id/fragment_today_exercise_success_minute_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
             android:layout_marginTop="40dp"
             android:text="@{ResultTimeData.minutes}"
             android:textColor="@color/Purple_300"

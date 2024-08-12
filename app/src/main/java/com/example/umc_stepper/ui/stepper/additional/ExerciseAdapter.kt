@@ -6,6 +6,8 @@ import com.example.umc_stepper.base.BaseAdapter
 import com.example.umc_stepper.base.BaseDiffCallback
 import com.example.umc_stepper.databinding.ItemSelectMyExerciseBinding
 import com.example.umc_stepper.domain.model.request.ExerciseDto
+import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
+
 
 class ExerciseAdapter(
     private val listener: OnExerciseClickListener
