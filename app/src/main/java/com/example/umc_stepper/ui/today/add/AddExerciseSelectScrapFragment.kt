@@ -14,7 +14,6 @@ import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentAddExerciseSelectScrapBinding
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseStepResponse
 import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
-import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.today.TodayViewModel
 import com.google.gson.Gson
@@ -26,9 +25,8 @@ class AddExerciseSelectScrapFragment :
     private lateinit var mainActivity: MainActivity
     private lateinit var selectScrapListAdapter: SelectScrapListAdapter
     private lateinit var selectScrapBodyPartAdapter: SelectScrapBodyPartAdapter
-    private val stepLevel = arguments?.getInt("stepLevel")
-    private val bodyPart = arguments?.getString("bodyPart", "")
-    val checkExerciseStepResponse: CheckExerciseResponse = CheckExerciseResponse()
+    private var stepLevel : Int = 0
+    private var bodyPart : String = ""
     private lateinit var args: Bundle
 
     private val todayViewModel: TodayViewModel by activityViewModels()
@@ -39,25 +37,27 @@ class AddExerciseSelectScrapFragment :
     }
 
     override fun setLayout() {
+        stepLevel = arguments?.getInt("stepLevel")!!
+        bodyPart = arguments?.getString("bodyPart", "").toString()
         initSettings()
     }
 
     private fun initSettings() {
         updateMainToolbar()
         setButton()
-        setAdapter()
         observeViewModel()
+        setAdapter()
 
         // 앞 화면에서 운동 부위, 운동 단계 받아야 함
     }
 
     private fun observeViewModel() {
 
-        val bodyParts: String = when (bodyPart) {
+        val bodyParts: String = when (arguments?.getString("bodyPart", "").toString()) {
             "무릎, 다리" -> "무릎다리"
             "어깨, 팔" -> "어깨팔"
             else -> {
-                ""
+                "머리"
             }
         }
 
@@ -97,7 +97,10 @@ class AddExerciseSelectScrapFragment :
     private fun setDataGson(item: CheckExerciseResponse) {
         val gson = Gson()
         val checkExerciseResponseJson = gson.toJson(item)
-
+        todayViewModel.addStep(
+            item
+        )
+        Log.d("크기",checkExerciseResponseJson)
         args = Bundle().apply {
             putString("CheckExerciseResponse", checkExerciseResponseJson)
         }
@@ -119,16 +122,10 @@ class AddExerciseSelectScrapFragment :
 
         // 운동 카드 추가 화면으로 되돌아가기 , 서버에서 받은 정보 넘기기
         binding.fragmentAddExerciseDownloadBtn.setOnClickListener {
-            val action = AddExerciseSelectScrapFragmentDirections.actionAddExerciseSelectScrapFragmentToFragmentAddExercise2()
-            findNavController().navigateSafe(action.actionId, args)
+
             val action =
                 AddExerciseSelectScrapFragmentDirections.actionAddExerciseSelectScrapFragmentToFragmentAddExercise2()
-            todayViewModel.addStep(
-                ExerciseStepResponse(
-                    step = stepLevel!!,
-                    myExercise = checkExerciseStepResponse
-                )
-            )
+
             findNavController().navigateSafe(action.actionId)
         }
     }
