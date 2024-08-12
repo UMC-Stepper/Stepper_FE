@@ -86,11 +86,13 @@ class CommunityViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 communityApiRepository.postLikeEdit(postId).collect {
+                    if(it.isSuccess) {
                     _likeResponse.value = it
-                    getDetailPost(postId)
                     _isLike.value = true
+                    getDetailPost(postId)
                     Log.d("CommunityViewModel", "_likeResponse : $it")
                 }
+                    }
             } catch (e:Exception) {
                 Log.e("getDetailPost is Error", e.message.toString())
             }
@@ -102,10 +104,12 @@ class CommunityViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 communityApiRepository.deleteCancelLike(postId).collect {
-                    _likeCancelResponse.value = it
-                    getDetailPost(postId)
-                    _isLike.value = false
-                    Log.d("CommunityViewModel", "_likeResponse : $it")
+                    if (it.isSuccess) {
+                        _likeCancelResponse.value = it
+                        _isLike.value = false
+                        getDetailPost(postId)
+                        Log.d("CommunityViewModel", "_likeResponse : $it")
+                    }
                 }
             } catch (e:Exception) {
                 Log.e("getDetailPost is Error", e.message.toString())
@@ -118,10 +122,12 @@ class CommunityViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 communityApiRepository.postCommitScrap(postId).collect {
-                    _scrapResponse.value = it
-                    getDetailPost(postId)
-                    _isScrap.value = true
-                    Log.d("CommunityViewModel", "_scrapResponse : $it")
+                    if (it.isSuccess) {
+                        _scrapResponse.value = it
+                        _isScrap.value = true
+                        getDetailPost(postId)
+                        Log.d("CommunityViewModel", "_scrapResponse : $it")
+                    }
                 }
             } catch (e:Exception) {
                 Log.e("getDetailPost is Error", e.message.toString())
@@ -135,10 +141,12 @@ class CommunityViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 communityApiRepository.deleteCancelScrap(postId).collect {
-                    _scrapCancelResponse.value = it
-                    getDetailPost(postId)
-                    _isScrap.value = false
-                    Log.d("CommunityViewModel", "_scrapResponse : $it")
+                    if (it.isSuccess) {
+                        _scrapCancelResponse.value = it
+                        _isScrap.value = false
+                        getDetailPost(postId)
+                        Log.d("CommunityViewModel", "_scrapResponse : $it")
+                    }
                 }
             } catch (e:Exception) {
                 Log.e("getDetailPost is Error", e.message.toString())
