@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="communityMyCommentsResponseItem"
+            type="com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponseItem" />
+        <variable
+            name="listener"
+            type="com.example.umc_stepper.utils.listener.ItemClickListener" />
 
     </data>
 
@@ -20,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="이 운동을 자주 해주면 자세가 달라져요"
+            android:text="@{communityMyCommentsResponseItem.title}"
             android:textColor="@color/White"
             android:textSize="14sp"
             android:maxLines="1"
@@ -35,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="평소에는 잘 안하다가 요즘에 새롭게 빠진 운동을 추천해 주세요! 일상에서 쉽게 접근할 수 있고, 초보자도 즐길 수 있는 운동이라면 더욱 좋겠습니다!"
+            android:text="@{communityMyCommentsResponseItem.body}"
             android:textColor="@color/White"
             android:textSize="14sp"
             android:maxLines="2"
@@ -59,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="7"
+            android:text="@{String.valueOf(communityMyCommentsResponseItem.likes)}"
             style="@style/body_regular_12"
             android:textColor="@color/Yellow_300"
             app:layout_constraintStart_toEndOf="@+id/item_weekly_home_thumbs_up_iv"
@@ -80,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="2"
+            android:text="@{String.valueOf(communityMyCommentsResponseItem.scraps)}"
             style="@style/body_regular_12"
             android:textColor="@color/Yellow_300"
             app:layout_constraintStart_toEndOf="@+id/item_weekly_home_scraps_up_iv"
@@ -101,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="1"
+            android:text="@{String.valueOf(communityMyCommentsResponseItem.commentsCount)}"
             style="@style/body_regular_12"
             android:textColor="@color/Yellow_300"
             app:layout_constraintStart_toEndOf="@+id/item_weekly_home_reply_up_iv"

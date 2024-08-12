@@ -4,6 +4,7 @@ import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.model.request.AiVideoDto
 import com.example.umc_stepper.domain.model.request.comment_controller.CommentWriteDto
+import com.example.umc_stepper.domain.model.request.comment_controller.ReplyRequestDto
 import com.example.umc_stepper.domain.model.request.member_controller.LogInDto
 import com.example.umc_stepper.domain.model.response.AiVideoInfo
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponseListPostViewResponseItem
@@ -68,8 +69,6 @@ interface CommunityApi {
         @Path("categoryName") categoryName : String
     ): BaseListResponse<ApiResponseListPostViewResponseItem>
 
-
-
     //내가 작성한 글 조회
     @GET("/api/community/my_posts")
     suspend fun getCommunityMyPosts(
@@ -85,6 +84,12 @@ interface CommunityApi {
     suspend fun postCommentWrite(
         @Body commentWriteDto: CommentWriteDto
     ):BaseResponse<CommentWriteResponse>
+
+    // 대댓글 작성
+    @POST("api/comment/reply")
+    suspend fun postReply (
+        @Body replyRequestDto: ReplyRequestDto
+    ) : BaseResponse<CommentResponse>
 
     //댓글 조회
     @GET("api/comment/{postId}/comment")
