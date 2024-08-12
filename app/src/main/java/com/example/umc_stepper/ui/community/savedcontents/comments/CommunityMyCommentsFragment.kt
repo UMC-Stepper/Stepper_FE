@@ -1,12 +1,14 @@
 package com.example.umc_stepper.ui.community.savedcontents.comments
 
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentCommunityMyCommentsBinding
@@ -16,6 +18,7 @@ import com.example.umc_stepper.ui.community.CommunityViewModel
 import com.example.umc_stepper.utils.listener.ItemClickListener
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlin.properties.Delegates
 
 class CommunityMyCommentsFragment : BaseFragment<FragmentCommunityMyCommentsBinding>(R.layout.fragment_community_my_comments),
     ItemClickListener {
@@ -78,7 +81,11 @@ class CommunityMyCommentsFragment : BaseFragment<FragmentCommunityMyCommentsBind
     }
 
     override fun onClick(item: Any) {
-        // 글 클릭하면 해당 글로 이동 (API로 해당글 정보 받아서 넘겨줘야 함)
+        val args = Bundle().apply {
+            putString("postId", "$item")
+        }
+        val action = CommunityMyCommentsFragmentDirections.actionCommunityMyCommentsFragmentToCommunityWeeklyShowPostFragment()
+        findNavController().navigateSafe(action.actionId, args)
     }
 
 }
