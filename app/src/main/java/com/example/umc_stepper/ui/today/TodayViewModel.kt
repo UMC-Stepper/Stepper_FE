@@ -22,9 +22,11 @@ import com.example.umc_stepper.domain.model.response.my_exercise_controller.Chec
 import com.example.umc_stepper.domain.repository.FastApiRepository
 import com.example.umc_stepper.domain.repository.TodayApiRepository
 import com.example.umc_stepper.domain.repository.YoutubeApiRepository
+import com.example.umc_stepper.utils.enums.LoadState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -77,6 +79,14 @@ class TodayViewModel @Inject constructor(
 
     private val _todayExerciseResponseDto = MutableStateFlow<BaseListResponse<ToDayExerciseResponseDto>>(BaseListResponse())
     val todayExerciseResponseDto : StateFlow<BaseListResponse<ToDayExerciseResponseDto>> = _todayExerciseResponseDto
+
+    private val _bodyPart = MutableStateFlow<String>("")
+    val bodyPart : StateFlow<String> = _bodyPart
+
+    fun setBodyPart(s : String){
+        _bodyPart.value = s
+    }
+
 
     // 운동 카드 추가
     fun postAddExerciseCard(exerciseCardRequestDto: ExerciseCardRequestDto) {
@@ -173,10 +183,17 @@ class TodayViewModel @Inject constructor(
     // 나만의 운동 조회
     fun getMyExercise(bodyPart: String) {
         viewModelScope.launch {
+            _checkExerciseResponseDTO.value = BaseListResponse(LoadState.LOADING)
             try {
                 todayApiRepository.getMyExercise(bodyPart).collect {
-                    _checkExerciseResponseDTO.value = it
-                    Log.d("TodayViewModel", "_checkExerciseResponseDTO : $it")
+                    if (it.isSuccess && !it.result.isNullOrEmpty()) {
+                        _checkExerciseResponseDTO.value = it.copy(loadState = LoadState.SUCCESS)
+                        Log.d("TodayViewModel", "_checkExerciseResponseDTO : $it")
+                    }
+                    else {
+                        _checkExerciseResponseDTO.value = BaseListResponse(LoadState.EMPTY)
+                    }
+
                 }
             } catch (e:Exception) {
                 Log.e("getMyExercise is Error", e.message.toString())
