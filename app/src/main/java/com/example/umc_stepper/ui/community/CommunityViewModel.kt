@@ -102,6 +102,20 @@ class CommunityViewModel @Inject constructor(
         }
     }
 
+    fun postCommitScrap(postId: Int) {
+        viewModelScope.launch {
+            try {
+                communityApiRepository.postCommitScrap(postId).collect {
+                    _scrapResponse.value = it
+                    Log.d("CommunityViewModel", "_scrapResponse : $it")
+                }
+            } catch (e:Exception) {
+                Log.e("getDetailPost is Error", e.message.toString())
+            }
+        }
+    }
+
+
     // 스크랩 취소
     fun deleteCancelScrap(postId : Int) {
         viewModelScope.launch {
