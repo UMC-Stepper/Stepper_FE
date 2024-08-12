@@ -29,7 +29,6 @@
                 android:id="@+id/fragment_community_my_comments_no_contents_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="작성한 댓글이 없습니다"
                 style="@style/sub_title_semi_bold_16"
                 android:textSize="15sp"
@@ -46,6 +45,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginTop="20dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layout_marginBottom="36dp"
                 tools:listitem="@layout/item_community_weekly_home_post"
                 app:layout_constraintBottom_toBottomOf="parent"
