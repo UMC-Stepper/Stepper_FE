@@ -68,7 +68,6 @@ class BadgeFragment : BaseFragment<FragmentBadgeBinding>(R.layout.fragment_badge
                             binding.fragmentBadgeYellow1Tv.text = i.categoryName
                             Log.e("mainViewModel ","it : ${i.categoryName}")
                             i.list.forEach { j ->
-                                j.badgeName
                             }
 
                         }
