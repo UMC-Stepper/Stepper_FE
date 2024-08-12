@@ -2,7 +2,6 @@ package com.example.umc_stepper.ui.today.home
 
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -13,14 +12,11 @@ import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentTodayHomeBinding
 import com.example.umc_stepper.domain.model.local.WeekCalendar
 import com.example.umc_stepper.ui.today.TodayViewModel
-import com.example.umc_stepper.utils.extensions.navigateSafe
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
-import org.threeten.bp.temporal.TemporalAdjuster
 import org.threeten.bp.temporal.TemporalAdjusters
 import java.util.Locale
 

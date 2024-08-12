@@ -1,23 +1,12 @@
 package com.example.umc_stepper.ui.settings
 
-import android.content.Context
-import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
@@ -25,7 +14,6 @@ import com.example.umc_stepper.databinding.FragmentSettingsEditProfileBinding
 import com.example.umc_stepper.ui.community.CommunityDialog
 import com.example.umc_stepper.ui.community.CommunityDialogInterface
 import com.example.umc_stepper.ui.community.CommunityRemoveInterface
-import com.example.umc_stepper.utils.EditPageOutDialog
 
 class SettingsEditProfileFragment : BaseFragment<FragmentSettingsEditProfileBinding>(R.layout.fragment_settings_edit_profile),
     CommunityDialogInterface,
