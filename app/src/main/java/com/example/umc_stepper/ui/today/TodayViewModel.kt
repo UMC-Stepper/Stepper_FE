@@ -8,6 +8,7 @@ import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.mapper.toExerciseStates
 import com.example.umc_stepper.domain.model.local.ExerciseState
+import com.example.umc_stepper.domain.model.local.ExerciseStep
 import com.example.umc_stepper.domain.model.request.AiVideoDto
 import com.example.umc_stepper.domain.model.request.exercise_card_controller.ExerciseCardRequestDto
 import com.example.umc_stepper.domain.model.response.AiVideoInfo
@@ -16,6 +17,7 @@ import com.example.umc_stepper.domain.model.response.exercise_card_controller.Ex
 import com.example.umc_stepper.domain.model.response.Ylist
 import com.example.umc_stepper.domain.model.response.YouTubeVideo
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardResponse
+import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseStepResponse
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ToDayExerciseResponseDto
 import com.example.umc_stepper.domain.model.response.my_exercise_controller.AddExerciseResponse
 import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
@@ -37,6 +39,11 @@ class TodayViewModel @Inject constructor(
     private val fastApiRepository: FastApiRepository
 ) : ViewModel() {
 
+    private val _setExerciseStep = MutableStateFlow<List<CheckExerciseResponse>>(
+        listOf()
+    )
+    val setExerciseStep: StateFlow<List<CheckExerciseResponse>> = _setExerciseStep
+
     private val _provideAiVideo = MutableStateFlow(AiVideoInfo())
     val provideAiVideo: StateFlow<AiVideoInfo> = _provideAiVideo
 
@@ -50,50 +57,74 @@ class TodayViewModel @Inject constructor(
     val successYoutubeLink: StateFlow<Ylist> = _successYoutubeLink
 
     // 운동 카드 추가
-    private val _addExerciseCardResponse = MutableStateFlow<BaseResponse<ExerciseCardResponse>>(BaseResponse())
-    val addExerciseCardResponse : StateFlow<BaseResponse<ExerciseCardResponse>> = _addExerciseCardResponse
+    private val _addExerciseCardResponse =
+        MutableStateFlow<BaseResponse<ExerciseCardResponse>>(BaseResponse())
+    val addExerciseCardResponse: StateFlow<BaseResponse<ExerciseCardResponse>> =
+        _addExerciseCardResponse
 
     // 운동 카드 상세 조회
-    private val _inquiryExerciseCardResponse = MutableStateFlow<BaseResponse<ExerciseCardResponse>>(BaseResponse())
-    val inquiryExerciseCardResponse : StateFlow<BaseResponse<ExerciseCardResponse>> = _inquiryExerciseCardResponse
+    private val _inquiryExerciseCardResponse =
+        MutableStateFlow<BaseResponse<ExerciseCardResponse>>(BaseResponse())
+    val inquiryExerciseCardResponse: StateFlow<BaseResponse<ExerciseCardResponse>> =
+        _inquiryExerciseCardResponse
 
     // 오늘의 운동 진행 상태 조회
     private val _exerciseState = MutableStateFlow<List<ExerciseState>?>(null)
     val exerciseState: StateFlow<List<ExerciseState>?> = _exerciseState
 
     // 운동 부위의 운동 카드 요일 조회
-    private val _exerciseCardWeekResponseDto = MutableStateFlow<BaseListResponse<ExerciseCardWeekResponseDto>>(BaseListResponse())
-    val exerciseCardWeekResponseDto : StateFlow<BaseListResponse<ExerciseCardWeekResponseDto>> = _exerciseCardWeekResponseDto
+    private val _exerciseCardWeekResponseDto =
+        MutableStateFlow<BaseListResponse<ExerciseCardWeekResponseDto>>(BaseListResponse())
+    val exerciseCardWeekResponseDto: StateFlow<BaseListResponse<ExerciseCardWeekResponseDto>> =
+        _exerciseCardWeekResponseDto
 
     // 월별 운동 카드 상태 조회
-    private val _exerciseCardStatusResponseDto = MutableStateFlow<BaseListResponse<ExerciseCardStatusResponseDto>>(BaseListResponse())
-    val exerciseCardStatusResponseDto : StateFlow<BaseListResponse<ExerciseCardStatusResponseDto>> = _exerciseCardStatusResponseDto
+    private val _exerciseCardStatusResponseDto =
+        MutableStateFlow<BaseListResponse<ExerciseCardStatusResponseDto>>(BaseListResponse())
+    val exerciseCardStatusResponseDto: StateFlow<BaseListResponse<ExerciseCardStatusResponseDto>> =
+        _exerciseCardStatusResponseDto
 
     // 나만의 운동 추가
-    private val _addExerciseResponse = MutableStateFlow<BaseResponse<AddExerciseResponse>>(BaseResponse())
+    private val _addExerciseResponse =
+        MutableStateFlow<BaseResponse<AddExerciseResponse>>(BaseResponse())
     val addExerciseResponse: StateFlow<BaseResponse<AddExerciseResponse>> = _addExerciseResponse
 
     // 나만의 운동 조회
-    private val _checkExerciseResponseDTO = MutableStateFlow<BaseListResponse<CheckExerciseResponse>>(BaseListResponse())
-    val checkExerciseResponseDTO: StateFlow<BaseListResponse<CheckExerciseResponse>> = _checkExerciseResponseDTO
+    private val _checkExerciseResponseDTO =
+        MutableStateFlow<BaseListResponse<CheckExerciseResponse>>(BaseListResponse())
+    val checkExerciseResponseDTO: StateFlow<BaseListResponse<CheckExerciseResponse>> =
+        _checkExerciseResponseDTO
 
-    private val _todayExerciseResponseDto = MutableStateFlow<BaseListResponse<ToDayExerciseResponseDto>>(BaseListResponse())
-    val todayExerciseResponseDto : StateFlow<BaseListResponse<ToDayExerciseResponseDto>> = _todayExerciseResponseDto
+    private val _todayExerciseResponseDto =
+        MutableStateFlow<BaseListResponse<ToDayExerciseResponseDto>>(BaseListResponse())
+    val todayExerciseResponseDto: StateFlow<BaseListResponse<ToDayExerciseResponseDto>> =
+        _todayExerciseResponseDto
 
     private val _bodyPart = MutableStateFlow<String>("")
-    val bodyPart : StateFlow<String> = _bodyPart
+    val bodyPart: StateFlow<String> = _bodyPart
 
-    fun setBodyPart(s : String){
+    fun setBodyPart(s: String) {
         _bodyPart.value = s
     }
 
+    fun addStep(stepCard: CheckExerciseResponse) {
+        val currentList = _setExerciseStep.value.toMutableList()
+        currentList.add(stepCard)
+        _setExerciseStep.value = currentList
+        Log.d("ViewModel", "Step added. New size: ${currentList.size}")
+    }
+
+    fun clearStep() {
+        val currentList : List<CheckExerciseResponse> = listOf()
+        _setExerciseStep.value = currentList
+    }
 
     // 운동 카드 추가
     fun postAddExerciseCard(exerciseCardRequestDto: ExerciseCardRequestDto) {
         viewModelScope.launch {
             try {
                 todayApiRepository.postAddExerciseCard(exerciseCardRequestDto).collect {
-                    _addExerciseCardResponse.value =it
+                    _addExerciseCardResponse.value = it
                 }
             } catch (e: Exception) {
                 Log.e("TodayViewModel AddExerciseCard Error", e.message.toString())
@@ -106,7 +137,7 @@ class TodayViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 todayApiRepository.postInquiryExerciseCard(exerciseId).collect {
-                    _inquiryExerciseCardResponse.value =it
+                    _inquiryExerciseCardResponse.value = it
                 }
             } catch (e: Exception) {
                 Log.e("TodayViewModel InquiryExerciseCard Error", e.message.toString())
@@ -114,14 +145,14 @@ class TodayViewModel @Inject constructor(
         }
     }
 
-    fun getStepperExerciseState(date : String){
+    fun getStepperExerciseState(date: String) {
         viewModelScope.launch {
             try {
-                todayApiRepository.getTodayExerciseState(date).collect{
+                todayApiRepository.getTodayExerciseState(date).collect {
                     _todayExerciseResponseDto.value = it
                 }
-            }catch (e : Exception){
-                Log.e("TodayViewModel",e.message.toString())
+            } catch (e: Exception) {
+                Log.e("TodayViewModel", e.message.toString())
             }
         }
     }
@@ -161,7 +192,7 @@ class TodayViewModel @Inject constructor(
                 todayApiRepository.getExerciseMonthCheck(month).collect {
                     _exerciseCardStatusResponseDto.value = it
                 }
-            } catch (e:Exception) {
+            } catch (e: Exception) {
                 Log.e("getExerciseMonthCheck is Error", e.message.toString())
             }
         }
@@ -170,11 +201,11 @@ class TodayViewModel @Inject constructor(
     // 나만의 운동 추가 addExerciseResponse
     fun postAddMyExercise(addExerciseRequestDto: ExerciseCardRequestDto) {
         viewModelScope.launch {
-            try{
+            try {
                 todayApiRepository.postAddMyExercise(addExerciseRequestDto).collect {
                     _addExerciseResponse.value = it
                 }
-            }  catch (e:Exception) {
+            } catch (e: Exception) {
                 Log.e("postAddMyExercise is Error", e.message.toString())
             }
         }
@@ -189,13 +220,12 @@ class TodayViewModel @Inject constructor(
                     if (it.isSuccess && !it.result.isNullOrEmpty()) {
                         _checkExerciseResponseDTO.value = it.copy(loadState = LoadState.SUCCESS)
                         Log.d("TodayViewModel", "_checkExerciseResponseDTO : $it")
-                    }
-                    else {
+                    } else {
                         _checkExerciseResponseDTO.value = BaseListResponse(LoadState.EMPTY)
                     }
 
                 }
-            } catch (e:Exception) {
+            } catch (e: Exception) {
                 Log.e("getMyExercise is Error", e.message.toString())
             }
         }
@@ -223,7 +253,10 @@ class TodayViewModel @Inject constructor(
                     val updatedList = _successYoutubeLink.value.ylist.toMutableList()
                     updatedList.add(video)
                     _successYoutubeLink.value = _successYoutubeLink.value.copy(ylist = updatedList)
-                    Log.d("TodayViewModel", "YouTube video received: ${video.items[0].snippet.title}")
+                    Log.d(
+                        "TodayViewModel",
+                        "YouTube video received: ${video.items[0].snippet.title}"
+                    )
                     Log.d("TodayViewModel", "Ylist size: ${_successYoutubeLink.value.ylist.size}")
                 }
             } catch (e: Exception) {
@@ -233,7 +266,7 @@ class TodayViewModel @Inject constructor(
     }
 
 
-    fun clearList(){
+    fun clearList() {
         val updatedList = _successYoutubeLink.value.ylist.toMutableList()
         updatedList.clear()
         _successYoutubeLink.value = _successYoutubeLink.value.copy(ylist = updatedList)
