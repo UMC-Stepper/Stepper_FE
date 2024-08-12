@@ -3,6 +3,8 @@ package com.example.umc_stepper.domain.repository
 import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.model.request.comment_controller.CommentWriteDto
+import com.example.umc_stepper.domain.model.request.comment_controller.ReplyRequestDto
+import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponse
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentWriteResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponseListPostViewResponseItem
@@ -30,6 +32,9 @@ interface CommunityApiRepository {
 
     //댓글 작성
     suspend fun postCommentWrite(commentWriteDto: CommentWriteDto): Flow<BaseResponse<CommentWriteResponse>>
+
+    // 대댓글 작성
+    suspend fun postReply(replyRequestDto: ReplyRequestDto) : Flow<BaseResponse<CommentResponse>>
 
     //댓글 조회
     suspend fun getComment(postId: Int): Flow<BaseListResponse<CommentResponseItem>>
