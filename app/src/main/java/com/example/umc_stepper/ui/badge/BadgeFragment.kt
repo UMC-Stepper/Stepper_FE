@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.badge
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,14 +16,30 @@ import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentBadgeBinding
 import com.example.umc_stepper.domain.model.response.Badge
+import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.login.MainViewModel
 import com.example.umc_stepper.ui.stepper.StepperViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
+@AndroidEntryPoint
 class BadgeFragment : BaseFragment<FragmentBadgeBinding>(R.layout.fragment_badge) {
     private val mainViewModel: MainViewModel by activityViewModels()
+    private lateinit var mainActivity : MainActivity
+    private val badgeNameList: List<String> = listOf(
+        "첫 운동 설정 완료",
+        "첫 오늘의 운동 완료",
+        "첫 추가 운동 완료",
+        "첫 게시글 작성 완료"
+    )
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
     override fun setLayout() {
+        updateMainToolbar()
         getBadge()
+        setBadge()
     }
 
     // 뷰모델의 함수 호출 -> 뷰모델 -> 리포지토리의 함수 호출 : 서버에서 api 받아오는 과정 전부 실행됨
@@ -51,7 +68,7 @@ class BadgeFragment : BaseFragment<FragmentBadgeBinding>(R.layout.fragment_badge
                             binding.fragmentBadgeYellow1Tv.text = i.categoryName
                             Log.e("mainViewModel ","it : ${i.categoryName}")
                             i.list.forEach { j ->
-                                j.id
+                                j.badgeName
                             }
 
                         }
@@ -61,5 +78,8 @@ class BadgeFragment : BaseFragment<FragmentBadgeBinding>(R.layout.fragment_badge
                 }
             }
         }
+    }
+    private fun updateMainToolbar() {
+        mainActivity.updateToolbarTitle("활동 훈장")
     }
 }
