@@ -87,6 +87,7 @@ class AdditionalExerciseMiddleFragment : BaseFragment<FragmentAdditionalExercise
         val timeJson = gson.toJson(time)
         val args = Bundle().apply {
             putString("time", timeJson)
+            putInt("titleNumber",1)
         }
 
         val action = AdditionalExerciseMiddleFragmentDirections.actionFragmentAdditionalExerciseMiddleToFragmentAdditionalExerciseSuccess()

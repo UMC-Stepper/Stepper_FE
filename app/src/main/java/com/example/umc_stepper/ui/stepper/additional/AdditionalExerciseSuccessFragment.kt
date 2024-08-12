@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.stepper.additional
 
+import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -28,13 +29,17 @@ class AdditionalExerciseSuccessFragment :
         "오늘 이만큼 추가 운동 했어요!"
     )
 
+    private val btnList: List<String> = listOf(
+        "운동 평가하기",
+        "추가 운동 완료"
+    )
+
     //이거 필요
     private var titleNumber by Delegates.notNull<Int>()
     override fun setLayout() {
         setTitle()
         observeLifeCycle()
         setOnClickBtn()
-
 
     }
 
@@ -56,6 +61,7 @@ class AdditionalExerciseSuccessFragment :
 
 
                 fragmentTodayExerciseSuccessTitleTv.text = titleList[titleNumber]
+                fragmentTodayExerciseSuccessOkBtn.text= btnList[titleNumber]
                 resultTimeData = time
             }
         }
@@ -64,12 +70,12 @@ class AdditionalExerciseSuccessFragment :
     private fun setOnClickBtn() {
         binding.fragmentTodayExerciseSuccessOkBtn.setOnClickListener {
             when (titleNumber) {
-                1 -> {
+                0 -> {
                     //운동
                     findNavController().navTop(R.id.action_fragmentAdditionalExerciseSuccess_to_fragmentEvaluationExercise)
                 }
 
-                2 -> {
+                1 -> {
                     stepperViewModel.saveMoreExerciseTime(
                         //추가운동
                         Time(
@@ -78,6 +84,16 @@ class AdditionalExerciseSuccessFragment :
                             seconds = binding.fragmentTodayExerciseSuccessSecondTv.text.toString()
                         )
                     )
+                    val hour = binding.fragmentTodayExerciseSuccessHourTv.text.toString()
+                    val minute = binding.fragmentTodayExerciseSuccessMinuteTv.text.toString()
+                    val seconds = binding.fragmentTodayExerciseSuccessSecondTv.text.toString()
+
+                    val bundle = Bundle().apply {
+                        putString("hour", hour)
+                        putString("minute", minute)
+                        putString("seconds", seconds)
+                    }
+                    findNavController().navigate(R.id.action_fragmentAdditionalExerciseSuccess_to_additionalExerciseHomeFragment,bundle)
                 }
 
                 else -> {
@@ -93,7 +109,7 @@ class AdditionalExerciseSuccessFragment :
                 stepperViewModel.addTimeState.collectLatest {
                     if (it.isSuccess) {
                         val action =
-                            R.id.action_fragmentAdditionalExerciseSuccess_to_stepperFragment
+                            R.id.action_fragmentAdditionalExerciseSuccess_to_additionalExerciseHomeFragment
                         findNavController().navTop(action)
                     }
                 }
