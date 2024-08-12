@@ -16,6 +16,7 @@ import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseActivity
 import com.example.umc_stepper.databinding.ActivityMainBinding
 import com.example.umc_stepper.token.TokenManager
+import com.example.umc_stepper.ui.community.CommunityViewModel
 import com.example.umc_stepper.ui.login.LoginViewModel
 import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.example.umc_stepper.ui.today.TodayViewModel
@@ -38,8 +39,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     //    private lateinit var mainViewModel: MainViewModel
     private lateinit var loginViewModel: LoginViewModel
+    private lateinit var communityViewModel: CommunityViewModel
 
-    //    private lateinit var communityViewModel: CommunityViewModel
     override fun setLayout() {
         confirmAccessToken()
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
@@ -58,7 +59,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         todayViewModel = ViewModelProvider(this)[TodayViewModel::class.java]
         stepperViewModel = ViewModelProvider(this)[StepperViewModel::class.java]
 //        mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
-//        communityViewModel = ViewModelProvider(this)[CommunityViewModel::class.java]
+        communityViewModel = ViewModelProvider(this)[CommunityViewModel::class.java]
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
     }
 
@@ -105,10 +106,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 else -> false
             }
         }
-
-        // 최소 실행시 프래그먼트 설정
-        mainBottomNavigationBar.selectedItemId = R.id.todayHomeFragment
-        navController.navigate(R.id.todayHomeFragment)
 
         // 평가 일지 (달력) 프래그먼트 -> 메인 툴바 제거
         navController.addOnDestinationChangedListener { _, destination, _ ->

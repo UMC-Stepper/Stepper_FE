@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/badgeFragment">
+    app:startDestination="@id/todayHomeFragment">
 
     <!-- 뱃지 프래그먼트 -->
     <fragment
@@ -21,9 +21,6 @@
         <action
             android:id="@+id/action_communityHomeFragment_to_communityWeeklyHomeFragment"
             app:destination="@id/communityWeeklyHomeFragment" />
-        <action
-            android:id="@+id/action_communityHomeFragment_to_communityWeeklyShowPostFragment"
-            app:destination="@id/communityWeeklyShowPostFragment" />
         <action
             android:id="@+id/action_communityHomeFragment_to_weeklyEditFragment"
             app:destination="@id/weeklyEditFragment" />
@@ -347,7 +344,11 @@
         android:id="@+id/communityWeeklyHomeFragment"
         android:name="com.example.umc_stepper.ui.community.weekly.CommunityWeeklyHomeFragment"
         android:label="CommunityWeeklyHomeFragment"
-        tools:layout="@layout/fragment_community_weekly_home"/>
+        tools:layout="@layout/fragment_community_weekly_home">
+        <action
+            android:id="@+id/action_communityWeeklyHomeFragment_to_communityWeeklyShowPostFragment"
+            app:destination="@id/communityWeeklyShowPostFragment" />
+    </fragment>
     <fragment
         android:id="@+id/communityWeeklyShowPostFragment"
         android:name="com.example.umc_stepper.ui.community.weekly.CommunityWeeklyShowPostFragment"
