@@ -8,7 +8,7 @@ import com.example.umc_stepper.databinding.ItemCommunityWeeklyHomePostBinding
 import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponseItem
 import com.example.umc_stepper.utils.listener.ItemClickListener
 
-class MyCommentsAdapter(onItemClick: ItemClickListener) :
+class MyCommentsAdapter(val listener: ItemClickListener) :
     BaseAdapter<CommunityMyCommentsResponseItem, ItemCommunityWeeklyHomePostBinding>(
         diffCallback = BaseDiffCallback(
             itemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
@@ -25,6 +25,7 @@ class MyCommentsAdapter(onItemClick: ItemClickListener) :
     ) {
         Log.d("MyCommentsAdapter","$item")
         binding.communityMyCommentsResponseItem = item
+        binding.listener = listener
     }
 
 }

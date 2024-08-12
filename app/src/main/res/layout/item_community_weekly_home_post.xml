@@ -6,6 +6,10 @@
         <variable
             name="communityMyCommentsResponseItem"
             type="com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponseItem" />
+        <variable
+            name="listener"
+            type="com.example.umc_stepper.utils.listener.ItemClickListener" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
