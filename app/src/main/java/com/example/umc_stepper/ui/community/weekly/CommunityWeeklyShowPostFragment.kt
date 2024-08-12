@@ -50,18 +50,35 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
     }
 
     private fun setImageView() {
+
+        // 좋아요 등록/취소
         binding.fragmentCommunityWeeklyShowThumbsUpIv.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    communityViewModel.postLikeEdit(3)
+                    launch {
+                        if (communityViewModel.isLike.value) {
+                            communityViewModel.deleteCancelLike(3)
+                            binding.fragmentCommunityWeeklyShowThumbsUpIv.setImageResource(R.drawable.ic_thumbs_up)
+                        } else {
+                            communityViewModel.postLikeEdit(3)
+                            binding.fragmentCommunityWeeklyShowThumbsUpIv.setImageResource(R.drawable.ic_thumbs_up_fill)
+                        }
+                    }
                 }
             }
         }
 
+        // 스크랩 등록/취소
         binding.fragmentCommunityWeeklyShowScrapsUpIv.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    communityViewModel.postCommitScrap(3)
+                    if (communityViewModel.isScrap.value) {
+                        communityViewModel.deleteCancelScrap(3)
+                        binding.fragmentCommunityWeeklyShowScrapsUpIv.setImageResource(R.drawable.ic_scraps_up)
+                    } else {
+                        communityViewModel.postCommitScrap(3)
+                        binding.fragmentCommunityWeeklyShowScrapsUpIv.setImageResource(R.drawable.ic_scrap_fill)
+                    }
                 }
             }
         }
@@ -89,6 +106,20 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
                             val date = inputFormat.parse(it.result?.updatedAt)
                             binding.fragmentCommunityWeeklyShowPostDateTv.text = date?.let { it -> outputFormat.format(it) }
                         }
+                    }
+                }
+
+                // 좋아요, 스크랩 이미지 설정
+                launch {
+                    if(communityViewModel.isLike.value) {
+                        binding.fragmentCommunityWeeklyShowThumbsUpIv.setImageResource(R.drawable.ic_thumbs_up_fill)
+                    } else {
+                        binding.fragmentCommunityWeeklyShowThumbsUpIv.setImageResource(R.drawable.ic_thumbs_up)
+                    }
+                    if(communityViewModel.isScrap.value) {
+                        binding.fragmentCommunityWeeklyShowScrapsUpIv.setImageResource(R.drawable.ic_scrap_fill)
+                    } else {
+                        binding.fragmentCommunityWeeklyShowScrapsUpIv.setImageResource(R.drawable.ic_scraps_up)
                     }
                 }
             }
