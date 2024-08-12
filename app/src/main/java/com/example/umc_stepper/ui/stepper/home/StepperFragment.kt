@@ -3,7 +3,6 @@ package com.example.umc_stepper.ui.stepper.home
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
