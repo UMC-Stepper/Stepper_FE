@@ -7,7 +7,7 @@
             type="com.example.umc_stepper.utils.listener.ItemClickListener" />
         <variable
             name="listItem"
-            type="com.example.umc_stepper.domain.model.Exercise2Data" />
+            type="com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,7 +20,7 @@
 
 
         <ImageView
-            app:imageUrl="@{listItem.thumbnail}"
+            app:imageUrl="@{listItem.video_image}"
             android:id="@+id/item_collocate_my_exercise_thumbnail_iv"
             android:layout_width="138dp"
             android:layout_height="78dp"
@@ -38,7 +38,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/pretendard_semi_bold"
-            android:text="@{listItem.title}"
+            android:text="@{listItem.video_title}"
             android:textColor="@color/White"
             app:layout_constraintStart_toEndOf="@id/item_collocate_my_exercise_thumbnail_iv"
             app:layout_constraintTop_toTopOf="@id/item_collocate_my_exercise_thumbnail_iv" />
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:fontFamily="@font/pretendard_regular"
-            android:text="@{listItem.channelName}"
+            android:text="@{listItem.channel_name}"
             android:textColor="@color/White"
             app:layout_constraintBottom_toBottomOf="@id/item_collocate_my_exercise_thumbnail_iv"
             app:layout_constraintStart_toStartOf="@id/item_collocate_my_exercise_title_tv" />

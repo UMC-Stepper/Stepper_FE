@@ -31,41 +31,41 @@
 
                 <TextView
                     android:id="@+id/fragment_community_home_toolbar_title_tv"
+                    style="@style/sub_title_bold_16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="COMMUNITY"
-                    style="@style/sub_title_bold_16" />
+                    android:text="COMMUNITY" />
 
                 <TextView
+                    android:id="@+id/fragment_community_home_toolbar_select_tag_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/fragment_community_home_toolbar_select_tag_tv"
+                    android:layout_marginStart="16dp"
                     android:background="@drawable/selector_tag"
+                    android:paddingStart="12dp"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="4dp"
                     android:text="무릎, 다리"
                     android:textColor="@color/Yellow_500"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:paddingTop="4dp"
-                    android:visibility="gone"
-                    android:paddingBottom="4dp"
-                    android:layout_marginStart="16dp"/>
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/fragment_community_home_toolbar_go_menu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
                     android:layout_gravity="end"
-                    android:src="@drawable/ic_toolbar_community_menu"/>
+                    android:layout_marginEnd="30dp"
+                    android:src="@drawable/ic_toolbar_community_menu" />
 
                 <ImageView
                     android:id="@+id/fragment_community_home_toolbar_go_search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
                     android:layout_gravity="end"
-                    android:src="@drawable/ic_toolbar_community_search"/>
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/ic_toolbar_community_search" />
             </com.google.android.material.appbar.MaterialToolbar>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -115,12 +115,10 @@
                     android:id="@+id/fragment_community_home_go_weekly_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="36dp"
                     android:src="@drawable/ic_go_community"
-                    android:layout_marginStart="34dp"
-                    android:layout_marginEnd="34dp"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_sub_title_tv"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/fragment_community_home_sub_title_tv"
                     app:layout_constraintTop_toTopOf="@+id/fragment_community_home_sub_title_tv" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -141,9 +139,10 @@
                 android:id="@+id/fragment_community_home_head_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_community_head"
                 android:layout_marginTop="12dp"
-                android:layout_marginStart="26dp"
+                android:src="@drawable/ic_community_head"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_community_home_chest_iv"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_part_title_tv" />
 
@@ -163,9 +162,10 @@
                 android:id="@+id/fragment_community_home_chest_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
                 android:src="@drawable/ic_community_chest"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_head_iv"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_community_home_stomach_iv"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/fragment_community_home_head_iv"
                 app:layout_constraintTop_toTopOf="@+id/fragment_community_home_head_iv" />
 
@@ -185,9 +185,10 @@
                 android:id="@+id/fragment_community_home_stomach_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
                 android:src="@drawable/ic_community_stomach"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_chest_iv"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_community_home_pelvis_iv"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/fragment_community_home_chest_iv"
                 app:layout_constraintTop_toTopOf="@+id/fragment_community_home_chest_iv" />
 
@@ -207,9 +208,10 @@
                 android:id="@+id/fragment_community_home_pelvis_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
                 android:src="@drawable/ic_community_pelvis"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_stomach_iv"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_community_home_arm_iv"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/fragment_community_home_stomach_iv"
                 app:layout_constraintTop_toTopOf="@+id/fragment_community_home_stomach_iv" />
 
@@ -229,9 +231,10 @@
                 android:id="@+id/fragment_community_home_arm_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
                 android:src="@drawable/ic_community_arm"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_pelvis_iv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/fragment_community_home_pelvis_iv"
                 app:layout_constraintTop_toTopOf="@+id/fragment_community_home_pelvis_iv" />
 
@@ -253,7 +256,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:src="@drawable/ic_community_leg"
-                app:layout_constraintStart_toStartOf="@+id/fragment_community_home_head_tv"
+                app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_head_iv"
+                app:layout_constraintStart_toStartOf="@+id/fragment_community_home_head_iv"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_head_tv" />
 
             <TextView
@@ -272,10 +276,10 @@
                 android:id="@+id/fragment_community_home_back_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
                 android:src="@drawable/ic_community_back"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_leg_iv"
-                app:layout_constraintStart_toEndOf="@+id/fragment_community_home_leg_iv"
+                app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_chest_iv"
+                app:layout_constraintStart_toStartOf="@+id/fragment_community_home_chest_iv"
                 app:layout_constraintTop_toTopOf="@+id/fragment_community_home_leg_iv" />
 
             <TextView
@@ -294,10 +298,10 @@
                 android:id="@+id/fragment_community_home_waist_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
                 android:src="@drawable/ic_community_waist"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_back_iv"
-                app:layout_constraintStart_toEndOf="@+id/fragment_community_home_back_iv"
+                app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_stomach_iv"
+                app:layout_constraintStart_toStartOf="@+id/fragment_community_home_stomach_iv"
                 app:layout_constraintTop_toTopOf="@+id/fragment_community_home_back_iv" />
 
             <TextView
@@ -316,10 +320,10 @@
                 android:id="@+id/fragment_community_home_foot_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
                 android:src="@drawable/ic_community_foot"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_waist_iv"
-                app:layout_constraintStart_toEndOf="@+id/fragment_community_home_waist_iv"
+                app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_pelvis_iv"
+                app:layout_constraintStart_toStartOf="@+id/fragment_community_home_pelvis_iv"
                 app:layout_constraintTop_toTopOf="@+id/fragment_community_home_waist_iv" />
 
             <TextView
@@ -339,11 +343,11 @@
                 android:layout_width="0dp"
                 android:layout_height="75dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
                 android:layout_marginTop="35dp"
+                android:layout_marginEnd="24dp"
                 android:layout_marginBottom="35dp"
-                android:src="@drawable/ic_community_logo"
                 android:background="@color/Purple_300"
+                android:src="@drawable/ic_community_logo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
