@@ -29,16 +29,17 @@ class AdditionalExerciseSuccessFragment :
         "오늘 이만큼 추가 운동 했어요!"
     )
 
+    private val btnList: List<String> = listOf(
+        "운동 평가하기",
+        "추가 운동 완료"
+    )
+
     //이거 필요
     private var titleNumber by Delegates.notNull<Int>()
     override fun setLayout() {
         setTitle()
         observeLifeCycle()
         setOnClickBtn()
-        binding.fragmentTodayExerciseSuccessOkBtn.setOnClickListener {
-            goAdditionalExerciseHome()
-        }
-
 
     }
 
@@ -60,6 +61,7 @@ class AdditionalExerciseSuccessFragment :
 
 
                 fragmentTodayExerciseSuccessTitleTv.text = titleList[titleNumber]
+                fragmentTodayExerciseSuccessOkBtn.text= btnList[titleNumber]
                 resultTimeData = time
             }
         }
@@ -82,6 +84,16 @@ class AdditionalExerciseSuccessFragment :
                             seconds = binding.fragmentTodayExerciseSuccessSecondTv.text.toString()
                         )
                     )
+                    val hour = binding.fragmentTodayExerciseSuccessHourTv.text.toString()
+                    val minute = binding.fragmentTodayExerciseSuccessMinuteTv.text.toString()
+                    val seconds = binding.fragmentTodayExerciseSuccessSecondTv.text.toString()
+
+                    val bundle = Bundle().apply {
+                        putString("hour", hour)
+                        putString("minute", minute)
+                        putString("seconds", seconds)
+                    }
+                    findNavController().navigate(R.id.action_fragmentAdditionalExerciseSuccess_to_additionalExerciseHomeFragment,bundle)
                 }
 
                 else -> {
@@ -103,18 +115,5 @@ class AdditionalExerciseSuccessFragment :
                 }
             }
         }
-    }
-
-    private fun goAdditionalExerciseHome(){
-        val hour = binding.fragmentTodayExerciseSuccessHourTv.text.toString()
-        val minute = binding.fragmentTodayExerciseSuccessMinuteTv.text.toString()
-        val seconds = binding.fragmentTodayExerciseSuccessSecondTv.text.toString()
-
-        val bundle = Bundle().apply {
-            putString("hour", hour)
-            putString("minute", minute)
-            putString("seconds", seconds)
-        }
-        findNavController().navigate(R.id.action_fragmentAdditionalExerciseSuccess_to_additionalExerciseHomeFragment,bundle)
     }
 }
