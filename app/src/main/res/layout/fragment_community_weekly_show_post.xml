@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="apiResponsePostViewResponse"
+            type="com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostViewResponse" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,7 +32,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginStart="58dp"
             android:layout_marginEnd="58dp"
-            android:text="평소에 잘 안하다가\n요즘에 빠진 운동을 추천해 주세요!"
+            android:text="주간미션"
             android:textAlignment="center"
             android:textColor="@color/White"
             app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="예니"
+                    android:text="@{apiResponsePostViewResponse.authorEmail}"
                     android:textColor="@color/White"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_community_weekly_show_post_profile_iv"
                     app:layout_constraintStart_toEndOf="@+id/fragment_community_weekly_show_post_profile_iv"
@@ -91,22 +97,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:text="24.07.17"
+
                     android:textColor="@color/Purple_Gray"
                     app:layout_constraintStart_toStartOf="@+id/fragment_community_weekly_show_post_profile_iv"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_community_weekly_show_post_profile_iv" />
 
-                <TextView
-                    android:id="@+id/fragment_community_weekly_show_post_time_tv"
-                    style="@style/body_regular_14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="21:50"
-                    android:textColor="@color/Purple_Gray"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_community_weekly_show_post_date_tv"
-                    app:layout_constraintStart_toEndOf="@+id/fragment_community_weekly_show_post_date_tv"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_community_weekly_show_post_date_tv" />
 
                 <ImageView
                     android:id="@+id/fragment_community_weekly_show_thumbs_up_iv"
@@ -114,9 +109,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
                     android:src="@drawable/ic_thumbs_up"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_community_weekly_show_post_time_tv"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_community_weekly_show_post_date_tv"
                     app:layout_constraintEnd_toStartOf="@+id/fragment_community_weekly_show_thumbs_up_tv"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_community_weekly_show_post_time_tv" />
+                    app:layout_constraintTop_toTopOf="@+id/fragment_community_weekly_show_post_date_tv" />
 
                 <TextView
                     android:id="@+id/fragment_community_weekly_show_thumbs_up_tv"
@@ -125,7 +120,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="12dp"
-                    android:text="7"
+                    android:text="@{String.valueOf(apiResponsePostViewResponse.likes)}"
                     android:textColor="@color/Yellow_300"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_community_weekly_show_thumbs_up_iv"
                     app:layout_constraintEnd_toStartOf="@+id/fragment_community_weekly_show_scraps_up_iv"
@@ -148,7 +143,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="12dp"
-                    android:text="2"
+                    android:text="@{String.valueOf(apiResponsePostViewResponse.scraps)}"
                     android:textColor="@color/Yellow_300"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_community_weekly_show_scraps_up_iv"
                     app:layout_constraintEnd_toStartOf="@+id/fragment_community_weekly_show_reply_up_iv"
@@ -171,7 +166,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="24dp"
-                    android:text="1"
+                    android:text="@{String.valueOf(apiResponsePostViewResponse.commentsCount)}"
                     android:textColor="@color/Yellow_300"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_community_weekly_show_reply_up_iv"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -185,7 +180,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="24dp"
-                    android:text="사전에 설정한 복부 운동하면서 더 부위가 아파졌어요."
+                    android:text="@{apiResponsePostViewResponse.title}"
                     android:textColor="@color/White"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -199,7 +194,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
-                    android:text="사전에 설정한 복부 운동하면서 더 부위가 아파졌어요."
+                    android:text="@{apiResponsePostViewResponse.body}"
                     android:textColor="@color/White"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

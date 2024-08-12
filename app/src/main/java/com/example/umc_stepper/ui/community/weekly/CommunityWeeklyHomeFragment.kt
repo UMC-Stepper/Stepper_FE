@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentCommunityWeeklyHomeBinding
@@ -23,6 +24,12 @@ class CommunityWeeklyHomeFragment : BaseFragment<FragmentCommunityWeeklyHomeBind
 
     override fun setLayout() {
         updateMainToolbar()
+
+        // 임시 버튼
+        binding.fragmentCommunityWeeklyHomeTitleConstraint.setOnClickListener {
+            val action = CommunityWeeklyHomeFragmentDirections.actionCommunityWeeklyHomeFragmentToCommunityWeeklyShowPostFragment()
+            findNavController().navigate(action.actionId)
+        }
     }
 
     private fun updateMainToolbar() {

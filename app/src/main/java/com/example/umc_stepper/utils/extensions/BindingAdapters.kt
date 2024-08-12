@@ -2,11 +2,14 @@ package com.example.umc_stepper.utils.extensions
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.umc_stepper.R
 import com.example.umc_stepper.domain.model.local.ExerciseState
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 object BindingAdapters {
     @JvmStatic
@@ -25,6 +28,27 @@ object BindingAdapters {
             .load(url)
             .apply(RequestOptions().centerCrop())
             .into(view)
+    }
+
+    @JvmStatic
+    @BindingAdapter("app:setTime")
+    fun setTimeTv(view: TextView, createdAt: String) {
+        if (createdAt.isNullOrEmpty()) {
+            // Null 또는 빈 문자열인 경우 기본 값 또는 오류 메시지 설정
+            view.text = "Unknown Date"
+            return
+        }
+
+        try {
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS", Locale.getDefault()) // 입력 문자열 형식 정의
+            val outputFormat = SimpleDateFormat("dd.MM.yy HH:mm", Locale.getDefault())   // 원하는 출력 형식 정의
+            val date = inputFormat.parse(createdAt)  // 문자열을 Date 객체로 파싱
+            val formattedDate = date?.let { outputFormat.format(it) }   // Date 객체를 원하는 문자열 형식으로 포맷
+            view.text = formattedDate
+        } catch (e: Exception) {
+            view.text = "Invalid Date"
+            e.printStackTrace()
+        }
     }
 
     @JvmStatic
