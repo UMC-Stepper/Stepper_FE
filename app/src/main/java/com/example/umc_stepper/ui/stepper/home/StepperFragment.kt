@@ -98,9 +98,10 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
         firstConnect()
         init()
         setTitle()
-        //임시함수적용: 추후 아래의 goCommunityIndex()함수와 함께 꼭 삭제
+        //임시함수적용: 추후 아래의 goCommunityIndex(), goTodayExercise()함수와 함께 꼭 삭제
         binding.stepperMonthTitleTv.setOnClickListener {
-            goCommunityIndex()
+            //goCommunityIndex()
+            goTodayExercise()
         }
 
         //임시함수적용: 추후 아래의 goCommunityPartHome()함수와 함께 꼭 삭제
@@ -125,6 +126,11 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
     //임시함수(꼭 추후삭제) 커뮤니티 부위별 게시판홈으로 이동
     private fun goCommunityPartHome() {
         findNavController().navigate(R.id.action_stepperFragment_to_communityPartHomeFragment)
+    }
+
+    //임시함수(꼭 추후삭제) 오늘의 운동하기으로 이동
+    private fun goTodayExercise() {
+        findNavController().navigate(R.id.action_stepperFragment_to_fragmentTodayExercise)
     }
 
 
