@@ -25,7 +25,7 @@ class CommunityViewModel @Inject constructor(
     private val _communityMyCommentsResponseItem = MutableStateFlow<BaseListResponse<CommunityMyCommentsResponseItem>>(BaseListResponse())
     val communityMyCommentsResponseItem : StateFlow<BaseListResponse<CommunityMyCommentsResponseItem>> = _communityMyCommentsResponseItem
 
-    // 게시글 상세조회
+    // 게시글 상세 조회
     private val _apiResponsePostViewResponse = MutableStateFlow<BaseResponse<ApiResponsePostViewResponse>>(BaseResponse())
     val apiResponsePostViewResponse : StateFlow<BaseResponse<ApiResponsePostViewResponse>> = _apiResponsePostViewResponse
 
@@ -44,6 +44,13 @@ class CommunityViewModel @Inject constructor(
     // 스크랩 취소
     private val _scrapCancelResponse = MutableStateFlow<BaseResponse<String>>(BaseResponse())
     val scrapCancelResponse : StateFlow<BaseResponse<String>> = _scrapCancelResponse
+
+    // 상태 변수 추가
+    private val _isScrap = MutableStateFlow(false)
+    val isScrap: StateFlow<Boolean> = _isScrap
+
+    private val _isLike = MutableStateFlow(false)
+    val isLike: StateFlow<Boolean> = _isLike
 
 
     // 내가 작성한 댓글의 게시글 조회
@@ -80,6 +87,8 @@ class CommunityViewModel @Inject constructor(
             try {
                 communityApiRepository.postLikeEdit(postId).collect {
                     _likeResponse.value = it
+                    getDetailPost(postId)
+                    _isLike.value = true
                     Log.d("CommunityViewModel", "_likeResponse : $it")
                 }
             } catch (e:Exception) {
@@ -94,6 +103,8 @@ class CommunityViewModel @Inject constructor(
             try {
                 communityApiRepository.deleteCancelLike(postId).collect {
                     _likeCancelResponse.value = it
+                    getDetailPost(postId)
+                    _isLike.value = false
                     Log.d("CommunityViewModel", "_likeResponse : $it")
                 }
             } catch (e:Exception) {
@@ -102,11 +113,14 @@ class CommunityViewModel @Inject constructor(
         }
     }
 
+    // 스크랩 등록
     fun postCommitScrap(postId: Int) {
         viewModelScope.launch {
             try {
                 communityApiRepository.postCommitScrap(postId).collect {
                     _scrapResponse.value = it
+                    getDetailPost(postId)
+                    _isScrap.value = true
                     Log.d("CommunityViewModel", "_scrapResponse : $it")
                 }
             } catch (e:Exception) {
@@ -122,6 +136,8 @@ class CommunityViewModel @Inject constructor(
             try {
                 communityApiRepository.deleteCancelScrap(postId).collect {
                     _scrapCancelResponse.value = it
+                    getDetailPost(postId)
+                    _isScrap.value = false
                     Log.d("CommunityViewModel", "_scrapResponse : $it")
                 }
             } catch (e:Exception) {
