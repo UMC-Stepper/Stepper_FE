@@ -24,6 +24,9 @@ class CommunityApiRepositoryImpl @Inject constructor(
     override suspend fun postCommitScrap(postId : Int): Flow<BaseResponse<ScrapResponse>> =
         dataSource.postCommitScrap(postId)
 
+    override suspend fun deleteCancelScrap(postId: Int): Flow<BaseResponse<String>> =
+        dataSource.deleteCancelScrap(postId)
+
     override suspend fun getCommunityMyPosts(): Flow<BaseListResponse<CommunityMyPostsResponseItem>> =
         dataSource.getCommunityMyPosts()
 

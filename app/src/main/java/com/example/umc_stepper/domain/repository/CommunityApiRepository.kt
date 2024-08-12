@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface CommunityApiRepository {
     suspend fun postCommitScrap(postId: Int): Flow<BaseResponse<ScrapResponse>>
+    suspend fun deleteCancelScrap(postId: Int): Flow<BaseResponse<String>>
     suspend fun postLikeEdit(postId: Int): Flow<BaseResponse<LikeResponse>>
     suspend fun deleteCancelLike(postId: Int): Flow<BaseResponse<String>>
     suspend fun postEditPost(): Flow<BaseResponse<ApiResponsePostResponse>>
