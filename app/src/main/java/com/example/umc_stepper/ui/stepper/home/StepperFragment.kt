@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentStepperBinding
+import com.example.umc_stepper.domain.model.response.Badge
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ToDayExerciseResponseDto
 import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
 import com.example.umc_stepper.token.TokenManager
@@ -22,6 +23,7 @@ import com.example.umc_stepper.utils.listener.AdapterNextClick
 import com.example.umc_stepper.utils.listener.ItemClickListener
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
@@ -31,15 +33,15 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_stepper),
     ItemClickListener, AdapterNextClick {
+
     private lateinit var recyclerAdapter: ExerciseViewAdapter
     private val stepperViewModel: StepperViewModel by activityViewModels()
-    lateinit var days: List<DayData>
+    lateinit var days: MutableList<DayData> // MutableList로 변경하여 수정 가능하도록
     private lateinit var mainActivity: MainActivity
     val todayViewModel: TodayViewModel by activityViewModels()
 
     @Inject
     lateinit var tokenManager: TokenManager
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -47,11 +49,11 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
     }
 
     private fun setTitle() {
-        mainActivity.updateToolbarTitle("STEPPER") //타이틀 세팅
+        mainActivity.updateToolbarTitle("STEPPER") // 타이틀 세팅
     }
 
     override fun setLayout() {
-        days = listOf(
+        days = mutableListOf(
             DayData("월", false, false),
             DayData("화", false, false),
             DayData("수", false, false),
@@ -70,14 +72,14 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
             DayData("6", false, false),
             DayData("7", false, false),
             DayData("8", false, false),
-            DayData("9", true, false),
+            DayData("9", false, false),
             DayData("10", false, false),
             DayData("11", false, false),
             DayData("12", false, false),
             DayData("13", false, false),
             DayData("14", false, false),
             DayData("15", false, false),
-            DayData("16", false, true),
+            DayData("16", false, false),
             DayData("17", false, false),
             DayData("18", false, false),
             DayData("19", false, false),
@@ -87,7 +89,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
             DayData("23", false, false),
             DayData("24", false, false),
             DayData("25", false, false),
-            DayData("26", true, false),
+            DayData("26", false, false),
             DayData("27", false, false),
             DayData("28", false, false),
             DayData("29", false, false),
@@ -100,7 +102,6 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
         setTitle()
         //임시함수적용: 추후 아래의 goCommunityIndex(), goTodayExercise()함수와 함께 꼭 삭제
         binding.stepperMonthTitleTv.setOnClickListener {
-            //goCommunityIndex()
             goTodayExercise()
         }
 
@@ -113,6 +114,36 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
             goAdditionalExerciseHome()
         }
     }
+
+    private fun observeExerciseMonthCheck() {
+        val month = LocalDate.now().monthValue
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                todayViewModel.getExerciseMonthCheck(month)
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            todayViewModel.exerciseCardStatusResponseDto.collect { response ->
+                val monthExercise = response.result
+                monthExercise?.forEach { exercise ->
+                    val dayOfMonth = exercise.date.substring(8, 10).toInt() // 날짜의 일 부분만 추출+정수 변환
+                    // days 리스트에서 position 값이 10 이상 40 이하인 항목 중 -> day가 일치하는 항목 찾아내기
+                    days.forEachIndexed { index, dayData ->
+                        if (index in 10..40 && dayData.day.toIntOrNull() == dayOfMonth) {
+                            days[index] = dayData.copy(
+                                hasDot = !exercise.status,  // status가 false일 때 hasDot을 true로 설정
+                                hasIcon = exercise.status   // status가 true일 때 hasIcon을 true로 설정
+                            )
+                        }
+                    }
+                }
+                // Adapter에 데이터 변경 알림
+                (binding.stepperCalendarGv.adapter as CalendarAdapter).notifyDataSetChanged()
+            }
+        }
+    }
+
 
     private fun goAdditionalExerciseHome() {
         findNavController().navigate(R.id.action_stepperFragment_to_additionalExerciseHomeFragment)
@@ -158,6 +189,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
         binding.stepperExerciseRv.adapter = recyclerAdapter
 
         observeLifecycle()
+        observeExerciseMonthCheck()
 
     }
 
