@@ -38,6 +38,7 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
         updateMainToolbar()
         setAdapter()
         observeViewModel()
+        setImageView()
     }
 
     private fun setAdapter() {
@@ -46,6 +47,24 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
 
         weeklyShowPostReplyAdapter = WeeklyShowPostReplyAdapter()
         binding.fragmentCommunityWeeklyShowPostReplyRv.adapter = weeklyShowPostReplyAdapter
+    }
+
+    private fun setImageView() {
+        binding.fragmentCommunityWeeklyShowThumbsUpIv.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    communityViewModel.postLikeEdit(3)
+                }
+            }
+        }
+
+        binding.fragmentCommunityWeeklyShowScrapsUpIv.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    communityViewModel.postCommitScrap(3)
+                }
+            }
+        }
     }
 
     private fun observeViewModel() {
@@ -64,7 +83,7 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
 
                             // 입출력 데이터 포맷 설정
                             val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
-                            val outputFormat = SimpleDateFormat("dd.MM.yy HH:mm", Locale.getDefault())
+                            val outputFormat = SimpleDateFormat("yy.MM.dd  HH:mm", Locale.getDefault())
 
                             // 날짜 파싱 및 변환
                             val date = inputFormat.parse(it.result?.updatedAt)
@@ -72,18 +91,6 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
                         }
                     }
                 }
-            }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-
-            }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-
             }
         }
     }
