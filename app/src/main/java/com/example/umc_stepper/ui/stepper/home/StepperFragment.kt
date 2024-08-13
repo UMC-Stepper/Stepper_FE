@@ -214,6 +214,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
             saveExerciseCardId(item.id.toString())
             Log.d("아이디", item.id.toString())
             val bd = Bundle()
+
             val pickItem = item.stepList.first { it.stepId == id }
             with(pickItem) {
                 val checkExerciseResponse = CheckExerciseResponse(
@@ -228,12 +229,16 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
                 val stepList = gson.toJson(item.stepList)
                 //step Id 전송
                 bd.putInt("stepId", id)
+                //step 전송
+                bd.putInt("step",pickItem.step)
                 //stepList 전송
                 bd.putString("stepList", stepList)
                 //유투부 정보 전송
                 bd.putString("myExercise", myExerciseJson)
                 //운동 타입 ( 0 : 오늘의 운동 , 1 : 추가 운동)
                 bd.putInt("exerciseType", 0)
+                //운동 아이디
+                bd.putInt("exerciseId",item.id)
             }
             findNavController().navigateSafe(
                 R.id.action_stepperFragment_to_fragmentTodayExercise,
@@ -246,6 +251,9 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
         lifecycleScope.launch {
             tokenManager.deleteExerciseCardId()
             tokenManager.saveExerciseCardId(id)
+            Log.d("토큰1",id)
         }
+
+
     }
 }
