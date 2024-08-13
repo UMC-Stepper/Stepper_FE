@@ -5,6 +5,7 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->  <!-- 툴바 기본 색상 -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:fontFamily">@font/base_font</item>
         <item name="android:colorBackground">@color/Purple_Black_BG_1</item>
 
         <!-- Status Bar -->
