@@ -4,9 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
@@ -14,10 +11,7 @@ import com.example.umc_stepper.databinding.FragmentTodayExerciseSuccessBinding
 import com.example.umc_stepper.domain.model.Time
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.stepper.StepperViewModel
-import com.example.umc_stepper.utils.extensions.navTop
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import kotlin.properties.Delegates
 import com.google.gson.Gson
 
@@ -47,9 +41,7 @@ class AdditionalExerciseSuccessFragment :
     override fun setLayout() {
         updateMainToolbar()
         setTitle()
-        observeLifeCycle()
         setOnClickBtn()
-
     }
 
 
@@ -81,7 +73,8 @@ class AdditionalExerciseSuccessFragment :
             when (titleNumber) {
                 0 -> {
                     //운동
-                    findNavController().navTop(R.id.action_fragmentAdditionalExerciseSuccess_to_fragmentEvaluationExercise)
+                    val action = AdditionalExerciseSuccessFragmentDirections.actionFragmentAdditionalExerciseSuccessToFragmentEvaluationExercise()
+                    findNavController().navigateSafe(action.actionId)
                 }
 
                 1 -> {
@@ -102,25 +95,12 @@ class AdditionalExerciseSuccessFragment :
                         putString("minute", minute)
                         putString("seconds", seconds)
                     }
-                    findNavController().navigate(R.id.action_fragmentAdditionalExerciseSuccess_to_additionalExerciseHomeFragment,bundle)
+                    val action = AdditionalExerciseSuccessFragmentDirections.actionFragmentAdditionalExerciseSuccessToAdditionalExerciseHomeFragment()
+                    findNavController().navigateSafe(action.actionId, bundle)
                 }
 
                 else -> {
 
-                }
-            }
-        }
-    }
-
-    private fun observeLifeCycle() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                stepperViewModel.addTimeState.collectLatest {
-                    if (it.isSuccess) {
-                        val action =
-                            R.id.action_fragmentAdditionalExerciseSuccess_to_additionalExerciseHomeFragment
-                        findNavController().navTop(action)
-                    }
                 }
             }
         }
