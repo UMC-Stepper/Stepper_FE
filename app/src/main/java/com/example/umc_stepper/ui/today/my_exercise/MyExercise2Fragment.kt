@@ -53,6 +53,8 @@ class MyExercise2Fragment :
         observeLifeCycle()
     }
 
+
+    //어댑터 초기화
     private fun initAdapter() {
         tagAdapter = TageAdapter(todayViewModel)
         itemAdapter = MyExercise2Adapter(this)
@@ -61,8 +63,8 @@ class MyExercise2Fragment :
         binding.fragmentMyExercise2YoutubeCardRv.adapter = itemAdapter
     }
 
+    // 유튜브에서 불러오기 버튼 클릭
     private fun setButton() {
-        // 유튜브에서 불러오기 버튼 클릭
         binding.fragmentMyExercise2YoutubeBtn.setOnClickListener {
             val action =
                 MyExercise2FragmentDirections.actionFragmentMyExercise2ToFragmentMyExercise3()
