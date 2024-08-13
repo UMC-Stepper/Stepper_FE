@@ -1,5 +1,7 @@
 package com.example.umc_stepper.ui
 
+import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
@@ -7,10 +9,12 @@ import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.umc_stepper.R
@@ -21,7 +25,6 @@ import com.example.umc_stepper.ui.community.CommunityViewModel
 import com.example.umc_stepper.ui.login.LoginViewModel
 import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.example.umc_stepper.ui.today.TodayViewModel
-import com.example.umc_stepper.utils.extensions.navigateSafe
 import com.example.umc_stepper.utils.extensions.navigateToTopLevelDestination
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
@@ -42,6 +45,27 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     //    private lateinit var mainViewModel: MainViewModel
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var communityViewModel: CommunityViewModel
+
+    private val communityFragments = setOf(
+        R.id.communityHomeFragment,
+        R.id.communitySearchFragment,
+        R.id.communityWeeklyHomeFragment,
+        R.id.communityWeeklyShowPostFragment,
+        R.id.weeklyEditFragment,
+        R.id.weeklySegmentEditFragment,
+        R.id.communityMyCommentsFragment,
+        R.id.communityMyScrapFragment,
+        R.id.communityIndexFragment,
+        R.id.communityIndexPostFragment,
+        //R.id.communityIndexPostPartFragment,
+        //R.id.communityIndexWeeklyFragment,
+        R.id.communityPartHomeFragment,
+        //R.id.communityPartAskFragment,
+        //R.id.communityPartFreeFragment,
+        //R.id.communityPartHomeHealthFragment,
+        //R.id.communityPartHomeMotivationFragment,
+        R.id.communityPartShowPostFragment
+    )
 
     override fun setLayout() {
         confirmAccessToken()
@@ -65,7 +89,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         }
     }
 
-
     private fun confirmAccessToken() {
         lifecycleScope.launch {
             val token = tokenManager.getAccessToken().first() // Flow에서 첫 번째 값을 가져옴
@@ -76,9 +99,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private fun setViewModel() {
         todayViewModel = ViewModelProvider(this)[TodayViewModel::class.java]
         stepperViewModel = ViewModelProvider(this)[StepperViewModel::class.java]
-//        mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        //mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
         communityViewModel = ViewModelProvider(this)[CommunityViewModel::class.java]
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+    }
+
+    private fun updateToolbarClickListeners(destinationId: Int) {
+        val currentFragmentId = navController.currentDestination?.id
+
+        if (currentFragmentId in communityFragments) {
+            setToolbarCommunityClickListener()
+        } else {
+            setToolbarBasicClickListener()
+        }
     }
 
     private fun setNavigation() {
@@ -91,6 +124,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         navController = host.navController
         mainBottomNavigationBar.apply {
             setupWithNavController(navController)
+        }
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            updateToolbarClickListeners(destination.id)
         }
 
         // 최상위 프래그먼트 이동 설정 (투데이, 뱃지, 스태퍼, 커뮤니티, 설정)
@@ -157,7 +194,94 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         return super.dispatchTouchEvent(ev)
     }
 
+    // 커뮤니티 클릭 리스너
+    private fun setToolbarCommunityClickListener() {
 
+        // 커뮤니티 홈
+        binding.mainToolbarBackIv.setOnClickListener {
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(navController.graph.startDestinationId, true)
+                .build()
+
+            navController.navigate(
+                R.id.communityHomeFragment,
+                null,
+                navOptions
+            )
+        }
+
+        // 검색
+        binding.mainToolbarGoToday.setOnClickListener {
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(navController.graph.startDestinationId, true)
+                .build()
+
+            navController.navigate(
+                R.id.communitySearchFragment,
+                null,
+                navOptions
+            )
+        }
+
+        // 목록
+        binding.mainToolbarGoStepper.setOnClickListener {
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(navController.graph.startDestinationId, true)
+                .build()
+
+            navController.navigate(
+                R.id.communityIndexFragment,
+                null,
+                navOptions
+            )
+        }
+    }
+
+    // 기본 클릭 리스너
+    private fun setToolbarBasicClickListener() {
+
+        // BackPressedDispatcher 설정
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (!navController.navigateUp()) {
+                    super.handleOnBackCancelled()
+                }
+            }
+        })
+
+        // 뒤로 가기
+        binding.mainToolbarBackIv.setOnClickListener {
+            if (!navController.navigateUp()) {
+                onBackPressedDispatcher.onBackPressed()
+            }
+        }
+
+        // 투데이 버튼
+        binding.mainToolbarGoToday.setOnClickListener {
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(navController.graph.startDestinationId, true)
+                .build()
+
+            navController.navigate(
+                R.id.todayHomeFragment,
+                null,
+                navOptions
+            )
+        }
+
+        // 스테퍼 버튼
+        binding.mainToolbarGoStepper.setOnClickListener {
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(navController.graph.startDestinationId, true)
+                .build()
+
+            navController.navigate(
+                R.id.stepperFragment,
+                null,  // arguments
+                navOptions  // 백스택 제거 옵션 적용
+            )
+        }
+    }
 
     // 툴바 타이틀 변경 함수
     fun updateToolbarTitle(title: String) {
