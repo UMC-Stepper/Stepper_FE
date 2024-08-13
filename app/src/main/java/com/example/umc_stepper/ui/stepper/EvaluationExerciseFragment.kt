@@ -29,7 +29,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class EvaluationExerciseFragment :
-    BaseFragment<FragmentEvaluationExerciseBinding>(R.layout.fragment_evaluation_exercise) {
+    BaseFragment<FragmentEvaluationExerciseBinding>(R.layout.fragment_evaluation_exercise) {    // 평가 일지 작성
     @Inject
     lateinit var tokenManager: TokenManager
     val stepperViewModel: StepperViewModel by activityViewModels()
@@ -51,9 +51,12 @@ class EvaluationExerciseFragment :
         mainActivity = context as MainActivity
     }
 
-    private fun setTitle() {
+    private fun setToolbar() {
         mainActivity.setBg()
-        mainActivity.updateToolbarLeftPlusImg("07.09", "무릎, 다리") //타이틀 세팅
+        mainActivity.updateToolbarTitle("운동 평가하기")
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
+        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
+        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
     }
 
     override fun setLayout() {
@@ -71,7 +74,7 @@ class EvaluationExerciseFragment :
     private fun initSetting() {
 //        initActivityResultLauncher()
         observeLifeCycle()
-        setTitle()
+        setToolbar()
         setImageView()
         setList()
         setScoreText()
@@ -213,20 +216,20 @@ class EvaluationExerciseFragment :
 
             stateTitleList = listOf(
                 "완전 괜찮아요",
+                "조금 덜 아팠어요",
                 "큰 차이가 없어요",
                 "조금 더 불편해요",
-                "완전 아파요",
-                "조금 덜 아팠어요"
+                "많이 아파요",
             )
 
             descriptionList = listOf(
-                "온전한 상태로 회복하고 있는 것 같네요! 오늘 운동도 고생 많았어요 \n" +
+                "온전한 상태로 회복하고 있는 것 같네요!\n오늘 운동도 고생 많았어요\n" +
                         "차트에 오늘 컨디션 기록할게요!",
                 "점점 나아지고 있는 모습 보기 좋아요!\n" +
                         "오늘 운동도 고생 많았어요 \n" +
                         "차트에 오늘 컨디션 기록할게요!",
                 "꾸준히 운동을 하면서 통증을 함께 더 \n" +
-                        "줄여나가 봅시다! 오늘 운동도 고생 많았어요\n" +
+                        "줄여나가 봅시다!\n오늘 운동도 고생 많았어요\n" +
                         "차트에 오늘 컨디션 기록할게요!",
                 "오늘 운동할 때 몸이 많이 불편했나요? \n" +
                         "스트레칭으로 충분히 몸을 풀어주세요. \n" +
