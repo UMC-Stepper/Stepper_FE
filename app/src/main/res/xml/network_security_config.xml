@@ -4,6 +4,6 @@
         <domain includeSubdomains="true">34.47.91.218</domain>
     </domain-config>
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">stepper-dev-env.eba-4gp3sbph.ap-northeast-2.elasticbeanstalk.com</domain>
+        <domain includeSubdomains="true">stepper-backend-dev-env.eba-qcmqwumz.ap-northeast-2.elasticbeanstalk.com</domain>
     </domain-config>
 </network-security-config>
