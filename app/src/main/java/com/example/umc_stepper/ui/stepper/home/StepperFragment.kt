@@ -234,6 +234,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
                 bd.putString("myExercise", myExerciseJson)
                 //운동 타입 ( 0 : 오늘의 운동 , 1 : 추가 운동)
                 bd.putInt("exerciseType", 0)
+                bd.putInt("exerciseId",item.id)
             }
             findNavController().navigateSafe(
                 R.id.action_stepperFragment_to_fragmentTodayExercise,
@@ -246,6 +247,9 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
         lifecycleScope.launch {
             tokenManager.deleteExerciseCardId()
             tokenManager.saveExerciseCardId(id)
+            Log.d("토큰1",id)
         }
+
+
     }
 }

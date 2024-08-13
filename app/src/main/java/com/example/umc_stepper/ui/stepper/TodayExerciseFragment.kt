@@ -42,6 +42,9 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
     private var stepIndex = 0
     private lateinit var stepList: List<ExerciseStepResponse>
 
+    @Inject
+    lateinit var tokenManager: TokenManager
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mainActivity = context as MainActivity
@@ -81,13 +84,17 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
     }
 
     override fun setLayout() {
+        val exerciseId = arguments?.getInt("exerciseId") ?: 0
+        postInquiryExerciseCard(exerciseId)
+        Log.d("토큰",exerciseId.toString())
         initSettings()
         initializeToolBar()
 
         // stepId를 전달받아 postInquiryExerciseCard 호출
-        val exerciseId = arguments?.getInt("exerciseId") ?: 0
-        postInquiryExerciseCard(exerciseId)
 
+
+
+        observeExerciseCardResponse()
         completeBtn.setOnClickListener {
             proceedToNextStep()
             dataSetting()
@@ -99,7 +106,6 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
 
     private fun postInquiryExerciseCard(exerciseId: Int) {
         todayViewModel.postInquiryExerciseCard(exerciseId)
-        observeExerciseCardResponse()
     }
 
     private fun observeExerciseCardResponse() {
@@ -111,6 +117,7 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
                         val result = response.result
                         result?.let {
                             stepList = it.stepList
+                            Log.d("크기",stepList.size.toString())
                             updateStep(0) // 첫 단계 설정
                         }
                     }
