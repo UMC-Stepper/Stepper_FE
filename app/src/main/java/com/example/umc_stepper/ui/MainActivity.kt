@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui
 
+import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -20,6 +21,7 @@ import com.example.umc_stepper.ui.community.CommunityViewModel
 import com.example.umc_stepper.ui.login.LoginViewModel
 import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.example.umc_stepper.ui.today.TodayViewModel
+import com.example.umc_stepper.utils.extensions.navigateSafe
 import com.example.umc_stepper.utils.extensions.navigateToTopLevelDestination
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
@@ -47,6 +49,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         setViewModel()
         setNavigation()
     }
+
+    // 카메라 액티비티에서 사진 사용시 메인 액티비티로 이동한 뒤, fragmentEvaluationExercise로 이동
+    override fun onResume() {
+        super.onResume()
+
+        val navigateTo = intent.getStringExtra("navigate_to")
+        val photoUriString = intent.getStringExtra("photo_uri")
+
+        if (navigateTo == "EvaluationExerciseFragment" && photoUriString != null) {
+            val bundle = Bundle().apply {
+                putString("photo_uri", photoUriString)
+            }
+            navController.navigate(R.id.fragmentEvaluationExercise, bundle)
+        }
+    }
+
 
     private fun confirmAccessToken() {
         lifecycleScope.launch {
