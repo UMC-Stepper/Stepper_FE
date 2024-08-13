@@ -98,6 +98,9 @@
         <action
             android:id="@+id/action_todayHomeFragment_to_addExerciseSelectScrapFragment"
             app:destination="@id/addExerciseSelectScrapFragment" />
+        <action
+            android:id="@+id/action_todayHomeFragment_to_stepperFragment"
+            app:destination="@id/stepperFragment" />
     </fragment>
 
     <!-- 스태퍼 평가일지 -->
