@@ -198,4 +198,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         )
     }
 
+    fun setBg2() {
+        binding.mainToolbar.setBackgroundColor(
+            ContextCompat.getColor(
+                this,
+                R.color.Purple_Black_BG_2
+            )
+        )
+    }
+
 }
