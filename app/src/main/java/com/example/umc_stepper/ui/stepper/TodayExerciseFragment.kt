@@ -40,7 +40,7 @@ import kotlin.properties.Delegates
 class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layout.fragment_today_exercise) {
 
     private lateinit var mainActivity: MainActivity
-    private var stepIndex = 0
+    private var stepIndex by Delegates.notNull<Int>()
     private lateinit var stepList: List<ExerciseStepResponse>
 
     @Inject
@@ -88,11 +88,12 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
         val exerciseId = arguments?.getInt("exerciseId") ?: 0
         val step = arguments?.getInt("step") ?: 0
         val stepId = arguments?.getInt("stepId") ?: 0
+        val stepIndex = step - 1
         postInquiryExerciseCard(exerciseId)
         Log.d("토큰", "$exerciseId $step $stepId")
         initSettings()
-        initializeToolBar()
-        updateStep(step - 1) // 단계 설정
+        initializeToolBar(step)
+        updateStep(stepIndex) // 단계 설정
 
 
         observeExerciseCardResponse()
@@ -119,8 +120,7 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
         }
     }
 
-    private fun initializeToolBar(){
-        val step = arguments?.getInt("step") ?: 0
+    private fun initializeToolBar(step: Int){
         mainActivity.updateToolbarTitle("${step}단계 운동 시작하기")
     }
 
@@ -148,7 +148,6 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
     private fun updateStep(stepIndex: Int) {
         if (!::stepList.isInitialized) return
 
-        this.stepIndex = stepIndex
         val currentStep = stepList[stepIndex]
 
         // 툴바 제목 업데이트
