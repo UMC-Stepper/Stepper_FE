@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
+import android.text.TextWatcher
 import android.util.Log
 import android.view.WindowManager
 import androidx.activity.result.ActivityResultLauncher
@@ -24,6 +25,7 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.w3c.dom.Text
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -40,6 +42,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         initPermissionLaunchers()
         checkPermissionsAndProceed()
         setting()
+    }
+
+    private fun activateLoginButton() {
+//        binding.activityLoginEmailEt.addTextChangedListener(object : TextWatcher {
+//
+//        })
+//
+//        binding.activityLoginPasswordEt.addTextChangedListener(object : TextWatcher{
+//
+//        })
     }
 
     private fun setting() {
