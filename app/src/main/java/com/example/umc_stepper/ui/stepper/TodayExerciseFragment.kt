@@ -91,9 +91,7 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
         Log.d("토큰", "$exerciseId $step $stepId")
         initSettings()
         initializeToolBar()
-
-        // stepId를 전달받아 postInquiryExerciseCard 호출
-
+        updateStep(step - 1) // 단계 설정
 
 
         observeExerciseCardResponse()
@@ -119,8 +117,7 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
                         val result = response.result
                         result?.let {
                             stepList = it.stepList
-                            Log.d("크기",stepList.size.toString())
-                            updateStep(0) // 첫 단계 설정
+
                         }
                     }
                 }
