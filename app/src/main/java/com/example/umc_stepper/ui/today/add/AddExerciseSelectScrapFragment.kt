@@ -25,10 +25,10 @@ class AddExerciseSelectScrapFragment :
     private lateinit var mainActivity: MainActivity
     private lateinit var selectScrapListAdapter: SelectScrapListAdapter
     private lateinit var selectScrapBodyPartAdapter: SelectScrapBodyPartAdapter
-    private var stepLevel : Int = 0
-    private var bodyPart : String = ""
+    private var stepLevel: Int = 0
+    private var bodyPart: String = ""
     private lateinit var args: Bundle
-
+    private lateinit var cer: CheckExerciseResponse
     private val todayViewModel: TodayViewModel by activityViewModels()
 
     override fun onAttach(context: Context) {
@@ -84,6 +84,7 @@ class AddExerciseSelectScrapFragment :
         // 스크랩 리스트중 아이템 한 개 클릭하면 버튼 활성화
         selectScrapListAdapter = SelectScrapListAdapter {
             setDataGson(it)
+            cer = it
             binding.fragmentAddExerciseDownloadBtn.isEnabled = true
             binding.fragmentAddExerciseDownloadBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
             binding.fragmentAddExerciseDownloadBtn.setTextColor(
@@ -97,10 +98,7 @@ class AddExerciseSelectScrapFragment :
     private fun setDataGson(item: CheckExerciseResponse) {
         val gson = Gson()
         val checkExerciseResponseJson = gson.toJson(item)
-        todayViewModel.addStep(
-            item
-        )
-        Log.d("크기",checkExerciseResponseJson)
+        Log.d("크기", checkExerciseResponseJson)
         args = Bundle().apply {
             putString("CheckExerciseResponse", checkExerciseResponseJson)
         }
@@ -111,10 +109,8 @@ class AddExerciseSelectScrapFragment :
     }
 
     private fun setButton() {
-
         // 운동 설정 버튼 설정 -> 앞에서 운동 단계 받아야 함
         binding.fragmentAddExerciseDownloadBtn.text = stepLevel.toString() + "단계 운동 설정하기"
-
         binding.fragmentAddExerciseDownloadBtn.setBackgroundResource(R.drawable.radius_corners_61dp_stroke_1)
         binding.fragmentAddExerciseDownloadBtn.setTextColor(
             ContextCompat.getColor(binding.root.context, R.color.Purple_700)
@@ -122,10 +118,8 @@ class AddExerciseSelectScrapFragment :
 
         // 운동 카드 추가 화면으로 되돌아가기 , 서버에서 받은 정보 넘기기
         binding.fragmentAddExerciseDownloadBtn.setOnClickListener {
-
-            val action =
-                AddExerciseSelectScrapFragmentDirections.actionAddExerciseSelectScrapFragmentToFragmentAddExercise2()
-
+            val action = AddExerciseSelectScrapFragmentDirections.actionAddExerciseSelectScrapFragmentToFragmentAddExercise2()
+            todayViewModel.addStep(cer)
             findNavController().navigateSafe(action.actionId)
         }
     }
