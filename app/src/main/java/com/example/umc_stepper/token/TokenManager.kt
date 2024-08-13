@@ -3,6 +3,7 @@ package com.example.umc_stepper.token
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.example.umc_stepper.utils.extensions.datastore
@@ -23,6 +24,9 @@ class TokenManager @Inject constructor(
         private val COOKIE = stringPreferencesKey("cookie")
         private val EXERCISE_ID = stringPreferencesKey("exercise_id")
         private val EXERCISE_CARD_ID = stringPreferencesKey("exercise_card_id")
+
+        private val IS_LIKE_KEY = booleanPreferencesKey("is_like")
+        private val IS_SCRAP_KEY = booleanPreferencesKey("is_scrap")
     }
 
     private val dataStore: DataStore<Preferences> = context.datastore
@@ -78,6 +82,31 @@ class TokenManager @Inject constructor(
     suspend fun deleteAccessToken() {
         dataStore.edit { prefs ->
             prefs.remove(ACCESS_TOKEN_KEY)
+        }
+    }
+
+    // 좋아요 / 스크랩
+    fun saveIsLike(isLike: Boolean) = runBlocking {
+        dataStore.edit { prefs ->
+            prefs[IS_LIKE_KEY] = isLike
+        }
+    }
+
+    fun getIsLike(): Flow<Boolean> {
+        return dataStore.data.map { prefs ->
+            prefs[IS_LIKE_KEY] ?: false
+        }
+    }
+
+    fun saveIsScrap(isScrap: Boolean) = runBlocking {
+        dataStore.edit { prefs ->
+            prefs[IS_SCRAP_KEY] = isScrap
+        }
+    }
+
+    fun getIsScrap(): Flow<Boolean> {
+        return dataStore.data.map { prefs ->
+            prefs[IS_SCRAP_KEY] ?: false
         }
     }
 }

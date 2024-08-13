@@ -79,6 +79,19 @@
                     app:layout_constraintTop_toTopOf="@+id/fragment_community_weekly_show_post_profile_iv" />
 
                 <TextView
+                    android:id="@+id/fragment_community_weekly_scrap_tv"
+                    style="@style/body_regular_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="스크랩"
+                    android:textAlignment="center"
+                    android:textColor="@color/White"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_community_weekly_show_post_modify_tv"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_community_weekly_show_post_modify_tv"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_community_weekly_show_post_modify_tv" />
+
+                <TextView
                     android:id="@+id/fragment_community_weekly_show_post_modify_tv"
                     style="@style/body_regular_14"
                     android:layout_width="wrap_content"
