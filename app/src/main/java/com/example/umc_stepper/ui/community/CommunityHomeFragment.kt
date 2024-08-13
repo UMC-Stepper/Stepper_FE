@@ -20,11 +20,26 @@ class CommunityHomeFragment : BaseFragment<FragmentCommunityHomeBinding>(R.layou
     }
 
     private fun setButton() {
+
+        // 위클리 게시판 글 목록으로 이동
         binding.fragmentCommunityHomeGoWeeklyIv.setOnClickListener {
             val action = CommunityHomeFragmentDirections.actionCommunityHomeFragmentToCommunityWeeklyHomeFragment()
             findNavController().navigate(action.actionId)
         }
 
+        // 검색 화면으로 이동
+        binding.fragmentCommunityHomeToolbarGoSearch.setOnClickListener {
+            val action = CommunityHomeFragmentDirections.actionCommunityHomeFragmentToCommunitySearchFragment()
+            findNavController().navigate(action.actionId)
+        }
+
+        // 메뉴 화면으로 이동
+        binding.fragmentCommunityHomeToolbarGoMenu.setOnClickListener {
+            val action = CommunityHomeFragmentDirections.actionCommunityHomeFragmentToCommunityIndexFragment()
+            findNavController().navigate(action.actionId)
+        }
+
+        // 임시 버튼 (Weekly 글 작성)
         binding.fragmentCommunityHomePartTitleTv.setOnClickListener {
             val action = CommunityHomeFragmentDirections.actionCommunityHomeFragmentToWeeklySegmentEditFragment()
             findNavController().navigate(action.actionId)
