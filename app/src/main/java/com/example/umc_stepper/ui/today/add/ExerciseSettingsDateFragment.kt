@@ -3,16 +3,26 @@ package com.example.umc_stepper.ui.today.add
 import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.TimePicker
+import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentExerciseSettingsDateBinding
+import com.example.umc_stepper.ui.stepper.home.CalendarAdapter
+import com.example.umc_stepper.ui.today.TodayViewModel
+import kotlinx.coroutines.launch
+import org.threeten.bp.LocalDate
 
 class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBinding>(R.layout.fragment_exercise_settings_date) {
 
     private lateinit var dayTextViews: List<TextView>
     private val selectedDays = mutableSetOf<TextView>()
+    val todayViewModel: TodayViewModel by activityViewModels()
 
     override fun setLayout() {
         val timePicker: TimePicker = binding.fragmentExerciseSettingsTimeSpinner
@@ -47,7 +57,7 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
         }
 
         binding.fragmentExerciseSettingsExerciseSuccessBt.setOnClickListener {
-            goExerciseCardLast()
+            observeExerciseCheckData()
         }
     }
 
@@ -70,8 +80,74 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
         binding.fragmentExerciseSettingsPlanDescription.text = "매주 $selectedDaysText"
     }
 
+    private fun observeExerciseCheckData() {
+        val bodyPart: String = when (arguments?.getString("bodyPart").toString()) {
+            "무릎, 다리" -> "무릎다리"
+            "어깨, 팔" -> "어깨팔"
+            else -> "머리"
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            todayViewModel.getExerciseCheckDate(bodyPart)
+
+            todayViewModel.exerciseCardWeekResponseDto.collect { response ->
+                val checkExercise = response.result
+                var isOverlapping = false
+
+                // 한글 요일을 영어로 변환하는 매핑
+                val koreanToEnglishDays = mapOf(
+                    "일" to "SUNDAY",
+                    "월" to "MONDAY",
+                    "화" to "TUESDAY",
+                    "수" to "WEDNESDAY",
+                    "목" to "THURSDAY",
+                    "금" to "FRIDAY",
+                    "토" to "SATURDAY"
+                )
+
+                // 영어 요일을 한글로 변환하는 매핑
+                val englishToKoreanDays = koreanToEnglishDays.entries.associate { (k, v) -> v to k }
+
+                // 선택한 요일을 영어로 변환
+                val selectedEnglishDays = selectedDays.mapNotNull { textView ->
+                    koreanToEnglishDays[textView.text.toString()]
+                }
+
+                checkExercise?.forEach { check ->
+                    val weeks = check.weeks?.map { it.name } ?: emptyList() // DayOfWeek -> String 변환
+                    val overlappingDays = selectedEnglishDays.filter { day ->
+                        weeks.contains(day)
+                    }
+
+                    if (overlappingDays.isNotEmpty()) {
+                        isOverlapping = true
+                        overlappingDays.forEach { day ->
+                            val textView = selectedDays.firstOrNull { koreanToEnglishDays[it.text.toString()] == day }
+                            textView?.let {
+                                // 요일 비활성화+스타일 변경
+                                it.isEnabled = false
+                                it.setBackgroundResource(R.drawable.shape_rounded_square_purple_bg2_21dp)
+                                it.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
+                                selectedDays.remove(it) // selectedDays 리스트에서 제거
+                            }
+                        }
+
+                        // 영어 요일명을 한글로 변환
+                        val dayNamesInKorean = overlappingDays.joinToString(", ") { englishToKoreanDays[it] ?: it }
+                        Toast.makeText(requireContext(), "$dayNamesInKorean 에 이미 운동이 존재합니다.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                if (!isOverlapping) {
+                    goExerciseCardLast() // 겹치는 요일이 없으면 이동
+                }
+            }
+        }
+    }
+
+
+
     private fun goExerciseCardLast(){
-        //fragment_card_last로 넘어가는 네비구현(코틀린코드 작업전이라 보류)
         val action = ExerciseSettingsDateFragmentDirections.actionFragmentExerciseSettingsDateToExerciseCardLastFragment()
         findNavController().navigate(action.actionId)
     }
