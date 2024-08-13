@@ -2,6 +2,7 @@ package com.example.umc_stepper.ui.stepper
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -18,6 +19,7 @@ import com.example.umc_stepper.databinding.FragmentEvaluationExerciseBinding
 import com.example.umc_stepper.domain.model.request.rate_diary_controller.RateDiaryDto
 import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.MainActivity
+import com.example.umc_stepper.utils.GlobalApplication
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
@@ -58,10 +60,19 @@ class EvaluationExerciseFragment :
         initSetting()
     }
 
+    private fun setImageView() {
+        val photoUriString = arguments?.getString("photo_uri")
+        val photoUri = photoUriString?.let { Uri.parse(it) }
+        photoUri?.let{
+            GlobalApplication.loadImage(binding.fragmentEvaluationExercisePictureExerciseIv, it)
+        }
+    }
+
     private fun initSetting() {
 //        initActivityResultLauncher()
         observeLifeCycle()
         setTitle()
+        setImageView()
         setList()
         setScoreText()
         setOnClickBtn()

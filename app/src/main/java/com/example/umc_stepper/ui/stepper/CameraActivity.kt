@@ -31,49 +31,17 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>(R.layout.activity_cam
     companion object {
         private const val TAG = "CameraXApp"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
-        private const val REQUEST_CODE_PERMISSIONS = 10
-        private val REQUIRED_PERMISSIONS =
-            mutableListOf(
-                Manifest.permission.CAMERA,
-                //Manifest.permission.READ_EXTERNAL_STORAGE
-            ).apply {
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
-                    add(Manifest.permission.READ_EXTERNAL_STORAGE)
-                }
-            }.toTypedArray()
     }
 
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     private var imageCapture: ImageCapture? = null
 
     // 카메라 작업을 수행하기 위한 스레드 풀을 관리 (메인 스레드와 별도로 동작)
-    private lateinit var cameraExecutor: ExecutorService
-
-    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
-        ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            if (allPermissionsGranted()) {
-                startCamera()
-            } else {
-                Toast.makeText(this, "권한이 거부되었습니다.", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
+    //private lateinit var cameraExecutor: ExecutorService
 
     override fun setLayout() {
 
-        // 이 화면 들어오면 권한 확인 및 요청
-        if (!allPermissionsGranted()) {
-            ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
-        } else {
-            startCamera()
-        }
+        startCamera()
 
         // 사진 찍기 버튼
         binding.activityCameraCaptureIv.setOnClickListener {
@@ -82,7 +50,7 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>(R.layout.activity_cam
 
         // 취소 버튼
         binding.activityCameraCancelIv.setOnClickListener {
-
+            finish()
         }
     }
 
@@ -91,19 +59,18 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>(R.layout.activity_cam
         val changeBtn = binding.activityCameraChangeIv
         changeBtn.setOnClickListener {
             // CameraSelector 업데이트
-            if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
-                cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
-                startCamera() //바뀐 카메라 화면으로 카메라 재실행
+            cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
+                CameraSelector.DEFAULT_FRONT_CAMERA
             } else {
-                cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-                startCamera() //바뀐 카메라 화면으로 카메라 재실행
+                CameraSelector.DEFAULT_BACK_CAMERA
             }
+            startCamera()
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        cameraExecutor.shutdown()
+        finish()
     }
 
     // 카메로부터 이미지를 촬영하고 저장하는 함수
@@ -126,8 +93,7 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>(R.layout.activity_cam
             }
         }
 
-        // Create output options object which contains file + metadata (이미지 저장 옵션 설정)
-        // 이 객체에서 원하는 출력 방법 지정 가능
+        // 이 객체에서 원하는 출력 방법 지정 가능  (이미지 저장 옵션 설정)
         val outputOptions = ImageCapture.OutputFileOptions
             .Builder(this.contentResolver,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
