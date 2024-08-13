@@ -2,23 +2,36 @@ package com.example.umc_stepper.ui.today.add
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentAddExerciseBinding
+import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseStepResponse
+import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
 import com.example.umc_stepper.ui.MainActivity
+import com.example.umc_stepper.ui.today.TodayViewModel
 import com.example.umc_stepper.utils.GlobalApplication
+import com.example.umc_stepper.utils.enums.bodyPartType
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import kotlin.properties.Delegates
 
+@AndroidEntryPoint
 class AddExerciseFragment :
     BaseFragment<FragmentAddExerciseBinding>(R.layout.fragment_add_exercise) {
-
+    private val todayViewModel: TodayViewModel by activityViewModels()
     private lateinit var tagList: List<TextView>
     private lateinit var addItemList: List<ConstraintLayout>
     private lateinit var nonAddItemList: List<ConstraintLayout>
@@ -26,20 +39,16 @@ class AddExerciseFragment :
     private lateinit var titleList: List<TextView>
     private lateinit var editBtnList: List<Button>
     private lateinit var channelList: List<TextView>
-    private val youtubeCardList : ArrayList<YoutubeCard> = arrayListOf(
-        YoutubeCard("","진정재활운동","서울아산병원 이비인후과"),
-        YoutubeCard("","진정재활운동","서울아산병원 이비인후과"),
-        YoutubeCard("","진정재활운동","서울아산병원 이비인후과")
-    )
-
-    private var menuCount by Delegates.notNull<Int>()
-    private lateinit var mainActivity : MainActivity
+    private var selectNumber = 0
+    private var bodyPart = ""
+    private lateinit var mainActivity: MainActivity
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mainActivity = context as MainActivity
     }
-    private fun setTitle(){
+
+    private fun setTitle() {
         mainActivity.updateToolbarTitle("운동 카드를 작성해봐요!")
     }
 
@@ -49,8 +58,8 @@ class AddExerciseFragment :
 
     private fun initSetting() {
         setTitle()
-        setList()
         setMenuList()
+        setList()
         setOnClick()
     }
 
@@ -59,25 +68,40 @@ class AddExerciseFragment :
 
         // 운동 부위 추가 1
         binding.fragmentAddExerciseNoneAddStep1Constraint.setOnClickListener {
-            val action = AddExerciseFragmentDirections.actionFragmentAddExerciseToAddExerciseSelectScrapFragment2()
-            findNavController().navigateSafe(action.actionId)
+            val action =
+                AddExerciseFragmentDirections.actionFragmentAddExerciseToAddExerciseSelectScrapFragment2()
+            findNavController().navigateSafe(
+                action.actionId,
+                Bundle().apply {
+                    putInt("stepLevel", 1)
+                    putString("bodyPart", bodyPart)
+                })
         }
 
         // 운동 부위 추가 2
         binding.fragmentAddExerciseNoneAddStep2Constraint.setOnClickListener {
-            val action = AddExerciseFragmentDirections.actionFragmentAddExerciseToAddExerciseSelectScrapFragment2()
-            findNavController().navigateSafe(action.actionId)
+            val action =
+                AddExerciseFragmentDirections.actionFragmentAddExerciseToAddExerciseSelectScrapFragment2()
+            findNavController().navigateSafe(action.actionId, Bundle().apply {
+                putInt("stepLevel", 2)
+                putString("bodyPart", bodyPart)
+            })
         }
 
         // 운동 부위 추가 3
         binding.fragmentAddExerciseNoneAddStep3Constraint.setOnClickListener {
-            val action = AddExerciseFragmentDirections.actionFragmentAddExerciseToAddExerciseSelectScrapFragment2()
-            findNavController().navigateSafe(action.actionId)
+            val action =
+                AddExerciseFragmentDirections.actionFragmentAddExerciseToAddExerciseSelectScrapFragment2()
+            findNavController().navigateSafe(action.actionId, Bundle().apply {
+                putInt("stepLevel", 3)
+                putString("bodyPart", bodyPart)
+            })
         }
 
         // 다음으로 버튼 클릭
         binding.fragmentAddExerciseNextBtn.setOnClickListener {
-            val action = AddExerciseFragmentDirections.actionFragmentAddExerciseToFragmentExerciseSettingsDate()
+            val action =
+                AddExerciseFragmentDirections.actionFragmentAddExerciseToFragmentExerciseSettingsDate()
             findNavController().navigateSafe(action.actionId)
         }
     }
@@ -98,8 +122,8 @@ class AddExerciseFragment :
 
             addItemList = listOf(
                 fragmentAddExerciseAddStep1Constraint,
-                fragmentAddExerciseAddStep1Constraint,
-                fragmentAddExerciseAddStep1Constraint,
+                fragmentAddExerciseAddStep2Constraint,
+                fragmentAddExerciseAddStep3Constraint,
             )
 
             nonAddItemList = listOf(
@@ -141,9 +165,11 @@ class AddExerciseFragment :
         }
     }
 
-    private fun setOnClickBtn(select : Int) {
+    private fun setOnClickBtn(select: Int) {
         for (i in 0..8) {
             if (select == i) {
+                selectNumber = i
+                bodyPart = tagList[i].text.toString()
                 tagList[i].setBackgroundResource(setColor(requireContext(), true).first)
                 tagList[i].setTextColor(setColor(requireContext(), true).second)
             } else {
@@ -168,74 +194,81 @@ class AddExerciseFragment :
 
 
     private fun setMenuList() {
-        menuCount = youtubeCardList.size-1
-        for (i in 0..menuCount) {
-            addItemList[i].visibility = View.VISIBLE
-            nonAddItemList[i].visibility = View.GONE
-            setMenu(youtubeCardList[i],i)
-        }
-    }
-
-    private fun setMenu(youtubeCard: YoutubeCard , count : Int) {
-
-        when(count) {
-            1 -> {
-                GlobalApplication.loadCropRoundedSquareImage(
-                    this@AddExerciseFragment.requireContext(),
-                    binding.fragmentAddExerciseThumbnail1Iv,
-                    "",
-                    18
-                )
-                binding.fragmentAddExerciseTitle1Tv.text = youtubeCard.title
-                binding.fragmentAddExerciseChannel1Tv.text = youtubeCard.description
-                binding.fragmentAddExerciseEdit1Iv.setOnClickListener {
-                    goEditPage(1)
-                }
-            }
-            2 -> {
-                GlobalApplication.loadCropRoundedSquareImage(
-                    this@AddExerciseFragment.requireContext(),
-                    binding.fragmentAddExerciseThumbnail2Iv,
-                    "",
-                    18
-                )
-                binding.fragmentAddExerciseTitle2Tv.text = youtubeCard.title
-                binding.fragmentAddExerciseChannel2Tv.text = youtubeCard.description
-                binding.fragmentAddExerciseEdit2Iv.setOnClickListener {
-                    goEditPage(2)
-                }
-            }
-            3 -> {
-                GlobalApplication.loadCropRoundedSquareImage(
-                    this@AddExerciseFragment.requireContext(),
-                    binding.fragmentAddExerciseThumbnail3Iv,
-                    "",
-                    18
-                )
-                binding.fragmentAddExerciseTitle3Tv.text = youtubeCard.title
-                binding.fragmentAddExerciseChannel3Tv.text = youtubeCard.description
-                binding.fragmentAddExerciseEdit3Iv.setOnClickListener {
-                    goEditPage(3)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                todayViewModel.setExerciseStep.collect {
+                    Log.d("크기", it.size.toString())
+                    if (it.isNotEmpty()) {
+                        for (i in 1..it.size) {
+                            addItemList[i - 1].visibility = View.VISIBLE
+                            nonAddItemList[i - 1].visibility = View.GONE
+                            setMenu(it[i - 1], i)
+                        }
+                    }
                 }
             }
         }
     }
 
-    private fun goEditPage(number : Int) {
-        val bundle = Bundle().apply {
-            putInt("count", number)
+        private fun setMenu(youtubeCard: CheckExerciseResponse, count: Int) {
+
+            when (count) {
+                1 -> {
+                    GlobalApplication.loadCropRoundedSquareImage(
+                        this@AddExerciseFragment.requireContext(),
+                        binding.fragmentAddExerciseThumbnail1Iv,
+                        youtubeCard.url,
+                        18
+                    )
+                    binding.fragmentAddExerciseTitle1Tv.text = youtubeCard.video_title
+                    binding.fragmentAddExerciseChannel1Tv.text = youtubeCard.channel_name
+                    binding.fragmentAddExerciseEdit1Iv.setOnClickListener {
+                        goEditPage(1)
+                    }
+                }
+
+                2 -> {
+                    GlobalApplication.loadCropRoundedSquareImage(
+                        this@AddExerciseFragment.requireContext(),
+                        binding.fragmentAddExerciseThumbnail2Iv,
+                        youtubeCard.url,
+                        18
+                    )
+                    binding.fragmentAddExerciseTitle2Tv.text = youtubeCard.video_title
+                    binding.fragmentAddExerciseChannel2Tv.text = youtubeCard.channel_name
+                    binding.fragmentAddExerciseEdit2Iv.setOnClickListener {
+                        goEditPage(2)
+                    }
+                }
+
+                3 -> {
+                    GlobalApplication.loadCropRoundedSquareImage(
+                        this@AddExerciseFragment.requireContext(),
+                        binding.fragmentAddExerciseThumbnail3Iv,
+                        youtubeCard.url,
+                        18
+                    )
+                    binding.fragmentAddExerciseTitle3Tv.text = youtubeCard.video_title
+                    binding.fragmentAddExerciseChannel3Tv.text = youtubeCard.video_title
+                    binding.fragmentAddExerciseEdit3Iv.setOnClickListener {
+                        goEditPage(3)
+                    }
+                }
+            }
         }
-        val action = AddExerciseFragmentDirections.actionFragmentAddExerciseToFragmentExerciseSettingsDate()
-        findNavController().navigateSafe(action.actionId,
-            bundle
-        )
+
+        private fun goEditPage(number: Int) {
+            val bundle = Bundle().apply {
+                putInt("count", number)
+            }
+            val action =
+                AddExerciseFragmentDirections.actionFragmentAddExerciseToFragmentExerciseSettingsDate()
+            findNavController().navigateSafe(
+                action.actionId,
+                bundle
+            )
+        }
+
+
     }
 
-
-}
-
-data class YoutubeCard(
-    val thumbnail: String,
-    val title: String,
-    val description : String,
-)
