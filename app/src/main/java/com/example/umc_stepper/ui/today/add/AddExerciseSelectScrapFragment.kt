@@ -106,6 +106,9 @@ class AddExerciseSelectScrapFragment :
 
     private fun updateMainToolbar() {
         mainActivity.updateToolbarTitle("운동 카드를 작성해봐요!")
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
+        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
+        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
     }
 
     private fun setButton() {

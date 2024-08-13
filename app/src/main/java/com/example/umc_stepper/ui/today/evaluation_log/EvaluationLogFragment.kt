@@ -34,7 +34,7 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
 
     private lateinit var evaluationLogBodyPartAdapter: EvaluationLogBodyPartAdapter
     private lateinit var materialCalendarView: MaterialCalendarView
-    private val eventDateList : MutableList<String> = mutableListOf()
+    private val eventDateSet: MutableSet<String> = mutableSetOf() // Set으로 변경
     private lateinit var mainActivity : MainActivity
 
     private val todayViewModel : TodayViewModel by activityViewModels()
@@ -43,10 +43,6 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mainActivity = context as MainActivity
-    }
-
-    override fun onStart() {
-        super.onStart()
     }
 
     override fun setLayout() {
@@ -63,12 +59,18 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
 
     private fun updateMainToolbar() {
         mainActivity.updateToolbarTitle("평가 일지")
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
+        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
+        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
     }
+
+    private lateinit var eventDecorator: EventDecorator
 
     private fun initAdapter() {
         evaluationLogBodyPartAdapter = EvaluationLogBodyPartAdapter{ item ->
             viewLifecycleOwner.lifecycleScope.launch{
-                eventDateList.add(item.date)
+                eventDateSet.clear()
+                eventDateSet.add(item.date)
                 setCalendarView()
             }
         }
@@ -101,7 +103,7 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
 
             viewLifecycleOwner.lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    // 데이터를 비동기적으로 로드하고, 로드가 완료될 때까지 기다립니다.
+                    // 데이터를 비동기적으로 로드하고, 로드가 완료될 때까지 기다림
                     stepperViewModel.getDiaryConfirm()
 
                     stepperViewModel.diaryList.collect { diaryResponse ->
@@ -167,14 +169,17 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
 
         viewLifecycleOwner.lifecycleScope.launch {
 
-            val dateList = generateDateList(CalendarDay.today().year, CalendarDay.today().month)
             val sundayDecorator = SundayDecorator(requireContext())
             val saturdayDecorator = SaturdayDecorator(requireContext())
             var boldDecorator = BoldDecorator(CalendarDay.today().month)
             val todayDecorator = TodayDecorator(requireContext())
             var selectedMonthDecorator = SelectedMonthDecorator(CalendarDay.today().month)
-            val eventDecorator = EventDecorator(requireContext(), eventDateList)
+            val eventDecorator = EventDecorator(requireContext(), eventDateSet)
 
+            // 기존 데코레이터 제거
+            materialCalendarView.removeDecorators()
+
+            // 새로운 데코레이터 추가
             materialCalendarView.addDecorators(
                 sundayDecorator,
                 saturdayDecorator,
@@ -184,18 +189,21 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
                 eventDecorator
             )
             materialCalendarView.setOnMonthChangedListener { _, date ->
+
+                // 월이 변경되면 새로운 데코레이터 설정
+                val newYear = date.year
+                val newMonth = date.month
+
+                // 새로운 날짜 리스트 생성
+                val newEventDecorator = EventDecorator(requireContext(), eventDateSet)
+                boldDecorator = BoldDecorator(newMonth)
+                selectedMonthDecorator = SelectedMonthDecorator(newMonth)
+
+                // 기존 데코레이터 제거
                 materialCalendarView.removeDecorators()
                 materialCalendarView.invalidateDecorators()
 
-                val newYear = date.year
-                val newMonth = date.month
-                val newDateList = generateDateList(newYear, newMonth)
-                val newEventDecorator = EventDecorator(requireContext(), eventDateList)
-                Log.d("로그", "${newDateList}")
-
-                // Decorators 추가
-                selectedMonthDecorator = SelectedMonthDecorator(date.month)
-                boldDecorator = BoldDecorator(date.month)
+                // 새 데코레이터 추가
                 materialCalendarView.addDecorators(
                     sundayDecorator,
                     saturdayDecorator,
@@ -204,17 +212,8 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
                     selectedMonthDecorator,
                     newEventDecorator
                 )
+                materialCalendarView.invalidateDecorators()
             }
-
-            materialCalendarView.invalidateDecorators()
-            materialCalendarView.addDecorators(
-                sundayDecorator,
-                saturdayDecorator,
-                boldDecorator,
-                todayDecorator,
-                selectedMonthDecorator,
-                eventDecorator
-            )
         }
     }
 
