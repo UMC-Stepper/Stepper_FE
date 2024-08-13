@@ -52,7 +52,7 @@ class EvaluationExerciseFragment :
     }
 
     private fun setToolbar() {
-        mainActivity.setBg()
+        mainActivity.setBg2()
         mainActivity.updateToolbarTitle("운동 평가하기")
         mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
         mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)

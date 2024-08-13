@@ -46,10 +46,10 @@ class EvaluationExerciseTodayFragment :
     }
 
     private fun setTitle() {
-        if (!diaryList.isEmpty()) {
+        if (diaryList.isNotEmpty()) {
             mainActivity.updateToolbarLeftPlusImg(selectedDate, diaryList[0].bodyPart) //타이틀 세팅
         }
-        mainActivity.setBg()
+        mainActivity.setBg2()
     }
 
     private fun takeDataClass() {
