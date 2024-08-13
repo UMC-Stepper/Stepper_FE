@@ -120,7 +120,8 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
     }
 
     private fun initializeToolBar(){
-        mainActivity.updateToolbarTitle("1단계 운동 시작하기")
+        val step = arguments?.getInt("step") ?: 0
+        mainActivity.updateToolbarTitle("${step}단계 운동 시작하기")
     }
 
     private fun postInquiryExerciseCard(exerciseId: Int) {
