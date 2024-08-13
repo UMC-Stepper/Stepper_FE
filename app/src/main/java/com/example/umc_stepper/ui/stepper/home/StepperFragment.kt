@@ -214,6 +214,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
             saveExerciseCardId(item.id.toString())
             Log.d("아이디", item.id.toString())
             val bd = Bundle()
+
             val pickItem = item.stepList.first { it.stepId == id }
             with(pickItem) {
                 val checkExerciseResponse = CheckExerciseResponse(
