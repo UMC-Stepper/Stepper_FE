@@ -1,6 +1,7 @@
 package com.example.umc_stepper.token
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -49,11 +50,20 @@ class TokenManager @Inject constructor(
         }
     }
 
-    fun saveExerciseCardId(eid : String) = runBlocking{
+    suspend fun saveExerciseCardId(id: String) {
         dataStore.edit { prefs ->
-            prefs[EXERCISE_CARD_ID] =  eid
+            prefs[EXERCISE_CARD_ID] = id
         }
+        Log.d("SaveExerciseCardId", "Saved ID: $id")
     }
+
+    fun getExerciseCardId(): Flow<String?> = dataStore.data
+        .map { prefs ->
+            prefs[EXERCISE_CARD_ID].also {
+                Log.d("GetExerciseCardId", "Retrieved ID: $it")
+            }
+        }
+
     suspend fun deleteExerciseCardId() {
         dataStore.edit { prefs ->
             prefs.remove(EXERCISE_CARD_ID)
