@@ -14,15 +14,20 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentCommunityWeeklyShowPostBinding
+import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.community.CommunityViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
+import javax.inject.Inject
 import kotlin.properties.Delegates
 
+@AndroidEntryPoint
 class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShowPostBinding>(R.layout.fragment_community_weekly_show_post) {
 
     private lateinit var mainActivity: MainActivity
@@ -30,6 +35,9 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
     private lateinit var weeklyShowPostReplyAdapter: WeeklyShowPostReplyAdapter
     private var postId by Delegates.notNull<Int>()
     private val communityViewModel: CommunityViewModel by activityViewModels()
+
+    @Inject
+    lateinit var tokenManager: TokenManager
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -62,14 +70,12 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
                         val currentState = communityViewModel.isLike.value
                         if (currentState) {
                             communityViewModel.deleteCancelLike(postId)
+                            tokenManager.saveIsLike(false)
+                            binding.fragmentCommunityWeeklyShowThumbsUpIv.setImageResource(R.drawable.ic_thumbs_up)
                         } else {
                             communityViewModel.postLikeEdit(postId)
-                        }
-                        communityViewModel.isLike.collectLatest { isLiked ->
-                            binding.fragmentCommunityWeeklyShowThumbsUpIv.setImageResource(
-                                if (isLiked) R.drawable.ic_thumbs_up_fill
-                                else R.drawable.ic_thumbs_up
-                            )
+                            tokenManager.saveIsLike(true)
+                            binding.fragmentCommunityWeeklyShowThumbsUpIv.setImageResource(R.drawable.ic_thumbs_up_fill)
                         }
                     }
                 }
@@ -80,17 +86,17 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
         binding.fragmentCommunityWeeklyShowScrapsUpIv.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    val currentState = communityViewModel.isScrap.value
-                    if (currentState) {
-                        communityViewModel.deleteCancelScrap(postId)
-                    } else {
-                        communityViewModel.postCommitScrap(postId)
-                    }
-                    communityViewModel.isLike.collectLatest { isLiked ->
-                        binding.fragmentCommunityWeeklyShowScrapsUpIv.setImageResource(
-                            if (isLiked) R.drawable. ic_scrap_fill
-                            else R.drawable.ic_scraps_up
-                        )
+                    launch {
+                        val currentState = communityViewModel.isScrap.value
+                        if (currentState) {
+                            communityViewModel.deleteCancelScrap(postId)
+                            tokenManager.saveIsScrap(false)
+                            binding.fragmentCommunityWeeklyShowScrapsUpIv.setImageResource(R.drawable.ic_scraps_up)
+                        } else {
+                            communityViewModel.postCommitScrap(postId)
+                            tokenManager.saveIsScrap(true)
+                            binding.fragmentCommunityWeeklyShowScrapsUpIv.setImageResource(R.drawable.ic_scrap_fill)
+                        }
                     }
                 }
             }
@@ -127,6 +133,29 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
                             val date = inputFormat.parse(it.result?.updatedAt)
                             binding.fragmentCommunityWeeklyShowPostDateTv.text = date?.let { it -> outputFormat.format(it) }
                         }
+
+                        // 좋아요
+                        launch {
+                            tokenManager.getIsLike().collectLatest { isLiked ->
+                                binding.fragmentCommunityWeeklyShowThumbsUpIv.setImageResource(
+                                    if (isLiked) R.drawable.ic_thumbs_up_fill
+                                    else R.drawable.ic_thumbs_up
+                                )
+                                Log.d("tokenManager", "isLiked : $isLiked")
+                            }
+                        }
+
+                        // 스크랩
+                        launch {
+                            tokenManager.getIsScrap().collectLatest { isScrap ->
+                                binding.fragmentCommunityWeeklyShowScrapsUpIv.setImageResource(
+                                    if (isScrap) R.drawable.ic_scrap_fill
+                                    else R.drawable.ic_scraps_up
+                                )
+                                Log.d("tokenManager", "isScrap : $isScrap")
+                            }
+                        }
+
                     }
                 }
             }
