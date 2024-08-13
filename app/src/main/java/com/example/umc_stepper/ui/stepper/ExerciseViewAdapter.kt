@@ -17,15 +17,15 @@ import com.example.umc_stepper.utils.listener.ItemClickListener
 
 class ExerciseViewAdapter(
     private val listener: ItemClickListener,
-    private val listener2 : AdapterNextClick
+    private val listener2: AdapterNextClick
 ) : BaseAdapter<ToDayExerciseResponseDto, ItemStepperTodayExerciseRecyclerBinding>(
     BaseDiffCallback(
         itemsTheSame = { oldItem, newItem -> oldItem == newItem },
         contentsTheSame = { oldItem, newItem -> oldItem == newItem }
     )
 ) {
-    private lateinit var btList : List<ImageButton>
-    lateinit var unBtList : List<ImageButton>
+    private lateinit var btList: List<ImageButton>
+    lateinit var unBtList: List<ImageButton>
     override val layoutId: Int
         get() = R.layout.item_stepper_today_exercise_recycler
 
@@ -35,55 +35,49 @@ class ExerciseViewAdapter(
     ) {
         btList = listOf(binding.bt1, binding.bt2, binding.bt3)
         unBtList = listOf(binding.unBt1, binding.unBt2, binding.unBt3)
-        Log.d("토큰 ",item.stepList.size.toString() + "사이즈")
-        when(item.stepList.size) {
+
+        // 원본 데이터를 변경하지 않고 뷰에 표시할 리스트 생성
+        val displayStepList = item.stepList.toMutableList()
+
+        when(displayStepList.size) {
             0 -> {
                 binding.cl1.visibility = View.GONE
                 binding.cl2.visibility = View.GONE
                 binding.cl3.visibility = View.GONE
-                item.stepList = listOf(ExerciseStepResponse(), ExerciseStepResponse(), ExerciseStepResponse())
+                displayStepList.addAll(List(3) { ExerciseStepResponse() })
             }
             1 -> {
                 binding.cl1.visibility = View.VISIBLE
                 binding.cl2.visibility = View.GONE
                 binding.cl3.visibility = View.GONE
-                for(i in 0..<item.stepList.size){
-                    if(item.stepList[i].step_status){
-                        btList[i].visibility = View.GONE
-                        unBtList[i].visibility = View.VISIBLE
-                    }
-                }
-                item.stepList += listOf(ExerciseStepResponse(), ExerciseStepResponse())
+                displayStepList.addAll(List(2) { ExerciseStepResponse() })
             }
             2 -> {
                 binding.cl1.visibility = View.VISIBLE
                 binding.cl2.visibility = View.VISIBLE
                 binding.cl3.visibility = View.GONE
-                for(i in 0..<item.stepList.size){
-                    if(item.stepList[i].step_status){
-                        btList[i].visibility = View.GONE
-                        unBtList[i].visibility = View.VISIBLE
-                    }
-                }
-                item.stepList += listOf(ExerciseStepResponse())
+                displayStepList.add(ExerciseStepResponse())
             }
             else -> {
                 binding.cl1.visibility = View.VISIBLE
                 binding.cl2.visibility = View.VISIBLE
                 binding.cl3.visibility = View.VISIBLE
-                for(i in 0..<item.stepList.size){
-                    if(item.stepList[i].step_status){
-                        Log.d("토큰",item.stepList[i].step_status.toString())
-                        btList[i].visibility = View.GONE
-                        unBtList[i].visibility = View.VISIBLE
-                    }
-                }
             }
         }
-        binding.stepList = item
+
+        for(i in displayStepList.indices.take(3)) {
+            if(displayStepList[i].step_status) {
+                btList[i].visibility = View.GONE
+                unBtList[i].visibility = View.VISIBLE
+            } else {
+                btList[i].visibility = View.VISIBLE
+                unBtList[i].visibility = View.GONE
+            }
+        }
+
+        // 바인딩에 displayStepList 전달
+        binding.stepList = item.copy(stepList = displayStepList)
         binding.pick = listener
         binding.pick2 = listener2
     }
-
 }
-
