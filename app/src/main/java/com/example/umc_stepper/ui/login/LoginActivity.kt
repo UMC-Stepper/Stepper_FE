@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
+import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.WindowManager
@@ -37,6 +38,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private lateinit var agreeDialog: AgreeDialog
     private lateinit var requestMultiplePermissionsLauncher: ActivityResultLauncher<Array<String>>
 
+
+
+
     override fun setLayout() {
         requestForUserData()
         initPermissionLaunchers()
@@ -45,13 +49,33 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun activateLoginButton() {
-//        binding.activityLoginEmailEt.addTextChangedListener(object : TextWatcher {
-//
-//        })
-//
-//        binding.activityLoginPasswordEt.addTextChangedListener(object : TextWatcher{
-//
-//        })
+        val enableButtonBackground = R.drawable.shape_rounded_square_purple700_50dp
+        val disableButtonBackground = R.drawable.shape_rounded_square_50dp_stroke_1
+        val enableButtonTextColor = ContextCompat.getColor(this, R.color.White)
+        val disableButtonTextColor = ContextCompat.getColor(this, R.color.Purple_700)
+
+        val textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                val emailText = binding.activityLoginEmailEt.text.toString().trim()
+                val passwordText = binding.activityLoginPasswordEt.text.toString().trim()
+
+                if (emailText.isNotEmpty() && passwordText.isNotEmpty()) {
+                    binding.activityLoginBtn.setBackgroundResource(enableButtonBackground)
+                    binding.activityLoginBtn.setTextColor(enableButtonTextColor)
+                    binding.activityLoginBtn.isEnabled = true
+                } else {
+                    binding.activityLoginBtn.setBackgroundResource(disableButtonBackground)
+                    binding.activityLoginBtn.setTextColor(disableButtonTextColor)
+                    binding.activityLoginBtn.isEnabled = false
+                }
+            }
+        }
+        binding.activityLoginEmailEt.addTextChangedListener(textWatcher)
+        binding.activityLoginPasswordEt.addTextChangedListener(textWatcher)
     }
 
     private fun setting() {
@@ -59,6 +83,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             tokenManager.deleteAccessToken()
         }
         setViewModel()
+        activateLoginButton()
         barTransparent()
         onClicked()
     }

@@ -20,7 +20,7 @@ import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-//앞 화면에서 받은 리스트로 조작해야 함
+//앞 화면에서 받은 리스트로 조작해야 함 , 평가 일지 조회
 class EvaluationExerciseTodayFragment :
     BaseFragment<FragmentEvaluationExerciseTodayBinding>(R.layout.fragment_evaluation_exercise_today) {
     private val stepperViewModel: StepperViewModel by activityViewModels()
@@ -46,10 +46,10 @@ class EvaluationExerciseTodayFragment :
     }
 
     private fun setTitle() {
-        if (!diaryList.isEmpty()) {
+        if (diaryList.isNotEmpty()) {
             mainActivity.updateToolbarLeftPlusImg(selectedDate, diaryList[0].bodyPart) //타이틀 세팅
         }
-        mainActivity.setBg()
+        mainActivity.setBg2()
     }
 
     private fun takeDataClass() {
@@ -165,13 +165,13 @@ class EvaluationExerciseTodayFragment :
             )
 
             descriptionList = listOf(
-                "온전한 상태로 회복하고 있는 것 같네요! 오늘 운동도 고생 많았어요 \n" +
+                "온전한 상태로 회복하고 있는 것 같네요!\n오늘 운동도 고생 많았어요\n" +
                         "차트에 오늘 컨디션 기록할게요!",
                 "점점 나아지고 있는 모습 보기 좋아요!\n" +
                         "오늘 운동도 고생 많았어요 \n" +
                         "차트에 오늘 컨디션 기록할게요!",
                 "꾸준히 운동을 하면서 통증을 함께 더 \n" +
-                        "줄여나가 봅시다! 오늘 운동도 고생 많았어요\n" +
+                        "줄여나가 봅시다!\n오늘 운동도 고생 많았어요\n" +
                         "차트에 오늘 컨디션 기록할게요!",
                 "오늘 운동할 때 몸이 많이 불편했나요? \n" +
                         "스트레칭으로 충분히 몸을 풀어주세요. \n" +
