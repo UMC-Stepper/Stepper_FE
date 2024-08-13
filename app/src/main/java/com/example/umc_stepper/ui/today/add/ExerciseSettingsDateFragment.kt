@@ -94,7 +94,7 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
                 val checkExercise = response.result
                 var isOverlapping = false
 
-                // 한글 요일을 영어로 변환
+                // 한글 요일을 영어로 변환하는 매핑
                 val koreanToEnglishDays = mapOf(
                     "일" to "SUNDAY",
                     "월" to "MONDAY",
@@ -104,6 +104,9 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
                     "금" to "FRIDAY",
                     "토" to "SATURDAY"
                 )
+
+                // 영어 요일을 한글로 변환하는 매핑
+                val englishToKoreanDays = koreanToEnglishDays.entries.associate { (k, v) -> v to k }
 
                 // 선택한 요일을 영어로 변환
                 val selectedEnglishDays = selectedDays.mapNotNull { textView ->
@@ -120,10 +123,18 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
                         isOverlapping = true
                         overlappingDays.forEach { day ->
                             val textView = selectedDays.firstOrNull { koreanToEnglishDays[it.text.toString()] == day }
-                            textView?.isEnabled = false // 겹치는 요일 비활성화
+                            textView?.let {
+                                // 요일 비활성화+스타일 변경
+                                it.isEnabled = false
+                                it.setBackgroundResource(R.drawable.shape_rounded_square_purple_bg2_21dp)
+                                it.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
+                                selectedDays.remove(it) // selectedDays 리스트에서 제거
+                            }
                         }
-                        val dayNames = overlappingDays.joinToString(", ") { it }
-                        Toast.makeText(requireContext(), "$dayNames 에 이미 운동이 존재합니다.", Toast.LENGTH_SHORT).show()
+
+                        // 영어 요일명을 한글로 변환
+                        val dayNamesInKorean = overlappingDays.joinToString(", ") { englishToKoreanDays[it] ?: it }
+                        Toast.makeText(requireContext(), "$dayNamesInKorean 에 이미 운동이 존재합니다.", Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -137,7 +148,6 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
 
 
     private fun goExerciseCardLast(){
-        //fragment_card_last로 넘어가는 네비구현(코틀린코드 작업전이라 보류)
         val action = ExerciseSettingsDateFragmentDirections.actionFragmentExerciseSettingsDateToExerciseCardLastFragment()
         findNavController().navigate(action.actionId)
     }
