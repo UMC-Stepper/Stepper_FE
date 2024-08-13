@@ -30,6 +30,12 @@
         <action
             android:id="@+id/action_communityHomeFragment_to_communityPartHomeFragment"
             app:destination="@id/communityPartHomeFragment" />
+        <action
+            android:id="@+id/action_communityHomeFragment_to_communityIndexFragment"
+            app:destination="@id/communityIndexFragment" />
+        <action
+            android:id="@+id/action_communityHomeFragment_to_communitySearchFragment"
+            app:destination="@id/communitySearchFragment" />
 
 
     </fragment>
@@ -413,7 +419,8 @@
     <fragment
         android:id="@+id/weeklyEditFragment"
         android:name="com.example.umc_stepper.ui.community.weekly.WeeklyEditFragment"
-        android:label="WeeklyEditFragment" />
+        android:label="WeeklyEditFragment"
+        tools:layout="@layout/fragment_weekly_edit"/>
 
     <!-- 커뮤니티 부위별 게시판 홈 -->
     <fragment
