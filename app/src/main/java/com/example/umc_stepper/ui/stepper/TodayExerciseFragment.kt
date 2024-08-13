@@ -88,12 +88,12 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
         val exerciseId = arguments?.getInt("exerciseId") ?: 0
         val step = arguments?.getInt("step") ?: 0
         val stepId = arguments?.getInt("stepId") ?: 0
-        val stepIndex = step - 1
+        stepIndex = step - 1
         postInquiryExerciseCard(exerciseId)
         Log.d("토큰", "$exerciseId $step $stepId")
         initSettings()
         initializeToolBar(step)
-        updateStep(stepIndex) // 단계 설정
+
 
 
         observeExerciseCardResponse()
@@ -137,7 +137,8 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
                         val result = response.result
                         result?.let {
                             stepList = it.stepList
-
+                            Log.d("로그",it.stepList.size.toString())
+                            updateStep(stepIndex) // 단계 설정
                         }
                     }
                 }
@@ -146,9 +147,9 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
     }
 
     private fun updateStep(stepIndex: Int) {
-        if (!::stepList.isInitialized) return
 
         val currentStep = stepList[stepIndex]
+        Log.d("로그ㅇ",stepList.size.toString())
 
         // 툴바 제목 업데이트
         when (stepIndex) {
