@@ -128,6 +128,12 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
 
     private fun setNavigationAction() {
 
+        // 스태퍼 화면 이동
+        binding.fragmentTodayHomeGoStepperIv.setOnClickListener {
+            val action = TodayHomeFragmentDirections.actionTodayHomeFragmentToStepperFragment()
+            findNavController().navigateSafe(action.actionId)
+        }
+
         // 운동 카드 추가
         binding.fragmentTodayHomePlusExerciseAddIv.setOnClickListener {
             todayViewModel.clearStep()
