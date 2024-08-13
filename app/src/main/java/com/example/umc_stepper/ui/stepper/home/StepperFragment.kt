@@ -203,7 +203,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
             bd.putString("CardListJson", json)
         }
         findNavController().navigateSafe(
-            R.id.action_stepperFragment_to_fragmentAddExercise,
+            R.id.action_stepperFragment_to_fragmentTodayExercise,
         )
     }
 
@@ -236,7 +236,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
                 bd.putInt("exerciseType", 0)
             }
             findNavController().navigateSafe(
-                R.id.action_stepperFragment_to_fragmentLastExercise,
+                R.id.action_stepperFragment_to_fragmentTodayExercise,
                 args = bd
             )
         }

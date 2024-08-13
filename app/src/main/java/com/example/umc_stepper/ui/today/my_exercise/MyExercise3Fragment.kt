@@ -56,9 +56,7 @@ class MyExercise3Fragment :
     override fun setLayout() {
         setTitle()
         initSetting()
-        binding.fragmentMyExerciseCompleteInputBt.setOnClickListener {
-            goExerciseCheck()
-        }
+
     }
 
     private fun initSetting() {
@@ -160,11 +158,8 @@ class MyExercise3Fragment :
             fragmentMyExerciseSearchResultCard2Cl.setOnClickListener {
                 ableUrlCheck(url2)
             }
-            fragmentMyExerciseCompleteInputBt.setOnClickListener {
-                val youtubeUrl = fragmentMyExerciseUploadYoutubeLinkEt.text.toString()
-                val action = MyExercise3FragmentDirections.actionFragmentMyExercise3ToMyExerciseCheckFragment()
-                findNavController().navigateSafe(action.actionId)
-                // url 담아서 다음 화면 전송
+            binding.fragmentMyExerciseCompleteInputBt.setOnClickListener {
+                goExerciseCheck()
             }
         }
     }
@@ -322,6 +317,7 @@ class MyExercise3Fragment :
         val urlText = binding.fragmentMyExerciseUploadYoutubeLinkEt.text.toString()
         val bundle = Bundle().apply {
             putString("urlText", urlText)
+            putString("bodyPart", binding.fragmentMyExerciseSelectTagTv.text.toString())
         }
         findNavController().navigate(R.id.action_fragmentMyExercise3_to_myExerciseCheckFragment, bundle)
     }

@@ -11,6 +11,7 @@ import com.example.umc_stepper.domain.model.local.ExerciseState
 import com.example.umc_stepper.domain.model.local.ExerciseStep
 import com.example.umc_stepper.domain.model.request.AiVideoDto
 import com.example.umc_stepper.domain.model.request.exercise_card_controller.ExerciseCardRequestDto
+import com.example.umc_stepper.domain.model.request.my_exercise_controller.AddExerciseRequestDto
 import com.example.umc_stepper.domain.model.response.AiVideoInfo
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardStatusResponseDto
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardWeekResponseDto
@@ -199,7 +200,7 @@ class TodayViewModel @Inject constructor(
     }
 
     // 나만의 운동 추가 addExerciseResponse
-    fun postAddMyExercise(addExerciseRequestDto: ExerciseCardRequestDto) {
+    fun postAddMyExercise(addExerciseRequestDto: AddExerciseRequestDto) {
         viewModelScope.launch {
             try {
                 todayApiRepository.postAddMyExercise(addExerciseRequestDto).collect {

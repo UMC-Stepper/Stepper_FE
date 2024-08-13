@@ -3,6 +3,7 @@ package com.example.umc_stepper.data.remote
 import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.model.request.exercise_card_controller.ExerciseCardRequestDto
+import com.example.umc_stepper.domain.model.request.my_exercise_controller.AddExerciseRequestDto
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardResponse
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardStatusResponseDto
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardWeekResponseDto
@@ -54,7 +55,7 @@ interface TodayApi {
     // 나만의 운동 추가 API
     @POST("/api/myexercise/add")
     suspend fun postAddMyExercise(
-        @Body addExerciseRequestDto: ExerciseCardRequestDto
+        @Body addExerciseRequestDto: AddExerciseRequestDto
     ) : BaseResponse<AddExerciseResponse>
 
     // 나만의 운동 조회 API -> 스크랩 화면
