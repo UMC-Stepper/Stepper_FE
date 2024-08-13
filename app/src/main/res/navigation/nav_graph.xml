@@ -478,5 +478,12 @@
         android:label="CommunityPartShowPostFragment"
         tools:layout="@layout/fragment_community_part_show_post"/>
 
+    <!-- 커뮤니티 검색 화면 -->
+    <fragment
+        android:id="@+id/communitySearchFragment"
+        android:name="com.example.umc_stepper.ui.community.CommunitySearchFragment"
+        android:label="CommunitySearchFragment"
+        tools:layout="@layout/fragment_community_search"/>
+
 
 </navigation>
