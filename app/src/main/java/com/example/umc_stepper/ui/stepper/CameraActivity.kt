@@ -37,7 +37,7 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>(R.layout.activity_cam
     private var imageCapture: ImageCapture? = null
 
     // 카메라 작업을 수행하기 위한 스레드 풀을 관리 (메인 스레드와 별도로 동작)
-    private lateinit var cameraExecutor: ExecutorService
+    //private lateinit var cameraExecutor: ExecutorService
 
     override fun setLayout() {
 
@@ -70,7 +70,6 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>(R.layout.activity_cam
 
     override fun onDestroy() {
         super.onDestroy()
-        cameraExecutor.shutdown()
         finish()
     }
 
