@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
@@ -91,17 +92,33 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
         Log.d("토큰", "$exerciseId $step $stepId")
         initSettings()
         initializeToolBar()
-
-        // stepId를 전달받아 postInquiryExerciseCard 호출
-
+        updateStep(step - 1) // 단계 설정
 
 
         observeExerciseCardResponse()
         completeBtn.setOnClickListener {
-            proceedToNextStep()
+            val currentStepId = stepList[stepIndex].stepId // 현재 단계의 stepId 받기
+            completeStep(currentStepId)
             dataSetting()
         }
     }
+
+    //진행상태 변경 false->true
+    private fun completeStep(stepId: Int) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                stepperViewModel.postEditExerciseStep(stepId)
+                stepperViewModel.exerciseCardStepResponse.collect { response ->
+                    if (response.isSuccess) {
+                        proceedToNextStep() // 다음 단계 넘어가기
+                    } else {
+                    }
+                }
+            } catch (e: Exception) {
+            }
+        }
+    }
+
     private fun initializeToolBar(){
         mainActivity.updateToolbarTitle("1단계 운동 시작하기")
     }
@@ -119,8 +136,7 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
                         val result = response.result
                         result?.let {
                             stepList = it.stepList
-                            Log.d("크기",stepList.size.toString())
-                            updateStep(0) // 첫 단계 설정
+
                         }
                     }
                 }
