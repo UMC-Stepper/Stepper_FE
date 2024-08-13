@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.stepper.additional
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.activityViewModels
@@ -11,6 +12,7 @@ import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentTodayExerciseSuccessBinding
 import com.example.umc_stepper.domain.model.Time
+import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.example.umc_stepper.utils.extensions.navTop
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +25,12 @@ import com.google.gson.Gson
 @AndroidEntryPoint
 class AdditionalExerciseSuccessFragment :
     BaseFragment<FragmentTodayExerciseSuccessBinding>(R.layout.fragment_today_exercise_success) {
+    private lateinit var mainActivity : MainActivity
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
     private val stepperViewModel: StepperViewModel by activityViewModels()
     private val titleList: List<String> = listOf(
         "오늘 이만큼 운동 했어요!",
@@ -37,6 +45,7 @@ class AdditionalExerciseSuccessFragment :
     //이거 필요
     private var titleNumber by Delegates.notNull<Int>()
     override fun setLayout() {
+        updateMainToolbar()
         setTitle()
         observeLifeCycle()
         setOnClickBtn()
@@ -115,5 +124,9 @@ class AdditionalExerciseSuccessFragment :
                 }
             }
         }
+    }
+
+    private fun updateMainToolbar() {
+        mainActivity.updateToolbarTitle("운동 완료")
     }
 }
