@@ -64,11 +64,12 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                //loginViewModel.userData.em
+                loginViewModel.loginData.value.result
             }
         }
     }
 
+    // 버튼 설정 함수
     private fun setButton() {
         binding.fragmentCommunityWeeklyScrapTv.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
@@ -78,6 +79,7 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
         }
     }
 
+    // 어댑터 설정 함수
     private fun setAdapter() {
         weeklyShowPostImageAdapter = WeeklyShowPostImageAdapter()
         binding.fragmentCommunityWeeklyShowPostImgRv.adapter = weeklyShowPostImageAdapter
@@ -86,7 +88,7 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
         binding.fragmentCommunityWeeklyShowPostReplyRv.adapter = weeklyShowPostReplyAdapter
     }
 
-    // 좋아요 이미지 뷰 클릭시 좋아요 등록/취소 함수
+    // 좋아요 이미지 뷰 클릭시 좋아요 등록/취소 함수 (앱 종료 전까지 가능)
     private fun onClickImageView() {
         binding.fragmentCommunityWeeklyShowThumbsUpIv.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
@@ -138,6 +140,15 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
                             // 날짜 파싱 및 변환
                             val date = inputFormat.parse(it.result?.updatedAt)
                             binding.fragmentCommunityWeeklyShowPostDateTv.text = date?.let { it -> outputFormat.format(it) }
+
+                            // 작성자와 현재 사용자가 동일한 경우만 수정하기 표시 (이 때, 스크랩 표시 X)
+                            if(it.result?.authorEmail?.equals(tokenManager.getEmail().first()) == true) {
+                                binding.fragmentCommunityWeeklyShowPostModifyTv.visibility = View.VISIBLE
+                                binding.fragmentCommunityWeeklyScrapTv.visibility = View.INVISIBLE
+                            } else {
+                                binding.fragmentCommunityWeeklyShowPostModifyTv.visibility = View.INVISIBLE
+                                binding.fragmentCommunityWeeklyScrapTv.visibility = View.VISIBLE
+                            }
                         }
                     }
                 }
