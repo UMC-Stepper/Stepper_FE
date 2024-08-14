@@ -18,16 +18,22 @@ import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentAddExerciseBinding
+import com.example.umc_stepper.domain.model.request.exercise_card_controller.ExerciseCardRequestDto
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseStepResponse
+import com.example.umc_stepper.domain.model.response.exercise_card_controller.ToDayExerciseResponseDto
 import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
 import com.example.umc_stepper.ui.MainActivity
+import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.example.umc_stepper.ui.today.TodayViewModel
 import com.example.umc_stepper.utils.GlobalApplication
 import com.example.umc_stepper.utils.enums.UpdateState
 import com.example.umc_stepper.utils.enums.bodyPartType
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.json.JSONObject
+import javax.inject.Inject
 import kotlin.properties.Delegates
 
 @AndroidEntryPoint
@@ -44,6 +50,8 @@ class AddExerciseFragment :
     private var selectNumber = 0
     private var bodyPart = ""
     private lateinit var mainActivity: MainActivity
+    private val stepperViewModel : StepperViewModel by activityViewModels()
+    private var cardListJson = ""
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -54,6 +62,11 @@ class AddExerciseFragment :
         mainActivity.updateToolbarTitle("운동 카드를 작성해봐요!")
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        cardListJson = arguments?.getString("CardListJson").orEmpty()
+        Log.d("카드도착", cardListJson)
+    }
     override fun setLayout() {
         initSetting()
     }
@@ -80,12 +93,26 @@ class AddExerciseFragment :
         }
         // 다음으로 버튼 클릭
         binding.fragmentAddExerciseNextBtn.setOnClickListener {
-            if (bodyPart.isNotEmpty()) {
-                val action =
-                    AddExerciseFragmentDirections.actionFragmentAddExerciseToFragmentExerciseSettingsDate()
-                findNavController().navigateSafe(action.actionId)
+            if (!cardListJson.isNullOrEmpty()) {
+                //운동카드 스텝 수정
+                val toDayExerciseResponseDto: ToDayExerciseResponseDto =
+                    Gson().fromJson(cardListJson, ToDayExerciseResponseDto::class.java)
+                //운동카드 수정 api 필요
+//                stepperViewModel.putEditExerciseCard(toDayExerciseResponseDto.stepList[0].myExercise.exerciseId,
+//                    ExerciseCardRequestDto(
+//                        bodyPart = bodyPart,
+//                        date =
+//                    )
+//                )
+                findNavController().navigateUp()
             } else {
-                Toast.makeText(requireContext(), "운동 부위를 선택해 주세요.", Toast.LENGTH_SHORT).show()
+                if (bodyPart.isNotEmpty()) {
+                    val action =
+                        AddExerciseFragmentDirections.actionFragmentAddExerciseToFragmentExerciseSettingsDate()
+                    findNavController().navigateSafe(action.actionId)
+                } else {
+                    Toast.makeText(requireContext(), "운동 부위를 선택해 주세요.", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -96,12 +123,16 @@ class AddExerciseFragment :
         if (bodyPart.isNotEmpty()) {
             val action =
                 AddExerciseFragmentDirections.actionFragmentAddExerciseToAddExerciseSelectScrapFragment2()
+
             findNavController().navigateSafe(
                 action.actionId,
                 Bundle().apply {
                     putInt("stepLevel", 1)
                     putString("bodyPart", bodyPart)
                     putString("updateType",us.name)
+                    if(cardListJson.isNotEmpty()){
+                        putString("CardListJson", cardListJson)
+                    }
                 })
         } else {
             Toast.makeText(requireContext(), "운동 부위를 선택해 주세요.", Toast.LENGTH_SHORT).show()
@@ -117,6 +148,10 @@ class AddExerciseFragment :
             findNavController().navigateSafe(action.actionId, Bundle().apply {
                 putInt("stepLevel", 2)
                 putString("bodyPart", bodyPart)
+                putString("updateType",us.name)
+                if(cardListJson.isNotEmpty()){
+                    putString("CardListJson", cardListJson)
+                }
             })
         } else {
             Toast.makeText(requireContext(), "운동 부위를 선택해 주세요.", Toast.LENGTH_SHORT).show()
@@ -131,6 +166,10 @@ class AddExerciseFragment :
         findNavController().navigateSafe(action.actionId, Bundle().apply {
             putInt("stepLevel", 3)
             putString("bodyPart", bodyPart)
+            putString("updateType",us.name)
+            if(cardListJson.isNotEmpty()){
+                putString("CardListJson", cardListJson)
+            }
         })
 
     }

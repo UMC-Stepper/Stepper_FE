@@ -19,6 +19,7 @@ import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.stepper.ExerciseViewAdapter
 import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.example.umc_stepper.ui.today.TodayViewModel
+import com.example.umc_stepper.utils.enums.UpdateState
 import com.example.umc_stepper.utils.listener.AdapterNextClick
 import com.example.umc_stepper.utils.listener.ItemClickListener
 import com.google.gson.Gson
@@ -174,6 +175,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
             }
         }
     }
+
     private fun firstConnect() {
         val currentDate = LocalDate.now()
         val selectedDate =
@@ -181,6 +183,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
         val formattedDate = selectedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         todayViewModel.getStepperExerciseState(formattedDate)
     }
+
     private fun init() {
         val adapter = CalendarAdapter(requireContext(), days)
         binding.stepperCalendarGv.adapter = adapter
@@ -201,9 +204,16 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
             val json = gson.toJson(item)
             //운동카드 리스트 전송
             bd.putString("CardListJson", json)
+            Log.d("카드",json.toString())
+
+            bd.putString("bp", item.bodyPart)
+            for (i in 0..<item.stepList.size) {
+                todayViewModel.addStep(item.stepList[i].myExercise!!)
+            }
         }
         findNavController().navigateSafe(
-            R.id.action_stepperFragment_to_fragmentTodayExercise,
+            R.id.action_stepperFragment_to_fragmentAddExercise,
+            bd
         )
     }
 
@@ -230,7 +240,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
                 //step Id 전송
                 bd.putInt("stepId", id)
                 //step 전송
-                bd.putInt("step",pickItem.step)
+                bd.putInt("step", pickItem.step)
                 //stepList 전송
                 bd.putString("stepList", stepList)
                 //유투부 정보 전송
@@ -238,7 +248,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
                 //운동 타입 ( 0 : 오늘의 운동 , 1 : 추가 운동)
                 bd.putInt("exerciseType", 0)
                 //운동 아이디
-                bd.putInt("exerciseId",item.id)
+                bd.putInt("exerciseId", item.id)
             }
             findNavController().navigateSafe(
                 R.id.action_stepperFragment_to_fragmentTodayExercise,
@@ -251,7 +261,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
         lifecycleScope.launch {
             tokenManager.deleteExerciseCardId()
             tokenManager.saveExerciseCardId(id)
-            Log.d("토큰1",id)
+            Log.d("토큰1", id)
         }
 
 
