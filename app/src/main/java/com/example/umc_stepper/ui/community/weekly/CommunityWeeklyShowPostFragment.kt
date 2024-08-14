@@ -3,10 +3,13 @@ package com.example.umc_stepper.ui.community.weekly
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -38,13 +41,14 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
     CommunityRemoveInterface {
 
     private lateinit var mainActivity: MainActivity
+    private lateinit var scrapDialog: CommunityDialog
     private lateinit var weeklyShowPostImageAdapter: WeeklyShowPostImageAdapter
     private lateinit var weeklyShowPostReplyAdapter: WeeklyShowPostReplyAdapter
-    private val communityViewModel: CommunityViewModel by activityViewModels()
 
+    private val communityViewModel: CommunityViewModel by activityViewModels()
     private var postId by Delegates.notNull<Int>()
     private var isScrap: Boolean = false
-    private lateinit var scrapDialog: CommunityDialog
+    private var isAnonymous: Boolean = false
 
     @Inject
     lateinit var tokenManager: TokenManager
@@ -80,6 +84,54 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
                     launch {
                         communityViewModel.postLikeEdit(postId)
+                    }
+                }
+            }
+        }
+
+        // 익명 체크 이미지뷰
+        binding.fragmentCommunityWeeklyShowPostCheckAnonymousIv.setOnClickListener {
+            if(!isAnonymous) {
+                Log.d("isAnonymous", "isAnonymous T : $isAnonymous")
+                binding.fragmentCommunityWeeklyShowPostCheckAnonymousIv.setImageResource(R.drawable.selector_checked_on)
+                isAnonymous = true
+            } else {
+                Log.d("isAnonymous", "isAnonymous F : $isAnonymous")
+                binding.fragmentCommunityWeeklyShowPostCheckAnonymousIv.setImageResource(R.drawable.selector_checked_off)
+                isAnonymous = false
+            }
+        }
+    }
+
+    // EditText 엔터 누르면 댓글 작성되는 함수
+    private fun setupCommentEditText() {
+        binding.fragmentCommunityWeeklyShowPostEt.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+                event?.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER) {
+
+                true
+            } else {
+                false
+            }
+        }
+    }
+
+    // 댓글 작성 로직처리 함수
+    private fun leaveComment(text: String) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                communityViewModel.apiResponsePostViewResponse.collectLatest {
+
+                    launch {
+                        // 작성자 인지 확인 (작성자는 익명 X)
+                        if(it.result?.authorEmail?.equals(tokenManager.getEmail().first()) == true) {
+
+                        } else {
+                            // 익명 여부 확인
+                            if (isAnonymous) {
+
+                            }
+                        }
                     }
                 }
             }
