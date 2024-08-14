@@ -10,10 +10,14 @@ import com.example.umc_stepper.domain.model.response.BadgeResponseItem
 import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResponse
 import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResult
 import com.example.umc_stepper.domain.model.response.member_controller.UserResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 
 interface MainApi {
     @POST("/api/members/signup")
@@ -37,19 +41,20 @@ interface MainApi {
     @DELETE("/api/members/delete")
     suspend fun deleteExit(
     ): BaseResponse<Any>
-
+    @Multipart
     @POST("/api/RateDiary/write")
     suspend fun postRateDiaryEdit(
-        rateDiaryDto: RateDiaryDto
-    ):BaseResponse<RateDiaryResult>
+        @Part image : MultipartBody.Part,
+        @Part("request") rateDiaryDto: RequestBody
+    ): BaseResponse<RateDiaryResult>
 
     @GET("/api/RateDiary/check")
     suspend fun getRateDiaryConfirm(
-    ):BaseResponse<List<RateDiaryResponse>>
+    ): BaseResponse<List<RateDiaryResponse>>
 
     //뱃지 조회
     @GET("/api/badge")
     suspend fun getBadge(
     ): BaseListResponse<BadgeResponseItem>
-    
+
 }

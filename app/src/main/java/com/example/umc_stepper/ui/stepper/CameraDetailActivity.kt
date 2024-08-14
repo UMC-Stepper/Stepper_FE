@@ -26,7 +26,7 @@ class CameraDetailActivity : BaseActivity<ActivityCameraDetailBinding>(R.layout.
 
     private fun setImageView() {
         photoUri = intent.getStringExtra("photo_uri")?.let { Uri.parse(it)}
-        Log.d("CameraDetailActivity", "photoUri : $photoUri")
+        Log.d("포토", "photoUri : $photoUri")
         photoUri?.let {
             GlobalApplication.loadImage(binding.activityCameraDetailPhotoIv, it)
         }
