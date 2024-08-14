@@ -81,7 +81,7 @@ class CommunityApiDataSource @Inject constructor(
             Log.e("Get Detail Post List Failure", it.message.toString())
         }
 
-    //내가 작성한 글 조회
+    //내가 작성한 글 목록 조회
     fun getCommunityMyPosts() : Flow<BaseListResponse<CommunityMyPostsResponseItem>> = flow{
         val result = communityApi.getCommunityMyPosts()
         emit(result)
@@ -90,12 +90,21 @@ class CommunityApiDataSource @Inject constructor(
 
     }
 
-    //내가 작성한 댓글 조회
+    //내가 작성한 댓글 목록 조회 getCommunityMyScraps
     fun getCommunityMyComments():Flow<BaseListResponse<CommunityMyCommentsResponseItem>> = flow{
         val result = communityApi.getCommunityMyComments()
         emit(result)
     }.catch {
         Log.e("Get Community MyComments Failure", it.message.toString())
+
+    }
+
+    //내가 스크랩한 글 목록 조회
+    fun getCommunityMyScraps():Flow<BaseListResponse<CommunityMyCommentsResponseItem>> = flow{
+        val result = communityApi.getCommunityMyScraps()
+        emit(result)
+    }.catch {
+        Log.e("Get Community MyScraps Failure", it.message.toString())
 
     }
 

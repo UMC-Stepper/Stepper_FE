@@ -21,9 +21,13 @@ class CommunityViewModel @Inject constructor(
     private val communityApiRepository: CommunityApiRepository
 ) : ViewModel() {
 
-    // 내가 작성한 댓글의 게시글 조회
+    // 내가 작성한 댓글의 글 목록 조회
     private val _communityMyCommentsResponseItem = MutableStateFlow<BaseListResponse<CommunityMyCommentsResponseItem>>(BaseListResponse())
     val communityMyCommentsResponseItem : StateFlow<BaseListResponse<CommunityMyCommentsResponseItem>> = _communityMyCommentsResponseItem
+
+    // 내가 스크랩한 글 목록 조회
+    private val _communityMyScrapResponseItem = MutableStateFlow<BaseListResponse<CommunityMyCommentsResponseItem>>(BaseListResponse())
+    val communityMyScrapResponseItem : StateFlow<BaseListResponse<CommunityMyCommentsResponseItem>> = _communityMyScrapResponseItem
 
     // 게시글 상세 조회
     private val _apiResponsePostViewResponse = MutableStateFlow<BaseResponse<ApiResponsePostViewResponse>>(BaseResponse())
@@ -53,7 +57,7 @@ class CommunityViewModel @Inject constructor(
     val isLike: StateFlow<Boolean> = _isLike
 
 
-    // 내가 작성한 댓글의 게시글 조회
+    // 내가 작성한 댓글의 글 목록 조회
     fun getCommunityMyComments() {
         viewModelScope.launch {
             try{
@@ -66,6 +70,20 @@ class CommunityViewModel @Inject constructor(
             }
         }
     }
+
+    fun getCommunityMyScraps() {
+        viewModelScope.launch {
+            try{
+                communityApiRepository.getCommunityMyScraps().collect {
+                    _communityMyScrapResponseItem.value = it
+                    Log.d("CommunityViewModel", "_communityMyScrapResponseItem : $it")
+                }
+            } catch (e:Exception) {
+                Log.e("getCommunityMyScraps is Error", e.message.toString())
+            }
+        }
+    }
+
 
     // 게시글 상세 조회
     fun getDetailPost(postId : Int) {

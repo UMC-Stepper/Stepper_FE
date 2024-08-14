@@ -69,14 +69,19 @@ interface CommunityApi {
         @Path("categoryName") categoryName : String
     ): BaseListResponse<ApiResponseListPostViewResponseItem>
 
-    //내가 작성한 글 조회
+    //내가 작성한 글 목록 조회
     @GET("/api/community/my_posts")
     suspend fun getCommunityMyPosts(
     ):BaseListResponse<CommunityMyPostsResponseItem>
 
-    //내가 작성한 댓글 조회
+    //내가 작성한 댓글 글 목록 조회
     @GET("/api/community/my_comments")
     suspend fun getCommunityMyComments(
+    ):BaseListResponse<CommunityMyCommentsResponseItem>
+
+    //내가 작성한 댓글 글 목록 조회
+    @GET("/api/community/my_scrap")
+    suspend fun getCommunityMyScraps(
     ):BaseListResponse<CommunityMyCommentsResponseItem>
 
     //댓글 작성

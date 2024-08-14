@@ -33,6 +33,8 @@ class CommunityApiRepositoryImpl @Inject constructor(
     override suspend fun getCommunityMyComments(): Flow<BaseListResponse<CommunityMyCommentsResponseItem>> =
         dataSource.getCommunityMyComments()
 
+    override suspend fun getCommunityMyScraps(): Flow<BaseListResponse<CommunityMyCommentsResponseItem>> =
+        dataSource.getCommunityMyScraps()
 
     override suspend fun postCommentWrite(commentWriteDto: CommentWriteDto): Flow<BaseResponse<CommentWriteResponse>> =
         dataSource.postCommentWrite(commentWriteDto)
