@@ -7,7 +7,7 @@ import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.model.request.comment_controller.CommentWriteDto
 import com.example.umc_stepper.domain.model.request.comment_controller.ReplyRequestDto
-import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponse
+import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentWriteResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostViewResponse
 import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponseItem
@@ -42,12 +42,12 @@ class CommunityViewModel @Inject constructor(
     val commentWriteResponse : StateFlow<BaseResponse<CommentWriteResponse>> = _commentWriteResponse
 
     // 대댓글 작성
-    private val _replyResponse = MutableStateFlow<BaseResponse<CommentResponse>>(BaseResponse())
-    val replyResponse : StateFlow<BaseResponse<CommentResponse>> = _replyResponse
+    private val _replyResponse = MutableStateFlow<BaseResponse<CommentResponseItem>>(BaseResponse())
+    val replyResponse : StateFlow<BaseResponse<CommentResponseItem>> = _replyResponse
 
     // 댓글 조회
-    private val _getCommentResponse = MutableStateFlow<BaseListResponse<CommentResponse>>(BaseListResponse())
-    val getCommentResponse : StateFlow<BaseListResponse<CommentResponse>> = _getCommentResponse
+    private val _getCommentResponse = MutableStateFlow<BaseListResponse<CommentResponseItem>>(BaseListResponse())
+    val getCommentResponse : StateFlow<BaseListResponse<CommentResponseItem>> = _getCommentResponse
 
     // 좋아요 등록
     private val _likeResponse = MutableStateFlow<BaseResponse<LikeResponse>>(BaseResponse())
