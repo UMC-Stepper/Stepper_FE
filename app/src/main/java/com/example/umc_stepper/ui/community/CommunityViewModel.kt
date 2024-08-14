@@ -42,8 +42,12 @@ class CommunityViewModel @Inject constructor(
     val commentWriteResponse : StateFlow<BaseResponse<CommentWriteResponse>> = _commentWriteResponse
 
     // 대댓글 작성
-    private val _commentResponse = MutableStateFlow<BaseResponse<CommentResponse>>(BaseResponse())
-    val commentResponse : StateFlow<BaseResponse<CommentResponse>> = _commentResponse
+    private val _replyResponse = MutableStateFlow<BaseResponse<CommentResponse>>(BaseResponse())
+    val replyResponse : StateFlow<BaseResponse<CommentResponse>> = _replyResponse
+
+    // 댓글 조회
+    private val _getCommentResponse = MutableStateFlow<BaseListResponse<CommentResponse>>(BaseListResponse())
+    val getCommentResponse : StateFlow<BaseListResponse<CommentResponse>> = _getCommentResponse
 
     // 좋아요 등록
     private val _likeResponse = MutableStateFlow<BaseResponse<LikeResponse>>(BaseResponse())
@@ -106,6 +110,7 @@ class CommunityViewModel @Inject constructor(
             try {
                 communityApiRepository.postCommentWrite(commentWriteDto).collect {
                     _commentWriteResponse.value = it
+                    Log.d("댓글 작성", "_commentWriteResponse : $it")
                 }
             } catch (e: Exception) {
                 Log.e("postCommentWrite is Error", e.message.toString())
@@ -114,11 +119,26 @@ class CommunityViewModel @Inject constructor(
     }
 
     // 대댓글 작성
-    fun postReply (replyRequestDto: ReplyRequestDto) {
+    fun postReply(replyRequestDto: ReplyRequestDto) {
         viewModelScope.launch {
             try {
                 communityApiRepository.postReply(replyRequestDto).collect {
-                    _commentResponse.value = it
+                    _replyResponse.value = it
+                    Log.d("대댓글 작성", "_replyResponse : $it")
+                }
+            } catch (e: Exception) {
+                Log.e("postCommentWrite is Error", e.message.toString())
+            }
+        }
+    }
+
+    // 댓글 조회
+    fun postReply(postId: Int) {
+        viewModelScope.launch {
+            try {
+                communityApiRepository.getComment(postId).collect {
+                    _getCommentResponse.value = it
+                    Log.d("댓글 조회", "_getCommentResponse : $it")
                 }
             } catch (e: Exception) {
                 Log.e("postCommentWrite is Error", e.message.toString())
