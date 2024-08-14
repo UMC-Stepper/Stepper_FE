@@ -100,6 +100,6 @@ interface CommunityApi {
     @GET("api/comment/{postId}/comment")
     suspend fun getComment(
         @Path("postId") postId : Int
-    ):BaseListResponse<CommentResponseItem>
+    ):BaseListResponse<CommentResponse>
 
 }

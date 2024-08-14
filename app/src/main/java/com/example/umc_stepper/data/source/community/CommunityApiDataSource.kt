@@ -164,7 +164,7 @@ class CommunityApiDataSource @Inject constructor(
     }
 
     //댓글 조회
-    suspend fun getComment(postId : Int):Flow<BaseListResponse<CommentResponseItem>> = flow{
+    suspend fun getComment(postId : Int):Flow<BaseListResponse<CommentResponse>> = flow{
         val result = communityApi.getComment(postId)
         emit(result)
     }.catch {

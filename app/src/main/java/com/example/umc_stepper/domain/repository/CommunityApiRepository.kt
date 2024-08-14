@@ -41,7 +41,7 @@ interface CommunityApiRepository {
     suspend fun postReply(replyRequestDto: ReplyRequestDto) : Flow<BaseResponse<CommentResponse>>
 
     //댓글 조회
-    suspend fun getComment(postId: Int): Flow<BaseListResponse<CommentResponseItem>>
+    suspend fun getComment(postId: Int): Flow<BaseListResponse<CommentResponse>>
 }
 
 
