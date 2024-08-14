@@ -4,9 +4,6 @@
 
     <data>
         <variable
-            name="listener"
-            type="com.example.umc_stepper.utils.listener.ItemClickListener" />
-        <variable
             name="commentResponseItem"
             type="com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem" />
     </data>
@@ -58,7 +55,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
                 android:src="@drawable/ic_reply_up_16dp"
-                android:onClick="@{() -> listener.onClick(commentResponseItem.commentId)}"
                 app:layout_constraintBottom_toBottomOf="@+id/item_weekly_show_post_comment_name_tv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/item_weekly_show_post_comment_name_tv" />

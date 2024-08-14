@@ -33,7 +33,7 @@ import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>(R.layout.fragment_community_show_post),
-    CommunityDialogInterface, CommunityRemoveInterface, ItemClickListener {
+    CommunityDialogInterface, CommunityRemoveInterface {
 
     private lateinit var mainActivity: MainActivity
     private lateinit var scrapDialog: CommunityDialog
@@ -133,12 +133,6 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
         }
     }
 
-
-    // 댓글 조회 함수
-
-
-    // 대댓글 조회 함수
-
     // 댓글 작성 로직 처리 함수
     private fun leaveComment(text: String) {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -184,7 +178,12 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
         weeklyShowPostImageAdapter = WeeklyShowPostImageAdapter()
         binding.fragmentCommunityWeeklyShowPostImgRv.adapter = weeklyShowPostImageAdapter
 
-        weeklyShowPostReplyAdapter = WeeklyShowPostReplyAdapter(this)
+        weeklyShowPostReplyAdapter = WeeklyShowPostReplyAdapter{
+            Log.d("댓글 리사이클러뷰 클릭 리스너","commentId : ${ it.toInt()}")
+            parentCommentId = it.toInt()
+            isReplyMode = true
+            showReplyDialog()
+        }
         binding.fragmentCommunityWeeklyShowPostReplyRv.adapter = weeklyShowPostReplyAdapter
     }
 
@@ -329,24 +328,18 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
                 // 대댓글 다이얼로그 처리
                 DialogType.REPLY -> {
                     if (btn1 == "확인") {
-
+                        launch {
+                            kotlinx.coroutines.delay(100)
+                            editKeyboardUp()
+                            setupCommentEditText()
+                        }
                     }
                 }
-                null -> TODO()
+                null -> Log.d("DialogType","DialogType is null")
             }
         }
     }
 
     override fun onRemove(pos: Int) {}
-
-    // 댓글 리사이클러뷰 클릭 리스너
-    override fun onClick(item: Any) {
-        Log.d("CommunityShowPostFragment","commentId")
-        parentCommentId = item as Int
-        isReplyMode = true
-        editKeyboardUp()
-        setupCommentEditText()
-        showReplyDialog()
-    }
 
 }
