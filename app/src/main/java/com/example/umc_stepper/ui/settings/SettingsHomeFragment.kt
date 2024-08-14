@@ -8,6 +8,7 @@ import com.example.umc_stepper.databinding.FragmentSettingsHomeBinding
 import com.example.umc_stepper.ui.community.CommunityDialog
 import com.example.umc_stepper.ui.community.CommunityDialogInterface
 import com.example.umc_stepper.ui.login.LoginActivity
+import com.example.umc_stepper.utils.enums.DialogType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -60,7 +61,7 @@ class SettingsHomeFragment : BaseFragment<FragmentSettingsHomeBinding>(R.layout.
         }
     }
 
-    override fun OnClickBtn1(btn1: String) {
+    override fun OnClickBtn1(btn1: String, dialogType: DialogType?) {
         val intent = Intent(requireContext(),LoginActivity::class.java)
         startActivity(intent)
         // 회원탈퇴기능(서버에전송)
