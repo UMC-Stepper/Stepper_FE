@@ -54,10 +54,14 @@ class CommunityMyScrapFragment : BaseFragment<FragmentCommunityMyScrapBinding>(R
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 communityViewModel.communityMyScrapResponseItem.collect {
-                    it.result?.forEach { res ->
-                        updateVisibility(res.title.isNotBlank())
+                    if (it.isSuccess) {
+                        it.result?.forEach { res ->
+                            updateVisibility(res.title.isNotBlank())
+                        }
+                        myScrapAdapter.submitList(it.result)
+                    } else {
+                        updateVisibility(false)
                     }
-                    myScrapAdapter.submitList(it.result)
                 }
             }
         }
