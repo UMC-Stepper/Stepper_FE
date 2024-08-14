@@ -14,6 +14,8 @@ import com.example.umc_stepper.domain.model.response.member_controller.UserRespo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 class MainApiDataSource @Inject constructor(
@@ -54,8 +56,8 @@ class MainApiDataSource @Inject constructor(
         Log.e("Get User Failure", it.message.toString())
     }
 
-    fun postRateDiaryEdit(rateDiaryDto: RateDiaryDto) : Flow<BaseResponse<RateDiaryResult>> = flow{
-        val result = mainApi.postRateDiaryEdit(rateDiaryDto)
+    fun postRateDiaryEdit(image : MultipartBody.Part,rateDiaryDto: RequestBody) : Flow<BaseResponse<RateDiaryResult>> = flow{
+        val result = mainApi.postRateDiaryEdit(image,rateDiaryDto)
         emit(result)
     }.catch {
         Log.e("Post RateDiary Edit Failure", it.message.toString())
