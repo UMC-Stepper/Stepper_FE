@@ -109,7 +109,9 @@ class AddExerciseFragment :
                 if (bodyPart.isNotEmpty()) {
                     val action =
                         AddExerciseFragmentDirections.actionFragmentAddExerciseToFragmentExerciseSettingsDate()
-                    findNavController().navigateSafe(action.actionId)
+                    findNavController().navigateSafe(action.actionId,Bundle().apply {
+                        putString("bodyPart",bodyPart)
+                    })
                 } else {
                     Toast.makeText(requireContext(), "운동 부위를 선택해 주세요.", Toast.LENGTH_SHORT).show()
                 }

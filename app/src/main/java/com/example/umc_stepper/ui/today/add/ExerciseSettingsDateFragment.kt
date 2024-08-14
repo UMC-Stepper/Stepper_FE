@@ -15,6 +15,7 @@ import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentExerciseSettingsDateBinding
 import com.example.umc_stepper.domain.model.request.exercise_card_controller.ExerciseCardRequestDto
+import com.example.umc_stepper.domain.model.request.exercise_card_controller.ExerciseStepRequestDto
 import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.today.TodayViewModel
 import com.example.umc_stepper.utils.enums.DayOfWeek
@@ -163,6 +164,16 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
             }
         }
     }
+    private fun changeDaysToEnglish(day: String) : String = when(day){
+        "일" -> "SUNDAY"
+        "월" -> "MONDAY"
+        "화" -> "TUESDAY"
+        "수" -> "WEDNESDAY"
+        "목" -> "THURSDAY"
+        "금" -> "FRIDAY"
+        "토" -> "SATURDAY"
+        else -> ""
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun postExerciseCard(){
@@ -170,19 +181,28 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
         val currentDateTime = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         val formattedDate = currentDateTime.format(formatter)
-
+        val stepList : ArrayList<ExerciseStepRequestDto> = arrayListOf()
+        val list = todayViewModel.getExerciseList()
+        for(i in 0..<todayViewModel.getExerciseListSize()){
+            stepList.add(
+                ExerciseStepRequestDto(
+                    myExerciseId = list[i],
+                    step = i + 1
+                )
+            )
+        }
         // 현재 날짜의 요일을 가져와서 대문자로 저장
         val dayOfWeek: java.time.DayOfWeek? = currentDateTime.dayOfWeek
         for(i in 0..<selectedDays.size) {
             ecrd = ExerciseCardRequestDto(
                 bodyPart = arguments?.getString("bodyPart") ?: "",
                 date = formattedDate,
-                week = selectedDays.elementAt(i).text.toString(),
+                week = changeDaysToEnglish(selectedDays.elementAt(i).text.toString()),
                 hour = hourTime.toInt(),
                 minute = minuteTime.toInt(),
                 second = 0,
                 materials = binding.fragmentExerciseSettingsExerciseMaterialsEt.text.toString(),
-                stepList =
+                stepList = stepList
             )
 
             todayViewModel.postAddExerciseCard(ecrd)

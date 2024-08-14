@@ -34,6 +34,7 @@ class AddExerciseSelectScrapFragment :
     private lateinit var args: Bundle
     private lateinit var cer: CheckExerciseResponse
     private val todayViewModel: TodayViewModel by activityViewModels()
+    private var exerciseId : Int = 0
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -94,6 +95,7 @@ class AddExerciseSelectScrapFragment :
         selectScrapListAdapter = SelectScrapListAdapter {
             setDataGson(it)
             cer = it
+            exerciseId = cer.exerciseId
             binding.fragmentAddExerciseDownloadBtn.isEnabled = true
             binding.fragmentAddExerciseDownloadBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
             binding.fragmentAddExerciseDownloadBtn.setTextColor(
@@ -153,12 +155,18 @@ class AddExerciseSelectScrapFragment :
             val pos = arguments?.getInt("stepLevel")
             if(pos != null) {
                 when (state) {
-                    UpdateState.ADD ->
+                    UpdateState.ADD -> {
                         todayViewModel.addStep(cer)
+                        todayViewModel.addExerciseList(cer.exerciseId)
+                        Log.d("크기add",todayViewModel.getExerciseListSize().toString())
+                    }
 
-                    UpdateState.UPDATE ->
-                        todayViewModel.updateStep(cer,pos)
+                    UpdateState.UPDATE -> {
+                        todayViewModel.updateStep(cer, pos)
+                        todayViewModel.updateExerciseList(cer.exerciseId, pos - 1)
+                        Log.d("크기update",todayViewModel.getExerciseListSize().toString())
 
+                    }
                     else -> {
                         Log.e("error", "error")
                     }
@@ -169,6 +177,7 @@ class AddExerciseSelectScrapFragment :
             }
             findNavController().navigateSafe(action.actionId, Bundle().apply {
                 putString("bp", bodyPart)
+                putInt("step", stepLevel)
                 if(cardListJson.isNotEmpty()){
                     putString("CardListJson", cardListJson)
                 }
