@@ -284,15 +284,13 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
                 try {
                     stepperViewModel.provideYoutubeLink.collect { response ->
                         Log.d("dataSetting", "Response received: $response")
-                        if (response != null && response.items.isNotEmpty()) {
+                        if (response.items.isNotEmpty()) {
                             val videoItem = response.items[0].snippet
                             Log.d("dataSetting", "Video title: ${videoItem.title}")
                             Log.d("dataSetting", "Channel title: ${videoItem.channelTitle}")
                             Log.d("dataSetting", "Thumbnail URL: ${videoItem.thumbnails.default.url}")
-
                             binding.fragmentLastExerciseTitleTv.text = videoItem.title
                             binding.fragmentLastExerciseChannelNameTv.text = videoItem.channelTitle
-
                             Glide.with(requireContext())
                                 .load(videoItem.thumbnails.default.url)
                                 .into(binding.fragmentLastExerciseProfileIv)

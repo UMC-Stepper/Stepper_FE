@@ -3,6 +3,7 @@ package com.example.umc_stepper.ui.today.add
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -16,6 +17,7 @@ import com.example.umc_stepper.domain.model.response.exercise_card_controller.Ex
 import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.today.TodayViewModel
+import com.example.umc_stepper.utils.enums.UpdateState
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 
@@ -47,7 +49,7 @@ class AddExerciseSelectScrapFragment :
         setButton()
         observeViewModel()
         setAdapter()
-
+        popBack()
         // 앞 화면에서 운동 부위, 운동 단계 받아야 함
     }
 
@@ -75,6 +77,7 @@ class AddExerciseSelectScrapFragment :
             }
         }
     }
+
 
     private fun setAdapter() {
         selectScrapBodyPartAdapter = SelectScrapBodyPartAdapter()
@@ -104,6 +107,22 @@ class AddExerciseSelectScrapFragment :
         }
     }
 
+    private fun popBack() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    val action =
+                        AddExerciseSelectScrapFragmentDirections.actionAddExerciseSelectScrapFragmentToFragmentAddExercise2()
+
+                    findNavController().navigateSafe(action.actionId, Bundle().apply {
+                        putString("bp", bodyPart)
+                    })
+                }
+            })
+
+    }
+
     private fun updateMainToolbar() {
         mainActivity.updateToolbarTitle("운동 카드를 작성해봐요!")
         mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
@@ -121,9 +140,27 @@ class AddExerciseSelectScrapFragment :
 
         // 운동 카드 추가 화면으로 되돌아가기 , 서버에서 받은 정보 넘기기
         binding.fragmentAddExerciseDownloadBtn.setOnClickListener {
-            val action = AddExerciseSelectScrapFragmentDirections.actionAddExerciseSelectScrapFragmentToFragmentAddExercise2()
-            todayViewModel.addStep(cer)
-            findNavController().navigateSafe(action.actionId)
+            val action =
+                AddExerciseSelectScrapFragmentDirections.actionAddExerciseSelectScrapFragmentToFragmentAddExercise2()
+
+            val state = UpdateState.valueOf(arguments?.getString("updateType")!!)
+            val pos = arguments?.getInt("stepLevel")
+            if(pos != null) {
+                when (state) {
+                    UpdateState.ADD ->
+                        todayViewModel.addStep(cer)
+
+                    UpdateState.UPDATE ->
+                        todayViewModel.updateStep(cer,pos)
+
+                    else -> {
+                        Log.e("error", "error")
+                    }
+                }
+            }
+            findNavController().navigateSafe(action.actionId, Bundle().apply {
+                putString("bp", bodyPart)
+            })
         }
     }
 

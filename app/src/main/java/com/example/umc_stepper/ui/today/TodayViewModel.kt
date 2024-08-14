@@ -115,10 +115,17 @@ class TodayViewModel @Inject constructor(
         Log.d("ViewModel", "Step added. New size: ${currentList.size}")
     }
 
-    fun clearStep() {
-        val currentList : List<CheckExerciseResponse> = listOf()
+    fun updateStep(stepCard: CheckExerciseResponse , pos : Int) {
+        val currentList = _setExerciseStep.value.toMutableList()
+        currentList[pos - 1] = stepCard
         _setExerciseStep.value = currentList
+        Log.d("ViewModel", "Step added. New size: ${currentList.size}")
     }
+
+    fun clearStep() {
+        _setExerciseStep.value = emptyList()  // 빈 리스트를 명확히 할당하여 상태 변경을 강제합니다.
+    }
+
 
     // 운동 카드 추가
     fun postAddExerciseCard(exerciseCardRequestDto: ExerciseCardRequestDto) {

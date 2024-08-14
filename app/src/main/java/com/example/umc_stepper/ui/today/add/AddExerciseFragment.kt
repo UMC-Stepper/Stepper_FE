@@ -23,6 +23,7 @@ import com.example.umc_stepper.domain.model.response.my_exercise_controller.Chec
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.today.TodayViewModel
 import com.example.umc_stepper.utils.GlobalApplication
+import com.example.umc_stepper.utils.enums.UpdateState
 import com.example.umc_stepper.utils.enums.bodyPartType
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -61,53 +62,22 @@ class AddExerciseFragment :
         setTitle()
         setMenuList()
         setList()
+        stateSelect()
         setOnClick()
     }
 
 
     private fun setOnClick() {
-
-        // 운동 부위 추가 1
+        val us = UpdateState.ADD
         binding.fragmentAddExerciseNoneAddStep1Constraint.setOnClickListener {
-
-            if (bodyPart.isNotEmpty()) {
-                val action =
-                    AddExerciseFragmentDirections.actionFragmentAddExerciseToAddExerciseSelectScrapFragment2()
-                findNavController().navigateSafe(
-                    action.actionId,
-                    Bundle().apply {
-                        putInt("stepLevel", 1)
-                        putString("bodyPart", bodyPart)
-                    })
-            } else {
-                Toast.makeText(requireContext(), "운동 부위를 선택해 주세요.", Toast.LENGTH_SHORT).show()
-            }
+            go1(us)
         }
-
-        // 운동 부위 추가 2
         binding.fragmentAddExerciseNoneAddStep2Constraint.setOnClickListener {
-            if (bodyPart.isNotEmpty()) {
-                val action =
-                    AddExerciseFragmentDirections.actionFragmentAddExerciseToAddExerciseSelectScrapFragment2()
-                findNavController().navigateSafe(action.actionId, Bundle().apply {
-                    putInt("stepLevel", 2)
-                    putString("bodyPart", bodyPart)
-                })
-            } else {
-                Toast.makeText(requireContext(), "운동 부위를 선택해 주세요.", Toast.LENGTH_SHORT).show()
-            }
+            go2(us)
         }
-
-        // 운동 부위 추가 3
         binding.fragmentAddExerciseNoneAddStep3Constraint.setOnClickListener {
-            val action =
-                AddExerciseFragmentDirections.actionFragmentAddExerciseToAddExerciseSelectScrapFragment2()
-            findNavController().navigateSafe(action.actionId, Bundle().apply {
-                putInt("stepLevel", 3)
-                putString("bodyPart", bodyPart)
-            })
+            go3(us)
         }
-
         // 다음으로 버튼 클릭
         binding.fragmentAddExerciseNextBtn.setOnClickListener {
             if (bodyPart.isNotEmpty()) {
@@ -118,6 +88,50 @@ class AddExerciseFragment :
                 Toast.makeText(requireContext(), "운동 부위를 선택해 주세요.", Toast.LENGTH_SHORT).show()
             }
         }
+
+    }
+
+    private fun go1(us : UpdateState) {
+        // 운동 부위 추가 1
+        if (bodyPart.isNotEmpty()) {
+            val action =
+                AddExerciseFragmentDirections.actionFragmentAddExerciseToAddExerciseSelectScrapFragment2()
+            findNavController().navigateSafe(
+                action.actionId,
+                Bundle().apply {
+                    putInt("stepLevel", 1)
+                    putString("bodyPart", bodyPart)
+                    putString("updateType",us.name)
+                })
+        } else {
+            Toast.makeText(requireContext(), "운동 부위를 선택해 주세요.", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    private fun go2(us : UpdateState) {
+        // 운동 부위 추가 2
+        if (bodyPart.isNotEmpty()) {
+            val action =
+                AddExerciseFragmentDirections.actionFragmentAddExerciseToAddExerciseSelectScrapFragment2()
+            findNavController().navigateSafe(action.actionId, Bundle().apply {
+                putInt("stepLevel", 2)
+                putString("bodyPart", bodyPart)
+            })
+        } else {
+            Toast.makeText(requireContext(), "운동 부위를 선택해 주세요.", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    private fun go3(us : UpdateState) {
+        // 운동 부위 추가 3
+        val action =
+            AddExerciseFragmentDirections.actionFragmentAddExerciseToAddExerciseSelectScrapFragment2()
+        findNavController().navigateSafe(action.actionId, Bundle().apply {
+            putInt("stepLevel", 3)
+            putString("bodyPart", bodyPart)
+        })
 
     }
 
@@ -183,6 +197,8 @@ class AddExerciseFragment :
     private fun setOnClickBtn(select: Int) {
         for (i in 0..8) {
             if (select == i) {
+                initStep()
+                clearExerciseCards() // 추가된 메서드 호출하여 카드 초기화
                 selectNumber = i
                 bodyPart = tagList[i].text.toString()
                 tagList[i].setBackgroundResource(setColor(requireContext(), true).first)
@@ -191,6 +207,29 @@ class AddExerciseFragment :
                 tagList[i].setBackgroundResource(setColor(requireContext(), false).first)
                 tagList[i].setTextColor(setColor(requireContext(), false).second)
             }
+        }
+    }
+
+    private fun clearExerciseCards() {
+        for (i in 0 until 3) {
+            addItemList[i].visibility = View.GONE
+            nonAddItemList[i].visibility = View.VISIBLE
+        }
+    }
+
+    private fun stateSelect() {
+        val part = arguments?.getString("bp") ?: ""
+        if (part.isNotEmpty()) {
+            val select = tagList.find { it.text.toString() == part }
+            if (select != null) {
+                select.setBackgroundResource(setColor(requireContext(), true).first)
+                select.setTextColor(setColor(requireContext(), true).second)
+                bodyPart = part
+            } else {
+                Log.e("에러", "일치하는 운동 부위를 찾을 수 없습니다: $part")
+            }
+        } else {
+            Log.d("정보", "선택된 운동 부위가 없습니다")
         }
     }
 
@@ -211,13 +250,16 @@ class AddExerciseFragment :
     private fun setMenuList() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                todayViewModel.setExerciseStep.collect {
-                    Log.d("크기", it.size.toString())
-                    if (it.isNotEmpty()) {
-                        for (i in 1..it.size) {
-                            addItemList[i - 1].visibility = View.VISIBLE
-                            nonAddItemList[i - 1].visibility = View.GONE
-                            setMenu(it[i - 1], i)
+                todayViewModel.setExerciseStep.collect { steps ->
+                    Log.d("크기", steps.size.toString())
+                    for (i in 0 until 3) {
+                        if (i < steps.size) {
+                            addItemList[i].visibility = View.VISIBLE
+                            nonAddItemList[i].visibility = View.GONE
+                            setMenu(steps[i], i + 1)
+                        } else {
+                            addItemList[i].visibility = View.GONE
+                            nonAddItemList[i].visibility = View.VISIBLE
                         }
                     }
                 }
@@ -225,62 +267,37 @@ class AddExerciseFragment :
         }
     }
 
+    private fun initStep() {
+        todayViewModel.clearStep()
+    }
+
     private fun setMenu(youtubeCard: CheckExerciseResponse, count: Int) {
+        val thumbnail = thumbnailList[count - 1]
+        val title = titleList[count - 1]
+        val channel = channelList[count - 1]
+        val editBtn = editBtnList[count - 1]
 
-        when (count) {
-            1 -> {
-                GlobalApplication.loadCropRoundedSquareImage(
-                    this@AddExerciseFragment.requireContext(),
-                    binding.fragmentAddExerciseThumbnail1Iv,
-                    youtubeCard.url,
-                    18
-                )
-                binding.fragmentAddExerciseTitle1Tv.text = youtubeCard.video_title
-                binding.fragmentAddExerciseChannel1Tv.text = youtubeCard.channel_name
-                binding.fragmentAddExerciseEdit1Iv.setOnClickListener {
-                    goEditPage(1)
-                }
-            }
-
-            2 -> {
-                GlobalApplication.loadCropRoundedSquareImage(
-                    this@AddExerciseFragment.requireContext(),
-                    binding.fragmentAddExerciseThumbnail2Iv,
-                    youtubeCard.url,
-                    18
-                )
-                binding.fragmentAddExerciseTitle2Tv.text = youtubeCard.video_title
-                binding.fragmentAddExerciseChannel2Tv.text = youtubeCard.channel_name
-                binding.fragmentAddExerciseEdit2Iv.setOnClickListener {
-                    goEditPage(2)
-                }
-            }
-
-            3 -> {
-                GlobalApplication.loadCropRoundedSquareImage(
-                    this@AddExerciseFragment.requireContext(),
-                    binding.fragmentAddExerciseThumbnail3Iv,
-                    youtubeCard.url,
-                    18
-                )
-                binding.fragmentAddExerciseTitle3Tv.text = youtubeCard.video_title
-                binding.fragmentAddExerciseChannel3Tv.text = youtubeCard.video_title
-                binding.fragmentAddExerciseEdit3Iv.setOnClickListener {
-                    goEditPage(3)
-                }
-            }
+        GlobalApplication.loadCropRoundedSquareImage(
+            requireContext(),
+            thumbnail,
+            youtubeCard.url,
+            18
+        )
+        title.text = youtubeCard.video_title
+        channel.text = youtubeCard.channel_name
+        editBtn.setOnClickListener {
+            goEditPage(count)
         }
     }
 
     private fun goEditPage(number: Int) {
-        val bundle = Bundle().apply {
-            putInt("count", number)
+        val updateState = UpdateState.UPDATE
+        when(number){
+            1 -> go1(updateState)
+            2 -> go2(updateState)
+            3 -> go3(updateState)
+            else -> Log.e("error","error")
         }
-        val action =
-            AddExerciseFragmentDirections.actionFragmentAddExerciseToFragmentExerciseSettingsDate()
-        findNavController().navigateSafe(action.actionId, bundle)
     }
-
-
 }
 
