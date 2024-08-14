@@ -14,6 +14,7 @@ import com.example.umc_stepper.databinding.FragmentSettingsEditProfileBinding
 import com.example.umc_stepper.ui.community.CommunityDialog
 import com.example.umc_stepper.ui.community.CommunityDialogInterface
 import com.example.umc_stepper.ui.community.CommunityRemoveInterface
+import com.example.umc_stepper.utils.enums.DialogType
 
 class SettingsEditProfileFragment : BaseFragment<FragmentSettingsEditProfileBinding>(R.layout.fragment_settings_edit_profile),
     CommunityDialogInterface,
@@ -108,7 +109,7 @@ class SettingsEditProfileFragment : BaseFragment<FragmentSettingsEditProfileBind
 
     override fun onRemove(pos: Int) {}
 
-    override fun OnClickBtn1(btn1: String) {
+    override fun OnClickBtn1(btn1: String, dialogType: DialogType?) {
         when(btn1) {
             "나가기" -> {
                 editPageOutDialog.dismiss()

@@ -14,6 +14,7 @@ import com.example.umc_stepper.databinding.FragmentWeeklyEditBinding
 import com.example.umc_stepper.ui.community.CommunityDialog
 import com.example.umc_stepper.ui.community.CommunityDialogInterface
 import com.example.umc_stepper.ui.community.CommunityRemoveInterface
+import com.example.umc_stepper.utils.enums.DialogType
 import java.util.Collections
 
 class WeeklyEditFragment : BaseFragment<FragmentWeeklyEditBinding>(R.layout.fragment_weekly_edit),
@@ -113,7 +114,7 @@ class WeeklyEditFragment : BaseFragment<FragmentWeeklyEditBinding>(R.layout.frag
         itemTouchHelper.attachToRecyclerView(binding.fragmentWeeklyImageUploadRv)
     }
 
-    override fun OnClickBtn1(btn1: String) {
+    override fun OnClickBtn1(btn1: String, dialogType: DialogType?) {
         when (btn1) {
             "앨범 선택" -> openGallery()
             "삭제하기" -> {

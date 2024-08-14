@@ -370,9 +370,9 @@
     <!-- 위클리 홈 게시글 상세보기 화면 -->
     <fragment
         android:id="@+id/communityWeeklyShowPostFragment"
-        android:name="com.example.umc_stepper.ui.community.weekly.CommunityWeeklyShowPostFragment"
+        android:name="com.example.umc_stepper.ui.community.CommunityShowPostFragment"
         android:label="CommunityWeeklyShowPostFragment"
-        tools:layout="@layout/fragment_community_weekly_show_post"/>
+        tools:layout="@layout/fragment_community_show_post"/>
 
     <!-- 커뮤니티 목록 확인 화면 -->
     <fragment

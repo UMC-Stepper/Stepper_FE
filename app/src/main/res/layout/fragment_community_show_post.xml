@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.community.weekly.CommunityWeeklyShowPostFragment">
+        tools:context=".ui.community.CommunityShowPostFragment">
 
         <ImageView
             android:id="@+id/fragment_community_weekly_show_post_pin_iv"
@@ -243,6 +243,7 @@
                     android:layout_marginEnd="12dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="16dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -296,6 +297,7 @@
                     android:drawableEnd="@drawable/ic_post_comment"
                     android:paddingStart="16dp"
                     android:paddingEnd="6dp"
+                    android:textColorHint="@color/White"
                     android:textColor="@color/White"
                     style="@style/body_regular_12"
                     android:background="@drawable/shape_rounded_square_purple700_60dp"

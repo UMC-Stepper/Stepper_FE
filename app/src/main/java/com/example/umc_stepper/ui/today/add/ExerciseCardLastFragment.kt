@@ -1,6 +1,8 @@
 package com.example.umc_stepper.ui.today.add
 
 import android.content.Context
+import android.os.Bundle
+import android.util.Log
 import androidx.navigation.fragment.findNavController
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
@@ -18,6 +20,16 @@ class ExerciseCardLastFragment:BaseFragment<FragmentExerciseCardLastBinding>(R.l
 
     private lateinit var exerciseAlarmAdapter: ExerciseAlarmAdapter
 
+    private val dayOfWeekMap = mapOf(
+        "일" to "일요일",
+        "월" to "월요일",
+        "화" to "화요일",
+        "수" to "수요일",
+        "목" to "목요일",
+        "금" to "금요일",
+        "토" to "토요일"
+    )
+
     override fun setLayout() {
         setButton()
         setAdapter()
@@ -34,24 +46,39 @@ class ExerciseCardLastFragment:BaseFragment<FragmentExerciseCardLastBinding>(R.l
         exerciseAlarmAdapter = ExerciseAlarmAdapter()
         binding.fragmentExerciseCardLastScheduleRv.adapter = exerciseAlarmAdapter
 
-        val testItem = ExerciseAlarm(
-            day = "수요일, 목요일",
-            time = "12:17",
-            amPm = "오후",
-            materials = "운동밴드",
-            true
-        )
-        val testItem2 = ExerciseAlarm(
-            day = "월요일, 금요일",
-            time = "6:00",
-            amPm = "오후",
-            materials = "줄넘기",
-            true
-        )
+        val args = arguments ?: Bundle()
+        val week = args.getString("week")
+        val hourTime = args.getInt("hourTime")
+        val minuteTime = args.getInt("minuteTime")
+        val material = args.getString("material")
+        val ampm = args.getString("ampm")
 
-        val testList = listOf(testItem, testItem2)
+        val alarmWeek = week?.let { getDayOfWeek(it) } ?: "알 수 없는 요일"
+
+        // 시간 형식화
+        val (alarmHour, alarmAmPm) = when (ampm) {
+            "PM" -> hourTime + 12 to "오후"
+            else -> hourTime to "오전"
+        }
+
+        val alarmTime = String.format("%02d:%02d", alarmHour, minuteTime)
+
+        val testItem = alarmWeek?.let {
+            ExerciseAlarm(
+                day = it,
+                time = alarmTime,
+                amPm = alarmAmPm,
+                materials = material,
+                true
+            )
+        }
+
+        val testList = listOf(testItem)
         exerciseAlarmAdapter.submitList(testList)
-        saveAlarms(testList)
+    }
+
+    private fun getDayOfWeek(week: String): String {
+        return dayOfWeekMap[week] ?: "?요일"
     }
 
     private fun saveAlarms(alarms: List<ExerciseAlarm>) {

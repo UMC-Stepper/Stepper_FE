@@ -14,6 +14,7 @@ import com.example.umc_stepper.databinding.FragmentWeeklySegmentEditBinding
 import com.example.umc_stepper.ui.community.CommunityDialog
 import com.example.umc_stepper.ui.community.CommunityDialogInterface
 import com.example.umc_stepper.ui.community.CommunityRemoveInterface
+import com.example.umc_stepper.utils.enums.DialogType
 import com.google.android.material.tabs.TabLayout
 import java.util.Collections
 
@@ -141,7 +142,7 @@ class WeeklySegmentEditFragment : BaseFragment<FragmentWeeklySegmentEditBinding>
         showDialog("해당 사진을 삭제하시겠습니까?","삭제하기","취소하기")
         selectedRemoveItemId = pos
     }
-    override fun OnClickBtn1(btn1 : String) {
+    override fun OnClickBtn1(btn1: String, dialogType: DialogType?) {
         when(btn1){
             "앨범 선택" -> openGallery()
             "삭제하기" -> {

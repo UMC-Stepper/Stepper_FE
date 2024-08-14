@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.community.weekly
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,13 +9,28 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.umc_stepper.databinding.ItemCommunityShowPostCommentBinding
 import com.example.umc_stepper.databinding.ItemCommunityShowPostCommentReplyBinding
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem
+import com.example.umc_stepper.utils.listener.ItemClickListener
+import java.text.SimpleDateFormat
+import java.util.Locale
 
-class WeeklyShowPostReplyAdapter : ListAdapter<CommentResponseItem, RecyclerView.ViewHolder>(diffUtil) {
+class WeeklyShowPostReplyAdapter(private val onItemClick: (String) -> Unit) : ListAdapter<CommentResponseItem, RecyclerView.ViewHolder>(diffUtil) {
 
     inner class CommentViewHolder(private val binding: ItemCommunityShowPostCommentBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : CommentResponseItem) {
             binding.apply {
+                Log.d("WeeklyShowPostReplyAdapter Item", "item: $item")
                 binding.commentResponseItem = item
+
+                val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+                val outputFormat = SimpleDateFormat("yy.MM.dd  HH:mm", Locale.getDefault())
+                val date = item.dateTime.let { inputFormat.parse(it) }
+                binding.itemWeeklyShowPostCommentTimeTv.text = date?.let { outputFormat.format(it) }
+
+                binding.fragmentCommunityWeeklyShowReplyUpIv.setOnClickListener {
+                    onItemClick(item.commentId.toString())
+                }
+
+
             }
         }
     }
@@ -41,6 +57,7 @@ class WeeklyShowPostReplyAdapter : ListAdapter<CommentResponseItem, RecyclerView
         }
     }
 
+    // 뷰 타입에 따라 홀더에 데이터 바인딩
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val currentItem = getItem(position)
         when (holder) {
@@ -49,9 +66,10 @@ class WeeklyShowPostReplyAdapter : ListAdapter<CommentResponseItem, RecyclerView
         }
     }
 
+    // 아이템 ViewType 결정
     override fun getItemViewType(position: Int): Int {
         // 임의의 로직을 통해 COMMENT 또는 REPLY를 반환
-        return if (position % 2 == 0) COMMENT else REPLY
+        return COMMENT
     }
 
     companion object{
