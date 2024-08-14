@@ -40,10 +40,10 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
     private lateinit var mainActivity: MainActivity
     private lateinit var weeklyShowPostImageAdapter: WeeklyShowPostImageAdapter
     private lateinit var weeklyShowPostReplyAdapter: WeeklyShowPostReplyAdapter
-    private var postId by Delegates.notNull<Int>()
     private val communityViewModel: CommunityViewModel by activityViewModels()
-    private val loginViewModel: LoginViewModel by activityViewModels()
 
+    private var postId by Delegates.notNull<Int>()
+    private var isScrap: Boolean = false
     private lateinit var scrapDialog: CommunityDialog
 
     @Inject
@@ -60,21 +60,14 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
         setPostId()
         setAdapter()
         observeViewModel()
-        onClickImageView()
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                loginViewModel.loginData.value.result
-            }
-        }
+        onClickView()
     }
 
     // 버튼 설정 함수
     private fun setButton() {
         binding.fragmentCommunityWeeklyScrapTv.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
-                val isScrap = tokenManager.getIsScrap().first()
-                showDialog(isScrap)
+                showDialog()
             }
         }
     }
@@ -88,23 +81,13 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
         binding.fragmentCommunityWeeklyShowPostReplyRv.adapter = weeklyShowPostReplyAdapter
     }
 
-    // 좋아요 이미지 뷰 클릭시 좋아요 등록/취소 함수 (앱 종료 전까지 가능)
-    private fun onClickImageView() {
+    // 좋아요 이미지 뷰 클릭시 좋아요 등록
+    private fun onClickView() {
         binding.fragmentCommunityWeeklyShowThumbsUpIv.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    val currentUserEmail = tokenManager.getEmail().first().toString()
                     launch {
-                        val currentState = communityViewModel.isLike.value
-                        if (currentState) {
-                            communityViewModel.deleteCancelLike(postId)
-                            tokenManager.saveIsLike(currentUserEmail, false)
-                            binding.fragmentCommunityWeeklyShowThumbsUpIv.setImageResource(R.drawable.ic_thumbs_up)
-                        } else {
-                            communityViewModel.postLikeEdit(postId)
-                            tokenManager.saveIsLike(currentUserEmail,true)
-                            binding.fragmentCommunityWeeklyShowThumbsUpIv.setImageResource(R.drawable.ic_thumbs_up_fill)
-                        }
+                        communityViewModel.postLikeEdit(postId)
                     }
                 }
             }
@@ -125,6 +108,16 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     communityViewModel.getDetailPost(postId.toInt())
+                    communityViewModel.getCommunityMyScraps()
+                }
+
+                // 스크랩 상태 확인 및 UI 업데이트
+                launch {
+                    isScrap = communityViewModel.communityMyScrapResponseItem.value.result?.any {
+                        it.id == postId
+                    } == true
+
+                    updateScrapText()
                 }
 
                 // 데이터바인딩 설정
@@ -139,8 +132,8 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
                                 SimpleDateFormat("yy.MM.dd  HH:mm", Locale.getDefault())
 
                             // 날짜 파싱 및 변환
-                            val date = inputFormat.parse(it.result?.updatedAt)
-                            binding.fragmentCommunityWeeklyShowPostDateTv.text = date?.let { it -> outputFormat.format(it) }
+                            val date = it.result?.updatedAt?.let { inputFormat.parse(it) }
+                            binding.fragmentCommunityWeeklyShowPostDateTv.text = date?.let { outputFormat.format(it) }
 
                             // 작성자와 현재 사용자가 동일한 경우만 수정하기 표시 (이 때, 스크랩 표시 X)
                             if(it.result?.authorEmail?.equals(tokenManager.getEmail().first()) == true) {
@@ -153,24 +146,6 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
                         }
                     }
                 }
-
-                // 좋아요 및 스크랩 상태를 동시에 수집
-                launch {
-                    combine(
-                        tokenManager.getIsLike(),
-                        tokenManager.getIsScrap()
-                    ) { isLiked, isScrap ->
-                        binding.fragmentCommunityWeeklyShowThumbsUpIv.setImageResource(
-                            if (isLiked) R.drawable.ic_thumbs_up_fill
-                            else R.drawable.ic_thumbs_up
-                        )
-                        binding.fragmentCommunityWeeklyScrapTv.text = if (isScrap) "스크랩취소" else "스크랩하기"
-                        binding.fragmentCommunityWeeklyShowScrapsUpIv.setImageResource(
-                            if (isScrap) R.drawable.ic_scrap_fill
-                            else R.drawable.ic_scraps_up
-                        )
-                    }.collect()
-                }
             }
         }
     }
@@ -182,7 +157,17 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
         mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_community_menu)
     }
 
-    private fun showDialog(isScrap: Boolean) {
+    private fun updateScrapText() {
+        if (isScrap) {
+            binding.fragmentCommunityWeeklyShowScrapsUpIv.setImageResource(R.drawable.ic_scrap_fill)
+            binding.fragmentCommunityWeeklyScrapTv.text = "스크랩취소"
+        } else {
+            binding.fragmentCommunityWeeklyShowScrapsUpIv.setImageResource(R.drawable.ic_scraps_up)
+            binding.fragmentCommunityWeeklyScrapTv.text = "스크랩하기"
+        }
+    }
+
+    private fun showDialog() {
         val title = if (!isScrap) "이 글을 스크랩하시겠습니까?" else "스크랩을 취소하시겠습니까?"
         val btn1 = "확인"
         val btn2 = "취소"
@@ -198,19 +183,15 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
 
     override fun OnClickBtn1(btn1: String) {
         viewLifecycleOwner.lifecycleScope.launch {
-            val currentUserEmail = tokenManager.getEmail().first()
-
-            if (currentUserEmail != null) {
-                val isScrap = tokenManager.getIsScrap().first()
-                if (btn1 == "확인") {
-                    if (!isScrap) {
-                        communityViewModel.postCommitScrap(postId)
-                        tokenManager.saveIsScrap(userEmail = currentUserEmail, isScrap = true)
-                    } else {
-                        communityViewModel.deleteCancelScrap(postId)
-                        tokenManager.saveIsScrap(userEmail = currentUserEmail, isScrap = false)
-                    }
+            if (btn1 == "확인") {
+                if (!isScrap) {
+                    communityViewModel.postCommitScrap(postId)
+                    isScrap = true
+                } else {
+                    communityViewModel.deleteCancelScrap(postId)
+                    isScrap = false
                 }
+                updateScrapText()
             }
         }
     }
