@@ -15,14 +15,6 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 object BindingAdapters {
-    @JvmStatic
-    @BindingAdapter("imageUrl")
-    fun loadImage(view: ImageView, url: String?) {
-        Glide.with(view.context)
-            .load(url)
-            .apply(RequestOptions().centerCrop())
-            .into(view)
-    }
 
     @JvmStatic
     @BindingAdapter("imageUrl2")
