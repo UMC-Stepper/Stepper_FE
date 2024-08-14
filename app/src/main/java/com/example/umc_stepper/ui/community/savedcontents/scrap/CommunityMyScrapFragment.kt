@@ -1,15 +1,19 @@
 package com.example.umc_stepper.ui.community.savedcontents.scrap
 
 import android.content.Context
+import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentCommunityMyScrapBinding
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.community.CommunityViewModel
+import com.example.umc_stepper.ui.community.savedcontents.comments.CommunityMyCommentsFragmentDirections
 import com.example.umc_stepper.utils.listener.ItemClickListener
 import kotlinx.coroutines.launch
 
@@ -26,8 +30,13 @@ class CommunityMyScrapFragment : BaseFragment<FragmentCommunityMyScrapBinding>(R
     }
 
     override fun setLayout() {
+        initSettings()
+    }
+
+    private fun initSettings() {
         updateToolbar()
         initAdapter()
+        observeViewModel()
     }
 
     private fun initAdapter() {
@@ -38,8 +47,29 @@ class CommunityMyScrapFragment : BaseFragment<FragmentCommunityMyScrapBinding>(R
     private fun observeViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                // 내가 스크랩 한 글 목록 불러오기
+                communityViewModel.getCommunityMyScraps()
             }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                communityViewModel.communityMyScrapResponseItem.collect {
+                    it.result?.forEach { res ->
+                        updateVisibility(res.title.isNotBlank())
+                    }
+                    myScrapAdapter.submitList(it.result)
+                }
+            }
+        }
+    }
+
+    private fun updateVisibility(show : Boolean) {
+        if (show) {
+            binding.fragmentCommunityMyScrapNoContentsTv.visibility = View.INVISIBLE
+            binding.fragmentCommunityMyScrapRv.visibility = View.VISIBLE
+        } else {
+            binding.fragmentCommunityMyScrapNoContentsTv.visibility = View.VISIBLE
+            binding.fragmentCommunityMyScrapRv.visibility = View.INVISIBLE
         }
     }
 
@@ -51,7 +81,11 @@ class CommunityMyScrapFragment : BaseFragment<FragmentCommunityMyScrapBinding>(R
     }
 
     override fun onClick(item: Any) {
-        TODO("Not yet implemented")
+        val args = Bundle().apply {
+            putString("postId", "$item")
+        }
+        val action = CommunityMyScrapFragmentDirections.actionCommunityMyScrapFragmentToCommunityWeeklyShowPostFragment()
+        findNavController().navigateSafe(action.actionId, args)
     }
 
 }
