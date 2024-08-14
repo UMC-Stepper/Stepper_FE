@@ -107,16 +107,14 @@ class CommunityApiDataSource @Inject constructor(
             emit(result)
 
         }catch (e: HttpException) {
-            // HTTP 오류가 발생한 경우
-            Log.e("Get Community MyScraps Failure", "HTTP Error: ${e.message()}")
-            emit(
-                BaseListResponse(
-                    isSuccess = false,
-                    code = e.code().toString(),
-                    message = e.message(),
-                    result = emptyList()
-                )
-            )
+            val errorResponse = e.response()?.let { it }
+            Log.e("Get Community MyScraps Failure", "HTTP Error: ${errorResponse?.errorBody()?.string()}")
+
+            emit(BaseListResponse(
+                isSuccess = errorResponse!!.isSuccessful,
+                code = errorResponse.code().toString(),
+                message = errorResponse.message().toString(),
+                result = emptyList()))
         }
     }
 
