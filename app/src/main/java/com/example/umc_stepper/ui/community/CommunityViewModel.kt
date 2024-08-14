@@ -115,15 +115,13 @@ class CommunityViewModel @Inject constructor(
 
     // 대댓글 작성
     fun postReply (replyRequestDto: ReplyRequestDto) {
-        fun postCommentWrite(replyRequestDto: ReplyRequestDto) {
-            viewModelScope.launch {
-                try {
-                    communityApiRepository.postReply(replyRequestDto).collect {
-                        _commentResponse.value = it
-                    }
-                } catch (e: Exception) {
-                    Log.e("postCommentWrite is Error", e.message.toString())
+        viewModelScope.launch {
+            try {
+                communityApiRepository.postReply(replyRequestDto).collect {
+                    _commentResponse.value = it
                 }
+            } catch (e: Exception) {
+                Log.e("postCommentWrite is Error", e.message.toString())
             }
         }
     }
