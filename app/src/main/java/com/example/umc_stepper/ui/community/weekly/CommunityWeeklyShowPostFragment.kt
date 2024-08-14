@@ -93,15 +93,16 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
         binding.fragmentCommunityWeeklyShowThumbsUpIv.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    val currentUserEmail = tokenManager.getEmail().first().toString()
                     launch {
                         val currentState = communityViewModel.isLike.value
                         if (currentState) {
                             communityViewModel.deleteCancelLike(postId)
-                            tokenManager.saveIsLike(false)
+                            tokenManager.saveIsLike(currentUserEmail, false)
                             binding.fragmentCommunityWeeklyShowThumbsUpIv.setImageResource(R.drawable.ic_thumbs_up)
                         } else {
                             communityViewModel.postLikeEdit(postId)
-                            tokenManager.saveIsLike(true)
+                            tokenManager.saveIsLike(currentUserEmail,true)
                             binding.fragmentCommunityWeeklyShowThumbsUpIv.setImageResource(R.drawable.ic_thumbs_up_fill)
                         }
                     }
@@ -197,14 +198,18 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
 
     override fun OnClickBtn1(btn1: String) {
         viewLifecycleOwner.lifecycleScope.launch {
-            val isScrap = tokenManager.getIsScrap().first()
-            if (btn1 == "확인") {
-                if (!isScrap) {
-                    communityViewModel.postCommitScrap(postId)
-                    tokenManager.saveIsScrap(true)
-                } else {
-                    communityViewModel.deleteCancelScrap(postId)
-                    tokenManager.saveIsScrap(false)
+            val currentUserEmail = tokenManager.getEmail().first()
+
+            if (currentUserEmail != null) {
+                val isScrap = tokenManager.getIsScrap().first()
+                if (btn1 == "확인") {
+                    if (!isScrap) {
+                        communityViewModel.postCommitScrap(postId)
+                        tokenManager.saveIsScrap(userEmail = currentUserEmail, isScrap = true)
+                    } else {
+                        communityViewModel.deleteCancelScrap(postId)
+                        tokenManager.saveIsScrap(userEmail = currentUserEmail, isScrap = false)
+                    }
                 }
             }
         }
