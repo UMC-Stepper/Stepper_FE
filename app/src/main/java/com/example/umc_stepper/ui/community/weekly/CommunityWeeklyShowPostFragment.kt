@@ -55,12 +55,15 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
     }
 
     override fun setLayout() {
+        initSettings()
+    }
+
+    private fun initSettings() {
         updateMainToolbar()
-        setButton()
         setPostId()
+        setButton()
         setAdapter()
         observeViewModel()
-        onClickView()
     }
 
     // 버튼 설정 함수
@@ -68,6 +71,17 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
         binding.fragmentCommunityWeeklyScrapTv.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
                 showDialog()
+            }
+        }
+
+        // 좋아요 이미지 뷰 클릭시 좋아요 등록
+        binding.fragmentCommunityWeeklyShowThumbsUpIv.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    launch {
+                        communityViewModel.postLikeEdit(postId)
+                    }
+                }
             }
         }
     }
@@ -79,19 +93,6 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
 
         weeklyShowPostReplyAdapter = WeeklyShowPostReplyAdapter()
         binding.fragmentCommunityWeeklyShowPostReplyRv.adapter = weeklyShowPostReplyAdapter
-    }
-
-    // 좋아요 이미지 뷰 클릭시 좋아요 등록
-    private fun onClickView() {
-        binding.fragmentCommunityWeeklyShowThumbsUpIv.setOnClickListener {
-            viewLifecycleOwner.lifecycleScope.launch {
-                repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    launch {
-                        communityViewModel.postLikeEdit(postId)
-                    }
-                }
-            }
-        }
     }
 
     // postId 이전 화면에서 넘겨받아서 저장하는 함수
