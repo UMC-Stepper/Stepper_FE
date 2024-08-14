@@ -103,11 +103,20 @@ class CommunityApiDataSource @Inject constructor(
 
     //내가 작성한 댓글 목록 조회 getCommunityMyScraps
     fun getCommunityMyComments():Flow<BaseListResponse<CommunityMyCommentsResponseItem>> = flow{
+        try {
         val result = communityApi.getCommunityMyComments()
         emit(result)
-    }.catch {
-        Log.e("Get Community MyComments Failure", it.message.toString())
+        } catch (e: HttpException) {
+            val errorResponse = e.response()?.let { it }
+            Log.e("Get Community MyScraps Failure", "HTTP Error: ${errorResponse?.errorBody()?.string()}")
 
+            emit(BaseListResponse(
+                isSuccess = errorResponse!!.isSuccessful,
+                code = errorResponse.code().toString(),
+                message = errorResponse.message().toString(),
+                result = emptyList())
+            )
+        }
     }
 
     //내가 스크랩한 글 목록 조회
@@ -123,7 +132,8 @@ class CommunityApiDataSource @Inject constructor(
                 isSuccess = errorResponse!!.isSuccessful,
                 code = errorResponse.code().toString(),
                 message = errorResponse.message().toString(),
-                result = emptyList()))
+                result = emptyList())
+            )
         }
     }
 
