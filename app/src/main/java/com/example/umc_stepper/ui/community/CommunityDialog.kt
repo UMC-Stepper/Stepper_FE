@@ -40,7 +40,7 @@ class CommunityDialog(
             dialogCommunityButton2Bt.text = btn2
 
             dialogCommunityButton1Bt.setOnClickListener {
-                communityDialogInterface.OnClickBtn1(btn1)
+                communityDialogInterface.OnClickBtn1(btn1, dialogType)
                 dismiss()
             }
             dialogCommunityButton2Bt.setOnClickListener {
