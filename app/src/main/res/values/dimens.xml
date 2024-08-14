@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="exerciseCardRv_no_items_height">330dp</dimen>
+</resources>
