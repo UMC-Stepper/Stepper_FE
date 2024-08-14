@@ -63,6 +63,7 @@ class CommunityViewModel @Inject constructor(
         }
     }
 
+    // 내가 스크랩한 글의 글 목록 조회
     fun getCommunityMyScraps() {
         viewModelScope.launch {
             try{
