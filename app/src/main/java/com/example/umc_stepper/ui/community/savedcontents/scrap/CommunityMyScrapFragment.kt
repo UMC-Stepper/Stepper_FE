@@ -55,8 +55,8 @@ class CommunityMyScrapFragment : BaseFragment<FragmentCommunityMyScrapBinding>(R
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 communityViewModel.communityMyScrapResponseItem.collect {
                     if (it.isSuccess) {
-                        it.result?.forEach { res ->
-                            updateVisibility(res.title.isNotBlank())
+                        it.result?.forEach { _ ->
+                            updateVisibility(true)
                         }
                         myScrapAdapter.submitList(it.result)
                     } else {
