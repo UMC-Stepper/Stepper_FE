@@ -25,11 +25,14 @@ interface CommunityApiRepository {
     suspend fun getDetailPost(postId: Int): Flow<BaseResponse<ApiResponsePostViewResponse>>
     suspend fun getDetailPostList(categoryName: String): Flow<BaseListResponse<ApiResponseListPostViewResponseItem>>
 
-    //내가 작성한 글 조회
+    //내가 작성한 글 목록 조회
     suspend fun getCommunityMyPosts(): Flow<BaseListResponse<CommunityMyPostsResponseItem>>
 
-    //내가 작성한 댓글 조회
+    //내가 작성한 댓글 글 목록 조회
     suspend fun getCommunityMyComments(): Flow<BaseListResponse<CommunityMyCommentsResponseItem>>
+
+    //내가 스크랩 한 글 목록 조회
+    suspend fun getCommunityMyScraps(): Flow<BaseListResponse<CommunityMyCommentsResponseItem>>
 
     //댓글 작성
     suspend fun postCommentWrite(commentWriteDto: CommentWriteDto): Flow<BaseResponse<CommentWriteResponse>>

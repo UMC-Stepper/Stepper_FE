@@ -47,6 +47,7 @@
                 android:layout_marginEnd="24dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="36dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_community_weekly_home_post"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

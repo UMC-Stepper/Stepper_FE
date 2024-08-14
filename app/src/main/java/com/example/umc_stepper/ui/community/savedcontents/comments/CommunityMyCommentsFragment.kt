@@ -54,10 +54,14 @@ class CommunityMyCommentsFragment : BaseFragment<FragmentCommunityMyCommentsBind
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 communityViewModel.communityMyCommentsResponseItem.collect {
-                    it.result?.forEach { res ->
-                        updateVisibility(res.title.isNotBlank())
+                    if (it.isSuccess) {
+                        it.result?.forEach { res ->
+                            updateVisibility(res.title.isNotBlank())
+                        }
+                        myCommentsAdapter.submitList(it.result)
+                    } else {
+                        updateVisibility(false)
                     }
-                    myCommentsAdapter.submitList(it.result)
                 }
             }
         }

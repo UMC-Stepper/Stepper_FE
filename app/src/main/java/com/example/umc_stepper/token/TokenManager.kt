@@ -28,7 +28,7 @@ class TokenManager @Inject constructor(
         private val EXERCISE_ID = stringPreferencesKey("exercise_id")
         private val EXERCISE_CARD_ID = stringPreferencesKey("exercise_card_id")
 
-        private val IS_LIKE_KEY = booleanPreferencesKey("is_like")
+        private val EMAIL_ID = stringPreferencesKey("email_id")
         private val IS_SCRAP_KEY = booleanPreferencesKey("is_scrap")
     }
 
@@ -115,28 +115,17 @@ class TokenManager @Inject constructor(
         }
     }
 
-    // 좋아요 / 스크랩
-    fun saveIsLike(isLike: Boolean) = runBlocking {
+    // 로그인 할 때 이메일 저장
+    fun saveEmail(email: String) = runBlocking {
         dataStore.edit { prefs ->
-            prefs[IS_LIKE_KEY] = isLike
+            prefs[EMAIL_ID] = email
         }
     }
 
-    fun getIsLike(): Flow<Boolean> {
+    // 이메일 조회
+    fun getEmail(): Flow<String?> {
         return dataStore.data.map { prefs ->
-            prefs[IS_LIKE_KEY] ?: false
-        }
-    }
-
-    fun saveIsScrap(isScrap: Boolean) = runBlocking {
-        dataStore.edit { prefs ->
-            prefs[IS_SCRAP_KEY] = isScrap
-        }
-    }
-
-    fun getIsScrap(): Flow<Boolean> {
-        return dataStore.data.map { prefs ->
-            prefs[IS_SCRAP_KEY] ?: false
+            prefs[EMAIL_ID]
         }
     }
 }

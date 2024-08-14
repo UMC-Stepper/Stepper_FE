@@ -19,6 +19,7 @@ import com.example.umc_stepper.domain.model.response.post_controller.ScrapRespon
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
 import javax.inject.Inject
 
 class CommunityApiDataSource @Inject constructor(
@@ -42,10 +43,20 @@ class CommunityApiDataSource @Inject constructor(
 
     //POST 좋아요 등록
     fun postLikeEdit(postId: Int): Flow<BaseResponse<LikeResponse>> = flow {
-        val result = communityApi.postLikeEdit(postId)
-        emit(result)
-    }.catch {
-        Log.e("Post Like Edit Failure", it.message.toString())
+       try {
+           val result = communityApi.postLikeEdit(postId)
+           emit(result)
+       }  catch (e: HttpException) {
+           val errorResponse = e.response()?.let { it }
+           Log.e("post Community LikeEdit Failure", "HTTP Error: ${errorResponse?.errorBody()?.string()}")
+
+           emit(BaseResponse(
+               isSuccess = errorResponse!!.isSuccessful,
+               code = errorResponse.code().toString(),
+               message = errorResponse.message().toString(),
+               result = null)
+           )
+       }
     }
 
     //DELETE 좋아요 취소
@@ -81,7 +92,7 @@ class CommunityApiDataSource @Inject constructor(
             Log.e("Get Detail Post List Failure", it.message.toString())
         }
 
-    //내가 작성한 글 조회
+    //내가 작성한 글 목록 조회
     fun getCommunityMyPosts() : Flow<BaseListResponse<CommunityMyPostsResponseItem>> = flow{
         val result = communityApi.getCommunityMyPosts()
         emit(result)
@@ -90,22 +101,58 @@ class CommunityApiDataSource @Inject constructor(
 
     }
 
-    //내가 작성한 댓글 조회
+    //내가 작성한 댓글 목록 조회 getCommunityMyScraps
     fun getCommunityMyComments():Flow<BaseListResponse<CommunityMyCommentsResponseItem>> = flow{
+        try {
         val result = communityApi.getCommunityMyComments()
         emit(result)
-    }.catch {
-        Log.e("Get Community MyComments Failure", it.message.toString())
+        } catch (e: HttpException) {
+            val errorResponse = e.response()?.let { it }
+            Log.e("Get Community MyScraps Failure", "HTTP Error: ${errorResponse?.errorBody()?.string()}")
 
+            emit(BaseListResponse(
+                isSuccess = errorResponse!!.isSuccessful,
+                code = errorResponse.code().toString(),
+                message = errorResponse.message().toString(),
+                result = emptyList())
+            )
+        }
+    }
+
+    //내가 스크랩한 글 목록 조회
+    fun getCommunityMyScraps():Flow<BaseListResponse<CommunityMyCommentsResponseItem>> = flow{
+        try {
+            val result = communityApi.getCommunityMyScraps()
+            emit(result)
+        } catch (e: HttpException) {
+            val errorResponse = e.response()?.let { it }
+            Log.e("Get Community MyScraps Failure", "HTTP Error: ${errorResponse?.errorBody()?.string()}")
+
+            emit(BaseListResponse(
+                isSuccess = errorResponse!!.isSuccessful,
+                code = errorResponse.code().toString(),
+                message = errorResponse.message().toString(),
+                result = emptyList())
+            )
+        }
     }
 
     //댓글 작성
     suspend fun postReply(replyRequestDto: ReplyRequestDto):Flow<BaseResponse<CommentResponse>> = flow{
-        val result = communityApi.postReply(replyRequestDto)
-        emit(result)
-    }.catch {
-        Log.e("Post Comment Write Failure", it.message.toString())
-
+        try {
+            val result = communityApi.postReply(replyRequestDto)
+            emit(result)
+        } catch (e: HttpException) {
+            Log.e("Post Comment Write Failure", e.message.toString())
+            emit(
+                BaseResponse(
+                    isSuccess = false,
+                    code = e.code().toString(),
+                    message = e.message(),
+                    result = null
+                )
+            )
+        }
     }
 
     //대댓글 작성
@@ -114,7 +161,6 @@ class CommunityApiDataSource @Inject constructor(
         emit(result)
     }.catch {
         Log.e("Post Comment Write Failure", it.message.toString())
-
     }
 
     //댓글 조회
@@ -123,7 +169,6 @@ class CommunityApiDataSource @Inject constructor(
         emit(result)
     }.catch {
         Log.e("Get Comment Failure", it.message.toString())
-
     }
 
 

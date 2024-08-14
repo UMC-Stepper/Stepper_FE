@@ -21,9 +21,13 @@ class CommunityViewModel @Inject constructor(
     private val communityApiRepository: CommunityApiRepository
 ) : ViewModel() {
 
-    // 내가 작성한 댓글의 게시글 조회
+    // 내가 작성한 댓글의 글 목록 조회
     private val _communityMyCommentsResponseItem = MutableStateFlow<BaseListResponse<CommunityMyCommentsResponseItem>>(BaseListResponse())
     val communityMyCommentsResponseItem : StateFlow<BaseListResponse<CommunityMyCommentsResponseItem>> = _communityMyCommentsResponseItem
+
+    // 내가 스크랩한 글 목록 조회
+    private val _communityMyScrapResponseItem = MutableStateFlow<BaseListResponse<CommunityMyCommentsResponseItem>>(BaseListResponse())
+    val communityMyScrapResponseItem : StateFlow<BaseListResponse<CommunityMyCommentsResponseItem>> = _communityMyScrapResponseItem
 
     // 게시글 상세 조회
     private val _apiResponsePostViewResponse = MutableStateFlow<BaseResponse<ApiResponsePostViewResponse>>(BaseResponse())
@@ -45,15 +49,7 @@ class CommunityViewModel @Inject constructor(
     private val _scrapCancelResponse = MutableStateFlow<BaseResponse<String>>(BaseResponse())
     val scrapCancelResponse : StateFlow<BaseResponse<String>> = _scrapCancelResponse
 
-    // 상태 변수 추가
-    private val _isScrap = MutableStateFlow(false)
-    val isScrap: StateFlow<Boolean> = _isScrap
-
-    private val _isLike = MutableStateFlow(false)
-    val isLike: StateFlow<Boolean> = _isLike
-
-
-    // 내가 작성한 댓글의 게시글 조회
+    // 내가 작성한 댓글의 글 목록 조회
     fun getCommunityMyComments() {
         viewModelScope.launch {
             try{
@@ -66,6 +62,21 @@ class CommunityViewModel @Inject constructor(
             }
         }
     }
+
+    // 내가 스크랩한 글의 글 목록 조회
+    fun getCommunityMyScraps() {
+        viewModelScope.launch {
+            try{
+                communityApiRepository.getCommunityMyScraps().collect {
+                    _communityMyScrapResponseItem.value = it
+                    Log.d("CommunityViewModel", "_communityMyScrapResponseItem : $it")
+                }
+            } catch (e:Exception) {
+                Log.e("getCommunityMyScraps is Error", e.message.toString())
+            }
+        }
+    }
+
 
     // 게시글 상세 조회
     fun getDetailPost(postId : Int) {
@@ -87,12 +98,11 @@ class CommunityViewModel @Inject constructor(
             try {
                 communityApiRepository.postLikeEdit(postId).collect {
                     if(it.isSuccess) {
-                    _likeResponse.value = it
-                    _isLike.value = true
-                    getDetailPost(postId)
-                    Log.d("CommunityViewModel", "_likeResponse : $it")
-                }
+                        _likeResponse.value = it
+                        getDetailPost(postId)
+                        Log.d("CommunityViewModel", "_likeResponse : $it")
                     }
+                }
             } catch (e:Exception) {
                 Log.e("getDetailPost is Error", e.message.toString())
             }
@@ -106,7 +116,6 @@ class CommunityViewModel @Inject constructor(
                 communityApiRepository.deleteCancelLike(postId).collect {
                     if (it.isSuccess) {
                         _likeCancelResponse.value = it
-                        _isLike.value = false
                         getDetailPost(postId)
                         Log.d("CommunityViewModel", "_likeResponse : $it")
                     }
@@ -124,7 +133,6 @@ class CommunityViewModel @Inject constructor(
                 communityApiRepository.postCommitScrap(postId).collect {
                     if (it.isSuccess) {
                         _scrapResponse.value = it
-                        _isScrap.value = true
                         getDetailPost(postId)
                         Log.d("CommunityViewModel", "_scrapResponse : $it")
                     }
@@ -143,7 +151,6 @@ class CommunityViewModel @Inject constructor(
                 communityApiRepository.deleteCancelScrap(postId).collect {
                     if (it.isSuccess) {
                         _scrapCancelResponse.value = it
-                        _isScrap.value = false
                         getDetailPost(postId)
                         Log.d("CommunityViewModel", "_scrapResponse : $it")
                     }

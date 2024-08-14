@@ -38,9 +38,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private lateinit var agreeDialog: AgreeDialog
     private lateinit var requestMultiplePermissionsLauncher: ActivityResultLauncher<Array<String>>
 
-
-
-
     override fun setLayout() {
         requestForUserData()
         initPermissionLaunchers()
@@ -155,6 +152,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                 val email = activityLoginEmailEt.text.toString()
                 val password = activityLoginPasswordEt.text.toString()
                 //전송 api 호출 loginViewModel.getUser(email,password)
+                tokenManager.saveEmail(email)
                 loginViewModel.postUserLogInInfo(
                     LogInDto(
                         email = email,

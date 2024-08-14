@@ -32,6 +32,17 @@ object BindingAdapters {
     }
 
     @JvmStatic
+    @BindingAdapter("app:setAuthor")
+    fun setAuthor(view:TextView, authorName: String?) {
+        val author = if (authorName != null && authorName.contains("@")) {
+            authorName.split("@")[0]
+        } else {
+            authorName
+        }
+        view.text = author
+    }
+
+    @JvmStatic
     @BindingAdapter("app:stepStatus")
     fun setStepStatusImg(view: ImageView, stepStatus: Boolean) {
         val imageRes = if (stepStatus) {
