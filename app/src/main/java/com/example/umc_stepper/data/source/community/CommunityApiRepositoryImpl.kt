@@ -4,7 +4,6 @@ import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.model.request.comment_controller.CommentWriteDto
 import com.example.umc_stepper.domain.model.request.comment_controller.ReplyRequestDto
-import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponse
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentWriteResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponseListPostViewResponseItem
@@ -39,10 +38,10 @@ class CommunityApiRepositoryImpl @Inject constructor(
     override suspend fun postCommentWrite(commentWriteDto: CommentWriteDto): Flow<BaseResponse<CommentWriteResponse>> =
         dataSource.postCommentWrite(commentWriteDto)
 
-    override suspend fun getComment(postId: Int): Flow<BaseListResponse<CommentResponse>> =
+    override suspend fun getComment(postId: Int): Flow<BaseListResponse<CommentResponseItem>> =
         dataSource.getComment(postId)
 
-    override suspend fun postReply(replyRequestDto: ReplyRequestDto): Flow<BaseResponse<CommentResponse>> =
+    override suspend fun postReply(replyRequestDto: ReplyRequestDto): Flow<BaseResponse<CommentResponseItem>> =
         dataSource.postReply(replyRequestDto)
 
     override suspend fun postLikeEdit(postId: Int): Flow<BaseResponse<LikeResponse>>

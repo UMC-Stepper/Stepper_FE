@@ -6,7 +6,6 @@ import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.data.remote.CommunityApi
 import com.example.umc_stepper.domain.model.request.comment_controller.CommentWriteDto
 import com.example.umc_stepper.domain.model.request.comment_controller.ReplyRequestDto
-import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponse
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentWriteResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponseListPostViewResponseItem
@@ -138,7 +137,7 @@ class CommunityApiDataSource @Inject constructor(
     }
 
     //댓글 작성
-    suspend fun postReply(replyRequestDto: ReplyRequestDto):Flow<BaseResponse<CommentResponse>> = flow{
+    suspend fun postReply(replyRequestDto: ReplyRequestDto):Flow<BaseResponse<CommentResponseItem>> = flow{
         try {
             val result = communityApi.postReply(replyRequestDto)
             emit(result)
@@ -164,7 +163,7 @@ class CommunityApiDataSource @Inject constructor(
     }
 
     //댓글 조회
-    suspend fun getComment(postId : Int):Flow<BaseListResponse<CommentResponse>> = flow{
+    suspend fun getComment(postId : Int):Flow<BaseListResponse<CommentResponseItem>> = flow{
         val result = communityApi.getComment(postId)
         emit(result)
     }.catch {
