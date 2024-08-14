@@ -5,6 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
+import com.example.umc_stepper.domain.model.request.comment_controller.CommentWriteDto
+import com.example.umc_stepper.domain.model.request.comment_controller.ReplyRequestDto
+import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponse
+import com.example.umc_stepper.domain.model.response.comment_controller.CommentWriteResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostViewResponse
 import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponseItem
 import com.example.umc_stepper.domain.model.response.post_controller.LikeResponse
@@ -33,13 +37,17 @@ class CommunityViewModel @Inject constructor(
     private val _apiResponsePostViewResponse = MutableStateFlow<BaseResponse<ApiResponsePostViewResponse>>(BaseResponse())
     val apiResponsePostViewResponse : StateFlow<BaseResponse<ApiResponsePostViewResponse>> = _apiResponsePostViewResponse
 
+    // 댓글 작성
+    private val _commentWriteResponse = MutableStateFlow<BaseResponse<CommentWriteResponse>>(BaseResponse())
+    val commentWriteResponse : StateFlow<BaseResponse<CommentWriteResponse>> = _commentWriteResponse
+
+    // 대댓글 작성
+    private val _commentResponse = MutableStateFlow<BaseResponse<CommentResponse>>(BaseResponse())
+    val commentResponse : StateFlow<BaseResponse<CommentResponse>> = _commentResponse
+
     // 좋아요 등록
     private val _likeResponse = MutableStateFlow<BaseResponse<LikeResponse>>(BaseResponse())
     val likeResponse : StateFlow<BaseResponse<LikeResponse>> = _likeResponse
-
-    // 좋아요 취소
-    private val _likeCancelResponse = MutableStateFlow<BaseResponse<String>>(BaseResponse())
-    val likeCancelResponse : StateFlow<BaseResponse<String>> = _likeCancelResponse
 
     // 스크랩 등록
     private val _scrapResponse = MutableStateFlow<BaseResponse<ScrapResponse>>(BaseResponse())
@@ -92,6 +100,34 @@ class CommunityViewModel @Inject constructor(
         }
     }
 
+    // 댓글 작성
+    fun postCommentWrite(commentWriteDto: CommentWriteDto) {
+        viewModelScope.launch {
+            try {
+                communityApiRepository.postCommentWrite(commentWriteDto).collect {
+                    _commentWriteResponse.value = it
+                }
+            } catch (e: Exception) {
+                Log.e("postCommentWrite is Error", e.message.toString())
+            }
+        }
+    }
+
+    // 대댓글 작성
+    fun postReply (replyRequestDto: ReplyRequestDto) {
+        fun postCommentWrite(replyRequestDto: ReplyRequestDto) {
+            viewModelScope.launch {
+                try {
+                    communityApiRepository.postReply(replyRequestDto).collect {
+                        _commentResponse.value = it
+                    }
+                } catch (e: Exception) {
+                    Log.e("postCommentWrite is Error", e.message.toString())
+                }
+            }
+        }
+    }
+
     // 좋아요 등록
     fun postLikeEdit(postId : Int) {
         viewModelScope.launch {
@@ -99,23 +135,6 @@ class CommunityViewModel @Inject constructor(
                 communityApiRepository.postLikeEdit(postId).collect {
                     if(it.isSuccess) {
                         _likeResponse.value = it
-                        getDetailPost(postId)
-                        Log.d("CommunityViewModel", "_likeResponse : $it")
-                    }
-                }
-            } catch (e:Exception) {
-                Log.e("getDetailPost is Error", e.message.toString())
-            }
-        }
-    }
-
-    // 좋아요 취소
-    fun deleteCancelLike(postId : Int) {
-        viewModelScope.launch {
-            try {
-                communityApiRepository.deleteCancelLike(postId).collect {
-                    if (it.isSuccess) {
-                        _likeCancelResponse.value = it
                         getDetailPost(postId)
                         Log.d("CommunityViewModel", "_likeResponse : $it")
                     }
