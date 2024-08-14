@@ -36,7 +36,6 @@ class CommunityMyCommentsFragment : BaseFragment<FragmentCommunityMyCommentsBind
         updateToolbar()
         setAdapter()
         observeViewModel()
-
     }
 
     private fun setAdapter() {
@@ -45,6 +44,8 @@ class CommunityMyCommentsFragment : BaseFragment<FragmentCommunityMyCommentsBind
     }
 
     private fun observeViewModel() {
+
+        // 내가 작성한 댓글의 게시글 조회 API 호출
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 communityViewModel.getCommunityMyComments()
@@ -54,11 +55,13 @@ class CommunityMyCommentsFragment : BaseFragment<FragmentCommunityMyCommentsBind
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 communityViewModel.communityMyCommentsResponseItem.collect {
+
+                    // 성공 하면 게시글 보여줌 (실패하면 글이 없습니다 나옴 -> fragmentCommunityMyCommentsNoContentsTv)
                     if (it.isSuccess) {
-                        it.result?.forEach { res ->
-                            updateVisibility(res.title.isNotBlank())
+                        it.result?.forEach { _ ->
+                            updateVisibility(true)
                         }
-                        myCommentsAdapter.submitList(it.result)
+                        myCommentsAdapter.submitList(it.result)    // 리사이클러뷰 갱신 (서버에서 불러온 내가 댓글단 글 목록)
                     } else {
                         updateVisibility(false)
                     }
@@ -67,6 +70,7 @@ class CommunityMyCommentsFragment : BaseFragment<FragmentCommunityMyCommentsBind
         }
     }
 
+    // 리사이클러뷰 , 글 없을 때 Visibility 설정하는 함수
     private fun updateVisibility(show : Boolean) {
         if (show) {
             binding.fragmentCommunityMyCommentsNoContentsTv.visibility = View.INVISIBLE
@@ -84,6 +88,7 @@ class CommunityMyCommentsFragment : BaseFragment<FragmentCommunityMyCommentsBind
         mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_community_menu)
     }
 
+    // 리사이클러뷰 클릭하면 해당 글로 이동하는 함수 (postID 전송)
     override fun onClick(item: Any) {
         val args = Bundle().apply {
             putString("postId", "$item")
