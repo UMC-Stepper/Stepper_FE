@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.community.weekly.CommunityWeeklyShowPostFragment">
+        tools:context=".ui.community.CommunityShowPostFragment">
 
         <ImageView
             android:id="@+id/fragment_community_weekly_show_post_pin_iv"

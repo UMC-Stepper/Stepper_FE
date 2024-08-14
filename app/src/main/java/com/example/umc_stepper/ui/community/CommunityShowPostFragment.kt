@@ -1,33 +1,23 @@
-package com.example.umc_stepper.ui.community.weekly
+package com.example.umc_stepper.ui.community
 
 import android.content.Context
-import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
-import com.example.umc_stepper.databinding.FragmentCommunityWeeklyShowPostBinding
+import com.example.umc_stepper.databinding.FragmentCommunityShowPostBinding
 import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.MainActivity
-import com.example.umc_stepper.ui.community.CommunityDialog
-import com.example.umc_stepper.ui.community.CommunityDialogInterface
-import com.example.umc_stepper.ui.community.CommunityRemoveInterface
-import com.example.umc_stepper.ui.community.CommunityViewModel
-import com.example.umc_stepper.ui.login.LoginViewModel
+import com.example.umc_stepper.ui.community.weekly.WeeklyShowPostImageAdapter
+import com.example.umc_stepper.ui.community.weekly.WeeklyShowPostReplyAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -36,7 +26,7 @@ import javax.inject.Inject
 import kotlin.properties.Delegates
 
 @AndroidEntryPoint
-class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShowPostBinding>(R.layout.fragment_community_weekly_show_post),
+class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>(R.layout.fragment_community_show_post),
     CommunityDialogInterface,
     CommunityRemoveInterface {
 
