@@ -45,7 +45,6 @@ class CommunityApiRepositoryImpl @Inject constructor(
     override suspend fun postReply(replyRequestDto: ReplyRequestDto): Flow<BaseResponse<CommentResponse>> =
         dataSource.postReply(replyRequestDto)
 
-
     override suspend fun postLikeEdit(postId: Int): Flow<BaseResponse<LikeResponse>>
     = dataSource.postLikeEdit(postId)
 
