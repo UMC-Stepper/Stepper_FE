@@ -2,6 +2,7 @@ package com.example.umc_stepper.ui.today.add
 
 import android.annotation.SuppressLint
 import android.os.Build
+import android.os.Bundle
 import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.TimePicker
@@ -35,6 +36,7 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
     @Inject
     lateinit var tokenManager: TokenManager
     private var hourTime : String = "0"
+    private var hourTime2 : String = "0"
     private var minuteTime : String = "0"
 
     @SuppressLint("DefaultLocale")
@@ -54,6 +56,7 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
             binding.fragmentExerciseSettingsMinTv.text = String.format("%02d", minute)
 
             hourTime = String.format("%02d", hour)
+            hourTime2 = String.format("%02d", hourIn12Format)
             minuteTime = String.format("%02d", minute)
         }
 
@@ -210,7 +213,18 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
     }
 
     private fun goExerciseCardLast(){
+        // TimePicker  am/pm 정보
+        val ampm = if (hourTime < 12.toString()) "AM" else "PM"
+
+        val selectedDaysText = selectedDays.joinToString(", ") { it.text }
+        val args = Bundle().apply {
+            putString("week", selectedDaysText) // 선택된 요일 값 (예: '화, 목')
+            putInt("hourTime", hourTime2.toInt()) // 시
+            putInt("minuteTime", minuteTime.toInt()) //분
+            putString("material", binding.fragmentExerciseSettingsExerciseMaterialsEt.text.toString()) //준비물
+            putString("ampm", ampm) // 오전,오후 값
+        }
         val action = ExerciseSettingsDateFragmentDirections.actionFragmentExerciseSettingsDateToExerciseCardLastFragment()
-        findNavController().navigate(action.actionId)
+        findNavController().navigate(action.actionId, args)
     }
 }
