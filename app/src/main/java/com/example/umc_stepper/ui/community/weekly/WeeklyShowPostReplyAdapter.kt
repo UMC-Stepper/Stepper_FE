@@ -10,6 +10,8 @@ import com.example.umc_stepper.databinding.ItemCommunityShowPostCommentBinding
 import com.example.umc_stepper.databinding.ItemCommunityShowPostCommentReplyBinding
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem
 import com.example.umc_stepper.utils.listener.ItemClickListener
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class WeeklyShowPostReplyAdapter(val listener: ItemClickListener) : ListAdapter<CommentResponseItem, RecyclerView.ViewHolder>(diffUtil) {
 
@@ -19,6 +21,13 @@ class WeeklyShowPostReplyAdapter(val listener: ItemClickListener) : ListAdapter<
                 Log.d("WeeklyShowPostReplyAdapter Item", "item: $item")
                 binding.commentResponseItem = item
                 binding.listener = listener
+
+                val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+                val outputFormat = SimpleDateFormat("yy.MM.dd  HH:mm", Locale.getDefault())
+
+                // 날짜 파싱 및 변환
+                val date = item.dateTime.let { inputFormat.parse(it) }
+                binding.itemWeeklyShowPostCommentTimeTv.text = date?.let { outputFormat.format(it) }
             }
         }
     }
