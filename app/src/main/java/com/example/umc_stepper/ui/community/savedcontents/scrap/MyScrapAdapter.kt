@@ -23,8 +23,8 @@ class MyScrapAdapter(val listener: ItemClickListener) :
         binding: ItemCommunityWeeklyHomePostBinding,
         item: CommunityMyCommentsResponseItem
     ) {
-        Log.d("MyCommentsAdapter","$item")
         binding.communityMyCommentsResponseItem = item
+        binding.itemWeeklyHomeScrapsUpIv.setImageResource(R.drawable.ic_scrap_fill)
         binding.listener = listener
     }
 
