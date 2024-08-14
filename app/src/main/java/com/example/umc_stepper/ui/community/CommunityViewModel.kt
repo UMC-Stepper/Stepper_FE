@@ -97,11 +97,11 @@ class CommunityViewModel @Inject constructor(
             try {
                 communityApiRepository.postLikeEdit(postId).collect {
                     if(it.isSuccess) {
-                    _likeResponse.value = it
-                    getDetailPost(postId)
-                    Log.d("CommunityViewModel", "_likeResponse : $it")
-                }
+                        _likeResponse.value = it
+                        getDetailPost(postId)
+                        Log.d("CommunityViewModel", "_likeResponse : $it")
                     }
+                }
             } catch (e:Exception) {
                 Log.e("getDetailPost is Error", e.message.toString())
             }
