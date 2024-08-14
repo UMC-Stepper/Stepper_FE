@@ -133,7 +133,7 @@ class CommunityViewModel @Inject constructor(
     }
 
     // 댓글 조회
-    fun postReply(postId: Int) {
+    fun getComment(postId: Int) {
         viewModelScope.launch {
             try {
                 communityApiRepository.getComment(postId).collect {
