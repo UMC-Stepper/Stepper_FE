@@ -11,6 +11,7 @@ import com.example.umc_stepper.domain.model.local.ExerciseState
 import com.example.umc_stepper.domain.model.local.ExerciseStep
 import com.example.umc_stepper.domain.model.request.AiVideoDto
 import com.example.umc_stepper.domain.model.request.exercise_card_controller.ExerciseCardRequestDto
+import com.example.umc_stepper.domain.model.request.exercise_card_controller.ExerciseStepRequestDto
 import com.example.umc_stepper.domain.model.request.my_exercise_controller.AddExerciseRequestDto
 import com.example.umc_stepper.domain.model.response.AiVideoInfo
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardStatusResponseDto
@@ -101,8 +102,38 @@ class TodayViewModel @Inject constructor(
     val todayExerciseResponseDto: StateFlow<BaseListResponse<ToDayExerciseResponseDto>> =
         _todayExerciseResponseDto
 
-    private val _bodyPart = MutableStateFlow<String>("")
+    private val _bodyPart = MutableStateFlow("")
     val bodyPart: StateFlow<String> = _bodyPart
+
+    private val _exerciseIdList = MutableStateFlow(listOf<Int>())
+    val exerciseIdList : StateFlow<List<Int>> = _exerciseIdList
+
+    fun addExerciseList(eid : Int){
+        val updatedList = _exerciseIdList.value.toMutableList()
+        updatedList.add(eid)
+        _exerciseIdList.value = updatedList
+    }
+
+    fun updateExerciseList(eid : Int, pos : Int){
+        val editList = _exerciseIdList.value.toMutableList()
+        editList[pos] = eid
+        _exerciseIdList.value = editList
+    }
+
+    fun clearExerciseList(){
+        val emptyList = emptyList<Int>()
+        _exerciseIdList.value = emptyList
+    }
+
+    fun getExerciseList() : List<Int>{
+        val list : ArrayList<Int> = arrayListOf()
+        for(i in 0..<_exerciseIdList.value.size){
+            list.add(_exerciseIdList.value[i])
+        }
+        return list.toList()
+    }
+
+    fun getExerciseListSize(): Int = _exerciseIdList.value.size
 
     fun setBodyPart(s: String) {
         _bodyPart.value = s

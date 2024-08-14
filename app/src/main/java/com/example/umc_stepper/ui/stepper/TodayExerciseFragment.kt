@@ -98,9 +98,13 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
 
         observeExerciseCardResponse()
         completeBtn.setOnClickListener {
-            val currentStepId = stepList[stepIndex].stepId // 현재 단계의 stepId 받기
-            completeStep(currentStepId)
-            dataSetting()
+            if(step==3){
+                goAdditionalExerciseSuccess()
+            }else{
+                val currentStepId = stepList[stepIndex].stepId // 현재 단계의 stepId 받기
+                completeStep(currentStepId)
+                dataSetting()
+            }
         }
     }
 
@@ -121,7 +125,11 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
     }
 
     private fun initializeToolBar(step: Int){
-        mainActivity.updateToolbarTitle("${step}단계 운동 시작하기")
+        if(step==3){
+            mainActivity.updateToolbarTitle("마지막 운동")
+        }else{
+            mainActivity.updateToolbarTitle("${step}단계 운동 시작하기")
+        }
     }
 
     private fun postInquiryExerciseCard(exerciseId: Int) {
@@ -168,7 +176,8 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
 
     private fun proceedToNextStep() {
         if (::stepList.isInitialized && stepIndex < stepList.size - 1) {
-            updateStep(stepIndex + 1)
+            stepIndex += 1
+            updateStep(stepIndex)
         } else {
             goAdditionalExerciseSuccess()
         }

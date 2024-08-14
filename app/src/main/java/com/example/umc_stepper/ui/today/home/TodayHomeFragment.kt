@@ -152,6 +152,7 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
         // 운동 카드 추가
         binding.fragmentTodayHomePlusExerciseAddIv.setOnClickListener {
             todayViewModel.clearStep()
+            todayViewModel.clearExerciseList()
             val action = TodayHomeFragmentDirections.actionTodayHomeFragmentToFragmentAddExercise()
             findNavController().navigateSafe(action.actionId)
         }

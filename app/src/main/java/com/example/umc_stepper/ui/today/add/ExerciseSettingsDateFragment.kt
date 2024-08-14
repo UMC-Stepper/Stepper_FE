@@ -1,29 +1,46 @@
 package com.example.umc_stepper.ui.today.add
 
+import android.annotation.SuppressLint
+import android.os.Build
+import android.os.Bundle
 import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.TimePicker
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentExerciseSettingsDateBinding
-import com.example.umc_stepper.ui.stepper.home.CalendarAdapter
+import com.example.umc_stepper.domain.model.request.exercise_card_controller.ExerciseCardRequestDto
+import com.example.umc_stepper.domain.model.request.exercise_card_controller.ExerciseStepRequestDto
+import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.today.TodayViewModel
+import com.example.umc_stepper.utils.enums.DayOfWeek
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import org.threeten.bp.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBinding>(R.layout.fragment_exercise_settings_date) {
 
     private lateinit var dayTextViews: List<TextView>
     private val selectedDays = mutableSetOf<TextView>()
     val todayViewModel: TodayViewModel by activityViewModels()
+    private lateinit var ecrd: ExerciseCardRequestDto
+    @Inject
+    lateinit var tokenManager: TokenManager
+    private var hourTime : String = "0"
+    private var hourTime2 : String = "0"
+    private var minuteTime : String = "0"
 
+    @SuppressLint("DefaultLocale")
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun setLayout() {
         val timePicker: TimePicker = binding.fragmentExerciseSettingsTimeSpinner
         timePicker.setIs24HourView(false)
@@ -37,6 +54,10 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
 
             binding.fragmentExerciseSettingsHourTv.text = String.format("%02d", hourIn12Format)
             binding.fragmentExerciseSettingsMinTv.text = String.format("%02d", minute)
+
+            hourTime = String.format("%02d", hour)
+            hourTime2 = String.format("%02d", hourIn12Format)
+            minuteTime = String.format("%02d", minute)
         }
 
         dayTextViews = listOf(
@@ -80,6 +101,7 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
         binding.fragmentExerciseSettingsPlanDescription.text = "매주 $selectedDaysText"
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun observeExerciseCheckData() {
         val bodyPart: String = when (arguments?.getString("bodyPart").toString()) {
             "무릎, 다리" -> "무릎다리"
@@ -140,15 +162,69 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
 
                 if (!isOverlapping) {
                     goExerciseCardLast() // 겹치는 요일이 없으면 이동
+                    postExerciseCard()
                 }
             }
         }
     }
+    private fun changeDaysToEnglish(day: String) : String = when(day){
+        "일" -> "SUNDAY"
+        "월" -> "MONDAY"
+        "화" -> "TUESDAY"
+        "수" -> "WEDNESDAY"
+        "목" -> "THURSDAY"
+        "금" -> "FRIDAY"
+        "토" -> "SATURDAY"
+        else -> ""
+    }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun postExerciseCard(){
+        // 현재 날짜와 시간을 가져오고 형식변경
+        val currentDateTime = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val formattedDate = currentDateTime.format(formatter)
+        val stepList : ArrayList<ExerciseStepRequestDto> = arrayListOf()
+        val list = todayViewModel.getExerciseList()
+        for(i in 0..<todayViewModel.getExerciseListSize()){
+            stepList.add(
+                ExerciseStepRequestDto(
+                    myExerciseId = list[i],
+                    step = i + 1
+                )
+            )
+        }
+        // 현재 날짜의 요일을 가져와서 대문자로 저장
+        val dayOfWeek: java.time.DayOfWeek? = currentDateTime.dayOfWeek
+        for(i in 0..<selectedDays.size) {
+            ecrd = ExerciseCardRequestDto(
+                bodyPart = arguments?.getString("bodyPart") ?: "",
+                date = formattedDate,
+                week = changeDaysToEnglish(selectedDays.elementAt(i).text.toString()),
+                hour = hourTime.toInt(),
+                minute = minuteTime.toInt(),
+                second = 0,
+                materials = binding.fragmentExerciseSettingsExerciseMaterialsEt.text.toString(),
+                stepList = stepList
+            )
 
+            todayViewModel.postAddExerciseCard(ecrd)
+        }
+    }
 
     private fun goExerciseCardLast(){
+        // TimePicker  am/pm 정보
+        val ampm = if (hourTime < 12.toString()) "AM" else "PM"
+
+        val selectedDaysText = selectedDays.joinToString(", ") { it.text }
+        val args = Bundle().apply {
+            putString("week", selectedDaysText) // 선택된 요일 값 (예: '화, 목')
+            putInt("hourTime", hourTime2.toInt()) // 시
+            putInt("minuteTime", minuteTime.toInt()) //분
+            putString("material", binding.fragmentExerciseSettingsExerciseMaterialsEt.text.toString()) //준비물
+            putString("ampm", ampm) // 오전,오후 값
+        }
         val action = ExerciseSettingsDateFragmentDirections.actionFragmentExerciseSettingsDateToExerciseCardLastFragment()
-        findNavController().navigate(action.actionId)
+        findNavController().navigate(action.actionId, args)
     }
 }

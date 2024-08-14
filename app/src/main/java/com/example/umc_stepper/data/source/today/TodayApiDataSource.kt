@@ -85,5 +85,4 @@ class TodayApiDataSource @Inject constructor(
         Log.e("GET MyExercise Failure", it.message.toString())
     }
 
-
 }
