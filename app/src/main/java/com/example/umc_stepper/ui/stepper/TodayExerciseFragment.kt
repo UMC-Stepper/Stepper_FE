@@ -176,7 +176,8 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
 
     private fun proceedToNextStep() {
         if (::stepList.isInitialized && stepIndex < stepList.size - 1) {
-            updateStep(stepIndex + 1)
+            stepIndex += 1
+            updateStep(stepIndex)
         } else {
             goAdditionalExerciseSuccess()
         }
