@@ -3,6 +3,7 @@ package com.example.umc_stepper.ui.today.add
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
@@ -23,6 +24,7 @@ import kotlinx.coroutines.launch
 
 class AddExerciseSelectScrapFragment :
     BaseFragment<FragmentAddExerciseSelectScrapBinding>(R.layout.fragment_add_exercise_select_scrap) {
+    private var cardListJson = ""
 
     private lateinit var mainActivity: MainActivity
     private lateinit var selectScrapListAdapter: SelectScrapListAdapter
@@ -43,7 +45,11 @@ class AddExerciseSelectScrapFragment :
         bodyPart = arguments?.getString("bodyPart", "").toString()
         initSettings()
     }
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        cardListJson = arguments?.getString("CardListJson").orEmpty()
+        Log.d("카드도착", cardListJson)
+    }
     private fun initSettings() {
         updateMainToolbar()
         setButton()
@@ -143,7 +149,7 @@ class AddExerciseSelectScrapFragment :
             val action =
                 AddExerciseSelectScrapFragmentDirections.actionAddExerciseSelectScrapFragmentToFragmentAddExercise2()
 
-            val state = UpdateState.valueOf(arguments?.getString("updateType")!!)
+            val state = arguments?.getString("updateType")?.let { it1 -> UpdateState.valueOf(it1) }
             val pos = arguments?.getInt("stepLevel")
             if(pos != null) {
                 when (state) {
@@ -158,8 +164,14 @@ class AddExerciseSelectScrapFragment :
                     }
                 }
             }
+            else{
+
+            }
             findNavController().navigateSafe(action.actionId, Bundle().apply {
                 putString("bp", bodyPart)
+                if(cardListJson.isNotEmpty()){
+                    putString("CardListJson", cardListJson)
+                }
             })
         }
     }

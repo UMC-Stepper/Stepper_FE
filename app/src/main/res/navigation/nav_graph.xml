@@ -135,6 +135,9 @@
         <action
             android:id="@+id/action_additionalExerciseHomeFragment_to_fragmentAdditionalExerciseMiddle"
             app:destination="@id/fragmentAdditionalExerciseMiddle" />
+        <action
+            android:id="@+id/action_additionalExerciseHomeFragment_to_fragmentAddExercise"
+            app:destination="@id/fragmentAddExercise" />
     </fragment>
 
     <!-- 투데이 나만의 운동 (AI) -->
