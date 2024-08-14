@@ -43,10 +43,20 @@ class CommunityApiDataSource @Inject constructor(
 
     //POST 좋아요 등록
     fun postLikeEdit(postId: Int): Flow<BaseResponse<LikeResponse>> = flow {
-        val result = communityApi.postLikeEdit(postId)
-        emit(result)
-    }.catch {
-        Log.e("Post Like Edit Failure", it.message.toString())
+       try {
+           val result = communityApi.postLikeEdit(postId)
+           emit(result)
+       }  catch (e: HttpException) {
+           val errorResponse = e.response()?.let { it }
+           Log.e("post Community LikeEdit Failure", "HTTP Error: ${errorResponse?.errorBody()?.string()}")
+
+           emit(BaseResponse(
+               isSuccess = errorResponse!!.isSuccessful,
+               code = errorResponse.code().toString(),
+               message = errorResponse.message().toString(),
+               result = null)
+           )
+       }
     }
 
     //DELETE 좋아요 취소
@@ -105,8 +115,7 @@ class CommunityApiDataSource @Inject constructor(
         try {
             val result = communityApi.getCommunityMyScraps()
             emit(result)
-
-        }catch (e: HttpException) {
+        } catch (e: HttpException) {
             val errorResponse = e.response()?.let { it }
             Log.e("Get Community MyScraps Failure", "HTTP Error: ${errorResponse?.errorBody()?.string()}")
 
