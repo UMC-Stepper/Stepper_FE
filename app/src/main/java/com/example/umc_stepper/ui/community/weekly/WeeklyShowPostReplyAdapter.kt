@@ -8,13 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.umc_stepper.databinding.ItemCommunityShowPostCommentBinding
 import com.example.umc_stepper.databinding.ItemCommunityShowPostCommentReplyBinding
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem
+import com.example.umc_stepper.utils.listener.ItemClickListener
 
-class WeeklyShowPostReplyAdapter : ListAdapter<CommentResponseItem, RecyclerView.ViewHolder>(diffUtil) {
+class WeeklyShowPostReplyAdapter(val listener: ItemClickListener) : ListAdapter<CommentResponseItem, RecyclerView.ViewHolder>(diffUtil) {
 
     inner class CommentViewHolder(private val binding: ItemCommunityShowPostCommentBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : CommentResponseItem) {
             binding.apply {
                 binding.commentResponseItem = item
+                binding.listener = listener
             }
         }
     }
