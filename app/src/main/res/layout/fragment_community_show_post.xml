@@ -296,6 +296,7 @@
                     android:drawableEnd="@drawable/ic_post_comment"
                     android:paddingStart="16dp"
                     android:paddingEnd="6dp"
+                    android:textColorHint="@color/White"
                     android:textColor="@color/White"
                     style="@style/body_regular_12"
                     android:background="@drawable/shape_rounded_square_purple700_60dp"
