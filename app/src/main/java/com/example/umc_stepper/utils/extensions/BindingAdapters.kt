@@ -6,6 +6,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.umc_stepper.R
 import com.example.umc_stepper.domain.model.local.ExerciseState
@@ -29,6 +31,24 @@ object BindingAdapters {
             .load(url)
             .apply(RequestOptions().centerCrop())
             .into(view)
+    }
+
+    @BindingAdapter(value = ["imageUrl", "roundedCorners"], requireAll = false)
+    @JvmStatic
+    fun loadCropRoundedSquareImage(imageView: ImageView, source: Any?, roundedCorners: Int?) {
+        val context = imageView.context
+        if (source == null || roundedCorners == null) {
+            return
+        }
+
+        val density = context.resources.displayMetrics.density
+        val rounded = (roundedCorners * density).toInt()
+        val roundedCornersTransformation = RoundedCorners(rounded)
+
+        Glide.with(context)
+            .load(source)
+            .apply(RequestOptions().transform(CenterCrop(), roundedCornersTransformation))
+            .into(imageView)
     }
 
     @JvmStatic
