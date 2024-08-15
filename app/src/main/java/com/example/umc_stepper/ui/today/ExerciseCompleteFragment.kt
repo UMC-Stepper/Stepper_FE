@@ -1,32 +1,53 @@
 package com.example.umc_stepper.ui.today
 
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import android.view.View
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentExerciseCompleteBinding
+import com.example.umc_stepper.domain.model.request.exercise_card_controller.ExerciseCardRequestDto
 import com.example.umc_stepper.ui.login.MainViewModel
+import kotlinx.coroutines.launch
 
 class ExerciseCompleteFragment :BaseFragment<FragmentExerciseCompleteBinding>(R.layout.fragment_exercise_complete) {
+
     private val mainViewModel: MainViewModel by activityViewModels()
+    private val todayViewModel: TodayViewModel by activityViewModels()
+
     override fun setLayout() {
         setButton()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
- 
         initSetting()
     }
 
     private fun setButton() {
+        // 13이상
+        val exerciseCardList: ArrayList<ExerciseCardRequestDto>? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            arguments?.getParcelableArrayList("exerciseCardList", ExerciseCardRequestDto::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            arguments?.getParcelableArrayList<ExerciseCardRequestDto>("exerciseCardList")
+        }
+        val selectDaysSize = arguments?.getInt("selectDaysSize") ?: 0
+
         binding.exerciseCompleteBtn.setOnClickListener {
-            updateBadge(0)
-            val action = ExerciseCompleteFragmentDirections.actionExerciseCompleteFragmentToTodayHomeFragment()
-            findNavController().navigateSafe(action.actionId)
+            exerciseCardList?.let { list ->
+                lifecycleScope.launch {
+                    for (i in 0 until selectDaysSize) {
+                        todayViewModel.postAddExerciseCard(list[i])
+                        Log.d("ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ", "iiiii : ${list[i]}")
+                    }
+                    updateBadge(0)
+                    val action =
+                        ExerciseCompleteFragmentDirections.actionExerciseCompleteFragmentToTodayHomeFragment()
+                    findNavController().navigateSafe(action.actionId)
+                }
+            }
         }
     }
 
@@ -43,19 +64,12 @@ class ExerciseCompleteFragment :BaseFragment<FragmentExerciseCompleteBinding>(R.
     }
 
     private fun initSetting() {
-        if (!arguments?.getString("description").isNullOrEmpty() &&
-            !arguments?.getString("type").isNullOrEmpty()
-        ) {
-            val des = arguments?.getString("description")
-            val type = arguments?.getString("type")
-
-            with(binding){
-                exerciseCompleteTv.text = type.toString()
-                exerciseCompleteTv2.text = des.toString()
-            }
+        val des = arguments?.getString("description")
+        val type = arguments?.getString("type")
+        with(binding){
+            exerciseCompleteTv.text = type.toString()
+            exerciseCompleteTv2.text = des.toString()
         }
-
-        binding.exerciseCompleteTv
     }
 
 }

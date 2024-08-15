@@ -48,7 +48,7 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
     private var parentCommentId by Delegates.notNull<Int>()
 
     private var isScrap: Boolean = false
-    private var isAnonymous: Boolean = false
+    private var isAnonymous: Boolean = true
     private var isReplyMode: Boolean = false
 
     @Inject
@@ -67,6 +67,7 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
         updateMainToolbar()
         setPostId()
         setButton()
+        sendToComment()
         setAdapter()
         observeViewModel()
     }
@@ -74,9 +75,7 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
     // 버튼 설정 함수
     private fun setButton() {
         binding.fragmentCommunityWeeklyScrapTv.setOnClickListener {
-            viewLifecycleOwner.lifecycleScope.launch {
-                showScrapDialog()
-            }
+            showScrapDialog()
         }
 
         // 좋아요 이미지 뷰 클릭시 좋아요 등록
@@ -105,7 +104,7 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
     }
 
     // EditText 엔터 누르면 댓글 작성되는 함수
-    private fun setupCommentEditText() {
+    private fun sendToComment() {
         val editComment =  binding.fragmentCommunityWeeklyShowPostEt
 
         if (isReplyMode) {
@@ -114,42 +113,51 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
             editComment.hint = "댓글을 입력하세요..."
         }
 
-        editComment.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-                event?.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER) {
-
+        binding.fragmentCommunityWeeklyShowPostCommentIv.setOnClickListener {
+            Log.d("CommunityShowPostFragment", "Comment button clicked")
                 if (isReplyMode) {
                     leaveReply(editComment.text.toString()) // 대댓글 작성
                     isReplyMode = false
                 } else {
                     leaveComment(editComment.text.toString()) // 댓글 작성
                 }
-
-                editComment.text.clear()
-                true
-            } else {
-                false
+                editComment.text?.clear()
             }
         }
-    }
 
     // 댓글 작성 로직 처리 함수
     private fun leaveComment(text: String) {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                communityViewModel.apiResponsePostViewResponse.collectLatest {
-                    launch {
-                        // 글 작성자 인지 확인 (작성자는 익명 X)
-                        if(it.result?.authorEmail?.equals(tokenManager.getEmail().first()) == true) {
-                            commentWriteDto = CommentWriteDto(postId, text, false)
-                            communityViewModel.postCommentWrite(commentWriteDto)
-                        } else {
-                            commentWriteDto = CommentWriteDto(postId, text, isAnonymous)
-                            communityViewModel.postCommentWrite(commentWriteDto)
-                        }
+                launch {
+                    communityViewModel.apiResponsePostViewResponse.collectLatest { response ->
+                        val isAuthor = response.result?.authorEmail == tokenManager.getEmail().first()
+                        val commentWriteDto = CommentWriteDto(postId, text, !isAuthor && isAnonymous)
+                        postComment(commentWriteDto)
                     }
                 }
             }
+        }
+    }
+
+    // 댓글 작성 및 응답 처리
+    private suspend fun postComment(commentWriteDto: CommentWriteDto) {
+        communityViewModel.postCommentWrite(commentWriteDto)
+        communityViewModel.commentWriteResponse.collectLatest { writeResponse ->
+            if (writeResponse.isSuccess) {
+                fetchComments()
+            } else {
+                Log.d("댓글 작성 실패", "댓글 작성에 실패했습니다.")
+            }
+        }
+    }
+
+    // 댓글 조회 및 UI 갱신
+    private suspend fun fetchComments() {
+        communityViewModel.getComment(postId)
+        communityViewModel.getCommentResponse.collectLatest { commentResponse ->
+            Log.d("댓글 조회 fetchComments", "commentResponse : $commentResponse")
+            weeklyShowPostReplyAdapter.submitList(commentResponse.result)
         }
     }
 
@@ -157,16 +165,15 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
     private fun leaveReply(text: String) {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                communityViewModel.apiResponsePostViewResponse.collectLatest {
-                    launch {
-                        // 글 작성자 인지 확인 (작성자는 익명 X)
-                        if(it.result?.authorEmail?.equals(tokenManager.getEmail().first()) == true) {
-                            replyRequestDto = ReplyRequestDto(postId, parentCommentId, text, false)
-                            communityViewModel.postReply(replyRequestDto)
-                        } else {
-                            replyRequestDto = ReplyRequestDto(postId, parentCommentId, text, isAnonymous)
-                            communityViewModel.postReply(replyRequestDto)
-                        }
+                launch {
+                    communityViewModel.apiResponsePostViewResponse.collectLatest { response ->
+                        val isAuthor =
+                            response.result?.authorEmail == tokenManager.getEmail().first()
+                        val replyRequestDto =
+                            ReplyRequestDto(postId, parentCommentId, text, !isAuthor && isAnonymous)
+                        communityViewModel.postReply(replyRequestDto)
+
+                        // 대댓글 작성 성공하면 조회하는 부분 추가해야 함
                     }
                 }
             }
@@ -244,7 +251,7 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
                 // 댓글 조회
                 launch {
                     communityViewModel.getCommentResponse.collect {
-                        Log.d("댓글 조회", "프래그먼트 it : ${it.result}")
+                        Log.d("댓글 조회 observeViewModel", "프래그먼트 it : ${it.result}")
                         weeklyShowPostReplyAdapter.submitList(it.result)
                     }
                 }
@@ -331,7 +338,6 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
                         launch {
                             kotlinx.coroutines.delay(100)
                             editKeyboardUp()
-                            setupCommentEditText()
                         }
                     }
                 }

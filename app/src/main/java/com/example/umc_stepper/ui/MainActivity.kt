@@ -181,18 +181,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     // 외부 터치시 키보드 숨기기, 포커스 제거
-    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        val imm: InputMethodManager = ContextCompat.getSystemService(
-            this,
-            InputMethodManager::class.java
-        ) as InputMethodManager
-        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
-
-        if (currentFocus is EditText) {
-            currentFocus!!.clearFocus()
-        }
-        return super.dispatchTouchEvent(ev)
-    }
+//    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+//        val imm: InputMethodManager = ContextCompat.getSystemService(
+//            this,
+//            InputMethodManager::class.java
+//        ) as InputMethodManager
+//        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+//
+//        if (currentFocus is EditText) {
+//            currentFocus!!.clearFocus()
+//        }
+//        return super.dispatchTouchEvent(ev)
+//    }
 
     // 커뮤니티 클릭 리스너
     private fun setToolbarCommunityClickListener() {
