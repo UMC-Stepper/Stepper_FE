@@ -16,7 +16,7 @@ import okhttp3.RequestBody
 interface MainApiRepository {
     suspend fun postLogInInfo(logInDto: LogInDto) : Flow<BaseResponse<String>>
     suspend fun postLogOutInfo() : Flow<BaseResponse<Any>>
-    suspend fun postSignUpInfo(userDto: UserDto) : Flow<BaseResponse<UserResponse>>
+    suspend fun postSignUpInfo(userDto: RequestBody,profileImage : MultipartBody.Part) : Flow<BaseResponse<UserResponse>>
     suspend fun getUserInfo() : Flow<BaseResponse<UserResponse>>
     suspend fun deleteExit() : Flow<BaseResponse<Any>>
     suspend fun postRateDiaryEdit(image : MultipartBody.Part,rateDiaryDto: RequestBody) : Flow<BaseResponse<RateDiaryResult>>

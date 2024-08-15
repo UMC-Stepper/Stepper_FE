@@ -12,7 +12,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import javax.inject.Inject
+
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
@@ -25,10 +28,10 @@ class LoginViewModel @Inject constructor(
     private val _loginData = MutableStateFlow<BaseResponse<String>>(BaseResponse())
     var loginData : StateFlow<BaseResponse<String>> = _loginData
 
-    fun postSignUpInfo(userDto: UserDto) {
+    fun postSignUpInfo(userDto: RequestBody,profileImage : MultipartBody.Part) {
         viewModelScope.launch {
             try {
-                mainApiRepository.postSignUpInfo(userDto).collect {
+                mainApiRepository.postSignUpInfo(userDto,profileImage).collect {
                     _userData.value = it
                 }
             } catch (e: Exception) {

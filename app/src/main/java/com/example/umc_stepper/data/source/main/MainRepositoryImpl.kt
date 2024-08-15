@@ -25,8 +25,8 @@ class MainRepositoryImpl @Inject constructor(
     override suspend fun postLogOutInfo(): Flow<BaseResponse<Any>>
     = dataSource.postLogOutInfo()
 
-    override suspend fun postSignUpInfo(userDto: UserDto): Flow<BaseResponse<UserResponse>>
-    = dataSource.postSignUpInfo(userDto)
+    override suspend fun postSignUpInfo(userDto: RequestBody,profileImage : MultipartBody.Part): Flow<BaseResponse<UserResponse>>
+    = dataSource.postSignUpInfo(userDto,profileImage)
 
     override suspend fun getUserInfo(): Flow<BaseResponse<UserResponse>>
     = dataSource.getUserInfo()
