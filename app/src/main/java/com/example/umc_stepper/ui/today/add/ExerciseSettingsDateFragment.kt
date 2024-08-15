@@ -33,11 +33,15 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
     private val selectedDays = mutableSetOf<TextView>()
     val todayViewModel: TodayViewModel by activityViewModels()
     private lateinit var ecrd: ExerciseCardRequestDto
+
     @Inject
     lateinit var tokenManager: TokenManager
     private var hourTime : String = "0"
     private var hourTime2 : String = "0"
     private var minuteTime : String = "0"
+    private var selectDaysSize = 0
+
+    private val exerciseCardList = mutableListOf<ExerciseCardRequestDto>()
 
     @SuppressLint("DefaultLocale")
     @RequiresApi(Build.VERSION_CODES.O)
@@ -207,14 +211,15 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
                 materials = binding.fragmentExerciseSettingsExerciseMaterialsEt.text.toString(),
                 stepList = stepList
             )
-
-            todayViewModel.postAddExerciseCard(ecrd)
+            exerciseCardList.add(ecrd)
         }
+        selectDaysSize = selectedDays.size
     }
 
     private fun goExerciseCardLast(){
         // TimePicker  am/pm 정보
         val ampm = if (hourTime < 12.toString()) "AM" else "PM"
+
 
         val selectedDaysText = selectedDays.joinToString(", ") { it.text }
         val args = Bundle().apply {
@@ -224,6 +229,8 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
             putString("material", binding.fragmentExerciseSettingsExerciseMaterialsEt.text.toString()) //준비물
             putString("ampm", ampm) // 오전,오후 값
             putString("type","success")
+            putParcelableArrayList("exerciseCardList", ArrayList(exerciseCardList))
+            putInt("selectDaysSize", selectDaysSize)
         }
         val action = ExerciseSettingsDateFragmentDirections.actionFragmentExerciseSettingsDateToExerciseCardLastFragment()
         findNavController().navigate(action.actionId, args)
