@@ -100,7 +100,10 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
         observeExerciseCardResponse()
         completeBtn.setOnClickListener {
             if(step==3){
+                val currentStepId = stepList[stepIndex].stepId // 현재 단계의 stepId 받기
+                completeStep(currentStepId)
                 goAdditionalExerciseSuccess()
+
             }else{
                 val currentStepId = stepList[stepIndex].stepId // 현재 단계의 stepId 받기
                 completeStep(currentStepId)
