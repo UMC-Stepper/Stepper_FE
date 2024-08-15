@@ -117,8 +117,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="36dp"
                     android:src="@drawable/ic_go_community"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_sub_title_tv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/fragment_community_home_sub_title_tv" />
