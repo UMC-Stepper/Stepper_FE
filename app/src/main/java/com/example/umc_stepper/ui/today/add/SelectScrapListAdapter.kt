@@ -57,6 +57,8 @@ class SelectScrapListAdapter(private val onItemClick: (CheckExerciseResponse) ->
 
             selectedItem?.let { onItemClick(it) }
         }
+
     }
+    fun getSelectExercise():String = selectedItem?.url ?: ""
 
 }
