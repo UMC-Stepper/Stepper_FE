@@ -80,7 +80,6 @@ class ExerciseCompleteFragment :BaseFragment<FragmentExerciseCompleteBinding>(R.
             }
         }
 
-        binding.exerciseCompleteTv
     }
 
 }
