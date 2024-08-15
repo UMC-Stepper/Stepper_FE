@@ -22,6 +22,10 @@ class ExerciseCompleteFragment :BaseFragment<FragmentExerciseCompleteBinding>(R.
 
     override fun setLayout() {
         setButton()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initSetting()
     }
 
@@ -64,12 +68,18 @@ class ExerciseCompleteFragment :BaseFragment<FragmentExerciseCompleteBinding>(R.
     }
 
     private fun initSetting() {
-        val des = arguments?.getString("description")
-        val type = arguments?.getString("type")
-        with(binding){
-            exerciseCompleteTv.text = type.toString()
-            exerciseCompleteTv2.text = des.toString()
+        if (!arguments?.getString("description").isNullOrEmpty() &&
+            !arguments?.getString("type").isNullOrEmpty()
+        ) {
+            val des = arguments?.getString("description")
+            val type = arguments?.getString("type")
+
+            with(binding){
+                exerciseCompleteTv.text = type.toString()
+                exerciseCompleteTv2.text = des.toString()
+            }
         }
+
     }
 
 }
