@@ -3,6 +3,7 @@ package com.example.umc_stepper.ui.today.add
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.TimePicker
@@ -165,8 +166,8 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
                 }
 
                 if (!isOverlapping) {
-                    goExerciseCardLast() // 겹치는 요일이 없으면 이동
                     postExerciseCard()
+                    goExerciseCardLast() // 겹치는 요일이 없으면 이동
                 }
             }
         }
@@ -190,6 +191,7 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
         val formattedDate = currentDateTime.format(formatter)
         val stepList : ArrayList<ExerciseStepRequestDto> = arrayListOf()
         val list = todayViewModel.getExerciseList()
+        selectDaysSize = selectedDays.size
         for(i in 0..<todayViewModel.getExerciseListSize()){
             stepList.add(
                 ExerciseStepRequestDto(
@@ -213,14 +215,11 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
             )
             exerciseCardList.add(ecrd)
         }
-        selectDaysSize = selectedDays.size
     }
 
     private fun goExerciseCardLast(){
         // TimePicker  am/pm 정보
         val ampm = if (hourTime < 12.toString()) "AM" else "PM"
-
-
         val selectedDaysText = selectedDays.joinToString(", ") { it.text }
         val args = Bundle().apply {
             putString("week", selectedDaysText) // 선택된 요일 값 (예: '화, 목')
