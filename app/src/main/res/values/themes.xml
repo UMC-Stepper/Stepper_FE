@@ -9,7 +9,7 @@
         <item name="android:colorBackground">@color/Purple_Black_BG_1</item>
 
         <item name="android:buttonStyle">@style/Widget.AppTheme.Button</item>
-        <item name="android:imageButtonStyle">@style/Widget.AppTheme.ImageView</item>
+        <item name="android:textViewStyle">@style/Widget.AppTheme.TextView</item>
 
         <!-- Status Bar (핸드폰 맨 위 부분 -> true: 검정, false: 흰색)  -->
         <item name="android:statusBarColor">@color/Purple_Black_BG_1</item>
@@ -24,6 +24,8 @@
         <!-- NumberPicker divider color -->
         <item name="colorControlNormal">@color/White</item>
         <item name="android:textColorPrimary">@color/White</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:outlineProvider">background</item>
     </style>
 
     <!-- fab -->
@@ -42,7 +44,7 @@
         <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:foreground">?attr/selectableItemBackground</item>
     </style>
-    <style name="Widget.AppTheme.ImageView" parent="android:Widget">
+    <style name="Widget.AppTheme.TextView" parent="Widget.AppCompat.TextView">
         <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:foreground">?attr/selectableItemBackground</item>
     </style>

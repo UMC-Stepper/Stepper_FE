@@ -432,13 +432,15 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/fragment_my_exercise_complete_input_bt"
+                    style="@style/sub_title_semi_bold_16"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="148dp"
                     android:layout_marginEnd="24dp"
                     android:height="44dp"
-                    android:background="@drawable/selector_checked_input"
+                    android:text="입력완료"
+                    android:background="@drawable/shape_rounded_square_purpleblack_bg2_25dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

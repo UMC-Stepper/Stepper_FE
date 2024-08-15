@@ -186,7 +186,7 @@
             android:id="@+id/community_part_home_tl"
             android:layout_width="match_parent"
             android:layout_height="33dp"
-            android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
+            android:background="@drawable/shape_rounded_square_purple_bg1_solid_21dp"
             android:backgroundTint="@color/Purple_Black_BG_2"
             app:layout_constraintEnd_toEndOf="@id/community_part_home_background"
             app:layout_constraintStart_toStartOf="parent"

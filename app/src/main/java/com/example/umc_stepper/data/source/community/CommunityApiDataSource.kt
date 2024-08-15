@@ -6,8 +6,8 @@ import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.data.remote.CommunityApi
 import com.example.umc_stepper.domain.model.request.comment_controller.CommentWriteDto
 import com.example.umc_stepper.domain.model.request.comment_controller.ReplyRequestDto
+import com.example.umc_stepper.domain.model.response.WeeklyMissionResponse
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem
-import com.example.umc_stepper.domain.model.response.comment_controller.CommentWriteResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponseListPostViewResponseItem
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostViewResponse
@@ -83,13 +83,49 @@ class CommunityApiDataSource @Inject constructor(
     }
 
     //GET 게시글 목록 조회
-    fun getDetailPostList(categoryName: String): Flow<BaseListResponse<ApiResponseListPostViewResponseItem>> =
+    fun getDetailPostList(categoryName: String): Flow<BaseListResponse<CommunityMyCommentsResponseItem>> =
         flow {
             val result = communityApi.getDetailPostList(categoryName)
             emit(result)
         }.catch {
             Log.e("Get Detail Post List Failure", it.message.toString())
         }
+
+    // 위클리 게시글 조회 API
+    fun getWeeklyPostList(weeklyMissionId : Int): Flow<BaseListResponse<CommunityMyCommentsResponseItem>> = flow {
+        try{
+            val result = communityApi.getWeeklyPostList(weeklyMissionId)
+            emit(result)
+        }catch (e: HttpException) {
+            val errorResponse = e.response()?.let { it }
+            Log.e("Get WeeklyPostList Failure", "HTTP Error: ${errorResponse?.errorBody()?.string()}")
+
+            emit(BaseListResponse(
+                isSuccess = errorResponse!!.isSuccessful,
+                code = errorResponse.code().toString(),
+                message = errorResponse.message().toString(),
+                result = emptyList())
+            )
+        }
+    }
+
+    // 주간 미션 조회 API
+    fun getWeeklyMission(id : Int): Flow<BaseResponse<WeeklyMissionResponse>> =  flow {
+        try{
+            val result = communityApi.getWeeklyMission(id)
+            emit(result)
+        }catch (e: HttpException) {
+            val errorResponse = e.response()?.let { it }
+            Log.e("Get WeeklyMission Failure", "HTTP Error: ${errorResponse?.errorBody()?.string()}")
+
+            emit(BaseResponse(
+                isSuccess = errorResponse!!.isSuccessful,
+                code = errorResponse.code().toString(),
+                message = errorResponse.message().toString(),
+                result = null)
+            )
+        }
+    }
 
     //내가 작성한 글 목록 조회
     fun getCommunityMyPosts() : Flow<BaseListResponse<CommunityMyPostsResponseItem>> = flow{
@@ -155,7 +191,7 @@ class CommunityApiDataSource @Inject constructor(
     }
 
     //대댓글 작성
-    suspend fun postCommentWrite(commentWriteDto: CommentWriteDto):Flow<BaseResponse<CommentWriteResponse>> = flow{
+    suspend fun postCommentWrite(commentWriteDto: CommentWriteDto):Flow<BaseResponse<CommentResponseItem>> = flow{
         try {
             val result = communityApi.postCommentWrite(commentWriteDto)
             emit(result)

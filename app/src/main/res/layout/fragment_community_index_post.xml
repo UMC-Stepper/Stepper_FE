@@ -36,7 +36,7 @@
         android:id="@+id/community_index_post_menu_tl"
         android:layout_width="match_parent"
         android:layout_height="33dp"
-        android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
+        android:background="@drawable/shape_rounded_square_purple_bg1_solid_21dp"
         android:backgroundTint="@color/Purple_Black_BG_2"
         app:tabBackground="@drawable/selector_community_index_tab"
         app:tabSelectedTextColor="@color/Black_500"

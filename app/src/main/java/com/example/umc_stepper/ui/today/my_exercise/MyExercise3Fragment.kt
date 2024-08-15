@@ -71,6 +71,8 @@ class MyExercise3Fragment :
         if (binding.fragmentMyExerciseUploadYoutubeLinkEt.text.isNullOrEmpty()) {
             binding.fragmentMyExerciseCompleteInputBt.isEnabled = false
             binding.fragmentMyExerciseCompleteInputBt.text="입력 완료"
+            binding.fragmentMyExerciseCompleteInputBt.setTextColor(ContextCompat.getColor(requireContext(), R.color.Purple_Gray_300))
+            binding.fragmentMyExerciseCompleteInputBt.setBackgroundResource(R.drawable.shape_rounded_square_purpleblack_bg2_25dp)
         } else {
             binding.fragmentMyExerciseCompleteInputBt.isEnabled = true
             binding.fragmentMyExerciseCompleteInputBt.text="입력 완료"

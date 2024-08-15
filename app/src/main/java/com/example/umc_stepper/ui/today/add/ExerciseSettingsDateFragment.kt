@@ -3,7 +3,6 @@ package com.example.umc_stepper.ui.today.add
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.TimePicker
@@ -20,7 +19,6 @@ import com.example.umc_stepper.domain.model.request.exercise_card_controller.Exe
 import com.example.umc_stepper.domain.model.request.exercise_card_controller.ExerciseStepRequestDto
 import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.today.TodayViewModel
-import com.example.umc_stepper.utils.enums.DayOfWeek
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
@@ -91,7 +89,7 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
     private fun toggleDaySelection(textView: TextView) {
         if (selectedDays.contains(textView)) {
             // 선택풀기
-            textView.setBackgroundResource(R.drawable.shape_rounded_square_purple_bg2_21dp)
+            textView.setBackgroundResource(R.drawable.shape_rounded_square_purple_bg1_solid_21dp)
             textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
             selectedDays.remove(textView)
         } else {
@@ -154,7 +152,7 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
                             textView?.let {
                                 // 요일 비활성화+스타일 변경
                                 it.isEnabled = false
-                                it.setBackgroundResource(R.drawable.shape_rounded_square_purple_bg2_21dp)
+                                it.setBackgroundResource(R.drawable.shape_rounded_square_purple_bg1_solid_21dp)
                                 it.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
                                 selectedDays.remove(it) // selectedDays 리스트에서 제거
                             }

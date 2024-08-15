@@ -7,7 +7,7 @@
         android:layout_width="149dp"
         android:layout_height="123dp"
         android:layout_marginStart="14dp"
-        android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
+        android:background="@drawable/shape_rounded_square_purple_bg1_solid_21dp"
         android:backgroundTint="@color/Purple_300">
 
         <ImageView
