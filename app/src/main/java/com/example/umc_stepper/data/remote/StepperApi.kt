@@ -22,7 +22,7 @@ interface StepperApi {
     ): BaseResponse<TimeResponse>
 
     // 평가일지 조회 API
-    @GET("api/more-exercise/")
+    @GET("api/more-exercise")
     suspend fun getMoreExercise(
         @Query("date") date : String
     ) : BaseListResponse<TimeResponse>
