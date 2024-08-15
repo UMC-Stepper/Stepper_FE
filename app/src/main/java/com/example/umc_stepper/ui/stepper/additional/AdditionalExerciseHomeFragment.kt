@@ -2,18 +2,11 @@ package com.example.umc_stepper.ui.stepper.additional
 
 import android.content.Context
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentAdditionalExerciseHomeBinding
 import com.example.umc_stepper.ui.MainActivity
-import com.example.umc_stepper.ui.stepper.StepperViewModel
-import com.example.umc_stepper.ui.today.TodayViewModel
-import kotlinx.coroutines.launch
 
 class AdditionalExerciseHomeFragment : BaseFragment<FragmentAdditionalExerciseHomeBinding>(R.layout.fragment_additional_exercise_home) {
 
