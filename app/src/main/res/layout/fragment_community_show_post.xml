@@ -12,6 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/Purple_Black_BG_2"
         tools:context=".ui.community.CommunityShowPostFragment">
 
         <ImageView
@@ -40,6 +41,7 @@
             app:layout_constraintTop_toBottomOf="@+id/fragment_community_weekly_show_post_pin_iv" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/fragment_community_weekly_show_post_nested_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="32dp"
@@ -256,8 +258,13 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/fragment_community_weekly_show_post_edit_constraint"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@color/Purple_Black_BG_2"
+                android:layout_height="50dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/shape_rounded_square_purple700_60dp"
+                android:backgroundTint="@color/Purple_Black_BG_1"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_community_weekly_show_post_nested_scroll_view"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
@@ -269,7 +276,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="12dp"
-                    android:src="@drawable/selector_checked_off"
+                    android:src="@drawable/selector_checked_on"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -291,20 +298,25 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:drawableEnd="@drawable/ic_post_comment"
+                    android:layout_marginEnd="12dp"
                     android:paddingStart="16dp"
-                    android:paddingEnd="6dp"
                     android:textColorHint="@color/White"
                     android:textColor="@color/White"
                     style="@style/body_regular_12"
-                    android:background="@drawable/shape_rounded_square_purple700_60dp"
                     android:backgroundTint="@color/Purple_Black_BG_1"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_community_weekly_show_post_comment_iv"
                     app:layout_constraintStart_toEndOf="@+id/fragment_community_weekly_show_post_anonymous_tv"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/fragment_community_weekly_show_post_comment_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/ic_post_comment"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
