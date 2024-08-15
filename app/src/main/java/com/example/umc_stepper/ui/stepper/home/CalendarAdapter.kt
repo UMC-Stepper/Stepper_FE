@@ -57,4 +57,4 @@ class CalendarAdapter(private val context: Context, private val days: List<DayDa
     }
 }
 
-data class DayData(val day: String, val hasDot: Boolean, val hasIcon: Boolean)
+data class DayData(val day: String, var hasDot: Boolean, var hasIcon: Boolean)

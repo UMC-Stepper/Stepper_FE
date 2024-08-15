@@ -17,9 +17,10 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val mainApiRepository: MainApiRepository
 ) : ViewModel(){
-
+    //뱃지
     private val _getBadge = MutableStateFlow<BaseListResponse<BadgeResponseItem>>(BaseListResponse())
     val getBadge : StateFlow<BaseListResponse<BadgeResponseItem>> = _getBadge
+    lateinit var badgeList: MutableList<BadgeCheck>
 
     fun getBadge(){
         viewModelScope.launch {
@@ -38,3 +39,4 @@ class MainViewModel @Inject constructor(
     private val TAG = "MainViewModel"
 
 }
+data class BadgeCheck(val badgeName: String, var hasDot: Boolean)
