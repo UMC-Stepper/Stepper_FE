@@ -80,7 +80,7 @@ class EvaluationExerciseTodayFragment :
     }
 
     private fun setObserver() {
-        if(diaryList.isNotEmpty()) {
+        if (diaryList.isNotEmpty()) {
             binding.fragmentEvaluationExerciseScoreTv.text =
                 diaryList[0].conditionRate.toString()
             binding.fragmentEvaluationExercisePointTv.text =
@@ -90,12 +90,13 @@ class EvaluationExerciseTodayFragment :
                 diaryList[0].conditionRate
             binding.fragmentEvaluationExerciseMemoEt.text =
                 diaryList[0].painMemo
-            GlobalApplication.loadCropImage(
-                binding.fragmentEvaluationExercisePictureExerciseIv,
-                diaryList[0].painImage
+            GlobalApplication.loadCropRoundedSquareImage(
+                context = requireContext(),
+                source = diaryList[0].painImage,
+                imageView = binding.fragmentEvaluationExercisePictureExerciseIv,
+                rounded = 18
             )
-        }
-        else{
+        } else {
             binding.allConstraintCl.visibility = View.GONE
             binding.allConstraint2Cl.visibility = View.VISIBLE
         }

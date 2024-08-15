@@ -329,6 +329,6 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
             putString("time", timeJson)
             putInt("titleNumber", 0)
         }
-        findNavController().navigate(R.id.action_fragmentTodayExercise_to_fragmentAdditionalExerciseSuccess, args)
+        findNavController().navigateSafe(R.id.action_fragmentTodayExercise_to_fragmentAdditionalExerciseSuccess, args)
     }
 }

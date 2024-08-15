@@ -105,7 +105,7 @@ class EvaluationExerciseFragment :
     }
 
 
-    fun compressImageFile(imageFile: File, maxSizeKB: Int): File {
+    private fun compressImageFile(imageFile: File, maxSizeKB: Int): File {
         val bitmap = BitmapFactory.decodeFile(imageFile.path)
         var quality = 100
         val outputStream = ByteArrayOutputStream()
