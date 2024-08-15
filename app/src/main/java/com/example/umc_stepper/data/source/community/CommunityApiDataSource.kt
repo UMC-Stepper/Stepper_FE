@@ -83,7 +83,7 @@ class CommunityApiDataSource @Inject constructor(
     }
 
     //GET 게시글 목록 조회
-    fun getDetailPostList(categoryName: String): Flow<BaseListResponse<ApiResponseListPostViewResponseItem>> =
+    fun getDetailPostList(categoryName: String): Flow<BaseListResponse<CommunityMyCommentsResponseItem>> =
         flow {
             val result = communityApi.getDetailPostList(categoryName)
             emit(result)
@@ -92,7 +92,7 @@ class CommunityApiDataSource @Inject constructor(
         }
 
     // 위클리 게시글 조회 API
-    fun getWeeklyPostList(weeklyMissionId  : Int): Flow<BaseListResponse<ApiResponseListPostViewResponseItem>> = flow {
+    fun getWeeklyPostList(weeklyMissionId : Int): Flow<BaseListResponse<CommunityMyCommentsResponseItem>> = flow {
         try{
             val result = communityApi.getWeeklyPostList(weeklyMissionId)
             emit(result)

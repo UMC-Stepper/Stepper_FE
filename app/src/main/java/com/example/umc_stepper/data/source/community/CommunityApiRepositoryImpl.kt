@@ -56,14 +56,14 @@ class CommunityApiRepositoryImpl @Inject constructor(
     override suspend fun getDetailPost(postId: Int): Flow<BaseResponse<ApiResponsePostViewResponse>>
     = dataSource.getDetailPost(postId)
 
-    override suspend fun getDetailPostList(categoryName: String): Flow<BaseListResponse<ApiResponseListPostViewResponseItem>>
+    override suspend fun getDetailPostList(categoryName: String): Flow<BaseListResponse<CommunityMyCommentsResponseItem>>
     = dataSource.getDetailPostList(categoryName)
 
     // 위클리 게시글 조회 API
-    override suspend fun getWeeklyPostList(weeklyMissionId  : Int): Flow<BaseListResponse<ApiResponseListPostViewResponseItem>>
+    override suspend fun getWeeklyPostList(weeklyMissionId  : Int): Flow<BaseListResponse<CommunityMyCommentsResponseItem>>
     = dataSource.getWeeklyPostList(weeklyMissionId)
 
     // 주간 미션 조회 API
-    override suspend fun getWeeklyMission( id : Int): Flow<BaseResponse<WeeklyMissionResponse>>
+    override suspend fun getWeeklyMission(id : Int): Flow<BaseResponse<WeeklyMissionResponse>>
     = dataSource.getWeeklyMission(id)
 }

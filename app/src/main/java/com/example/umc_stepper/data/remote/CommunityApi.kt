@@ -58,20 +58,20 @@ interface CommunityApi {
     // 위클리 게시글 조회 API
     @GET("/api/community/{weeklyMissionId}/posts/weekly")
     suspend fun getWeeklyPostList(
-        @Path("id") id : Int
-    ): BaseListResponse<ApiResponseListPostViewResponseItem>
+        @Path("weeklyMissionId") weeklyMissionId : Int
+    ): BaseListResponse<CommunityMyCommentsResponseItem>
 
     // 주간 미션 조회 API
     @GET("/api/weekly-missions/{id}")
     suspend fun getWeeklyMission(
-        @Path("weeklyMissionId") weeklyMissionId : Int
+        @Path("id") id : Int
     ): BaseResponse<WeeklyMissionResponse>
 
     //게시글 목록 조회
     @GET("/api/community/{categoryName}/posts")
     suspend fun getDetailPostList(
         @Path("categoryName") categoryName : String
-    ): BaseListResponse<ApiResponseListPostViewResponseItem>
+    ): BaseListResponse<CommunityMyCommentsResponseItem>
 
     //내가 작성한 글 목록 조회
     @GET("/api/community/my_posts")
