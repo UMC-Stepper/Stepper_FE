@@ -1,38 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="40dp"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/shape_rounded_square_pruple400_40dp"
-    android:backgroundTint="@color/Purple_300">
+<layout>
 
-    <TextView
-        android:id="@+id/stepper_additional_exercise_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/pretendard_medium"
-        android:paddingLeft="16dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:text="24. 08. 22"
-        android:textColor="@color/Purple_Black_BG_2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <variable
+            name="TimeResponse"
+            type="com.example.umc_stepper.domain.model.response.more_exercise_controller.TimeResponse" />
+    </data>
 
-    <TextView
-        android:id="@+id/stepper_additional_exercise_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/pretendard_medium"
-        android:paddingTop="10dp"
-        android:paddingRight="16dp"
-        android:paddingBottom="10dp"
-        android:text="4:00"
-        android:textColor="@color/Purple_Black_BG_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/shape_rounded_square_pruple400_40dp"
+        android:backgroundTint="@color/Purple_300">
+
+        <TextView
+            android:id="@+id/stepper_additional_exercise_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_medium"
+            android:paddingLeft="16dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text='@{TimeResponse.date}'
+            android:textColor="@color/Purple_Black_BG_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/stepper_additional_exercise_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_medium"
+            android:paddingTop="10dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="10dp"
+            android:text='@{TimeResponse.hour + ":" + TimeResponse.minutes}'
+            android:textColor="@color/Purple_Black_BG_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
