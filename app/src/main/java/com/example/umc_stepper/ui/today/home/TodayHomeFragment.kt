@@ -2,7 +2,6 @@ package com.example.umc_stepper.ui.today.home
 
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -28,7 +27,6 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
     private val todayViewModel : TodayViewModel by activityViewModels()
     private var calendarList = ArrayList<WeekCalendar>()
 
-
     override fun setLayout() {
         initSettings()
         setNavigationAction()
@@ -42,7 +40,6 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
 
     private fun initSettings() {
         setMonth()
-        updateRecyclerViewHeight()
         initAdapter()
         firstConnect()
         observeViewModel()
@@ -75,19 +72,6 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
             binding.fragmentTodayHomeExerciseCardRv.visibility = View.INVISIBLE
             binding.fragmentTodayHomeNoCardTv.visibility = View.VISIBLE
         }
-    }
-
-    // 운동 카드 RecyclerView 아이템 유/무에 따라 Height 설정 다르게 하는 함수
-    private fun updateRecyclerViewHeight() {
-        val exerciseStateList = todayViewModel.exerciseState.value
-
-        val layoutParams = binding.fragmentTodayHomeExerciseCardRv.layoutParams
-        if (exerciseStateList.isNullOrEmpty()) {
-            layoutParams.height = resources.getDimensionPixelSize(R.dimen.exerciseCardRv_no_items_height)
-        } else {
-            layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-        }
-        binding.fragmentTodayHomeExerciseCardRv.layoutParams = layoutParams
     }
 
     // 툴바 달 설정

@@ -2,30 +2,22 @@ package com.example.umc_stepper.data.remote
 
 import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
-import com.example.umc_stepper.domain.model.request.AiVideoDto
 import com.example.umc_stepper.domain.model.request.comment_controller.CommentWriteDto
 import com.example.umc_stepper.domain.model.request.comment_controller.ReplyRequestDto
-import com.example.umc_stepper.domain.model.request.member_controller.LogInDto
-import com.example.umc_stepper.domain.model.response.AiVideoInfo
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponseListPostViewResponseItem
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostViewResponse
 import com.example.umc_stepper.domain.model.response.post_controller.LikeResponse
-import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponse
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentWriteResponse
-import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponse
 import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponseItem
 import com.example.umc_stepper.domain.model.response.post_controller.ScrapResponse
-import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyPostsResponse
 import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyPostsResponseItem
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable.Param
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface CommunityApi {
     //스크랩 등록
@@ -94,7 +86,7 @@ interface CommunityApi {
     @POST("api/comment/reply")
     suspend fun postReply (
         @Body replyRequestDto: ReplyRequestDto
-    ) : BaseResponse<CommentResponse>
+    ) : BaseResponse<CommentResponseItem>
 
     //댓글 조회
     @GET("api/comment/{postId}/comment")

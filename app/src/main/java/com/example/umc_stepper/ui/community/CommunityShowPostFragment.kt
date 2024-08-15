@@ -1,33 +1,29 @@
-package com.example.umc_stepper.ui.community.weekly
+package com.example.umc_stepper.ui.community
 
 import android.content.Context
-import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import androidx.core.content.ContextCompat
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
-import com.example.umc_stepper.databinding.FragmentCommunityWeeklyShowPostBinding
+import com.example.umc_stepper.databinding.FragmentCommunityShowPostBinding
+import com.example.umc_stepper.domain.model.request.comment_controller.CommentWriteDto
+import com.example.umc_stepper.domain.model.request.comment_controller.ReplyRequestDto
 import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.MainActivity
-import com.example.umc_stepper.ui.community.CommunityDialog
-import com.example.umc_stepper.ui.community.CommunityDialogInterface
-import com.example.umc_stepper.ui.community.CommunityRemoveInterface
-import com.example.umc_stepper.ui.community.CommunityViewModel
-import com.example.umc_stepper.ui.login.LoginViewModel
+import com.example.umc_stepper.ui.community.weekly.WeeklyShowPostImageAdapter
+import com.example.umc_stepper.ui.community.weekly.WeeklyShowPostReplyAdapter
+import com.example.umc_stepper.utils.enums.DialogType
+import com.example.umc_stepper.utils.listener.ItemClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -36,19 +32,24 @@ import javax.inject.Inject
 import kotlin.properties.Delegates
 
 @AndroidEntryPoint
-class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShowPostBinding>(R.layout.fragment_community_weekly_show_post),
-    CommunityDialogInterface,
-    CommunityRemoveInterface {
+class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>(R.layout.fragment_community_show_post),
+    CommunityDialogInterface, CommunityRemoveInterface {
 
     private lateinit var mainActivity: MainActivity
     private lateinit var scrapDialog: CommunityDialog
+    private lateinit var replyDialog: CommunityDialog
     private lateinit var weeklyShowPostImageAdapter: WeeklyShowPostImageAdapter
     private lateinit var weeklyShowPostReplyAdapter: WeeklyShowPostReplyAdapter
+    private lateinit var commentWriteDto: CommentWriteDto
+    private lateinit var replyRequestDto: ReplyRequestDto
 
     private val communityViewModel: CommunityViewModel by activityViewModels()
     private var postId by Delegates.notNull<Int>()
+    private var parentCommentId by Delegates.notNull<Int>()
+
     private var isScrap: Boolean = false
     private var isAnonymous: Boolean = false
+    private var isReplyMode: Boolean = false
 
     @Inject
     lateinit var tokenManager: TokenManager
@@ -74,7 +75,7 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
     private fun setButton() {
         binding.fragmentCommunityWeeklyScrapTv.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
-                showDialog()
+                showScrapDialog()
             }
         }
 
@@ -105,10 +106,26 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
 
     // EditText 엔터 누르면 댓글 작성되는 함수
     private fun setupCommentEditText() {
-        binding.fragmentCommunityWeeklyShowPostEt.setOnEditorActionListener { v, actionId, event ->
+        val editComment =  binding.fragmentCommunityWeeklyShowPostEt
+
+        if (isReplyMode) {
+            editComment.hint = "대댓글을 입력하세요..."
+        } else {
+            editComment.hint = "댓글을 입력하세요..."
+        }
+
+        editComment.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH ||
                 event?.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER) {
 
+                if (isReplyMode) {
+                    leaveReply(editComment.text.toString()) // 대댓글 작성
+                    isReplyMode = false
+                } else {
+                    leaveComment(editComment.text.toString()) // 댓글 작성
+                }
+
+                editComment.text.clear()
                 true
             } else {
                 false
@@ -116,21 +133,39 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
         }
     }
 
-    // 댓글 작성 로직처리 함수
+    // 댓글 작성 로직 처리 함수
     private fun leaveComment(text: String) {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 communityViewModel.apiResponsePostViewResponse.collectLatest {
-
                     launch {
-                        // 작성자 인지 확인 (작성자는 익명 X)
+                        // 글 작성자 인지 확인 (작성자는 익명 X)
                         if(it.result?.authorEmail?.equals(tokenManager.getEmail().first()) == true) {
-
+                            commentWriteDto = CommentWriteDto(postId, text, false)
+                            communityViewModel.postCommentWrite(commentWriteDto)
                         } else {
-                            // 익명 여부 확인
-                            if (isAnonymous) {
+                            commentWriteDto = CommentWriteDto(postId, text, isAnonymous)
+                            communityViewModel.postCommentWrite(commentWriteDto)
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-                            }
+    // 대댓글 작성 로직 처리 함수
+    private fun leaveReply(text: String) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                communityViewModel.apiResponsePostViewResponse.collectLatest {
+                    launch {
+                        // 글 작성자 인지 확인 (작성자는 익명 X)
+                        if(it.result?.authorEmail?.equals(tokenManager.getEmail().first()) == true) {
+                            replyRequestDto = ReplyRequestDto(postId, parentCommentId, text, false)
+                            communityViewModel.postReply(replyRequestDto)
+                        } else {
+                            replyRequestDto = ReplyRequestDto(postId, parentCommentId, text, isAnonymous)
+                            communityViewModel.postReply(replyRequestDto)
                         }
                     }
                 }
@@ -143,11 +178,16 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
         weeklyShowPostImageAdapter = WeeklyShowPostImageAdapter()
         binding.fragmentCommunityWeeklyShowPostImgRv.adapter = weeklyShowPostImageAdapter
 
-        weeklyShowPostReplyAdapter = WeeklyShowPostReplyAdapter()
+        weeklyShowPostReplyAdapter = WeeklyShowPostReplyAdapter{
+            Log.d("댓글 리사이클러뷰 클릭 리스너","commentId : ${ it.toInt()}")
+            parentCommentId = it.toInt()
+            isReplyMode = true
+            showReplyDialog()
+        }
         binding.fragmentCommunityWeeklyShowPostReplyRv.adapter = weeklyShowPostReplyAdapter
     }
 
-    // postId 이전 화면에서 넘겨받아서 저장하는 함수
+    // postId 이전 화면에서 넘겨받아 저장하는 함수
     private fun setPostId() {
         arguments?.let {
             postId = it.getString("postId")?.toInt() ?: 1
@@ -162,6 +202,7 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
                 launch {
                     communityViewModel.getDetailPost(postId.toInt())
                     communityViewModel.getCommunityMyScraps()
+                    communityViewModel.getComment(postId)
                 }
 
                 // 스크랩 상태 확인 및 UI 업데이트
@@ -199,6 +240,14 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
                         }
                     }
                 }
+
+                // 댓글 조회
+                launch {
+                    communityViewModel.getCommentResponse.collect {
+                        Log.d("댓글 조회", "프래그먼트 it : ${it.result}")
+                        weeklyShowPostReplyAdapter.submitList(it.result)
+                    }
+                }
             }
         }
     }
@@ -208,6 +257,14 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
         mainActivity.updateToolbarLeftImg(R.drawable.ic_toolbar_community_home)
         mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_community_search)
         mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_community_menu)
+    }
+
+    // 키보드 강제로 활성화 및 올리는 함수
+    private fun editKeyboardUp() {
+        val editComment = binding.fragmentCommunityWeeklyShowPostEt
+        editComment.requestFocus()
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(editComment, InputMethodManager.SHOW_IMPLICIT)
     }
 
     private fun updateScrapText() {
@@ -220,13 +277,14 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
         }
     }
 
-    private fun showDialog() {
+    // 스크랩 다이얼로그 표시 함수
+    private fun showScrapDialog() {
         val title = if (!isScrap) "이 글을 스크랩하시겠습니까?" else "스크랩을 취소하시겠습니까?"
         val btn1 = "확인"
         val btn2 = "취소"
 
         activity?.let {
-            scrapDialog = CommunityDialog(title, btn1, btn2, this)
+            scrapDialog = CommunityDialog(title, btn1, btn2, this, DialogType.SCRAP)
             scrapDialog.isCancelable = false
             scrapDialog.show(it.supportFragmentManager, "CommunityDialog")
         } ?: run {
@@ -234,17 +292,50 @@ class CommunityWeeklyShowPostFragment : BaseFragment<FragmentCommunityWeeklyShow
         }
     }
 
-    override fun OnClickBtn1(btn1: String) {
+    // 대댓글 다이얼로그 표시 함수
+    private fun showReplyDialog() {
+        val title = "대댓글을 작성하시겠습니까?"
+        val btn1 = "확인"
+        val btn2 = "취소"
+
+        activity?.let {
+            replyDialog = CommunityDialog(title, btn1, btn2, this, DialogType.REPLY)
+            replyDialog.isCancelable = false
+            replyDialog.show(it.supportFragmentManager, "CommunityDialog")
+        } ?: run {
+            Log.e("CommunityWeeklyShowPostFragment", "Activity is null")
+        }
+    }
+
+    // 다이얼로그 버튼 클릭 리스너
+    override fun OnClickBtn1(btn1: String, dialogType: DialogType?) {
         viewLifecycleOwner.lifecycleScope.launch {
-            if (btn1 == "확인") {
-                if (!isScrap) {
-                    communityViewModel.postCommitScrap(postId)
-                    isScrap = true
-                } else {
-                    communityViewModel.deleteCancelScrap(postId)
-                    isScrap = false
+            when (dialogType) {
+                // 스크랩 다이얼로그 처리
+                DialogType.SCRAP -> {
+                    if (btn1 == "확인") {
+                        if (!isScrap) {
+                            communityViewModel.postCommitScrap(postId)
+                            isScrap = true
+                        } else {
+                            communityViewModel.deleteCancelScrap(postId)
+                            isScrap = false
+                        }
+                        updateScrapText()
+                    }
                 }
-                updateScrapText()
+
+                // 대댓글 다이얼로그 처리
+                DialogType.REPLY -> {
+                    if (btn1 == "확인") {
+                        launch {
+                            kotlinx.coroutines.delay(100)
+                            editKeyboardUp()
+                            setupCommentEditText()
+                        }
+                    }
+                }
+                null -> Log.d("DialogType","DialogType is null")
             }
         }
     }

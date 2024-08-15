@@ -23,6 +23,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -81,10 +83,10 @@ class StepperViewModel @Inject constructor(
         }
     }
 
-    fun postDiaryEdit(rateDiaryDto: RateDiaryDto){
+    fun postDiaryEdit(image : MultipartBody.Part, request: RequestBody){
         viewModelScope.launch {
             try{
-                mainApiRepository.postRateDiaryEdit(rateDiaryDto).collect{
+                mainApiRepository.postRateDiaryEdit(image, request).collect{
                     _diaryItems.value = it
                 }
             }catch (e : Exception){

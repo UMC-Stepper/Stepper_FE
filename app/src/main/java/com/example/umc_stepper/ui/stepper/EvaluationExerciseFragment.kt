@@ -2,9 +2,13 @@ package com.example.umc_stepper.ui.stepper
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -20,12 +24,21 @@ import com.example.umc_stepper.domain.model.request.rate_diary_controller.RateDi
 import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.utils.GlobalApplication
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import java.lang.NumberFormatException
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class EvaluationExerciseFragment :
@@ -41,8 +54,8 @@ class EvaluationExerciseFragment :
     lateinit var stateTitleList: List<String>
     lateinit var descriptionList: List<String>
     var selectTextDescription = 0
-
-    var profileImage = ""
+    var exerciseId by Delegates.notNull<Int>()
+    lateinit var profileImage: MultipartBody.Part
     var score = 0
     private lateinit var mainActivity: MainActivity
 
@@ -61,15 +74,74 @@ class EvaluationExerciseFragment :
 
     override fun setLayout() {
         initSetting()
+        lifecycleScope.launch {
+            exerciseId = tokenManager.getExerciseCardId().first()?.toInt() ?: 0
+        }
     }
 
     private fun setImageView() {
         val photoUriString = arguments?.getString("photo_uri")
+
         val photoUri = photoUriString?.let { Uri.parse(it) }
-        photoUri?.let{
+        photoUri?.let {
             GlobalApplication.loadImage(binding.fragmentEvaluationExercisePictureExerciseIv, it)
         }
+
+        val file = photoUri?.let { getPathFromUri(requireContext(), it)?.let { File(it) } }
+
+        // 이미지 파일을 압축
+        val compressedFile = file?.let { compressImageFile(it, 500) }  // 여기서 maxSizeKB를 지정
+
+        val requestFile = compressedFile?.asRequestBody("image/*".toMediaTypeOrNull())
+        if (compressedFile != null) {
+            profileImage = requestFile?.let {
+                MultipartBody.Part.createFormData("image", compressedFile.name, it)
+            }!!
+        }
+
+        if (compressedFile != null) {
+            Log.d("CompressedImage", "File size: ${compressedFile.length()} bytes")
+        }
     }
+
+
+    fun compressImageFile(imageFile: File, maxSizeKB: Int): File {
+        val bitmap = BitmapFactory.decodeFile(imageFile.path)
+        var quality = 100
+        val outputStream = ByteArrayOutputStream()
+
+        do {
+            outputStream.reset()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream)
+            quality -= 5
+        } while (outputStream.size() / 1024 > maxSizeKB && quality > 0)
+
+        val compressedFile = File(imageFile.parent, "compressed_${imageFile.name}")
+        try {
+            val fos = FileOutputStream(compressedFile)
+            fos.write(outputStream.toByteArray())
+            fos.flush()
+            fos.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        return compressedFile
+    }
+
+    private fun getPathFromUri(context: Context, uri: Uri): String? {
+        var path: String? = null
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = context.contentResolver.query(uri, projection, null, null, null)
+        cursor?.use {
+            if (it.moveToFirst()) {
+                val columnIndex = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+                path = it.getString(columnIndex)
+            }
+        }
+        return path
+    }
+
 
     private fun initSetting() {
 //        initActivityResultLauncher()
@@ -154,23 +226,25 @@ class EvaluationExerciseFragment :
                 val imageUrl = profileImage //이미지
                 val point = score //점수
                 mainActivity.visibleTag()
-                lifecycleScope.launch {
-                    val exerciseId = tokenManager.getExerciseId().first() ?: ""
-                    stepperViewModel.postDiaryEdit(
-                        RateDiaryDto(
-                            conditionRate = point.toString(),
-                            painImage = imageUrl,
-                            painMemo = memo,
-                            painRate = state.toString(),
-                            exerciseCardId = exerciseId //운동아이디
-                        )
-                    )
-                }
+                val gson = Gson()
+                Log.d("평가", exerciseId.toString())
+                val rateDiary = RateDiaryDto(
+                    conditionRate = point.toString(),
+                    painImage = "x",
+                    painMemo = memo,
+                    painRate = selectTextDescription.toString(),
+                    exerciseCardId = exerciseId.toString() //운동아이디
+                )
+                val rj = gson.toJson(rateDiary, RateDiaryDto::class.java)
+                val rb = rj.toRequestBody("application/json".toMediaTypeOrNull())
+                stepperViewModel.postDiaryEdit(
+                    image = imageUrl,
+                    request = rb
+                )
                 //위의 값들 서버로 전달
             }
         }
     }
-
 
     private fun setList() {
         with(binding) {

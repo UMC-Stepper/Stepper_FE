@@ -33,25 +33,35 @@
             android:layout_marginStart="8dp"
             android:layout_marginBottom="12dp"
             android:layout_marginTop="12dp"
+            app:imageUrl="@{checkExerciseResponse.video_image}"
+            app:roundedCorners="@{12}"
+            android:background="@drawable/shape_rounded_square_white_12dp"
+            android:backgroundTint="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/item_select_my_exercise_checked_bt"
             app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/item_select_my_exercise_title_tv"
-            android:textColor="@color/White"
-            app:layout_constraintStart_toEndOf="@id/item_select_my_exercise_thumbnail_iv"
-            app:layout_constraintTop_toTopOf="@id/item_select_my_exercise_thumbnail_iv"
-            android:fontFamily="@font/pretendard_semi_bold"
+            style="@style/body_semi_bold_14"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:text="@{checkExerciseResponse.video_title}"
+            android:layout_marginEnd="12dp"
             android:layout_marginTop="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{checkExerciseResponse.video_title}"
+            android:textAlignment="textStart"
+            android:textColor="@color/White"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_select_my_exercise_thumbnail_iv"
+            app:layout_constraintTop_toTopOf="@id/item_select_my_exercise_thumbnail_iv" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_regular"
+            style="@style/body_medium_12"
             android:text="@{checkExerciseResponse.channel_name}"
             android:layout_marginBottom="4dp"
             android:textColor="@color/White"

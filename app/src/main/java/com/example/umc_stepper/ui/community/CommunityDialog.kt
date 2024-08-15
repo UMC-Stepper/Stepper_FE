@@ -9,12 +9,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.umc_stepper.databinding.DialogCommunityBinding
 import com.example.umc_stepper.ui.login.ConfirmDialogInterface
+import com.example.umc_stepper.utils.enums.DialogType
 
 class CommunityDialog(
     private val title: String,
     private val btn1: String,
     private val btn2: String,
-    private val communityDialogInterface: CommunityDialogInterface
+    private val communityDialogInterface: CommunityDialogInterface,
+    private val dialogType: DialogType? = null
 ) : DialogFragment() {
 
     private var _binding: DialogCommunityBinding? = null
@@ -38,7 +40,7 @@ class CommunityDialog(
             dialogCommunityButton2Bt.text = btn2
 
             dialogCommunityButton1Bt.setOnClickListener {
-                communityDialogInterface.OnClickBtn1(btn1)
+                communityDialogInterface.OnClickBtn1(btn1, dialogType)
                 dismiss()
             }
             dialogCommunityButton2Bt.setOnClickListener {
