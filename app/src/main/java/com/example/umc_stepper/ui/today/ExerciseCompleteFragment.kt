@@ -17,17 +17,18 @@ class ExerciseCompleteFragment :BaseFragment<FragmentExerciseCompleteBinding>(R.
 
     private fun setButton(){
         binding.exerciseCompleteBtn.setOnClickListener {
-            updateFirstBadge()
+            updateBadge(0)
             val action = ExerciseCompleteFragmentDirections.actionExerciseCompleteFragmentToTodayHomeFragment()
             findNavController().navigateSafe(action.actionId)
         }
     }
 
-    private fun updateFirstBadge() {
+    //뱃지전역함수(뷰모델에 넣으면 부를때 복잡해지길래..)
+    fun updateBadge(i:Int) {
         // 첫 번째 badgeList 항목의 hasBadge 값이 false일 때만 true로 변경하고 토스트 메시지 띄우기
-        if (!mainViewModel.badgeList[0].hasBadge) {
+        if (!mainViewModel.badgeList[i].hasBadge) {
             // 첫 번째 badgeList 항목의 hasBadge 값을 true로 설정
-            mainViewModel.badgeList[0].hasBadge = true
+            mainViewModel.badgeList[i].hasBadge = true
 
             // "새로운 뱃지 획득! My Badge를 확인해주세요"라는 토스트 메시지 띄우기
             Toast.makeText(requireContext(), "새로운 뱃지 획득! My Badge를 확인해주세요", Toast.LENGTH_SHORT).show()
