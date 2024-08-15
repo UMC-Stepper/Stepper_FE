@@ -48,7 +48,7 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
     private var parentCommentId by Delegates.notNull<Int>()
 
     private var isScrap: Boolean = false
-    private var isAnonymous: Boolean = false
+    private var isAnonymous: Boolean = true
     private var isReplyMode: Boolean = false
 
     @Inject
@@ -125,10 +125,20 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
                     leaveComment(editComment.text.toString()) // 댓글 작성
                 }
 
-                editComment.text.clear()
+                editComment.text?.clear()
                 true
             } else {
                 false
+            }
+        }
+
+        binding.fragmentCommunityWeeklyShowPostTil.setEndIconOnClickListener {
+            if (isReplyMode) {
+                leaveReply(editComment.text.toString()) // 대댓글 작성
+                isReplyMode = false
+            } else {
+                leaveComment(editComment.text.toString()) // 댓글 작성
+                editComment.text?.clear()
             }
         }
     }
