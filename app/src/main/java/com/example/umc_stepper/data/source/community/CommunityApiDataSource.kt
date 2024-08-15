@@ -92,9 +92,9 @@ class CommunityApiDataSource @Inject constructor(
         }
 
     // 위클리 게시글 조회 API
-    fun getWeeklyPostList(id : Int): Flow<BaseListResponse<ApiResponseListPostViewResponseItem>> = flow {
+    fun getWeeklyPostList(weeklyMissionId  : Int): Flow<BaseListResponse<ApiResponseListPostViewResponseItem>> = flow {
         try{
-            val result = communityApi.getWeeklyPostList(id)
+            val result = communityApi.getWeeklyPostList(weeklyMissionId)
             emit(result)
         }catch (e: HttpException) {
             val errorResponse = e.response()?.let { it }

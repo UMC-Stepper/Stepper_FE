@@ -31,7 +31,7 @@ interface CommunityApiRepository {
     suspend fun getCommunityMyComments(): Flow<BaseListResponse<CommunityMyCommentsResponseItem>>
 
     // 위클리 게시글 조회 API
-    suspend fun getWeeklyPostList(id : Int): Flow<BaseListResponse<ApiResponseListPostViewResponseItem>>
+    suspend fun getWeeklyPostList(weeklyMissionId : Int): Flow<BaseListResponse<ApiResponseListPostViewResponseItem>>
 
     // 주간 미션 조회 API
     suspend fun getWeeklyMission(id : Int): Flow<BaseResponse<WeeklyMissionResponse>>

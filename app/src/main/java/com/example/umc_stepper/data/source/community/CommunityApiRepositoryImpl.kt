@@ -60,8 +60,8 @@ class CommunityApiRepositoryImpl @Inject constructor(
     = dataSource.getDetailPostList(categoryName)
 
     // 위클리 게시글 조회 API
-    override suspend fun getWeeklyPostList(id : Int): Flow<BaseListResponse<ApiResponseListPostViewResponseItem>>
-    = dataSource.getWeeklyPostList(id)
+    override suspend fun getWeeklyPostList(weeklyMissionId  : Int): Flow<BaseListResponse<ApiResponseListPostViewResponseItem>>
+    = dataSource.getWeeklyPostList(weeklyMissionId)
 
     // 주간 미션 조회 API
     override suspend fun getWeeklyMission( id : Int): Flow<BaseResponse<WeeklyMissionResponse>>

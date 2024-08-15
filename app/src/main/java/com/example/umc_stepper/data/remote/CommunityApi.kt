@@ -64,7 +64,7 @@ interface CommunityApi {
     // 주간 미션 조회 API
     @GET("/api/weekly-missions/{id}")
     suspend fun getWeeklyMission(
-        @Path("id") id : Int
+        @Path("weeklyMissionId") weeklyMissionId : Int
     ): BaseResponse<WeeklyMissionResponse>
 
     //게시글 목록 조회
