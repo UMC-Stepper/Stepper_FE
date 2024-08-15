@@ -4,6 +4,7 @@ import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.model.request.comment_controller.CommentWriteDto
 import com.example.umc_stepper.domain.model.request.comment_controller.ReplyRequestDto
+import com.example.umc_stepper.domain.model.response.WeeklyMissionResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponseListPostViewResponseItem
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostViewResponse
@@ -54,6 +55,18 @@ interface CommunityApi {
     suspend fun getDetailPost(
         @Path("postId") postId: Int
     ): BaseResponse<ApiResponsePostViewResponse>
+
+    // 위클리 게시글 조회 API
+    @GET("/api/community/{weeklyMissionId}/posts/weekly")
+    suspend fun getWeeklyPostList(
+        @Path("id") id : Int
+    ): BaseListResponse<ApiResponseListPostViewResponseItem>
+
+    // 주간 미션 조회 API
+    @GET("/api/weekly-missions/{id}")
+    suspend fun getWeeklyMission(
+        @Path("id") id : Int
+    ): BaseResponse<WeeklyMissionResponse>
 
     //게시글 목록 조회
     @GET("/api/community/{categoryName}/posts")
