@@ -1,5 +1,9 @@
 package com.example.umc_stepper.domain.model.request.exercise_card_controller
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class ExerciseCardRequestDto(
     val bodyPart: String,
     var date: String,
@@ -9,9 +13,10 @@ data class ExerciseCardRequestDto(
     val second: Int,
     val stepList: List<ExerciseStepRequestDto>,
     var week: String
-)
+) : Parcelable
 
+@Parcelize
 data class ExerciseStepRequestDto(
     val myExerciseId: Int,
     val step: Int
-)
+) : Parcelable
