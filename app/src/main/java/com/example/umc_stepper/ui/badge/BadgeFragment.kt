@@ -28,10 +28,10 @@ class BadgeFragment : BaseFragment<FragmentBadgeBinding>(R.layout.fragment_badge
     private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var mainActivity : MainActivity
     private val badgeImageList = mutableListOf(
-        R.drawable.ic_badge_fake,
-        R.drawable.ic_badge_fake,
-        R.drawable.ic_badge_fake,
-        R.drawable.ic_badge_fake
+        R.drawable.ic_badge_1,
+        R.drawable.ic_badge_2,
+        R.drawable.ic_badge_3,
+        R.drawable.ic_badge_4
     )
 
     override fun onAttach(context: Context) {
