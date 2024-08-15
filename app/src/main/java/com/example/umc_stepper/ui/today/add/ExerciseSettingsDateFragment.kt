@@ -223,6 +223,7 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
             putInt("minuteTime", minuteTime.toInt()) //분
             putString("material", binding.fragmentExerciseSettingsExerciseMaterialsEt.text.toString()) //준비물
             putString("ampm", ampm) // 오전,오후 값
+            putString("type","success")
         }
         val action = ExerciseSettingsDateFragmentDirections.actionFragmentExerciseSettingsDateToExerciseCardLastFragment()
         findNavController().navigate(action.actionId, args)

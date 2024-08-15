@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
@@ -11,10 +12,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
+import com.example.umc_stepper.ui.today.add.AddExerciseSelectScrapFragmentDirections
 
 abstract class BaseFragment<VB: ViewBinding>(@LayoutRes private val layoutRes: Int) : Fragment() {
+
     private var _binding: VB? = null
+
     protected val binding get() = _binding!!
 
     override fun onCreateView(

@@ -13,6 +13,6 @@ class ExerciseCompleteFragment :BaseFragment<FragmentExerciseCompleteBinding>(R.
         }
     }
     private fun goStepperHome(){
-        findNavController().navigate(R.id.action_fragmentExerciseComplete_to_stepperFragment)
+        findNavController().navigateSafe(R.id.action_fragmentExerciseComplete_to_stepperFragment)
     }
 }

@@ -3,6 +3,7 @@ package com.example.umc_stepper.ui.today
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
@@ -15,7 +16,13 @@ class ExerciseCompleteFragment :BaseFragment<FragmentExerciseCompleteBinding>(R.
         setButton()
     }
 
-    private fun setButton(){
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+ 
+        initSetting()
+    }
+
+    private fun setButton() {
         binding.exerciseCompleteBtn.setOnClickListener {
             updateBadge(0)
             val action = ExerciseCompleteFragmentDirections.actionExerciseCompleteFragmentToTodayHomeFragment()
@@ -33,6 +40,22 @@ class ExerciseCompleteFragment :BaseFragment<FragmentExerciseCompleteBinding>(R.
             // "새로운 뱃지 획득! My Badge를 확인해주세요"라는 토스트 메시지 띄우기
             Toast.makeText(requireContext(), "새로운 뱃지 획득! My Badge를 확인해주세요", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun initSetting() {
+        if (!arguments?.getString("description").isNullOrEmpty() &&
+            !arguments?.getString("type").isNullOrEmpty()
+        ) {
+            val des = arguments?.getString("description")
+            val type = arguments?.getString("type")
+
+            with(binding){
+                exerciseCompleteTv.text = type.toString()
+                exerciseCompleteTv2.text = des.toString()
+            }
+        }
+
+        binding.exerciseCompleteTv
     }
 
 }

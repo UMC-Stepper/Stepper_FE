@@ -112,7 +112,7 @@
                 android:paddingTop="4dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="4dp"
-                android:text="어깨, 팔"
+                android:text="무릎, 다리"
                 android:textColor="@drawable/selector_add_exercise_text_color"
                 app:layout_constraintStart_toEndOf="@id/fragment_add_exercise_select_tag_4_tv"
                 app:layout_constraintTop_toTopOf="@id/fragment_add_exercise_select_tag_4_tv" />

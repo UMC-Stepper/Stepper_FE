@@ -20,9 +20,11 @@ import retrofit2.http.POST
 import retrofit2.http.Part
 
 interface MainApi {
+    @Multipart
     @POST("/api/members/signup")
     suspend fun postSignUpInfo(
-        @Body userDto: UserDto
+        @Part("data") userDto: RequestBody,
+        @Part profileImage: MultipartBody.Part,
     ): BaseResponse<UserResponse>
 
     @POST("/api/members/logout")
@@ -41,10 +43,11 @@ interface MainApi {
     @DELETE("/api/members/delete")
     suspend fun deleteExit(
     ): BaseResponse<Any>
+
     @Multipart
     @POST("/api/RateDiary/write")
     suspend fun postRateDiaryEdit(
-        @Part image : MultipartBody.Part,
+        @Part image: MultipartBody.Part,
         @Part("request") rateDiaryDto: RequestBody
     ): BaseResponse<RateDiaryResult>
 

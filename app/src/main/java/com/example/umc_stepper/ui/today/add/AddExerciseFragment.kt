@@ -93,7 +93,7 @@ class AddExerciseFragment :
         }
         // 다음으로 버튼 클릭
         binding.fragmentAddExerciseNextBtn.setOnClickListener {
-            if (!cardListJson.isNullOrEmpty()) {
+            if (cardListJson.isNotEmpty()) {
                 //운동카드 스텝 수정
                 val toDayExerciseResponseDto: ToDayExerciseResponseDto =
                     Gson().fromJson(cardListJson, ToDayExerciseResponseDto::class.java)
