@@ -64,11 +64,17 @@ class AddExerciseDownloadFragment : BaseFragment<FragmentAddExerciseSelectScrapB
 
         binding.fragmentAddExerciseDownloadBtn.setOnClickListener {
             goLastExercise()
+
         }
     }
 
     private fun goLastExercise(){
-        findNavController().navigate(R.id.action_fragmentAddExerciseDownload_to_fragmentLastExercise)
+        val args = Bundle().apply {
+            putString("urlText", selectScrapListAdapter.getSelectExercise())
+            Log.d("링크",selectScrapListAdapter.getSelectExercise())
+        }
+
+        findNavController().navigate(R.id.action_fragmentAddExerciseDownload_to_fragmentLastExercise,args)
     }
 
     override fun onCategoryClick(category: String) {
