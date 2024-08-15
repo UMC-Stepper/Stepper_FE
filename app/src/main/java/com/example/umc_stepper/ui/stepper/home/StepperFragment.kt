@@ -18,6 +18,7 @@ import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.stepper.ExerciseViewAdapter
 import com.example.umc_stepper.ui.stepper.StepperViewModel
+import com.example.umc_stepper.ui.stepper.additional.AddExerciseAdapter
 import com.example.umc_stepper.ui.today.TodayViewModel
 import com.example.umc_stepper.utils.enums.UpdateState
 import com.example.umc_stepper.utils.listener.AdapterNextClick
@@ -35,6 +36,7 @@ import javax.inject.Inject
 class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_stepper),
     ItemClickListener, AdapterNextClick {
 
+    private lateinit var addExerciseAdapter: AddExerciseAdapter
     private lateinit var recyclerAdapter: ExerciseViewAdapter
     private val stepperViewModel: StepperViewModel by activityViewModels()
     lateinit var days: MutableList<DayData> // MutableList로 변경하여 수정 가능하도록
@@ -174,6 +176,13 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
                 }
             }
         }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                stepperViewModel.moreExerciseList.collectLatest {
+                    addExerciseAdapter.submitList(it.result)
+                }
+            }
+        }
     }
 
     private fun firstConnect() {
@@ -191,6 +200,9 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
         recyclerAdapter = ExerciseViewAdapter(this, this)
         binding.stepperExerciseRv.adapter = recyclerAdapter
 
+        addExerciseAdapter = AddExerciseAdapter()
+        binding.stepperAdditionalRv.adapter = addExerciseAdapter
+
         observeLifecycle()
         observeExerciseMonthCheck()
 
@@ -204,7 +216,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
             val json = gson.toJson(item)
             //운동카드 리스트 전송
             bd.putString("CardListJson", json)
-            Log.d("카드",json.toString())
+            Log.d("카드", json.toString())
 
             bd.putString("bp", item.bodyPart)
             for (i in 0..<item.stepList.size) {
