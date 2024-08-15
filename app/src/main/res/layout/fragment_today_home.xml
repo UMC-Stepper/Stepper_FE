@@ -167,6 +167,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="12dp"
                 android:src="@drawable/ic_today_home_my_exercise"
+                app:tint="@color/White"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -226,6 +227,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="12dp"
                 android:src="@drawable/ic_today_home_evaluation_log"
+                app:tint="@color/White"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
