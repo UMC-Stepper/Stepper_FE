@@ -67,6 +67,7 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
         updateMainToolbar()
         setPostId()
         setButton()
+        sendToComment()
         setAdapter()
         observeViewModel()
     }
@@ -105,7 +106,7 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
     }
 
     // EditText 엔터 누르면 댓글 작성되는 함수
-    private fun setupCommentEditText() {
+    private fun sendToComment() {
         val editComment =  binding.fragmentCommunityWeeklyShowPostEt
 
         if (isReplyMode) {
@@ -114,34 +115,17 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
             editComment.hint = "댓글을 입력하세요..."
         }
 
-        editComment.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-                event?.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER) {
-
+        binding.fragmentCommunityWeeklyShowPostCommentIv.setOnClickListener {
+            Log.d("CommunityShowPostFragment", "Comment button clicked")
                 if (isReplyMode) {
                     leaveReply(editComment.text.toString()) // 대댓글 작성
                     isReplyMode = false
                 } else {
                     leaveComment(editComment.text.toString()) // 댓글 작성
                 }
-
-                editComment.text?.clear()
-                true
-            } else {
-                false
-            }
-        }
-
-        binding.fragmentCommunityWeeklyShowPostTil.setEndIconOnClickListener {
-            if (isReplyMode) {
-                leaveReply(editComment.text.toString()) // 대댓글 작성
-                isReplyMode = false
-            } else {
-                leaveComment(editComment.text.toString()) // 댓글 작성
                 editComment.text?.clear()
             }
         }
-    }
 
     // 댓글 작성 로직 처리 함수
     private fun leaveComment(text: String) {
@@ -341,7 +325,6 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
                         launch {
                             kotlinx.coroutines.delay(100)
                             editKeyboardUp()
-                            setupCommentEditText()
                         }
                     }
                 }
