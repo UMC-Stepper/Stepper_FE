@@ -25,8 +25,8 @@ import kotlinx.coroutines.launch
 class BadgeFragment : BaseFragment<FragmentBadgeBinding>(R.layout.fragment_badge) {
     private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var mainActivity : MainActivity
-    private val badgeNameList: List<String> = listOf(
-        "첫 운동 설정 완료",
+    private val badgeNameList: String = listOf(
+        ("첫 운동 설정 완료",true).toString(),
         "첫 오늘의 운동 완료",
         "첫 추가 운동 완료",
         "첫 게시글 작성 완료"
