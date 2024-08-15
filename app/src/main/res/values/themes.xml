@@ -2,15 +2,18 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.UMC_Stepper" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->  <!-- 툴바 기본 색상 -->
+        <!--<item name="colorPrimary">@color/my_light_primary</item> -->   <!-- 툴바 기본 색상 -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:fontFamily">@font/base_font</item>
         <item name="android:colorBackground">@color/Purple_Black_BG_1</item>
 
-        <!-- Status Bar -->
-<!--        <item name="android:statusBarColor">@color/White</item>-->
-<!--        <item name="android:windowLightStatusBar">true</item> 상태 바 아이콘 (t: 검 / f: 흰) -->
+        <item name="android:buttonStyle">@style/Widget.AppTheme.Button</item>
+        <item name="android:imageButtonStyle">@style/Widget.AppTheme.ImageView</item>
+
+        <!-- Status Bar (핸드폰 맨 위 부분 -> true: 검정, false: 흰색)  -->
+        <item name="android:statusBarColor">@color/Purple_Black_BG_1</item>
+        <item name="android:windowLightStatusBar">false</item>
 
     </style>
 
@@ -23,13 +26,6 @@
         <item name="android:textColorPrimary">@color/White</item>
     </style>
 
-    <!-- Splash  -->
-<!--    <style name="AppTheme.Splash" parent="Theme.UMC_Stepper">-->
-<!--        <item name="windowSplashScreenBackground">@color/</item>-->
-<!--        <item name="windowSplashScreenAnimatedIcon">@drawable/</item>-->
-<!--        <item name="postSplashScreenTheme">@style/Theme.UMC_Stepper</item>-->
-<!--    </style>-->
-
     <!-- fab -->
     <style name="FabShapeAppearance">
         <item name="cornerFamily">rounded</item>
@@ -40,5 +36,22 @@
     <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
         <item name="cornerSize">50%</item>
     </style>
+
+    <!-- 버튼 ripple 효과 -->
+    <style name="Widget.AppTheme.Button" parent="Widget.AppCompat.Button">
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+    <style name="Widget.AppTheme.ImageView" parent="android:Widget">
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+
+    <!-- Splash  -->
+    <!--    <style name="AppTheme.Splash" parent="Theme.UMC_Stepper">-->
+    <!--        <item name="windowSplashScreenBackground">@color/</item>-->
+    <!--        <item name="windowSplashScreenAnimatedIcon">@drawable/</item>-->
+    <!--        <item name="postSplashScreenTheme">@style/Theme.UMC_Stepper</item>-->
+    <!--    </style>-->
 
 </resources>
