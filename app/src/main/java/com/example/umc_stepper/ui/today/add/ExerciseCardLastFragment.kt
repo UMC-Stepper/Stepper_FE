@@ -20,16 +20,6 @@ class ExerciseCardLastFragment:BaseFragment<FragmentExerciseCardLastBinding>(R.l
 
     private lateinit var exerciseAlarmAdapter: ExerciseAlarmAdapter
 
-    private val dayOfWeekMap = mapOf(
-        "일" to "일요일",
-        "월" to "월요일",
-        "화" to "화요일",
-        "수" to "수요일",
-        "목" to "목요일",
-        "금" to "금요일",
-        "토" to "토요일"
-    )
-
     override fun setLayout() {
         setButton()
         setAdapter()
@@ -56,7 +46,6 @@ class ExerciseCardLastFragment:BaseFragment<FragmentExerciseCardLastBinding>(R.l
         val material = args.getString("material")
         val ampm = args.getString("ampm")
 
-        val alarmWeek = week?.let { getDayOfWeek(it) } ?: "알 수 없는 요일"
 
         // 시간 형식화
         val (alarmHour, alarmAmPm) = when (ampm) {
@@ -66,7 +55,7 @@ class ExerciseCardLastFragment:BaseFragment<FragmentExerciseCardLastBinding>(R.l
 
         val alarmTime = String.format("%02d:%02d", alarmHour, minuteTime)
 
-        val testItem = alarmWeek?.let {
+        val testItem = week?.let {
             ExerciseAlarm(
                 day = it,
                 time = alarmTime,
@@ -78,10 +67,6 @@ class ExerciseCardLastFragment:BaseFragment<FragmentExerciseCardLastBinding>(R.l
 
         val testList = listOf(testItem)
         exerciseAlarmAdapter.submitList(testList)
-    }
-
-    private fun getDayOfWeek(week: String): String {
-        return dayOfWeekMap[week] ?: "?요일"
     }
 
     private fun saveAlarms(alarms: List<ExerciseAlarm>) {
