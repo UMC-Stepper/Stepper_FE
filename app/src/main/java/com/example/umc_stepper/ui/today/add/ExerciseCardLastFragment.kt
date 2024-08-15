@@ -27,7 +27,6 @@ class ExerciseCardLastFragment:BaseFragment<FragmentExerciseCardLastBinding>(R.l
     }
 
     private fun setButton() {
-
         binding.fragmentExerciseCardLastCompleteBtn.setOnClickListener {
             val action = ExerciseCardLastFragmentDirections.actionExerciseCardLastFragmentToExerciseCompleteFragment()
             findNavController().navigateSafe(action.actionId, Bundle().apply {

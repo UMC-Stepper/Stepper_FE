@@ -47,6 +47,7 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
     @SuppressLint("DefaultLocale")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun setLayout() {
+        selectedDays.clear()
         val timePicker: TimePicker = binding.fragmentExerciseSettingsTimeSpinner
         timePicker.setIs24HourView(false)
         val amPmSpinnerId = resources.getIdentifier("amPm", "id", "android")
@@ -220,6 +221,7 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
     private fun goExerciseCardLast(){
         // TimePicker  am/pm 정보
         val ampm = if (hourTime < 12.toString()) "AM" else "PM"
+
         val selectedDaysText = selectedDays.joinToString(", ") { it.text }
         val args = Bundle().apply {
             putString("week", selectedDaysText) // 선택된 요일 값 (예: '화, 목')
