@@ -156,10 +156,20 @@ class CommunityApiDataSource @Inject constructor(
 
     //대댓글 작성
     suspend fun postCommentWrite(commentWriteDto: CommentWriteDto):Flow<BaseResponse<CommentWriteResponse>> = flow{
-        val result = communityApi.postCommentWrite(commentWriteDto)
-        emit(result)
-    }.catch {
-        Log.e("Post Comment Write Failure", it.message.toString())
+        try {
+            val result = communityApi.postCommentWrite(commentWriteDto)
+            emit(result)
+        } catch (e: HttpException) {
+            Log.e("Post Comment Write Failure", e.message.toString())
+            emit(
+                BaseResponse(
+                    isSuccess = false,
+                    code = e.code().toString(),
+                    message = e.message(),
+                    result = null
+                )
+            )
+        }
     }
 
     //댓글 조회

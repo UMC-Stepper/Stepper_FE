@@ -3,6 +3,7 @@ package com.example.umc_stepper.ui.today.add
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.TimePicker
@@ -33,25 +34,15 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
     private val selectedDays = mutableSetOf<TextView>()
     val todayViewModel: TodayViewModel by activityViewModels()
     private lateinit var ecrd: ExerciseCardRequestDto
+
     @Inject
     lateinit var tokenManager: TokenManager
     private var hourTime : String = "0"
     private var hourTime2 : String = "0"
     private var minuteTime : String = "0"
-    // 한글 요일을 영어로 변환하는 매핑
-    val koreanToEnglishDays = mapOf(
-        "일" to "SUNDAY",
-        "월" to "MONDAY",
-        "화" to "TUESDAY",
-        "수" to "WEDNESDAY",
-        "목" to "THURSDAY",
-        "금" to "FRIDAY",
-        "토" to "SATURDAY"
-    )
+    private var selectDaysSize = 0
 
-    // 영어 요일을 한글로 변환하는 매핑
-    val englishToKoreanDays = koreanToEnglishDays.entries.associate { (k, v) -> v to k }
-
+    private val exerciseCardList = mutableListOf<ExerciseCardRequestDto>()
 
     @SuppressLint("DefaultLocale")
     @RequiresApi(Build.VERSION_CODES.O)
@@ -71,7 +62,7 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
             binding.fragmentExerciseSettingsMinTv.text = String.format("%02d", minute)
 
             hourTime = String.format("%02d", hour)
-            hourTime2 = binding.fragmentExerciseSettingsHourTv.text.toString()
+            hourTime2 = String.format("%02d", hourIn12Format)
             minuteTime = String.format("%02d", minute)
         }
 
@@ -131,6 +122,20 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
                 val checkExercise = response.result
                 var isOverlapping = false
 
+                // 한글 요일을 영어로 변환하는 매핑
+                val koreanToEnglishDays = mapOf(
+                    "일" to "SUNDAY",
+                    "월" to "MONDAY",
+                    "화" to "TUESDAY",
+                    "수" to "WEDNESDAY",
+                    "목" to "THURSDAY",
+                    "금" to "FRIDAY",
+                    "토" to "SATURDAY"
+                )
+
+                // 영어 요일을 한글로 변환하는 매핑
+                val englishToKoreanDays = koreanToEnglishDays.entries.associate { (k, v) -> v to k }
+
                 // 선택한 요일을 영어로 변환
                 val selectedEnglishDays = selectedDays.mapNotNull { textView ->
                     koreanToEnglishDays[textView.text.toString()]
@@ -162,8 +167,8 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
                 }
 
                 if (!isOverlapping) {
-                    goExerciseCardLast() // 겹치는 요일이 없으면 이동
                     postExerciseCard()
+                    goExerciseCardLast() // 겹치는 요일이 없으면 이동
                 }
             }
         }
@@ -187,6 +192,7 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
         val formattedDate = currentDateTime.format(formatter)
         val stepList : ArrayList<ExerciseStepRequestDto> = arrayListOf()
         val list = todayViewModel.getExerciseList()
+        selectDaysSize = selectedDays.size
         for(i in 0..<todayViewModel.getExerciseListSize()){
             stepList.add(
                 ExerciseStepRequestDto(
@@ -208,35 +214,24 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
                 materials = binding.fragmentExerciseSettingsExerciseMaterialsEt.text.toString(),
                 stepList = stepList
             )
-
-            todayViewModel.postAddExerciseCard(ecrd)
+            exerciseCardList.add(ecrd)
         }
     }
 
     private fun goExerciseCardLast(){
         // TimePicker  am/pm 정보
         val ampm = if (hourTime < 12.toString()) "AM" else "PM"
-        val dayOfWeekMap = mapOf(
-            "일" to "일요일",
-            "월" to "월요일",
-            "화" to "화요일",
-            "수" to "수요일",
-            "목" to "목요일",
-            "금" to "금요일",
-            "토" to "토요일"
-        )
 
+        val selectedDaysText = selectedDays.joinToString(", ") { it.text }
         val args = Bundle().apply {
-            putString("week", selectedDays.joinToString(", ") { textView ->
-                // 요일->한국어->0요일  로 변환
-                val koreanDay = englishToKoreanDays[textView.text.toString()] ?: textView.text.toString()
-                dayOfWeekMap[koreanDay] ?: koreanDay
-            }) // 선택된 요일 값 (예: '화요일, 목요일')
+            putString("week", selectedDaysText) // 선택된 요일 값 (예: '화, 목')
             putInt("hourTime", hourTime2.toInt()) // 시
             putInt("minuteTime", minuteTime.toInt()) //분
             putString("material", binding.fragmentExerciseSettingsExerciseMaterialsEt.text.toString()) //준비물
             putString("ampm", ampm) // 오전,오후 값
             putString("type","success")
+            putParcelableArrayList("exerciseCardList", ArrayList(exerciseCardList))
+            putInt("selectDaysSize", selectDaysSize)
         }
         val action = ExerciseSettingsDateFragmentDirections.actionFragmentExerciseSettingsDateToExerciseCardLastFragment()
         findNavController().navigate(action.actionId, args)
