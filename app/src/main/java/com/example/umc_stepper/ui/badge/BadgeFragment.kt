@@ -26,6 +26,12 @@ import kotlinx.coroutines.launch
 class BadgeFragment : BaseFragment<FragmentBadgeBinding>(R.layout.fragment_badge) {
     private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var mainActivity : MainActivity
+    private val badgeImageList = mutableListOf(
+        R.drawable.ic_badge_fake,
+        R.drawable.ic_badge_fake,
+        R.drawable.ic_badge_fake,
+        R.drawable.ic_badge_fake
+    )
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -33,6 +39,28 @@ class BadgeFragment : BaseFragment<FragmentBadgeBinding>(R.layout.fragment_badge
     }
     override fun setLayout() {
         updateMainToolbar()
+        updateBadgeImages() //뱃지 이미지 업데이트
+    }
+
+
+    private fun updateBadgeImages(){
+        //첫 운동 설정 완료
+        if (mainViewModel.badgeList[0].hasBadge) {
+            binding.fragmentBadgeYellow11Iv.setImageResource(badgeImageList[0])
+        }
+        //첫 오늘의 운동 완료
+        if (mainViewModel.badgeList[1].hasBadge) {
+            binding.fragmentBadgeYellow12Iv.setImageResource(badgeImageList[1])
+        }
+        //첫 추가 운동 완료
+        if (mainViewModel.badgeList[2].hasBadge) {
+            binding.fragmentBadgeYellow13Iv.setImageResource(badgeImageList[2])
+        }
+        //첫 게시글 작성 완료
+        if (mainViewModel.badgeList[3].hasBadge) {
+            binding.fragmentBadgeYellow14Iv.setImageResource(badgeImageList[3])
+        }
+
     }
 
 //    // 뷰모델의 함수 호출 -> 뷰모델 -> 리포지토리의 함수 호출 : 서버에서 api 받아오는 과정 전부 실행됨
