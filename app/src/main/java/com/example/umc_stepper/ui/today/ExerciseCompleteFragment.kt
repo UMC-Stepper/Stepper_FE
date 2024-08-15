@@ -40,7 +40,6 @@ class ExerciseCompleteFragment :BaseFragment<FragmentExerciseCompleteBinding>(R.
                 lifecycleScope.launch {
                     for (i in 0 until selectDaysSize) {
                         todayViewModel.postAddExerciseCard(list[i])
-                        Log.d("ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ", "iiiii : ${list[i]}")
                     }
                     updateBadge(0)
                     val action =

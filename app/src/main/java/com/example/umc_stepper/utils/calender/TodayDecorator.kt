@@ -29,14 +29,14 @@ class TodayDecorator(context: Context) : DayViewDecorator {
     }
 }
 
-class EventDecorator(private val context: Context, private val eventDateSet: Set<String>) : DayViewDecorator {
+class EventDecorator(private val context: Context, private val bodyPartDateMap: Map<String, Set<String>>) : DayViewDecorator {
 
     private val datesWithEvent = mutableSetOf<CalendarDay>()
 
     init {
         // 날짜 파싱
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        eventDateSet.forEach { dateString ->
+        bodyPartDateMap.values.flatten().forEach { dateString ->
             try {
                 val date = dateFormat.parse(dateString)
                 if (date != null) {

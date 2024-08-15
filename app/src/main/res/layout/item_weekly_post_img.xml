@@ -21,6 +21,8 @@
             android:background="@drawable/shape_rounded_square_purple700_18dp"
             android:backgroundTint="@color/White"
             android:src="@drawable/ic_community_logo"
+            app:imageUrl="@{imageUri}"
+            app:roundedCorners="@{18}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

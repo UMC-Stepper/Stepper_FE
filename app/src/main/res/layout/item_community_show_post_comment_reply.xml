@@ -48,6 +48,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:background="@color/White"
+                app:imageUrl2="@{commentResponseItem.profileImage}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />

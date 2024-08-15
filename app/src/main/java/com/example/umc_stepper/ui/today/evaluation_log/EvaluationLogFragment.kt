@@ -34,7 +34,7 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
 
     private lateinit var evaluationLogBodyPartAdapter: EvaluationLogBodyPartAdapter
     private lateinit var materialCalendarView: MaterialCalendarView
-    private val eventDateSet: MutableSet<String> = mutableSetOf() // Set으로 변경
+    private val bodyPartDateMap = mutableMapOf<String, MutableSet<String>>() // Set으로 변경
     private lateinit var mainActivity : MainActivity
 
     private val todayViewModel : TodayViewModel by activityViewModels()
@@ -69,8 +69,11 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
     private fun initAdapter() {
         evaluationLogBodyPartAdapter = EvaluationLogBodyPartAdapter{ item ->
             viewLifecycleOwner.lifecycleScope.launch{
-                eventDateSet.clear()
-                eventDateSet.add(item.date)
+                val bodyPart = item.bodyPart.toString()
+                val date = item.date
+                val dates = bodyPartDateMap.getOrPut(bodyPart) { mutableSetOf() }
+                dates.add(date)
+
                 setCalendarView()
             }
         }
@@ -86,8 +89,22 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            todayViewModel.exerciseCardStatusResponseDto.collect {
-                evaluationLogBodyPartAdapter.submitList(it.result)
+            todayViewModel.exerciseCardStatusResponseDto.collect { response ->
+                evaluationLogBodyPartAdapter.submitList(response.result)
+
+                // bodyPartDateMap 업데이트
+                bodyPartDateMap.clear() // 기존 데이터 삭제
+                response.result?.forEach { item ->
+                    val bodyPart = item.bodyPart.toString()
+                    val date = item.date
+
+                    // 기존의 날짜 목록을 가져오거나 새로 생성
+                    val dates = bodyPartDateMap.getOrPut(bodyPart) { mutableSetOf() }
+                    dates.add(date)
+                }
+
+                // CalendarView 업데이트
+                setCalendarView()
             }
         }
     }
@@ -174,7 +191,7 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
             var boldDecorator = BoldDecorator(CalendarDay.today().month)
             val todayDecorator = TodayDecorator(requireContext())
             var selectedMonthDecorator = SelectedMonthDecorator(CalendarDay.today().month)
-            val eventDecorator = EventDecorator(requireContext(), eventDateSet)
+            val eventDecorator = EventDecorator(requireContext(), bodyPartDateMap)
 
             // 기존 데코레이터 제거
             materialCalendarView.removeDecorators()
@@ -195,7 +212,7 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
                 val newMonth = date.month
 
                 // 새로운 날짜 리스트 생성
-                val newEventDecorator = EventDecorator(requireContext(), eventDateSet)
+                val newEventDecorator = EventDecorator(requireContext(), bodyPartDateMap)
                 boldDecorator = BoldDecorator(newMonth)
                 selectedMonthDecorator = SelectedMonthDecorator(newMonth)
 

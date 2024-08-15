@@ -74,7 +74,16 @@
 
         </activity>
 
-        <receiver android:name=".ui.stepper.AlarmReceiver"/>
+        <service
+            android:name=".utils.firebase.MyFirebaseMessagingService"
+            android:exported="false"
+            tools:ignore="WrongManifestParent">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+
     </application>
 
 </manifest>
