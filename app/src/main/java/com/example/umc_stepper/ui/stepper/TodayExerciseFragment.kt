@@ -88,6 +88,7 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
         val exerciseId = arguments?.getInt("exerciseId") ?: 0
         val step = arguments?.getInt("step") ?: 0
         val stepId = arguments?.getInt("stepId") ?: 0
+        Log.d("스텝아이디",stepId.toString())
         stepIndex = step - 1
         postInquiryExerciseCard(exerciseId)
         Log.d("토큰", "$exerciseId $step $stepId")
@@ -99,7 +100,10 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
         observeExerciseCardResponse()
         completeBtn.setOnClickListener {
             if(step==3){
+                val currentStepId = stepList[stepIndex].stepId // 현재 단계의 stepId 받기
+                completeStep(currentStepId)
                 goAdditionalExerciseSuccess()
+
             }else{
                 val currentStepId = stepList[stepIndex].stepId // 현재 단계의 stepId 받기
                 completeStep(currentStepId)
