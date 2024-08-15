@@ -35,8 +35,8 @@ class CommunityViewModel @Inject constructor(
     val communityMyScrapResponseItem : StateFlow<BaseListResponse<CommunityMyCommentsResponseItem>> = _communityMyScrapResponseItem
 
     // 위클리 게시글 조회
-    private val _weeklyPostViewListResponse = MutableStateFlow<BaseListResponse<ApiResponseListPostViewResponseItem>>(BaseListResponse())
-    val weeklyPostViewListResponse : StateFlow<BaseListResponse<ApiResponseListPostViewResponseItem>> = _weeklyPostViewListResponse
+    private val _weeklyPostViewListResponse = MutableStateFlow<BaseListResponse<CommunityMyCommentsResponseItem>>(BaseListResponse())
+    val weeklyPostViewListResponse : StateFlow<BaseListResponse<CommunityMyCommentsResponseItem>> = _weeklyPostViewListResponse
 
     //주간 미션 조회
     private val _weeklyMissionResponse = MutableStateFlow<BaseResponse<WeeklyMissionResponse>>(BaseResponse())
