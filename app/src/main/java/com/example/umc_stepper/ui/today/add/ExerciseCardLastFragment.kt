@@ -31,7 +31,9 @@ class ExerciseCardLastFragment:BaseFragment<FragmentExerciseCardLastBinding>(R.l
         binding.fragmentExerciseCardLastCompleteBtn.setOnClickListener {
             val action = ExerciseCardLastFragmentDirections.actionExerciseCardLastFragmentToExerciseCompleteFragment()
             findNavController().navigateSafe(action.actionId, Bundle().apply {
-                putAll(arguments)    // 앞에서 받은 Bundle 그대로 다음 프래그먼트로 전달
+                putAll(arguments)   // 앞에서 받은 Bundle 그대로 다음 프래그먼트로 전달
+                putString("type","운동 설정 완료!")
+                putString("description","더 나은 단계로 나아갈 수 있게 STEPPER가\n함께 할게요")
             })
         }
     }
