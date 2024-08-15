@@ -6,7 +6,6 @@ import com.example.umc_stepper.domain.model.request.comment_controller.CommentWr
 import com.example.umc_stepper.domain.model.request.comment_controller.ReplyRequestDto
 import com.example.umc_stepper.domain.model.response.WeeklyMissionResponse
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem
-import com.example.umc_stepper.domain.model.response.comment_controller.CommentWriteResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponseListPostViewResponseItem
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostViewResponse
@@ -36,7 +35,7 @@ class CommunityApiRepositoryImpl @Inject constructor(
     override suspend fun getCommunityMyScraps(): Flow<BaseListResponse<CommunityMyCommentsResponseItem>> =
         dataSource.getCommunityMyScraps()
 
-    override suspend fun postCommentWrite(commentWriteDto: CommentWriteDto): Flow<BaseResponse<CommentWriteResponse>> =
+    override suspend fun postCommentWrite(commentWriteDto: CommentWriteDto): Flow<BaseResponse<CommentResponseItem>> =
         dataSource.postCommentWrite(commentWriteDto)
 
     override suspend fun getComment(postId: Int): Flow<BaseListResponse<CommentResponseItem>> =

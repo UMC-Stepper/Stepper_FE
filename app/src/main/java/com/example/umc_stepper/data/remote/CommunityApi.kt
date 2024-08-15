@@ -10,7 +10,6 @@ import com.example.umc_stepper.domain.model.response.post_controller.ApiResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostViewResponse
 import com.example.umc_stepper.domain.model.response.post_controller.LikeResponse
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem
-import com.example.umc_stepper.domain.model.response.comment_controller.CommentWriteResponse
 import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponseItem
 import com.example.umc_stepper.domain.model.response.post_controller.ScrapResponse
 import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyPostsResponseItem
@@ -93,7 +92,7 @@ interface CommunityApi {
     @POST("/api/comment/write")
     suspend fun postCommentWrite(
         @Body commentWriteDto: CommentWriteDto
-    ):BaseResponse<CommentWriteResponse>
+    ):BaseResponse<CommentResponseItem>
 
     // 대댓글 작성
     @POST("api/comment/reply")
