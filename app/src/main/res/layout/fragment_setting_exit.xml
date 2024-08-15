@@ -114,6 +114,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
+            android:textColor="@color/White"
             android:background="@drawable/radius_corners_50dp"
             android:backgroundTint="@color/Purple_Black_BG_2"
             android:hint="탈퇴하는 이유를 말씀해 주세요."
@@ -121,7 +122,7 @@
             android:textColorHint="@color/Purple_Gray"
             app:layout_constraintTop_toBottomOf="@id/fragment_settings_exit_rg" />
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/sub_title_semi_bold_16"
             android:layout_width="match_parent"
             android:layout_height="46dp"

@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/title_bold_24"
+            android:text="오늘 운동 완료!"
             android:textAlignment="center"
             android:textColor="@color/White"
             app:layout_constraintBottom_toTopOf="@id/exercise_complete_tv2"
@@ -32,10 +33,12 @@
             android:layout_marginBottom="8dp"
             />
 
+
         <TextView
             android:id="@+id/exercise_complete_tv2"
             android:textAlignment="center"
             style="@style/body_medium_14"
+            android:text="운동하느라 고생많으셨어요.\n다음 운동 때는 더 좋은 컨디션으로 만나요."
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/White"
