@@ -11,12 +11,14 @@ import com.example.umc_stepper.domain.model.response.BadgeResponseItem
 import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResponse
 import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResult
 import com.example.umc_stepper.domain.model.response.member_controller.UserResponse
+import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponseItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
+import retrofit2.HttpException
 import javax.inject.Inject
 
 class MainApiDataSource @Inject constructor(
@@ -26,11 +28,23 @@ class MainApiDataSource @Inject constructor(
         userDto: RequestBody,
         profileImage: MultipartBody.Part
     ): Flow<BaseResponse<UserResponse>> = flow {
+        try {
         val result = mainApi.postSignUpInfo(userDto, profileImage)
         emit(result)
-    }.catch {
-        Log.e("Post SignUp Failure", it.message.toString())
+    } catch (e: HttpException) {
+            val errorResponse = e.response()?.let { it }
+            Log.e("Get Community MyScraps Failure", "HTTP Error: ${errorResponse?.errorBody()?.string()}")
+
+            emit(BaseResponse(
+                isSuccess = errorResponse!!.isSuccessful,
+                code = errorResponse.code().toString(),
+                message = errorResponse.message().toString(),
+                result =null)
+            )
+        }
     }
+
+
 
     fun postLogOutInfo(): Flow<BaseResponse<Any>> = flow {
         val result = mainApi.postLogOutInfo()
