@@ -8,6 +8,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.FirebaseApp
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
@@ -15,6 +16,7 @@ class GlobalApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        FirebaseApp.initializeApp(this)
         instance = this
     }
 
