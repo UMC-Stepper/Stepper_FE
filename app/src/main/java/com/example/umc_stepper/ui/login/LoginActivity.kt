@@ -1,13 +1,17 @@
 package com.example.umc_stepper.ui.login
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.MotionEvent
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -150,6 +154,17 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         }
     }
 
+    // 외부 터치시 키보드 숨기기, 포커스 제거
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        val imm: InputMethodManager =
+            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+
+        if (currentFocus is EditText) {
+            currentFocus!!.clearFocus()
+        }
+        return super.dispatchTouchEvent(ev)
+    }
 
     private fun setViewModel() {
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]

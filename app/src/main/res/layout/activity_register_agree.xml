@@ -13,7 +13,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/Purple_Black">
 
             <TextView
                 android:id="@+id/fragment_register_agree_tv"
@@ -30,7 +31,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/fragment_register_agree_btn"
                 style="@style/sub_title_semi_bold_16"
                 android:layout_width="match_parent"
@@ -42,7 +43,7 @@
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 android:text="전체 동의하기"
-                android:textAlignment="textStart"
+                android:textAlignment="center"
                 android:textColor="@color/White"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -169,15 +170,15 @@
                     android:textSize="11sp" />
             </ScrollView>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/register_confirm_btn"
                 style="@style/sub_title_semi_bold_16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="52dp"
-                android:layout_marginBottom="47dp"
                 android:layout_marginEnd="24dp"
+                android:layout_marginBottom="47dp"
                 android:background="@drawable/selector_confirm_off"
                 android:enabled="false"
                 android:paddingTop="12dp"

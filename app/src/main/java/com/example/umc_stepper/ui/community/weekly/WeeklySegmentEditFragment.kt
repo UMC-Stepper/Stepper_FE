@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.community.weekly
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -18,6 +19,7 @@ import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentWeeklySegmentEditBinding
 import com.example.umc_stepper.domain.model.request.member_controller.UserDto
 import com.example.umc_stepper.domain.model.request.post_controller.PostEditDto
+import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.community.CommunityDialog
 import com.example.umc_stepper.ui.community.CommunityDialogInterface
 import com.example.umc_stepper.ui.community.CommunityRemoveInterface
@@ -37,18 +39,26 @@ import java.util.Collections
 class WeeklySegmentEditFragment : BaseFragment<FragmentWeeklySegmentEditBinding>(R.layout.fragment_weekly_segment_edit) ,
     CommunityDialogInterface,
     CommunityRemoveInterface{
-    var selectedRemoveItemId = 0
+
+    private lateinit var mainActivity : MainActivity
     private lateinit var postEditDto: PostEditDto
-    val communityViewModel : CommunityViewModel by activityViewModels()
     private lateinit var communityDialog : CommunityDialog
     private lateinit var galleryForResult: ActivityResultLauncher<Intent>
     private lateinit var uploadImgAdapter: WeeklyEditImageAdapter
+
+    private var selectedRemoveItemId = 0
+    private val communityViewModel : CommunityViewModel by activityViewModels()
     private val imgList: MutableList<UploadImageCard> = mutableListOf()
     private var selectedTab = ""
     private val imageList: MutableList<MultipartBody.Part> = mutableListOf()
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
 
     override fun setLayout() {
+        updateMainToolbar()
         initTabLayout()
         initRecyclerView()
         onClickBtn()
@@ -223,7 +233,11 @@ class WeeklySegmentEditFragment : BaseFragment<FragmentWeeklySegmentEditBinding>
         return file
     }
 
-
-
+    private fun updateMainToolbar() {
+        mainActivity.updateToolbarTitle("Weekly Mission")
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
+        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
+        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
+    }
 
 }

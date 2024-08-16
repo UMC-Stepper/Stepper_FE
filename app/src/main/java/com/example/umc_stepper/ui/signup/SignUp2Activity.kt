@@ -9,7 +9,9 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -51,6 +53,10 @@ class SignUp2Activity : BaseActivity<FragmentRegister2Binding>(R.layout.fragment
     private lateinit var selectImageUri: Uri
     private lateinit var profile: MultipartBody.Part
 
+    override fun onResume() {
+        super.onResume()
+    }
+
     override fun setLayout() {
         init()
     }
@@ -62,6 +68,20 @@ class SignUp2Activity : BaseActivity<FragmentRegister2Binding>(R.layout.fragment
         receiveUserData()
         setOnClickBtn()
         addTextWatcher()
+    }
+
+    private fun activateConfirmButton() {
+        if (binding.fragmentRegister2HeightEt.text.isNullOrEmpty().not() &&
+            binding.fragmentRegister2WeightEt.text.isNullOrEmpty().not()
+        ) {
+            binding.fragmentRegister2SuccessInputBt.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
+            binding.fragmentRegister2SuccessInputBt.isEnabled = true
+            binding.fragmentRegister2SuccessInputBt.setTextColor(ContextCompat.getColor(this, R.color.White))
+        } else {
+            binding.fragmentRegister2SuccessInputBt.setBackgroundResource(R.drawable.radius_corners_61dp_stroke_1)
+            binding.fragmentRegister2SuccessInputBt.isEnabled = false
+            binding.fragmentRegister2SuccessInputBt.setTextColor(ContextCompat.getColor(this, R.color.Purple_700))
+        }
     }
 
     private fun initLoginViewModel() {
@@ -114,6 +134,18 @@ class SignUp2Activity : BaseActivity<FragmentRegister2Binding>(R.layout.fragment
                 requestFile
             )
         }
+    }
+
+    // 외부 터치시 키보드 숨기기, 포커스 제거
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        val imm: InputMethodManager =
+            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+
+        if (currentFocus is EditText) {
+            currentFocus!!.clearFocus()
+        }
+        return super.dispatchTouchEvent(ev)
     }
 
     private fun compressBitmap(bitmap: Bitmap, maxSizeKB: Int): File {
@@ -201,6 +233,7 @@ class SignUp2Activity : BaseActivity<FragmentRegister2Binding>(R.layout.fragment
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 checkWeightField()
+                activateConfirmButton()
             }
             override fun afterTextChanged(s: Editable?) {}
         })

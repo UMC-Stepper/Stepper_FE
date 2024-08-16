@@ -108,5 +108,8 @@ class AdditionalExerciseSuccessFragment :
 
     private fun updateMainToolbar() {
         mainActivity.updateToolbarTitle("운동 완료")
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
+        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
+        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
     }
 }

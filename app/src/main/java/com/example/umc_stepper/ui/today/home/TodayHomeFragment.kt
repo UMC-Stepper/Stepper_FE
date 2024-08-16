@@ -30,12 +30,6 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
     override fun setLayout() {
         initSettings()
         setNavigationAction()
-
-        // 임시용 스크랩 함수 이동
-        binding.fragmentTodayHomeCalenderMonthTv.setOnClickListener {
-            val action = TodayHomeFragmentDirections.actionTodayHomeFragmentToAddExerciseSelectScrapFragment()
-            findNavController().navigateSafe(action.actionId)
-        }
     }
 
     private fun initSettings() {
