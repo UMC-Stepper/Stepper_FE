@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
@@ -28,9 +29,15 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
     private var isAgreementChecked = false // 약관 동의
     private lateinit var startForResult: ActivityResultLauncher<Intent>
 
+    override fun onResume() {
+        super.onResume()
+        activateConfirmButton()
+    }
+
     override fun setLayout() {
         setEditText()
         onClickBtn()
+        activateConfirmButton()
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
     }
 
@@ -90,7 +97,27 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
 
             override fun afterTextChanged(s: Editable?) {}
         })
+    }
 
+    private fun activateConfirmButton() {
+        val isTermsChecked = binding.signupTermsCheckIv.drawable.constantState == ContextCompat.getDrawable(this, R.drawable.selector_checked_on)?.constantState
+        if (binding.signupNicknameEt.text.isNullOrEmpty().not() &&
+            binding.signupEmailEt.text.isNullOrEmpty().not() &&
+            binding.signupCertNumberEt.text.isNullOrEmpty().not() &&
+            binding.signupPwdEt.text.isNullOrEmpty().not() &&
+            binding.signupPwdCheckEt.text.isNullOrEmpty().not() &&
+            isAgreementChecked
+        ) {
+            Log.d("isAgreementChecked", "isAgreementChecked ㅅㅅ : $isAgreementChecked")
+            binding.signupCompleteBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
+            binding.signupCompleteBtn.isEnabled = true
+            binding.signupCompleteBtn.setTextColor(ContextCompat.getColor(this, R.color.White))
+        } else {
+            Log.d("isAgreementChecked", "isAgreementChecked ㄹㄹ : $isAgreementChecked")
+            binding.signupCompleteBtn.setBackgroundResource(R.drawable.radius_corners_61dp_stroke_1)
+            binding.signupCompleteBtn.isEnabled = false
+            binding.signupCompleteBtn.setTextColor(ContextCompat.getColor(this, R.color.Purple_700))
+        }
     }
 
     private fun checkPwd() {
