@@ -37,7 +37,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
     override fun setLayout() {
         setEditText()
         onClickBtn()
-        activateConfirmButton()
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
     }
 
@@ -100,7 +99,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
     }
 
     private fun activateConfirmButton() {
-        val isTermsChecked = binding.signupTermsCheckIv.drawable.constantState == ContextCompat.getDrawable(this, R.drawable.selector_checked_on)?.constantState
         if (binding.signupNicknameEt.text.isNullOrEmpty().not() &&
             binding.signupEmailEt.text.isNullOrEmpty().not() &&
             binding.signupCertNumberEt.text.isNullOrEmpty().not() &&
@@ -108,12 +106,10 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
             binding.signupPwdCheckEt.text.isNullOrEmpty().not() &&
             isAgreementChecked
         ) {
-            Log.d("isAgreementChecked", "isAgreementChecked ㅅㅅ : $isAgreementChecked")
             binding.signupCompleteBtn.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
             binding.signupCompleteBtn.isEnabled = true
             binding.signupCompleteBtn.setTextColor(ContextCompat.getColor(this, R.color.White))
         } else {
-            Log.d("isAgreementChecked", "isAgreementChecked ㄹㄹ : $isAgreementChecked")
             binding.signupCompleteBtn.setBackgroundResource(R.drawable.radius_corners_61dp_stroke_1)
             binding.signupCompleteBtn.isEnabled = false
             binding.signupCompleteBtn.setTextColor(ContextCompat.getColor(this, R.color.Purple_700))
