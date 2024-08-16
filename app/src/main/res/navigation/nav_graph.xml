@@ -502,7 +502,14 @@
         android:id="@+id/communitySearchFragment"
         android:name="com.example.umc_stepper.ui.community.CommunitySearchFragment"
         android:label="CommunitySearchFragment"
-        tools:layout="@layout/fragment_community_search"/>
+        tools:layout="@layout/fragment_community_search">
+        <action
+            android:id="@+id/action_communitySearchFragment_to_communityWeeklyShowPostFragment"
+            app:destination="@id/communityWeeklyShowPostFragment" />
+        <action
+            android:id="@+id/action_communitySearchFragment_to_communityPartShowPostFragment"
+            app:destination="@id/communityPartShowPostFragment" />
+    </fragment>
 
 
 </navigation>

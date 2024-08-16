@@ -172,7 +172,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 R.id.settingsShowProfileFragment,
                 R.id.settingsEditProfileFragment,
                 R.id.settingsFragment,
-                R.id.evaluationExerciseTodayFragment
+                R.id.evaluationExerciseTodayFragment,
+                R.id.communitySearchFragment
             )
             binding.mainToolbar.apply {
                 visibility = if (shouldHideToolbar) View.GONE else View.VISIBLE
@@ -304,7 +305,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.mainToolbarTitleTv.visibility = View.VISIBLE
     }
 
-    // 툴바 중간 이미지 변경 함수
+    // 툴바 오른쪽에서 두번째 이미지 변경 함수
     fun updateToolbarMiddleImg(imgSrc: Int) {
         binding.mainToolbarGoToday.setImageResource(imgSrc)
     }

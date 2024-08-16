@@ -57,6 +57,21 @@ class StepperViewModel @Inject constructor(
     private val _exerciseCardStepResponse = MutableStateFlow<BaseResponse<Any>>(BaseResponse())
     val exerciseCardStepResponse : StateFlow<BaseResponse<Any>> = _exerciseCardStepResponse
 
+    private val _moreExerciseList = MutableStateFlow<BaseListResponse<TimeResponse>>(BaseListResponse())
+    val moreExerciseList : StateFlow<BaseListResponse<TimeResponse>> = _moreExerciseList
+
+    fun moreExerciseAdd(date : String){
+        viewModelScope.launch {
+            try {
+                stepperApiRepository.getMoreExercise(date).collect{
+                    _moreExerciseList.value = it
+                }
+            }catch (e : Exception){
+                Log.e("에러","추가운동")
+            }
+        }
+    }
+
     // 운동 카드 수정
     fun putEditExerciseCard(exerciseId: Int, exerciseCardRequestDto: ExerciseCardRequestDto) {
         viewModelScope.launch {
