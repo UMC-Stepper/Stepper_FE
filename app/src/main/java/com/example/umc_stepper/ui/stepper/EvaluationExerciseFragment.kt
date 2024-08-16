@@ -86,6 +86,7 @@ class EvaluationExerciseFragment :
         val photoUri = photoUriString?.let { Uri.parse(it) }
         photoUri?.let {
             GlobalApplication.loadImage(binding.fragmentEvaluationExercisePictureExerciseIv, it)
+            activateButton()
         }
 
         val file = photoUri?.let { getPathFromUri(requireContext(), it)?.let { File(it) } }
@@ -103,6 +104,7 @@ class EvaluationExerciseFragment :
         if (compressedFile != null) {
             Log.d("CompressedImage", "File size: ${compressedFile.length()} bytes")
         }
+
     }
 
 
@@ -152,8 +154,11 @@ class EvaluationExerciseFragment :
         setList()
         setScoreText()
         setOnClickBtn()
-        activateButton()
+        activateButton() // 초기 상태 설정
+
     }
+
+
 
     private fun activateButton() {
         val args = arguments?.getString("photo_uri").toString()
@@ -204,7 +209,9 @@ class EvaluationExerciseFragment :
                 binding.fragmentEvaluationExerciseScoreTv.text = "${score}점"
             }
 
-            override fun afterTextChanged(s: Editable?) {}
+            override fun afterTextChanged(s: Editable?) {
+                activateButton()
+            }
         })
     }
 
@@ -232,7 +239,7 @@ class EvaluationExerciseFragment :
                 stateAllToggle()
             }
             //카메라액티비티로 이동
-            binding.fragmentEvaluationExercisePictureExerciseIv.setOnClickListener {
+            fragmentEvaluationExercisePictureExerciseIv.setOnClickListener {
                 val intent = Intent(activity, CameraActivity::class.java)
                 startActivity(intent)
             }
@@ -259,6 +266,7 @@ class EvaluationExerciseFragment :
                     image = imageUrl,
                     request = rb
                 )
+                Log.d("클릭","ㅇㅇㅇㅇㅇ")
                 //위의 값들 서버로 전달
             }
         }

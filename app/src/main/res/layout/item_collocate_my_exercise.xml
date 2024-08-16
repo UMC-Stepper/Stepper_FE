@@ -20,7 +20,6 @@
 
 
         <ImageView
-            app:imageUrl="@{listItem.video_image}"
             android:id="@+id/item_collocate_my_exercise_thumbnail_iv"
             android:layout_width="138dp"
             android:layout_height="78dp"

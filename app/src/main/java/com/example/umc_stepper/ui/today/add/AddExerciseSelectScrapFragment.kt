@@ -43,7 +43,15 @@ class AddExerciseSelectScrapFragment :
 
     override fun setLayout() {
         stepLevel = arguments?.getInt("stepLevel")!!
-        bodyPart = arguments?.getString("bodyPart", "").toString()
+        bodyPart = arguments?.getString("bodyPart").toString()
+        bodyPart = when (bodyPart) {
+            "무릎, 다리" -> "무릎다리"
+            "어깨, 팔" -> "어깨팔"
+            else -> {
+                bodyPart
+            }
+        }
+        Log.d("로그",bodyPart)
         initSettings()
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,17 +69,9 @@ class AddExerciseSelectScrapFragment :
 
     private fun observeViewModel() {
 
-        val bodyParts: String = when (arguments?.getString("bodyPart", "").toString()) {
-            "무릎, 다리" -> "무릎다리"
-            "어깨, 팔" -> "어깨팔"
-            else -> {
-                "머리"
-            }
-        }
-
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                todayViewModel.getMyExercise(bodyParts)
+                todayViewModel.getMyExercise(bodyPart)
             }
         }
 

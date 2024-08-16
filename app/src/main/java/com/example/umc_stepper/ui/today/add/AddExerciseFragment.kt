@@ -135,6 +135,7 @@ class AddExerciseFragment :
                 Bundle().apply {
                     putInt("stepLevel", 1)
                     putString("bodyPart", bodyPart)
+                    Log.d("로그",bodyPart)
                     putString("updateType",us.name)
                     if(cardListJson.isNotEmpty()){
                         putString("CardListJson", cardListJson)
@@ -322,10 +323,11 @@ class AddExerciseFragment :
         val channel = channelList[count - 1]
         val editBtn = editBtnList[count - 1]
 
+        Log.d("로그",youtubeCard.url)
         GlobalApplication.loadCropRoundedSquareImage(
             requireContext(),
             thumbnail,
-            youtubeCard.url,
+            youtubeCard.video_image,
             18
         )
         title.text = youtubeCard.video_title
