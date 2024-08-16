@@ -15,6 +15,9 @@ import com.example.umc_stepper.domain.model.response.post_controller.LikeRespons
 import com.example.umc_stepper.domain.model.response.post_controller.ScrapResponse
 import com.example.umc_stepper.domain.repository.CommunityApiRepository
 import kotlinx.coroutines.flow.Flow
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.http.Multipart
 import javax.inject.Inject
 
 class CommunityApiRepositoryImpl @Inject constructor(
@@ -50,8 +53,8 @@ class CommunityApiRepositoryImpl @Inject constructor(
     override suspend fun deleteCancelLike(postId: Int): Flow<BaseResponse<String>>
     = dataSource.deleteCancelLike(postId)
 
-    override suspend fun postEditPost(): Flow<BaseResponse<ApiResponsePostResponse>>
-    = dataSource.postEditPost()
+    override suspend fun postEditPost(data : RequestBody, image : MultipartBody.Part): Flow<BaseResponse<ApiResponsePostResponse>>
+    = dataSource.postEditPost(data,image)
 
     override suspend fun getDetailPost(postId: Int): Flow<BaseResponse<ApiResponsePostViewResponse>>
     = dataSource.getDetailPost(postId)

@@ -9,6 +9,7 @@ import com.example.umc_stepper.domain.model.request.comment_controller.CommentWr
 import com.example.umc_stepper.domain.model.request.comment_controller.ReplyRequestDto
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentWriteResponse
+import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostViewResponse
 import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponseItem
 import com.example.umc_stepper.domain.model.response.post_controller.LikeResponse
@@ -18,6 +19,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -60,6 +63,26 @@ class CommunityViewModel @Inject constructor(
     // 스크랩 취소
     private val _scrapCancelResponse = MutableStateFlow<BaseResponse<String>>(BaseResponse())
     val scrapCancelResponse : StateFlow<BaseResponse<String>> = _scrapCancelResponse
+
+    //글 작성
+    private val _postEditResponse = MutableStateFlow<BaseResponse<ApiResponsePostResponse>>(
+        BaseResponse()
+    )
+    val postEditResponse : StateFlow<BaseResponse<ApiResponsePostResponse>> = _postEditResponse
+
+    //글 작성
+    fun postEditResponse(data : RequestBody, image : MultipartBody.Part){
+        viewModelScope.launch {
+            try {
+                communityApiRepository.postEditPost(data,image).collect{
+                    _postEditResponse.value = it
+                }
+            }catch (e : Exception){
+                Log.e("에러","글 작성 에러")
+            }
+        }
+    }
+
 
     // 내가 작성한 댓글의 글 목록 조회
     fun getCommunityMyComments() {

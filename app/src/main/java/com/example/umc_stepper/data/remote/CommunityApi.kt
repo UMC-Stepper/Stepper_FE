@@ -13,10 +13,14 @@ import com.example.umc_stepper.domain.model.response.comment_controller.CommentW
 import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponseItem
 import com.example.umc_stepper.domain.model.response.post_controller.ScrapResponse
 import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyPostsResponseItem
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface CommunityApi {
@@ -45,8 +49,11 @@ interface CommunityApi {
     ) : BaseResponse<String>
 
     //사용자 게시글 작성
+    @Multipart
     @POST("/api/community/write")
     suspend fun postEditPost(
+        @Part data : RequestBody,
+        @Part ("image") image : MultipartBody.Part
     ): BaseResponse<ApiResponsePostResponse>
 
     //게시글 상세 조회
