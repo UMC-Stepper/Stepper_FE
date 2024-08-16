@@ -123,14 +123,18 @@
             app:layout_constraintStart_toStartOf="@+id/fragment_register_2_height_et"
             app:layout_constraintTop_toBottomOf="@id/fragment_register_2_weight_tv" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/fragment_register_2_success_input_bt"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
+            style="@style/sub_title_semi_bold_16"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="52dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="80dp"
-            android:background="@drawable/selector_checked_input"
+            android:layout_marginBottom="60dp"
+            android:background="@drawable/radius_corners_61dp_stroke_1"
+            android:text="@string/sign_up_complete_btn"
+            android:textColor="@color/Purple_700"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
