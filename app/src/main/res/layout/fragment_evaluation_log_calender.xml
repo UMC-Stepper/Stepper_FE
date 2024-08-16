@@ -8,25 +8,67 @@
         android:layout_height="match_parent"
         tools:context=".ui.today.evaluation_log.EvaluationLogFragment">
 
+        <ImageView
+            android:id="@+id/fragment_evaluation_log_calender_back_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fragment_evaluation_log_calender_title_tv"
+            style="@style/sub_title_semi_bold_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="평가 일지"
+            android:textColor="@color/White"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_evaluation_log_calender_back_iv"
+            app:layout_constraintStart_toEndOf="@+id/fragment_evaluation_log_calender_back_iv"
+            app:layout_constraintTop_toTopOf="@+id/fragment_evaluation_log_calender_back_iv" />
+
+        <ImageView
+            android:id="@+id/fragment_evaluation_log_calender_go_today_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="11dp"
+            android:background="@drawable/ic_toolbar_today"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_evaluation_log_calender_go_stepper_iv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/fragment_evaluation_log_calender_go_stepper_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/ic_toolbar_stepper"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment_evaluation_log_calender_rv"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_evaluation_log_calender_back_iv"
             tools:listitem="@layout/item_evaluation_log_calender_category" />
 
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             android:id="@+id/fragment_evaluation_log_calender_calendarview"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="16dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
