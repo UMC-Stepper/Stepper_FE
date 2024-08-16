@@ -50,6 +50,10 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
 
     private fun setTitle() {
         mainActivity.updateToolbarTitle("STEPPER") // 타이틀 세팅
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
+        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
+        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
+
     }
 
     override fun setLayout() {

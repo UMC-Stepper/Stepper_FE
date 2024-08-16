@@ -50,6 +50,9 @@ class MyExercise3Fragment :
 
     private fun setTitle(){
         mainActivity.updateToolbarTitle("나만의 운동 영상 저장하기") //타이틀 세팅
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
+        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
+        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
         binding.fragmentMyExerciseSelectTagTv.text = arguments?.getString("bodyPart")
     }
 

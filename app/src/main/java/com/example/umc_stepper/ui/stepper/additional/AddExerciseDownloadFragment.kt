@@ -99,5 +99,9 @@ class AddExerciseDownloadFragment : BaseFragment<FragmentAddExerciseSelectScrapB
 
     private fun updateMainToolbar() {
         mainActivity.updateToolbarTitle("추가 운동하기")
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
+        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
+        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
+
     }
 }

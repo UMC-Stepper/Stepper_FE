@@ -134,6 +134,9 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
         }else{
             mainActivity.updateToolbarTitle("${step}단계 운동 시작하기")
         }
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
+        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
+        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
     }
 
     private fun postInquiryExerciseCard(exerciseId: Int) {

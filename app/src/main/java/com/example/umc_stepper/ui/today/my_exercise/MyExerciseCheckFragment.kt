@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.today.my_exercise
 
+import android.content.Context
 import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -13,6 +14,7 @@ import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentExerciseCheckBinding
 import com.example.umc_stepper.domain.model.request.my_exercise_controller.AddExerciseRequestDto
 import com.example.umc_stepper.domain.model.response.VideoSnippet
+import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.example.umc_stepper.ui.today.TodayViewModel
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
@@ -24,10 +26,17 @@ import kotlinx.coroutines.launch
 class MyExerciseCheckFragment :
     BaseFragment<FragmentExerciseCheckBinding>(R.layout.fragment_exercise_check) {
 
-        private lateinit var videoInfo : VideoSnippet
+    private lateinit var videoInfo : VideoSnippet
+    private lateinit var mainActivity : MainActivity
+
     private val stepperViewModel: StepperViewModel by activityViewModels()
     private val youtubeKey = BuildConfig.YOUTUBE_KEY
     private val todayViewModel: TodayViewModel by activityViewModels()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
 
     override fun setLayout() {
         val urlText = arguments?.getString("urlText")
@@ -37,7 +46,7 @@ class MyExerciseCheckFragment :
             fetchYouTubeVideoDetails(urlText)
             dataSetting()
         }
-
+        updateMainToolbar()
         setButton()
     }
 
@@ -132,6 +141,13 @@ class MyExerciseCheckFragment :
                 }
             }
         }
+    }
+
+    private fun updateMainToolbar() {
+        mainActivity.updateToolbarTitle("나만의 운동 영상 저장하기")
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
+        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
+        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
     }
 
 }
