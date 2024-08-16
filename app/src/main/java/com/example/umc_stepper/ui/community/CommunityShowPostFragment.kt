@@ -15,6 +15,7 @@ import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentCommunityShowPostBinding
 import com.example.umc_stepper.domain.model.request.comment_controller.CommentWriteDto
 import com.example.umc_stepper.domain.model.request.comment_controller.ReplyRequestDto
+import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem
 import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.community.weekly.WeeklyShowPostImageAdapter
@@ -92,11 +93,9 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
         // 익명 체크 이미지뷰
         binding.fragmentCommunityWeeklyShowPostCheckAnonymousIv.setOnClickListener {
             if(!isAnonymous) {
-                Log.d("isAnonymous", "isAnonymous T : $isAnonymous")
                 binding.fragmentCommunityWeeklyShowPostCheckAnonymousIv.setImageResource(R.drawable.selector_checked_on)
                 isAnonymous = true
             } else {
-                Log.d("isAnonymous", "isAnonymous F : $isAnonymous")
                 binding.fragmentCommunityWeeklyShowPostCheckAnonymousIv.setImageResource(R.drawable.selector_checked_off)
                 isAnonymous = false
             }
@@ -116,67 +115,74 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
         binding.fragmentCommunityWeeklyShowPostCommentIv.setOnClickListener {
             Log.d("CommunityShowPostFragment", "Comment button clicked")
                 if (isReplyMode) {
-                    leaveReply(editComment.text.toString()) // 대댓글 작성
+                    postReply(editComment.text.toString()) // 대댓글 작성
                     isReplyMode = false
                 } else {
-                    leaveComment(editComment.text.toString()) // 댓글 작성
+                    postComment(editComment.text.toString()) // 댓글 작성
                 }
                 editComment.text?.clear()
             }
         }
 
     // 댓글 작성 로직 처리 함수
-    private fun leaveComment(text: String) {
+    private fun postComment(text: String) {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     communityViewModel.apiResponsePostViewResponse.collectLatest { response ->
                         val isAuthor = response.result?.authorEmail == tokenManager.getEmail().first()
                         val commentWriteDto = CommentWriteDto(postId, text, !isAuthor && isAnonymous)
-                        postComment(commentWriteDto)
+                        postContent(commentWriteDto, true)
                     }
                 }
             }
-        }
-    }
-
-    // 댓글 작성 및 응답 처리
-    private suspend fun postComment(commentWriteDto: CommentWriteDto) {
-        communityViewModel.postCommentWrite(commentWriteDto)
-        communityViewModel.commentWriteResponse.collectLatest { writeResponse ->
-            if (writeResponse.isSuccess) {
-                fetchComments()
-            } else {
-                Log.d("댓글 작성 실패", "댓글 작성에 실패했습니다.")
-            }
-        }
-    }
-
-    // 댓글 조회 및 UI 갱신
-    private suspend fun fetchComments() {
-        communityViewModel.getComment(postId)
-        communityViewModel.getCommentResponse.collectLatest { commentResponse ->
-            Log.d("댓글 조회 fetchComments", "commentResponse : $commentResponse")
-            weeklyShowPostReplyAdapter.submitList(commentResponse.result)
         }
     }
 
     // 대댓글 작성 로직 처리 함수
-    private fun leaveReply(text: String) {
+    private fun postReply(text: String) {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     communityViewModel.apiResponsePostViewResponse.collectLatest { response ->
-                        val isAuthor =
-                            response.result?.authorEmail == tokenManager.getEmail().first()
-                        val replyRequestDto =
-                            ReplyRequestDto(postId, parentCommentId, text, !isAuthor && isAnonymous)
-                        communityViewModel.postReply(replyRequestDto)
-
-                        // 대댓글 작성 성공하면 조회하는 부분 추가해야 함
+                        val isAuthor = response.result?.authorEmail == tokenManager.getEmail().first()
+                        val replyRequestDto = ReplyRequestDto(postId, parentCommentId, text, !isAuthor && isAnonymous)
+                        postContent(replyRequestDto, false)
                     }
                 }
             }
+        }
+    }
+
+    // 댓글 및 대댓글 작성 및 응답 처리 함수
+    private suspend fun <T> postContent(contentDto: T, isComment: Boolean) {
+        if (isComment) {
+            communityViewModel.postCommentWrite(contentDto as CommentWriteDto)
+            communityViewModel.commentWriteResponse.collectLatest { response ->
+                if (response.isSuccess) {
+                    fetchComments()
+                } else {
+                    Log.d("댓글 작성 실패", "댓글 작성에 실패했습니다.")
+                }
+            }
+        } else {
+            communityViewModel.postReply(contentDto as ReplyRequestDto)
+            communityViewModel.replyResponse.collectLatest { response ->
+                if (response.isSuccess) {
+                    fetchComments()
+                } else {
+                    Log.d("대댓글 작성 실패", "대댓글 작성에 실패했습니다.")
+                }
+            }
+        }
+    }
+
+    // 댓글, 대댓글 조회 및 UI 갱신
+    private suspend fun fetchComments() {
+        communityViewModel.getComment(postId)
+        communityViewModel.getCommentResponse.collectLatest { res  ->
+            val items = res.result?.let {convertCommentsAndReplies(res.result) }
+            weeklyShowPostReplyAdapter.submitList(items)
         }
     }
 
@@ -250,13 +256,23 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
 
                 // 댓글 조회
                 launch {
-                    communityViewModel.getCommentResponse.collect {
-                        Log.d("댓글 조회 observeViewModel", "프래그먼트 it : ${it.result}")
-                        weeklyShowPostReplyAdapter.submitList(it.result)
+                    communityViewModel.getCommentResponse.collect { res  ->
+                        val items = res.result?.let {convertCommentsAndReplies(res.result) }
+                        weeklyShowPostReplyAdapter.submitList(items)
                     }
                 }
             }
         }
+    }
+
+    // 댓글과 대댓글을 하나의 리스트로 합치는 함수
+    private fun convertCommentsAndReplies(comments: List<CommentResponseItem>): List<Any> {
+        val items = mutableListOf<Any>()
+        comments.forEach { comment ->
+            items.add(comment) // 댓글 추가
+            items.addAll(comment.replyList) // 댓글에 속한 대댓글 추가
+        }
+        return items
     }
 
     private fun updateMainToolbar() {
