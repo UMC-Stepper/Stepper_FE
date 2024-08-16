@@ -11,20 +11,18 @@ import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentStepperBinding
-import com.example.umc_stepper.domain.model.response.Badge
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ToDayExerciseResponseDto
 import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
 import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.stepper.ExerciseViewAdapter
 import com.example.umc_stepper.ui.stepper.StepperViewModel
+import com.example.umc_stepper.ui.stepper.additional.AddExerciseAdapter
 import com.example.umc_stepper.ui.today.TodayViewModel
-import com.example.umc_stepper.utils.enums.UpdateState
 import com.example.umc_stepper.utils.listener.AdapterNextClick
 import com.example.umc_stepper.utils.listener.ItemClickListener
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
@@ -35,6 +33,7 @@ import javax.inject.Inject
 class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_stepper),
     ItemClickListener, AdapterNextClick {
 
+    private lateinit var addExerciseAdapter: AddExerciseAdapter
     private lateinit var recyclerAdapter: ExerciseViewAdapter
     private val stepperViewModel: StepperViewModel by activityViewModels()
     lateinit var days: MutableList<DayData> // MutableList로 변경하여 수정 가능하도록
@@ -174,14 +173,25 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
                 }
             }
         }
-    }
 
+    }
+    private fun observeLifecycle2(){
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                stepperViewModel.moreExerciseList.collectLatest {
+                    addExerciseAdapter.submitList(it.result)
+                    Log.d("사이즈",addExerciseAdapter.itemCount.toString())
+                }
+            }
+        }
+    }
     private fun firstConnect() {
         val currentDate = LocalDate.now()
         val selectedDate =
             LocalDate.of(currentDate.year, currentDate.monthValue, currentDate.dayOfMonth)
         val formattedDate = selectedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         todayViewModel.getStepperExerciseState(formattedDate)
+        stepperViewModel.moreExerciseAdd(formattedDate)
     }
 
     private fun init() {
@@ -191,7 +201,11 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
         recyclerAdapter = ExerciseViewAdapter(this, this)
         binding.stepperExerciseRv.adapter = recyclerAdapter
 
+        addExerciseAdapter = AddExerciseAdapter()
+        binding.stepperAdditionalRv.adapter = addExerciseAdapter
+
         observeLifecycle()
+        observeLifecycle2()
         observeExerciseMonthCheck()
 
     }
@@ -204,7 +218,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
             val json = gson.toJson(item)
             //운동카드 리스트 전송
             bd.putString("CardListJson", json)
-            Log.d("카드",json.toString())
+            Log.d("카드", json.toString())
 
             bd.putString("bp", item.bodyPart)
             for (i in 0..<item.stepList.size) {

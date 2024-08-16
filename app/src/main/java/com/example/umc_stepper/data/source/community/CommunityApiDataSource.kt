@@ -18,6 +18,8 @@ import com.example.umc_stepper.domain.model.response.post_controller.ScrapRespon
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -67,8 +69,8 @@ class CommunityApiDataSource @Inject constructor(
     }
 
     //POST 게시글 작성
-    fun postEditPost(): Flow<BaseResponse<ApiResponsePostResponse>> = flow {
-        val result = communityApi.postEditPost()
+    fun postEditPost(data : RequestBody, image : List<MultipartBody.Part>): Flow<BaseResponse<ApiResponsePostResponse>> = flow {
+        val result = communityApi.postEditPost(data,image)
         emit(result)
     }.catch {
         Log.e("Post Edit Post Failure", it.message.toString())
