@@ -6,6 +6,7 @@ import com.example.umc_stepper.base.BaseDiffCallback
 import com.example.umc_stepper.databinding.ItemCollocateMyExerciseBinding
 import com.example.umc_stepper.domain.model.Exercise2Data
 import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
+import com.example.umc_stepper.utils.GlobalApplication
 import com.example.umc_stepper.utils.listener.ItemClickListener
 
 class MyExercise2Adapter(
@@ -23,6 +24,7 @@ class MyExercise2Adapter(
     override fun bind(binding: ItemCollocateMyExerciseBinding, item: CheckExerciseResponse) {
         binding.listItem = item
         binding.listener = listener
+        GlobalApplication.loadCropRoundedSquareImage(binding.root.context,binding.itemCollocateMyExerciseThumbnailIv,item.video_image,12)
     }
 
 
