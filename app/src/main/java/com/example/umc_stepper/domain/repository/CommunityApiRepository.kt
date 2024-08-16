@@ -21,7 +21,7 @@ interface CommunityApiRepository {
     suspend fun deleteCancelScrap(postId: Int): Flow<BaseResponse<String>>
     suspend fun postLikeEdit(postId: Int): Flow<BaseResponse<LikeResponse>>
     suspend fun deleteCancelLike(postId: Int): Flow<BaseResponse<String>>
-    suspend fun postEditPost(data : RequestBody, image : MultipartBody.Part): Flow<BaseResponse<ApiResponsePostResponse>>
+    suspend fun postEditPost(data : RequestBody, image : List<MultipartBody.Part>): Flow<BaseResponse<ApiResponsePostResponse>>
     suspend fun getDetailPost(postId: Int): Flow<BaseResponse<ApiResponsePostViewResponse>>
     suspend fun getDetailPostList(categoryName: String): Flow<BaseListResponse<CommunityMyCommentsResponseItem>>
 

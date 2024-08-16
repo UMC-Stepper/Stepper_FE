@@ -53,7 +53,7 @@ class CommunityApiRepositoryImpl @Inject constructor(
     override suspend fun deleteCancelLike(postId: Int): Flow<BaseResponse<String>>
     = dataSource.deleteCancelLike(postId)
 
-    override suspend fun postEditPost(data : RequestBody, image : MultipartBody.Part): Flow<BaseResponse<ApiResponsePostResponse>>
+    override suspend fun postEditPost(data : RequestBody, image : List<MultipartBody.Part>): Flow<BaseResponse<ApiResponsePostResponse>>
     = dataSource.postEditPost(data,image)
 
     override suspend fun getDetailPost(postId: Int): Flow<BaseResponse<ApiResponsePostViewResponse>>

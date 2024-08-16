@@ -69,7 +69,7 @@ class CommunityApiDataSource @Inject constructor(
     }
 
     //POST 게시글 작성
-    fun postEditPost(data : RequestBody, image : MultipartBody.Part): Flow<BaseResponse<ApiResponsePostResponse>> = flow {
+    fun postEditPost(data : RequestBody, image : List<MultipartBody.Part>): Flow<BaseResponse<ApiResponsePostResponse>> = flow {
         val result = communityApi.postEditPost(data,image)
         emit(result)
     }.catch {

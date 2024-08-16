@@ -53,7 +53,7 @@ interface CommunityApi {
     @POST("/api/community/write")
     suspend fun postEditPost(
         @Part data : RequestBody,
-        @Part ("image") image : MultipartBody.Part
+        @Part ("image") image : List<MultipartBody.Part>
     ): BaseResponse<ApiResponsePostResponse>
 
     //게시글 상세 조회
