@@ -6,14 +6,18 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentWeeklySegmentEditBinding
+import com.example.umc_stepper.domain.model.request.post_controller.PostEditDto
 import com.example.umc_stepper.ui.community.CommunityDialog
 import com.example.umc_stepper.ui.community.CommunityDialogInterface
 import com.example.umc_stepper.ui.community.CommunityRemoveInterface
+import com.example.umc_stepper.ui.community.CommunityViewModel
 import com.example.umc_stepper.utils.enums.DialogType
 import com.google.android.material.tabs.TabLayout
 import java.util.Collections
@@ -22,6 +26,7 @@ class WeeklySegmentEditFragment : BaseFragment<FragmentWeeklySegmentEditBinding>
     CommunityDialogInterface,
     CommunityRemoveInterface{
     var selectedRemoveItemId = 0
+    val communityViewModel : CommunityViewModel by activityViewModels()
     private lateinit var communityDialog : CommunityDialog
     private lateinit var galleryForResult: ActivityResultLauncher<Intent>
     private lateinit var uploadImgAdapter: WeeklyEditImageAdapter
@@ -50,10 +55,14 @@ class WeeklySegmentEditFragment : BaseFragment<FragmentWeeklySegmentEditBinding>
             showDialog("사진 업로드 하기","앨범 선택","취소하기")
         }
         binding.fragmentWeeklySuccessEditBt.setOnClickListener {
-            //저장
+            val postEditDto = PostEditDto()
+            communityViewModel.postEditResponse(
+
+            )
+            findNavController().navigateUp()
         }
         binding.fragmentWeeklySegmentEditCancelBt.setOnClickListener {
-            //취소
+            findNavController().navigateUp()
         }
     }
 
