@@ -1,6 +1,9 @@
 package com.example.umc_stepper.ui.community.weekly
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -13,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentWeeklySegmentEditBinding
+import com.example.umc_stepper.domain.model.request.member_controller.UserDto
 import com.example.umc_stepper.domain.model.request.post_controller.PostEditDto
 import com.example.umc_stepper.ui.community.CommunityDialog
 import com.example.umc_stepper.ui.community.CommunityDialogInterface
@@ -20,18 +24,29 @@ import com.example.umc_stepper.ui.community.CommunityRemoveInterface
 import com.example.umc_stepper.ui.community.CommunityViewModel
 import com.example.umc_stepper.utils.enums.DialogType
 import com.google.android.material.tabs.TabLayout
+import com.google.gson.Gson
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
 import java.util.Collections
 
 class WeeklySegmentEditFragment : BaseFragment<FragmentWeeklySegmentEditBinding>(R.layout.fragment_weekly_segment_edit) ,
     CommunityDialogInterface,
     CommunityRemoveInterface{
     var selectedRemoveItemId = 0
+    private lateinit var postEditDto: PostEditDto
     val communityViewModel : CommunityViewModel by activityViewModels()
     private lateinit var communityDialog : CommunityDialog
     private lateinit var galleryForResult: ActivityResultLauncher<Intent>
     private lateinit var uploadImgAdapter: WeeklyEditImageAdapter
     private val imgList: MutableList<UploadImageCard> = mutableListOf()
     private var selectedTab = ""
+    private val imageList: MutableList<MultipartBody.Part> = mutableListOf()
+
 
     override fun setLayout() {
         initTabLayout()
@@ -49,15 +64,26 @@ class WeeklySegmentEditFragment : BaseFragment<FragmentWeeklySegmentEditBinding>
             Log.e("WeeklySegmentEditFragment", "Activity is null")
         }
     }
-
+//이미지 리스트 (글작성) , bodyPart 받아야 함
     private fun onClickBtn() {
         binding.fragmentWeeklyAddPictureIv.setOnClickListener {
             showDialog("사진 업로드 하기","앨범 선택","취소하기")
         }
         binding.fragmentWeeklySuccessEditBt.setOnClickListener {
-            val postEditDto = PostEditDto()
+            val bodyPart  = arguments?.getString("bodyPart") ?: ""
+            postEditDto = PostEditDto(
+                imageUrl = "",
+                title = binding.fragmentWeeklySubtitleEt.text.toString(),
+                body = binding.fragmentWeeklyDescriptionTv.text.toString(),
+                bodyPart = bodyPart,
+                subCategory = selectedTab,
+                weeklyMissionId = 1,
+            )
+            val gson = Gson()
+            val userJson = gson.toJson(postEditDto, PostEditDto::class.java)
+            val userRequest = userJson.toRequestBody("application/json".toMediaTypeOrNull())
             communityViewModel.postEditResponse(
-
+                userRequest, imageList
             )
             findNavController().navigateUp()
         }
@@ -85,6 +111,7 @@ class WeeklySegmentEditFragment : BaseFragment<FragmentWeeklySegmentEditBinding>
                     for (i in 0 until clipData.itemCount) {
                         val imageUri = clipData.getItemAt(i).uri
                         imageUri?.let {
+                            handleSelectedImage(it)
                             imgList.add(i, UploadImageCard(it.toString(), i))
                         }
                     }
@@ -160,5 +187,43 @@ class WeeklySegmentEditFragment : BaseFragment<FragmentWeeklySegmentEditBinding>
             }
         }
     }
+
+
+    private fun handleSelectedImage(uri: Uri) {
+        val inputStream = requireActivity().contentResolver.openInputStream(uri)
+        inputStream?.use { stream ->
+            val bitmap = BitmapFactory.decodeStream(stream)
+            val compressedFile = compressBitmap(bitmap, 500)
+
+            val requestFile = compressedFile.asRequestBody("image/*".toMediaTypeOrNull())
+            val imagePart = MultipartBody.Part.createFormData(
+                "images",
+                compressedFile.name,
+                requestFile
+            )
+            imageList.add(imagePart)
+        }
+    }
+
+    private fun compressBitmap(bitmap: Bitmap, maxSizeKB: Int): File {
+        var quality = 100
+        val outputStream = ByteArrayOutputStream()
+
+        do {
+            outputStream.reset()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream)
+            quality -= 5
+        } while (outputStream.size() / 1024 > maxSizeKB && quality > 0)
+
+        val file = File(requireActivity().cacheDir, "compressed_image.jpg")
+        FileOutputStream(file).use { fos ->
+            fos.write(outputStream.toByteArray())
+        }
+
+        return file
+    }
+
+
+
 
 }
