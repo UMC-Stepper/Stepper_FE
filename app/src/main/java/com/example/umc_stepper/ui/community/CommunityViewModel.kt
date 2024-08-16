@@ -9,14 +9,13 @@ import com.example.umc_stepper.domain.model.request.comment_controller.CommentWr
 import com.example.umc_stepper.domain.model.request.comment_controller.ReplyRequestDto
 import com.example.umc_stepper.domain.model.response.WeeklyMissionResponse
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem
-import com.example.umc_stepper.domain.model.response.comment_controller.CommentWriteResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostResponse
-import com.example.umc_stepper.domain.model.response.post_controller.ApiResponseListPostViewResponseItem
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostViewResponse
 import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponseItem
 import com.example.umc_stepper.domain.model.response.post_controller.LikeResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ScrapResponse
 import com.example.umc_stepper.domain.repository.CommunityApiRepository
+import com.example.umc_stepper.utils.enums.LoadState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -41,6 +40,11 @@ class CommunityViewModel @Inject constructor(
     // 위클리 게시글 조회
     private val _weeklyPostViewListResponse = MutableStateFlow<BaseListResponse<CommunityMyCommentsResponseItem>>(BaseListResponse())
     val weeklyPostViewListResponse : StateFlow<BaseListResponse<CommunityMyCommentsResponseItem>> = _weeklyPostViewListResponse
+
+    // 위클리 게시글 검색 조회
+    private val _weeklySearchViewListResponse = MutableStateFlow<BaseListResponse<CommunityMyCommentsResponseItem>>(BaseListResponse())
+    val weeklySearchViewListResponse : StateFlow<BaseListResponse<CommunityMyCommentsResponseItem>> = _weeklySearchViewListResponse
+
 
     //주간 미션 조회
     private val _weeklyMissionResponse = MutableStateFlow<BaseResponse<WeeklyMissionResponse>>(BaseResponse())
@@ -81,7 +85,7 @@ class CommunityViewModel @Inject constructor(
     val postEditResponse : StateFlow<BaseResponse<ApiResponsePostResponse>> = _postEditResponse
 
     //글 작성
-    fun postEditResponse(data : RequestBody, image : MultipartBody.Part){
+    fun postEditResponse(data : RequestBody, image : List<MultipartBody.Part>){
         viewModelScope.launch {
             try {
                 communityApiRepository.postEditPost(data,image).collect{
@@ -129,6 +133,28 @@ class CommunityViewModel @Inject constructor(
                 communityApiRepository.getWeeklyPostList(weeklyMissionId).collect {
                     _weeklyPostViewListResponse.value = it
                     Log.d("CommunityViewModel", "_weeklyPostViewListResponse : $it")
+                }
+            } catch (e:Exception) {
+                Log.e("getCommunityMyScraps is Error", e.message.toString())
+            }
+        }
+    }
+
+    // 위클리 게시글 조회 search
+    fun getWeeklySearchList(weeklyMissionId : Int, query : String) {
+        viewModelScope.launch {
+            try{
+                communityApiRepository.getWeeklyPostList(weeklyMissionId).collect { response ->
+                    if (response.isSuccess && !response.result.isNullOrEmpty()) {
+                        val filterList = response.result.filter{
+                            it.title.contains(query) || it.body.contains(query)
+                        }
+                        val copyResponse = response.copy(loadState = LoadState.SUCCESS).copy(result = filterList)
+                        _weeklySearchViewListResponse.value = copyResponse
+                        Log.d("TodayViewModel", "_checkExerciseResponseDTO : $response")
+                    } else {
+                        _weeklySearchViewListResponse.value = BaseListResponse(LoadState.EMPTY)
+                    }
                 }
             } catch (e:Exception) {
                 Log.e("getCommunityMyScraps is Error", e.message.toString())
