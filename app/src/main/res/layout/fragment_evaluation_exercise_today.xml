@@ -14,8 +14,67 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/Purple_Black_BG_2">
 
+            <ImageView
+                android:id="@+id/fragment_evaluation_exercise_today_back_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fragment_evaluation_exercise_today_title_tv"
+                style="@style/sub_title_semi_bold_16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="평가일지"
+                android:textColor="@color/White"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_evaluation_exercise_today_back_iv"
+                app:layout_constraintStart_toEndOf="@+id/fragment_evaluation_exercise_today_back_iv"
+                app:layout_constraintTop_toTopOf="@+id/fragment_evaluation_exercise_today_back_iv" />
+
+            <TextView
+                android:id="@+id/fragment_evaluation_exercise_today_body_tv"
+                style="@style/body_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_rounded_stroke_square_yellow700_40dp_1dp"
+                android:paddingStart="12dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="4dp"
+                android:layout_marginStart="16dp"
+                android:text="부위"
+                android:textColor="@color/Yellow_500"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_evaluation_exercise_today_title_tv"
+                app:layout_constraintStart_toEndOf="@+id/fragment_evaluation_exercise_today_title_tv"
+                app:layout_constraintTop_toTopOf="@+id/fragment_evaluation_exercise_today_title_tv" />
+
+            <ImageView
+                android:id="@+id/fragment_evaluation_exercise_today_go_today_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="11dp"
+                android:background="@drawable/ic_toolbar_today"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_evaluation_exercise_today_go_stepper_iv"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/fragment_evaluation_exercise_today_go_stepper_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/ic_toolbar_stepper"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/all_constraint_2_cl"
@@ -67,11 +126,12 @@
                 android:id="@+id/all_constraint_cl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:background="@color/Purple_Black_BG_1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/fragment_evaluation_exercise_today_back_iv">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
