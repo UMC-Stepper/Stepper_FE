@@ -57,7 +57,6 @@ class AddExerciseSelectScrapFragment :
         observeViewModel()
         setAdapter()
         popBack()
-        // 앞 화면에서 운동 부위, 운동 단계 받아야 함
     }
 
     private fun observeViewModel() {

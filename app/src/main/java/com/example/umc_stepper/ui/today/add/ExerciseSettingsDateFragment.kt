@@ -1,6 +1,7 @@
 package com.example.umc_stepper.ui.today.add
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.widget.NumberPicker
@@ -18,6 +19,7 @@ import com.example.umc_stepper.databinding.FragmentExerciseSettingsDateBinding
 import com.example.umc_stepper.domain.model.request.exercise_card_controller.ExerciseCardRequestDto
 import com.example.umc_stepper.domain.model.request.exercise_card_controller.ExerciseStepRequestDto
 import com.example.umc_stepper.token.TokenManager
+import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.today.TodayViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -28,10 +30,9 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBinding>(R.layout.fragment_exercise_settings_date) {
 
-    private lateinit var dayTextViews: List<TextView>
-    private val selectedDays = mutableSetOf<TextView>()
-    val todayViewModel: TodayViewModel by activityViewModels()
     private lateinit var ecrd: ExerciseCardRequestDto
+    private lateinit var mainActivity : MainActivity
+    private lateinit var dayTextViews: List<TextView>
 
     @Inject
     lateinit var tokenManager: TokenManager
@@ -40,7 +41,14 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
     private var minuteTime : String = "0"
     private var selectDaysSize = 0
 
+    private val selectedDays = mutableSetOf<TextView>()
     private val exerciseCardList = mutableListOf<ExerciseCardRequestDto>()
+    private val todayViewModel: TodayViewModel by activityViewModels()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
 
     @SuppressLint("DefaultLocale")
     @RequiresApi(Build.VERSION_CODES.O)
@@ -234,4 +242,12 @@ class ExerciseSettingsDateFragment : BaseFragment<FragmentExerciseSettingsDateBi
         val action = ExerciseSettingsDateFragmentDirections.actionFragmentExerciseSettingsDateToExerciseCardLastFragment()
         findNavController().navigate(action.actionId, args)
     }
+
+    private fun updateMainToolbar() {
+        mainActivity.updateToolbarTitle("운동 카드를 작성해봐요!")
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
+        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
+        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
+    }
+
 }
