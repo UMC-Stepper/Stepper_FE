@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -151,6 +152,23 @@ class EvaluationExerciseFragment :
         setList()
         setScoreText()
         setOnClickBtn()
+        activateButton()
+    }
+
+    private fun activateButton() {
+        val args = arguments?.getString("photo_uri").toString()
+        if(binding.fragmentEvaluationExercisePointTv.text.isNullOrEmpty().not() &&
+            binding.fragmentEvaluationExerciseMemoEt.text.isNullOrEmpty().not() &&
+            args.isNullOrEmpty().not()
+            ) {
+            binding.fragmentEvaluationExerciseSuccessBt.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
+            binding.fragmentEvaluationExerciseSuccessBt.isEnabled = true
+            binding.fragmentEvaluationExerciseSuccessBt.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
+        } else {
+            binding.fragmentEvaluationExerciseSuccessBt.setBackgroundResource(R.drawable.radius_corners_61dp_stroke_1)
+            binding.fragmentEvaluationExerciseSuccessBt.isEnabled = false
+            binding.fragmentEvaluationExerciseSuccessBt.setTextColor(ContextCompat.getColor(requireContext(), R.color.Purple_700))
+        }
     }
 
     private fun observeLifeCycle() {
