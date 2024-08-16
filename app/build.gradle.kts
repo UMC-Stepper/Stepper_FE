@@ -9,6 +9,7 @@ plugins {
     id("kotlin-parcelize")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
 }
 
 
@@ -70,8 +71,8 @@ dependencies {
 
     // FireBase
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
-    implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation("com.google.firebase:firebase-messaging-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx:22.0.2")
+    implementation("com.google.firebase:firebase-messaging:24.0.0")
 
 
     // Hilt

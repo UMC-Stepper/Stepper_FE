@@ -22,6 +22,7 @@ class TokenManager @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
     companion object {
+        private val FCM_TOKEN = stringPreferencesKey("fcm_token")
         private val ACCESS_TOKEN_KEY = stringPreferencesKey("access_token")
         private val YOUTUBE_TOKEN_KEY = stringPreferencesKey("youtube_token")
         private val COOKIE = stringPreferencesKey("cookie")
@@ -112,6 +113,19 @@ class TokenManager @Inject constructor(
     suspend fun deleteAccessToken() {
         dataStore.edit { prefs ->
             prefs.remove(ACCESS_TOKEN_KEY)
+        }
+    }
+
+    // FCM 토큰 저장
+    suspend fun saveFcmToken(fcmToken: String) {
+        dataStore.edit { prefs ->
+            prefs[FCM_TOKEN] = fcmToken
+        }
+    }
+
+    fun getFcmToken() : Flow<String?> {
+        return dataStore.data.map { prefs ->
+            prefs[FCM_TOKEN]
         }
     }
 

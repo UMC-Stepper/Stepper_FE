@@ -6,7 +6,9 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
@@ -24,32 +26,29 @@ import dagger.hilt.android.AndroidEntryPoint
 class EvaluationExerciseTodayFragment :
     BaseFragment<FragmentEvaluationExerciseTodayBinding>(R.layout.fragment_evaluation_exercise_today) {
     private val stepperViewModel: StepperViewModel by activityViewModels()
-    private lateinit var imgList: List<ImageView>
-    private lateinit var tvList: List<TextView>
-    private lateinit var triangleList: List<ImageView>
-    private lateinit var blurList: List<Int>
-    private lateinit var notBlurList: List<Int>
-    private lateinit var stateTitleList: List<String>
-    private lateinit var descriptionList: List<String>
+    private var imgList: List<ImageView> = listOf()
+    private var tvList: List<TextView> = listOf()
+    private var triangleList: List<ImageView> = listOf()
+    private var blurList: List<Int> = listOf()
+    private var notBlurList: List<Int> = listOf()
+    private var stateTitleList: List<String> = listOf()
+    private var descriptionList: List<String> = listOf()
     private var selectTextDescription = 0
     private var profileImage = ""
     private var score = 0
     private lateinit var args: Bundle
     private lateinit var selectedDate: String
     private lateinit var diaryListValue: String
-    private lateinit var mainActivity: MainActivity
     private lateinit var diaryList: List<RateDiaryResponse>
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mainActivity = context as MainActivity
-    }
 
     private fun setTitle() {
         if (diaryList.isNotEmpty()) {
-            mainActivity.updateToolbarLeftPlusImg(selectedDate, diaryList[0].bodyPart) //타이틀 세팅
+            binding.fragmentEvaluationExerciseTodayTitleTv.text = selectedDate
+            binding.fragmentEvaluationExerciseTodayBodyTv.text = diaryList[0].bodyPart
+            binding.fragmentEvaluationExerciseTodayBodyTv.visibility = View.VISIBLE
+        } else {
+            binding.fragmentEvaluationExerciseTodayBodyTv.visibility = View.INVISIBLE
         }
-        mainActivity.setBg2()
     }
 
     private fun takeDataClass() {
@@ -73,7 +72,6 @@ class EvaluationExerciseTodayFragment :
 
     private fun initSetting() {
         setTitle()
-        setList()
         initScreen()
         setObserver()
         setOnClickBtn()
@@ -85,7 +83,6 @@ class EvaluationExerciseTodayFragment :
                 diaryList[0].conditionRate.toString()
             binding.fragmentEvaluationExercisePointTv.text =
                 diaryList[0].conditionRate.toString()
-            setDescription(diaryList[0].painRate)
             binding.fragmentEvaluationExerciseProgressbarPb.progress =
                 diaryList[0].conditionRate
             binding.fragmentEvaluationExerciseMemoEt.text =
@@ -186,13 +183,32 @@ class EvaluationExerciseTodayFragment :
     }
 
     private fun setOnClickBtn() {
-        with(binding) {
-            fragmentEvaluationExerciseSuccessBt.setOnClickListener {
-                mainActivity.visibleTag()
-                val action =
-                    EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToEvaluationLogFragment()
-                findNavController().navigateSafe(action.actionId)
+        // 뒤로 가기
+        binding.fragmentEvaluationExerciseTodayBackIv.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        // 투데이 버튼
+        binding.fragmentEvaluationExerciseTodayGoTodayIv.setOnClickListener {
+            val action =
+                EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToTodayHomeFragment()
+            findNavController().navigateSafe(action.actionId)
+        }
+
+        // 스테퍼 버튼
+        binding.fragmentEvaluationExerciseTodayGoStepperIv.setOnClickListener {
+            val action =
+                EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToStepperFragment()
+            findNavController().navigateSafe(action.actionId)
+
+            with(binding) {
+                fragmentEvaluationExerciseSuccessBt.setOnClickListener {
+                    val action =
+                        EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToEvaluationLogFragment()
+                    findNavController().navigateSafe(action.actionId)
+                }
             }
         }
     }
+
 }

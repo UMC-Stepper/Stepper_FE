@@ -60,6 +60,10 @@ class AddExerciseFragment :
 
     private fun setTitle() {
         mainActivity.updateToolbarTitle("운동 카드를 작성해봐요!")
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
+        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
+        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

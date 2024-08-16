@@ -22,9 +22,12 @@ import com.example.umc_stepper.domain.model.request.member_controller.LogInDto
 import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.signup.SignUpActivity
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.w3c.dom.Text
 import javax.inject.Inject
@@ -38,11 +41,33 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private lateinit var agreeDialog: AgreeDialog
     private lateinit var requestMultiplePermissionsLauncher: ActivityResultLauncher<Array<String>>
 
+    private var fcmToken = ""
+
     override fun setLayout() {
         requestForUserData()
         initPermissionLaunchers()
         checkPermissionsAndProceed()
         setting()
+    }
+
+    // FCM 토큰 TokenManager에 저장하는 함수
+    private fun saveFcmToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) return@OnCompleteListener
+
+            // Get new FCM registration token
+            val token = task.result
+            lifecycleScope.launch {
+                tokenManager.saveFcmToken(token)
+            }
+        })
+    }
+
+    // FCM 토큰 TokenManager에서 가져오는 함수
+    private fun getFcmToken() {
+        lifecycleScope.launch {
+            fcmToken = tokenManager.getFcmToken().first().toString()
+        }
     }
 
     private fun activateLoginButton() {
@@ -79,6 +104,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         lifecycleScope.launch {
             tokenManager.deleteAccessToken()
         }
+        saveFcmToken()
+        getFcmToken()
         setViewModel()
         activateLoginButton()
         barTransparent()

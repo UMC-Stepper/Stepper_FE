@@ -9,16 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.umc_stepper.databinding.ItemCommunityShowPostCommentBinding
 import com.example.umc_stepper.databinding.ItemCommunityShowPostCommentReplyBinding
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem
-import com.example.umc_stepper.utils.listener.ItemClickListener
+import com.example.umc_stepper.domain.model.response.comment_controller.ReplyResponse
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class WeeklyShowPostReplyAdapter(private val onItemClick: (String) -> Unit) : ListAdapter<CommentResponseItem, RecyclerView.ViewHolder>(diffUtil) {
+class WeeklyShowPostReplyAdapter(private val onItemClick: (String) -> Unit) : ListAdapter<Any, RecyclerView.ViewHolder>(diffUtil) {
 
     inner class CommentViewHolder(private val binding: ItemCommunityShowPostCommentBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : CommentResponseItem) {
             binding.apply {
-                Log.d("WeeklyShowPostReplyAdapter Item", "item: $item")
+                Log.d("CommentViewHolder Item", "item: $item")
                 binding.commentResponseItem = item
 
                 val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
@@ -36,9 +36,10 @@ class WeeklyShowPostReplyAdapter(private val onItemClick: (String) -> Unit) : Li
     }
 
     inner class ReplyViewHolder(private val binding: ItemCommunityShowPostCommentReplyBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item : CommentResponseItem) {
+        fun bind(item : ReplyResponse) {
             binding.apply {
-                binding.commentResponseItem = item
+                Log.d("ReplyViewHolder Item", "item: $item")
+                binding.replyResponse  = item
             }
         }
     }
@@ -61,28 +62,41 @@ class WeeklyShowPostReplyAdapter(private val onItemClick: (String) -> Unit) : Li
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val currentItem = getItem(position)
         when (holder) {
-            is CommentViewHolder -> holder.bind(currentItem)
-            is ReplyViewHolder -> holder.bind(currentItem)
+            is CommentViewHolder -> holder.bind(currentItem as CommentResponseItem)
+            is ReplyViewHolder -> holder.bind(currentItem as ReplyResponse)
         }
     }
 
     // 아이템 ViewType 결정
     override fun getItemViewType(position: Int): Int {
-        // 임의의 로직을 통해 COMMENT 또는 REPLY를 반환
-        return COMMENT
+        return when (getItem(position)) {
+            is CommentResponseItem -> COMMENT
+            is ReplyResponse -> REPLY
+            else -> throw IllegalArgumentException("Unknown item type")
+        }
     }
 
     companion object{
         const val COMMENT = 0
         const val REPLY = 1
 
-        val diffUtil = object : DiffUtil.ItemCallback<CommentResponseItem>() {
-            override fun areItemsTheSame(oldItem: CommentResponseItem, newItem: CommentResponseItem): Boolean {
-                return oldItem.commentId == newItem.commentId
+        val diffUtil = object : DiffUtil.ItemCallback<Any>() {
+            override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
+                return if (oldItem is CommentResponseItem && newItem is CommentResponseItem) {
+                    oldItem.commentId == newItem.commentId
+                } else if (oldItem is ReplyResponse && newItem is ReplyResponse) {
+                    oldItem.parentCommentId == newItem.parentCommentId && oldItem.content == newItem.content
+                } else {
+                    false
+                }
             }
 
-            override fun areContentsTheSame(oldItem: CommentResponseItem, newItem: CommentResponseItem): Boolean {
-                return oldItem == newItem
+            override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
+                return when {
+                    oldItem is CommentResponseItem && newItem is CommentResponseItem -> oldItem == newItem
+                    oldItem is ReplyResponse && newItem is ReplyResponse -> oldItem == newItem
+                    else -> false
+                }
             }
         }
     }
