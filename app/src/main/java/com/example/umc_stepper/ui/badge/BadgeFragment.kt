@@ -102,5 +102,8 @@ class BadgeFragment : BaseFragment<FragmentBadgeBinding>(R.layout.fragment_badge
 //    }
     private fun updateMainToolbar() {
         mainActivity.updateToolbarTitle("활동 훈장")
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
+        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
+        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
     }
 }
