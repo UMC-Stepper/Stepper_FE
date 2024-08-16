@@ -61,7 +61,7 @@ class CommunityMyCommentsFragment : BaseFragment<FragmentCommunityMyCommentsBind
                         it.result?.forEach { _ ->
                             updateVisibility(true)
                         }
-                        myCommentsAdapter.submitList(it.result)    // 리사이클러뷰 갱신 (서버에서 불러온 내가 댓글단 글 목록)
+                        myCommentsAdapter.submitList(it.result) // 리사이클러뷰 갱신 (서버에서 불러온 내가 댓글 작성한 글 목록)
                     } else {
                         updateVisibility(false)
                     }

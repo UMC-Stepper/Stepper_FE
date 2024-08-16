@@ -4,8 +4,8 @@ import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.model.request.comment_controller.CommentWriteDto
 import com.example.umc_stepper.domain.model.request.comment_controller.ReplyRequestDto
+import com.example.umc_stepper.domain.model.response.WeeklyMissionResponse
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem
-import com.example.umc_stepper.domain.model.response.comment_controller.CommentWriteResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponseListPostViewResponseItem
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostViewResponse
@@ -38,7 +38,7 @@ class CommunityApiRepositoryImpl @Inject constructor(
     override suspend fun getCommunityMyScraps(): Flow<BaseListResponse<CommunityMyCommentsResponseItem>> =
         dataSource.getCommunityMyScraps()
 
-    override suspend fun postCommentWrite(commentWriteDto: CommentWriteDto): Flow<BaseResponse<CommentWriteResponse>> =
+    override suspend fun postCommentWrite(commentWriteDto: CommentWriteDto): Flow<BaseResponse<CommentResponseItem>> =
         dataSource.postCommentWrite(commentWriteDto)
 
     override suspend fun getComment(postId: Int): Flow<BaseListResponse<CommentResponseItem>> =
@@ -59,6 +59,14 @@ class CommunityApiRepositoryImpl @Inject constructor(
     override suspend fun getDetailPost(postId: Int): Flow<BaseResponse<ApiResponsePostViewResponse>>
     = dataSource.getDetailPost(postId)
 
-    override suspend fun getDetailPostList(categoryName: String): Flow<BaseListResponse<ApiResponseListPostViewResponseItem>>
+    override suspend fun getDetailPostList(categoryName: String): Flow<BaseListResponse<CommunityMyCommentsResponseItem>>
     = dataSource.getDetailPostList(categoryName)
+
+    // 위클리 게시글 조회 API
+    override suspend fun getWeeklyPostList(weeklyMissionId  : Int): Flow<BaseListResponse<CommunityMyCommentsResponseItem>>
+    = dataSource.getWeeklyPostList(weeklyMissionId)
+
+    // 주간 미션 조회 API
+    override suspend fun getWeeklyMission(id : Int): Flow<BaseResponse<WeeklyMissionResponse>>
+    = dataSource.getWeeklyMission(id)
 }

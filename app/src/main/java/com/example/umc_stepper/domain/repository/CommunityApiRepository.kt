@@ -4,9 +4,8 @@ import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.model.request.comment_controller.CommentWriteDto
 import com.example.umc_stepper.domain.model.request.comment_controller.ReplyRequestDto
+import com.example.umc_stepper.domain.model.response.WeeklyMissionResponse
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem
-import com.example.umc_stepper.domain.model.response.comment_controller.CommentWriteResponse
-import com.example.umc_stepper.domain.model.response.post_controller.ApiResponseListPostViewResponseItem
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostViewResponse
 import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponseItem
@@ -24,7 +23,7 @@ interface CommunityApiRepository {
     suspend fun deleteCancelLike(postId: Int): Flow<BaseResponse<String>>
     suspend fun postEditPost(data : RequestBody, image : MultipartBody.Part): Flow<BaseResponse<ApiResponsePostResponse>>
     suspend fun getDetailPost(postId: Int): Flow<BaseResponse<ApiResponsePostViewResponse>>
-    suspend fun getDetailPostList(categoryName: String): Flow<BaseListResponse<ApiResponseListPostViewResponseItem>>
+    suspend fun getDetailPostList(categoryName: String): Flow<BaseListResponse<CommunityMyCommentsResponseItem>>
 
     //내가 작성한 글 목록 조회
     suspend fun getCommunityMyPosts(): Flow<BaseListResponse<CommunityMyPostsResponseItem>>
@@ -32,11 +31,17 @@ interface CommunityApiRepository {
     //내가 작성한 댓글 글 목록 조회
     suspend fun getCommunityMyComments(): Flow<BaseListResponse<CommunityMyCommentsResponseItem>>
 
+    // 위클리 게시글 조회 API
+    suspend fun getWeeklyPostList(id : Int): Flow<BaseListResponse<CommunityMyCommentsResponseItem>>
+
+    // 주간 미션 조회 API
+    suspend fun getWeeklyMission(weeklyMissionId : Int): Flow<BaseResponse<WeeklyMissionResponse>>
+
     //내가 스크랩 한 글 목록 조회
     suspend fun getCommunityMyScraps(): Flow<BaseListResponse<CommunityMyCommentsResponseItem>>
 
     //댓글 작성
-    suspend fun postCommentWrite(commentWriteDto: CommentWriteDto): Flow<BaseResponse<CommentWriteResponse>>
+    suspend fun postCommentWrite(commentWriteDto: CommentWriteDto): Flow<BaseResponse<CommentResponseItem>>
 
     // 대댓글 작성
     suspend fun postReply(replyRequestDto: ReplyRequestDto) : Flow<BaseResponse<CommentResponseItem>>
