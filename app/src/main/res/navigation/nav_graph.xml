@@ -251,6 +251,12 @@
         <action
             android:id="@+id/action_evaluationExerciseTodayFragment_to_evaluationLogFragment"
             app:destination="@id/evaluationLogFragment" />
+        <action
+            android:id="@+id/action_evaluationExerciseTodayFragment_to_todayHomeFragment"
+            app:destination="@id/todayHomeFragment" />
+        <action
+            android:id="@+id/action_evaluationExerciseTodayFragment_to_stepperFragment"
+            app:destination="@id/stepperFragment" />
     </fragment>
 
     <!-- 스태퍼 오늘의 운동하기1,2,3 -->
