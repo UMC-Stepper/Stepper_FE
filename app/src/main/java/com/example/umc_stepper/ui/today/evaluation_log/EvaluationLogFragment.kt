@@ -51,22 +51,34 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
     }
 
     private fun initSettings() {
-        updateMainToolbar()
         initAdapter()
         observeViewModel()
         setCalendarView()
         setClickDate()
     }
 
-    private fun updateMainToolbar() {
-        mainActivity.updateToolbarTitle("평가 일지")
-        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
-        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
-        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
+    private fun setButton() {
+        // 뒤로 가기
+        binding.fragmentEvaluationLogCalenderBackIv.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        // 투데이 버튼
+        binding.fragmentEvaluationLogCalenderGoTodayIv.setOnClickListener {
+            val action =
+                EvaluationLogFragmentDirections.actionEvaluationLogFragmentToTodayHomeFragment()
+            findNavController().navigateSafe(action.actionId)
+        }
+
+        // 스테퍼 버튼
+        binding.fragmentEvaluationLogCalenderGoStepperIv.setOnClickListener {
+            val action =
+                EvaluationLogFragmentDirections.actionEvaluationLogFragmentToStepperFragment()
+            findNavController().navigateSafe(action.actionId)
+        }
     }
 
     private fun initAdapter() {
-
         // 운동 부위 리사이클러뷰 아이템 클릭
         evaluationLogBodyPartAdapter = EvaluationLogBodyPartAdapter{ item ->
             viewLifecycleOwner.lifecycleScope.launch{
@@ -87,9 +99,7 @@ class EvaluationLogFragment: BaseFragment<FragmentEvaluationLogCalenderBinding>(
     private fun observeViewModel() {
         val month = LocalDate.now().monthValue
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                todayViewModel.getExerciseMonthCheck(month)
-            }
+            todayViewModel.getExerciseMonthCheck(month)
         }
 
         viewLifecycleOwner.lifecycleScope.launch {

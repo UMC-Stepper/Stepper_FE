@@ -84,6 +84,12 @@
         <action
             android:id="@+id/action_evaluationLogFragment_to_evaluationExerciseTodayFragment"
             app:destination="@id/evaluationExerciseTodayFragment" />
+        <action
+            android:id="@+id/action_evaluationLogFragment_to_todayHomeFragment"
+            app:destination="@id/todayHomeFragment" />
+        <action
+            android:id="@+id/action_evaluationLogFragment_to_stepperFragment"
+            app:destination="@id/stepperFragment" />
     </fragment>
 
     <!-- 투데이 홈 -->

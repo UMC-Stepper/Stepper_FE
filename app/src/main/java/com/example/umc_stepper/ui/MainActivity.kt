@@ -172,6 +172,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 R.id.settingsShowProfileFragment,
                 R.id.settingsEditProfileFragment,
                 R.id.settingsFragment,
+                R.id.evaluationLogFragment,
                 R.id.evaluationExerciseTodayFragment,
                 R.id.communitySearchFragment
             )
