@@ -152,7 +152,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="머리, 얼굴"
+                android:text="머리"
                 android:textColor="@color/White"
                 app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_head_iv"
                 app:layout_constraintStart_toStartOf="@+id/fragment_community_home_head_iv"

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.umc_stepper.R
@@ -21,6 +22,7 @@ class CommunityPartHomeFragment : Fragment(){
 
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
+    private lateinit var titlePart: TextView
     private lateinit var mainActivity: MainActivity
 
     override fun onAttach(context: Context) {
@@ -38,9 +40,19 @@ class CommunityPartHomeFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_community_part_home, container, false)
+        updateToolbar()
+        var bodyPart = arguments?.getString("bodyPart").toString()
+        bodyPart = when (bodyPart) {
+            "무릎,다리" -> "무릎다리"
+            "어깨,팔" -> "어깨팔"
+            else -> {
+                bodyPart
+            }
+        }
+        titlePart = view.findViewById(R.id.community_part_home_title_tv)
         viewPager = view.findViewById(R.id.community_part_home_vp)
         tabLayout = view.findViewById(R.id.community_part_home_tl)
-        updateToolbar()
+        titlePart.text = bodyPart
         return view
     }
 
