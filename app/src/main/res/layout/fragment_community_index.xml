@@ -27,23 +27,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/commnunity_index_post_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/ic_commnity_index_post_btn"
+        android:src="@drawable/ic_commnity_index_post_btn"
+        android:background="?attr/selectableItemBackground"
         app:layout_constraintEnd_toStartOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@id/community_index_tv" />
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/commnunity_index_comment_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:layout_marginStart="8dp"
-        android:background="@drawable/ic_community_index_comment_btn"
+        android:src="@drawable/ic_community_index_comment_btn"
+        android:background="?attr/selectableItemBackground"
         app:layout_constraintStart_toEndOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@id/community_index_tv" />
 
@@ -51,7 +53,8 @@
         android:id="@+id/community_index_scap_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/ic_community_index_scrap_btn"
+        android:src="@drawable/ic_community_index_scrap_btn"
+        android:background="?attr/selectableItemBackground"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

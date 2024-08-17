@@ -60,18 +60,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
+                android:foreground="@android:color/transparent"
+                android:background="@android:color/transparent"
                 android:text="서버에서 받아야 함"
                 android:textColor="@color/Yellow_300"
                 app:layout_constraintBottom_toBottomOf="@+id/item_weekly_show_post_comment_reply_profile_iv"
                 app:layout_constraintStart_toEndOf="@+id/item_weekly_show_post_comment_reply_profile_iv"
                 app:layout_constraintTop_toTopOf="@+id/item_weekly_show_post_comment_reply_profile_iv" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/fragment_community_weekly_show_reply_up_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
                 android:src="@drawable/ic_reply_up_16dp"
+                android:background="?attr/selectableItemBackground"
                 app:layout_constraintBottom_toBottomOf="@+id/item_weekly_show_post_comment_reply_name_tv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/item_weekly_show_post_comment_reply_name_tv" />
@@ -83,6 +86,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
                 android:layout_marginEnd="16dp"
+                android:foreground="@android:color/transparent"
+                android:background="@android:color/transparent"
                 android:text="@{replyResponse.content}"
                 android:textColor="@color/White"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -97,6 +102,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="8dp"
+                android:foreground="@android:color/transparent"
+                android:background="@android:color/transparent"
                 android:text="서버에서 받아야 함"
                 android:textColor="@color/Purple_Gray"
                 app:layout_constraintBottom_toBottomOf="parent"

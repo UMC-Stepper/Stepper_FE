@@ -22,12 +22,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/fragment_community_home_toolbar_back_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:src="@drawable/ic_toolbar_community_home" />
+                    android:src="@drawable/ic_toolbar_community_home"
+                    android:background="?attr/selectableItemBackground"/>
 
                 <TextView
                     android:id="@+id/fragment_community_home_toolbar_title_tv"
@@ -51,20 +52,22 @@
                     android:textColor="@color/Yellow_500"
                     android:visibility="gone" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/fragment_community_home_toolbar_go_menu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginEnd="30dp"
+                    android:background="?attr/selectableItemBackground"
                     android:src="@drawable/ic_toolbar_community_menu" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/fragment_community_home_toolbar_go_search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginEnd="12dp"
+                    android:background="?attr/selectableItemBackground"
                     android:src="@drawable/ic_toolbar_community_search" />
             </com.google.android.material.appbar.MaterialToolbar>
 
@@ -111,12 +114,13 @@
                     app:layout_constraintStart_toStartOf="@+id/fragment_community_home_title_tv"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_title_tv" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/fragment_community_home_go_weekly_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="36dp"
                     android:src="@drawable/ic_go_community"
+                    android:background="?attr/selectableItemBackground"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_sub_title_tv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/fragment_community_home_sub_title_tv" />
@@ -135,12 +139,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_top_constraint" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/fragment_community_home_head_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:src="@drawable/ic_community_head"
+                android:background="?attr/selectableItemBackground"
                 app:layout_constraintEnd_toStartOf="@+id/fragment_community_home_chest_iv"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -158,11 +163,12 @@
                 app:layout_constraintStart_toStartOf="@+id/fragment_community_home_head_iv"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_head_iv" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/fragment_community_home_chest_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_community_chest"
+                android:background="?attr/selectableItemBackground"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_head_iv"
                 app:layout_constraintEnd_toStartOf="@+id/fragment_community_home_stomach_iv"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -181,11 +187,12 @@
                 app:layout_constraintStart_toStartOf="@+id/fragment_community_home_chest_iv"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_chest_iv" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/fragment_community_home_stomach_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_community_stomach"
+                android:background="?attr/selectableItemBackground"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_chest_iv"
                 app:layout_constraintEnd_toStartOf="@+id/fragment_community_home_pelvis_iv"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -204,11 +211,12 @@
                 app:layout_constraintStart_toStartOf="@+id/fragment_community_home_stomach_iv"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_stomach_iv" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/fragment_community_home_pelvis_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_community_pelvis"
+                android:background="?attr/selectableItemBackground"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_stomach_iv"
                 app:layout_constraintEnd_toStartOf="@+id/fragment_community_home_arm_iv"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -227,11 +235,12 @@
                 app:layout_constraintStart_toStartOf="@+id/fragment_community_home_pelvis_iv"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_pelvis_iv" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/fragment_community_home_arm_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_community_arm"
+                android:background="?attr/selectableItemBackground"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_pelvis_iv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -250,12 +259,13 @@
                 app:layout_constraintStart_toStartOf="@+id/fragment_community_home_arm_iv"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_arm_iv" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/fragment_community_home_leg_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:src="@drawable/ic_community_leg"
+                android:background="?attr/selectableItemBackground"
                 app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_head_iv"
                 app:layout_constraintStart_toStartOf="@+id/fragment_community_home_head_iv"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_head_tv" />
@@ -272,11 +282,12 @@
                 app:layout_constraintStart_toStartOf="@+id/fragment_community_home_leg_iv"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_leg_iv" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/fragment_community_home_back_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_community_back"
+                android:background="?attr/selectableItemBackground"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_leg_iv"
                 app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_chest_iv"
                 app:layout_constraintStart_toStartOf="@+id/fragment_community_home_chest_iv"
@@ -294,11 +305,12 @@
                 app:layout_constraintStart_toStartOf="@+id/fragment_community_home_back_iv"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_back_iv" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/fragment_community_home_waist_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_community_waist"
+                android:background="?attr/selectableItemBackground"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_back_iv"
                 app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_stomach_iv"
                 app:layout_constraintStart_toStartOf="@+id/fragment_community_home_stomach_iv"
@@ -316,11 +328,12 @@
                 app:layout_constraintStart_toStartOf="@+id/fragment_community_home_waist_iv"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_waist_iv" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/fragment_community_home_foot_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_community_foot"
+                android:background="?attr/selectableItemBackground"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_community_home_waist_iv"
                 app:layout_constraintEnd_toEndOf="@+id/fragment_community_home_pelvis_iv"
                 app:layout_constraintStart_toStartOf="@+id/fragment_community_home_pelvis_iv"
