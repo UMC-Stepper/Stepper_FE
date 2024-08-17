@@ -17,9 +17,21 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:text="복부 Community"
+        android:text=""
         android:textColor="@color/White"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/community_part_home_title2_tv"
+        style="@style/head_bold_18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="16dp"
+        android:text="Community"
+        android:textColor="@color/White"
+        app:layout_constraintStart_toEndOf="@id/community_part_home_title_tv"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout

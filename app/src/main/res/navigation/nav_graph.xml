@@ -517,5 +517,46 @@
             app:destination="@id/communityPartShowPostFragment" />
     </fragment>
 
+    <!-- 부위 커뮤니티 게시글 상세 보기 -->
+    <fragment
+        android:id="@+id/communityIndexPostPartFragment"
+        android:name="com.example.umc_stepper.ui.community.savedcontents.post.CommunityIndexPostPartFragment"
+        android:label="CommunityIndexPostPartFragment"
+        tools:layout="@layout/fragment_community_index_post_part"/>
+
+    <!-- 커뮤니티 목록 위클리 -->
+    <fragment
+        android:id="@+id/communityIndexWeelklyFragment"
+        android:name="com.example.umc_stepper.ui.community.savedcontents.post.CommunityIndexPostWeeklyFragment"
+        android:label="CommunityIndexWeelklyFragment"
+        tools:layout="@layout/fragment_community_index_post_weekly"/>
+
+    <!-- 부위 커뮤니티 -무물보 -->
+    <fragment
+        android:id="@+id/communityPartHomeAskFragment"
+        android:name="com.example.umc_stepper.ui.community.part.CommunityPartHomeAskFragment"
+        android:label="CommunityPartHomeAskFragment"
+        tools:layout="@layout/fragment_community_part_home_tab"/>
+
+    <!-- 부위 커뮤니티 -자유 -->
+    <fragment
+        android:id="@+id/communityPartHomeFreeFragment"
+        android:name="com.example.umc_stepper.ui.community.part.CommunityPartHomeFreeFragment"
+        android:label="CommunityPartHomeFreeFragment"
+        tools:layout="@layout/fragment_community_part_home_tab"/>
+
+    <!-- 부위 커뮤니티 -건강정보 -->
+    <fragment
+        android:id="@+id/communityPartHomeHealthFragment"
+        android:name="com.example.umc_stepper.ui.community.part.CommunityPartHomeHealthFragment"
+        android:label="CommunityPartHomeHealthFragment"
+        tools:layout="@layout/fragment_community_part_home_tab"/>
+
+    <!-- 부위 커뮤니티 -동기부여 -->
+    <fragment
+        android:id="@+id/communityPartHomeMotivationFragment"
+        android:name="com.example.umc_stepper.ui.community.part.CommunityPartHomeMotivationFragment"
+        android:label="CommunityPartHomeMotivationFragmen"
+        tools:layout="@layout/fragment_community_part_home_tab"/>
 
 </navigation>
