@@ -2,6 +2,7 @@ package com.example.umc_stepper.ui.stepper
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -59,6 +60,7 @@ class EvaluationExerciseFragment :
     lateinit var profileImage: MultipartBody.Part
     var score = 0
     private lateinit var mainActivity: MainActivity
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -73,11 +75,59 @@ class EvaluationExerciseFragment :
         mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
     }
 
+    override fun onPause() {
+        super.onPause()
+        saveSharedPreferences()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activateButton() // 초기 상태 설정
+    }
+
+    private fun deleteSharedPreferences() {
+        sharedPreferences = requireContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear()  // 모든 데이터 삭제
+        editor.apply()
+    }
+
+    private fun saveSharedPreferences() {
+        sharedPreferences = requireContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("conditionPoint", binding.fragmentEvaluationExercisePointTv.text.toString())
+        editor.putString("memo", binding.fragmentEvaluationExerciseMemoEt.text.toString())
+        editor.apply()
+    }
+
+    private fun saveDescriptionNum (description: Int) {
+        sharedPreferences = requireContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt("selectedDescription", description)
+        editor.apply()
+    }
+
+    private fun getSharedPreferences() {
+        sharedPreferences = requireContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val point = sharedPreferences.getString("conditionPoint", "")
+        val memo = sharedPreferences.getString("memo", "")
+        selectTextDescription = sharedPreferences.getInt("selectedDescription",0)
+        stateAllToggle()
+        binding.fragmentEvaluationExercisePointTv.setText(point)
+        binding.fragmentEvaluationExerciseMemoEt.setText(memo)
+    }
+
     override fun setLayout() {
         initSetting()
         lifecycleScope.launch {
             exerciseId = tokenManager.getExerciseCardId().first()?.toInt() ?: 0
         }
+
+        // 사진이 존재해야만 이전 값 매핑됨
+        if(arguments?.getString("photo_uri") != null) {
+            getSharedPreferences()
+        }
+        activateButton()
     }
 
     private fun setImageView() {
@@ -86,7 +136,6 @@ class EvaluationExerciseFragment :
         val photoUri = photoUriString?.let { Uri.parse(it) }
         photoUri?.let {
             GlobalApplication.loadImage(binding.fragmentEvaluationExercisePictureExerciseIv, it)
-            activateButton()
         }
 
         val file = photoUri?.let { getPathFromUri(requireContext(), it)?.let { File(it) } }
@@ -154,8 +203,6 @@ class EvaluationExerciseFragment :
         setList()
         setScoreText()
         setOnClickBtn()
-        activateButton() // 초기 상태 설정
-
     }
 
 
@@ -164,7 +211,8 @@ class EvaluationExerciseFragment :
         val args = arguments?.getString("photo_uri").toString()
         if(binding.fragmentEvaluationExercisePointTv.text.isNullOrEmpty().not() &&
             binding.fragmentEvaluationExerciseMemoEt.text.isNullOrEmpty().not() &&
-            args.isNullOrEmpty().not()
+            args.isNullOrEmpty().not() &&
+            selectTextDescription in 0..4
             ) {
             binding.fragmentEvaluationExerciseSuccessBt.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
             binding.fragmentEvaluationExerciseSuccessBt.isEnabled = true
@@ -209,9 +257,7 @@ class EvaluationExerciseFragment :
                 binding.fragmentEvaluationExerciseScoreTv.text = "${score}점"
             }
 
-            override fun afterTextChanged(s: Editable?) {
-                activateButton()
-            }
+            override fun afterTextChanged(s: Editable?) {}
         })
     }
 
@@ -219,22 +265,27 @@ class EvaluationExerciseFragment :
     private fun setOnClickBtn() {
         with(binding) {
             fragmentEvaluationExerciseBlur20Iv.setOnClickListener {
+                saveDescriptionNum(0)
                 selectTextDescription = 0
                 stateAllToggle()
             }
             fragmentEvaluationExerciseBlur40Iv.setOnClickListener {
+                saveDescriptionNum(1)
                 selectTextDescription = 1
                 stateAllToggle()
             }
             fragmentEvaluationExerciseBlur60Iv.setOnClickListener {
+                saveDescriptionNum(2)
                 selectTextDescription = 2
                 stateAllToggle()
             }
             fragmentEvaluationExerciseBlur80Iv.setOnClickListener {
+                saveDescriptionNum(3)
                 selectTextDescription = 3
                 stateAllToggle()
             }
             fragmentEvaluationExerciseBlur100Iv.setOnClickListener {
+                saveDescriptionNum(4)
                 selectTextDescription = 4
                 stateAllToggle()
             }
@@ -247,7 +298,8 @@ class EvaluationExerciseFragment :
             //운동아이디필요
             fragmentEvaluationExerciseSuccessBt.setOnClickListener {
                 val memo = fragmentEvaluationExerciseMemoEt.text.toString() //메모
-                val state = selectTextDescription //상태값 0 1 2 3 4
+                val state = sharedPreferences.getInt("selectedDescription",0) //상태값 0 1 2 3 4
+                Log.d("클릭","state : $state")
                 val imageUrl = profileImage //이미지
                 val point = score //점수
                 mainActivity.visibleTag()
@@ -257,7 +309,7 @@ class EvaluationExerciseFragment :
                     conditionRate = point.toString(),
                     painImage = "x",
                     painMemo = memo,
-                    painRate = selectTextDescription.toString(),
+                    painRate = state.toString(),
                     exerciseCardId = exerciseId.toString() //운동아이디
                 )
                 val rj = gson.toJson(rateDiary, RateDiaryDto::class.java)
@@ -266,7 +318,8 @@ class EvaluationExerciseFragment :
                     image = imageUrl,
                     request = rb
                 )
-                Log.d("클릭","ㅇㅇㅇㅇㅇ")
+                deleteSharedPreferences() // 평가일지 작성 정보 삭제
+                Log.d("클릭","rateDiary : $rateDiary")
                 //위의 값들 서버로 전달
             }
         }
