@@ -44,7 +44,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" >
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/activity_camera_detail_retake_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,6 +52,7 @@
                 android:layout_marginTop="17dp"
                 android:layout_marginEnd="30dp"
                 android:src="@drawable/ic_camera_detail_retake"
+                android:background="?attr/selectableItemBackground"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -62,19 +63,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:foreground="@android:color/transparent"
+                android:background="@android:color/transparent"
                 android:text="다시찍기"
                 android:textColor="@color/Purple_300"
                 app:layout_constraintEnd_toEndOf="@+id/activity_camera_detail_retake_iv"
                 app:layout_constraintStart_toStartOf="@+id/activity_camera_detail_retake_iv"
                 app:layout_constraintTop_toBottomOf="@+id/activity_camera_detail_retake_iv" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/activity_camera_detail_use_photo_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="87dp"
                 android:layout_marginStart="30dp"
                 android:src="@drawable/ic_camera_detail_use_photo"
+                android:background="?attr/selectableItemBackground"
                 app:layout_constraintBottom_toBottomOf="@+id/activity_camera_detail_retake_iv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -85,6 +89,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:foreground="@android:color/transparent"
+                android:background="@android:color/transparent"
                 android:text="사진 사용"
                 android:textColor="@color/Purple_300"
                 app:layout_constraintEnd_toEndOf="@+id/activity_camera_detail_use_photo_iv"

@@ -44,13 +44,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" >
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/activity_camera_cancel_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="42dp"
                 android:layout_marginTop="26dp"
                 android:src="@drawable/ic_camera_cancel"
+                android:background="?attr/selectableItemBackground"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
@@ -66,12 +67,13 @@
                 app:layout_constraintStart_toEndOf="@+id/activity_camera_cancel_iv"
                 app:layout_constraintTop_toTopOf="@+id/activity_camera_cancel_iv" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/activity_camera_change_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="38dp"
                 android:src="@drawable/ic_camera_change"
+                android:background="?attr/selectableItemBackground"
                 app:layout_constraintBottom_toBottomOf="@+id/activity_camera_capture_iv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/activity_camera_capture_iv" />

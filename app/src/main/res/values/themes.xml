@@ -46,8 +46,8 @@
     </style>
     <style name="Widget.AppTheme.TextView" parent="Widget.AppCompat.TextView">
         <item name="android:background">?attr/selectableItemBackground</item>
-        <item name="android:foreground">?attr/selectableItemBackground</item>
     </style>
+
 
     <!-- Splash  -->
     <!--    <style name="AppTheme.Splash" parent="Theme.UMC_Stepper">-->

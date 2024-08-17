@@ -54,6 +54,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:fontFamily="@font/pretendard_regular"
+            android:foreground="@android:color/transparent"
+            android:background="@android:color/transparent"
             android:text="@{listItem.channel_name}"
             android:textColor="@color/White"
             app:layout_constraintBottom_toBottomOf="@id/item_collocate_my_exercise_thumbnail_iv"

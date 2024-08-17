@@ -85,7 +85,7 @@ class CommunityApiDataSource @Inject constructor(
     }
 
     //GET 게시글 목록 조회
-    fun getDetailPostList(categoryName: String): Flow<BaseListResponse<CommunityMyCommentsResponseItem>> =
+    fun getDetailPostList(categoryName: String): Flow<BaseListResponse<ApiResponseListPostViewResponseItem>> =
         flow {
             val result = communityApi.getDetailPostList(categoryName)
             emit(result)

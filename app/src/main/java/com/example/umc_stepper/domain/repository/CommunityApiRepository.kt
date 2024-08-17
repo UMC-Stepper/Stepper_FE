@@ -6,6 +6,7 @@ import com.example.umc_stepper.domain.model.request.comment_controller.CommentWr
 import com.example.umc_stepper.domain.model.request.comment_controller.ReplyRequestDto
 import com.example.umc_stepper.domain.model.response.WeeklyMissionResponse
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem
+import com.example.umc_stepper.domain.model.response.post_controller.ApiResponseListPostViewResponseItem
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostViewResponse
 import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponseItem
@@ -23,7 +24,6 @@ interface CommunityApiRepository {
     suspend fun deleteCancelLike(postId: Int): Flow<BaseResponse<String>>
     suspend fun postEditPost(data : RequestBody, image : List<MultipartBody.Part>): Flow<BaseResponse<ApiResponsePostResponse>>
     suspend fun getDetailPost(postId: Int): Flow<BaseResponse<ApiResponsePostViewResponse>>
-    suspend fun getDetailPostList(categoryName: String): Flow<BaseListResponse<CommunityMyCommentsResponseItem>>
 
     //내가 작성한 글 목록 조회
     suspend fun getCommunityMyPosts(): Flow<BaseListResponse<CommunityMyPostsResponseItem>>
@@ -33,6 +33,9 @@ interface CommunityApiRepository {
 
     // 위클리 게시글 조회 API
     suspend fun getWeeklyPostList(id : Int): Flow<BaseListResponse<CommunityMyCommentsResponseItem>>
+
+    // 게시글 목록 조회
+    suspend fun getDetailPostList(categoryName : String) : Flow<BaseListResponse<ApiResponseListPostViewResponseItem>>
 
     // 주간 미션 조회 API
     suspend fun getWeeklyMission(weeklyMissionId : Int): Flow<BaseResponse<WeeklyMissionResponse>>

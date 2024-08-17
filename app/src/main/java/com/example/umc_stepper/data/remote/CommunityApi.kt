@@ -78,7 +78,7 @@ interface CommunityApi {
     @GET("/api/community/{categoryName}/posts")
     suspend fun getDetailPostList(
         @Path("categoryName") categoryName : String
-    ): BaseListResponse<CommunityMyCommentsResponseItem>
+    ): BaseListResponse<ApiResponseListPostViewResponseItem>
 
     //내가 작성한 글 목록 조회
     @GET("/api/community/my_posts")

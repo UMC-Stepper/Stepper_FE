@@ -59,7 +59,7 @@ class CommunityApiRepositoryImpl @Inject constructor(
     override suspend fun getDetailPost(postId: Int): Flow<BaseResponse<ApiResponsePostViewResponse>>
     = dataSource.getDetailPost(postId)
 
-    override suspend fun getDetailPostList(categoryName: String): Flow<BaseListResponse<CommunityMyCommentsResponseItem>>
+    override suspend fun getDetailPostList(categoryName: String): Flow<BaseListResponse<ApiResponseListPostViewResponseItem>>
     = dataSource.getDetailPostList(categoryName)
 
     // 위클리 게시글 조회 API
