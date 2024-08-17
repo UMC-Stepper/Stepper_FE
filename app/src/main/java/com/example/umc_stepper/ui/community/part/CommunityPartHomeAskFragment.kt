@@ -1,6 +1,7 @@
 package com.example.umc_stepper.ui.community.part
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -21,15 +22,19 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class CommunityPartHomeAskFragment :BaseFragment<FragmentCommunityPartHomeTabBinding>(R.layout.fragment_community_part_home_tab),
+class CommunityPartHomeAskFragment : BaseFragment<FragmentCommunityPartHomeTabBinding>(R.layout.fragment_community_part_home_tab),
     ItemClickListener {
+
     private val communityViewModel: CommunityViewModel by activityViewModels()
     private lateinit var communityPartHomeAdapter: CommunityPartHomeAdapter
+    private val part: String by lazy {
+        arguments?.getString("bodyPart").toString()
+    }
 
     override fun setLayout() {
         observeCategoryList("QnA")
         initRecyclerView()
-
+        Log.d("부위",part)
     }
 
     private fun initRecyclerView() {
@@ -37,17 +42,25 @@ class CommunityPartHomeAskFragment :BaseFragment<FragmentCommunityPartHomeTabBin
         binding.fragmentCommunityPartHomeRv.adapter = communityPartHomeAdapter
     }
 
-
-    private fun observeCategoryList(categoryName:String) {
+    private fun observeCategoryList(categoryName: String) {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 communityViewModel.getDetailPostList(categoryName)
             }
         }
+
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                communityViewModel.apiResponseListPostViewResponse.collect {
-                    communityPartHomeAdapter.submitList(it.result)
+                try {
+                    communityViewModel.apiResponseListPostViewResponse.collect { response ->
+                        val filteredItems = response.result?.filter { item ->
+                            item.subCategory == categoryName && item.bodyPart == part
+                        }
+                        Log.d("부위홈", filteredItems.toString())
+                        communityPartHomeAdapter.submitList(filteredItems)
+                    }
+                } catch (e: Exception) {
+                    Log.e("부위홈 에러", "Error: ${e.message}")
                 }
             }
         }
@@ -58,6 +71,7 @@ class CommunityPartHomeAskFragment :BaseFragment<FragmentCommunityPartHomeTabBin
             val args = Bundle().apply {
                 putString("partPostId", item.id.toString())
             }
+            // 추후 상세 화면을 표시하는 로직 추가
         }
     }
 }
