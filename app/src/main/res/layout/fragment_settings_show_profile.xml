@@ -2,6 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="userInfo"
+            type="com.example.umc_stepper.domain.model.response.member_controller.UserResponse" />
+    </data>
     
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -36,6 +42,7 @@
             android:layout_height="80dp"
             android:layout_marginTop="40dp"
             android:background="@color/White"
+            app:imageUrl2="@{userInfo.profileImage}"
             app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +71,7 @@
             android:paddingStart="24dp"
             android:background="@drawable/radius_corners_50dp"
             android:backgroundTint="@color/Purple_Black_BG_2"
-            android:text="Yen"
+            android:text="@{userInfo.nickName}"
             android:gravity="center|start"
             android:textColor="@color/White"
             app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +101,7 @@
             android:backgroundTint="@color/Purple_Black_BG_2"
             android:gravity="center|start"
             android:paddingStart="24dp"
-            android:text="choo6291@naver.com"
+            android:text="@{userInfo.email}"
             android:textColor="@color/White"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
