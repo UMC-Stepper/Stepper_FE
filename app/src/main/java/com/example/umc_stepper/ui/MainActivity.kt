@@ -57,13 +57,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         R.id.communityMyScrapFragment,
         R.id.communityIndexFragment,
         R.id.communityIndexPostFragment,
-        //R.id.communityIndexPostPartFragment,
-        //R.id.communityIndexWeeklyFragment,
+        R.id.communityIndexPostPartFragment,
+        R.id.communityIndexWeelklyFragment,
         R.id.communityPartHomeFragment,
-        //R.id.communityPartAskFragment,
-        //R.id.communityPartFreeFragment,
-        //R.id.communityPartHomeHealthFragment,
-        //R.id.communityPartHomeMotivationFragment,
+        R.id.communityPartHomeAskFragment,
+        R.id.communityPartHomeFreeFragment,
+        R.id.communityPartHomeHealthFragment,
+        R.id.communityPartHomeMotivationFragment,
         R.id.communityPartShowPostFragment
     )
 
