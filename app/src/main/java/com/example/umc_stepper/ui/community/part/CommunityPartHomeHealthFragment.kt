@@ -2,6 +2,7 @@ package com.example.umc_stepper.ui.community.part
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -62,6 +63,9 @@ class CommunityPartHomeHealthFragment : BaseFragment<FragmentCommunityPartHomeTa
 
                         // 데이터가 없는 경우 로그 확인
                         if (filteredItems.isEmpty()) {
+                            binding.communityPartHomeTabTv.text="건강정보 글이 없습니다."
+                            binding.communityPartHomeTabTv.visibility= View.VISIBLE
+                            binding.fragmentCommunityPartHomeRv.visibility= View.GONE
                             Log.d("부위홈", "아이템이 없음.")
                         }
                     }

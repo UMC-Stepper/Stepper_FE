@@ -69,6 +69,9 @@ class CommunityPartHomeAskFragment : BaseFragment<FragmentCommunityPartHomeTabBi
 
                         // 데이터가 없는 경우 로그 확인
                         if (filteredItems.isEmpty()) {
+                            binding.communityPartHomeTabTv.text="QnA 글이 없습니다."
+                            binding.communityPartHomeTabTv.visibility=View.VISIBLE
+                            binding.fragmentCommunityPartHomeRv.visibility=View.GONE
                             Log.d("부위홈", "아이템이 없음.")
                         }
                     }
