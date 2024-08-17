@@ -166,10 +166,7 @@ class SettingsEditProfileFragment : BaseFragment<FragmentSettingsEditProfileBind
     }
 
     override fun onBtnClick2() {
-        val shapeAppearanceModel = ShapeAppearanceModel.builder()
-            .setAllCornerSizes(ShapeAppearanceModel.PILL) // 50%로 둥근 모서리를 적용
-            .build()
-        binding.fragmentSettingsEditProfileIv.shapeAppearanceModel = shapeAppearanceModel
+        GlobalApplication.loadProfileImage(binding.fragmentSettingsEditProfileIv, R.drawable.shape_rounded_square_white_18dp)
     }
 
 }
