@@ -16,13 +16,14 @@
             android:layout_height="wrap_content"
             android:background="@color/Purple_Black_BG_2">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/fragment_evaluation_exercise_today_back_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:src="@drawable/ic_back"
+                android:background="?attr/selectableItemBackground"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,23 +56,25 @@
                 app:layout_constraintStart_toEndOf="@+id/fragment_evaluation_exercise_today_title_tv"
                 app:layout_constraintTop_toTopOf="@+id/fragment_evaluation_exercise_today_title_tv" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/fragment_evaluation_exercise_today_go_today_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="11dp"
-                android:background="@drawable/ic_toolbar_today"
+                android:src="@drawable/ic_toolbar_today"
+                android:background="?attr/selectableItemBackground"
                 app:layout_constraintEnd_toStartOf="@+id/fragment_evaluation_exercise_today_go_stepper_iv"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/fragment_evaluation_exercise_today_go_stepper_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="24dp"
-                android:background="@drawable/ic_toolbar_stepper"
+                android:src="@drawable/ic_toolbar_stepper"
+                android:background="?attr/selectableItemBackground"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -565,9 +568,9 @@
                     android:layout_marginTop="44dp"
                     android:layout_marginBottom="42dp"
                     android:layout_marginEnd="24dp"
-                    android:background="@drawable/shape_rounded_stroke_square_purple700_41dp_stroke_1dp"
+                    android:background="@drawable/shape_rounded_square_purple700_60dp"
                     android:text="완료하기"
-                    android:textColor="@color/Purple_700"
+                    android:textColor="@color/White"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_picture_exercise_iv"
                     app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_picture_exercise_iv"

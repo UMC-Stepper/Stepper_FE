@@ -119,12 +119,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/fragment_community_weekly_show_post_profile_iv" />
 
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/fragment_community_weekly_show_thumbs_up_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
                     android:src="@drawable/ic_thumbs_up"
+                    android:background="?attr/selectableItemBackground"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_community_weekly_show_post_date_tv"
                     app:layout_constraintEnd_toStartOf="@+id/fragment_community_weekly_show_thumbs_up_tv"
                     app:layout_constraintTop_toTopOf="@+id/fragment_community_weekly_show_post_date_tv" />
@@ -136,6 +137,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="12dp"
+                    android:foreground="@android:color/transparent"
+                    android:background="@android:color/transparent"
                     android:text="@{String.valueOf(apiResponsePostViewResponse.likes)}"
                     android:textColor="@color/Yellow_300"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_community_weekly_show_thumbs_up_iv"
@@ -310,12 +313,13 @@
                     app:layout_constraintStart_toEndOf="@+id/fragment_community_weekly_show_post_anonymous_tv"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/fragment_community_weekly_show_post_comment_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
                     android:src="@drawable/ic_post_comment"
+                    android:background="?attr/selectableItemBackground"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

@@ -299,7 +299,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_add_exercise_step1_tv">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/fragment_add_exercise_none_add_step1_plus_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -307,6 +307,7 @@
                     android:layout_marginTop="29dp"
                     android:layout_marginEnd="143dp"
                     android:src="@drawable/ic_today_home_plus_exercise_card"
+                    android:background="?attr/selectableItemBackground"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -319,6 +320,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="운동 영상 추가하기"
+                    android:foreground="@android:color/transparent"
+                    android:background="@android:color/transparent"
                     app:layout_constraintEnd_toEndOf="@+id/fragment_add_exercise_none_add_step1_plus_iv"
                     app:layout_constraintStart_toStartOf="@+id/fragment_add_exercise_none_add_step1_plus_iv"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_add_exercise_none_add_step1_plus_iv" />
@@ -420,7 +423,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_add_exercise_step2_tv">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/fragment_add_exercise_none_add_step2_plus_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -428,6 +431,7 @@
                     android:layout_marginTop="29dp"
                     android:layout_marginEnd="143dp"
                     android:src="@drawable/ic_today_home_plus_exercise_card"
+                    android:background="?attr/selectableItemBackground"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -440,6 +444,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="운동 영상 추가하기"
+                    android:foreground="@android:color/transparent"
+                    android:background="@android:color/transparent"
                     app:layout_constraintEnd_toEndOf="@+id/fragment_add_exercise_none_add_step2_plus_iv"
                     app:layout_constraintStart_toStartOf="@+id/fragment_add_exercise_none_add_step2_plus_iv"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_add_exercise_none_add_step2_plus_iv" />
@@ -538,7 +544,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_add_exercise_step3_tv">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/fragment_add_exercise_none_add_step3_plus_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -546,6 +552,7 @@
                     android:layout_marginTop="29dp"
                     android:layout_marginEnd="143dp"
                     android:src="@drawable/ic_today_home_plus_exercise_card"
+                    android:background="?attr/selectableItemBackground"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -558,6 +565,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="운동 영상 추가하기"
+                    android:foreground="@android:color/transparent"
+                    android:background="@android:color/transparent"
                     app:layout_constraintEnd_toEndOf="@+id/fragment_add_exercise_none_add_step3_plus_iv"
                     app:layout_constraintStart_toStartOf="@+id/fragment_add_exercise_none_add_step3_plus_iv"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_add_exercise_none_add_step3_plus_iv" />

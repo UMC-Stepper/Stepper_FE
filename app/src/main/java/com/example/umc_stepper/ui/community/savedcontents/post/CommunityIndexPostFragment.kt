@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.umc_stepper.R
+import com.example.umc_stepper.databinding.FragmentCommunityIndexPostBinding
 import com.example.umc_stepper.ui.MainActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -18,6 +19,7 @@ class CommunityIndexPostFragment : Fragment() {
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
     private lateinit var mainActivity: MainActivity
+    private lateinit var binding: FragmentCommunityIndexPostBinding
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -27,12 +29,14 @@ class CommunityIndexPostFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = FragmentCommunityIndexPostBinding.inflate(inflater)
         val view:View = inflater.inflate(R.layout.fragment_community_index_post, container, false)
         viewPager = view.findViewById(R.id.community_index_post_vp)
         tabLayout = view.findViewById(R.id.community_index_post_menu_tl)
