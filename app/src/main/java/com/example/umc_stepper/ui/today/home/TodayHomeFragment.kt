@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.today.home
 
+import android.content.Context
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -11,7 +12,10 @@ import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentTodayHomeBinding
 import com.example.umc_stepper.domain.model.local.WeekCalendar
+import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.today.TodayViewModel
+import com.example.umc_stepper.utils.enums.LoadState
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
@@ -26,6 +30,11 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
     private lateinit var todayHomeExerciseCardAdapter: TodayHomeExerciseCardAdapter
     private val todayViewModel : TodayViewModel by activityViewModels()
     private var calendarList = ArrayList<WeekCalendar>()
+    private lateinit var mainActivity: MainActivity
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
 
     override fun setLayout() {
         initSettings()
@@ -143,9 +152,16 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
 
         // 평가 일지
         binding.fragmentTodayHomeEvaluationLogConstraint.setOnClickListener {
-            val action = TodayHomeFragmentDirections.actionTodayHomeFragmentToEvaluationLogFragment()
-            findNavController().navigateSafe(action.actionId)
+            lifecycleScope.launch {
+                todayViewModel.loadEvaluationLogData() // 데이터 로드 시작
+                todayViewModel.dataLoadState.collectLatest { state ->
+                    if (state == LoadState.LOADING) {
+                        mainActivity.showProgress()
+                        val action = TodayHomeFragmentDirections.actionTodayHomeFragmentToEvaluationLogFragment()
+                        findNavController().navigateSafe(action.actionId)
+                    }
+                }
+            }
         }
-
     }
 }

@@ -1,6 +1,8 @@
 package com.example.umc_stepper.ui.today
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.umc_stepper.BuildConfig
@@ -28,6 +30,7 @@ import com.example.umc_stepper.domain.repository.TodayApiRepository
 import com.example.umc_stepper.domain.repository.YoutubeApiRepository
 import com.example.umc_stepper.utils.enums.LoadState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -106,28 +109,45 @@ class TodayViewModel @Inject constructor(
     val bodyPart: StateFlow<String> = _bodyPart
 
     private val _exerciseIdList = MutableStateFlow(listOf<Int>())
-    val exerciseIdList : StateFlow<List<Int>> = _exerciseIdList
+    val exerciseIdList: StateFlow<List<Int>> = _exerciseIdList
 
-    fun addExerciseList(eid : Int){
+    private val _dataLoadState = MutableStateFlow(LoadState.SUCCESS)
+    val dataLoadState: StateFlow<LoadState> get() = _dataLoadState
+
+    fun loadEvaluationLogData() {
+        viewModelScope.launch {
+            val loadState = LoadState.LOADING
+            _dataLoadState.value = loadState
+        }
+    }
+
+    fun successEvaluationLogData() {
+        viewModelScope.launch {
+            val loadState = LoadState.SUCCESS
+            _dataLoadState.value = loadState
+        }
+    }
+
+    fun addExerciseList(eid: Int) {
         val updatedList = _exerciseIdList.value.toMutableList()
         updatedList.add(eid)
         _exerciseIdList.value = updatedList
     }
 
-    fun updateExerciseList(eid : Int, pos : Int){
+    fun updateExerciseList(eid: Int, pos: Int) {
         val editList = _exerciseIdList.value.toMutableList()
         editList[pos] = eid
         _exerciseIdList.value = editList
     }
 
-    fun clearExerciseList(){
+    fun clearExerciseList() {
         val emptyList = emptyList<Int>()
         _exerciseIdList.value = emptyList
     }
 
-    fun getExerciseList() : List<Int>{
-        val list : ArrayList<Int> = arrayListOf()
-        for(i in 0..<_exerciseIdList.value.size){
+    fun getExerciseList(): List<Int> {
+        val list: ArrayList<Int> = arrayListOf()
+        for (i in 0..<_exerciseIdList.value.size) {
             list.add(_exerciseIdList.value[i])
         }
         return list.toList()
@@ -146,7 +166,7 @@ class TodayViewModel @Inject constructor(
         Log.d("ViewModel", "Step added. New size: ${currentList.size}")
     }
 
-    fun updateStep(stepCard: CheckExerciseResponse , pos : Int) {
+    fun updateStep(stepCard: CheckExerciseResponse, pos: Int) {
         val currentList = _setExerciseStep.value.toMutableList()
         currentList[pos - 1] = stepCard
         _setExerciseStep.value = currentList

@@ -11,8 +11,10 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
@@ -25,8 +27,10 @@ import com.example.umc_stepper.ui.community.CommunityViewModel
 import com.example.umc_stepper.ui.login.LoginViewModel
 import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.example.umc_stepper.ui.today.TodayViewModel
+import com.example.umc_stepper.utils.enums.LoadState
 import com.example.umc_stepper.utils.extensions.navigateToTopLevelDestination
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
@@ -72,6 +76,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         setViewModel()
         setNavigation()
+        observeLifeCycle()
     }
 
     // 카메라 액티비티에서 사진 사용시 메인 액티비티로 이동한 뒤, fragmentEvaluationExercise로 이동
@@ -332,6 +337,27 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 R.color.Purple_Black_BG_2
             )
         )
+    }
+
+    fun showProgress(){
+        binding.pg.visibility = View.VISIBLE
+    }
+    fun hideProgress(){
+        binding.pg.visibility = View.GONE
+    }
+
+    fun observeLifeCycle(){
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                todayViewModel.dataLoadState.collectLatest { state ->
+                    when(state) {
+                        LoadState.LOADING -> showProgress()
+                        LoadState.SUCCESS, LoadState.ERROR -> hideProgress()
+                        else ->{}
+                    }
+                }
+            }
+        }
     }
 
 }
