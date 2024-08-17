@@ -11,12 +11,14 @@ import com.example.umc_stepper.domain.model.response.post_controller.CommunityMy
 import com.example.umc_stepper.utils.GlobalApplication
 import com.example.umc_stepper.utils.listener.ItemClickListener
 
-class CommunityPartHomeAdapter(private val itemClickListener: ItemClickListener) : BaseAdapter<ApiResponseListPostViewResponseItem, ItemCommunityPartHomePostBinding> (
+class CommunityPartHomeAdapter(
+    private val itemClickListener: ItemClickListener
+) : BaseAdapter<ApiResponseListPostViewResponseItem, ItemCommunityPartHomePostBinding>(
     BaseDiffCallback(
-    itemsTheSame = { oldItem, newItem -> oldItem == newItem},
-    contentsTheSame = { oldItem, newItem -> oldItem == newItem }
+        itemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id }, // 아이템의 고유 ID로 비교
+        contentsTheSame = { oldItem, newItem -> oldItem == newItem } // 전체 내용 비교
     )
-){
+) {
     override val layoutId: Int
         get() = R.layout.item_community_part_home_post
 
@@ -25,7 +27,17 @@ class CommunityPartHomeAdapter(private val itemClickListener: ItemClickListener)
         binding.root.setOnClickListener {
             itemClickListener.onClick(item)
         }
-        GlobalApplication.loadCropRoundedSquareImage(binding.root.context,binding.itemWeeklyHomeDescIv,item.imageUrl,12)
+        loadImage(binding, item.imageUrl)
+    }
+
+    private fun loadImage(binding: ItemCommunityPartHomePostBinding, imageUrl: String?) {
+        if (imageUrl != null) {
+            GlobalApplication.loadCropRoundedSquareImage(
+                binding.root.context,
+                binding.itemWeeklyHomeDescIv,
+                imageUrl, 12
+            )
+        }
     }
 }
 

@@ -204,7 +204,7 @@ class CommunityViewModel @Inject constructor(
             try {
                 communityApiRepository.getDetailPostList(categoryName).collect {
                     _apiResponseListPostViewResponse.value = it
-                    Log.d("CommunityViewModel", "_apiResponseListPostViewResponse : $it")
+                    Log.d("게시글 목록 조회", "_apiResponseListPostViewResponse : $it")
                 }
             } catch (e:Exception) {
                 Log.e("getDetailPostList is Error", e.message.toString())

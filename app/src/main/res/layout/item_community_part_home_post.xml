@@ -71,7 +71,7 @@
             android:clickable="false"
             android:foreground="@android:color/transparent"
             android:background="@android:color/transparent"
-            android:text="@{partPostItem.likes}"
+            android:text='@{Integer.toString(partPostItem.likes)}'
             style="@style/body_regular_12"
             android:textColor="@color/Yellow_300"
             app:layout_constraintStart_toEndOf="@+id/item_weekly_home_thumbs_up_iv"
@@ -95,7 +95,7 @@
             android:clickable="false"
             android:foreground="@android:color/transparent"
             android:background="@android:color/transparent"
-            android:text="@{partPostItem.scraps}"
+            android:text='@{Integer.toString(partPostItem.scraps)}'
             style="@style/body_regular_12"
             android:textColor="@color/Yellow_300"
             app:layout_constraintStart_toEndOf="@+id/item_weekly_home_scraps_up_iv"
@@ -119,7 +119,7 @@
             android:clickable="false"
             android:foreground="@android:color/transparent"
             android:background="@android:color/transparent"
-            android:text="@{partPostItem.commentsCount}"
+            android:text='@{Integer.toString(partPostItem.commentsCount)}'
             style="@style/body_regular_12"
             android:textColor="@color/Yellow_300"
             app:layout_constraintStart_toEndOf="@+id/item_weekly_home_reply_up_iv"
