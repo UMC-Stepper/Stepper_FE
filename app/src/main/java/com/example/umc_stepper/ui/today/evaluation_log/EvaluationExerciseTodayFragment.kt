@@ -8,6 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
@@ -16,10 +19,15 @@ import com.example.umc_stepper.databinding.FragmentEvaluationExerciseTodayBindin
 import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResponse
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.stepper.StepperViewModel
+import com.example.umc_stepper.ui.today.TodayViewModel
+import com.example.umc_stepper.ui.today.add.AddExerciseSelectScrapFragmentDirections
 import com.example.umc_stepper.utils.GlobalApplication
+import com.example.umc_stepper.utils.enums.LoadState
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 //앞 화면에서 받은 리스트로 조작해야 함 , 평가 일지 조회
@@ -36,10 +44,16 @@ class EvaluationExerciseTodayFragment :
     private var selectTextDescription = 0
     private var profileImage = ""
     private var score = 0
+    private val todayViewModel: TodayViewModel by activityViewModels()
     private lateinit var args: Bundle
     private lateinit var selectedDate: String
     private lateinit var diaryListValue: String
     private lateinit var diaryList: List<RateDiaryResponse>
+    private lateinit var mainActivity: MainActivity
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
 
     private fun setTitle() {
         if (diaryList.isNotEmpty()) {
@@ -71,13 +85,28 @@ class EvaluationExerciseTodayFragment :
     }
 
     private fun initSetting() {
+        setList()
         setTitle()
         initScreen()
         setObserver()
         setOnClickBtn()
+        todayViewModel.successEvaluationLogData()
     }
 
     private fun setObserver() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                todayViewModel.dataLoadState.collectLatest {
+                    if (it == LoadState.LOADING) {
+                        mainActivity.showProgress()
+                    } else {
+                        mainActivity.hideProgress()
+                    }
+                }
+            }
+        }
+
+
         if (diaryList.isNotEmpty()) {
             binding.fragmentEvaluationExerciseScoreTv.text =
                 diaryList[0].conditionRate.toString()
@@ -87,6 +116,7 @@ class EvaluationExerciseTodayFragment :
                 diaryList[0].conditionRate
             binding.fragmentEvaluationExerciseMemoEt.text =
                 diaryList[0].painMemo
+            setDescription(diaryList[0].painRate)
             GlobalApplication.loadCropRoundedSquareImage(
                 context = requireContext(),
                 source = diaryList[0].painImage,
@@ -184,31 +214,59 @@ class EvaluationExerciseTodayFragment :
 
     private fun setOnClickBtn() {
         // 뒤로 가기
-        binding.fragmentEvaluationExerciseTodayBackIv.setOnClickListener {
-            findNavController().popBackStack()
-        }
+        with(binding) {
+            binding.fragmentEvaluationExerciseSuccessBt.setOnClickListener {
+                todayViewModel.loadEvaluationLogData()
+                mainActivity.showProgress()
+                val action =
+                    EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToEvaluationLogFragment()
+                findNavController().navigateSafe(action.actionId)
+            }
 
-        // 투데이 버튼
-        binding.fragmentEvaluationExerciseTodayGoTodayIv.setOnClickListener {
-            val action =
-                EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToTodayHomeFragment()
-            findNavController().navigateSafe(action.actionId)
-        }
+            // 투데이 버튼
+            binding.fragmentEvaluationExerciseTodayGoTodayIv.setOnClickListener {
+                val action =
+                    EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToTodayHomeFragment()
+                findNavController().navigateSafe(action.actionId)
+            }
 
-        // 스테퍼 버튼
-        binding.fragmentEvaluationExerciseTodayGoStepperIv.setOnClickListener {
-            val action =
-                EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToStepperFragment()
-            findNavController().navigateSafe(action.actionId)
+            // 스테퍼 버튼
+            binding.fragmentEvaluationExerciseTodayGoStepperIv.setOnClickListener {
+                val action =
+                    EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToStepperFragment()
+                findNavController().navigateSafe(action.actionId)
 
-            with(binding) {
+
                 fragmentEvaluationExerciseSuccessBt.setOnClickListener {
+                    todayViewModel.loadEvaluationLogData()
+                    mainActivity.showProgress()
                     val action =
                         EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToEvaluationLogFragment()
                     findNavController().navigateSafe(action.actionId)
                 }
             }
         }
+        popBack()
+    }
+
+    private fun popBack() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    todayViewModel.loadEvaluationLogData()
+                    mainActivity.showProgress()
+                    val action =
+                        EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToEvaluationLogFragment()
+                    findNavController().navigateSafe(action.actionId)
+                }
+            })
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+        todayViewModel.loadEvaluationLogData()
     }
 
 }
