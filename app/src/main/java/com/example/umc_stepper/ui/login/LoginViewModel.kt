@@ -28,6 +28,22 @@ class LoginViewModel @Inject constructor(
     private val _loginData = MutableStateFlow<BaseResponse<String>>(BaseResponse())
     var loginData : StateFlow<BaseResponse<String>> = _loginData
 
+    private val _userInfo = MutableStateFlow<BaseResponse<UserResponse>>(BaseResponse())
+    var userInfo: StateFlow<BaseResponse<UserResponse>> = _userInfo
+
+    // 회원 정보 조회 API
+    fun getUserInfo() {
+        viewModelScope.launch {
+            try {
+                mainApiRepository.getUserInfo().collect {
+                    _userInfo.value = it
+                }
+            } catch (e: Exception) {
+                Log.e("getUserInfo", "Error")
+            }
+        }
+    }
+
     fun postSignUpInfo(userDto: RequestBody,profileImage : MultipartBody.Part) {
         viewModelScope.launch {
             try {

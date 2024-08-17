@@ -1,6 +1,10 @@
 package com.example.umc_stepper.ui.settings
 
 import android.content.Intent
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
@@ -8,12 +12,16 @@ import com.example.umc_stepper.databinding.FragmentSettingsHomeBinding
 import com.example.umc_stepper.ui.community.CommunityDialog
 import com.example.umc_stepper.ui.community.CommunityDialogInterface
 import com.example.umc_stepper.ui.login.LoginActivity
+import com.example.umc_stepper.ui.login.LoginViewModel
 import com.example.umc_stepper.utils.enums.DialogType
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SettingsHomeFragment : BaseFragment<FragmentSettingsHomeBinding>(R.layout.fragment_settings_home),
     CommunityDialogInterface {
+
+    private val loginViewModel : LoginViewModel by activityViewModels()
 
     private lateinit var communityDialog: CommunityDialog
     override fun setLayout() {
@@ -36,6 +44,22 @@ class SettingsHomeFragment : BaseFragment<FragmentSettingsHomeBinding>(R.layout.
         binding.settingsMenu3DeleteAccountIb.setOnClickListener {
             findNavController().navigateSafe(R.id.action_settingsFragment_to_settingExitFragment)
         }
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                loginViewModel.getUserInfo()
+                loginViewModel.userInfo.collect {
+                    privateGetUserInfo()
+                }
+            }
+        }
+    }
+
+    private suspend fun privateGetUserInfo() {
+        binding.userInfo = loginViewModel.userInfo.value.result
     }
 
     private fun updateToggleText(isChecked: Boolean) {
