@@ -41,18 +41,20 @@ class CommunityPartHomeFragment : Fragment(){
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_community_part_home, container, false)
         updateToolbar()
-        var bodyPart = arguments?.getString("bodyPart").toString()
-        bodyPart = when (bodyPart) {
+        var category2 = arguments?.getString("bodyPart").toString()
+        Log.d("카테고리",category2)
+        var category = arguments?.getString("bodyPart").toString()
+        category = when (category) {
             "무릎,다리" -> "무릎다리"
             "어깨,팔" -> "어깨팔"
             else -> {
-                bodyPart
+                category
             }
         }
         titlePart = view.findViewById(R.id.community_part_home_title_tv)
         viewPager = view.findViewById(R.id.community_part_home_vp)
         tabLayout = view.findViewById(R.id.community_part_home_tl)
-        titlePart.text = bodyPart
+        titlePart.text = category2
         return view
     }
 
