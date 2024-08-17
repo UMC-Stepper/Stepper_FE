@@ -85,13 +85,14 @@
             app:layout_constraintStart_toEndOf="@id/settings_profile_iv"
             app:layout_constraintTop_toBottomOf="@id/settings_name_tv" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/settings_menu1_ib"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="121dp"
             android:layout_marginEnd="24dp"
-            android:background="@drawable/ic_setting_right_arrow_btn"
+            android:src="@drawable/ic_setting_right_arrow_btn"
+            android:background="?attr/selectableItemBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -190,7 +191,7 @@
             app:layout_constraintStart_toEndOf="@id/settings_menu3_1_iv"
             app:layout_constraintTop_toBottomOf="@id/settings_menu3_tv" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/settings_menu3_logout_ib"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -222,13 +223,14 @@
             app:layout_constraintStart_toEndOf="@id/settings_menu3_1_iv"
             app:layout_constraintTop_toBottomOf="@id/settings_menu3_1_iv" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/settings_menu3_delete_account_ib"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
-            android:background="@drawable/ic_setting_right_arrow_btn"
+            android:src="@drawable/ic_setting_right_arrow_btn"
+            android:background="?attr/selectableItemBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/settings_menu3_1_iv" />
 
