@@ -9,6 +9,8 @@ import com.example.umc_stepper.domain.model.request.comment_controller.CommentWr
 import com.example.umc_stepper.domain.model.request.comment_controller.ReplyRequestDto
 import com.example.umc_stepper.domain.model.response.WeeklyMissionResponse
 import com.example.umc_stepper.domain.model.response.comment_controller.CommentResponseItem
+import com.example.umc_stepper.domain.model.response.post_controller.ApiResponseListPostViewResponse
+import com.example.umc_stepper.domain.model.response.post_controller.ApiResponseListPostViewResponseItem
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostViewResponse
 import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponseItem
@@ -53,6 +55,10 @@ class CommunityViewModel @Inject constructor(
     // 게시글 상세 조회
     private val _apiResponsePostViewResponse = MutableStateFlow<BaseResponse<ApiResponsePostViewResponse>>(BaseResponse())
     val apiResponsePostViewResponse : StateFlow<BaseResponse<ApiResponsePostViewResponse>> = _apiResponsePostViewResponse
+
+    // 게시글 목록 조회
+    private val _apiResponseListPostViewResponse = MutableStateFlow<BaseListResponse<ApiResponseListPostViewResponseItem>>(BaseListResponse())
+    val apiResponseListPostViewResponse : StateFlow<BaseListResponse<ApiResponseListPostViewResponseItem>> = _apiResponseListPostViewResponse
 
     // 댓글 작성
     private val _commentWriteResponse = MutableStateFlow<BaseResponse<CommentResponseItem>>(BaseResponse())
@@ -188,6 +194,20 @@ class CommunityViewModel @Inject constructor(
                 }
             } catch (e:Exception) {
                 Log.e("getDetailPost is Error", e.message.toString())
+            }
+        }
+    }
+
+    // 게시글 목록 조회
+    fun getDetailPostList(categoryName : String) {
+        viewModelScope.launch {
+            try {
+                communityApiRepository.getDetailPostList(categoryName).collect {
+                    _apiResponseListPostViewResponse.value = it
+                    Log.d("CommunityViewModel", "_apiResponseListPostViewResponse : $it")
+                }
+            } catch (e:Exception) {
+                Log.e("getDetailPostList is Error", e.message.toString())
             }
         }
     }
