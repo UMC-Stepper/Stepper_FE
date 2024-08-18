@@ -47,9 +47,7 @@ class CommunityMyCommentsFragment : BaseFragment<FragmentCommunityMyCommentsBind
 
         // 내가 작성한 댓글의 게시글 조회 API 호출
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                communityViewModel.getCommunityMyComments()
-            }
+            communityViewModel.getCommunityMyComments()
         }
 
         lifecycleScope.launch {
