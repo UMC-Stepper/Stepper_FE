@@ -9,12 +9,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.umc_stepper.R
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.community.CommunityDialog
 import com.example.umc_stepper.ui.community.CommunityDialogInterface
+import com.example.umc_stepper.ui.community.savedcontents.comments.CommunityMyCommentsFragmentDirections
 import com.example.umc_stepper.ui.community.savedcontents.post.PagerFragmentStateAdapter
+import com.example.umc_stepper.utils.extensions.navigateSafe
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -24,6 +28,8 @@ class CommunityPartHomeFragment : Fragment() {
     private lateinit var tabLayout: TabLayout
     private lateinit var titlePart: TextView
     private lateinit var mainActivity: MainActivity
+    private lateinit var floatButton: FloatingActionButton
+    private lateinit var subCategory: String
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -85,7 +91,18 @@ class CommunityPartHomeFragment : Fragment() {
                 3 -> "동기부여"
                 else -> "Tab ${position + 1}"
             }
+            subCategory=tab.text.toString()
         }.attach()
+
+        //fab bodyPart, subCategory 넘기기
+        floatButton.setOnClickListener {
+            val args = Bundle().apply {
+                putString("bodyPart", category)
+                putString("subCategory",subCategory)
+            }
+            val action = CommunityPartHomeFragmentDirections.actionCommunityPartHomeFragmentToWeeklySegmentEditFragment()
+            findNavController().navigateSafe(action.actionId, args)
+        }
     }
 
     private fun updateToolbar() {

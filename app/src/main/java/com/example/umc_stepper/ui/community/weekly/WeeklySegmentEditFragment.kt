@@ -45,6 +45,8 @@ class WeeklySegmentEditFragment :
     private lateinit var communityDialog: CommunityDialog
     private lateinit var galleryForResult: ActivityResultLauncher<Intent>
     private lateinit var uploadImgAdapter: WeeklyEditImageAdapter
+    private lateinit var bodyPart:String
+    private lateinit var subCategory: String
 
     private var selectedRemoveItemId = 0
     private val communityViewModel: CommunityViewModel by activityViewModels()
@@ -58,6 +60,8 @@ class WeeklySegmentEditFragment :
     }
 
     override fun setLayout() {
+        bodyPart = arguments?.getString("bodyPart").toString() //무릎,다리->무릎다리 로 오도록 이미 처리되어있음.
+        subCategory = arguments?.getString("subCategory").toString() //QnA, 건강정보, 자유토크, 동기부여
         updateMainToolbar()
         initTabLayout()
         initRecyclerView()
