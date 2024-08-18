@@ -1,54 +1,55 @@
 package com.example.umc_stepper.ui.community.part
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.umc_stepper.R
-import com.example.umc_stepper.ui.MainActivity
-import com.example.umc_stepper.ui.community.CommunityDialog
-import com.example.umc_stepper.ui.community.CommunityDialogInterface
-import com.example.umc_stepper.ui.community.savedcontents.comments.CommunityMyCommentsFragmentDirections
+import com.example.umc_stepper.base.BaseFragment
+import com.example.umc_stepper.databinding.FragmentCommunityPartHomeBinding
 import com.example.umc_stepper.ui.community.savedcontents.post.PagerFragmentStateAdapter
-import com.example.umc_stepper.utils.extensions.navigateSafe
+import com.example.umc_stepper.ui.community.weekly.CommunityWeeklyHomeFragmentDirections
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class CommunityPartHomeFragment : Fragment() {
+class CommunityPartHomeFragment : BaseFragment<FragmentCommunityPartHomeBinding>(R.layout.fragment_community_part_home) {
 
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
     private lateinit var titlePart: TextView
-    private lateinit var mainActivity: MainActivity
     private lateinit var floatButton: FloatingActionButton
     private lateinit var subCategory: String
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mainActivity = context as MainActivity
+    override fun setLayout() {
+        setButton()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val view: View = inflater.inflate(R.layout.fragment_community_part_home, container, false)
-        updateToolbar()
-        floatButton = view.findViewById(R.id.fragment_community_weekly_home_fab)
+    private fun initView() {
+        floatButton = binding.fragmentCommunityWeeklyHomeFab
+        titlePart = binding.communityPartHomeTitleTv
+        viewPager = binding.communityPartHomeVp
+        tabLayout = binding.communityPartHomeTl
+    }
 
-        titlePart = view.findViewById(R.id.community_part_home_title_tv)
-        viewPager = view.findViewById(R.id.community_part_home_vp)
-        tabLayout = view.findViewById(R.id.community_part_home_tl)
+    private fun setButton() {
+        binding.communityPartHomeToolbarBackIv.setOnClickListener {
+            val action = CommunityPartHomeFragmentDirections.actionCommunityPartHomeFragmentToCommunityHomeFragment()
+            findNavController().navigate(action.actionId)
+        }
 
-        return view
+        // 검색 화면으로 이동
+        binding.communityPartHomeToolbarGoSearch.setOnClickListener {
+            val action = CommunityPartHomeFragmentDirections.actionCommunityPartHomeFragmentToCommunitySearchFragment()
+            findNavController().navigate(action.actionId)
+        }
+
+        // 메뉴 화면으로 이동
+        binding.communityPartHomeToolbarGoMenu.setOnClickListener {
+            val action = CommunityPartHomeFragmentDirections.actionCommunityPartHomeFragmentToCommunityIndexFragment()
+            findNavController().navigate(action.actionId)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -106,10 +107,4 @@ class CommunityPartHomeFragment : Fragment() {
         }
     }
 
-    private fun updateToolbar() {
-        mainActivity.updateToolbarTitle("Community")
-        mainActivity.updateToolbarLeftImg(R.drawable.ic_toolbar_community_home)
-        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_community_search)
-        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_community_menu)
-    }
 }
