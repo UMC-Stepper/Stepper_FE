@@ -186,6 +186,17 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
         }
     }
 
+    // 위클리 미션 / 부위 게시판 별 Title 설정 함수
+    private fun setPostTitle(bodyPart: String?, weeklyMissionTitle: String?) {
+        if(bodyPart.isNullOrEmpty().not()) {
+            binding.fragmentCommunityWeeklyShowPostLogoTitleTv.text =  "$bodyPart Community"
+            binding.fragmentCommunityWeeklyShowPostPinIv.visibility = View.INVISIBLE
+        } else {
+            binding.fragmentCommunityWeeklyShowPostLogoTitleTv.text = weeklyMissionTitle ?: "평소에 잘 안하다가 요즘에 빠진 운동을 추천해 주세요!"
+            binding.fragmentCommunityWeeklyShowPostPinIv.visibility = View.VISIBLE
+        }
+    }
+
     // 어댑터 설정 함수
     private fun setAdapter() {
         weeklyShowPostImageAdapter = WeeklyShowPostImageAdapter()
@@ -242,6 +253,9 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
                             val date = it.result?.updatedAt?.let { inputFormat.parse(it) }
                             binding.fragmentCommunityWeeklyShowPostDateTv.text = date?.let { outputFormat.format(it) }
 
+                            // 이미지 어댑터 연결
+                            weeklyShowPostImageAdapter.submitList(it.result?.imageList)
+
                             // 작성자와 현재 사용자가 동일한 경우만 수정하기 표시 (이 때, 스크랩 표시 X)
                             if(it.result?.authorEmail?.equals(tokenManager.getEmail().first()) == true) {
                                 binding.fragmentCommunityWeeklyShowPostModifyTv.visibility = View.VISIBLE
@@ -250,6 +264,9 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
                                 binding.fragmentCommunityWeeklyShowPostModifyTv.visibility = View.INVISIBLE
                                 binding.fragmentCommunityWeeklyScrapTv.visibility = View.VISIBLE
                             }
+
+                            // 운동 부위 존재하면 부위 게시판 글 상세보기
+                            setPostTitle(it.result?.bodyPart.toString(), it.result?.weeklyMissionTitle)
                         }
                     }
                 }
