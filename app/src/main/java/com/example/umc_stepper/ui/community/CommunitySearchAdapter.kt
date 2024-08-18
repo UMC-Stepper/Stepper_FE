@@ -23,7 +23,7 @@ class CommunitySearchAdapter(private val itemClickListener: ItemClickListener) :
         binding.root.setOnClickListener {
             itemClickListener.onClick(item)
         }
-        GlobalApplication.loadCropRoundedSquareImage(binding.root.context,binding.itemCommunitySearchProfileIv,item.imageUrl,12)
+        GlobalApplication.loadCropRoundedSquareImage(binding.root.context,binding.itemCommunitySearchProfileIv,item.imageList[0].imageUrl,12)
     }
 }
 

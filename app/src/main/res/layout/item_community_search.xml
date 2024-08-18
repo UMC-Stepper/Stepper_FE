@@ -16,7 +16,7 @@
         android:clickable="true"
         android:focusable="true"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/shape_rounded_square_purple_bg1_solid_21dp">
+        android:background="@drawable/shape_rounded_square_purple_bg2_solid_21dp">
 
         <TextView
             android:id="@+id/item_community_search_title"

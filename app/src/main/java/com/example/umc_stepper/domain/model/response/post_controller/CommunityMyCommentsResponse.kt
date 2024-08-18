@@ -15,5 +15,11 @@ data class CommunityMyCommentsResponseItem(
     val subCategory: String="",
     val weeklyMissionTitle: String="",
     val createdAt: String ="",
-    val updatedAt: String=""
+    val updatedAt: String="",
+    val imageList : List<ImageCard> = listOf()
+)
+
+data class ImageCard(
+    val id : Int = 0,
+    val imageUrl: String = ""
 )
