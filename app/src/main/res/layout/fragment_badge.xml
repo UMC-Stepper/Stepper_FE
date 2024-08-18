@@ -4,369 +4,385 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".ui.badge.BadgeFragment">
+        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            tools:context=".ui.badge.BadgeFragment">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <TextView
+                android:id="@+id/fragment_badge_title_tv"
+                style="@style/title_bold_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="활동 훈장"
+                android:textColor="@color/White"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fragment_badge_title2_tv"
+                style="@style/body_regular_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="15dp"
+                android:text="미션을 달성하고 뱃지를 모아보세요"
+                android:textColor="@color/White"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_title_tv" />
+
+            <TextView
+                android:id="@+id/fragment_badge_yellow1_tv"
+                style="@style/head_bold_18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="40dp"
+                android:text="첫 도전들을 응원해!"
+                android:textColor="@color/Yellow_300"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_title2_tv" />
+
+            <ImageView
+                android:id="@+id/fragment_badge_yellow1_1_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="24dp"
+                android:src="@drawable/ic_badge_purple"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_badge_yellow1_2_iv"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow1_tv" />
+
+            <ImageView
+                android:id="@+id/fragment_badge_yellow1_2_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_badge_purple"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_badge_yellow1_3_iv"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/fragment_badge_yellow1_1_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow1_tv" />
 
 
-            />
+            <ImageView
+                android:id="@+id/fragment_badge_yellow1_3_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_badge_purple"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_badge_yellow1_4_iv"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/fragment_badge_yellow1_2_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow1_tv" />
 
-        <TextView
-            android:id="@+id/fragment_badge_title_tv"
-            style="@style/title_bold_24"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:text="활동 훈장"
-            android:textColor="@color/White"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                style="@style/body_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="첫 추가\n운동 완료"
+                android:textAlignment="center"
+                android:textColor="@color/White"
+                app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow1_3_iv"
+                app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow1_3_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow1_3_iv" />
 
-        <TextView
-            android:id="@+id/fragment_badge_title2_tv"
-            style="@style/body_regular_14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="15dp"
-            android:text="미션을 달성하고 뱃지를 모아보세요"
-            android:textColor="@color/White"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_title_tv" />
+            <ImageView
+                android:id="@+id/fragment_badge_yellow1_4_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_badge_purple"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/fragment_badge_yellow1_3_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow1_tv" />
 
-        <TextView
-            android:id="@+id/fragment_badge_yellow1_tv"
-            style="@style/head_bold_18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="40dp"
-            android:text="첫 도전들을 응원해!"
-            android:textColor="@color/Yellow_300"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_title2_tv" />
+            <TextView
+                style="@style/body_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="첫 게시글\n작성 완료"
+                android:textAlignment="center"
+                android:textColor="@color/White"
+                app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow1_4_iv"
+                app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow1_4_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow1_4_iv" />
 
-        <ImageView
-            android:id="@+id/fragment_badge_yellow1_1_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_badge_purple"
-            app:layout_constraintEnd_toStartOf="@+id/fragment_badge_yellow1_2_iv"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow1_tv" />
+            <TextView
+                android:id="@+id/fragment_badge_yellow1_1_tv"
+                style="@style/body_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="첫운동\n설정 완료"
+                android:textAlignment="center"
+                android:textColor="@color/White"
+                app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow1_1_iv"
+                app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow1_1_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow1_1_iv" />
 
-        <ImageView
-            android:id="@+id/fragment_badge_yellow1_2_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_badge_purple"
-            app:layout_constraintEnd_toStartOf="@+id/fragment_badge_yellow1_3_iv"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/fragment_badge_yellow1_1_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow1_tv" />
+            <TextView
+                style="@style/body_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="첫 오늘의\n운동 완료"
+                android:textAlignment="center"
+                android:textColor="@color/White"
+                app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow1_2_iv"
+                app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow1_2_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow1_2_iv" />
 
+            <TextView
+                android:id="@+id/fragment_badge_yellow2_tv"
+                style="@style/head_bold_18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="40dp"
+                android:text="꾸준함을 응원해!"
+                android:textColor="@color/Yellow_300"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow1_1_tv" />
 
-        <ImageView
-            android:id="@+id/fragment_badge_yellow1_3_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_badge_purple"
-            app:layout_constraintEnd_toStartOf="@+id/fragment_badge_yellow1_4_iv"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/fragment_badge_yellow1_2_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow1_tv" />
+            <ImageView
+                android:id="@+id/fragment_badge_yellow2_1_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="24dp"
+                android:src="@drawable/ic_badge_purple"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_badge_yellow2_2_iv"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow2_tv" />
 
-        <TextView
-            style="@style/body_regular_12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="첫 추가\n운동 완료"
-            android:textAlignment="center"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow1_3_iv"
-            app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow1_3_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow1_3_iv" />
-
-        <ImageView
-            android:id="@+id/fragment_badge_yellow1_4_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_badge_purple"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/fragment_badge_yellow1_3_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow1_tv" />
-
-        <TextView
-            style="@style/body_regular_12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="첫 게시글\n작성 완료"
-            android:textAlignment="center"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow1_4_iv"
-            app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow1_4_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow1_4_iv" />
-
-        <TextView
-            android:id="@+id/fragment_badge_yellow1_1_tv"
-            style="@style/body_regular_12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="첫운동\n설정 완료"
-            android:textAlignment="center"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow1_1_iv"
-            app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow1_1_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow1_1_iv" />
-
-        <TextView
-            style="@style/body_regular_12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="첫 오늘의\n운동 완료"
-            android:textAlignment="center"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow1_2_iv"
-            app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow1_2_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow1_2_iv" />
-
-        <TextView
-            android:id="@+id/fragment_badge_yellow2_tv"
-            style="@style/head_bold_18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="40dp"
-            android:text="꾸준함을 응원해!"
-            android:textColor="@color/Yellow_300"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow1_1_tv" />
-
-        <ImageView
-            android:id="@+id/fragment_badge_yellow2_1_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_badge_purple"
-            app:layout_constraintEnd_toStartOf="@+id/fragment_badge_yellow2_2_iv"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow2_tv" />
-
-        <ImageView
-            android:id="@+id/fragment_badge_yellow2_2_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_badge_purple"
-            app:layout_constraintEnd_toStartOf="@+id/fragment_badge_yellow2_3_iv"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/fragment_badge_yellow2_1_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow2_tv" />
+            <ImageView
+                android:id="@+id/fragment_badge_yellow2_2_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_badge_purple"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_badge_yellow2_3_iv"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/fragment_badge_yellow2_1_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow2_tv" />
 
 
-        <ImageView
-            android:id="@+id/fragment_badge_yellow2_3_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_badge_purple"
-            app:layout_constraintEnd_toStartOf="@+id/fragment_badge_yellow2_4_iv"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/fragment_badge_yellow2_2_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow2_tv" />
+            <ImageView
+                android:id="@+id/fragment_badge_yellow2_3_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_badge_purple"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_badge_yellow2_4_iv"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/fragment_badge_yellow2_2_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow2_tv" />
 
-        <TextView
-            style="@style/body_regular_12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="스테퍼 도장\n30개"
-            android:textAlignment="center"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow2_3_iv"
-            app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow2_3_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow2_3_iv" />
+            <TextView
+                style="@style/body_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="스테퍼 도장\n30개"
+                android:textAlignment="center"
+                android:textColor="@color/White"
+                app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow2_3_iv"
+                app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow2_3_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow2_3_iv" />
 
-        <ImageView
-            android:id="@+id/fragment_badge_yellow2_4_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_badge_purple"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/fragment_badge_yellow2_3_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow2_tv" />
+            <ImageView
+                android:id="@+id/fragment_badge_yellow2_4_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_badge_purple"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/fragment_badge_yellow2_3_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow2_tv" />
 
-        <TextView
-            style="@style/body_regular_12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="스테퍼 도장\n40개"
-            android:textAlignment="center"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow2_4_iv"
-            app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow2_4_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow2_4_iv" />
+            <TextView
+                style="@style/body_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="스테퍼 도장\n40개"
+                android:textAlignment="center"
+                android:textColor="@color/White"
+                app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow2_4_iv"
+                app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow2_4_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow2_4_iv" />
 
-        <TextView
-            android:id="@+id/fragment_badge_yellow2_1_tv"
-            style="@style/body_regular_12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="스테퍼 도장\n10개"
-            android:textAlignment="center"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow2_1_iv"
-            app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow2_1_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow2_1_iv" />
+            <TextView
+                android:id="@+id/fragment_badge_yellow2_1_tv"
+                style="@style/body_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="스테퍼 도장\n10개"
+                android:textAlignment="center"
+                android:textColor="@color/White"
+                app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow2_1_iv"
+                app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow2_1_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow2_1_iv" />
 
-        <TextView
-            style="@style/body_regular_12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="스테퍼 도장\n20개"
-            android:textAlignment="center"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow2_2_iv"
-            app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow2_2_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow2_2_iv" />
+            <TextView
+                style="@style/body_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="스테퍼 도장\n20개"
+                android:textAlignment="center"
+                android:textColor="@color/White"
+                app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow2_2_iv"
+                app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow2_2_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow2_2_iv" />
 
-        <TextView
-            android:id="@+id/fragment_badge_yellow3_tv"
-            style="@style/head_bold_18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="40dp"
-            android:text="열혈 유저 STEPPER"
-            android:textColor="@color/Yellow_300"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow2_1_tv" />
+            <TextView
+                android:id="@+id/fragment_badge_yellow3_tv"
+                style="@style/head_bold_18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="40dp"
+                android:text="열혈 유저 STEPPER"
+                android:textColor="@color/Yellow_300"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow2_1_tv" />
 
-        <ImageView
-            android:id="@+id/fragment_badge_yellow3_1_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_badge_purple"
-            app:layout_constraintEnd_toStartOf="@+id/fragment_badge_yellow3_2_iv"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow3_tv" />
+            <ImageView
+                android:id="@+id/fragment_badge_yellow3_1_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="24dp"
+                android:src="@drawable/ic_badge_purple"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_badge_yellow3_2_iv"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow3_tv" />
 
-        <ImageView
-            android:id="@+id/fragment_badge_yellow3_2_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_badge_purple"
-            app:layout_constraintEnd_toStartOf="@+id/fragment_badge_yellow3_3_iv"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/fragment_badge_yellow3_1_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow3_tv" />
-
-
-        <ImageView
-            android:id="@+id/fragment_badge_yellow3_3_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_badge_purple"
-            app:layout_constraintEnd_toStartOf="@+id/fragment_badge_yellow3_4_iv"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/fragment_badge_yellow3_2_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow3_tv" />
-
-        <TextView
-            style="@style/body_regular_12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="추천 5개\n받기"
-            android:textAlignment="center"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow3_3_iv"
-            app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow3_3_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow3_3_iv" />
-
-        <ImageView
-            android:id="@+id/fragment_badge_yellow3_4_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_badge_purple"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/fragment_badge_yellow3_3_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow3_tv" />
-
-        <TextView
-            style="@style/body_regular_12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="추천 10개\n받기"
-            android:textAlignment="center"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow3_4_iv"
-            app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow3_4_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow3_4_iv" />
-
-        <TextView
-            android:id="@+id/fragment_badge_yellow3_1_tv"
-            style="@style/body_regular_12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="글 작성\n10번 달성"
-            android:textAlignment="center"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow3_1_iv"
-            app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow3_1_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow3_1_iv" />
-
-        <TextView
-            style="@style/body_regular_12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="댓글 작성\n10번 달성"
-            android:textAlignment="center"
-            android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow3_2_iv"
-            app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow3_2_iv"
-            app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow3_2_iv" />
+            <ImageView
+                android:id="@+id/fragment_badge_yellow3_2_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_badge_purple"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_badge_yellow3_3_iv"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/fragment_badge_yellow3_1_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow3_tv" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout></layout>
+            <ImageView
+                android:id="@+id/fragment_badge_yellow3_3_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_badge_purple"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_badge_yellow3_4_iv"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/fragment_badge_yellow3_2_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow3_tv" />
+
+            <TextView
+                style="@style/body_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="20dp"
+                android:text="추천 5개\n받기"
+                android:textAlignment="center"
+                android:textColor="@color/White"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow3_3_iv"
+                app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow3_3_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow3_3_iv" />
+
+            <ImageView
+                android:id="@+id/fragment_badge_yellow3_4_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_badge_purple"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/fragment_badge_yellow3_3_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow3_tv" />
+
+            <TextView
+                style="@style/body_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="20dp"
+                android:text="추천 10개\n받기"
+                android:textAlignment="center"
+                android:textColor="@color/White"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow3_4_iv"
+                app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow3_4_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow3_4_iv" />
+
+            <TextView
+                android:id="@+id/fragment_badge_yellow3_1_tv"
+                style="@style/body_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="20dp"
+                android:text="글 작성\n10번 달성"
+                android:textAlignment="center"
+                android:textColor="@color/White"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow3_1_iv"
+                app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow3_1_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow3_1_iv" />
+
+            <TextView
+                style="@style/body_regular_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="20dp"
+                android:text="댓글 작성\n10번 달성"
+                android:textAlignment="center"
+                android:textColor="@color/White"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/fragment_badge_yellow3_2_iv"
+                app:layout_constraintStart_toStartOf="@id/fragment_badge_yellow3_2_iv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_badge_yellow3_2_iv" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>
