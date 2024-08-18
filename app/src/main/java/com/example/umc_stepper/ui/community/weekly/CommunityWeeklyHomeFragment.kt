@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -28,7 +29,6 @@ class CommunityWeeklyHomeFragment : BaseFragment<FragmentCommunityWeeklyHomeBind
     private lateinit var weeklyHomePostListAdapter: WeeklyHomePostListAdapter
     private val communityViewModel : CommunityViewModel by activityViewModels()
     private var weeklyMissionId = 0
-    private lateinit var weeklyMissionTitle: String
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -81,7 +81,6 @@ class CommunityWeeklyHomeFragment : BaseFragment<FragmentCommunityWeeklyHomeBind
         lifecycleScope.launch {
             communityViewModel.weeklyMissionResponse.collect {
                 weeklyMissionId = it.result?.id ?: 1
-                weeklyMissionTitle = it.result?.missionTitle.toString() ?: "평소에 잘 안하다가 요즘에 빠진\\n운동을 추천해주세요!"
             }
         }
         weeklyMissionId = communityViewModel.weeklyMissionResponse.value.result?.id ?: 1
@@ -90,6 +89,7 @@ class CommunityWeeklyHomeFragment : BaseFragment<FragmentCommunityWeeklyHomeBind
     private fun setButton() {
         binding.fragmentCommunityWeeklyHomeFab.setOnClickListener {
             val action = CommunityWeeklyHomeFragmentDirections.actionCommunityWeeklyHomeFragmentToWeeklyEditFragment()
+            val weeklyMissionTitle = getString(R.string.Weekly_Mission_Demo_day)
             val args = Bundle().apply {
                 putString("weeklyMissionTitle", "$weeklyMissionTitle")
             }

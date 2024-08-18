@@ -131,7 +131,7 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/shape_rounded_square_yellow300_12dp"
             android:backgroundTint="@color/White"
-            app:imageUrl="@{communityMyCommentsResponseItem.imageUrl}"
+            app:imageUrl2="@{communityMyCommentsResponseItem.imageUrl}"
             app:roundedCorners="@{18}"
             android:src="@drawable/ic_community_logo"
             app:layout_constraintBottom_toBottomOf="parent"
