@@ -14,6 +14,7 @@ import com.example.umc_stepper.domain.model.response.post_controller.ApiResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostViewResponse
 import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponseItem
+import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyPostsResponseItem
 import com.example.umc_stepper.domain.model.response.post_controller.LikeResponse
 import com.example.umc_stepper.domain.model.response.post_controller.ScrapResponse
 import com.example.umc_stepper.domain.repository.CommunityApiRepository
@@ -30,6 +31,10 @@ import javax.inject.Inject
 class CommunityViewModel @Inject constructor(
     private val communityApiRepository: CommunityApiRepository
 ) : ViewModel() {
+
+    // 내가 작성한 글의 글 목록 조회
+    private val _communityMyPostsResponseItem = MutableStateFlow<BaseListResponse<CommunityMyPostsResponseItem>>(BaseListResponse())
+    val communityMyPostsResponseItem : StateFlow<BaseListResponse<CommunityMyPostsResponseItem>> = _communityMyPostsResponseItem
 
     // 내가 작성한 댓글의 글 목록 조회
     private val _communityMyCommentsResponseItem = MutableStateFlow<BaseListResponse<CommunityMyCommentsResponseItem>>(BaseListResponse())
@@ -99,6 +104,20 @@ class CommunityViewModel @Inject constructor(
                 }
             }catch (e : Exception){
                 Log.e("에러","글 작성 에러")
+            }
+        }
+    }
+
+    // 내가 작성한 글의 글 목록 조회
+    fun getCommunityMyPosts() {
+        viewModelScope.launch {
+            try{
+                communityApiRepository.getCommunityMyPosts().collect {
+                    _communityMyPostsResponseItem.value = it
+                    Log.d("CommunityViewModel", "CommunityMyPostsResponseItem : $it")
+                }
+            } catch (e:Exception) {
+                Log.e("getCommunityMyPosts is Error", e.message.toString())
             }
         }
     }

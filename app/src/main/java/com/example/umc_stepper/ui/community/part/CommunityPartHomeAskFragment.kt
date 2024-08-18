@@ -7,6 +7,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.umc_stepper.R
@@ -22,6 +24,10 @@ import com.example.umc_stepper.utils.listener.ItemClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+
+interface NavigationCallback {
+    fun navigateToWeeklyShowPost(postId: String)
+}
 
 @AndroidEntryPoint
 class CommunityPartHomeAskFragment : BaseFragment<FragmentCommunityPartHomeTabBinding>(R.layout.fragment_community_part_home_tab),
@@ -49,9 +55,7 @@ class CommunityPartHomeAskFragment : BaseFragment<FragmentCommunityPartHomeTabBi
 
     private fun observeCategoryList(categoryName: String) {
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                communityViewModel.getDetailPostList(categoryName)
-            }
+            communityViewModel.getDetailPostList(categoryName)
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -64,15 +68,15 @@ class CommunityPartHomeAskFragment : BaseFragment<FragmentCommunityPartHomeTabBi
 
                         Log.d("부위홈", filteredItems.toString())
 
-                        // 데이터가 있으면 어댑터에 전달
-                        communityPartHomeAdapter.submitList(filteredItems)
-
                         // 데이터가 없는 경우 로그 확인
                         if (filteredItems.isEmpty()) {
                             binding.communityPartHomeTabTv.text="QnA 글이 없습니다."
-                            binding.communityPartHomeTabTv.visibility=View.VISIBLE
-                            binding.fragmentCommunityPartHomeRv.visibility=View.GONE
+                            updateVisibility(false)
                             Log.d("부위홈", "아이템이 없음.")
+                        }else{
+                            updateVisibility(true)
+                            // 데이터가 있으면 어댑터에 전달
+                            communityPartHomeAdapter.submitList(filteredItems)
                         }
                     }
                 } catch (e: Exception) {
@@ -82,12 +86,25 @@ class CommunityPartHomeAskFragment : BaseFragment<FragmentCommunityPartHomeTabBi
         }
     }
 
+    private fun updateVisibility(show : Boolean) {
+        if (show) {
+            binding.communityPartHomeTabTv.visibility = View.INVISIBLE
+            binding.fragmentCommunityPartHomeRv.visibility = View.VISIBLE
+        } else {
+            binding.communityPartHomeTabTv.visibility = View.VISIBLE
+            binding.fragmentCommunityPartHomeRv.visibility = View.INVISIBLE
+        }
+    }
+
     override fun onClick(item: Any) {
-        if (item is ApiResponseListPostViewResponseItem) {
-            val args = Bundle().apply {
-                putString("partPostId", item.id.toString())
-            }
-            // 추후 상세 화면을 표시하는 로직 추가
+        val args = Bundle().apply {
+            putString("postId", "$item")
+        }
+        try {
+            val action = CommunityPartHomeFragmentDirections.actionCommunityPartHomeFragmentToCommunityWeeklyShowPostFragment()
+            findNavController().navigateSafe(action.actionId, args)
+        } catch (e: Exception) {
+            Log.e("NavigationError", "Navigation error: ${e.message}")
         }
     }
 }

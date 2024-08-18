@@ -3,19 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
-            name="partPostItem"
-            type="com.example.umc_stepper.domain.model.response.post_controller.ApiResponseListPostViewResponseItem" />
-        <variable
-            name="listener"
-            type="com.example.umc_stepper.utils.listener.ItemClickListener" />
+            name="indexPostItem"
+            type="com.example.umc_stepper.domain.model.response.post_controller.CommunityMyPostsResponseItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:onClick="@{() ->listener.onClick(partPostItem.id)}"
         android:backgroundTint="@color/Purple_Black_BG_2"
         android:background="@drawable/shape_rounded_square_register_field_20dp_stroke_1">
 
@@ -29,7 +26,7 @@
             android:clickable="false"
             android:foreground="@android:color/transparent"
             android:background="@android:color/transparent"
-            android:text="@{partPostItem.title}"
+            android:text="@{indexPostItem.title}"
             android:textColor="@color/White"
             android:textSize="14sp"
             android:maxLines="1"
@@ -47,7 +44,7 @@
             android:clickable="false"
             android:foreground="@android:color/transparent"
             android:background="@android:color/transparent"
-            android:text="@{partPostItem.body}"
+            android:text="@{indexPostItem.body}"
             android:textColor="@color/White"
             android:textSize="14sp"
             android:maxLines="2"
@@ -74,7 +71,7 @@
             android:clickable="false"
             android:foreground="@android:color/transparent"
             android:background="@android:color/transparent"
-            android:text='@{Integer.toString(partPostItem.likes)}'
+            android:text='@{Integer.toString(indexPostItem.likes)}'
             style="@style/body_regular_12"
             android:textColor="@color/Yellow_300"
             app:layout_constraintStart_toEndOf="@+id/item_weekly_home_thumbs_up_iv"
@@ -98,7 +95,7 @@
             android:clickable="false"
             android:foreground="@android:color/transparent"
             android:background="@android:color/transparent"
-            android:text='@{Integer.toString(partPostItem.scraps)}'
+            android:text='@{Integer.toString(indexPostItem.scraps)}'
             style="@style/body_regular_12"
             android:textColor="@color/Yellow_300"
             app:layout_constraintStart_toEndOf="@+id/item_weekly_home_scraps_up_iv"
@@ -122,7 +119,7 @@
             android:clickable="false"
             android:foreground="@android:color/transparent"
             android:background="@android:color/transparent"
-            android:text='@{Integer.toString(partPostItem.commentsCount)}'
+            android:text='@{Integer.toString(indexPostItem.commentsCount)}'
             style="@style/body_regular_12"
             android:textColor="@color/Yellow_300"
             app:layout_constraintStart_toEndOf="@+id/item_weekly_home_reply_up_iv"
