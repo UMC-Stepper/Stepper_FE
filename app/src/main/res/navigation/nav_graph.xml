@@ -411,7 +411,14 @@
         android:id="@+id/communityIndexPostFragment"
         android:name="com.example.umc_stepper.ui.community.savedcontents.post.CommunityIndexPostFragment"
         android:label="CommunityIndexPostFragment"
-        tools:layout="@layout/fragment_community_index_post"/>
+        tools:layout="@layout/fragment_community_index_post">
+        <action
+            android:id="@+id/action_communityIndexPostFragment_to_communityPartShowPostFragment"
+            app:destination="@id/communityPartShowPostFragment" />
+        <action
+            android:id="@+id/action_communityIndexPostFragment_to_communityWeeklyShowPostFragment"
+            app:destination="@id/communityWeeklyShowPostFragment" />
+    </fragment>
 
     <!-- 커뮤니티 목록 확인 - 작성한 댓글 모음 -->
     <fragment
