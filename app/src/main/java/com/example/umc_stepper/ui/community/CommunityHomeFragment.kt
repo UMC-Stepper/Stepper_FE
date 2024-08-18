@@ -17,6 +17,12 @@ class CommunityHomeFragment : BaseFragment<FragmentCommunityHomeBinding>(R.layou
 
     override fun setLayout() {
         setButton()
+        binding.fragmentCommunityHomeBannerAdIv.setOnClickListener {
+            findNavController().navigateSafe(
+                CommunityHomeFragmentDirections.actionCommunityHomeFragmentToWeeklySegmentEditFragment().actionId,
+                Bundle().apply { "허리" }
+                )
+        }
     }
 
     private fun setButton() {

@@ -39,9 +39,10 @@ class CommunityPartHomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view: View = inflater.inflate(R.layout.fragment_community_part_home, container, false)
         updateToolbar()
+        floatButton = view.findViewById(R.id.fragment_community_weekly_home_fab)
 
         titlePart = view.findViewById(R.id.community_part_home_title_tv)
         viewPager = view.findViewById(R.id.community_part_home_vp)

@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentWeeklySegmentEditBinding
-import com.example.umc_stepper.domain.model.request.member_controller.UserDto
 import com.example.umc_stepper.domain.model.request.post_controller.PostEditDto
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.community.CommunityDialog
@@ -52,7 +51,7 @@ class WeeklySegmentEditFragment :
     private var selectedRemoveItemId = 0
     private val communityViewModel: CommunityViewModel by activityViewModels()
     private val imgList: MutableList<UploadImageCard> = mutableListOf()
-    private var selectedTab = ""
+    private var selectedTab = "QnA"
     private val imageList: MutableList<MultipartBody.Part> = mutableListOf()
 
     override fun onAttach(context: Context) {
@@ -87,7 +86,7 @@ class WeeklySegmentEditFragment :
             showDialog("사진 업로드 하기", "앨범 선택", "취소하기")
         }
         binding.fragmentWeeklySuccessEditBt.setOnClickListener {
-            val bodyPart = arguments?.getString("bodyPart") ?: "머리"
+            val bodyPart = arguments?.getString("bodyPart") ?: ""
             postEditDto = PostEditDto(
                 imageUrl = "",
                 title = binding.fragmentWeeklySubtitleEt.text.toString(),
@@ -212,11 +211,12 @@ class WeeklySegmentEditFragment :
         val inputStream = requireActivity().contentResolver.openInputStream(uri)
         inputStream?.use { stream ->
             val bitmap = BitmapFactory.decodeStream(stream)
-            val compressedFile = compressBitmap(bitmap, 500)
+            val resizedBitmap = resizeBitmapTo16x16(bitmap) // 16x16으로 크기 조정
+            val compressedFile = compressBitmap(resizedBitmap, 500)
 
             val requestFile = compressedFile.asRequestBody("image/*".toMediaTypeOrNull())
             val imagePart = MultipartBody.Part.createFormData(
-                "images",
+                "image",
                 compressedFile.name,
                 requestFile
             )
@@ -224,6 +224,7 @@ class WeeklySegmentEditFragment :
         }
     }
 
+    private var fileTail = 0
     private fun compressBitmap(bitmap: Bitmap, maxSizeKB: Int): File {
         var quality = 100
         val outputStream = ByteArrayOutputStream()
@@ -234,7 +235,8 @@ class WeeklySegmentEditFragment :
             quality -= 5
         } while (outputStream.size() / 1024 > maxSizeKB && quality > 0)
 
-        val file = File(requireActivity().cacheDir, "compressed_image.jpg")
+        val file = File(requireActivity().cacheDir, "compressed_image$fileTail.jpg")
+        fileTail++
         FileOutputStream(file).use { fos ->
             fos.write(outputStream.toByteArray())
         }
@@ -247,6 +249,10 @@ class WeeklySegmentEditFragment :
         mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
         mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
         mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
+    }
+
+    private fun resizeBitmapTo16x16(bitmap: Bitmap): Bitmap {
+        return Bitmap.createScaledBitmap(bitmap, 100, 100, true)
     }
 
 }
