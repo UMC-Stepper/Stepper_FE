@@ -18,7 +18,6 @@ class WeeklyShowPostReplyAdapter(private val onItemClick: (String) -> Unit) : Li
     inner class CommentViewHolder(private val binding: ItemCommunityShowPostCommentBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : CommentResponseItem) {
             binding.apply {
-                Log.d("CommentViewHolder Item", "item: $item")
                 binding.commentResponseItem = item
 
                 val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
@@ -38,8 +37,11 @@ class WeeklyShowPostReplyAdapter(private val onItemClick: (String) -> Unit) : Li
     inner class ReplyViewHolder(private val binding: ItemCommunityShowPostCommentReplyBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : ReplyResponse) {
             binding.apply {
-                Log.d("ReplyViewHolder Item", "item: $item")
                 binding.replyResponse  = item
+                val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+                val outputFormat = SimpleDateFormat("yy.MM.dd  HH:mm", Locale.getDefault())
+                val date = item.localDateTime.let { inputFormat.parse(it) }
+                binding.itemWeeklyShowPostCommentReplyTimeTv.text = date?.let { outputFormat.format(it) }
             }
         }
     }

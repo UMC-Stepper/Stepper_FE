@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +17,7 @@ import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentCommunityWeeklyHomeBinding
 import com.example.umc_stepper.ui.MainActivity
+import com.example.umc_stepper.ui.community.CommunityHomeFragmentDirections
 import com.example.umc_stepper.ui.community.CommunityViewModel
 import com.example.umc_stepper.ui.community.savedcontents.comments.CommunityMyCommentsFragmentDirections
 import com.example.umc_stepper.utils.listener.ItemClickListener
@@ -24,23 +26,15 @@ import kotlinx.coroutines.launch
 
 class CommunityWeeklyHomeFragment : BaseFragment<FragmentCommunityWeeklyHomeBinding>(R.layout.fragment_community_weekly_home), ItemClickListener {
 
-    private lateinit var mainActivity: MainActivity
     private lateinit var weeklyHomePostListAdapter: WeeklyHomePostListAdapter
     private val communityViewModel : CommunityViewModel by activityViewModels()
     private var weeklyMissionId = 0
-    private lateinit var weeklyMissionTitle: String
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mainActivity = context as MainActivity
-    }
 
     override fun setLayout() {
         initSettings()
     }
 
     private fun initSettings() {
-        updateMainToolbar()
         setButton()
         initAdapter()
         observeViewModel()
@@ -81,7 +75,6 @@ class CommunityWeeklyHomeFragment : BaseFragment<FragmentCommunityWeeklyHomeBind
         lifecycleScope.launch {
             communityViewModel.weeklyMissionResponse.collect {
                 weeklyMissionId = it.result?.id ?: 1
-                weeklyMissionTitle = it.result?.missionTitle.toString() ?: "평소에 잘 안하다가 요즘에 빠진\\n운동을 추천해주세요!"
             }
         }
         weeklyMissionId = communityViewModel.weeklyMissionResponse.value.result?.id ?: 1
@@ -90,18 +83,30 @@ class CommunityWeeklyHomeFragment : BaseFragment<FragmentCommunityWeeklyHomeBind
     private fun setButton() {
         binding.fragmentCommunityWeeklyHomeFab.setOnClickListener {
             val action = CommunityWeeklyHomeFragmentDirections.actionCommunityWeeklyHomeFragmentToWeeklyEditFragment()
+            val weeklyMissionTitle = getString(R.string.Weekly_Mission_Demo_day)
             val args = Bundle().apply {
                 putString("weeklyMissionTitle", "$weeklyMissionTitle")
             }
             findNavController().navigateSafe(action.actionId, args)
         }
-    }
 
-    private fun updateMainToolbar() {
-        mainActivity.updateToolbarTitle("Weekly Mission")
-        mainActivity.updateToolbarLeftImg(R.drawable.ic_toolbar_community_home)
-        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_community_search)
-        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_community_menu)
+        // 커뮤니티 홈으로 이동
+        binding.fragmentCommunityWeeklyHomeToolbarBackIv.setOnClickListener {
+            val action = CommunityWeeklyHomeFragmentDirections.actionCommunityWeeklyHomeFragmentToCommunityHomeFragment()
+            findNavController().navigate(action.actionId)
+        }
+
+        // 검색 화면으로 이동
+        binding.fragmentCommunityWeeklyHomeToolbarGoSearch.setOnClickListener {
+            val action = CommunityWeeklyHomeFragmentDirections.actionCommunityWeeklyHomeFragmentToCommunitySearchFragment()
+            findNavController().navigate(action.actionId)
+        }
+
+        // 메뉴 화면으로 이동
+        binding.fragmentCommunityWeeklyHomeToolbarGoMenu.setOnClickListener {
+            val action = CommunityWeeklyHomeFragmentDirections.actionCommunityWeeklyHomeFragmentToCommunityIndexFragment()
+            findNavController().navigate(action.actionId)
+        }
     }
 
     override fun onClick(item: Any) {

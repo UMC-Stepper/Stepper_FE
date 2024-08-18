@@ -107,11 +107,15 @@
                     style="@style/body_regular_14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="32dp"
                     android:layout_marginBottom="32dp"
-                    android:text="이번주에 비가 온다고 하네요.\n이럴 때 집에서 하는 나만의 운동을\n추천해 주세요"
+                    android:text="@string/Weekly_Mission_Demo_day"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/fragment_community_home_title_tv"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_community_home_go_weekly_iv"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_community_home_title_tv" />
 
                 <androidx.appcompat.widget.AppCompatImageButton

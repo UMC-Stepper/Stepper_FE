@@ -14,7 +14,7 @@ class WeeklyShowPostImageAdapter : BaseAdapter<ImageResponse, ItemWeeklyPostImgB
 ) {
 
     override val layoutId: Int
-        get() = R.id.item_weekly_post_img_iv
+        get() = R.layout.item_weekly_post_img
 
     override fun bind(binding: ItemWeeklyPostImgBinding, item: ImageResponse) {
         binding.imageResponse = item

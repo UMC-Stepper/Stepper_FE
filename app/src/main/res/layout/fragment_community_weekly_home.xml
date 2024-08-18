@@ -98,15 +98,27 @@
                 app:layout_constraintTop_toBottomOf="@+id/fragment_community_weekly_home_title_tv" >
 
                 <TextView
-                    android:id="@+id/fragment_community_weekly_home_desc_tv"
+                    android:id="@+id/fragment_community_weekly_home_desc_tv1"
                     style="@style/head_bold_18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:layout_marginStart="20dp"
-                    android:text="평소에 잘 안하다가 요즘에 빠진\n운동을 추천해주세요!"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:text="@string/Weekly_Mission_Demo_day1"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/fragment_community_weekly_home_desc_tv2"
+                    style="@style/head_bold_18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Weekly_Mission_Demo_day2"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/fragment_community_weekly_home_desc_tv1"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_community_weekly_home_desc_tv1" />
 
                 <ImageView
                     android:id="@+id/fragment_community_weekly_home_desc_iv"
@@ -114,13 +126,12 @@
                     android:layout_height="0dp"
                     android:layout_marginStart="170dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="16dp"
                     android:src="@drawable/ic_community_logo"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_community_weekly_home_desc_tv" />
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_community_weekly_home_desc_tv2" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
@@ -14,6 +15,11 @@ import com.example.umc_stepper.databinding.FragmentCommunityHomeBinding
 import com.example.umc_stepper.ui.MainActivity
 
 class CommunityHomeFragment : BaseFragment<FragmentCommunityHomeBinding>(R.layout.fragment_community_home) {
+
+    override fun onPause() {
+        super.onPause()
+        requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.Purple_Black_BG_1)
+    }
 
     override fun setLayout() {
         setButton()
@@ -23,6 +29,7 @@ class CommunityHomeFragment : BaseFragment<FragmentCommunityHomeBinding>(R.layou
                 Bundle().apply { "허리" }
                 )
         }
+        requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.Purple_300)
     }
 
     private fun setButton() {

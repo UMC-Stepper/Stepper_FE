@@ -114,7 +114,7 @@ class StepperFragment : BaseFragment<FragmentStepperBinding>(R.layout.fragment_s
             goCommunityPartHome()
         }
         //추가운동홈으로 이동
-        binding.stepperAdditionalBtn.setOnClickListener {
+        binding.stepperAdditionalExerciseConstraintBtn.setOnClickListener {
             goAdditionalExerciseHome()
         }
     }

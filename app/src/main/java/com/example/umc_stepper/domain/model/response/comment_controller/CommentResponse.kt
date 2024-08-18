@@ -14,5 +14,8 @@ data class ReplyResponse(
     val postId: Int=0,
     val parentCommentId: Int=0,
     val content: String="",
-    val anonymous: Boolean = false
+    val anonymous: Boolean = false,
+    val profileImage : String = "",
+    val localDateTime: String="",
+    val memberName: String=""
 )
