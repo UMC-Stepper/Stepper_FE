@@ -3,7 +3,6 @@ package com.example.umc_stepper.ui.today.evaluation_log
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -55,6 +54,7 @@ class EvaluationLogFragment :
         observeDataLoadState()
         initSettings()
     }
+
     private fun observeDataLoadState() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -149,10 +149,11 @@ class EvaluationLogFragment :
                 bodyPartDateMap.clear()
                 bodyPartDateMap.putAll(processedData.first)
                 evaluationLogBodyPartAdapter.submitList(processedData.second)
-                eventDateSet.clear()
-                eventDateSet.addAll(processedData.third)
-                updateCalendarView()
+
             }
+            //eventDateSet.clear()
+            //eventDateSet.addAll(processedData.third)
+            //updateCalendarView()
         }
     }
 
@@ -198,10 +199,19 @@ class EvaluationLogFragment :
     }
 
     private fun setCalendarView() {
+
         materialCalendarView = binding.fragmentEvaluationLogCalenderCalendarview
         materialCalendarView.isDynamicHeightEnabled = true
         materialCalendarView.setHeaderTextAppearance(R.style.CalendarWidgetHeader)
         materialCalendarView.setTitleFormatter(::formatCalendarTitle)
+        val today = CalendarDay.today()
+        val minDate = CalendarDay.from(today.year, 8, 1)
+        val maxDate = CalendarDay.from(today.year,8, 31)
+        materialCalendarView.state().edit()
+            .setMinimumDate(minDate)
+            .setMaximumDate(maxDate)
+            .commit()
+
         updateCalendarView()
 
         materialCalendarView.setOnMonthChangedListener { _, date ->
