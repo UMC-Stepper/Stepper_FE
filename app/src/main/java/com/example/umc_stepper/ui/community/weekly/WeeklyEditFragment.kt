@@ -33,6 +33,9 @@ class WeeklyEditFragment : BaseFragment<FragmentWeeklyEditBinding>(R.layout.frag
         initRecyclerView()
         onClickBtn()
         initActivityResultLauncher()
+
+        // weeklyMissionTitle 수신
+        Log.d("로그", "weeklyMissionTitle : ${arguments?.getString("weeklyMissionTitle")}")
     }
 
     private fun showDialog(title: String, btn1: String, btn2: String) {
