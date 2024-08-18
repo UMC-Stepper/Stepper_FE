@@ -16,10 +16,13 @@ import com.example.umc_stepper.domain.model.response.post_controller.ApiResponse
 import com.example.umc_stepper.ui.community.CommunityViewModel
 import com.example.umc_stepper.ui.community.part.CommunityPartHomeAdapter
 import com.example.umc_stepper.utils.listener.ItemClickListener
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-class CommunityIndexPostPartFragment :BaseFragment<FragmentCommunityIndexPostPartBinding>(R.layout.fragment_community_index_post_part),
+@AndroidEntryPoint
+class CommunityIndexPostPartFragment : BaseFragment<FragmentCommunityIndexPostPartBinding>(R.layout.fragment_community_index_post_part),
     ItemClickListener {
+
     private val communityViewModel: CommunityViewModel by activityViewModels()
     private lateinit var communityIndexPostAdapter: CommunityIndexPostAdapter
 
@@ -27,6 +30,7 @@ class CommunityIndexPostPartFragment :BaseFragment<FragmentCommunityIndexPostPar
         initRecyclerView()
         observePartPostList()
     }
+
     private fun initRecyclerView() {
         communityIndexPostAdapter = CommunityIndexPostAdapter(this)
         binding.communityIndexPostPartRv.apply {
@@ -36,36 +40,42 @@ class CommunityIndexPostPartFragment :BaseFragment<FragmentCommunityIndexPostPar
     }
 
     private fun observePartPostList() {
+        // 데이터를 먼저 로드
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                communityViewModel.getCommunityMyPosts()
-            }
+            communityViewModel.getCommunityMyPosts()
         }
 
+        // 데이터가 로드되면 수집하고 UI 업데이트
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                try {
-                    communityViewModel.communityMyPostsResponseItem.collect { response ->
-                        val filteredItems = response.result?.filter { item ->
-                            item.weeklyMissionTitle == null
-                        } ?: emptyList()
+                communityViewModel.communityMyPostsResponseItem.collect { response ->
+                    val partItems = response.result?.filter { item ->
+                        item.weeklyMissionTitle == null
+                    } ?: emptyList()
 
-                        Log.d("작성한 글_부위", filteredItems.toString())
+                    Log.d("작성한 글_부위", partItems.toString())
 
+                    // 데이터가 없는 경우 로그 확인 및 UI 업데이트
+                    if (partItems.isNullOrEmpty()) {
+                        updateVisibility(false)
+                        Log.d("작성한 글_부위", "아이템이 없음.")
+                    } else {
+                        updateVisibility(true)
                         // 데이터가 있으면 어댑터에 전달
-                        communityIndexPostAdapter.submitList(filteredItems)
-
-                        // 데이터가 없는 경우 로그 확인
-                        if (filteredItems.isEmpty()) {
-                            binding.communityIndexPostPartTv.visibility= View.VISIBLE
-                            binding.communityIndexPostPartRv.visibility= View.GONE
-                            Log.d("작성한 글_부위", "아이템이 없음.")
-                        }
+                        communityIndexPostAdapter.submitList(partItems)
                     }
-                } catch (e: Exception) {
-                    Log.e("작성한 글_부위 에러", "Error: ${e.message}")
                 }
             }
+        }
+    }
+
+    private fun updateVisibility(show : Boolean) {
+        if (show) {
+            binding.communityIndexPostPartTv.visibility = View.INVISIBLE
+            binding.communityIndexPostPartRv.visibility = View.VISIBLE
+        } else {
+            binding.communityIndexPostPartTv.visibility = View.VISIBLE
+            binding.communityIndexPostPartRv.visibility = View.INVISIBLE
         }
     }
 
@@ -78,3 +88,4 @@ class CommunityIndexPostPartFragment :BaseFragment<FragmentCommunityIndexPostPar
         }
     }
 }
+

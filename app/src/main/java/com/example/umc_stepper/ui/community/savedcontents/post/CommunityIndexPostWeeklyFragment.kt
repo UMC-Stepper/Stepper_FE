@@ -16,10 +16,13 @@ import com.example.umc_stepper.domain.model.response.post_controller.ApiResponse
 import com.example.umc_stepper.ui.community.CommunityViewModel
 import com.example.umc_stepper.ui.community.part.CommunityPartHomeAdapter
 import com.example.umc_stepper.utils.listener.ItemClickListener
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-class CommunityIndexPostWeeklyFragment :BaseFragment<FragmentCommunityIndexPostWeeklyBinding>(R.layout.fragment_community_index_post_weekly),
+@AndroidEntryPoint
+class CommunityIndexPostWeeklyFragment : BaseFragment<FragmentCommunityIndexPostWeeklyBinding>(R.layout.fragment_community_index_post_weekly),
     ItemClickListener {
+
     private val communityViewModel: CommunityViewModel by activityViewModels()
     private lateinit var communityIndexPostAdapter: CommunityIndexPostAdapter
 
@@ -37,36 +40,47 @@ class CommunityIndexPostWeeklyFragment :BaseFragment<FragmentCommunityIndexPostW
     }
 
     private fun observeWeeklyPostList() {
+        // 데이터를 먼저 로드
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                communityViewModel.getCommunityMyPosts()
-            }
+            communityViewModel.getCommunityMyPosts()
         }
 
+        // 데이터가 로드되면 수집하고 UI 업데이트
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 try {
                     communityViewModel.communityMyPostsResponseItem.collect { response ->
-                        val filteredItems = response.result?.filter { item ->
-                            item.weeklyMissionTitle == null
+                        // weeklyMissionTitle이 null이 아닌 값만 필터링
+                        val weeklyItems = response.result?.filter { item ->
+                            item.weeklyMissionTitle !== null
                         } ?: emptyList()
 
-                        Log.d("작성한 글_위클리", filteredItems.toString())
+                        Log.d("작성한 글_위클리", weeklyItems.toString())
 
-                        // 데이터가 있으면 어댑터에 전달
-                        communityIndexPostAdapter.submitList(filteredItems)
-
-                        // 데이터가 없는 경우 로그 확인
-                        if (filteredItems.isEmpty()) {
-                            binding.communityIndexPostWeeklyTv.visibility= View.VISIBLE
-                            binding.communityIndexPostWeeklyRv.visibility= View.GONE
+                        // 데이터가 없는 경우 UI 업데이트
+                        if (weeklyItems.isNullOrEmpty()) {
+                            updateVisibility(false)
                             Log.d("작성한 글_위클리", "아이템이 없음.")
+                        } else {
+                            // 데이터가 있는 경우 UI 업데이트
+                            updateVisibility(true)
+                            communityIndexPostAdapter.submitList(weeklyItems)
                         }
                     }
                 } catch (e: Exception) {
                     Log.e("작성한 글_위클리 에러", "Error: ${e.message}")
                 }
             }
+        }
+    }
+
+    private fun updateVisibility(show : Boolean) {
+        if (show) {
+            binding.communityIndexPostWeeklyTv.visibility = View.INVISIBLE
+            binding.communityIndexPostWeeklyRv.visibility = View.VISIBLE
+        } else {
+            binding.communityIndexPostWeeklyTv.visibility = View.VISIBLE
+            binding.communityIndexPostWeeklyRv.visibility = View.INVISIBLE
         }
     }
 
@@ -78,5 +92,4 @@ class CommunityIndexPostWeeklyFragment :BaseFragment<FragmentCommunityIndexPostW
             // 추후 상세 화면을 표시하는 로직 추가
         }
     }
-
 }
