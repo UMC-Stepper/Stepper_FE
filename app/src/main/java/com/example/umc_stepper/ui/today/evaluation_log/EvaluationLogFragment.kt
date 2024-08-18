@@ -51,6 +51,11 @@ class EvaluationLogFragment :
         mainActivity = context as MainActivity
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mainActivity.hideProgress()
+
+    }
     override fun setLayout() {
         observeDataLoadState()
         initSettings()
@@ -99,6 +104,7 @@ class EvaluationLogFragment :
         }
         binding.fragmentEvaluationLogCalenderRv.adapter = evaluationLogBodyPartAdapter
     }
+
 
     private fun initCalendarDecorators() {
         sundayDecorator = SundayDecorator(requireContext())

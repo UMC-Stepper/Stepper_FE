@@ -14,6 +14,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
+import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.today.add.AddExerciseSelectScrapFragmentDirections
 
 abstract class BaseFragment<VB: ViewBinding>(@LayoutRes private val layoutRes: Int) : Fragment() {
@@ -33,6 +34,9 @@ abstract class BaseFragment<VB: ViewBinding>(@LayoutRes private val layoutRes: I
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if( activity is MainActivity){
+            (activity as MainActivity).hideProgress()
+        }
         setLayout()
     }
 

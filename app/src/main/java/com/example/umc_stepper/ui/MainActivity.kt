@@ -138,10 +138,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         // 최상위 프래그먼트 이동 설정 (투데이, 뱃지, 스태퍼, 커뮤니티, 설정)
         mainBottomNavigationBar.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.todayHomeFragment -> navController.navigateToTopLevelDestination(
-                    R.id.todayHomeFragment,
-                    navController
-                )
+                R.id.todayHomeFragment -> {
+                    navController.navigateToTopLevelDestination(
+                        R.id.todayHomeFragment,
+                        navController
+                    )
+                }
 
                 R.id.stepperFragment -> navController.navigateToTopLevelDestination(
                     R.id.stepperFragment,
@@ -165,6 +167,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
                 else -> false
             }
+
         }
 
         // 평가 일지 (달력) 프래그먼트 -> 메인 툴바 제거
@@ -346,7 +349,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.pg.visibility = View.GONE
     }
 
-    fun observeLifeCycle(){
+    private fun observeLifeCycle(){
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 todayViewModel.dataLoadState.collectLatest { state ->
