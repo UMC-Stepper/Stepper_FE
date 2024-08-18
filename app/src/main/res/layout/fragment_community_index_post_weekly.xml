@@ -21,14 +21,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/community_index_post_weekly_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="24dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/item_community_part_home_post"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_community_index_post" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
     </layout>
