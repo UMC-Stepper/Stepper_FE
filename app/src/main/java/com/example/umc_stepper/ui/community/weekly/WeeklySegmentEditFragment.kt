@@ -96,7 +96,7 @@ class WeeklySegmentEditFragment :
                 body = binding.fragmentWeeklyDescriptionTv.text.toString(),
                 bodyPart = bodyPart,
                 subCategory = selectedTab,
-                weeklyMissionId = 1,
+                weeklyMissionId = null
             )
             val gson = Gson()
             val userJson = gson.toJson(postEditDto, PostEditDto::class.java)
