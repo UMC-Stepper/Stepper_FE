@@ -52,8 +52,8 @@ interface CommunityApi {
     @Multipart
     @POST("/api/community/write")
     suspend fun postEditPost(
-        @Part data : RequestBody,
-        @Part ("image") image : List<MultipartBody.Part>
+        @Part ("data") data : RequestBody,
+        @Part image : List<MultipartBody.Part>
     ): BaseResponse<ApiResponsePostResponse>
 
     //게시글 상세 조회
