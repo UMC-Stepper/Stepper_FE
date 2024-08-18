@@ -86,7 +86,7 @@ class WeeklySegmentEditFragment :
             showDialog("사진 업로드 하기", "앨범 선택", "취소하기")
         }
         binding.fragmentWeeklySuccessEditBt.setOnClickListener {
-            val bodyPart = arguments?.getString("bodyPart") ?: "머리"
+            val bodyPart = arguments?.getString("bodyPart") ?: ""
             postEditDto = PostEditDto(
                 imageUrl = "",
                 title = binding.fragmentWeeklySubtitleEt.text.toString(),
