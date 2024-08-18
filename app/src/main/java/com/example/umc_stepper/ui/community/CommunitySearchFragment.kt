@@ -126,15 +126,9 @@ class CommunitySearchFragment :
             val args = Bundle().apply {
                 putString("postId", item.id.toString())
             }
-            if (item.weeklyMissionTitle.isEmpty()) {
-                findNavController().navigateSafe(
-                    R.id.action_communitySearchFragment_to_communityPartShowPostFragment, args
-                )
-            } else {
-                findNavController().navigateSafe(
-                    R.id.action_communitySearchFragment_to_communityWeeklyShowPostFragment, args
-                )
-            }
+            findNavController().navigateSafe(
+                R.id.action_communitySearchFragment_to_communityWeeklyShowPostFragment, args
+            )
         }
     }
 }
