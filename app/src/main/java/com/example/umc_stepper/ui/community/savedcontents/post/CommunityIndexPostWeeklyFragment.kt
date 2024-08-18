@@ -8,11 +8,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentCommunityIndexPostWeeklyBinding
 import com.example.umc_stepper.domain.model.response.post_controller.ApiResponseListPostViewResponseItem
+import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyPostsResponseItem
 import com.example.umc_stepper.ui.community.CommunityViewModel
 import com.example.umc_stepper.ui.community.part.CommunityPartHomeAdapter
 import com.example.umc_stepper.utils.listener.ItemClickListener
@@ -85,11 +87,12 @@ class CommunityIndexPostWeeklyFragment : BaseFragment<FragmentCommunityIndexPost
     }
 
     override fun onClick(item: Any) {
-        if (item is ApiResponseListPostViewResponseItem) {
+        if (item is CommunityMyPostsResponseItem) {
             val args = Bundle().apply {
-                putString("indexWeeklyPostId", item.id.toString())
+                putString("postId", item.id.toString())
             }
-            // 추후 상세 화면을 표시하는 로직 추가
+            findNavController().navigateSafe(
+                R.id.action_communityIndexPostFragment_to_communityWeeklyShowPostFragment, args)
         }
     }
 }
