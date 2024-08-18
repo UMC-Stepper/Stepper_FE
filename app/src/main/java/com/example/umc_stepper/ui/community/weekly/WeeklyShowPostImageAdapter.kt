@@ -4,10 +4,11 @@ import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseAdapter
 import com.example.umc_stepper.base.BaseDiffCallback
 import com.example.umc_stepper.databinding.ItemWeeklyPostImgBinding
+import com.example.umc_stepper.domain.model.response.ImageResponse
 
-class WeeklyShowPostImageAdapter : BaseAdapter<String, ItemWeeklyPostImgBinding>(
+class WeeklyShowPostImageAdapter : BaseAdapter<ImageResponse, ItemWeeklyPostImgBinding>(
     diffCallback = BaseDiffCallback(
-        itemsTheSame = { oldItem, newItem -> oldItem == newItem },
+        itemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
         contentsTheSame = { oldItem, newItem -> oldItem == newItem }
     )
 ) {
@@ -15,7 +16,7 @@ class WeeklyShowPostImageAdapter : BaseAdapter<String, ItemWeeklyPostImgBinding>
     override val layoutId: Int
         get() = R.id.item_weekly_post_img_iv
 
-    override fun bind(binding: ItemWeeklyPostImgBinding, item: String) {
-        binding.imageUri = item
+    override fun bind(binding: ItemWeeklyPostImgBinding, item: ImageResponse) {
+        binding.imageResponse = item
     }
 }

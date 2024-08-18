@@ -379,7 +379,7 @@
             app:destination="@id/communityWeeklyShowPostFragment" />
     </fragment>
 
-    <!-- 위클리 홈 게시글 상세보기 화면 -->
+    <!-- 게시글 상세보기 화면 -->
     <fragment
         android:id="@+id/communityWeeklyShowPostFragment"
         android:name="com.example.umc_stepper.ui.community.CommunityShowPostFragment"
@@ -444,8 +444,8 @@
         android:label="CommunityPartHomeFragment"
         tools:layout="@layout/fragment_community_part_home">
         <action
-            android:id="@+id/action_communityPartHomeFragment_to_communityPartShowPostFragment"
-            app:destination="@id/communityPartShowPostFragment" />
+            android:id="@+id/action_communityPartHomeFragment_to_communityWeeklyShowPostFragment"
+            app:destination="@id/communityWeeklyShowPostFragment" />
     </fragment>
 
     <fragment
@@ -512,9 +512,6 @@
         <action
             android:id="@+id/action_communitySearchFragment_to_communityWeeklyShowPostFragment"
             app:destination="@id/communityWeeklyShowPostFragment" />
-        <action
-            android:id="@+id/action_communitySearchFragment_to_communityPartShowPostFragment"
-            app:destination="@id/communityPartShowPostFragment" />
     </fragment>
 
     <!-- 부위 커뮤니티 게시글 상세 보기 -->

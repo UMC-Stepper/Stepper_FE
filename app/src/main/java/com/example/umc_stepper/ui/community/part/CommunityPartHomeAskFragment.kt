@@ -7,6 +7,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.umc_stepper.R
@@ -23,9 +25,15 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+interface NavigationCallback {
+    fun navigateToWeeklyShowPost(postId: String)
+}
+
 @AndroidEntryPoint
 class CommunityPartHomeAskFragment : BaseFragment<FragmentCommunityPartHomeTabBinding>(R.layout.fragment_community_part_home_tab),
     ItemClickListener {
+
+    private var navigationCallback: NavigationCallback? = null
 
     private val communityViewModel: CommunityViewModel by activityViewModels()
     private lateinit var communityPartHomeAdapter: CommunityPartHomeAdapter
@@ -81,11 +89,14 @@ class CommunityPartHomeAskFragment : BaseFragment<FragmentCommunityPartHomeTabBi
     }
 
     override fun onClick(item: Any) {
-        if (item is ApiResponseListPostViewResponseItem) {
-            val args = Bundle().apply {
-                putString("partPostId", item.id.toString())
-            }
-            // 추후 상세 화면을 표시하는 로직 추가
+        val args = Bundle().apply {
+            putString("postId", "$item")
+        }
+        try {
+            val action = CommunityPartHomeFragmentDirections.actionCommunityPartHomeFragmentToCommunityWeeklyShowPostFragment()
+            findNavController().navigateSafe(action.actionId, args)
+        } catch (e: Exception) {
+            Log.e("NavigationError", "Navigation error: ${e.message}")
         }
     }
 }

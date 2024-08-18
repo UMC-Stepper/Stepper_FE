@@ -7,6 +7,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
@@ -75,11 +77,15 @@ class CommunityPartHomeMotivationFragment : BaseFragment<FragmentCommunityPartHo
     }
 
     override fun onClick(item: Any) {
-        if (item is ApiResponseListPostViewResponseItem) {
-            val args = Bundle().apply {
-                putString("partPostId", item.id.toString())
-            }
-            // 추후 상세 화면을 표시하는 로직 추가
+        val args = Bundle().apply {
+            putString("postId", "$item")
+        }
+        try {
+            val action = CommunityPartHomeFragmentDirections.actionCommunityPartHomeFragmentToCommunityWeeklyShowPostFragment()
+            findNavController().navigateSafe(action.actionId, args)
+        } catch (e: Exception) {
+            Log.e("NavigationError", "Navigation error: ${e.message}")
         }
     }
+
 }

@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/Purple_Black_BG_2"
+        android:background="@color/Purple_Black_BG_1"
         tools:context=".ui.community.CommunityShowPostFragment">
 
         <ImageView
@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
+            android:visibility="invisible"
             android:src="@drawable/ic_weekly_pin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_rounded_purple_bg2_top_half_40dp">
 
+                <!--  app:imageUrl2="@{apiResponsePostViewResponse.imageUrl}" -->
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/fragment_community_weekly_show_post_profile_iv"
                     android:layout_width="45dp"
@@ -64,7 +66,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="32dp"
                     android:background="@color/White"
-                    app:imageUrl2="@{apiResponsePostViewResponse.imageUrl}"
+
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />

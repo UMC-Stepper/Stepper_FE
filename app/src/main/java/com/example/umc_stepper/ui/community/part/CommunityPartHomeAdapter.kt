@@ -24,9 +24,7 @@ class CommunityPartHomeAdapter(
 
     override fun bind(binding: ItemCommunityPartHomePostBinding, item: ApiResponseListPostViewResponseItem) {
         binding.partPostItem = item
-        binding.root.setOnClickListener {
-            itemClickListener.onClick(item)
-        }
+        binding.listener = itemClickListener
         loadImage(binding, item.imageUrl)
     }
 
