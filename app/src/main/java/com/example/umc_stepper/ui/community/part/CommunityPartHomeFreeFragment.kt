@@ -43,9 +43,7 @@ class CommunityPartHomeFreeFragment : BaseFragment<FragmentCommunityPartHomeTabB
 
     private fun observeCategoryList(categoryName: String) {
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                communityViewModel.getDetailPostList(categoryName)
-            }
+            communityViewModel.getDetailPostList(categoryName)
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
