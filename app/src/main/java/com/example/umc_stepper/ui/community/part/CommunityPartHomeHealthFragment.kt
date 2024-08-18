@@ -57,21 +57,31 @@ class CommunityPartHomeHealthFragment : BaseFragment<FragmentCommunityPartHomeTa
 
                         Log.d("부위홈", filteredItems.toString())
 
-                        // 데이터가 있으면 어댑터에 전달
-                        communityPartHomeAdapter.submitList(filteredItems)
-
                         // 데이터가 없는 경우 로그 확인
                         if (filteredItems.isEmpty()) {
                             binding.communityPartHomeTabTv.text="건강정보 글이 없습니다."
-                            binding.communityPartHomeTabTv.visibility= View.VISIBLE
-                            binding.fragmentCommunityPartHomeRv.visibility= View.GONE
+                            updateVisibility(false)
                             Log.d("부위홈", "아이템이 없음.")
+                        }else{
+                            updateVisibility(true)
+                            // 데이터가 있으면 어댑터에 전달
+                            communityPartHomeAdapter.submitList(filteredItems)
                         }
                     }
                 } catch (e: Exception) {
                     Log.e("부위홈 에러", "Error: ${e.message}")
                 }
             }
+        }
+    }
+
+    private fun updateVisibility(show : Boolean) {
+        if (show) {
+            binding.communityPartHomeTabTv.visibility = View.INVISIBLE
+            binding.fragmentCommunityPartHomeRv.visibility = View.VISIBLE
+        } else {
+            binding.communityPartHomeTabTv.visibility = View.VISIBLE
+            binding.fragmentCommunityPartHomeRv.visibility = View.INVISIBLE
         }
     }
 
