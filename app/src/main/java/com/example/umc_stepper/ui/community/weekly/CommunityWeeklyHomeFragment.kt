@@ -28,6 +28,7 @@ class CommunityWeeklyHomeFragment : BaseFragment<FragmentCommunityWeeklyHomeBind
     private lateinit var weeklyHomePostListAdapter: WeeklyHomePostListAdapter
     private val communityViewModel : CommunityViewModel by activityViewModels()
     private var weeklyMissionId = 0
+    private lateinit var weeklyMissionTitle: String
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -80,6 +81,7 @@ class CommunityWeeklyHomeFragment : BaseFragment<FragmentCommunityWeeklyHomeBind
         lifecycleScope.launch {
             communityViewModel.weeklyMissionResponse.collect {
                 weeklyMissionId = it.result?.id ?: 1
+                weeklyMissionTitle = it.result?.missionTitle.toString() ?: "평소에 잘 안하다가 요즘에 빠진\\n운동을 추천해주세요!"
             }
         }
         weeklyMissionId = communityViewModel.weeklyMissionResponse.value.result?.id ?: 1
@@ -87,8 +89,11 @@ class CommunityWeeklyHomeFragment : BaseFragment<FragmentCommunityWeeklyHomeBind
 
     private fun setButton() {
         binding.fragmentCommunityWeeklyHomeFab.setOnClickListener {
-            val action = CommunityWeeklyHomeFragmentDirections
-            // 위클리 홈 게시글 작성 화면으로 이동
+            val action = CommunityWeeklyHomeFragmentDirections.actionCommunityWeeklyHomeFragmentToWeeklyEditFragment()
+            val args = Bundle().apply {
+                putString("weeklyMissionTitle", "$weeklyMissionTitle")
+            }
+            findNavController().navigateSafe(action.actionId, args)
         }
     }
 

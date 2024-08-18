@@ -377,6 +377,9 @@
         <action
             android:id="@+id/action_communityWeeklyHomeFragment_to_communityWeeklyShowPostFragment"
             app:destination="@id/communityWeeklyShowPostFragment" />
+        <action
+            android:id="@+id/action_communityWeeklyHomeFragment_to_weeklyEditFragment"
+            app:destination="@id/weeklyEditFragment" />
     </fragment>
 
     <!-- 게시글 상세보기 화면 -->
