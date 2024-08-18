@@ -380,6 +380,15 @@
         <action
             android:id="@+id/action_communityWeeklyHomeFragment_to_weeklyEditFragment"
             app:destination="@id/weeklyEditFragment" />
+        <action
+            android:id="@+id/action_communityWeeklyHomeFragment_to_communityHomeFragment"
+            app:destination="@id/communityHomeFragment" />
+        <action
+            android:id="@+id/action_communityWeeklyHomeFragment_to_communitySearchFragment"
+            app:destination="@id/communitySearchFragment" />
+        <action
+            android:id="@+id/action_communityWeeklyHomeFragment_to_communityIndexFragment"
+            app:destination="@id/communityIndexFragment" />
     </fragment>
 
     <!-- 게시글 상세보기 화면 -->
@@ -452,6 +461,15 @@
         <action
             android:id="@+id/action_communityPartHomeFragment_to_weeklySegmentEditFragment"
             app:destination="@id/weeklySegmentEditFragment" />
+        <action
+            android:id="@+id/action_communityPartHomeFragment_to_communityIndexFragment"
+            app:destination="@id/communityIndexFragment" />
+        <action
+            android:id="@+id/action_communityPartHomeFragment_to_communitySearchFragment"
+            app:destination="@id/communitySearchFragment" />
+        <action
+            android:id="@+id/action_communityPartHomeFragment_to_communityHomeFragment"
+            app:destination="@id/communityHomeFragment" />
     </fragment>
 
     <fragment
