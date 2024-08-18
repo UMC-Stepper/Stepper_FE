@@ -35,6 +35,9 @@
 
     <!-- 커뮤니티 -->
     <string name="Weekly_Mission">Weekly Mission</string>
+    <string name="Weekly_Mission_Demo_day1">새롭게 만나본 STEPPER는 어떤가요?</string>
+    <string name="Weekly_Mission_Demo_day2">자유롭게 STEPPER 사용 후기를 남겨주세요!</string>
+    <string name="Weekly_Mission_Demo_day">새롭게 만나본 STEPPER는 어떤가요?\n자유롭게 STEPPER 사용 후기를 남겨주세요!</string>
 
     <string-array name="custom_months">
         <item>1월</item>
