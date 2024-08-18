@@ -46,9 +46,7 @@ class CommunityMyScrapFragment : BaseFragment<FragmentCommunityMyScrapBinding>(R
 
     private fun observeViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                communityViewModel.getCommunityMyScraps()
-            }
+            communityViewModel.getCommunityMyScraps()
         }
 
         lifecycleScope.launch {
