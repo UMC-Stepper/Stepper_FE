@@ -33,8 +33,6 @@ interface NavigationCallback {
 class CommunityPartHomeAskFragment : BaseFragment<FragmentCommunityPartHomeTabBinding>(R.layout.fragment_community_part_home_tab),
     ItemClickListener {
 
-    private var navigationCallback: NavigationCallback? = null
-
     private val communityViewModel: CommunityViewModel by activityViewModels()
     private lateinit var communityPartHomeAdapter: CommunityPartHomeAdapter
     private val part: String by lazy {
