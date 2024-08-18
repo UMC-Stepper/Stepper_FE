@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="imageUri"
-            type="String" />
+            name="imageResponse"
+            type="com.example.umc_stepper.domain.model.response.ImageResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +21,7 @@
             android:background="@drawable/shape_rounded_square_purple700_18dp"
             android:backgroundTint="@color/White"
             android:src="@drawable/ic_community_logo"
-            app:imageUrl="@{imageUri}"
+            app:imageUrl="@{imageResponse.imageUrl}"
             app:roundedCorners="@{18}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
