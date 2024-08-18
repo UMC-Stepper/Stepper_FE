@@ -189,9 +189,11 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
     // 위클리 미션 / 부위 게시판 별 Title 설정 함수
     private fun setPostTitle(bodyPart: String?, weeklyMissionTitle: String?) {
         if(bodyPart.isNullOrEmpty().not()) {
+            mainActivity.updateToolbarTitle("Community")
             binding.fragmentCommunityWeeklyShowPostLogoTitleTv.text =  "$bodyPart Community"
             binding.fragmentCommunityWeeklyShowPostPinIv.visibility = View.INVISIBLE
         } else {
+            mainActivity.updateToolbarTitle("Weekly Mission")
             binding.fragmentCommunityWeeklyShowPostLogoTitleTv.text = weeklyMissionTitle ?: "평소에 잘 안하다가 요즘에 빠진 운동을 추천해 주세요!"
             binding.fragmentCommunityWeeklyShowPostPinIv.visibility = View.VISIBLE
         }
@@ -293,7 +295,6 @@ class CommunityShowPostFragment : BaseFragment<FragmentCommunityShowPostBinding>
     }
 
     private fun updateMainToolbar() {
-        mainActivity.updateToolbarTitle("Weekly Mission")
         mainActivity.updateToolbarLeftImg(R.drawable.ic_toolbar_community_home)
         mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_community_search)
         mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_community_menu)
