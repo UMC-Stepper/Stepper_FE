@@ -36,18 +36,19 @@ import java.io.File
 import java.io.FileOutputStream
 import java.util.Collections
 
-class WeeklySegmentEditFragment : BaseFragment<FragmentWeeklySegmentEditBinding>(R.layout.fragment_weekly_segment_edit) ,
+class WeeklySegmentEditFragment :
+    BaseFragment<FragmentWeeklySegmentEditBinding>(R.layout.fragment_weekly_segment_edit),
     CommunityDialogInterface,
-    CommunityRemoveInterface{
+    CommunityRemoveInterface {
 
-    private lateinit var mainActivity : MainActivity
+    private lateinit var mainActivity: MainActivity
     private lateinit var postEditDto: PostEditDto
-    private lateinit var communityDialog : CommunityDialog
+    private lateinit var communityDialog: CommunityDialog
     private lateinit var galleryForResult: ActivityResultLauncher<Intent>
     private lateinit var uploadImgAdapter: WeeklyEditImageAdapter
 
     private var selectedRemoveItemId = 0
-    private val communityViewModel : CommunityViewModel by activityViewModels()
+    private val communityViewModel: CommunityViewModel by activityViewModels()
     private val imgList: MutableList<UploadImageCard> = mutableListOf()
     private var selectedTab = ""
     private val imageList: MutableList<MultipartBody.Part> = mutableListOf()
@@ -64,6 +65,7 @@ class WeeklySegmentEditFragment : BaseFragment<FragmentWeeklySegmentEditBinding>
         onClickBtn()
         initActivityResultLauncher()
     }
+
     private fun showDialog(title: String, btn1: String, btn2: String) {
         activity?.let {
             communityDialog = CommunityDialog(title, btn1, btn2, this)
@@ -74,13 +76,14 @@ class WeeklySegmentEditFragment : BaseFragment<FragmentWeeklySegmentEditBinding>
             Log.e("WeeklySegmentEditFragment", "Activity is null")
         }
     }
-//이미지 리스트 (글작성) , bodyPart 받아야 함
+
+    //이미지 리스트 (글작성) , bodyPart 받아야 함
     private fun onClickBtn() {
         binding.fragmentWeeklyAddPictureIv.setOnClickListener {
-            showDialog("사진 업로드 하기","앨범 선택","취소하기")
+            showDialog("사진 업로드 하기", "앨범 선택", "취소하기")
         }
         binding.fragmentWeeklySuccessEditBt.setOnClickListener {
-            val bodyPart  = arguments?.getString("bodyPart") ?: ""
+            val bodyPart = arguments?.getString("bodyPart") ?: "머리"
             postEditDto = PostEditDto(
                 imageUrl = "",
                 title = binding.fragmentWeeklySubtitleEt.text.toString(),
@@ -131,14 +134,14 @@ class WeeklySegmentEditFragment : BaseFragment<FragmentWeeklySegmentEditBinding>
         }
     }
 
-    private fun initTabLayout(){
+    private fun initTabLayout() {
         with(binding.fragmentWeeklySegmentItemTb) {
             addTab(newTab().setText("QnA"))
             addTab(newTab().setText("건강정보"))
             addTab(newTab().setText("자유토크"))
             addTab(newTab().setText("동기부여"))
 
-            addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
                     selectedTab = tab.text.toString()
                 }
@@ -184,12 +187,14 @@ class WeeklySegmentEditFragment : BaseFragment<FragmentWeeklySegmentEditBinding>
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(binding.fragmentWeeklyImageUploadRv)
     }
+
     override fun onRemove(pos: Int) {
-        showDialog("해당 사진을 삭제하시겠습니까?","삭제하기","취소하기")
+        showDialog("해당 사진을 삭제하시겠습니까?", "삭제하기", "취소하기")
         selectedRemoveItemId = pos
     }
+
     override fun OnClickBtn1(btn1: String, dialogType: DialogType?) {
-        when(btn1){
+        when (btn1) {
             "앨범 선택" -> openGallery()
             "삭제하기" -> {
                 uploadImgAdapter.removeItem(selectedRemoveItemId)
