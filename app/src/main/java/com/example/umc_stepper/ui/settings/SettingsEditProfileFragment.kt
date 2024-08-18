@@ -39,7 +39,9 @@ class SettingsEditProfileFragment : BaseFragment<FragmentSettingsEditProfileBind
 
     override fun setLayout() {
         initSetting()
+        binding.imageUri = arguments?.getString("imageUri")
     }
+
     private fun onClickBtn(){
         binding.fragmentSettingsEditProfileCameraIv.setOnClickListener{
             showDialogWithProfile()

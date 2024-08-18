@@ -1,6 +1,7 @@
 package com.example.umc_stepper.ui.settings
 
 
+import android.os.Bundle
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +16,7 @@ import kotlinx.coroutines.launch
 class SettingsShowProfileFragment : BaseFragment<FragmentSettingsShowProfileBinding>(R.layout.fragment_settings_show_profile) {
 
     private val loginViewModel : LoginViewModel by activityViewModels()
+    private lateinit var imageUri : String
 
     override fun setLayout() {
         setButton()
@@ -27,6 +29,7 @@ class SettingsShowProfileFragment : BaseFragment<FragmentSettingsShowProfileBind
                 loginViewModel.getUserInfo()
                 loginViewModel.userInfo.collect {
                     privateGetUserInfo()
+                    imageUri = it.result?.profileImage.toString()
                 }
             }
         }
@@ -38,8 +41,11 @@ class SettingsShowProfileFragment : BaseFragment<FragmentSettingsShowProfileBind
 
     private fun setButton() {
         binding.fragmentSettingsShowEditBtn.setOnClickListener {
+            val args = Bundle().apply {
+                val imageUri = putString("imageUri", imageUri)
+            }
             val action = SettingsShowProfileFragmentDirections.actionSettingsShowProfileFragmentToSettingsEditProfileFragment()
-            findNavController().navigate(action.actionId)
+            findNavController().navigate(action.actionId, args)
         }
     }
 
