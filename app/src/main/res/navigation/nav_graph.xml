@@ -446,6 +446,9 @@
         <action
             android:id="@+id/action_communityPartHomeFragment_to_communityWeeklyShowPostFragment"
             app:destination="@id/communityWeeklyShowPostFragment" />
+        <action
+            android:id="@+id/action_communityPartHomeFragment_to_weeklySegmentEditFragment"
+            app:destination="@id/weeklySegmentEditFragment" />
     </fragment>
 
     <fragment
