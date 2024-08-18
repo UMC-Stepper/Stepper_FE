@@ -6,14 +6,12 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.umc_stepper.R
@@ -25,7 +23,6 @@ import com.example.umc_stepper.ui.community.CommunityDialog
 import com.example.umc_stepper.ui.community.CommunityDialogInterface
 import com.example.umc_stepper.ui.community.CommunityRemoveInterface
 import com.example.umc_stepper.ui.community.CommunityViewModel
-import com.example.umc_stepper.ui.login.MainViewModel
 import com.example.umc_stepper.utils.enums.DialogType
 import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
