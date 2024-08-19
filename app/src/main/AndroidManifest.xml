@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 알림 권한 -->
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/><!--알람 권한-->
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" /> <!-- 알람 권한 -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- 카메라 권한 -->
     <uses-feature android:name="android.hardware.camera.any" />
 
@@ -20,60 +20,51 @@
     <application
         android:name=".utils.GlobalApplication"
         android:allowBackup="true"
-        android:networkSecurityConfig="@xml/network_security_config"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UMC_Stepper"
         tools:targetApi="31">
         <activity
+            android:name=".ui.man"
+            android:exported="false" />
+        <activity
             android:name=".test.Test"
-            android:exported="true" >
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".ui.stepper.CameraDetailActivity"
             android:exported="false" />
         <activity
             android:name=".ui.signup.SignUpActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan">
-
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name=".ui.signup.SignUp2Activity"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan">
-
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".ui.signup.RegisterAgreeActivity"
-            android:exported="true">
-
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".ui.stepper.CameraActivity"
-            android:exported="false">
-
-        </activity>
-
+            android:exported="false"></activity>
         <service
             android:name=".utils.firebase.MyFirebaseMessagingService"
             android:exported="false"
@@ -82,8 +73,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-
     </application>
 
 </manifest>
