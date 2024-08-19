@@ -146,7 +146,7 @@ object NetworkModule {
         return Retrofit.Builder()
             .addConverterFactory(gsonConverterFactory)
             .client(okHttpClient)
-            .baseUrl("http://stepper-dev-env.eba-4gp3sbph.ap-northeast-2.elasticbeanstalk.com/")
+            .baseUrl("http://stepper-backend-dev-env.eba-qcmqwumz.ap-northeast-2.elasticbeanstalk.com/")
             .build()
     }
 }

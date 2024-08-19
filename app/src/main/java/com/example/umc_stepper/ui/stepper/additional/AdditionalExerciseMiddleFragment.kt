@@ -72,6 +72,10 @@ class AdditionalExerciseMiddleFragment : BaseFragment<FragmentAdditionalExercise
 
     private fun updateMainToolbar() {
         mainActivity.updateToolbarTitle("추가 운동하기")
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
+        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
+        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
+
     }
 
     private fun goAdditionalExerciseSuccess(){
@@ -87,6 +91,7 @@ class AdditionalExerciseMiddleFragment : BaseFragment<FragmentAdditionalExercise
         val timeJson = gson.toJson(time)
         val args = Bundle().apply {
             putString("time", timeJson)
+            putInt("titleNumber",1)
         }
 
         val action = AdditionalExerciseMiddleFragmentDirections.actionFragmentAdditionalExerciseMiddleToFragmentAdditionalExerciseSuccess()

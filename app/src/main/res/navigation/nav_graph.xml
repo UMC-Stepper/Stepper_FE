@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/badgeFragment">
+    app:startDestination="@id/todayHomeFragment">
 
     <!-- 뱃지 프래그먼트 -->
     <fragment
@@ -22,14 +22,20 @@
             android:id="@+id/action_communityHomeFragment_to_communityWeeklyHomeFragment"
             app:destination="@id/communityWeeklyHomeFragment" />
         <action
-            android:id="@+id/action_communityHomeFragment_to_communityWeeklyShowPostFragment"
-            app:destination="@id/communityWeeklyShowPostFragment" />
-        <action
             android:id="@+id/action_communityHomeFragment_to_weeklyEditFragment"
             app:destination="@id/weeklyEditFragment" />
         <action
             android:id="@+id/action_communityHomeFragment_to_weeklySegmentEditFragment"
             app:destination="@id/weeklySegmentEditFragment" />
+        <action
+            android:id="@+id/action_communityHomeFragment_to_communityPartHomeFragment"
+            app:destination="@id/communityPartHomeFragment" />
+        <action
+            android:id="@+id/action_communityHomeFragment_to_communityIndexFragment"
+            app:destination="@id/communityIndexFragment" />
+        <action
+            android:id="@+id/action_communityHomeFragment_to_communitySearchFragment"
+            app:destination="@id/communitySearchFragment" />
 
 
     </fragment>
@@ -62,6 +68,10 @@
         <action
             android:id="@+id/action_stepperFragment_to_communityPartHomeFragment"
             app:destination="@id/communityPartHomeFragment" />
+        <!-- 임시로 오늘의 운동 하는 화면으로 이동-->
+        <action
+            android:id="@+id/action_stepperFragment_to_fragmentTodayExercise"
+            app:destination="@id/fragmentTodayExercise" />
     </fragment>
 
     <!-- 투데이 평가일지-->
@@ -74,6 +84,12 @@
         <action
             android:id="@+id/action_evaluationLogFragment_to_evaluationExerciseTodayFragment"
             app:destination="@id/evaluationExerciseTodayFragment" />
+        <action
+            android:id="@+id/action_evaluationLogFragment_to_todayHomeFragment"
+            app:destination="@id/todayHomeFragment" />
+        <action
+            android:id="@+id/action_evaluationLogFragment_to_stepperFragment"
+            app:destination="@id/stepperFragment" />
     </fragment>
 
     <!-- 투데이 홈 -->
@@ -94,6 +110,9 @@
         <action
             android:id="@+id/action_todayHomeFragment_to_addExerciseSelectScrapFragment"
             app:destination="@id/addExerciseSelectScrapFragment" />
+        <action
+            android:id="@+id/action_todayHomeFragment_to_stepperFragment"
+            app:destination="@id/stepperFragment" />
     </fragment>
 
     <!-- 스태퍼 평가일지 -->
@@ -122,6 +141,9 @@
         <action
             android:id="@+id/action_additionalExerciseHomeFragment_to_fragmentAdditionalExerciseMiddle"
             app:destination="@id/fragmentAdditionalExerciseMiddle" />
+        <action
+            android:id="@+id/action_additionalExerciseHomeFragment_to_fragmentAddExercise"
+            app:destination="@id/fragmentAddExercise" />
     </fragment>
 
     <!-- 투데이 나만의 운동 (AI) -->
@@ -193,6 +215,10 @@
         <action
             android:id="@+id/action_fragmentAdditionalExerciseSuccess_to_fragmentEvaluationExercise"
             app:destination="@id/fragmentEvaluationExercise" />
+        <!--추가운동 홈으로-->
+        <action
+            android:id="@+id/action_fragmentAdditionalExerciseSuccess_to_additionalExerciseHomeFragment"
+            app:destination="@id/additionalExerciseHomeFragment" />
     </fragment>
 
     <!-- 스태퍼 추가운동 하기(영상 + 타이머) -->
@@ -231,7 +257,25 @@
         <action
             android:id="@+id/action_evaluationExerciseTodayFragment_to_evaluationLogFragment"
             app:destination="@id/evaluationLogFragment" />
+        <action
+            android:id="@+id/action_evaluationExerciseTodayFragment_to_todayHomeFragment"
+            app:destination="@id/todayHomeFragment" />
+        <action
+            android:id="@+id/action_evaluationExerciseTodayFragment_to_stepperFragment"
+            app:destination="@id/stepperFragment" />
     </fragment>
+
+    <!-- 스태퍼 오늘의 운동하기1,2,3 -->
+    <fragment
+        android:id="@+id/fragmentTodayExercise"
+        android:name="com.example.umc_stepper.ui.stepper.TodayExerciseFragment"
+        android:label="TodayExercise"
+        tools:layout="@layout/fragment_last_exercise">
+        <action
+            android:id="@+id/action_fragmentTodayExercise_to_fragmentAdditionalExerciseSuccess"
+            app:destination="@id/fragmentAdditionalExerciseSuccess" />
+    </fragment>
+
 
     <!-- 스태퍼 운동 완료 -->
     <fragment
@@ -323,16 +367,36 @@
             android:id="@+id/action_myExerciseCheckFragment_to_fragmentMyExercise2"
             app:destination="@id/fragmentMyExercise2" />
     </fragment>
+
+    <!-- 커뮤니티 위클리 홈 화면 -->
     <fragment
         android:id="@+id/communityWeeklyHomeFragment"
         android:name="com.example.umc_stepper.ui.community.weekly.CommunityWeeklyHomeFragment"
         android:label="CommunityWeeklyHomeFragment"
-        tools:layout="@layout/fragment_community_weekly_home"/>
+        tools:layout="@layout/fragment_community_weekly_home">
+        <action
+            android:id="@+id/action_communityWeeklyHomeFragment_to_communityWeeklyShowPostFragment"
+            app:destination="@id/communityWeeklyShowPostFragment" />
+        <action
+            android:id="@+id/action_communityWeeklyHomeFragment_to_weeklyEditFragment"
+            app:destination="@id/weeklyEditFragment" />
+        <action
+            android:id="@+id/action_communityWeeklyHomeFragment_to_communityHomeFragment"
+            app:destination="@id/communityHomeFragment" />
+        <action
+            android:id="@+id/action_communityWeeklyHomeFragment_to_communitySearchFragment"
+            app:destination="@id/communitySearchFragment" />
+        <action
+            android:id="@+id/action_communityWeeklyHomeFragment_to_communityIndexFragment"
+            app:destination="@id/communityIndexFragment" />
+    </fragment>
+
+    <!-- 게시글 상세보기 화면 -->
     <fragment
         android:id="@+id/communityWeeklyShowPostFragment"
-        android:name="com.example.umc_stepper.ui.community.weekly.CommunityWeeklyShowPostFragment"
+        android:name="com.example.umc_stepper.ui.community.CommunityShowPostFragment"
         android:label="CommunityWeeklyShowPostFragment"
-        tools:layout="@layout/fragment_community_weekly_show_post"/>
+        tools:layout="@layout/fragment_community_show_post"/>
 
     <!-- 커뮤니티 목록 확인 화면 -->
     <fragment
@@ -356,32 +420,64 @@
         android:id="@+id/communityIndexPostFragment"
         android:name="com.example.umc_stepper.ui.community.savedcontents.post.CommunityIndexPostFragment"
         android:label="CommunityIndexPostFragment"
-        tools:layout="@layout/fragment_community_index_post"/>
+        tools:layout="@layout/fragment_community_index_post">
+        <action
+            android:id="@+id/action_communityIndexPostFragment_to_communityPartShowPostFragment"
+            app:destination="@id/communityPartShowPostFragment" />
+        <action
+            android:id="@+id/action_communityIndexPostFragment_to_communityWeeklyShowPostFragment"
+            app:destination="@id/communityWeeklyShowPostFragment" />
+    </fragment>
 
     <!-- 커뮤니티 목록 확인 - 작성한 댓글 모음 -->
     <fragment
         android:id="@+id/communityMyCommentsFragment"
         android:name="com.example.umc_stepper.ui.community.savedcontents.comments.CommunityMyCommentsFragment"
         android:label="CommunityMyCommentsFragment"
-        tools:layout="@layout/fragment_community_my_comments"/>
+        tools:layout="@layout/fragment_community_my_comments">
+        <action
+            android:id="@+id/action_communityMyCommentsFragment_to_communityWeeklyShowPostFragment"
+            app:destination="@id/communityWeeklyShowPostFragment" />
+    </fragment>
 
     <!-- 커뮤니티 목록 확인 - 스크랩 모음 -->
     <fragment
         android:id="@+id/communityMyScrapFragment"
         android:name="com.example.umc_stepper.ui.community.savedcontents.scrap.CommunityMyScrapFragment"
         android:label="CommunityMyScrapFragment"
-        tools:layout="@layout/fragment_community_my_scrap"/>
+        tools:layout="@layout/fragment_community_my_scrap">
+        <action
+            android:id="@+id/action_communityMyScrapFragment_to_communityWeeklyShowPostFragment"
+            app:destination="@id/communityWeeklyShowPostFragment" />
+    </fragment>
     <fragment
         android:id="@+id/weeklyEditFragment"
         android:name="com.example.umc_stepper.ui.community.weekly.WeeklyEditFragment"
-        android:label="WeeklyEditFragment" />
+        android:label="WeeklyEditFragment"
+        tools:layout="@layout/fragment_weekly_edit"/>
 
     <!-- 커뮤니티 부위별 게시판 홈 -->
     <fragment
         android:id="@+id/communityPartHomeFragment"
         android:name="com.example.umc_stepper.ui.community.part.CommunityPartHomeFragment"
         android:label="CommunityPartHomeFragment"
-        tools:layout="@layout/fragment_community_part_home"/>
+        tools:layout="@layout/fragment_community_part_home">
+        <action
+            android:id="@+id/action_communityPartHomeFragment_to_communityWeeklyShowPostFragment"
+            app:destination="@id/communityWeeklyShowPostFragment" />
+        <action
+            android:id="@+id/action_communityPartHomeFragment_to_weeklySegmentEditFragment"
+            app:destination="@id/weeklySegmentEditFragment" />
+        <action
+            android:id="@+id/action_communityPartHomeFragment_to_communityIndexFragment"
+            app:destination="@id/communityIndexFragment" />
+        <action
+            android:id="@+id/action_communityPartHomeFragment_to_communitySearchFragment"
+            app:destination="@id/communitySearchFragment" />
+        <action
+            android:id="@+id/action_communityPartHomeFragment_to_communityHomeFragment"
+            app:destination="@id/communityHomeFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/weeklySegmentEditFragment"
@@ -399,6 +495,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_settingsShowProfileFragment"
             app:destination="@id/settingsShowProfileFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_settingExitFragment"
+            app:destination="@id/settingExitFragment" />
     </fragment>
 
     <!-- 설정-프로필edit -->
@@ -422,6 +521,70 @@
             android:id="@+id/action_settingsShowProfileFragment_to_settingsEditProfileFragment"
             app:destination="@id/settingsEditProfileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingExitFragment"
+        android:name="com.example.umc_stepper.ui.settings.SettingExitFragment"
+        android:label="fragment_setting_exit"
+        tools:layout="@layout/fragment_setting_exit" />
 
+    <!-- 부위 커뮤니티 게시글 상세 보기 -->
+    <fragment
+        android:id="@+id/communityPartShowPostFragment"
+        android:name="com.example.umc_stepper.ui.community.part.CommunityPartShowPostFragment"
+        android:label="CommunityPartShowPostFragment"
+        tools:layout="@layout/fragment_community_part_show_post"/>
+
+    <!-- 커뮤니티 검색 화면 -->
+    <fragment
+        android:id="@+id/communitySearchFragment"
+        android:name="com.example.umc_stepper.ui.community.CommunitySearchFragment"
+        android:label="CommunitySearchFragment"
+        tools:layout="@layout/fragment_community_search">
+        <action
+            android:id="@+id/action_communitySearchFragment_to_communityWeeklyShowPostFragment"
+            app:destination="@id/communityWeeklyShowPostFragment" />
+    </fragment>
+
+    <!-- 부위 커뮤니티 게시글 상세 보기 -->
+    <fragment
+        android:id="@+id/communityIndexPostPartFragment"
+        android:name="com.example.umc_stepper.ui.community.savedcontents.post.CommunityIndexPostPartFragment"
+        android:label="CommunityIndexPostPartFragment"
+        tools:layout="@layout/fragment_community_index_post_part"/>
+
+    <!-- 커뮤니티 목록 위클리 -->
+    <fragment
+        android:id="@+id/communityIndexWeelklyFragment"
+        android:name="com.example.umc_stepper.ui.community.savedcontents.post.CommunityIndexPostWeeklyFragment"
+        android:label="CommunityIndexWeelklyFragment"
+        tools:layout="@layout/fragment_community_index_post_weekly"/>
+
+    <!-- 부위 커뮤니티 -무물보 -->
+    <fragment
+        android:id="@+id/communityPartHomeAskFragment"
+        android:name="com.example.umc_stepper.ui.community.part.CommunityPartHomeAskFragment"
+        android:label="CommunityPartHomeAskFragment"
+        tools:layout="@layout/fragment_community_part_home_tab"/>
+
+    <!-- 부위 커뮤니티 -자유 -->
+    <fragment
+        android:id="@+id/communityPartHomeFreeFragment"
+        android:name="com.example.umc_stepper.ui.community.part.CommunityPartHomeFreeFragment"
+        android:label="CommunityPartHomeFreeFragment"
+        tools:layout="@layout/fragment_community_part_home_tab"/>
+
+    <!-- 부위 커뮤니티 -건강정보 -->
+    <fragment
+        android:id="@+id/communityPartHomeHealthFragment"
+        android:name="com.example.umc_stepper.ui.community.part.CommunityPartHomeHealthFragment"
+        android:label="CommunityPartHomeHealthFragment"
+        tools:layout="@layout/fragment_community_part_home_tab"/>
+
+    <!-- 부위 커뮤니티 -동기부여 -->
+    <fragment
+        android:id="@+id/communityPartHomeMotivationFragment"
+        android:name="com.example.umc_stepper.ui.community.part.CommunityPartHomeMotivationFragment"
+        android:label="CommunityPartHomeMotivationFragmen"
+        tools:layout="@layout/fragment_community_part_home_tab"/>
 
 </navigation>

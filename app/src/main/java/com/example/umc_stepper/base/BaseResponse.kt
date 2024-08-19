@@ -12,6 +12,7 @@ data class BaseResponse<T> (
 )
 
 data class BaseListResponse<T> (
+    val loadState: LoadState = LoadState.LOADING,
     val isSuccess: Boolean = false,
     val code: String = "",
     val message: String = "",

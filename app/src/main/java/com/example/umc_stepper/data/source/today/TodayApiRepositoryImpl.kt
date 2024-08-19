@@ -3,6 +3,7 @@ package com.example.umc_stepper.data.source.today
 import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.model.request.exercise_card_controller.ExerciseCardRequestDto
+import com.example.umc_stepper.domain.model.request.my_exercise_controller.AddExerciseRequestDto
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardResponse
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardStatusResponseDto
 import com.example.umc_stepper.domain.model.response.exercise_card_controller.ExerciseCardWeekResponseDto
@@ -32,7 +33,7 @@ class TodayApiRepositoryImpl @Inject constructor(
     override suspend fun getExerciseMonthCheck(month: Int): Flow<BaseListResponse<ExerciseCardStatusResponseDto>> =
         dataSource.getExerciseMonthCheck(month)
 
-    override suspend fun postAddMyExercise(addExerciseRequestDto: ExerciseCardRequestDto): Flow<BaseResponse<AddExerciseResponse>> =
+    override suspend fun postAddMyExercise(addExerciseRequestDto: AddExerciseRequestDto): Flow<BaseResponse<AddExerciseResponse>> =
         dataSource.postAddMyExercise(addExerciseRequestDto)
 
     override suspend fun getExerciseCheckDate(bodyPart: String): Flow<BaseListResponse<ExerciseCardWeekResponseDto>> =

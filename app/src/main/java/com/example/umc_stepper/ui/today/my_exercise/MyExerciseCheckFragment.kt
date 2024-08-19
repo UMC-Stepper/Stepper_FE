@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.today.my_exercise
 
+import android.content.Context
 import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -11,19 +12,33 @@ import com.example.umc_stepper.BuildConfig
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentExerciseCheckBinding
+import com.example.umc_stepper.domain.model.request.my_exercise_controller.AddExerciseRequestDto
+import com.example.umc_stepper.domain.model.response.VideoSnippet
+import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.stepper.StepperViewModel
+import com.example.umc_stepper.ui.today.TodayViewModel
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 @AndroidEntryPoint
-class MyExerciseCheckFragment:
+class MyExerciseCheckFragment :
     BaseFragment<FragmentExerciseCheckBinding>(R.layout.fragment_exercise_check) {
 
-        private val stepperViewModel: StepperViewModel by activityViewModels()
-        private val youtubeKey = BuildConfig.YOUTUBE_KEY
+    private lateinit var videoInfo : VideoSnippet
+    private lateinit var mainActivity : MainActivity
 
-        override fun setLayout() {
+    private val stepperViewModel: StepperViewModel by activityViewModels()
+    private val youtubeKey = BuildConfig.YOUTUBE_KEY
+    private val todayViewModel: TodayViewModel by activityViewModels()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
+
+    override fun setLayout() {
         val urlText = arguments?.getString("urlText")
         if (!urlText.isNullOrEmpty()) {
             binding.fragmentDownloadYoutube2MainCardInputLinkEt.setText(urlText)
@@ -31,13 +46,21 @@ class MyExerciseCheckFragment:
             fetchYouTubeVideoDetails(urlText)
             dataSetting()
         }
-
+        updateMainToolbar()
         setButton()
     }
 
     private fun setButton() {
         binding.fragmentDownloadYoutube2Btn.setOnClickListener {
-            val action = MyExerciseCheckFragmentDirections.actionMyExerciseCheckFragmentToFragmentMyExercise2()
+            todayViewModel.postAddMyExercise(AddExerciseRequestDto(
+                url = arguments?.getString("urlText") ?: "",
+                body_part = arguments?.getString("bodyPart") ?: "",
+                video_title = videoInfo.title,
+                channel_name = videoInfo.channelTitle,
+                video_image = videoInfo.thumbnails.default.url
+            ))
+            val action =
+                MyExerciseCheckFragmentDirections.actionMyExerciseCheckFragmentToFragmentMyExercise2()
             findNavController().navigateSafe(action.actionId)
         }
     }
@@ -45,7 +68,8 @@ class MyExerciseCheckFragment:
     private fun initializeYouTubePlayer(url: String) {
         lifecycle.addObserver(binding.fragmentDownloadYoutube2MainCardPreviewYv)
 
-        binding.fragmentDownloadYoutube2MainCardPreviewYv.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+        binding.fragmentDownloadYoutube2MainCardPreviewYv.addYouTubePlayerListener(object :
+            AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
                 val videoId = extractVideoId(url)
                 youTubePlayer.loadVideo(videoId, 0f)
@@ -93,14 +117,21 @@ class MyExerciseCheckFragment:
                             val videoItem = response.items[0].snippet
                             Log.d("dataSetting", "Video title: ${videoItem.title}")
                             Log.d("dataSetting", "Channel title: ${videoItem.channelTitle}")
-                            Log.d("dataSetting", "Thumbnail URL: ${videoItem.thumbnails.default.url}")
+                            Log.d(
+                                "dataSetting",
+                                "Thumbnail URL: ${videoItem.thumbnails.default.url}"
+                            )
 
-                            binding.fragmentDownloadYoutube2MainCardChannelNameTv.text = videoItem.title
-                            binding.fragmentDownloadYoutube2ProfileNameTv.text = videoItem.channelTitle
+                            binding.fragmentDownloadYoutube2MainCardChannelNameTv.text =
+                                videoItem.title
+                            binding.fragmentDownloadYoutube2ProfileNameTv.text =
+                                videoItem.channelTitle
 
                             Glide.with(requireContext())
                                 .load(videoItem.thumbnails.default.url)
                                 .into(binding.fragmentDownloadYoutube2MainCardChannelProfileIv)
+
+                            videoInfo = response.items[0].snippet
                         } else {
                             Log.e("dataSetting", "비디오 아이템이 없음")
                         }
@@ -110,6 +141,13 @@ class MyExerciseCheckFragment:
                 }
             }
         }
+    }
+
+    private fun updateMainToolbar() {
+        mainActivity.updateToolbarTitle("나만의 운동 영상 저장하기")
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
+        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
+        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
     }
 
 }

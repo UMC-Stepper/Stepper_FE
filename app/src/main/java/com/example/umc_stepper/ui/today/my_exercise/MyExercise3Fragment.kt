@@ -50,14 +50,16 @@ class MyExercise3Fragment :
 
     private fun setTitle(){
         mainActivity.updateToolbarTitle("나만의 운동 영상 저장하기") //타이틀 세팅
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
+        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
+        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
+        binding.fragmentMyExerciseSelectTagTv.text = arguments?.getString("bodyPart")
     }
 
     override fun setLayout() {
         setTitle()
         initSetting()
-        binding.fragmentMyExerciseCompleteInputBt.setOnClickListener {
-            goExerciseCheck()
-        }
+
     }
 
     private fun initSetting() {
@@ -72,6 +74,8 @@ class MyExercise3Fragment :
         if (binding.fragmentMyExerciseUploadYoutubeLinkEt.text.isNullOrEmpty()) {
             binding.fragmentMyExerciseCompleteInputBt.isEnabled = false
             binding.fragmentMyExerciseCompleteInputBt.text="입력 완료"
+            binding.fragmentMyExerciseCompleteInputBt.setTextColor(ContextCompat.getColor(requireContext(), R.color.Purple_Gray_300))
+            binding.fragmentMyExerciseCompleteInputBt.setBackgroundResource(R.drawable.shape_rounded_square_purpleblack_bg2_25dp)
         } else {
             binding.fragmentMyExerciseCompleteInputBt.isEnabled = true
             binding.fragmentMyExerciseCompleteInputBt.text="입력 완료"
@@ -159,11 +163,8 @@ class MyExercise3Fragment :
             fragmentMyExerciseSearchResultCard2Cl.setOnClickListener {
                 ableUrlCheck(url2)
             }
-            fragmentMyExerciseCompleteInputBt.setOnClickListener {
-                val youtubeUrl = fragmentMyExerciseUploadYoutubeLinkEt.text.toString()
-                val action = MyExercise3FragmentDirections.actionFragmentMyExercise3ToMyExerciseCheckFragment()
-                findNavController().navigateSafe(action.actionId)
-                // url 담아서 다음 화면 전송
+            binding.fragmentMyExerciseCompleteInputBt.setOnClickListener {
+                goExerciseCheck()
             }
         }
     }
@@ -321,6 +322,7 @@ class MyExercise3Fragment :
         val urlText = binding.fragmentMyExerciseUploadYoutubeLinkEt.text.toString()
         val bundle = Bundle().apply {
             putString("urlText", urlText)
+            putString("bodyPart", binding.fragmentMyExerciseSelectTagTv.text.toString())
         }
         findNavController().navigate(R.id.action_fragmentMyExercise3_to_myExerciseCheckFragment, bundle)
     }

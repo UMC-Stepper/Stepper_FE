@@ -1,16 +1,24 @@
 package com.example.umc_stepper.ui.signup
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -27,6 +35,14 @@ import com.google.gson.JsonSyntaxException
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 @AndroidEntryPoint
 class SignUp2Activity : BaseActivity<FragmentRegister2Binding>(R.layout.fragment_register_2) {
@@ -34,6 +50,12 @@ class SignUp2Activity : BaseActivity<FragmentRegister2Binding>(R.layout.fragment
     private var gson: Gson = Gson()
     private lateinit var galleryForResult: ActivityResultLauncher<Intent>
     private lateinit var loginViewModel: LoginViewModel
+    private lateinit var selectImageUri: Uri
+    private lateinit var profile: MultipartBody.Part
+
+    override fun onResume() {
+        super.onResume()
+    }
 
     override fun setLayout() {
         init()
@@ -48,42 +70,114 @@ class SignUp2Activity : BaseActivity<FragmentRegister2Binding>(R.layout.fragment
         addTextWatcher()
     }
 
-    private fun initLoginViewModel(){
+    private fun activateConfirmButton() {
+        if (binding.fragmentRegister2HeightEt.text.isNullOrEmpty().not() &&
+            binding.fragmentRegister2WeightEt.text.isNullOrEmpty().not()
+        ) {
+            binding.fragmentRegister2SuccessInputBt.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
+            binding.fragmentRegister2SuccessInputBt.isEnabled = true
+            binding.fragmentRegister2SuccessInputBt.setTextColor(ContextCompat.getColor(this, R.color.White))
+        } else {
+            binding.fragmentRegister2SuccessInputBt.setBackgroundResource(R.drawable.radius_corners_61dp_stroke_1)
+            binding.fragmentRegister2SuccessInputBt.isEnabled = false
+            binding.fragmentRegister2SuccessInputBt.setTextColor(ContextCompat.getColor(this, R.color.Purple_700))
+        }
+    }
+
+    private fun initLoginViewModel() {
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
     }
-    //갤러리 런처 초기화
+
     private fun initActivityResultLauncher() {
         galleryForResult = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result: ActivityResult ->
-            if (result.resultCode == RESULT_OK) {
-                val selectImageUrl = result.data?.data
-                selectImageUrl?.let {
-                    GlobalApplication.loadProfileImage(
-                        binding.fragmentRegister2ProfileFrameIv,
-                        it.toString()
-                    )
-                    binding.fragmentRegister2ProfileImgIv.visibility = View.GONE
-                    user.profileImage = it.toString()
+            if (result.resultCode == RESULT_OK && result.data?.data != null) {
+                val selectedImageUri = result.data?.data
+                selectedImageUri?.let { uri ->
+                    try {
+                        // 선택된 이미지를 이미지 뷰에 표시
+                        GlobalApplication.loadProfileImage(
+                            binding.fragmentRegister2ProfileFrameIv,
+                            uri.toString()
+                        )
+
+                        // 이미지 처리
+                        handleSelectedImage(uri)
+
+                        // 이미지 선택 UI 업데이트
+                        binding.fragmentRegister2ProfileImgIv.visibility = View.GONE
+
+                        // UserDto에 프로필 이미지 경로 설정
+                        user.profileImage = uri.toString()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        Toast.makeText(this, "이미지 처리 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
+                    }
                 }
+            } else if (result.resultCode != RESULT_OK) {
+                Toast.makeText(this, "이미지 선택이 취소되었습니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun observeLifeCycle(){
+    private fun handleSelectedImage(uri: Uri) {
+        val inputStream = contentResolver.openInputStream(uri)
+        inputStream?.use { stream ->
+            val bitmap = BitmapFactory.decodeStream(stream)
+            val compressedFile = compressBitmap(bitmap, 500)
+
+            val requestFile = compressedFile.asRequestBody("image/*".toMediaTypeOrNull())
+            profile = MultipartBody.Part.createFormData(
+                "image",
+                compressedFile.name,
+                requestFile
+            )
+        }
+    }
+
+    // 외부 터치시 키보드 숨기기, 포커스 제거
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        val imm: InputMethodManager =
+            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+
+        if (currentFocus is EditText) {
+            currentFocus!!.clearFocus()
+        }
+        return super.dispatchTouchEvent(ev)
+    }
+
+    private fun compressBitmap(bitmap: Bitmap, maxSizeKB: Int): File {
+        var quality = 100
+        val outputStream = ByteArrayOutputStream()
+
+        do {
+            outputStream.reset()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream)
+            quality -= 5
+        } while (outputStream.size() / 1024 > maxSizeKB && quality > 0)
+
+        val file = File(cacheDir, "compressed_image.jpg")
+        FileOutputStream(file).use { fos ->
+            fos.write(outputStream.toByteArray())
+        }
+
+        return file
+    }
+
+    private fun observeLifeCycle() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 loginViewModel.userData.collectLatest {
-                    if(it.isSuccess){
-                        startActivity(Intent(this@SignUp2Activity,LoginActivity::class.java))
+                    if (it.isSuccess) {
+                        startActivity(Intent(this@SignUp2Activity, LoginActivity::class.java))
                     }
                 }
             }
         }
-
     }
 
-    //이전 화면 에서 유저 데이터 받아 오기
     private fun receiveUserData() {
         try {
             intent.getStringExtra("user")?.let { userJson ->
@@ -92,27 +186,27 @@ class SignUp2Activity : BaseActivity<FragmentRegister2Binding>(R.layout.fragment
             }
         } catch (e: JsonSyntaxException) {
             e.printStackTrace()
-            Log.e("user", user.toString())
+            Log.e("user", "Error parsing user data")
         }
     }
 
-    //버튼 클릭
     private fun setOnClickBtn() {
         with(binding) {
             fragmentRegister2SuccessInputBt.setOnClickListener {
-                // 성공 버튼 클릭 시 동작
                 val height = fragmentRegister2HeightEt.text.toString()
                 val weight = fragmentRegister2WeightEt.text.toString()
-                confirmNumberText(height,fragmentRegister2HeightEt)
-                confirmNumberText(weight,fragmentRegister2WeightEt)
+                confirmNumberText(height, fragmentRegister2HeightEt)
+                confirmNumberText(weight, fragmentRegister2WeightEt)
 
-                if(weight.isNotEmpty() && height.isNotEmpty()) {
+                val gson = Gson()
+                val userJson = gson.toJson(user, UserDto::class.java)
+                val userRequest = userJson.toRequestBody("application/json".toMediaTypeOrNull())
+
+                if (weight.isNotEmpty() && height.isNotEmpty()) {
                     user.weight = weight.toInt()
                     user.height = height.toInt()
-                    loginViewModel.postSignUpInfo(user)
+                    loginViewModel.postSignUpInfo(profileImage = profile, userDto = userRequest)
                 }
-
-
             }
             fragmentRegister2ProfileCardCv.setOnClickListener {
                 openGallery()
@@ -120,21 +214,18 @@ class SignUp2Activity : BaseActivity<FragmentRegister2Binding>(R.layout.fragment
         }
     }
 
-
     private fun confirmNumberText(confirmText: String, view: EditText) {
         try {
             confirmText.toInt()
         } catch (e: NumberFormatException) {
             view.setText("")
-            Toast.makeText(this@SignUp2Activity,"숫자만 입력해주세요.",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@SignUp2Activity, "숫자만 입력해주세요.", Toast.LENGTH_SHORT).show()
         }
     }
-    //갤러리 열기
+
     private fun openGallery() {
-        val galleryIntent = Intent()
-            .setType("image/*")
-            .setAction(Intent.ACTION_GET_CONTENT)
-        galleryForResult.launch(Intent.createChooser(galleryIntent, "Select Picture"))
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        galleryForResult.launch(galleryIntent)
     }
 
     private fun addTextWatcher() {
@@ -142,8 +233,8 @@ class SignUp2Activity : BaseActivity<FragmentRegister2Binding>(R.layout.fragment
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 checkWeightField()
+                activateConfirmButton()
             }
-
             override fun afterTextChanged(s: Editable?) {}
         })
 
@@ -161,10 +252,9 @@ class SignUp2Activity : BaseActivity<FragmentRegister2Binding>(R.layout.fragment
         val drawableOk = ContextCompat.getDrawable(this, R.drawable.ic_signup_pwd_check_ok)?.apply {
             setBounds(0, 0, intrinsicWidth, intrinsicHeight)
         }
-        val drawableError =
-            ContextCompat.getDrawable(this, R.drawable.ic_signup_pwd_check_error)?.apply {
-                setBounds(0, 0, intrinsicWidth, intrinsicHeight)
-            }
+        val drawableError = ContextCompat.getDrawable(this, R.drawable.ic_signup_pwd_check_error)?.apply {
+            setBounds(0, 0, intrinsicWidth, intrinsicHeight)
+        }
 
         if (wTextField.isNotEmpty()) {
             binding.fragmentRegister2WeightEt.setCompoundDrawables(null, null, drawableOk, null)
@@ -178,10 +268,9 @@ class SignUp2Activity : BaseActivity<FragmentRegister2Binding>(R.layout.fragment
         val drawableOk = ContextCompat.getDrawable(this, R.drawable.ic_signup_pwd_check_ok)?.apply {
             setBounds(0, 0, intrinsicWidth, intrinsicHeight)
         }
-        val drawableError =
-            ContextCompat.getDrawable(this, R.drawable.ic_signup_pwd_check_error)?.apply {
-                setBounds(0, 0, intrinsicWidth, intrinsicHeight)
-            }
+        val drawableError = ContextCompat.getDrawable(this, R.drawable.ic_signup_pwd_check_error)?.apply {
+            setBounds(0, 0, intrinsicWidth, intrinsicHeight)
+        }
 
         if (hTextField.isNotEmpty()) {
             binding.fragmentRegister2HeightEt.setCompoundDrawables(null, null, drawableOk, null)
@@ -189,5 +278,4 @@ class SignUp2Activity : BaseActivity<FragmentRegister2Binding>(R.layout.fragment
             binding.fragmentRegister2HeightEt.setCompoundDrawables(null, null, drawableError, null)
         }
     }
-
 }

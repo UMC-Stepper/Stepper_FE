@@ -1,7 +1,7 @@
 package com.example.umc_stepper.domain.model.request.comment_controller
 
 data class CommentWriteDto(
-    val anonymous: Boolean,
+    val postId: Int,
     val content: String,
-    val postId: Int
+    val anonymous: Boolean
 )

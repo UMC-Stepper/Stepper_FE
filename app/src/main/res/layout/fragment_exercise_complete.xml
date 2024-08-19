@@ -17,34 +17,52 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <TextView
             android:id="@+id/exercise_complete_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
-            android:layout_marginEnd="35dp"
-            android:layout_marginBottom="35dp"
-            android:src="@drawable/ic_exercise_complete_text"
-            app:layout_constraintBottom_toTopOf="@+id/exercise_complete_btn"
+            style="@style/title_bold_24"
+            android:text="오늘 운동 완료!"
+            android:textAlignment="center"
+            android:textColor="@color/White"
+            app:layout_constraintBottom_toTopOf="@id/exercise_complete_tv2"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp"
+            />
+
+
+        <TextView
+            android:id="@+id/exercise_complete_tv2"
+            android:textAlignment="center"
+            style="@style/body_medium_14"
+            android:text="운동하느라 고생많으셨어요.\n다음 운동 때는 더 좋은 컨디션으로 만나요."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/White"
+            app:layout_constraintBottom_toTopOf="@id/exercise_complete_btn"
+            app:layout_constraintStart_toStartOf="@id/exercise_complete_btn"
+            app:layout_constraintEnd_toEndOf="@id/exercise_complete_btn"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="34dp"
+            />
 
         <Button
+            android:layout_marginBottom="65dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
             android:id="@+id/exercise_complete_btn"
             style="@style/sub_title_semi_bold_16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="34dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="45dp"
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
             android:text="오늘 운동 완료"
             android:textColor="@color/White"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

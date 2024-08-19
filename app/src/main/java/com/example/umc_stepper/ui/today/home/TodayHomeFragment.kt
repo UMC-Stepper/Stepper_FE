@@ -1,8 +1,8 @@
 package com.example.umc_stepper.ui.today.home
 
+import android.content.Context
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -12,15 +12,15 @@ import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentTodayHomeBinding
 import com.example.umc_stepper.domain.model.local.WeekCalendar
+import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.today.TodayViewModel
-import com.example.umc_stepper.utils.extensions.navigateSafe
-import kotlinx.coroutines.flow.collect
+import com.example.umc_stepper.utils.enums.LoadState
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
-import org.threeten.bp.temporal.TemporalAdjuster
 import org.threeten.bp.temporal.TemporalAdjusters
 import java.util.Locale
 
@@ -30,17 +30,15 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
     private lateinit var todayHomeExerciseCardAdapter: TodayHomeExerciseCardAdapter
     private val todayViewModel : TodayViewModel by activityViewModels()
     private var calendarList = ArrayList<WeekCalendar>()
-
+    private lateinit var mainActivity: MainActivity
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
 
     override fun setLayout() {
         initSettings()
         setNavigationAction()
-
-        // 임시용 스크랩 함수 이동
-        binding.fragmentTodayHomeCalenderMonthTv.setOnClickListener {
-            val action = TodayHomeFragmentDirections.actionTodayHomeFragmentToAddExerciseSelectScrapFragment()
-            findNavController().navigateSafe(action.actionId)
-        }
     }
 
     private fun initSettings() {
@@ -116,7 +114,7 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
 
         var weekDay = resources.getStringArray(R.array.calendar_day_eng)
         val dateFormat = DateTimeFormatter.ofPattern("dd").withLocale(Locale.forLanguageTag("ko"))
-        var preSunday: LocalDateTime = LocalDateTime.now().with(TemporalAdjusters.previous(DayOfWeek.SUNDAY))
+        var preSunday: LocalDateTime = LocalDateTime.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY))
         Log.d("weekDay", "weekDay : $weekDay, preSunday: $preSunday")
 
         for (i in 0..6) {
@@ -132,8 +130,16 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
 
     private fun setNavigationAction() {
 
+        // 스태퍼 화면 이동
+        binding.fragmentTodayHomeGoStepperIv.setOnClickListener {
+            val action = TodayHomeFragmentDirections.actionTodayHomeFragmentToStepperFragment()
+            findNavController().navigateSafe(action.actionId)
+        }
+
         // 운동 카드 추가
         binding.fragmentTodayHomePlusExerciseAddIv.setOnClickListener {
+            todayViewModel.clearStep()
+            todayViewModel.clearExerciseList()
             val action = TodayHomeFragmentDirections.actionTodayHomeFragmentToFragmentAddExercise()
             findNavController().navigateSafe(action.actionId)
         }
@@ -146,9 +152,16 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
 
         // 평가 일지
         binding.fragmentTodayHomeEvaluationLogConstraint.setOnClickListener {
-            val action = TodayHomeFragmentDirections.actionTodayHomeFragmentToEvaluationLogFragment()
-            findNavController().navigateSafe(action.actionId)
+            lifecycleScope.launch {
+                todayViewModel.loadEvaluationLogData() // 데이터 로드 시작
+                todayViewModel.dataLoadState.collectLatest { state ->
+                    if (state == LoadState.LOADING) {
+                        mainActivity.showProgress()
+                        val action = TodayHomeFragmentDirections.actionTodayHomeFragmentToEvaluationLogFragment()
+                        findNavController().navigateSafe(action.actionId)
+                    }
+                }
+            }
         }
-
     }
 }

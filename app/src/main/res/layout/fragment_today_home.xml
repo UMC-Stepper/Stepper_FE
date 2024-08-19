@@ -6,11 +6,11 @@
     <data>
 
     </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".ui.today.home.TodayHomeFragment">
+
 
         <ImageView
             android:id="@+id/fragment_today_home_calender_iv"
@@ -34,23 +34,25 @@
             app:layout_constraintStart_toEndOf="@+id/fragment_today_home_calender_iv"
             app:layout_constraintTop_toTopOf="@+id/fragment_today_home_calender_iv" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/fragment_today_home_go_today_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="11dp"
-            android:background="@drawable/ic_toolbar_today"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/ic_toolbar_today"
             app:layout_constraintEnd_toStartOf="@+id/fragment_today_home_go_stepper_iv"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/fragment_today_home_go_stepper_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="24dp"
-            android:background="@drawable/ic_toolbar_stepper"
+            android:src="@drawable/ic_toolbar_stepper"
+            android:background="?attr/selectableItemBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -79,11 +81,12 @@
             app:layout_constraintStart_toStartOf="@+id/fragment_today_home_week_calendar_rv"
             app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_week_calendar_rv" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/fragment_today_home_plus_exercise_add_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_today_home_plus_exercise_card"
+            android:background="?attr/selectableItemBackground"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_today_home_title_tv"
             app:layout_constraintEnd_toEndOf="@+id/fragment_today_home_week_calendar_rv"
             app:layout_constraintTop_toTopOf="@+id/fragment_today_home_title_tv" />
@@ -91,11 +94,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment_today_home_exercise_card_rv"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="330dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="24dp"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +114,7 @@
             android:layout_marginStart="23dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="25dp"
-            android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
+            android:background="@drawable/shape_rounded_square_purple_bg1_solid_21dp"
             android:backgroundTint="@color/Purple_Black_BG_2"
             android:gravity="center"
             android:text="설정하신 운동이 없습니다\n카드를 추가해주세요"
@@ -128,6 +131,7 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
+        <!-- 나만의 운동 -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fragment_today_home_my_exercise_constraint"
             android:layout_width="0dp"
@@ -136,12 +140,13 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="15dp"
-            android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
-            android:backgroundTint="@color/Purple_Black_BG_2"
+            android:background="@drawable/selector_today_home"
+            android:clickable="true"
+            android:focusable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/fragment_today_home_guideline"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_no_card_tv">
+            app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_exercise_card_rv">
 
             <TextView
                 android:id="@+id/fragment_today_home_my_exercise_tv"
@@ -151,6 +156,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="나만의 운동"
+                android:clickable="false"
+                android:foreground="@android:color/transparent"
+                android:background="@android:color/transparent"
                 android:textColor="@color/White"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -162,6 +170,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="12dp"
                 android:src="@drawable/ic_today_home_my_exercise"
+                app:tint="@color/White"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -172,7 +181,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="12dp"
-                android:text="필요시 유뷰트 영상\nURL 저장"
+                android:clickable="false"
+                android:foreground="@android:color/transparent"
+                android:background="@android:color/transparent"
+                android:text="필요시 유튜브 영상\nURL 저장"
                 android:textColor="@color/White"
                 android:textSize="11sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -181,6 +193,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <!-- 평가일지 -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fragment_today_home_evaluation_log_constraint"
             android:layout_width="0dp"
@@ -189,12 +202,11 @@
             android:layout_marginEnd="26dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="30dp"
-            android:background="@drawable/shape_rounded_square_purple_bg2_21dp"
-            android:backgroundTint="@color/Purple_Black_BG_2"
+            android:background="@drawable/selector_today_home"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/fragment_today_home_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_no_card_tv">
+            app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_exercise_card_rv">
 
             <TextView
                 android:id="@+id/fragment_today_home_evaluation_log_tv"
@@ -203,6 +215,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:clickable="false"
+                android:foreground="@android:color/transparent"
+                android:background="@android:color/transparent"
                 android:text="평가 일지"
                 android:textColor="@color/White"
                 app:layout_constraintStart_toStartOf="parent"
@@ -215,6 +230,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="12dp"
                 android:src="@drawable/ic_today_home_evaluation_log"
+                app:tint="@color/White"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -225,6 +241,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="12dp"
+                android:clickable="false"
+                android:foreground="@android:color/transparent"
+                android:background="@android:color/transparent"
                 android:text="통증과 컨디션 평가\n일지 모아보기"
                 android:textColor="@color/White"
                 android:textSize="11sp"
@@ -232,9 +251,8 @@
                 app:layout_constraintStart_toStartOf="@+id/fragment_today_home_evaluation_log_tv"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_today_home_evaluation_log_tv" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

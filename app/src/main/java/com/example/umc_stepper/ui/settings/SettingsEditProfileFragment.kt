@@ -1,23 +1,18 @@
 package com.example.umc_stepper.ui.settings
 
-import android.content.Context
-import android.os.Bundle
+import android.app.Activity
+import android.content.Intent
+import android.provider.MediaStore
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
@@ -25,17 +20,32 @@ import com.example.umc_stepper.databinding.FragmentSettingsEditProfileBinding
 import com.example.umc_stepper.ui.community.CommunityDialog
 import com.example.umc_stepper.ui.community.CommunityDialogInterface
 import com.example.umc_stepper.ui.community.CommunityRemoveInterface
-import com.example.umc_stepper.utils.EditPageOutDialog
+import com.example.umc_stepper.ui.community.CommunitySelectDialog
+import com.example.umc_stepper.utils.GlobalApplication
+import com.example.umc_stepper.utils.enums.DialogType
+import com.example.umc_stepper.utils.listener.CommunitySelectClick
+import com.google.android.material.shape.ShapeAppearanceModel
 
 class SettingsEditProfileFragment : BaseFragment<FragmentSettingsEditProfileBinding>(R.layout.fragment_settings_edit_profile),
     CommunityDialogInterface,
-    CommunityRemoveInterface {
+    CommunityRemoveInterface,
+    CommunitySelectClick
+{
 
     private lateinit var callback: OnBackPressedCallback
     private lateinit var editPageOutDialog: CommunityDialog
+    private lateinit var profileDialog: CommunitySelectDialog
+    private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
 
     override fun setLayout() {
         initSetting()
+        binding.imageUri = arguments?.getString("imageUri")
+    }
+
+    private fun onClickBtn(){
+        binding.fragmentSettingsEditProfileCameraIv.setOnClickListener{
+            showDialogWithProfile()
+        }
     }
 
     // 뒤로가기 콜백 설정 함수
@@ -54,6 +64,8 @@ class SettingsEditProfileFragment : BaseFragment<FragmentSettingsEditProfileBind
         editEmail()
         editPhoneNumber()
         addOnBackPressedCallback()
+        onClickBtn()
+        initGalleryLauncher()
     }
 
     private fun showDialog(title: String, btn1: String, btn2: String) {
@@ -64,6 +76,16 @@ class SettingsEditProfileFragment : BaseFragment<FragmentSettingsEditProfileBind
         } ?: run {
             // activity가 null인 경우 예외 처리
             Log.e("SettingsEditProfileFragment", "Activity is null")
+        }
+    }
+
+    private fun showDialogWithProfile(){
+        activity?.let{
+            profileDialog = CommunitySelectDialog(this)
+            profileDialog.isCancelable = false
+            profileDialog.show(it.supportFragmentManager,"ProfileDialog")
+        } ?: run {
+            Log.e("Community Dialog", "Community Dialog Error")
         }
     }
 
@@ -120,7 +142,7 @@ class SettingsEditProfileFragment : BaseFragment<FragmentSettingsEditProfileBind
 
     override fun onRemove(pos: Int) {}
 
-    override fun OnClickBtn1(btn1: String) {
+    override fun OnClickBtn1(btn1: String, dialogType: DialogType?) {
         when(btn1) {
             "나가기" -> {
                 editPageOutDialog.dismiss()
@@ -128,6 +150,25 @@ class SettingsEditProfileFragment : BaseFragment<FragmentSettingsEditProfileBind
                 findNavController().navigateSafe(action.actionId)
             }
         }
+    }
+    private fun initGalleryLauncher() {
+        galleryLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data?.data?.let { uri ->
+                    GlobalApplication.loadProfileImage(binding.fragmentSettingsEditProfileIv, uri)
+                }
+            }
+        }
+    }
+    override fun onBtnClick1() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        galleryLauncher.launch(intent)
+    }
+
+    override fun onBtnClick2() {
+        GlobalApplication.loadProfileImage(binding.fragmentSettingsEditProfileIv, R.drawable.shape_rounded_square_white_18dp)
     }
 
 }

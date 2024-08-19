@@ -25,5 +25,4 @@ class EvaluationLogBodyPartAdapter(private val onItemClick: (ExerciseCardStatusR
         }
     }
 
-
 }

@@ -3,16 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="apiResponsePostViewResponse"
+            type="com.example.umc_stepper.domain.model.response.post_controller.ApiResponsePostViewResponse" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.community.weekly.CommunityWeeklyShowPostFragment">
+        android:background="@color/Purple_Black_BG_1"
+        tools:context=".ui.community.CommunityShowPostFragment">
 
         <ImageView
             android:id="@+id/fragment_community_weekly_show_post_pin_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
+            android:visibility="invisible"
             android:src="@drawable/ic_weekly_pin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -24,9 +32,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginStart="58dp"
-            android:layout_marginEnd="58dp"
-            android:text="평소에 잘 안하다가\n요즘에 빠진 운동을 추천해 주세요!"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="주간미션"
+            android:textSize="14sp"
             android:textAlignment="center"
             android:textColor="@color/White"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,6 +43,7 @@
             app:layout_constraintTop_toBottomOf="@+id/fragment_community_weekly_show_post_pin_iv" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/fragment_community_weekly_show_post_nested_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="32dp"
@@ -49,6 +59,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_rounded_purple_bg2_top_half_40dp">
 
+
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/fragment_community_weekly_show_post_profile_iv"
                     android:layout_width="45dp"
@@ -56,6 +67,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="32dp"
                     android:background="@color/White"
+                    app:imageUrl2="@{apiResponsePostViewResponse.profileImageUrl}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
@@ -66,10 +78,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="예니"
+                    app:setAuthor="@{apiResponsePostViewResponse.authorEmail}"
                     android:textColor="@color/White"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_community_weekly_show_post_profile_iv"
                     app:layout_constraintStart_toEndOf="@+id/fragment_community_weekly_show_post_profile_iv"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_community_weekly_show_post_profile_iv" />
+
+                <TextView
+                    android:id="@+id/fragment_community_weekly_scrap_tv"
+                    style="@style/body_regular_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    android:layout_marginEnd="24dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/White"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_community_weekly_show_post_profile_iv"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/fragment_community_weekly_show_post_profile_iv" />
 
                 <TextView
@@ -91,32 +116,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:text="24.07.17"
+
                     android:textColor="@color/Purple_Gray"
                     app:layout_constraintStart_toStartOf="@+id/fragment_community_weekly_show_post_profile_iv"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_community_weekly_show_post_profile_iv" />
 
-                <TextView
-                    android:id="@+id/fragment_community_weekly_show_post_time_tv"
-                    style="@style/body_regular_14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="21:50"
-                    android:textColor="@color/Purple_Gray"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_community_weekly_show_post_date_tv"
-                    app:layout_constraintStart_toEndOf="@+id/fragment_community_weekly_show_post_date_tv"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_community_weekly_show_post_date_tv" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/fragment_community_weekly_show_thumbs_up_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
                     android:src="@drawable/ic_thumbs_up"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_community_weekly_show_post_time_tv"
+                    android:background="?attr/selectableItemBackground"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_community_weekly_show_post_date_tv"
                     app:layout_constraintEnd_toStartOf="@+id/fragment_community_weekly_show_thumbs_up_tv"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_community_weekly_show_post_time_tv" />
+                    app:layout_constraintTop_toTopOf="@+id/fragment_community_weekly_show_post_date_tv" />
 
                 <TextView
                     android:id="@+id/fragment_community_weekly_show_thumbs_up_tv"
@@ -125,7 +140,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="12dp"
-                    android:text="7"
+                    android:foreground="@android:color/transparent"
+                    android:background="@android:color/transparent"
+                    android:text="@{String.valueOf(apiResponsePostViewResponse.likes)}"
                     android:textColor="@color/Yellow_300"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_community_weekly_show_thumbs_up_iv"
                     app:layout_constraintEnd_toStartOf="@+id/fragment_community_weekly_show_scraps_up_iv"
@@ -148,7 +165,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="12dp"
-                    android:text="2"
+                    android:text="@{String.valueOf(apiResponsePostViewResponse.scraps)}"
                     android:textColor="@color/Yellow_300"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_community_weekly_show_scraps_up_iv"
                     app:layout_constraintEnd_toStartOf="@+id/fragment_community_weekly_show_reply_up_iv"
@@ -171,7 +188,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="24dp"
-                    android:text="1"
+                    android:text="@{String.valueOf(apiResponsePostViewResponse.commentsCount)}"
                     android:textColor="@color/Yellow_300"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_community_weekly_show_reply_up_iv"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -185,7 +202,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="24dp"
-                    android:text="사전에 설정한 복부 운동하면서 더 부위가 아파졌어요."
+                    android:text="@{apiResponsePostViewResponse.title}"
                     android:textColor="@color/White"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -199,7 +216,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
-                    android:text="사전에 설정한 복부 운동하면서 더 부위가 아파졌어요."
+                    android:text="@{apiResponsePostViewResponse.body}"
                     android:textColor="@color/White"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -212,6 +229,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
                     android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_community_weekly_show_post_desc_tv"
@@ -222,8 +240,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_marginTop="32dp"
-                    android:background="@color/Purple_300"
-                    android:src="@drawable/ic_community_logo"
+                    android:src="@drawable/ic_add_banner"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_community_weekly_show_post_img_rv" />
@@ -231,11 +248,12 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/fragment_community_weekly_show_post_reply_rv"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="12dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="16dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -248,20 +266,25 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/fragment_community_weekly_show_post_edit_constraint"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@color/Purple_Black_BG_2"
+                android:layout_height="50dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/shape_rounded_square_purple700_60dp"
+                android:backgroundTint="@color/Purple_Black_BG_1"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_community_weekly_show_post_nested_scroll_view"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
                 <ImageView
-                    android:id="@+id/fragment_community_weekly_show_post_check_user_iv"
+                    android:id="@+id/fragment_community_weekly_show_post_check_anonymous_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="12dp"
-                    android:src="@drawable/ic_register_check"
+                    android:src="@drawable/selector_checked_on"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -274,28 +297,35 @@
                     android:layout_marginStart="5dp"
                     android:text="익명"
                     android:textColor="@color/White"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_community_weekly_show_post_check_user_iv"
-                    app:layout_constraintStart_toEndOf="@+id/fragment_community_weekly_show_post_check_user_iv"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_community_weekly_show_post_check_user_iv" />
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_community_weekly_show_post_check_anonymous_iv"
+                    app:layout_constraintStart_toEndOf="@+id/fragment_community_weekly_show_post_check_anonymous_iv"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_community_weekly_show_post_check_anonymous_iv" />
 
                 <EditText
                     android:id="@+id/fragment_community_weekly_show_post_et"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:drawableEnd="@drawable/ic_post_comment"
+                    android:layout_marginEnd="12dp"
                     android:paddingStart="16dp"
-                    android:paddingEnd="6dp"
+                    android:textColorHint="@color/White"
                     android:textColor="@color/White"
                     style="@style/body_regular_12"
-                    android:background="@drawable/shape_rounded_square_purple700_60dp"
                     android:backgroundTint="@color/Purple_Black_BG_1"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_community_weekly_show_post_comment_iv"
                     app:layout_constraintStart_toEndOf="@+id/fragment_community_weekly_show_post_anonymous_tv"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/fragment_community_weekly_show_post_comment_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/ic_post_comment"
+                    android:background="?attr/selectableItemBackground"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 

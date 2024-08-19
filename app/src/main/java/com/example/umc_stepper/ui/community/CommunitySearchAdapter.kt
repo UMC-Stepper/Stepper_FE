@@ -5,9 +5,11 @@ import com.example.umc_stepper.base.BaseAdapter
 import com.example.umc_stepper.base.BaseDiffCallback
 import com.example.umc_stepper.databinding.ItemCommunitySearchBinding
 import com.example.umc_stepper.domain.model.PostItem
+import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponseItem
 import com.example.umc_stepper.utils.GlobalApplication
+import com.example.umc_stepper.utils.listener.ItemClickListener
 
-class CommunitySearchAdapter : BaseAdapter<PostItem, ItemCommunitySearchBinding> (
+class CommunitySearchAdapter(private val itemClickListener: ItemClickListener) : BaseAdapter<CommunityMyCommentsResponseItem, ItemCommunitySearchBinding> (
     BaseDiffCallback(
     itemsTheSame = { oldItem, newItem -> oldItem == newItem},
     contentsTheSame = { oldItem, newItem -> oldItem == newItem }
@@ -16,10 +18,12 @@ class CommunitySearchAdapter : BaseAdapter<PostItem, ItemCommunitySearchBinding>
     override val layoutId: Int
         get() = R.layout.item_community_search
 
-    override fun bind(binding: ItemCommunitySearchBinding, item: PostItem) {
+    override fun bind(binding: ItemCommunitySearchBinding, item: CommunityMyCommentsResponseItem) {
         binding.postItem = item
-        GlobalApplication.loadCropRoundedSquareImage(binding.root.context,binding.itemCommunitySearchProfileIv,item.img,12)
-        binding.itemCommunitySearchProfileIv
+        binding.root.setOnClickListener {
+            itemClickListener.onClick(item)
+        }
+        GlobalApplication.loadCropRoundedSquareImage(binding.root.context,binding.itemCommunitySearchProfileIv,item.imageList[0].imageUrl,12)
     }
 }
 

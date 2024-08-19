@@ -1,6 +1,6 @@
 package com.example.umc_stepper.domain.model.response.post_controller
 
-//get 게시클 목록 조회
+//get 게시글 목록 조회
 class ApiResponseListPostViewResponse : ArrayList<ApiResponseListPostViewResponseItem>()
 
 data class ApiResponseListPostViewResponseItem(

@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="postItem"
-            type="com.example.umc_stepper.domain.model.PostItem" />
+            type="com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponseItem" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_community_search_cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/shape_rounded_square_purple_bg2_21dp">
+        android:background="@drawable/shape_rounded_square_purple_bg2_solid_21dp">
 
         <TextView
             android:id="@+id/item_community_search_title"
@@ -20,6 +24,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            android:foreground="@android:color/transparent"
             android:text="@{postItem.title}"
             android:textColor="@color/White"
             android:textStyle="bold"
@@ -32,7 +39,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@{postItem.description}"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            android:foreground="@android:color/transparent"
+            android:text="@{postItem.body}"
             android:textColor="@color/White"
             app:layout_constraintStart_toStartOf="@id/item_community_search_title"
             app:layout_constraintTop_toBottomOf="@id/item_community_search_title" />
@@ -55,6 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
             android:src="@drawable/ic_like_off"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/item_community_search_description_tv"
             app:layout_constraintTop_toBottomOf="@id/item_community_search_description_tv" />
 
@@ -64,7 +75,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="@{postItem.like}"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            android:foreground="@android:color/transparent"
+            android:text="@{postItem.likes}"
             android:textColor="@color/Yellow_300"
             app:layout_constraintBottom_toBottomOf="@id/item_community_search_like_iv"
             app:layout_constraintStart_toEndOf="@id/item_community_search_like_iv"
@@ -86,7 +100,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="@{postItem.scrap}"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            android:foreground="@android:color/transparent"
+            android:text="@{postItem.scraps}"
             android:textColor="@color/Yellow_300"
             app:layout_constraintBottom_toBottomOf="@id/item_community_search_like_iv"
             app:layout_constraintStart_toEndOf="@id/item_community_search_bookmark_iv"
@@ -108,7 +125,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="@{postItem.message}"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            android:foreground="@android:color/transparent"
+            android:text="@{postItem.commentsCount}"
             android:textColor="@color/Yellow_300"
             app:layout_constraintBottom_toBottomOf="@id/item_community_search_like_iv"
             app:layout_constraintStart_toEndOf="@id/item_community_search_message_iv"

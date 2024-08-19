@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
     </data>
 
-    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="44dp"
         android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -432,6 +431,7 @@
                 android:id="@+id/fragment_evaluation_exercise_picture_exercise_iv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
@@ -446,8 +446,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="44dp"
+                android:layout_marginBottom="42dp"
                 android:layout_marginEnd="24dp"
-                android:background="@drawable/selector_checked_input"
+                style="@style/sub_title_semi_bold_16"
+                android:background="@drawable/radius_corners_61dp_stroke_1"
+                android:text="@string/sign_up_complete_btn"
+                android:textColor="@color/Purple_700"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_picture_exercise_iv"
                 app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_picture_exercise_iv"
                 app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_picture_exercise_iv" />

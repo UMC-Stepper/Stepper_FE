@@ -6,7 +6,12 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
@@ -14,42 +19,50 @@ import com.example.umc_stepper.databinding.FragmentEvaluationExerciseTodayBindin
 import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResponse
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.stepper.StepperViewModel
+import com.example.umc_stepper.ui.today.TodayViewModel
+import com.example.umc_stepper.ui.today.add.AddExerciseSelectScrapFragmentDirections
 import com.example.umc_stepper.utils.GlobalApplication
+import com.example.umc_stepper.utils.enums.LoadState
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-//앞 화면에서 받은 리스트로 조작해야 함
+//앞 화면에서 받은 리스트로 조작해야 함 , 평가 일지 조회
 class EvaluationExerciseTodayFragment :
     BaseFragment<FragmentEvaluationExerciseTodayBinding>(R.layout.fragment_evaluation_exercise_today) {
     private val stepperViewModel: StepperViewModel by activityViewModels()
-    private lateinit var imgList: List<ImageView>
-    private lateinit var tvList: List<TextView>
-    private lateinit var triangleList: List<ImageView>
-    private lateinit var blurList: List<Int>
-    private lateinit var notBlurList: List<Int>
-    private lateinit var stateTitleList: List<String>
-    private lateinit var descriptionList: List<String>
+    private var imgList: List<ImageView> = listOf()
+    private var tvList: List<TextView> = listOf()
+    private var triangleList: List<ImageView> = listOf()
+    private var blurList: List<Int> = listOf()
+    private var notBlurList: List<Int> = listOf()
+    private var stateTitleList: List<String> = listOf()
+    private var descriptionList: List<String> = listOf()
     private var selectTextDescription = 0
     private var profileImage = ""
     private var score = 0
+    private val todayViewModel: TodayViewModel by activityViewModels()
     private lateinit var args: Bundle
     private lateinit var selectedDate: String
     private lateinit var diaryListValue: String
-    private lateinit var mainActivity: MainActivity
     private lateinit var diaryList: List<RateDiaryResponse>
-
+    private lateinit var mainActivity: MainActivity
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mainActivity = context as MainActivity
     }
 
     private fun setTitle() {
-        if (!diaryList.isEmpty()) {
-            mainActivity.updateToolbarLeftPlusImg(selectedDate, diaryList[0].bodyPart) //타이틀 세팅
+        if (diaryList.isNotEmpty()) {
+            binding.fragmentEvaluationExerciseTodayTitleTv.text = selectedDate
+            binding.fragmentEvaluationExerciseTodayBodyTv.text = diaryList[0].bodyPart
+            binding.fragmentEvaluationExerciseTodayBodyTv.visibility = View.VISIBLE
+        } else {
+            binding.fragmentEvaluationExerciseTodayBodyTv.visibility = View.INVISIBLE
         }
-        mainActivity.setBg()
     }
 
     private fun takeDataClass() {
@@ -72,30 +85,45 @@ class EvaluationExerciseTodayFragment :
     }
 
     private fun initSetting() {
-        setTitle()
         setList()
+        setTitle()
         initScreen()
         setObserver()
         setOnClickBtn()
+        todayViewModel.successEvaluationLogData()
     }
 
     private fun setObserver() {
-        if(diaryList.isNotEmpty()) {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                todayViewModel.dataLoadState.collectLatest {
+                    if (it == LoadState.LOADING) {
+                        mainActivity.showProgress()
+                    } else {
+                        mainActivity.hideProgress()
+                    }
+                }
+            }
+        }
+
+
+        if (diaryList.isNotEmpty()) {
             binding.fragmentEvaluationExerciseScoreTv.text =
                 diaryList[0].conditionRate.toString()
             binding.fragmentEvaluationExercisePointTv.text =
                 diaryList[0].conditionRate.toString()
-            setDescription(diaryList[0].painRate)
             binding.fragmentEvaluationExerciseProgressbarPb.progress =
                 diaryList[0].conditionRate
             binding.fragmentEvaluationExerciseMemoEt.text =
                 diaryList[0].painMemo
-            GlobalApplication.loadCropImage(
-                binding.fragmentEvaluationExercisePictureExerciseIv,
-                diaryList[0].painImage
+            setDescription(diaryList[0].painRate)
+            GlobalApplication.loadCropRoundedSquareImage(
+                context = requireContext(),
+                source = diaryList[0].painImage,
+                imageView = binding.fragmentEvaluationExercisePictureExerciseIv,
+                rounded = 18
             )
-        }
-        else{
+        } else {
             binding.allConstraintCl.visibility = View.GONE
             binding.allConstraint2Cl.visibility = View.VISIBLE
         }
@@ -165,13 +193,13 @@ class EvaluationExerciseTodayFragment :
             )
 
             descriptionList = listOf(
-                "온전한 상태로 회복하고 있는 것 같네요! 오늘 운동도 고생 많았어요 \n" +
+                "온전한 상태로 회복하고 있는 것 같네요!\n오늘 운동도 고생 많았어요\n" +
                         "차트에 오늘 컨디션 기록할게요!",
                 "점점 나아지고 있는 모습 보기 좋아요!\n" +
                         "오늘 운동도 고생 많았어요 \n" +
                         "차트에 오늘 컨디션 기록할게요!",
                 "꾸준히 운동을 하면서 통증을 함께 더 \n" +
-                        "줄여나가 봅시다! 오늘 운동도 고생 많았어요\n" +
+                        "줄여나가 봅시다!\n오늘 운동도 고생 많았어요\n" +
                         "차트에 오늘 컨디션 기록할게요!",
                 "오늘 운동할 때 몸이 많이 불편했나요? \n" +
                         "스트레칭으로 충분히 몸을 풀어주세요. \n" +
@@ -185,13 +213,60 @@ class EvaluationExerciseTodayFragment :
     }
 
     private fun setOnClickBtn() {
+        // 뒤로 가기
         with(binding) {
-            fragmentEvaluationExerciseSuccessBt.setOnClickListener {
-                mainActivity.visibleTag()
+            binding.fragmentEvaluationExerciseSuccessBt.setOnClickListener {
+                todayViewModel.loadEvaluationLogData()
+                mainActivity.showProgress()
                 val action =
                     EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToEvaluationLogFragment()
                 findNavController().navigateSafe(action.actionId)
             }
+
+            // 투데이 버튼
+            binding.fragmentEvaluationExerciseTodayGoTodayIv.setOnClickListener {
+                val action =
+                    EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToTodayHomeFragment()
+                findNavController().navigateSafe(action.actionId)
+            }
+
+            // 스테퍼 버튼
+            binding.fragmentEvaluationExerciseTodayGoStepperIv.setOnClickListener {
+                val action =
+                    EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToStepperFragment()
+                findNavController().navigateSafe(action.actionId)
+
+
+                fragmentEvaluationExerciseSuccessBt.setOnClickListener {
+                    todayViewModel.loadEvaluationLogData()
+                    mainActivity.showProgress()
+                    val action =
+                        EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToEvaluationLogFragment()
+                    findNavController().navigateSafe(action.actionId)
+                }
+            }
         }
+        popBack()
     }
+
+    private fun popBack() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    todayViewModel.loadEvaluationLogData()
+                    mainActivity.showProgress()
+                    val action =
+                        EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToEvaluationLogFragment()
+                    findNavController().navigateSafe(action.actionId)
+                }
+            })
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+        todayViewModel.loadEvaluationLogData()
+    }
+
 }

@@ -29,29 +29,9 @@ class TodayDecorator(context: Context) : DayViewDecorator {
     }
 }
 
-class EventDecorator(private val context: Context, private val eventDateList: MutableList<String>)
-    : DayViewDecorator {
+class EventDecorator(private val context: Context,  private val eventDates: Set<CalendarDay>) : DayViewDecorator {
 
-    private val datesWithEvent = mutableSetOf<CalendarDay>()
-
-    init {
-        // 날짜 파싱
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        eventDateList.forEach { dateString ->
-            try {
-                val date = dateFormat.parse(dateString)
-                if (date != null) {
-                    val calendar = Calendar.getInstance().apply {
-                        time = date
-                    }
-                    val calendarDay = CalendarDay.from(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH))
-                    datesWithEvent.add(calendarDay)
-                }
-            } catch (e: ParseException) {
-                e.printStackTrace()
-            }
-        }
-    }
+    private val datesWithEvent = eventDates.toMutableSet()
 
     override fun shouldDecorate(day: CalendarDay): Boolean {
         // 저장된 결과를 사용하여 데코레이션을 적용할 날짜를 결정합니다.

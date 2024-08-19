@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <ScrollView
+        android:layout_marginBottom="45dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".ui.stepper.home.StepperFragment">
@@ -139,34 +140,41 @@
             android:id="@+id/stepper_additional_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
             android:layout_marginTop="16dp"
-            android:visibility="visible"
-            tools:listitem="@layout/item_stepper_additional_exercise"
-            tools:itemCount="1"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/stepper_additional_tv" />
-
-        <ImageButton
-            android:id="@+id/stepper_additional_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="40dp"
             android:layout_marginEnd="24dp"
-            android:background="@drawable/ic_stepper_additional_btn"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="vertical"
+            android:layout_marginStart="24dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/stepper_additional_rv" />
+            tools:itemCount="2"
+            app:layout_constraintTop_toBottomOf="@id/stepper_additional_tv"
+            tools:listitem="@layout/item_stepper_additional_exercise" />
 
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:id="@+id/stepper_additional_exercise_constraint_btn"
+           android:layout_width="0dp"
+           android:layout_height="40dp"
+           android:layout_marginTop="12dp"
+           android:layout_marginBottom="40dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"
+           android:background="@drawable/shape_rounded_square_pruple400_40dp"
+           android:backgroundTint="@color/Purple_300"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/stepper_additional_rv">
 
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+               android:src="@drawable/ic_add_additional_exercise_btn"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"/>
 
-
+       </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout></ScrollView></layout>

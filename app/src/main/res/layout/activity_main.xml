@@ -18,7 +18,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:background="?attr/selectableItemBackground"
                     android:id="@+id/main_toolbar_back_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -47,7 +48,9 @@
                 android:paddingBottom="4dp"
                 android:layout_marginStart="16dp"/>
 
-                <ImageView
+            <androidx.appcompat.widget.AppCompatImageButton
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground"
                     android:id="@+id/main_toolbar_go_stepper"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -55,7 +58,8 @@
                     android:layout_gravity="end"
                     android:src="@drawable/ic_toolbar_stepper"/>
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:background="?attr/selectableItemBackground"
                 android:id="@+id/main_toolbar_go_today"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -85,11 +89,21 @@
             app:menu="@menu/bottom_menu"
             app:itemActiveIndicatorStyle="@android:color/transparent"
             app:itemBackground="@android:color/transparent"
+            app:itemRippleColor="@android:color/transparent"
             app:itemTextColor="@color/Text_Gray"
             app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/pg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

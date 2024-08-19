@@ -5,13 +5,15 @@ import com.example.umc_stepper.base.BaseAdapter
 import com.example.umc_stepper.base.BaseDiffCallback
 import com.example.umc_stepper.databinding.ItemCollocateMyExerciseBinding
 import com.example.umc_stepper.domain.model.Exercise2Data
+import com.example.umc_stepper.domain.model.response.my_exercise_controller.CheckExerciseResponse
+import com.example.umc_stepper.utils.GlobalApplication
 import com.example.umc_stepper.utils.listener.ItemClickListener
 
 class MyExercise2Adapter(
     val listener: ItemClickListener
-)  : BaseAdapter<Exercise2Data, ItemCollocateMyExerciseBinding>(
+)  : BaseAdapter<CheckExerciseResponse, ItemCollocateMyExerciseBinding>(
     BaseDiffCallback(
-        itemsTheSame = { oldItem, newItem -> oldItem == newItem },
+        itemsTheSame = { oldItem, newItem -> oldItem.exerciseId == newItem.exerciseId },
         contentsTheSame = { oldItem, newItem -> oldItem == newItem }
     )
 ){
@@ -19,9 +21,10 @@ class MyExercise2Adapter(
     override val layoutId: Int
         get() = R.layout.item_collocate_my_exercise
 
-    override fun bind(binding: ItemCollocateMyExerciseBinding, item: Exercise2Data) {
+    override fun bind(binding: ItemCollocateMyExerciseBinding, item: CheckExerciseResponse) {
         binding.listItem = item
         binding.listener = listener
+        GlobalApplication.loadCropRoundedSquareImage(binding.root.context,binding.itemCollocateMyExerciseThumbnailIv,item.video_image,12)
     }
 
 

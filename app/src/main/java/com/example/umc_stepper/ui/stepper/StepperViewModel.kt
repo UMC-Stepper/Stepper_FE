@@ -23,6 +23,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,8 +33,6 @@ class StepperViewModel @Inject constructor(
     private val youtubeApiRepository: YoutubeApiRepository,
     private val stepperApiRepository: StepperApiRepository
 ) : ViewModel() {
-    private val _levelItems = MutableLiveData<List<LevelListItem>>()
-    val levelItems: LiveData<List<LevelListItem>> = _levelItems
 
     private val _successYoutubeLink = MutableStateFlow(YouTubeVideo())
     val provideYoutubeLink: StateFlow<YouTubeVideo> = _successYoutubeLink
@@ -56,6 +56,21 @@ class StepperViewModel @Inject constructor(
     // 운동 카드 단계별 상태 수정
     private val _exerciseCardStepResponse = MutableStateFlow<BaseResponse<Any>>(BaseResponse())
     val exerciseCardStepResponse : StateFlow<BaseResponse<Any>> = _exerciseCardStepResponse
+
+    private val _moreExerciseList = MutableStateFlow<BaseListResponse<TimeResponse>>(BaseListResponse())
+    val moreExerciseList : StateFlow<BaseListResponse<TimeResponse>> = _moreExerciseList
+
+    fun moreExerciseAdd(date : String){
+        viewModelScope.launch {
+            try {
+                stepperApiRepository.getMoreExercise(date).collect{
+                    _moreExerciseList.value = it
+                }
+            }catch (e : Exception){
+                Log.e("에러","추가운동")
+            }
+        }
+    }
 
     // 운동 카드 수정
     fun putEditExerciseCard(exerciseId: Int, exerciseCardRequestDto: ExerciseCardRequestDto) {
@@ -83,10 +98,10 @@ class StepperViewModel @Inject constructor(
         }
     }
 
-    fun postDiaryEdit(rateDiaryDto: RateDiaryDto){
+    fun postDiaryEdit(image : MultipartBody.Part, request: RequestBody){
         viewModelScope.launch {
             try{
-                mainApiRepository.postRateDiaryEdit(rateDiaryDto).collect{
+                mainApiRepository.postRateDiaryEdit(image, request).collect{
                     _diaryItems.value = it
                 }
             }catch (e : Exception){
@@ -111,36 +126,6 @@ class StepperViewModel @Inject constructor(
                 Log.e(TAG, "getDiaryConfirm Error")
             }
         }
-    }
-    init {
-        loadLevelItems()
-    }
-
-    private fun loadLevelItems() {
-        val items = listOf(
-            LevelListItem(
-                listOf(
-                    LevelItem("image1.jpg", "Level 1"),
-                    LevelItem("image2.jpg", "Level 2"),
-                    LevelItem("image3.jpg", "Level 3")
-                )
-            ),
-            LevelListItem(
-                listOf(
-                    LevelItem("image4.jpg", "Level 1"),
-                    LevelItem("image5.jpg", "Level 2"),
-                    LevelItem("image6.jpg", "Level 3")
-                )
-            ),
-            LevelListItem(
-                listOf(
-                    LevelItem("image4.jpg", "Level 1"),
-                    LevelItem("image5.jpg", "Level 2"),
-                    LevelItem("image6.jpg", "Level 3")
-                )
-            )
-        )
-        _levelItems.value = items
     }
 
     fun getYoutubeVideoInfo(part: String, id: String, key: String) {
@@ -168,4 +153,5 @@ class StepperViewModel @Inject constructor(
             }
         }
     }
+
 }

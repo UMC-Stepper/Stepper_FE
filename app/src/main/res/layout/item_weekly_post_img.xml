@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+        <variable
+            name="imageResponse"
+            type="com.example.umc_stepper.domain.model.response.ImageResponse" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -15,6 +21,8 @@
             android:background="@drawable/shape_rounded_square_purple700_18dp"
             android:backgroundTint="@color/White"
             android:src="@drawable/ic_community_logo"
+            app:imageUrl="@{imageResponse.imageUrl}"
+            app:roundedCorners="@{18}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

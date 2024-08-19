@@ -2,11 +2,18 @@ package com.example.umc_stepper.ui.stepper
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -18,16 +25,26 @@ import com.example.umc_stepper.databinding.FragmentEvaluationExerciseBinding
 import com.example.umc_stepper.domain.model.request.rate_diary_controller.RateDiaryDto
 import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.MainActivity
+import com.example.umc_stepper.utils.GlobalApplication
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import java.lang.NumberFormatException
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class EvaluationExerciseFragment :
-    BaseFragment<FragmentEvaluationExerciseBinding>(R.layout.fragment_evaluation_exercise) {
+    BaseFragment<FragmentEvaluationExerciseBinding>(R.layout.fragment_evaluation_exercise) {    // 평가 일지 작성
     @Inject
     lateinit var tokenManager: TokenManager
     val stepperViewModel: StepperViewModel by activityViewModels()
@@ -39,32 +56,172 @@ class EvaluationExerciseFragment :
     lateinit var stateTitleList: List<String>
     lateinit var descriptionList: List<String>
     var selectTextDescription = 0
-
-    var profileImage = ""
+    var exerciseId by Delegates.notNull<Int>()
+    lateinit var profileImage: MultipartBody.Part
     var score = 0
     private lateinit var mainActivity: MainActivity
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mainActivity = context as MainActivity
     }
 
-    private fun setTitle() {
-        mainActivity.setBg()
-        mainActivity.updateToolbarLeftPlusImg("07.09", "무릎, 다리") //타이틀 세팅
+    private fun setToolbar() {
+        mainActivity.setBg2()
+        mainActivity.updateToolbarTitle("운동 평가하기")
+        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
+        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
+        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        saveSharedPreferences()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activateButton() // 초기 상태 설정
+    }
+
+    private fun deleteSharedPreferences() {
+        sharedPreferences = requireContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear()  // 모든 데이터 삭제
+        editor.apply()
+    }
+
+    private fun saveSharedPreferences() {
+        sharedPreferences = requireContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("conditionPoint", binding.fragmentEvaluationExercisePointTv.text.toString())
+        editor.putString("memo", binding.fragmentEvaluationExerciseMemoEt.text.toString())
+        editor.apply()
+    }
+
+    private fun saveDescriptionNum (description: Int) {
+        sharedPreferences = requireContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt("selectedDescription", description)
+        editor.apply()
+    }
+
+    private fun getSharedPreferences() {
+        sharedPreferences = requireContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val point = sharedPreferences.getString("conditionPoint", "")
+        val memo = sharedPreferences.getString("memo", "")
+        selectTextDescription = sharedPreferences.getInt("selectedDescription",0)
+        stateAllToggle()
+        binding.fragmentEvaluationExercisePointTv.setText(point)
+        binding.fragmentEvaluationExerciseMemoEt.setText(memo)
     }
 
     override fun setLayout() {
         initSetting()
+        lifecycleScope.launch {
+            exerciseId = tokenManager.getExerciseCardId().first()?.toInt() ?: 0
+        }
+
+        // 사진이 존재해야만 이전 값 매핑됨
+        if(arguments?.getString("photo_uri") != null) {
+            getSharedPreferences()
+        }
+        activateButton()
     }
+
+    private fun setImageView() {
+        val photoUriString = arguments?.getString("photo_uri")
+
+        val photoUri = photoUriString?.let { Uri.parse(it) }
+        photoUri?.let {
+            GlobalApplication.loadImage(binding.fragmentEvaluationExercisePictureExerciseIv, it)
+        }
+
+        val file = photoUri?.let { getPathFromUri(requireContext(), it)?.let { File(it) } }
+
+        // 이미지 파일을 압축
+        val compressedFile = file?.let { compressImageFile(it, 500) }  // 여기서 maxSizeKB를 지정
+
+        val requestFile = compressedFile?.asRequestBody("image/*".toMediaTypeOrNull())
+        if (compressedFile != null) {
+            profileImage = requestFile?.let {
+                MultipartBody.Part.createFormData("image", compressedFile.name, it)
+            }!!
+        }
+
+        if (compressedFile != null) {
+            Log.d("CompressedImage", "File size: ${compressedFile.length()} bytes")
+        }
+
+    }
+
+
+    private fun compressImageFile(imageFile: File, maxSizeKB: Int): File {
+        val bitmap = BitmapFactory.decodeFile(imageFile.path)
+        var quality = 100
+        val outputStream = ByteArrayOutputStream()
+
+        do {
+            outputStream.reset()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream)
+            quality -= 5
+        } while (outputStream.size() / 1024 > maxSizeKB && quality > 0)
+
+        val compressedFile = File(imageFile.parent, "compressed_${imageFile.name}")
+        try {
+            val fos = FileOutputStream(compressedFile)
+            fos.write(outputStream.toByteArray())
+            fos.flush()
+            fos.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        return compressedFile
+    }
+
+    private fun getPathFromUri(context: Context, uri: Uri): String? {
+        var path: String? = null
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = context.contentResolver.query(uri, projection, null, null, null)
+        cursor?.use {
+            if (it.moveToFirst()) {
+                val columnIndex = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+                path = it.getString(columnIndex)
+            }
+        }
+        return path
+    }
+
 
     private fun initSetting() {
 //        initActivityResultLauncher()
         observeLifeCycle()
-        setTitle()
+        setToolbar()
+        setImageView()
         setList()
         setScoreText()
         setOnClickBtn()
+    }
+
+
+
+    private fun activateButton() {
+        val args = arguments?.getString("photo_uri").toString()
+        if(binding.fragmentEvaluationExercisePointTv.text.isNullOrEmpty().not() &&
+            binding.fragmentEvaluationExerciseMemoEt.text.isNullOrEmpty().not() &&
+            args.isNullOrEmpty().not() &&
+            selectTextDescription in 0..4
+            ) {
+            binding.fragmentEvaluationExerciseSuccessBt.setBackgroundResource(R.drawable.shape_rounded_square_purple700_60dp)
+            binding.fragmentEvaluationExerciseSuccessBt.isEnabled = true
+            binding.fragmentEvaluationExerciseSuccessBt.setTextColor(ContextCompat.getColor(requireContext(), R.color.White))
+        } else {
+            binding.fragmentEvaluationExerciseSuccessBt.setBackgroundResource(R.drawable.radius_corners_61dp_stroke_1)
+            binding.fragmentEvaluationExerciseSuccessBt.isEnabled = false
+            binding.fragmentEvaluationExerciseSuccessBt.setTextColor(ContextCompat.getColor(requireContext(), R.color.Purple_700))
+        }
     }
 
     private fun observeLifeCycle() {
@@ -108,27 +265,32 @@ class EvaluationExerciseFragment :
     private fun setOnClickBtn() {
         with(binding) {
             fragmentEvaluationExerciseBlur20Iv.setOnClickListener {
+                saveDescriptionNum(0)
                 selectTextDescription = 0
                 stateAllToggle()
             }
             fragmentEvaluationExerciseBlur40Iv.setOnClickListener {
+                saveDescriptionNum(1)
                 selectTextDescription = 1
                 stateAllToggle()
             }
             fragmentEvaluationExerciseBlur60Iv.setOnClickListener {
+                saveDescriptionNum(2)
                 selectTextDescription = 2
                 stateAllToggle()
             }
             fragmentEvaluationExerciseBlur80Iv.setOnClickListener {
+                saveDescriptionNum(3)
                 selectTextDescription = 3
                 stateAllToggle()
             }
             fragmentEvaluationExerciseBlur100Iv.setOnClickListener {
+                saveDescriptionNum(4)
                 selectTextDescription = 4
                 stateAllToggle()
             }
             //카메라액티비티로 이동
-            binding.fragmentEvaluationExercisePictureExerciseIv.setOnClickListener {
+            fragmentEvaluationExercisePictureExerciseIv.setOnClickListener {
                 val intent = Intent(activity, CameraActivity::class.java)
                 startActivity(intent)
             }
@@ -136,27 +298,32 @@ class EvaluationExerciseFragment :
             //운동아이디필요
             fragmentEvaluationExerciseSuccessBt.setOnClickListener {
                 val memo = fragmentEvaluationExerciseMemoEt.text.toString() //메모
-                val state = selectTextDescription //상태값 0 1 2 3 4
+                val state = sharedPreferences.getInt("selectedDescription",0) //상태값 0 1 2 3 4
+                Log.d("클릭","state : $state")
                 val imageUrl = profileImage //이미지
                 val point = score //점수
                 mainActivity.visibleTag()
-                lifecycleScope.launch {
-                    val exerciseId = tokenManager.getExerciseId().first() ?: ""
-                    stepperViewModel.postDiaryEdit(
-                        RateDiaryDto(
-                            conditionRate = point.toString(),
-                            painImage = imageUrl,
-                            painMemo = memo,
-                            painRate = state.toString(),
-                            exerciseCardId = exerciseId //운동아이디
-                        )
-                    )
-                }
+                val gson = Gson()
+                Log.d("평가", exerciseId.toString())
+                val rateDiary = RateDiaryDto(
+                    conditionRate = point.toString(),
+                    painImage = "x",
+                    painMemo = memo,
+                    painRate = state.toString(),
+                    exerciseCardId = exerciseId.toString() //운동아이디
+                )
+                val rj = gson.toJson(rateDiary, RateDiaryDto::class.java)
+                val rb = rj.toRequestBody("application/json".toMediaTypeOrNull())
+                stepperViewModel.postDiaryEdit(
+                    image = imageUrl,
+                    request = rb
+                )
+                deleteSharedPreferences() // 평가일지 작성 정보 삭제
+                Log.d("클릭","rateDiary : $rateDiary")
                 //위의 값들 서버로 전달
             }
         }
     }
-
 
     private fun setList() {
         with(binding) {
@@ -202,20 +369,20 @@ class EvaluationExerciseFragment :
 
             stateTitleList = listOf(
                 "완전 괜찮아요",
+                "조금 덜 아팠어요",
                 "큰 차이가 없어요",
                 "조금 더 불편해요",
-                "완전 아파요",
-                "조금 덜 아팠어요"
+                "많이 아파요",
             )
 
             descriptionList = listOf(
-                "온전한 상태로 회복하고 있는 것 같네요! 오늘 운동도 고생 많았어요 \n" +
+                "온전한 상태로 회복하고 있는 것 같네요!\n오늘 운동도 고생 많았어요\n" +
                         "차트에 오늘 컨디션 기록할게요!",
                 "점점 나아지고 있는 모습 보기 좋아요!\n" +
                         "오늘 운동도 고생 많았어요 \n" +
                         "차트에 오늘 컨디션 기록할게요!",
                 "꾸준히 운동을 하면서 통증을 함께 더 \n" +
-                        "줄여나가 봅시다! 오늘 운동도 고생 많았어요\n" +
+                        "줄여나가 봅시다!\n오늘 운동도 고생 많았어요\n" +
                         "차트에 오늘 컨디션 기록할게요!",
                 "오늘 운동할 때 몸이 많이 불편했나요? \n" +
                         "스트레칭으로 충분히 몸을 풀어주세요. \n" +
