@@ -22,7 +22,7 @@ import android.content.SharedPreferences
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val mainApiRepository: MainApiRepository,
-    private val sharedPreferences: SharedPreferences // SharedPreferences 주입
+    private val sharedPreferences: SharedPreferences
 ) : ViewModel() {
 
     private val _getBadge = MutableStateFlow<BaseListResponse<BadgeResponseItem>>(BaseListResponse())
@@ -67,6 +67,21 @@ class MainViewModel @Inject constructor(
             apply()
         }
     }
+
+    // 모든 배지 상태를 false로 변경하는 함수
+    fun resetAllBadges() {
+        badgeList.forEach { badge ->
+            badge.hasBadge = false
+        }
+        // SharedPreferences에 저장된 배지 상태도 업데이트
+        badgeList.forEachIndexed { index, _ ->
+            with(sharedPreferences.edit()) {
+                putBoolean("badge_$index", false)
+                apply()
+            }
+        }
+    }
+
 }
 
 data class BadgeCheck(val badgeName: String, var hasBadge: Boolean)
