@@ -74,7 +74,7 @@
             android:clickable="false"
             android:foreground="@android:color/transparent"
             android:background="@android:color/transparent"
-            android:text='@{Integer.toString(partPostItem.likes)}'
+            android:text='@{String.valueOf(partPostItem.likes)}'
             style="@style/body_regular_12"
             android:textColor="@color/Yellow_300"
             app:layout_constraintStart_toEndOf="@+id/item_weekly_home_thumbs_up_iv"
@@ -98,7 +98,7 @@
             android:clickable="false"
             android:foreground="@android:color/transparent"
             android:background="@android:color/transparent"
-            android:text='@{Integer.toString(partPostItem.scraps)}'
+            android:text='@{String.valueOf(partPostItem.scraps)}'
             style="@style/body_regular_12"
             android:textColor="@color/Yellow_300"
             app:layout_constraintStart_toEndOf="@+id/item_weekly_home_scraps_up_iv"
@@ -122,7 +122,7 @@
             android:clickable="false"
             android:foreground="@android:color/transparent"
             android:background="@android:color/transparent"
-            android:text='@{Integer.toString(partPostItem.commentsCount)}'
+            android:text='@{String.valueOf(partPostItem.commentsCount)}'
             style="@style/body_regular_12"
             android:textColor="@color/Yellow_300"
             app:layout_constraintStart_toEndOf="@+id/item_weekly_home_reply_up_iv"
@@ -136,7 +136,6 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="20dp"
-            app:imageUrl2="@{partPostItem.imageUrl}"
             android:background="@drawable/shape_rounded_square_white_12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

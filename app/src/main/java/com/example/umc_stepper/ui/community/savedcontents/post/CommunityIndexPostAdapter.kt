@@ -1,6 +1,7 @@
 package com.example.umc_stepper.ui.community.savedcontents.post
 
 import android.util.Log
+import androidx.core.content.ContextCompat
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseAdapter
 import com.example.umc_stepper.base.BaseDiffCallback
@@ -30,17 +31,15 @@ class CommunityIndexPostAdapter(private val itemClickListener: ItemClickListener
         binding.root.setOnClickListener {
             itemClickListener.onClick(item)
         }
-        loadImage(binding, item.imageUrl)
-    }
-
-    private fun loadImage(binding: ItemCommunityIndexPostBinding, imageUrl: String?) {
-        if (imageUrl != null) {
-            GlobalApplication.loadCropRoundedSquareImage(
-                binding.root.context,
-                binding.itemWeeklyHomeDescIv,
-                imageUrl, 12
+        if (item.imageList.isNotEmpty()) {
+            GlobalApplication.loadImage(binding.itemWeeklyHomeDescIv, item.imageList[0].imageUrl)
+        } else {
+            binding.itemWeeklyHomeDescIv.setImageDrawable(
+                ContextCompat.getDrawable(binding.root.context, R.drawable.ic_community_logo)
             )
         }
     }
+
+
 
 }

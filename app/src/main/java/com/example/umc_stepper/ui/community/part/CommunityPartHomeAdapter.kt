@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.community.part
 
+import androidx.core.content.ContextCompat
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseAdapter
 import com.example.umc_stepper.base.BaseDiffCallback
@@ -25,15 +26,11 @@ class CommunityPartHomeAdapter(
     override fun bind(binding: ItemCommunityPartHomePostBinding, item: ApiResponseListPostViewResponseItem) {
         binding.partPostItem = item
         binding.listener = itemClickListener
-        loadImage(binding, item.imageUrl)
-    }
-
-    private fun loadImage(binding: ItemCommunityPartHomePostBinding, imageUrl: String?) {
-        if (imageUrl != null) {
-            GlobalApplication.loadCropRoundedSquareImage(
-                binding.root.context,
-                binding.itemWeeklyHomeDescIv,
-                imageUrl, 12
+        if (item.imageList.isNotEmpty()) {
+            GlobalApplication.loadImage(binding.itemWeeklyHomeDescIv, item.imageList[0].imageUrl)
+        } else {
+            binding.itemWeeklyHomeDescIv.setImageDrawable(
+                ContextCompat.getDrawable(binding.root.context, R.drawable.ic_community_logo)
             )
         }
     }
