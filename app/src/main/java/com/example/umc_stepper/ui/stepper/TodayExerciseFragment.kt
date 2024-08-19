@@ -36,6 +36,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.properties.Delegates
+
 @AndroidEntryPoint
 class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layout.fragment_today_exercise) {
 
@@ -91,6 +92,7 @@ class TodayExerciseFragment : BaseFragment<FragmentTodayExerciseBinding>(R.layou
         Log.d("스텝아이디",stepId.toString())
         stepIndex = step - 1
         postInquiryExerciseCard(exerciseId)
+        dataSetting()
         Log.d("토큰", "$exerciseId $step $stepId")
         initSettings()
         initializeToolBar(step)
