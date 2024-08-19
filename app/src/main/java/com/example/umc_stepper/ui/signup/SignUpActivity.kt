@@ -178,6 +178,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
                     val gson = Gson()
                     val userDto = gson.toJson(
                         UserDto(
+                            name = nickname,
                             nickName = nickname,
                             email = email,
                             password = password,
