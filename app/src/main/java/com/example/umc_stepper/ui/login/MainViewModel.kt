@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 import android.content.SharedPreferences
+import com.example.umc_stepper.domain.model.request.FCMNotificationRequestDto
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
@@ -28,6 +29,9 @@ class MainViewModel @Inject constructor(
     private val _getBadge = MutableStateFlow<BaseListResponse<BadgeResponseItem>>(BaseListResponse())
     val getBadge: StateFlow<BaseListResponse<BadgeResponseItem>> = _getBadge
 
+    private val _getFcm = MutableStateFlow<String>("")
+    val getFcm: StateFlow<String> = _getFcm
+
     var badgeList = mutableListOf(
         BadgeCheck("첫 운동 설정 완료", false),
         BadgeCheck("첫 오늘의 운동 완료", false),
@@ -37,6 +41,19 @@ class MainViewModel @Inject constructor(
 
     init {
         loadBadgeStates()
+    }
+
+    fun getFcm(fCMNotificationRequestDto: FCMNotificationRequestDto) {
+        viewModelScope.launch {
+            try {
+                mainApiRepository.getFcm(fCMNotificationRequestDto).collect {
+                    _getFcm.value = it
+                }
+            } catch (e: Exception) {
+                Log.e("MainViewModel getFcm Error", e.message.toString())
+            }
+
+        }
     }
 
     fun getBadge() {
