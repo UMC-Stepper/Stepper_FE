@@ -3,11 +3,11 @@ package com.example.umc_stepper.domain.model.response.post_controller
 data class ApiResponsePostResponse(
     val authorEmail: String = "",
     val body: String = "",
-    val bodyPart: String = "",
+    val bodyPart: String? = "",
     val createdAt: String = "",
     val id: Int = 0,
     val imageUrl: String = "",
-    val subCategory: String = "",
+    val subCategory: String? = "",
     val title: String = "",
     val updatedAt: String = "",
     val weeklyMissionTitle: String = ""

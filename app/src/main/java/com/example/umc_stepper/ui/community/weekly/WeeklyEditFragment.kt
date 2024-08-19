@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -23,6 +24,7 @@ import com.example.umc_stepper.ui.community.CommunityDialog
 import com.example.umc_stepper.ui.community.CommunityDialogInterface
 import com.example.umc_stepper.ui.community.CommunityRemoveInterface
 import com.example.umc_stepper.ui.community.CommunityViewModel
+import com.example.umc_stepper.ui.login.MainViewModel
 import com.example.umc_stepper.utils.enums.DialogType
 import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -44,7 +46,7 @@ class WeeklyEditFragment : BaseFragment<FragmentWeeklyEditBinding>(R.layout.frag
     private lateinit var galleryForResult: ActivityResultLauncher<Intent>
     private lateinit var uploadImgAdapter: WeeklyEditImageAdapter
     private lateinit var communityDialog: CommunityDialog
-//    private val mainViewModel: MainViewModel by activityViewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
     private val imageList: MutableList<MultipartBody.Part> = mutableListOf()
     private val communityViewModel: CommunityViewModel by activityViewModels()
 
@@ -79,7 +81,7 @@ class WeeklyEditFragment : BaseFragment<FragmentWeeklyEditBinding>(R.layout.frag
         }
         binding.fragmentWeeklyEditSuccessBt.setOnClickListener {
             //저장
-//            updateBadge(3)  // 첫 게시물 작성 완료 뱃지
+            updateBadge(3)  // 첫 게시물 작성 완료 뱃지
             postEditDto = PostEditDto(
                 imageUrl = "string",
                 title = binding.fragmentWeeklySubtitleEt.text.toString(),
@@ -131,16 +133,16 @@ class WeeklyEditFragment : BaseFragment<FragmentWeeklyEditBinding>(R.layout.frag
         }
     }
 
-//    private fun updateBadge(i:Int) {
-//        // 첫 번째 badgeList 항목의 hasBadge 값이 false일 때만 true로 변경하고 토스트 메시지 띄우기
-//        if (!mainViewModel.badgeList[i].hasBadge) {
-//            // 첫 번째 badgeList 항목의 hasBadge 값을 true로 설정
-//            mainViewModel.badgeList[i].hasBadge = true
-//
-//            // "새로운 뱃지 획득! My Badge를 확인해주세요"라는 토스트 메시지 띄우기
-//            Toast.makeText(requireContext(), "새로운 뱃지 획득! My Badge를 확인해주세요", Toast.LENGTH_SHORT).show()
-//        }
-//    }
+    private fun updateBadge(i: Int) {
+        // 첫 번째 badgeList 항목의 hasBadge 값이 false일 때만 true로 변경하고 토스트 메시지 띄우기
+        if (!mainViewModel.badgeList[i].hasBadge) {
+            // 첫 번째 badgeList 항목의 hasBadge 값을 true로 설정
+            mainViewModel.updateBadgeState(i, true)
+
+            // "새로운 뱃지 획득! My Badge를 확인해주세요"라는 토스트 메시지 띄우기
+            Toast.makeText(requireContext(), "새로운 뱃지 획득! My Badge를 확인해주세요", Toast.LENGTH_SHORT).show()
+        }
+    }
 
 
     private fun initRecyclerView() {

@@ -213,37 +213,33 @@ class EvaluationExerciseTodayFragment :
     }
 
     private fun setOnClickBtn() {
-        // 뒤로 가기
+
         with(binding) {
-            binding.fragmentEvaluationExerciseSuccessBt.setOnClickListener {
-                todayViewModel.loadEvaluationLogData()
-                mainActivity.showProgress()
-                val action =
-                    EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToEvaluationLogFragment()
-                findNavController().navigateSafe(action.actionId)
+            // 뒤로 가기
+            fragmentEvaluationExerciseTodayBackIv.setOnClickListener {
+                findNavController().popBackStack()
             }
 
             // 투데이 버튼
-            binding.fragmentEvaluationExerciseTodayGoTodayIv.setOnClickListener {
+            fragmentEvaluationExerciseTodayGoTodayIv.setOnClickListener {
                 val action =
                     EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToTodayHomeFragment()
                 findNavController().navigateSafe(action.actionId)
             }
 
             // 스테퍼 버튼
-            binding.fragmentEvaluationExerciseTodayGoStepperIv.setOnClickListener {
+            fragmentEvaluationExerciseTodayGoStepperIv.setOnClickListener {
                 val action =
                     EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToStepperFragment()
                 findNavController().navigateSafe(action.actionId)
-
-
-                fragmentEvaluationExerciseSuccessBt.setOnClickListener {
-                    todayViewModel.loadEvaluationLogData()
-                    mainActivity.showProgress()
-                    val action =
-                        EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToEvaluationLogFragment()
-                    findNavController().navigateSafe(action.actionId)
-                }
+            }
+            // 완료 버튼
+            fragmentEvaluationExerciseSuccessBt.setOnClickListener {
+                todayViewModel.loadEvaluationLogData()
+                mainActivity.showProgress()
+                val action =
+                    EvaluationExerciseTodayFragmentDirections.actionEvaluationExerciseTodayFragmentToEvaluationLogFragment()
+                findNavController().navigateSafe(action.actionId)
             }
         }
         popBack()

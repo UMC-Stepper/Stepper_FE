@@ -71,7 +71,7 @@
             android:clickable="false"
             android:foreground="@android:color/transparent"
             android:background="@android:color/transparent"
-            android:text='@{Integer.toString(indexPostItem.likes)}'
+            android:text='@{String.valueOf(indexPostItem.likes)}'
             style="@style/body_regular_12"
             android:textColor="@color/Yellow_300"
             app:layout_constraintStart_toEndOf="@+id/item_weekly_home_thumbs_up_iv"
@@ -95,7 +95,7 @@
             android:clickable="false"
             android:foreground="@android:color/transparent"
             android:background="@android:color/transparent"
-            android:text='@{Integer.toString(indexPostItem.scraps)}'
+            android:text='@{String.valueOf(indexPostItem.scraps)}'
             style="@style/body_regular_12"
             android:textColor="@color/Yellow_300"
             app:layout_constraintStart_toEndOf="@+id/item_weekly_home_scraps_up_iv"
@@ -119,7 +119,7 @@
             android:clickable="false"
             android:foreground="@android:color/transparent"
             android:background="@android:color/transparent"
-            android:text='@{Integer.toString(indexPostItem.commentsCount)}'
+            android:text='@{String.valueOf(indexPostItem.commentsCount)}'
             style="@style/body_regular_12"
             android:textColor="@color/Yellow_300"
             app:layout_constraintStart_toEndOf="@+id/item_weekly_home_reply_up_iv"
@@ -133,7 +133,6 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="20dp"
-            app:imageUrl2="@{indexPostItem.imageUrl}"
             android:background="@drawable/shape_rounded_square_white_12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -145,7 +144,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.7"/>
+            app:layout_constraintGuide_begin="288dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

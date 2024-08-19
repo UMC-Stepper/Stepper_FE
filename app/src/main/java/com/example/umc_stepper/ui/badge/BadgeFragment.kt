@@ -23,7 +23,9 @@ import com.example.umc_stepper.ui.stepper.StepperViewModel
 import com.example.umc_stepper.ui.stepper.home.DayData
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import org.checkerframework.checker.units.qual.A
 
+@AndroidEntryPoint
 class BadgeFragment : BaseFragment<FragmentBadgeBinding>(R.layout.fragment_badge) {
     private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var mainActivity : MainActivity
@@ -105,5 +107,6 @@ class BadgeFragment : BaseFragment<FragmentBadgeBinding>(R.layout.fragment_badge
         mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
         mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
         mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
+        mainActivity.setBg()
     }
 }
