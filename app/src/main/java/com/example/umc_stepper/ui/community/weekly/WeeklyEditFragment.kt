@@ -81,11 +81,11 @@ class WeeklyEditFragment : BaseFragment<FragmentWeeklyEditBinding>(R.layout.frag
             //저장
 //            updateBadge(3)  // 첫 게시물 작성 완료 뱃지
             postEditDto = PostEditDto(
-                imageUrl = "",
+                imageUrl = "string",
                 title = binding.fragmentWeeklySubtitleEt.text.toString(),
                 body = binding.fragmentWeeklyDescriptionTv.text.toString(),
-                bodyPart = "머리",
-                subCategory = "QnA",
+                bodyPart = null,
+                subCategory = null,
                 weeklyMissionId = 1
             )
             val gson = Gson()
