@@ -27,6 +27,7 @@ import com.example.umc_stepper.databinding.ActivityLoginBinding
 import com.example.umc_stepper.domain.model.request.member_controller.LogInDto
 import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.MainActivity
+import com.example.umc_stepper.ui.man
 import com.example.umc_stepper.ui.signup.SignUpActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.snackbar.Snackbar
@@ -55,8 +56,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         initPermissionLaunchers()
         checkPermissionsAndProceed()
         setting()
+        dd()
     }
 
+
+    private fun dd(){
+        binding.activityLoginStepperIv.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, man::class.java))
+        }
+    }
     // FCM 토큰 TokenManager에 저장하는 함수
     private fun saveFcmToken() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
