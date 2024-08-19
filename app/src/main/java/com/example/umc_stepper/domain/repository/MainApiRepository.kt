@@ -2,6 +2,7 @@ package com.example.umc_stepper.domain.repository
 
 import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
+import com.example.umc_stepper.domain.model.request.FCMNotificationRequestDto
 import com.example.umc_stepper.domain.model.request.member_controller.LogInDto
 import com.example.umc_stepper.domain.model.request.rate_diary_controller.RateDiaryDto
 import com.example.umc_stepper.domain.model.request.member_controller.UserDto
@@ -23,5 +24,5 @@ interface MainApiRepository {
     suspend fun getRateDiaryConfirm() : Flow<BaseResponse<List<RateDiaryResponse>>>
     suspend fun getBadge(): Flow<BaseListResponse<BadgeResponseItem>>
 
-
+    suspend fun getFcm(fCMNotificationRequestDto: FCMNotificationRequestDto): Flow<String>
 }

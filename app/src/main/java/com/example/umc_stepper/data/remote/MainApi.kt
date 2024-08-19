@@ -2,6 +2,7 @@ package com.example.umc_stepper.data.remote
 
 import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
+import com.example.umc_stepper.domain.model.request.FCMNotificationRequestDto
 import com.example.umc_stepper.domain.model.request.member_controller.LogInDto
 import com.example.umc_stepper.domain.model.request.rate_diary_controller.RateDiaryDto
 import com.example.umc_stepper.domain.model.request.member_controller.UserDto
@@ -26,6 +27,12 @@ interface MainApi {
         @Part("data") userDto: RequestBody,
         @Part profileImage: MultipartBody.Part,
     ): BaseResponse<UserResponse>
+
+    // FCM
+    @POST("/api/v1/notification")
+    suspend fun getFcm(
+        @Body fCMNotificationRequestDto: FCMNotificationRequestDto
+    ): String
 
     @POST("/api/members/logout")
     suspend fun postLogOutInfo(

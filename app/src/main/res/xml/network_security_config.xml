@@ -6,4 +6,9 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">stepper-backend-dev-env.eba-qcmqwumz.ap-northeast-2.elasticbeanstalk.com</domain>
     </domain-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">192.168.219.109</domain>
+        <domain includeSubdomains="true">10.0.2.2</domain>
+</domain-config>
+
 </network-security-config>

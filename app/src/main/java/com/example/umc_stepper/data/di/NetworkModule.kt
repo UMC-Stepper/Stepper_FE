@@ -52,7 +52,6 @@ object NetworkModule {
         return YoutubeTokenInterceptor(tokenManager)
     }
 
-
     @Provides
     @Singleton
     fun provideConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
@@ -136,6 +135,8 @@ object NetworkModule {
             .build()
     }
 
+    // 서버 배포 주소 http://stepper-backend-dev-env.eba-qcmqwumz.ap-northeast-2.elasticbeanstalk.com/
+    // 로컬 주소 http://192.168.186.1:8080/ (집)
     @MainRetrofit
     @Singleton
     @Provides
