@@ -24,6 +24,7 @@ class CommunityPartHomeFragment : BaseFragment<FragmentCommunityPartHomeBinding>
 
     override fun setLayout() {
         setButton()
+        initView()
     }
 
     private fun initView() {
