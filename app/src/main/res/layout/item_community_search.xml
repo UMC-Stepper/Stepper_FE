@@ -78,7 +78,7 @@
             android:background="@android:color/transparent"
             android:clickable="false"
             android:foreground="@android:color/transparent"
-            android:text="@{postItem.likes}"
+            android:text='@{String.valueOf(postItem.likes)}'
             android:textColor="@color/Yellow_300"
             app:layout_constraintBottom_toBottomOf="@id/item_community_search_like_iv"
             app:layout_constraintStart_toEndOf="@id/item_community_search_like_iv"
@@ -103,7 +103,7 @@
             android:background="@android:color/transparent"
             android:clickable="false"
             android:foreground="@android:color/transparent"
-            android:text="@{postItem.scraps}"
+            android:text='@{String.valueOf(postItem.scraps)}'
             android:textColor="@color/Yellow_300"
             app:layout_constraintBottom_toBottomOf="@id/item_community_search_like_iv"
             app:layout_constraintStart_toEndOf="@id/item_community_search_bookmark_iv"
@@ -128,7 +128,7 @@
             android:background="@android:color/transparent"
             android:clickable="false"
             android:foreground="@android:color/transparent"
-            android:text="@{postItem.commentsCount}"
+            android:text='@{String.valueOf(postItem.commentsCount)}'
             android:textColor="@color/Yellow_300"
             app:layout_constraintBottom_toBottomOf="@id/item_community_search_like_iv"
             app:layout_constraintStart_toEndOf="@id/item_community_search_message_iv"

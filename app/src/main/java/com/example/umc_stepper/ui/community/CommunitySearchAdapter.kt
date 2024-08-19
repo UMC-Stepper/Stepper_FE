@@ -1,5 +1,6 @@
 package com.example.umc_stepper.ui.community
 
+import androidx.core.content.ContextCompat
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseAdapter
 import com.example.umc_stepper.base.BaseDiffCallback
@@ -23,7 +24,13 @@ class CommunitySearchAdapter(private val itemClickListener: ItemClickListener) :
         binding.root.setOnClickListener {
             itemClickListener.onClick(item)
         }
-        GlobalApplication.loadCropRoundedSquareImage(binding.root.context,binding.itemCommunitySearchProfileIv,item.imageList[0].imageUrl,12)
+        if (item.imageList.isNotEmpty()) {
+            GlobalApplication.loadImage(binding.itemCommunitySearchProfileIv, item.imageList[0].imageUrl)
+        } else {
+            binding.itemCommunitySearchProfileIv.setImageDrawable(
+                ContextCompat.getDrawable(binding.root.context, R.drawable.ic_community_logo)
+            )
+        }
     }
 }
 
