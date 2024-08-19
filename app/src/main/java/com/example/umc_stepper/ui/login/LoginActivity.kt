@@ -14,7 +14,9 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -39,6 +41,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login),
     ConfirmDialogInterface{
+    private val mainViewModel: MainViewModel by viewModels()
     @Inject
     lateinit var tokenManager: TokenManager
     private lateinit var loginViewModel: LoginViewModel
@@ -188,12 +191,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         )
     }
 
+    private fun resetAllBadges() {
+        mainViewModel.resetAllBadges()
+    }
+
     private fun onClicked() {
         with(binding) {
             activityLoginBtn.setOnClickListener {
                 val email = activityLoginEmailEt.text.toString()
                 val password = activityLoginPasswordEt.text.toString()
-                //전송 api 호출 loginViewModel.getUser(email,password)
+                resetAllBadges()
                 tokenManager.saveEmail(email)
                 loginViewModel.postUserLogInInfo(
                     LogInDto(
