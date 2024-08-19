@@ -30,11 +30,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:textSize="14sp"
             android:text="평소에 잘 안하다가\n요줌에 빠진 운동을 추천해 주세요!"
             android:textAlignment="center"
             android:textColor="@color/White"
-            app:layout_constraintEnd_toEndOf="@id/fragment_weekly_pin_iv"
-            app:layout_constraintStart_toStartOf="@id/fragment_weekly_pin_iv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_weekly_pin_iv" />
 
         <EditText
@@ -45,6 +48,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="24dp"
+            android:paddingStart="16dp"
             android:background="@drawable/shape_rounded_stroke_square_purple700_14dp_stroke_1dp"
             android:textColor="@color/White"
             app:layout_constraintTop_toBottomOf="@id/fragment_weekly_title_tv" />
@@ -55,6 +59,9 @@
             android:layout_width="0dp"
             android:layout_height="270dp"
             android:layout_marginTop="12dp"
+            android:gravity="top"
+            android:paddingStart="16sp"
+            android:paddingTop="12sp"
             android:background="@drawable/shape_rounded_stroke_square_purple700_14dp_stroke_1dp"
             android:textColor="@color/White"
             app:layout_constraintEnd_toEndOf="@id/fragment_weekly_subtitle_et"
