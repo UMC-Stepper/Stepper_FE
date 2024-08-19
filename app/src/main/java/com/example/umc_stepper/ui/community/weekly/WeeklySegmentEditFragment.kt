@@ -52,7 +52,7 @@ class WeeklySegmentEditFragment :
 
     private var selectedRemoveItemId = 0
     private val communityViewModel: CommunityViewModel by activityViewModels()
-//    private val mainViewModel: MainViewModel by activityViewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
     private val imgList: MutableList<UploadImageCard> = mutableListOf()
     private var selectedTab = "QnA"
     private val imageList: MutableList<MultipartBody.Part> = mutableListOf()
@@ -104,7 +104,7 @@ class WeeklySegmentEditFragment :
             communityViewModel.postEditResponse(
                 userRequest, imageList
             )
-//            updateBadge(3)  // 첫 게시글 작성 완료
+            updateBadge(3)  // 첫 게시글 작성 완료
             findNavController().navigateUp()
         }
         binding.fragmentWeeklySegmentEditCancelBt.setOnClickListener {
@@ -259,15 +259,15 @@ class WeeklySegmentEditFragment :
         return Bitmap.createScaledBitmap(bitmap, 100, 100, true)
     }
 
-//    private fun updateBadge(i:Int) {
-//        // 첫 번째 badgeList 항목의 hasBadge 값이 false일 때만 true로 변경하고 토스트 메시지 띄우기
-//        if (!mainViewModel.badgeList[i].hasBadge) {
-//            // 첫 번째 badgeList 항목의 hasBadge 값을 true로 설정
-//            mainViewModel.badgeList[i].hasBadge = true
-//
-//            // "새로운 뱃지 획득! My Badge를 확인해주세요"라는 토스트 메시지 띄우기
-//            Toast.makeText(requireContext(), "새로운 뱃지 획득! My Badge를 확인해주세요", Toast.LENGTH_SHORT).show()
-//        }
-//    }
+    private fun updateBadge(i: Int) {
+        // 첫 번째 badgeList 항목의 hasBadge 값이 false일 때만 true로 변경하고 토스트 메시지 띄우기
+        if (!mainViewModel.badgeList[i].hasBadge) {
+            // 첫 번째 badgeList 항목의 hasBadge 값을 true로 설정
+            mainViewModel.updateBadgeState(i, true)
+
+            // "새로운 뱃지 획득! My Badge를 확인해주세요"라는 토스트 메시지 띄우기
+            Toast.makeText(requireContext(), "새로운 뱃지 획득! My Badge를 확인해주세요", Toast.LENGTH_SHORT).show()
+        }
+    }
 
 }
