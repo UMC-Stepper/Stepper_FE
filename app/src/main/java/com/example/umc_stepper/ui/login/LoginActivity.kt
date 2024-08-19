@@ -213,7 +213,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                 loginViewModel.postUserLogInInfo(
                     LogInDto(
                         email = email,
-                        password = password
+                        password = password,
+                        firebaseToken = fcmToken
                     )
                 )
             }
