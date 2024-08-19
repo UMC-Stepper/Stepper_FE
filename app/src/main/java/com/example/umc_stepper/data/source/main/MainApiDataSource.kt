@@ -4,20 +4,17 @@ import android.util.Log
 import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.data.remote.MainApi
+import com.example.umc_stepper.domain.model.request.FCMNotificationRequestDto
 import com.example.umc_stepper.domain.model.request.member_controller.LogInDto
-import com.example.umc_stepper.domain.model.request.rate_diary_controller.RateDiaryDto
-import com.example.umc_stepper.domain.model.request.member_controller.UserDto
 import com.example.umc_stepper.domain.model.response.BadgeResponseItem
+import com.example.umc_stepper.domain.model.response.member_controller.UserResponse
 import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResponse
 import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResult
-import com.example.umc_stepper.domain.model.response.member_controller.UserResponse
-import com.example.umc_stepper.domain.model.response.post_controller.CommunityMyCommentsResponseItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.ResponseBody
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -93,6 +90,13 @@ class MainApiDataSource @Inject constructor(
 
     fun getBadge(): Flow<BaseListResponse<BadgeResponseItem>> = flow {
         val result = mainApi.getBadge()
+        emit(result)
+    }.catch {
+        Log.e("Get Badge Failure", it.message.toString())
+    }
+
+    fun getFcm(fCMNotificationRequestDto: FCMNotificationRequestDto): Flow<String> = flow {
+        val result = mainApi.getFcm(fCMNotificationRequestDto)
         emit(result)
     }.catch {
         Log.e("Get Badge Failure", it.message.toString())
