@@ -1,7 +1,6 @@
 package com.example.umc_stepper.ui.login
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
@@ -18,12 +17,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+import android.content.SharedPreferences
+
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val mainApiRepository: MainApiRepository,
-    private val sharedPreferences: SharedPreferences
+    private val sharedPreferences: SharedPreferences // SharedPreferences 주입
 ) : ViewModel() {
-    // 뱃지
+
     private val _getBadge = MutableStateFlow<BaseListResponse<BadgeResponseItem>>(BaseListResponse())
     val getBadge: StateFlow<BaseListResponse<BadgeResponseItem>> = _getBadge
 
@@ -43,7 +44,7 @@ class MainViewModel @Inject constructor(
             try {
                 mainApiRepository.getBadge().collect {
                     _getBadge.value = it
-                    // Log.e("mainViewModel ", "it : $it")
+                    // Log.e("mainViewModel", "it : $it")
                 }
             } catch (e: Exception) {
                 Log.e("mainViewModel getBadge", e.message.toString())

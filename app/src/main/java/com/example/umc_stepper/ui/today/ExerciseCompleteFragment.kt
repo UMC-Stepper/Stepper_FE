@@ -36,12 +36,12 @@ class ExerciseCompleteFragment :BaseFragment<FragmentExerciseCompleteBinding>(R.
         val selectDaysSize = arguments?.getInt("selectDaysSize") ?: 0
 
         binding.exerciseCompleteBtn.setOnClickListener {
+            updateBadge(0)
             exerciseCardList?.let { list ->
                 lifecycleScope.launch {
                     for (i in 0 until selectDaysSize) {
                         todayViewModel.postAddExerciseCard(list[i])
                     }
-                    updateBadge(0)
                     val action =
                         ExerciseCompleteFragmentDirections.actionExerciseCompleteFragmentToTodayHomeFragment()
                     findNavController().navigateSafe(action.actionId)
