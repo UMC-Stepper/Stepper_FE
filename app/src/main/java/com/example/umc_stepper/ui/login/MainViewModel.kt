@@ -17,36 +17,71 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+import android.content.SharedPreferences
+
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val mainApiRepository: MainApiRepository
-) : ViewModel(){
-    //뱃지
+    private val mainApiRepository: MainApiRepository,
+    private val sharedPreferences: SharedPreferences
+) : ViewModel() {
+
     private val _getBadge = MutableStateFlow<BaseListResponse<BadgeResponseItem>>(BaseListResponse())
-    val getBadge : StateFlow<BaseListResponse<BadgeResponseItem>> = _getBadge
+    val getBadge: StateFlow<BaseListResponse<BadgeResponseItem>> = _getBadge
 
     var badgeList = mutableListOf(
-        BadgeCheck("첫 운동 설정 완료",false),
+        BadgeCheck("첫 운동 설정 완료", false),
         BadgeCheck("첫 오늘의 운동 완료", false),
-        BadgeCheck("첫 추가 운동 완료",false),
+        BadgeCheck("첫 추가 운동 완료", false),
         BadgeCheck("첫 게시글 작성 완료", false)
-        )
+    )
 
-    fun getBadge(){
+    init {
+        loadBadgeStates()
+    }
+
+    fun getBadge() {
         viewModelScope.launch {
-            try{
-                mainApiRepository.getBadge().collect{
+            try {
+                mainApiRepository.getBadge().collect {
                     _getBadge.value = it
-                    //Log.e("mainViewModel ","it : $it")
+                    // Log.e("mainViewModel", "it : $it")
                 }
-            }catch(e:Exception){
-                Log.e("mainViewModel getBadge",e.message.toString())
+            } catch (e: Exception) {
+                Log.e("mainViewModel getBadge", e.message.toString())
             }
-
         }
     }
 
     private val TAG = "MainViewModel"
 
+    private fun loadBadgeStates() {
+        badgeList.forEachIndexed { index, badgeCheck ->
+            badgeCheck.hasBadge = sharedPreferences.getBoolean("badge_$index", false)
+        }
+    }
+
+    fun updateBadgeState(index: Int, hasBadge: Boolean) {
+        badgeList[index].hasBadge = hasBadge
+        with(sharedPreferences.edit()) {
+            putBoolean("badge_$index", hasBadge)
+            apply()
+        }
+    }
+
+    // 모든 배지 상태를 false로 변경하는 함수
+    fun resetAllBadges() {
+        badgeList.forEach { badge ->
+            badge.hasBadge = false
+        }
+        // SharedPreferences에 저장된 배지 상태도 업데이트
+        badgeList.forEachIndexed { index, _ ->
+            with(sharedPreferences.edit()) {
+                putBoolean("badge_$index", false)
+                apply()
+            }
+        }
+    }
+
 }
+
 data class BadgeCheck(val badgeName: String, var hasBadge: Boolean)
