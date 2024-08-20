@@ -20,6 +20,7 @@
                 android:id="@+id/fragment_evaluation_exercise_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:background="@color/Purple_Black_BG_2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
