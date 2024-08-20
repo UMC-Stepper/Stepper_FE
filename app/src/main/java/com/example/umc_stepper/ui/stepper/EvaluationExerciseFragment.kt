@@ -25,6 +25,7 @@ import com.example.umc_stepper.databinding.FragmentEvaluationExerciseBinding
 import com.example.umc_stepper.domain.model.request.rate_diary_controller.RateDiaryDto
 import com.example.umc_stepper.token.TokenManager
 import com.example.umc_stepper.ui.MainActivity
+import com.example.umc_stepper.ui.today.evaluation_log.EvaluationExerciseTodayFragmentDirections
 import com.example.umc_stepper.utils.GlobalApplication
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,35 +46,24 @@ import kotlin.properties.Delegates
 @AndroidEntryPoint
 class EvaluationExerciseFragment :
     BaseFragment<FragmentEvaluationExerciseBinding>(R.layout.fragment_evaluation_exercise) {    // 평가 일지 작성
-    @Inject
-    lateinit var tokenManager: TokenManager
-    val stepperViewModel: StepperViewModel by activityViewModels()
-    lateinit var imgList: List<ImageView>
-    lateinit var tvList: List<TextView>
-    lateinit var triangleList: List<ImageView>
-    lateinit var blurList: List<Int>
-    lateinit var notBlurList: List<Int>
-    lateinit var stateTitleList: List<String>
-    lateinit var descriptionList: List<String>
-    var selectTextDescription = 0
-    var exerciseId by Delegates.notNull<Int>()
-    lateinit var profileImage: MultipartBody.Part
-    var score = 0
-    private lateinit var mainActivity: MainActivity
+
+    @Inject lateinit var tokenManager: TokenManager
+
+    private lateinit var imgList: List<ImageView>
+    private lateinit var tvList: List<TextView>
+    private lateinit var triangleList: List<ImageView>
+    private lateinit var blurList: List<Int>
+    private lateinit var notBlurList: List<Int>
+    private lateinit var stateTitleList: List<String>
+    private lateinit var descriptionList: List<String>
+    private lateinit var profileImage: MultipartBody.Part
     private lateinit var sharedPreferences: SharedPreferences
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mainActivity = context as MainActivity
-    }
+    private val stepperViewModel: StepperViewModel by activityViewModels()
+    private var selectTextDescription = 0
+    private var exerciseId by Delegates.notNull<Int>()
+    private var score = 0
 
-    private fun setToolbar() {
-        mainActivity.setBg2()
-        mainActivity.updateToolbarTitle("운동 평가하기")
-        mainActivity.updateToolbarLeftImg(R.drawable.ic_back)
-        mainActivity.updateToolbarMiddleImg(R.drawable.ic_toolbar_today)
-        mainActivity.updateToolbarRightImg(R.drawable.ic_toolbar_stepper)
-    }
 
     override fun onPause() {
         super.onPause()
@@ -198,7 +188,6 @@ class EvaluationExerciseFragment :
     private fun initSetting() {
 //        initActivityResultLauncher()
         observeLifeCycle()
-        setToolbar()
         setImageView()
         setList()
         setScoreText()
@@ -229,9 +218,8 @@ class EvaluationExerciseFragment :
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 stepperViewModel.diaryItems.collectLatest {
                     if (it.isSuccess) {
-                        val action =
-                            R.id.action_fragmentEvaluationExercise_to_fragmentExerciseComplete
-                        findNavController().navigateSafe(action)
+                        val action = EvaluationExerciseFragmentDirections.actionFragmentEvaluationExerciseToFragmentExerciseComplete()
+                        findNavController().navigateSafe(action.actionId)
                     }
                 }
             }
@@ -289,6 +277,26 @@ class EvaluationExerciseFragment :
                 selectTextDescription = 4
                 stateAllToggle()
             }
+
+            // 뒤로 가기
+            fragmentEvaluationExerciseBackIv.setOnClickListener {
+                findNavController().popBackStack()
+            }
+
+            // 투데이 버튼
+            fragmentEvaluationExerciseGoTodayIv.setOnClickListener {
+                val action =
+                    EvaluationExerciseFragmentDirections.actionFragmentEvaluationExerciseToTodayHomeFragment()
+                findNavController().navigateSafe(action.actionId)
+            }
+
+            // 스테퍼 버튼
+            fragmentEvaluationExerciseGoStepperIv.setOnClickListener {
+                val action =
+                    EvaluationExerciseFragmentDirections.actionFragmentEvaluationExerciseToStepperFragment()
+                findNavController().navigateSafe(action.actionId)
+            }
+
             //카메라액티비티로 이동
             fragmentEvaluationExercisePictureExerciseIv.setOnClickListener {
                 val intent = Intent(activity, CameraActivity::class.java)
@@ -302,7 +310,6 @@ class EvaluationExerciseFragment :
                 Log.d("클릭","state : $state")
                 val imageUrl = profileImage //이미지
                 val point = score //점수
-                mainActivity.visibleTag()
                 val gson = Gson()
                 Log.d("평가", exerciseId.toString())
                 val rateDiary = RateDiaryDto(
