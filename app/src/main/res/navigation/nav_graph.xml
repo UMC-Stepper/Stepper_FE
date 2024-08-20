@@ -460,7 +460,11 @@
         android:id="@+id/weeklyEditFragment"
         android:name="com.example.umc_stepper.ui.community.weekly.WeeklyEditFragment"
         android:label="WeeklyEditFragment"
-        tools:layout="@layout/fragment_weekly_edit"/>
+        tools:layout="@layout/fragment_weekly_edit">
+        <action
+            android:id="@+id/action_weeklyEditFragment_to_communityWeeklyHomeFragment"
+            app:destination="@id/communityWeeklyHomeFragment" />
+    </fragment>
 
     <!-- 커뮤니티 부위별 게시판 홈 -->
     <fragment
@@ -490,7 +494,11 @@
         android:name="com.example.umc_stepper.ui.community.weekly.WeeklySegmentEditFragment"
         android:label="fragment_weekly_segment_edit"
         tools:layout="@layout/fragment_weekly_segment_edit"
-        />
+        >
+        <action
+            android:id="@+id/action_weeklySegmentEditFragment_to_communityPartHomeFragment"
+            app:destination="@id/communityPartHomeFragment" />
+    </fragment>
 
     <!-- 설정 홈 -->
     <fragment

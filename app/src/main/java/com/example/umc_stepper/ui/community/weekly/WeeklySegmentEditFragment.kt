@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -110,11 +111,15 @@ class WeeklySegmentEditFragment :
             )
             updateBadge(3)  // 첫 게시글 작성 완료
             lifecycleScope.launch {
-                communityViewModel.postEditResponse
-                    .drop(1)
-                    .collect { response ->
+                communityViewModel.postEditResponse.collect { response ->
                     if (response.result != null) {
-                        findNavController().popBackStack()
+                        val action = WeeklySegmentEditFragmentDirections.actionWeeklySegmentEditFragmentToCommunityPartHomeFragment()
+                        findNavController().navigateSafe(
+                            action.actionId,
+                            Bundle().apply {
+                                putString("bodyPart",bodyPart)
+                            }
+                        )
                         Log.d("위클리 게시글 작성 성공", "응답이 ${response.result} 입니다")
                     }
                     else {
