@@ -30,6 +30,7 @@ import com.example.umc_stepper.utils.enums.DialogType
 import com.example.umc_stepper.utils.enums.LoadState
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -104,12 +105,14 @@ class WeeklyEditFragment : BaseFragment<FragmentWeeklyEditBinding>(R.layout.frag
             )
 
             lifecycleScope.launch {
-                communityViewModel.postEditResponse.collect { response ->
+                communityViewModel.postEditResponse
+                    .drop(1)
+                    .collect { response ->
                     if (response.result != null) {
                         findNavController().popBackStack()
-                        Log.d("reuslttt", "response.result : ${response.result}")
+                        Log.d("위클리 게시글 작성 성공", "응답이 ${response.result} 입니다")
                     } else {
-                        Toast.makeText(context, "응답이 null입니다.", Toast.LENGTH_SHORT).show()
+                        Log.d("위클리 게시글 작성 실패", "응답이 null 입니다")
                     }
                 }
             }

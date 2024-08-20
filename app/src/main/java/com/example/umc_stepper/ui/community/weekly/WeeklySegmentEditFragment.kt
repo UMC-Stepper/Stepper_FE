@@ -12,6 +12,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -28,6 +29,8 @@ import com.example.umc_stepper.ui.login.MainViewModel
 import com.example.umc_stepper.utils.enums.DialogType
 import com.google.android.material.tabs.TabLayout
 import com.google.gson.Gson
+import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -88,6 +91,7 @@ class WeeklySegmentEditFragment :
         binding.fragmentWeeklyAddPictureIv.setOnClickListener {
             showDialog("사진 업로드 하기", "앨범 선택", "취소하기")
         }
+
         binding.fragmentWeeklySuccessEditBt.setOnClickListener {
             val bodyPart = arguments?.getString("bodyPart") ?: ""
             postEditDto = PostEditDto(
@@ -105,10 +109,24 @@ class WeeklySegmentEditFragment :
                 userRequest, imageList
             )
             updateBadge(3)  // 첫 게시글 작성 완료
-            findNavController().navigateUp()
+            lifecycleScope.launch {
+                communityViewModel.postEditResponse
+                    .drop(1)
+                    .collect { response ->
+                    if (response.result != null) {
+                        findNavController().popBackStack()
+                        Log.d("위클리 게시글 작성 성공", "응답이 ${response.result} 입니다")
+                    }
+                    else {
+                        Log.d("운동 부위 게시글 작성 실패", "응답이 null 입니다")
+                    }
+                }
+            }
         }
+
+        // 취소
         binding.fragmentWeeklySegmentEditCancelBt.setOnClickListener {
-            findNavController().navigateUp()
+            findNavController().popBackStack()
         }
     }
 
