@@ -14,16 +14,62 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/Purple_Black_BG_1">
+            android:background="@color/Purple_Black_BG_2">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/fragment_evaluation_exercise_back_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_back"
+                android:background="?attr/selectableItemBackground"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fragment_evaluation_exercise_title_tv"
+                style="@style/sub_title_semi_bold_16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="평가일지"
+                android:textColor="@color/White"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_evaluation_exercise_back_iv"
+                app:layout_constraintStart_toEndOf="@+id/fragment_evaluation_exercise_back_iv"
+                app:layout_constraintTop_toTopOf="@+id/fragment_evaluation_exercise_back_iv" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/fragment_evaluation_exercise_go_today_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="11dp"
+                android:src="@drawable/ic_toolbar_today"
+                android:background="?attr/selectableItemBackground"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_evaluation_exercise_go_stepper_iv"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/fragment_evaluation_exercise_go_stepper_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/ic_toolbar_stepper"
+                android:background="?attr/selectableItemBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/fragment_evaluation_exercise_half_bg_cl"
                 android:layout_width="match_parent"
-                android:layout_height="363dp"
+                android:layout_height="360dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/shape_rounded_purple_black_half_square_60dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/fragment_evaluation_exercise_back_iv">
 
                 <TextView
                     android:id="@+id/fragment_evaluation_exercise_half_bg_tv"
@@ -100,7 +146,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/fragment_evaluation_exercise_today_sick_tv"
+                android:id="@+id/fragment_evaluation_exercise_sick_tv"
                 style="@style/head_bold_18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -112,15 +158,15 @@
                 app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_half_bg_cl" />
 
             <TextView
-                android:id="@+id/fragment_evaluation_exercise_today_sick_description_tv"
+                android:id="@+id/fragment_evaluation_exercise_sick_description_tv"
                 style="@style/body_medium_12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="오늘의 운동 통증을 평가해주세요."
                 android:textColor="@color/White"
-                app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_today_sick_tv"
-                app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_today_sick_tv" />
+                app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_sick_tv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_sick_tv" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/fragment_evaluation_exercise_dv"
@@ -130,9 +176,9 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="40dp"
                 app:dividerColor="@color/Purple_Black_BG_2"
-                app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_today_sick_tv"
-                app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_today_sick_tv"
-                app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_today_sick_description_tv" />
+                app:layout_constraintEnd_toEndOf="@id/fragment_evaluation_exercise_sick_tv"
+                app:layout_constraintStart_toStartOf="@id/fragment_evaluation_exercise_sick_tv"
+                app:layout_constraintTop_toBottomOf="@id/fragment_evaluation_exercise_sick_description_tv" />
 
             <ImageView
                 android:id="@+id/fragment_evaluation_exercise_blur_20_iv"
