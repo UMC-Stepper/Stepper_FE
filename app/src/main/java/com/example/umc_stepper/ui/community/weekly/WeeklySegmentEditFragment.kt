@@ -113,7 +113,7 @@ class WeeklySegmentEditFragment :
             lifecycleScope.launch {
                 communityViewModel.postEditResponse.collect { response ->
                     if (response.result != null) {
-                        val action = WeeklySegmentEditFragmentDirections.actionWeeklySegmentEditFragmentToCommunityWeeklyHomeFragment()
+                        val action = WeeklySegmentEditFragmentDirections.actionWeeklySegmentEditFragmentToCommunityPartHomeFragment()
                         findNavController().navigateSafe(
                             action.actionId,
                             Bundle().apply {

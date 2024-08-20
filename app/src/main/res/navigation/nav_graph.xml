@@ -496,8 +496,8 @@
         tools:layout="@layout/fragment_weekly_segment_edit"
         >
         <action
-            android:id="@+id/action_weeklySegmentEditFragment_to_communityWeeklyHomeFragment"
-            app:destination="@id/communityWeeklyHomeFragment" />
+            android:id="@+id/action_weeklySegmentEditFragment_to_communityPartHomeFragment"
+            app:destination="@id/communityPartHomeFragment" />
     </fragment>
 
     <!-- 설정 홈 -->
