@@ -70,10 +70,19 @@ class CommunityApiDataSource @Inject constructor(
 
     //POST 게시글 작성
     fun postEditPost(data : RequestBody, image : List<MultipartBody.Part>): Flow<BaseResponse<ApiResponsePostResponse>> = flow {
-        val result = communityApi.postEditPost(data,image)
-        emit(result)
-    }.catch {
-        Log.e("Post Edit Post Failure", it.message.toString())
+        try {
+            val result = communityApi.postEditPost(data, image)
+            emit(result)
+        } catch (e: HttpException) {
+            val errorResponse = e.response()?.let { it }
+            Log.e("Get postEditPost Failure", "HTTP Error: ${errorResponse?.errorBody()?.string()}")
+            emit(BaseResponse(
+                isSuccess = errorResponse!!.isSuccessful,
+                code = errorResponse.code().toString(),
+                message = errorResponse.message().toString(),
+                result = null)
+            )
+        }
     }
 
     //GET 게시글 상세 조회
