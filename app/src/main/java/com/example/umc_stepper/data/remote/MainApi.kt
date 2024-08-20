@@ -2,11 +2,9 @@ package com.example.umc_stepper.data.remote
 
 import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
-import com.example.umc_stepper.domain.model.request.FCMNotificationRequestDto
+import com.example.umc_stepper.domain.model.request.fcm.FCMNotificationRequestDto
+import com.example.umc_stepper.domain.model.request.fcm.ScheduleNotificationRequestDto
 import com.example.umc_stepper.domain.model.request.member_controller.LogInDto
-import com.example.umc_stepper.domain.model.request.rate_diary_controller.RateDiaryDto
-import com.example.umc_stepper.domain.model.request.member_controller.UserDto
-import com.example.umc_stepper.domain.model.response.BadgeResponse
 import com.example.umc_stepper.domain.model.response.BadgeResponseItem
 import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResponse
 import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResult
@@ -28,10 +26,16 @@ interface MainApi {
         @Part profileImage: MultipartBody.Part,
     ): BaseResponse<UserResponse>
 
-    // FCM
-    @POST("/api/v1/notification")
+    // FCM 토큰 조회 API
+    @POST("/api/v1/notification/alarm")
     suspend fun getFcm(
         @Body fCMNotificationRequestDto: FCMNotificationRequestDto
+    ): String
+
+    // FCM 시간 보내기 API
+    @POST("/api/v1/notification/schedule")
+    suspend fun postFcmTime(
+        @Body scheduleNotificationRequestDto: ScheduleNotificationRequestDto
     ): String
 
     @POST("/api/members/logout")

@@ -1,14 +1,9 @@
 package com.example.umc_stepper.ui.login
 
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseListResponse
-import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.domain.model.response.BadgeResponseItem
 import com.example.umc_stepper.domain.repository.MainApiRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +13,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 import android.content.SharedPreferences
-import com.example.umc_stepper.domain.model.request.FCMNotificationRequestDto
+import com.example.umc_stepper.domain.model.request.fcm.FCMNotificationRequestDto
+import com.example.umc_stepper.domain.model.request.fcm.ScheduleNotificationRequestDto
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
@@ -31,6 +27,9 @@ class MainViewModel @Inject constructor(
 
     private val _getFcm = MutableStateFlow<String>("")
     val getFcm: StateFlow<String> = _getFcm
+
+    private val _postFcmTime = MutableStateFlow<String>("")
+    val postFcmTime: StateFlow<String> = _postFcmTime
 
     var badgeList = mutableListOf(
         BadgeCheck("첫 운동 설정 완료", false),
@@ -51,6 +50,19 @@ class MainViewModel @Inject constructor(
                 }
             } catch (e: Exception) {
                 Log.e("MainViewModel getFcm Error", e.message.toString())
+            }
+
+        }
+    }
+
+    fun postFcmTime(scheduleNotificationRequestDto: ScheduleNotificationRequestDto) {
+        viewModelScope.launch {
+            try {
+                mainApiRepository.postFcmTime(scheduleNotificationRequestDto).collect {
+                    _getFcm.value = it
+                }
+            } catch (e: Exception) {
+                Log.e("MainViewModel postFcmTime Error", e.message.toString())
             }
 
         }

@@ -4,7 +4,8 @@ import android.util.Log
 import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
 import com.example.umc_stepper.data.remote.MainApi
-import com.example.umc_stepper.domain.model.request.FCMNotificationRequestDto
+import com.example.umc_stepper.domain.model.request.fcm.FCMNotificationRequestDto
+import com.example.umc_stepper.domain.model.request.fcm.ScheduleNotificationRequestDto
 import com.example.umc_stepper.domain.model.request.member_controller.LogInDto
 import com.example.umc_stepper.domain.model.response.BadgeResponseItem
 import com.example.umc_stepper.domain.model.response.member_controller.UserResponse
@@ -95,11 +96,20 @@ class MainApiDataSource @Inject constructor(
         Log.e("Get Badge Failure", it.message.toString())
     }
 
+    // FCM 알림 전송
     fun getFcm(fCMNotificationRequestDto: FCMNotificationRequestDto): Flow<String> = flow {
         val result = mainApi.getFcm(fCMNotificationRequestDto)
         emit(result)
     }.catch {
-        Log.e("Get Badge Failure", it.message.toString())
+        Log.e("Get getFcm Failure", it.message.toString())
+    }
+
+    // FCM 시간 전송
+    fun postFcmTime(scheduleNotificationRequestDto: ScheduleNotificationRequestDto): Flow<String> = flow {
+        val result = mainApi.postFcmTime(scheduleNotificationRequestDto)
+        emit(result)
+    }.catch {
+        Log.e("Get postFcmTime Failure", it.message.toString())
     }
 
 }
