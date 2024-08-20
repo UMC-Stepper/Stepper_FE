@@ -2,9 +2,9 @@ package com.example.umc_stepper.data.source.main
 
 import com.example.umc_stepper.base.BaseListResponse
 import com.example.umc_stepper.base.BaseResponse
+import com.example.umc_stepper.domain.model.request.fcm.FCMNotificationRequestDto
+import com.example.umc_stepper.domain.model.request.fcm.ScheduleNotificationRequestDto
 import com.example.umc_stepper.domain.model.request.member_controller.LogInDto
-import com.example.umc_stepper.domain.model.request.rate_diary_controller.RateDiaryDto
-import com.example.umc_stepper.domain.model.request.member_controller.UserDto
 import com.example.umc_stepper.domain.model.response.BadgeResponseItem
 import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResponse
 import com.example.umc_stepper.domain.model.response.rate_diary_controller.RateDiaryResult
@@ -41,5 +41,13 @@ class MainRepositoryImpl @Inject constructor(
 
     override suspend fun getBadge(): Flow<BaseListResponse<BadgeResponseItem>>
     = dataSource.getBadge()
+
+    // FCM 알림 전송
+    override suspend fun getFcm(fCMNotificationRequestDto: FCMNotificationRequestDto): Flow<String>
+    = dataSource.getFcm(fCMNotificationRequestDto)
+
+    // FCM 시간 전송
+    override suspend fun postFcmTime(scheduleNotificationRequestDto: ScheduleNotificationRequestDto): Flow<String>
+    = dataSource.postFcmTime(scheduleNotificationRequestDto)
 
 }

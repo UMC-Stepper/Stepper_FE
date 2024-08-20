@@ -12,7 +12,11 @@ import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentTodayHomeBinding
 import com.example.umc_stepper.domain.model.local.WeekCalendar
+import com.example.umc_stepper.domain.model.request.fcm.FCMNotificationRequestDto
+import com.example.umc_stepper.domain.model.request.fcm.ScheduleNotificationRequestDto
 import com.example.umc_stepper.ui.MainActivity
+import com.example.umc_stepper.ui.login.LoginViewModel
+import com.example.umc_stepper.ui.login.MainViewModel
 import com.example.umc_stepper.ui.today.TodayViewModel
 import com.example.umc_stepper.utils.enums.LoadState
 import kotlinx.coroutines.flow.collectLatest
@@ -22,7 +26,10 @@ import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.temporal.TemporalAdjusters
+import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Locale
+import java.util.TimeZone
 
 class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragment_today_home) {
 
