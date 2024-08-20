@@ -1,32 +1,28 @@
 package com.example.umc_stepper.ui.stepper
 
-import android.Manifest
 import android.content.ContentValues
 import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Build
+import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Toast
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.FocusMeteringAction
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
-import com.example.umc_stepper.base.BaseActivity
-import com.example.umc_stepper.databinding.ActivityCameraBinding
+import com.example.umc_stepper.base.BaseFragment
+import com.example.umc_stepper.databinding.FragmentCameraBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
-import java.util.concurrent.ExecutorService
 
-class CameraActivity : BaseActivity<ActivityCameraBinding>(R.layout.activity_camera) {
+class CameraFragment : BaseFragment<FragmentCameraBinding>(R.layout.fragment_camera) {
 
     companion object {
         private const val TAG = "CameraXApp"
@@ -40,17 +36,16 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>(R.layout.activity_cam
     //private lateinit var cameraExecutor: ExecutorService
 
     override fun setLayout() {
-
         startCamera()
 
         // 사진 찍기 버튼
         binding.activityCameraCaptureIv.setOnClickListener {
-            takePhoto(this)
+            takePhoto(requireContext())
         }
 
         // 취소 버튼
         binding.activityCameraCancelIv.setOnClickListener {
-            finish()
+            findNavController().popBackStack()
         }
     }
 
@@ -70,7 +65,6 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>(R.layout.activity_cam
 
     override fun onDestroy() {
         super.onDestroy()
-        finish()
     }
 
     // 카메로부터 이미지를 촬영하고 저장하는 함수
@@ -95,7 +89,7 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>(R.layout.activity_cam
 
         // 이 객체에서 원하는 출력 방법 지정 가능  (이미지 저장 옵션 설정)
         val outputOptions = ImageCapture.OutputFileOptions
-            .Builder(this.contentResolver,
+            .Builder(requireContext().contentResolver,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                 contentValues)
             .build()
@@ -116,12 +110,13 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>(R.layout.activity_cam
                 override fun onImageSaved(output: ImageCapture.OutputFileResults){
                     Log.d(TAG, "사진 촬영에 성공하였습니다.")
 
-                    // 촬영한 사진을
+                    // 촬영한 사진을 카메라 디테일 프래그먼트로 이동
                     output.savedUri?.let { uri ->
-                        val intent = Intent(this@CameraActivity, CameraDetailActivity::class.java).apply {
-                            putExtra("photo_uri", uri.toString())
+                        val action = CameraFragmentDirections.actionCameraFragmentToCameraDetailFragment()
+                        val bundle = Bundle().apply {
+                            putString("photo_uri", uri.toString())
                         }
-                        startActivity(intent)
+                        findNavController().navigateSafe(action.actionId, bundle)
                     }
                 }
             }
@@ -132,7 +127,7 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>(R.layout.activity_cam
     private fun startCamera() {
 
         // 카메라 제공자 초기화, 리스너 등록
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
         cameraProviderFuture.addListener({
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
@@ -177,8 +172,7 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>(R.layout.activity_cam
             } catch (exc: Exception) {
                 Log.e(TAG, "카메라 시작 실패", exc)
             }
-        }, ContextCompat.getMainExecutor(this)) // 메인 스레드에서 실행
+        }, ContextCompat.getMainExecutor(requireContext())) // 메인 스레드에서 실행
     }
-
 
 }

@@ -297,13 +297,13 @@ class EvaluationExerciseFragment :
                 findNavController().navigateSafe(action.actionId)
             }
 
-            //카메라액티비티로 이동
+            // 카메라 프래그먼트로 이동
             fragmentEvaluationExercisePictureExerciseIv.setOnClickListener {
-                val intent = Intent(activity, CameraActivity::class.java)
-                startActivity(intent)
+                val action = EvaluationExerciseFragmentDirections.actionFragmentEvaluationExerciseToCameraFragment()
+                findNavController().navigateSafe(action.actionId)
             }
 
-            //운동아이디필요
+            // 운동 아이디 필요
             fragmentEvaluationExerciseSuccessBt.setOnClickListener {
                 val memo = fragmentEvaluationExerciseMemoEt.text.toString() //메모
                 val state = sharedPreferences.getInt("selectedDescription",0) //상태값 0 1 2 3 4

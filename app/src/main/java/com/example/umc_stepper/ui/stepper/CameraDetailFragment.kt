@@ -1,21 +1,15 @@
 package com.example.umc_stepper.ui.stepper
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.bumptech.glide.Glide
+import androidx.navigation.fragment.findNavController
 import com.example.umc_stepper.R
-import com.example.umc_stepper.base.BaseActivity
-import com.example.umc_stepper.databinding.ActivityCameraDetailBinding
-import com.example.umc_stepper.ui.MainActivity
+import com.example.umc_stepper.base.BaseFragment
+import com.example.umc_stepper.databinding.FragmentCameraDetailBinding
 import com.example.umc_stepper.utils.GlobalApplication
 
-class CameraDetailActivity : BaseActivity<ActivityCameraDetailBinding>(R.layout.activity_camera_detail) {
+class CameraDetailFragment : BaseFragment<FragmentCameraDetailBinding>(R.layout.fragment_camera_detail) {
 
     private var photoUri : Uri? = null
 
@@ -25,7 +19,7 @@ class CameraDetailActivity : BaseActivity<ActivityCameraDetailBinding>(R.layout.
     }
 
     private fun setImageView() {
-        photoUri = intent.getStringExtra("photo_uri")?.let { Uri.parse(it)}
+        photoUri = arguments?.getString("photo_uri")?.let { Uri.parse(it)}
         Log.d("포토", "photoUri : $photoUri")
         photoUri?.let {
             GlobalApplication.loadImage(binding.activityCameraDetailPhotoIv, it)
@@ -35,7 +29,7 @@ class CameraDetailActivity : BaseActivity<ActivityCameraDetailBinding>(R.layout.
     private fun setButton() {
         // 다시 찍기 버튼
         binding.activityCameraDetailRetakeIv.setOnClickListener {
-            startNextActivity(CameraActivity::class.java)
+            findNavController().popBackStack()
         }
 
         // 사진 사용 버튼
@@ -45,12 +39,11 @@ class CameraDetailActivity : BaseActivity<ActivityCameraDetailBinding>(R.layout.
     }
 
     private fun navigateToEvaluationExercise() {
-        val intent = Intent(this, MainActivity::class.java).apply {
-            putExtra("navigate_to", "EvaluationExerciseFragment")
-            putExtra("photo_uri", photoUri.toString())
+        val action = CameraDetailFragmentDirections.actionCameraDetailFragmentToFragmentEvaluationExercise()
+        val bundle = Bundle().apply {
+            putString("photo_uri", photoUri.toString())
         }
-        startActivity(intent)
-        finish()
+        findNavController().navigateSafe(action.actionId, bundle)
     }
 
 }
