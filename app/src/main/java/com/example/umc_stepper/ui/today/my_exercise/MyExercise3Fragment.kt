@@ -320,9 +320,18 @@ class MyExercise3Fragment :
 
     private fun goExerciseCheck() {
         val urlText = binding.fragmentMyExerciseUploadYoutubeLinkEt.text.toString()
+        val bodyPart = when(binding.fragmentMyExerciseSelectTagTv.text.toString()){
+            "무릎, 다리" -> "무릎다리"
+            "어깨, 팔" -> "어깨팔"
+            else -> {
+                binding.fragmentMyExerciseSelectTagTv.text.toString()
+            }
+        }
+
+
         val bundle = Bundle().apply {
             putString("urlText", urlText)
-            putString("bodyPart", binding.fragmentMyExerciseSelectTagTv.text.toString())
+            putString("bodyPart", bodyPart)
         }
         findNavController().navigate(R.id.action_fragmentMyExercise3_to_myExerciseCheckFragment, bundle)
     }
