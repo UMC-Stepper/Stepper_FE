@@ -12,6 +12,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -26,9 +27,13 @@ import com.example.umc_stepper.ui.community.CommunityRemoveInterface
 import com.example.umc_stepper.ui.community.CommunityViewModel
 import com.example.umc_stepper.ui.login.MainViewModel
 import com.example.umc_stepper.utils.enums.DialogType
+import com.example.umc_stepper.utils.enums.LoadState
 import com.google.gson.Gson
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.ByteArrayOutputStream
@@ -79,8 +84,9 @@ class WeeklyEditFragment : BaseFragment<FragmentWeeklyEditBinding>(R.layout.frag
         binding.fragmentWeeklyAddPictureIv.setOnClickListener {
             showDialog("사진 업로드 하기", "앨범 선택", "취소하기")
         }
+
+        //저장
         binding.fragmentWeeklyEditSuccessBt.setOnClickListener {
-            //저장
             updateBadge(3)  // 첫 게시물 작성 완료 뱃지
             postEditDto = PostEditDto(
                 imageUrl = "string",
@@ -96,10 +102,22 @@ class WeeklyEditFragment : BaseFragment<FragmentWeeklyEditBinding>(R.layout.frag
             communityViewModel.postEditResponse(
                 userRequest, imageList
             )
-            findNavController().navigateUp()
+
+            lifecycleScope.launch {
+                communityViewModel.postEditResponse.collect { response ->
+                    if (response.result != null) {
+                        findNavController().popBackStack()
+                        Log.d("reuslttt", "response.result : ${response.result}")
+                    } else {
+                        Toast.makeText(context, "응답이 null입니다.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
+
+        // 취소
         binding.fragmentWeeklyEditCancelBt.setOnClickListener {
-            findNavController().navigateUp()
+            findNavController().popBackStack()
         }
     }
 
