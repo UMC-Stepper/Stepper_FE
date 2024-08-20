@@ -1,6 +1,5 @@
 package com.example.umc_stepper.ui.stepper
 
-import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -9,7 +8,7 @@ import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentExerciseCompleteBinding
 import com.example.umc_stepper.ui.login.MainViewModel
 
-class ExerciseCompleteFragment :BaseFragment<FragmentExerciseCompleteBinding>(R.layout.fragment_exercise_complete) {
+class ExerciseLogCompleteFragment :BaseFragment<FragmentExerciseCompleteBinding>(R.layout.fragment_exercise_complete) {
     private val mainViewModel: MainViewModel by activityViewModels()
     override fun setLayout() {
         binding.exerciseCompleteBtn.setOnClickListener {
@@ -18,7 +17,7 @@ class ExerciseCompleteFragment :BaseFragment<FragmentExerciseCompleteBinding>(R.
         }
     }
     private fun goStepperHome() {
-        val action = ExerciseCompleteFragmentDirections.actionFragmentExerciseCompleteToStepperFragment()
+        val action = ExerciseLogCompleteFragmentDirections.actionFragmentExerciseLogCompleteToStepperFragment()
         findNavController().navigateSafe(action.actionId)
     }
 

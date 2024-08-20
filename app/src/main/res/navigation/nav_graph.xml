@@ -123,13 +123,16 @@
         tools:layout="@layout/fragment_evaluation_exercise">
         <action
             android:id="@+id/action_fragmentEvaluationExercise_to_fragmentExerciseComplete"
-            app:destination="@id/fragmentExerciseComplete" />
+            app:destination="@id/fragmentExerciseLogComplete" />
         <action
             android:id="@+id/action_fragmentEvaluationExercise_to_stepperFragment"
             app:destination="@id/stepperFragment" />
         <action
             android:id="@+id/action_fragmentEvaluationExercise_to_todayHomeFragment"
             app:destination="@id/todayHomeFragment" />
+        <action
+            android:id="@+id/action_fragmentEvaluationExercise_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
     </fragment>
 
     <!-- 스태퍼 추가운동 홈 -->
@@ -285,12 +288,12 @@
 
     <!-- 스태퍼 운동 완료 -->
     <fragment
-        android:id="@+id/fragmentExerciseComplete"
-        android:name="com.example.umc_stepper.ui.stepper.ExerciseCompleteFragment"
-        android:label="ExerciseComplete"
+        android:id="@+id/fragmentExerciseLogComplete"
+        android:name="com.example.umc_stepper.ui.stepper.ExerciseLogCompleteFragment"
+        android:label="fragmentExerciseLogComplete"
         tools:layout="@layout/fragment_exercise_complete">
         <action
-            android:id="@+id/action_fragmentExerciseComplete_to_stepperFragment"
+            android:id="@+id/action_fragmentExerciseLogComplete_to_stepperFragment"
             app:destination="@id/stepperFragment" />
     </fragment>
 
@@ -600,5 +603,26 @@
         android:name="com.example.umc_stepper.ui.community.part.CommunityPartHomeMotivationFragment"
         android:label="CommunityPartHomeMotivationFragmen"
         tools:layout="@layout/fragment_community_part_home_tab"/>
+
+    <!-- 카메라 촬영 화면 -->
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.example.umc_stepper.ui.stepper.CameraFragment"
+        android:label="CameraFragment"
+        tools:layout="@layout/fragment_camera">
+        <action
+            android:id="@+id/action_cameraFragment_to_cameraDetailFragment"
+            app:destination="@id/cameraDetailFragment" />
+    </fragment>
+    <!-- 카메라 디테일 화면 -->
+    <fragment
+        android:id="@+id/cameraDetailFragment"
+        android:name="com.example.umc_stepper.ui.stepper.CameraDetailFragment"
+        android:label="CameraDetailFragment"
+        tools:layout="@layout/fragment_camera_detail" >
+        <action
+            android:id="@+id/action_cameraDetailFragment_to_fragmentEvaluationExercise"
+            app:destination="@id/fragmentEvaluationExercise" />
+    </fragment>
 
 </navigation>

@@ -14,62 +14,76 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/Purple_Black_BG_2">
+            android:background="@color/Purple_Black_BG_1">
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/fragment_evaluation_exercise_back_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_back"
-                android:background="?attr/selectableItemBackground"
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/fragment_evaluation_exercise_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/Purple_Black_BG_2"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent">
 
-            <TextView
-                android:id="@+id/fragment_evaluation_exercise_title_tv"
-                style="@style/sub_title_semi_bold_16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:text="평가일지"
-                android:textColor="@color/White"
-                app:layout_constraintBottom_toBottomOf="@+id/fragment_evaluation_exercise_back_iv"
-                app:layout_constraintStart_toEndOf="@+id/fragment_evaluation_exercise_back_iv"
-                app:layout_constraintTop_toTopOf="@+id/fragment_evaluation_exercise_back_iv" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/fragment_evaluation_exercise_go_today_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="11dp"
-                android:src="@drawable/ic_toolbar_today"
-                android:background="?attr/selectableItemBackground"
-                app:layout_constraintEnd_toStartOf="@+id/fragment_evaluation_exercise_go_stepper_iv"
-                app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/fragment_evaluation_exercise_back_iv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:src="@drawable/ic_back"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/fragment_evaluation_exercise_go_stepper_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="24dp"
-                android:src="@drawable/ic_toolbar_stepper"
-                android:background="?attr/selectableItemBackground"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/fragment_evaluation_exercise_title_tv"
+                        style="@style/sub_title_semi_bold_16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="평가일지"
+                        android:textColor="@color/White"
+                        app:layout_constraintBottom_toBottomOf="@+id/fragment_evaluation_exercise_back_iv"
+                        app:layout_constraintStart_toEndOf="@+id/fragment_evaluation_exercise_back_iv"
+                        app:layout_constraintTop_toTopOf="@+id/fragment_evaluation_exercise_back_iv" />
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/fragment_evaluation_exercise_go_today_iv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="11dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:src="@drawable/ic_toolbar_today"
+                        app:layout_constraintEnd_toStartOf="@+id/fragment_evaluation_exercise_go_stepper_iv"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/fragment_evaluation_exercise_go_stepper_iv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:src="@drawable/ic_toolbar_stepper"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.appbar.MaterialToolbar>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/fragment_evaluation_exercise_half_bg_cl"
                 android:layout_width="match_parent"
                 android:layout_height="360dp"
-                android:layout_marginTop="15dp"
                 android:background="@drawable/shape_rounded_purple_black_half_square_60dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_evaluation_exercise_back_iv">
+                app:layout_constraintTop_toBottomOf="@+id/fragment_evaluation_exercise_toolbar">
 
                 <TextView
                     android:id="@+id/fragment_evaluation_exercise_half_bg_tv"

@@ -8,6 +8,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentTodayHomeBinding
@@ -19,6 +20,7 @@ import com.example.umc_stepper.ui.login.LoginViewModel
 import com.example.umc_stepper.ui.login.MainViewModel
 import com.example.umc_stepper.ui.today.TodayViewModel
 import com.example.umc_stepper.utils.enums.LoadState
+import com.example.umc_stepper.utils.extensions.HorizontalSpaceItemDecoration
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.threeten.bp.DayOfWeek
@@ -132,6 +134,8 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
             }
         }
         binding.fragmentTodayHomeWeekCalendarRv.adapter = todayHomeCalendarAdapter
+        binding.fragmentTodayHomeWeekCalendarRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.fragmentTodayHomeWeekCalendarRv.addItemDecoration(HorizontalSpaceItemDecoration(3))
         todayHomeCalendarAdapter.submitList(calendarList.subList(0, calendarList.size.coerceAtMost(7)))
     }
 
