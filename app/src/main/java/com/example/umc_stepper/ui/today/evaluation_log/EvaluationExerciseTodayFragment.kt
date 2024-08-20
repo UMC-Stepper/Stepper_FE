@@ -50,6 +50,7 @@ class EvaluationExerciseTodayFragment :
     private lateinit var diaryListValue: String
     private lateinit var diaryList: List<RateDiaryResponse>
     private lateinit var mainActivity: MainActivity
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mainActivity = context as MainActivity

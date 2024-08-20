@@ -124,6 +124,12 @@
         <action
             android:id="@+id/action_fragmentEvaluationExercise_to_fragmentExerciseComplete"
             app:destination="@id/fragmentExerciseComplete" />
+        <action
+            android:id="@+id/action_fragmentEvaluationExercise_to_stepperFragment"
+            app:destination="@id/stepperFragment" />
+        <action
+            android:id="@+id/action_fragmentEvaluationExercise_to_todayHomeFragment"
+            app:destination="@id/todayHomeFragment" />
     </fragment>
 
     <!-- 스태퍼 추가운동 홈 -->

@@ -17,8 +17,9 @@ class ExerciseCompleteFragment :BaseFragment<FragmentExerciseCompleteBinding>(R.
             updateBadge(1) // 첫 오늘의 운동 완료
         }
     }
-    private fun goStepperHome(){
-        findNavController().navigateSafe(R.id.action_fragmentExerciseComplete_to_stepperFragment)
+    private fun goStepperHome() {
+        val action = ExerciseCompleteFragmentDirections.actionFragmentExerciseCompleteToStepperFragment()
+        findNavController().navigateSafe(action.actionId)
     }
 
     private fun updateBadge(i: Int) {

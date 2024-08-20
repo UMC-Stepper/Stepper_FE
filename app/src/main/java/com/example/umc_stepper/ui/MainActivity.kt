@@ -183,6 +183,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 R.id.settingsFragment,
                 R.id.evaluationLogFragment,
                 R.id.evaluationExerciseTodayFragment,
+                R.id.fragmentEvaluationExercise,
                 R.id.communitySearchFragment,
                 R.id.communityWeeklyHomeFragment,
                 R.id.communityPartHomeFragment
