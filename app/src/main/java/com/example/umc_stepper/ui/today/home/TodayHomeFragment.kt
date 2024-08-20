@@ -12,13 +12,13 @@ import com.example.umc_stepper.R
 import com.example.umc_stepper.base.BaseFragment
 import com.example.umc_stepper.databinding.FragmentTodayHomeBinding
 import com.example.umc_stepper.domain.model.local.WeekCalendar
-import com.example.umc_stepper.domain.model.request.FCMNotificationRequestDto
+import com.example.umc_stepper.domain.model.request.fcm.FCMNotificationRequestDto
+import com.example.umc_stepper.domain.model.request.fcm.ScheduleNotificationRequestDto
 import com.example.umc_stepper.ui.MainActivity
 import com.example.umc_stepper.ui.login.LoginViewModel
 import com.example.umc_stepper.ui.login.MainViewModel
 import com.example.umc_stepper.ui.today.TodayViewModel
 import com.example.umc_stepper.utils.enums.LoadState
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.threeten.bp.DayOfWeek
@@ -26,7 +26,10 @@ import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.temporal.TemporalAdjusters
+import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Locale
+import java.util.TimeZone
 
 class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragment_today_home) {
 
@@ -88,11 +91,6 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
         binding.fragmentTodayHomeCalenderMonthTv.text = localDateMonth
     }
 
-    // FCM 테스트 변수
-    private var id = 0
-    private val mainViewModel : MainViewModel by activityViewModels()
-    private val loginViewModel : LoginViewModel by activityViewModels()
-
     private fun observeViewModel() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -102,27 +100,6 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
                 }
             }
         }
-
-        // FCM API 테스트 코드 1
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                loginViewModel.getUserInfo()
-            }
-        }
-
-        // FCM API 테스트 코드 2
-        lifecycleScope.launch {
-            loginViewModel.userInfo.collect { userInfo ->
-                // Safely access userInfo
-                val userId = userInfo.result?.id ?: 0 // Default value if id is null
-                val fCMNotificationRequestDto = FCMNotificationRequestDto(userId, "안녕하세요", "스테퍼입니다")
-
-                binding.fragmentTodayHomeTitleTv.setOnClickListener {
-                    mainViewModel.getFcm(fCMNotificationRequestDto)
-                }
-            }
-        }
-
     }
 
     // 어댑터 초기화 및 날짜 설정

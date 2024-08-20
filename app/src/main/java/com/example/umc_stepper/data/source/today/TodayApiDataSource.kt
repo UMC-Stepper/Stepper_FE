@@ -27,8 +27,9 @@ class TodayApiDataSource @Inject constructor(
     fun postAddExerciseCard(exerciseCardRequestDto: ExerciseCardRequestDto)	: Flow<BaseResponse<ExerciseCardResponse>> = flow {
         val result = todayApi.postAddExerciseCard(exerciseCardRequestDto)
         emit(result)
-    }.catch {
-        Log.e("Post AddExerciseCard Failure", it.message.toString())
+    }.catch { e ->
+        val errorBody = (e as? HttpException)?.response()?.errorBody()?.string()
+        Log.e("postAddExerciseCard Failure", "HTTP ${(e as? HttpException)?.code()} Error: $errorBody")
     }
 
     // 운동 카드 상세 조회 API
