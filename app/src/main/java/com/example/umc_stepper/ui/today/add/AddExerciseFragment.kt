@@ -264,7 +264,13 @@ class AddExerciseFragment :
     }
 
     private fun stateSelect() {
-        val part = arguments?.getString("bp") ?: ""
+        var part = arguments?.getString("bp") ?: ""
+        when(part){
+            "무릎다리" -> part = "무릎, 다리"
+            "어깨팔" -> part = "어깨, 팔"
+            else -> part
+        }
+        Log.d("부위",part)
         if (part.isNotEmpty()) {
             val select = tagList.find { it.text.toString() == part }
             if (select != null) {

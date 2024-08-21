@@ -84,7 +84,12 @@ class AddExerciseDownloadFragment : BaseFragment<FragmentAddExerciseSelectScrapB
     private fun loadExercises(category: String) {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                todayViewModel.getMyExercise(category)
+                var ct = when(category){
+                    "어깨, 팔" -> {"어깨팔"}
+                     "무릎, 다리" -> {"무릎다리"}
+                     else -> {category}
+                }
+                todayViewModel.getMyExercise(ct)
             }
         }
         viewLifecycleOwner.lifecycleScope.launch {
