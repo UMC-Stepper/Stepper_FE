@@ -228,7 +228,7 @@ class WeeklySegmentEditFragment :
             "앨범 선택" -> openGallery()
             "삭제하기" -> {
                 uploadImgAdapter.removeItem(selectedRemoveItemId)
-                Log.d("삭제", "$selectedRemoveItemId, ${uploadImgAdapter.currentList.size}")
+                Log.d("삭제", "$selectedRemoveItemId ${uploadImgAdapter.itemCount}")
             }
         }
     }
