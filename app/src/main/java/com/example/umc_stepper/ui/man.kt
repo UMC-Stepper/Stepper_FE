@@ -48,7 +48,7 @@ class man : AppCompatActivity(), SensorEventListener {
             val now = LocalDateTime.now()
 
             // 비교할 날짜와 시간 설정 (2024년 8월 22일 18시)
-            val targetDateTime = LocalDateTime.of(2024, 8, 22, 20, 0)
+            val targetDateTime = LocalDateTime.of(2024, 8, 22, 18, 0)
 
             // 현재 시간이 targetDateTime 이후인지 체크
             if (now.isAfter(targetDateTime)) {
@@ -56,7 +56,7 @@ class man : AppCompatActivity(), SensorEventListener {
                 startActivity(Intent(this@man, Gridd::class.java))
             }
             else{
-                Toast.makeText(this@man,"2024년 8월 22일 20시에 열립니다",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@man,"2024년 8월 22일 18시에 공개 됩니다.",Toast.LENGTH_SHORT).show()
             }
         }
 
