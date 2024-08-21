@@ -1,15 +1,20 @@
 package com.example.umc_stepper.ui
 
 import android.content.Context
+import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
+import androidx.lifecycle.lifecycleScope
 import com.example.umc_stepper.R
+import kotlinx.coroutines.launch
 import kotlin.math.sqrt
 
 class man : AppCompatActivity(), SensorEventListener {
@@ -19,17 +24,26 @@ class man : AppCompatActivity(), SensorEventListener {
     private var stepCount = 0
     private var lastMagnitude = 0f
     private lateinit var stepCountTextView: TextView
-    private lateinit var resetBtn : Button
+    private lateinit var resetBtn: Button
+    lateinit var bt : Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_man)
+        bt = findViewById<Button>(R.id.butt)
 
         stepCountTextView = findViewById(R.id.stepCountTextView)
 
         resetBtn = findViewById(R.id.resetButton)
 
         resetBtn.setOnClickListener {
-            stepCountTextView.text = "걸음 수: 0"
+            stepCount = 0
+            updateStepCount()
+        }
+
+
+        bt.setOnClickListener {
+            startActivity(Intent(this@man,Gridd::class.java))
         }
 
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -70,6 +84,12 @@ class man : AppCompatActivity(), SensorEventListener {
     }
 
     private fun updateStepCount() {
+
         stepCountTextView.text = "걸음 수: $stepCount"
+        lifecycleScope.launch {
+            if (stepCount == 100) {
+                bt.visibility = View.VISIBLE
+            }
+        }
     }
 }
