@@ -10,11 +10,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.lifecycleScope
 import com.example.umc_stepper.R
 import kotlinx.coroutines.launch
+import org.threeten.bp.LocalDateTime
 import kotlin.math.sqrt
 
 class man : AppCompatActivity(), SensorEventListener {
@@ -25,7 +27,7 @@ class man : AppCompatActivity(), SensorEventListener {
     private var lastMagnitude = 0f
     private lateinit var stepCountTextView: TextView
     private lateinit var resetBtn: Button
-    lateinit var bt : Button
+    lateinit var bt: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +45,19 @@ class man : AppCompatActivity(), SensorEventListener {
 
 
         bt.setOnClickListener {
-            startActivity(Intent(this@man,Gridd::class.java))
+            val now = LocalDateTime.now()
+
+            // 비교할 날짜와 시간 설정 (2024년 8월 22일 18시)
+            val targetDateTime = LocalDateTime.of(2024, 8, 22, 20, 0)
+
+            // 현재 시간이 targetDateTime 이후인지 체크
+            if (now.isAfter(targetDateTime)) {
+                // 조건을 만족하면 Gridd 액티비티로 이동
+                startActivity(Intent(this@man, Gridd::class.java))
+            }
+            else{
+                Toast.makeText(this@man,"2024년 8월 22일 20시에 열립니다",Toast.LENGTH_SHORT).show()
+            }
         }
 
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
