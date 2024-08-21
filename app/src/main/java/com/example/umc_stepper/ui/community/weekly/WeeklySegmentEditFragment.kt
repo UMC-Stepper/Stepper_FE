@@ -86,6 +86,12 @@ class WeeklySegmentEditFragment :
             Log.e("WeeklySegmentEditFragment", "Activity is null")
         }
     }
+    private fun reFormat(s : String){
+        when(s){
+            "팔,어깨" -> {bodyPart = "어깨팔"}
+            else -> bodyPart
+        }
+    }
 
     //이미지 리스트 (글작성) , bodyPart 받아야 함
     private fun onClickBtn() {
@@ -94,7 +100,7 @@ class WeeklySegmentEditFragment :
         }
 
         binding.fragmentWeeklySuccessEditBt.setOnClickListener {
-            val bodyPart = arguments?.getString("bodyPart") ?: ""
+            reFormat(bodyPart)
             postEditDto = PostEditDto(
                 imageUrl = "",
                 title = binding.fragmentWeeklySubtitleEt.text.toString(),
