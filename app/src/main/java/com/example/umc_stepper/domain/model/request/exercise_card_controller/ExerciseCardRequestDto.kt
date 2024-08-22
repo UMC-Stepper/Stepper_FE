@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ExerciseCardRequestDto(
-    val bodyPart: String,
+    var bodyPart: String,
     var date: String,
     val hour: Int,
     val materials: String,

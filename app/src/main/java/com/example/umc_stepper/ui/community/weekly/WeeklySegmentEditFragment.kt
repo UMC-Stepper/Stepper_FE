@@ -86,6 +86,12 @@ class WeeklySegmentEditFragment :
             Log.e("WeeklySegmentEditFragment", "Activity is null")
         }
     }
+    private fun reFormat(s : String){
+        when(s){
+            "팔,어깨" -> {bodyPart = "어깨팔"}
+            else -> bodyPart
+        }
+    }
 
     //이미지 리스트 (글작성) , bodyPart 받아야 함
     private fun onClickBtn() {
@@ -94,7 +100,7 @@ class WeeklySegmentEditFragment :
         }
 
         binding.fragmentWeeklySuccessEditBt.setOnClickListener {
-            val bodyPart = arguments?.getString("bodyPart") ?: ""
+            reFormat(bodyPart)
             postEditDto = PostEditDto(
                 imageUrl = "",
                 title = binding.fragmentWeeklySubtitleEt.text.toString(),
@@ -149,6 +155,7 @@ class WeeklySegmentEditFragment :
             ActivityResultContracts.StartActivityForResult()
         ) { result: ActivityResult ->
             if (result.resultCode == AppCompatActivity.RESULT_OK) {
+                Log.d("사진","${AppCompatActivity.RESULT_OK}")
                 val clipData = result.data?.clipData
                 if (clipData != null) {
                     for (i in 0 until clipData.itemCount) {
@@ -228,7 +235,7 @@ class WeeklySegmentEditFragment :
             "앨범 선택" -> openGallery()
             "삭제하기" -> {
                 uploadImgAdapter.removeItem(selectedRemoveItemId)
-                Log.d("삭제", "$selectedRemoveItemId, ${uploadImgAdapter.currentList.size}")
+                Log.d("삭제", "$selectedRemoveItemId ${uploadImgAdapter.itemCount}")
             }
         }
     }

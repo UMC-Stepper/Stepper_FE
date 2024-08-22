@@ -131,8 +131,7 @@ class WeeklyEditFragment : BaseFragment<FragmentWeeklyEditBinding>(R.layout.frag
         galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         galleryForResult.launch(Intent.createChooser(galleryIntent, "Select Pictures"))
     }
-
-
+    var gcount = 0
     //갤러리 런처 초기화
     private fun initActivityResultLauncher() {
         galleryForResult = registerForActivityResult(
@@ -145,10 +144,11 @@ class WeeklyEditFragment : BaseFragment<FragmentWeeklyEditBinding>(R.layout.frag
                         val imageUri = clipData.getItemAt(i).uri
                         imageUri?.let {
                             handleSelectedImage(it)
-                            imgList.add(i, UploadImageCard(it.toString(), i))
+                            imgList.add(gcount, UploadImageCard(it.toString(), gcount++))
                         }
                     }
                     uploadImgAdapter.submitList(imgList)
+                    binding.fragmentWeeklyImageUploadRv.adapter?.notifyDataSetChanged()
                 }
             }
         }
@@ -201,7 +201,7 @@ class WeeklyEditFragment : BaseFragment<FragmentWeeklyEditBinding>(R.layout.frag
         when (btn1) {
             "앨범 선택" -> openGallery()
             "삭제하기" -> {
-                binding.fragmentWeeklyImageUploadRv.adapter?.notifyItemRemoved(selectedRemoveItemId)
+                uploadImgAdapter.removeItem(selectedRemoveItemId)
                 Log.d("삭제", "$selectedRemoveItemId ${uploadImgAdapter.itemCount}")
             }
         }

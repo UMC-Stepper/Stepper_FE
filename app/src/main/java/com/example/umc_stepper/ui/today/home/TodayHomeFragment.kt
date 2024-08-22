@@ -72,6 +72,13 @@ class TodayHomeFragment : BaseFragment<FragmentTodayHomeBinding>(R.layout.fragme
 
     private fun updateUIVisibility() {
         val exerciseStateList = todayViewModel.exerciseState.value
+        exerciseStateList?.forEach {
+            when (it.bodyPart) {
+                "무릎다리" -> it.bodyPart = "무릎, 다리"
+                "어깨팔" -> it.bodyPart = "어깨, 팔"
+            }
+        }
+
         var isSuccess = exerciseStateList?.firstOrNull()?.isSuccess ?: false
 
         if (isSuccess) {

@@ -65,6 +65,12 @@ class ExerciseCompleteFragment :BaseFragment<FragmentExerciseCompleteBinding>(R.
                 lifecycleScope.launch {
                     // 1. 모든 운동 카드를 추가하는 작업
                     for (i in 0 until selectDaysSize) {
+                        if(list[i].bodyPart == "무릎, 다리"){
+                            list[i].bodyPart = "무릎다리"
+                        }
+                        else if(list[i].bodyPart == "어깨, 팔"){
+                            list[i].bodyPart = "어깨팔"
+                        }
                         todayViewModel.postAddExerciseCard(list[i])
                     }
 
