@@ -155,6 +155,7 @@ class WeeklySegmentEditFragment :
             ActivityResultContracts.StartActivityForResult()
         ) { result: ActivityResult ->
             if (result.resultCode == AppCompatActivity.RESULT_OK) {
+                Log.d("사진","${AppCompatActivity.RESULT_OK}")
                 val clipData = result.data?.clipData
                 if (clipData != null) {
                     for (i in 0 until clipData.itemCount) {
