@@ -4,30 +4,27 @@
 </div>
 
 ## 목차
-
-- [개요](https://www.notion.so/5d54e32b871546d58479aa52b38a4676?pvs=21)
-- [설명](https://www.notion.so/5d54e32b871546d58479aa52b38a4676?pvs=21)
-- [화면](https://www.notion.so/5d54e32b871546d58479aa52b38a4676?pvs=21)
+  - [개요](#개요) 
+  - [설명](#설명)
+  - [화면](#플로우)
 
 ## 개요
-
 - 프로젝트 이름: STEPPER
-- 프로젝트 지속기간: 2024.07.07-2024.08.20
-- 개발 엔진 및 언어: Android Studio, Kotlin
+- 프로젝트 지속기간: 2022.07-2022.08
+- 개발 엔진 및 언어: AndroidStudio, Kotlin
 - 멤버: 박지원 (루피), 이채영 (채리), 김성민 (미니)
 
 ## 설명
-
-[제목 없는 데이터베이스](https://www.notion.so/8beecf9ec6864a95a93966d0fae16481?pvs=21)
+|![image](이미지)|![image](이미지)|
+|:---:|:---:|
+|시작 화면|사용자 정보 화면|
 
 설명
 
 ## 기술스택
-
 ---
 
 ### **🤖** 안드로이드
-
 | **Category** | **TechStack** |
 | --- | --- |
 | Architecture | Clean Architecture, MVVM |
@@ -40,7 +37,10 @@
 | Open Source | Material CalendarView |
 
 ## 플로우
-
 - 맵의 이동 가능 장소
 
-[제목 없는 데이터베이스](https://www.notion.so/03bb25f988794ddda598e90b3980a94c?pvs=21)
+|Home|Today|Stepper|community|
+|---|---|---|---|
+|![image](이미지)|![image](이미지)|![image](이미지)|![image](이미지)|
+|설명|설명|설명|설명|
+
