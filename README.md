@@ -2,9 +2,13 @@
 <h2>[2024] Stepper</h2>
 설명
 </div>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/ce26efda-b9ec-4add-ad2b-1413257446b6" alt="스태퍼"/>
+</p>
 
 ## Stepper
 ![스태퍼](https://github.com/user-attachments/assets/ce26efda-b9ec-4add-ad2b-1413257446b6)
+
 나만의 운동을 추가하고 
 운동카드를 추가하여
 원하는 재활 운동을 해보세요
