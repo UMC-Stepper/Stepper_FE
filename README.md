@@ -8,9 +8,11 @@
   <img src="https://github.com/user-attachments/assets/ce26efda-b9ec-4add-ad2b-1413257446b6" alt="스태퍼"/>
 </p>
 
-나만의 운동을 추가하고 
-운동카드를 추가하여
-원하는 재활 운동을 해보세요
+<div align="center">
+  나만의 운동을 추가하고<br>
+  운동카드를 추가하여<br>
+  원하는 재활 운동을 해보세요
+</div>
 
 ## 목차
   - [개요](#개요) 
