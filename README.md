@@ -11,7 +11,7 @@
 
 ## 목차
   - [개요](#개요) 
-  - [설명](#설명)
+  - [화면](#화면)
   - [기술스택](#기술스택)
   - [화면](#플로우)
 
@@ -21,7 +21,7 @@
 - 개발 엔진 및 언어: Android Studio, Kotlin
 - 멤버: 박지원 (루피), 이채영 (채리), 김성민 (미니)
 
-## 설명
+## 화면
 | 화면                      | 사진                                                    |
 |---------------------------|---------------------------------------------------------|
 | 회원가입/로그인           | <img src="https://github.com/user-attachments/assets/1e55328b-5485-4692-818e-26191a6c77b4" alt="로그인 (시작화면)" width="150"/> <img src="https://github.com/user-attachments/assets/398fae89-9e98-419f-ad5b-33ce7b15ebb1" alt="회원가입 3" width="150"/> <img src="https://github.com/user-attachments/assets/b0b197bc-a7a0-4c3b-9cdd-afc678812629" alt="회원가입 3" width="150"/> <img src="https://github.com/user-attachments/assets/af3acc2a-63fb-45dd-a10c-f8e4ef7cd36b" alt="회원가입 2" width="150"/> |
