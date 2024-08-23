@@ -5,7 +5,7 @@
 
 ## Stepper
 
-![스태퍼.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/081cb785-93c3-4768-bd82-b669d35f1098/fd1e4827-975d-45f5-8bad-920df6998fd6/%EC%8A%A4%ED%83%9C%ED%8D%BC.png)
+![image](https://prod-files-secure.s3.us-west-2.amazonaws.com/081cb785-93c3-4768-bd82-b669d35f1098/fd1e4827-975d-45f5-8bad-920df6998fd6/%EC%8A%A4%ED%83%9C%ED%8D%BC.png)
 
 나만의 운동을 추가하고 
 운동카드를 추가하여
