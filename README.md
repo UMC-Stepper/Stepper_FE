@@ -45,8 +45,8 @@
 ## 플로우
 - 맵의 이동 가능 장소
 
-|Home|Today|Stepper|community|
-|---|---|---|---|
+|Login|Today 나만의 운동 추가|Today 운동 카드 추가|community||Login|Today|Stepper|community|
+|---|---|---|---||---|---|---|---|
 |![image](이미지)|![image](이미지)|![image](이미지)|![image](이미지)|
 |설명|설명|설명|설명|
 
