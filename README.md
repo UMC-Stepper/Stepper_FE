@@ -23,12 +23,8 @@
 
 ## 설명
 | 화면                      | 사진                                                    |
-|---------------------------|-----------------------------------------------------------|
-| 회원가입/로그인           |![로그인 (시작화면)](https://github.com/user-attachments/assets/1e55328b-5485-4692-818e-26191a6c77b4)![회원가입 3](https://github.com/user-attachments/assets/398fae89-9e98-419f-ad5b-33ce7b15ebb1)
-![회원가입 2](https://github.com/user-attachments/assets/6bdb09bc-e512-404e-a017-3f4226f0e70b)
-![회원가입 1](https://github.com/user-attachments/assets/89412538-0be8-4ebb-b89d-f7e018210d60)
-
-        |
+|---------------------------|---------------------------------------------------------|
+| 회원가입/로그인           | <img src="https://github.com/user-attachments/assets/1e55328b-5485-4692-818e-26191a6c77b4" alt="로그인 (시작화면)" width="200"/> <img src="https://github.com/user-attachments/assets/398fae89-9e98-419f-ad5b-33ce7b15ebb1" alt="회원가입 3" width="200"/> |
 | 투데이 나만의 운동 추가   |              |
 | 투데이 운동 카드 작성     |            |
 | 투데이 평가일지 조회      |                |
@@ -37,6 +33,7 @@
 | 스태퍼 평가일지 작성      |                  |
 | 커뮤니티                  |                    |
 | 뱃지                      |                          |
+
 
 
 설명
