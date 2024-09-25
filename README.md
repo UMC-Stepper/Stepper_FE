@@ -3,12 +3,6 @@
   <img src="https://github.com/user-attachments/assets/66d9c5da-6741-435b-8a35-82d4773baa86" alt="스태퍼"/>
 </p>
 
-<div align="center">
-  나만의 운동을 추가하고<br>
-  운동카드를 추가하여<br>
-  원하는 재활 운동을 해보세요
-</div>
-
 ## 목차
   - [개요](#개요)
   - [기능](#기능) 
