@@ -1,6 +1,6 @@
 ## Stepper
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/ce26efda-b9ec-4add-ad2b-1413257446b6" alt="스태퍼"/>
+  <img src="https://github.com/user-attachments/assets/66d9c5da-6741-435b-8a35-82d4773baa86" alt="스태퍼"/>
 </p>
 
 <div align="center">
@@ -10,16 +10,24 @@
 </div>
 
 ## 목차
-  - [개요](#개요) 
+  - [개요](#개요)
+  - [기능](#기능) 
   - [화면](#화면)
   - [기술스택](#기술스택)
-  - [화면](#플로우)
+  - [저작권](#저작권)
 
 ## 개요
 - 프로젝트 이름: STEPPER
 - 프로젝트 지속기간: 2024.07.07-2024.08.20
 - 개발 엔진 및 언어: Android Studio, Kotlin
 - 멤버: 박지원 (루피), 이채영 (채리), 김성민 (미니)
+
+## 기능
+(1) AI 를 통한 영상 추천 기능 : 신체 부위와 구체적인 통증 키워드를 선택하면 이에 맞는 운동 영상이 추천되는 기능 
+(2)  YOUTUBE 연동을 통해 부위 별 운동 영상 저장 및 앱 내에서 시청 : 유저의 편리함을 위해 앱 내에서 YOUTUBE 기능을 연동 시켜 영상 링크 저장 및 바로 시청 가능 
+(3) 평가 일지 작성 : 운동 진행 후 평가 일지 작성을 통해서 자신의 운동 후 상태를 보고 
+(4) 뱃지 : 성취감 제고를 위해서 각각의 미션을 설정한 후 유저가 이를 달성 시 조건에 맞는 뱃지를 취득함
+(5) 커뮤니티 : WEEKLY MISSION 과 부위 별 커뮤니티 운영을 통해서 각 재활에 맞는 정보 공유 가능
 
 ## 화면
 | 화면                      | 사진                                                    |
@@ -35,11 +43,6 @@
 | 커뮤니티                  | <img src="https://github.com/user-attachments/assets/4c4d8e0f-fd95-4eeb-98b2-98a403585ad4" alt="커뮤니티 홈" width="150"/> <img src="https://github.com/user-attachments/assets/495ab421-6047-4c58-ad56-45d0e56cf8d3" alt="위클리 게시판 홈" width="150"/> <img src="https://github.com/user-attachments/assets/7c4425e7-4064-4401-b1fb-60c0a31ddd32" alt="운동 부위 게시판 홈" width="150"/> |
 | 뱃지                      | <img src="https://github.com/user-attachments/assets/8d2f340c-d88c-4164-96ed-9baedb40b4eb" alt="뱃지 1" width="150"/> <img src="https://github.com/user-attachments/assets/addcb318-d592-4fa2-8228-ab5bb46a6c53" alt="뱃지 2" width="150"/> |
 
-
-
-
-설명
-
 ## 기술스택
 
 ### **🤖** 안드로이드
@@ -54,11 +57,7 @@
 | Notification | Firebase FCM |
 | Open Source | Material CalendarView |
 
-## 플로우
-- 맵의 이동 가능 장소
-
-|Home|Today|Stepper|community|
-|---|---|---|---|
-|![image](이미지)|![image](이미지)|![image](이미지)|![image](이미지)|
-|설명|설명|설명|설명|
-
+## 저작권
+Copyright 2024. 전세원 All rights reserved.<br>
+ⓒ 2024. 전세원 All rights reserved.<br>
+(c) 2024. 전세원 All rights reserved.
